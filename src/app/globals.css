@@ -1,25 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  --ink: #0b1220;
-  --ink-soft: #1a2336;
-  --paper: #f3f5f8;
-  --paper-deep: #e6ebf2;
-  --muted: #5b6475;
-  --line: rgba(11, 18, 32, 0.1);
-  --accent: #e11d48;
-  --accent-2: #2563eb;
+  --ink: #101010;
+  --paper: #ebebeb;
+  --paper-2: #f4f4f4;
+  --muted: #5c5c5c;
+  --line: #cfcfcf;
+  --signal: #ff2d2d;
 }
 
 @theme inline {
   --color-ink: var(--ink);
-  --color-ink-soft: var(--ink-soft);
   --color-paper: var(--paper);
-  --color-paper-deep: var(--paper-deep);
+  --color-paper-2: var(--paper-2);
   --color-muted: var(--muted);
   --color-line: var(--line);
-  --color-accent: var(--accent);
-  --color-accent-2: var(--accent-2);
+  --color-signal: var(--signal);
   --font-sans: var(--font-body);
   --font-display: var(--font-display);
 }
@@ -31,18 +27,14 @@
 html {
   background: var(--paper);
   color: var(--ink);
-  scroll-behavior: smooth;
 }
 
 body {
   min-height: 100vh;
   margin: 0;
-  background:
-    radial-gradient(ellipse 90% 55% at 80% -10%, rgba(37, 99, 235, 0.12), transparent 55%),
-    radial-gradient(ellipse 70% 45% at 0% 10%, rgba(225, 29, 72, 0.08), transparent 50%),
-    linear-gradient(180deg, #f7f8fb 0%, #eef1f6 100%);
+  background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-body), "Manrope", system-ui, sans-serif;
+  font-family: var(--font-body), "IBM Plex Sans", system-ui, sans-serif;
   text-rendering: geometricPrecision;
 }
 
@@ -52,43 +44,43 @@ a {
 }
 
 ::selection {
-  background: #2563eb;
-  color: white;
+  background: #101010;
+  color: #fff;
 }
 
 .font-display {
-  font-family: var(--font-display), "Syne", system-ui, sans-serif;
+  font-family: var(--font-display), "Big Shoulders Display", Impact, sans-serif;
 }
 
-@keyframes spectrum-shift {
-  0% {
-    background-position: 0% 50%;
+.spectrum-rail {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  width: 100%;
+  height: 8px;
+}
+
+.spectrum-rail > span {
+  display: block;
+  height: 100%;
+}
+
+@keyframes hero-ken {
+  from {
+    transform: scale(1.08);
   }
-  100% {
-    background-position: 100% 50%;
+  to {
+    transform: scale(1);
   }
 }
 
-.spectrum-line {
-  background: linear-gradient(
-    90deg,
-    #e11d48,
-    #ea580c,
-    #ca8a04,
-    #16a34a,
-    #0891b2,
-    #2563eb,
-    #7c3aed,
-    #e11d48
-  );
-  background-size: 200% 100%;
-  animation: spectrum-shift 8s linear infinite;
+.hero-ken {
+  animation: hero-ken 12s ease-out both;
 }
 
-@keyframes rise-in {
+@keyframes slide-up {
   from {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(28px);
   }
   to {
     opacity: 1;
@@ -96,38 +88,35 @@ a {
   }
 }
 
-.rise-in {
-  animation: rise-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+.slide-up {
+  animation: slide-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.rise-delay-1 {
-  animation-delay: 0.12s;
+.slide-delay-1 {
+  animation-delay: 0.15s;
 }
-.rise-delay-2 {
-  animation-delay: 0.24s;
-}
-.rise-delay-3 {
-  animation-delay: 0.36s;
+.slide-delay-2 {
+  animation-delay: 0.3s;
 }
 
-@keyframes float-soft {
+@keyframes rail-pulse {
   0%,
   100% {
-    transform: translateY(0);
+    opacity: 1;
   }
   50% {
-    transform: translateY(-8px);
+    opacity: 0.72;
   }
 }
 
-.float-soft {
-  animation: float-soft 5.5s ease-in-out infinite;
+.rail-pulse {
+  animation: rail-pulse 3.8s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .spectrum-line,
-  .rise-in,
-  .float-soft {
+  .hero-ken,
+  .slide-up,
+  .rail-pulse {
     animation: none !important;
   }
 }

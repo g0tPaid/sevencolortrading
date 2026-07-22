@@ -1,8 +1,8 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import { CheckCircle2 } from 'lucide-react';
 import { PrimaryCta, SecondaryCta } from '@/components/cta';
 import {
   BRAND,
@@ -25,29 +25,29 @@ function HomeInquiry() {
   }
 
   return (
-    <div className="rounded-[28px] border border-line bg-white/80 p-5 shadow-[0_20px_60px_rgba(11,18,32,0.06)] backdrop-blur sm:p-7">
-      <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted">
-        Best for startups & beginners
+    <div className="border border-line bg-paper-2 p-6 sm:p-8">
+      <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-muted">
+        Start with a budget
       </p>
-      <h3 className="font-display mt-2 text-2xl font-bold tracking-[-0.03em] text-ink">
-        Tell us your budget — we&apos;ll source the best product in class.
+      <h3 className="font-display mt-2 text-3xl font-black uppercase tracking-[-0.02em] text-ink sm:text-4xl">
+        Tell us what you need. We&apos;ll find it in China.
       </h3>
-      <label className="mt-5 block text-[12px] font-semibold tracking-[0.08em] text-ink/70">
-        Product description *
+      <label className="mt-6 block text-[11px] font-bold uppercase tracking-[0.16em] text-muted">
+        Product description
       </label>
       <textarea
         value={description}
         onChange={(event) => setDescription(event.target.value)}
         rows={4}
-        placeholder="What do you need, quantity, target price, destination…"
-        className="mt-2 w-full rounded-2xl border border-line bg-paper px-4 py-3 text-sm outline-none ring-accent/30 placeholder:text-muted/70 focus:ring-2"
+        placeholder="Product, quantity, target price, destination…"
+        className="mt-2 w-full border border-line bg-paper px-4 py-3 text-sm outline-none focus:border-ink"
       />
       <button
         type="button"
         onClick={send}
-        className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-ink px-5 py-3.5 text-[12px] font-bold uppercase tracking-[0.16em] text-white transition hover:bg-ink-soft sm:w-auto"
+        className="mt-4 inline-flex w-full items-center justify-center bg-ink px-5 py-3.5 text-[12px] font-bold uppercase tracking-[0.18em] text-paper transition hover:bg-signal sm:w-auto"
       >
-        Send inquiry on WhatsApp
+        Send on WhatsApp
       </button>
     </div>
   );
@@ -56,141 +56,130 @@ function HomeInquiry() {
 export default function HomePage() {
   return (
     <main>
-      <section className="relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute -left-24 top-16 h-72 w-72 rounded-full bg-[#2563eb]/15 blur-3xl" />
-          <div className="absolute -right-16 top-40 h-80 w-80 rounded-full bg-[#e11d48]/12 blur-3xl" />
+      {/* Hero: one composition — brand, headline, line, CTA, full-bleed port image */}
+      <section className="relative min-h-[92vh] overflow-hidden bg-ink text-paper">
+        <Image
+          src="/hero-china-port.jpg"
+          alt="China container port at dusk"
+          fill
+          priority
+          className="hero-ken object-cover object-center opacity-55"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/25" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
+
+        <div className="relative mx-auto flex min-h-[92vh] max-w-[1200px] flex-col justify-end px-4 pb-14 pt-28 sm:px-6 sm:pb-20">
+          <p className="slide-up text-[11px] font-bold uppercase tracking-[0.32em] text-paper/70">
+            Dubai · Xiamen · No MOQ
+          </p>
+          <h1 className="slide-up slide-delay-1 font-display mt-3 max-w-[11ch] text-[64px] font-black uppercase leading-[0.86] tracking-[-0.03em] sm:text-[96px] lg:text-[112px]">
+            Seven Color Trading
+          </h1>
+          <p className="slide-up slide-delay-2 mt-5 max-w-md text-base leading-7 text-paper/80 sm:text-lg">
+            Source anything from China with zero hassle — your eyes and ears on the ground.
+          </p>
+          <div className="slide-up slide-delay-2 mt-8 flex flex-wrap gap-3">
+            <PrimaryCta />
+            <SecondaryCta href="/about" className="border-paper/40 text-paper hover:bg-paper hover:text-ink">
+              About the house
+            </SecondaryCta>
+          </div>
         </div>
-        <div className="relative mx-auto grid max-w-6xl gap-10 px-4 pb-16 pt-14 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:pb-20 lg:pt-20">
+        <div className="absolute inset-x-0 bottom-0">
+          <div className="spectrum-rail rail-pulse" aria-hidden>
+            {SPECTRUM.map((color) => (
+              <span key={color} style={{ backgroundColor: color }} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[1200px] px-4 py-16 sm:px-6 sm:py-20">
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
           <div>
-            <p className="rise-in text-[11px] font-bold uppercase tracking-[0.24em] text-muted">
-              Version 2 · {BRAND.domain}
-            </p>
-            <h1 className="rise-in rise-delay-1 font-display mt-4 max-w-[14ch] text-[48px] font-extrabold leading-[0.92] tracking-[-0.055em] text-ink sm:text-[68px]">
-              {BRAND.name}
-            </h1>
-            <p className="rise-in rise-delay-2 mt-5 max-w-xl text-lg leading-8 text-ink/75 sm:text-xl">
-              Source anything and everything from China with zero hassle. No MOQ. Offices in Dubai
-              and China. 1:1 customer service.
-            </p>
-            <div className="rise-in rise-delay-3 mt-8 flex flex-wrap gap-3">
-              <PrimaryCta />
-              <SecondaryCta href="/services">See services</SecondaryCta>
-            </div>
-            <div className="mt-8 flex flex-wrap gap-2">
-              {['No MOQ', 'Dubai & China offices', 'Photos before shipping', '24/7 WhatsApp'].map(
-                (item, index) => (
-                  <span
-                    key={item}
-                    className="rounded-full border border-line bg-white/70 px-3 py-1.5 text-[11px] font-semibold tracking-[0.06em] text-ink/80"
-                    style={{ borderBottomColor: SPECTRUM[index % SPECTRUM.length] }}
-                  >
-                    {item}
-                  </span>
-                ),
-              )}
-            </div>
+            <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-muted">How it works</p>
+            <h2 className="font-display mt-3 text-5xl font-black uppercase leading-[0.9] tracking-[-0.03em] sm:text-6xl">
+              Four steps.
+              <br />
+              Then it ships.
+            </h2>
           </div>
-
-          <div className="float-soft relative overflow-hidden rounded-[32px] border border-line bg-ink p-6 text-white shadow-[0_30px_80px_rgba(11,18,32,0.28)] sm:p-8">
-            <div className="spectrum-line absolute inset-x-0 top-0 h-1" />
-            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/50">
-              How it works
-            </p>
-            <ol className="mt-5 space-y-4">
-              {HOW_IT_WORKS.map((step) => (
-                <li key={step.step} className="grid grid-cols-[auto_1fr] gap-3">
-                  <span className="font-display text-2xl font-bold text-white/35">{step.step}</span>
-                  <div>
-                    <div className="flex items-baseline justify-between gap-3">
-                      <p className="font-semibold tracking-[-0.02em]">{step.title}</p>
-                      <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-white/40">
-                        {step.time}
-                      </span>
-                    </div>
-                    <p className="mt-1 text-sm leading-6 text-white/65">{step.body}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {BRAND.stats.map((stat, index) => (
-            <div
-              key={stat.label}
-              className="rounded-3xl border border-line bg-white/75 px-5 py-6"
-            >
-              <div
-                className="mb-3 h-1 w-10 rounded-full"
-                style={{ backgroundColor: SPECTRUM[index % SPECTRUM.length] }}
-              />
-              <p className="font-display text-3xl font-bold tracking-[-0.04em]">{stat.value}</p>
-              <p className="mt-1 text-sm text-muted">{stat.label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto mt-20 max-w-6xl px-4 sm:px-6">
-        <div className="max-w-2xl">
-          <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-muted">
-            Product categories
+          <p className="max-w-xl text-base leading-7 text-ink/70">
+            From inquiry to delivery, we handle sourcing, negotiation, inspection, and freight so
+            you can stay focused on selling.
           </p>
-          <h2 className="font-display mt-3 text-4xl font-bold tracking-[-0.04em] text-ink sm:text-5xl">
-            What can we source for you?
+        </div>
+
+        <ol className="mt-12 divide-y divide-line border-y border-line">
+          {HOW_IT_WORKS.map((step) => (
+            <li
+              key={step.step}
+              className="grid gap-3 py-6 sm:grid-cols-[88px_1fr_120px] sm:items-baseline"
+            >
+              <span className="font-display text-4xl font-black text-signal">{step.step}</span>
+              <div>
+                <p className="font-display text-2xl font-bold uppercase tracking-[-0.02em]">
+                  {step.title}
+                </p>
+                <p className="mt-2 max-w-2xl text-sm leading-6 text-muted">{step.body}</p>
+              </div>
+              <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-ink/50 sm:text-right">
+                {step.time}
+              </p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section className="border-y border-ink bg-ink py-16 text-paper sm:py-20">
+        <div className="mx-auto max-w-[1200px] px-4 sm:px-6">
+          <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-paper/45">
+            What we source
+          </p>
+          <h2 className="font-display mt-3 max-w-[14ch] text-5xl font-black uppercase leading-[0.9] tracking-[-0.03em] sm:text-6xl">
+            Anything. No minimum order.
           </h2>
-          <p className="mt-4 text-base leading-7 text-ink/70">
-            From consumer electronics to industrial equipment — we source everything with no
-            minimum order.
+          <div className="mt-12 grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+            {CATEGORIES.map((category, index) => (
+              <article key={category.title} className="border-t border-paper/20 pt-4">
+                <div
+                  className="mb-4 h-1.5 w-10"
+                  style={{ backgroundColor: SPECTRUM[index % SPECTRUM.length] }}
+                />
+                <h3 className="font-display text-2xl font-bold uppercase tracking-[-0.02em]">
+                  {category.title}
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-paper/60">{category.body}</p>
+              </article>
+            ))}
+          </div>
+          <p className="mt-10 text-sm text-paper/55">
+            Don&apos;t see it listed?{' '}
+            <Link href="/quote" className="text-paper underline underline-offset-4">
+              Ask anyway — we source across categories.
+            </Link>
           </p>
         </div>
-        <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {CATEGORIES.map((category, index) => (
-            <article
-              key={category.title}
-              className="rounded-[24px] border border-line bg-white/70 p-5 transition hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(11,18,32,0.08)]"
-            >
-              <span
-                className="inline-block h-2.5 w-2.5 rounded-full"
-                style={{ backgroundColor: SPECTRUM[index % SPECTRUM.length] }}
-                aria-hidden
-              />
-              <h3 className="font-display mt-4 text-xl font-bold tracking-[-0.03em]">
-                {category.title}
-              </h3>
-              <p className="mt-2 text-sm leading-6 text-muted">{category.body}</p>
-            </article>
-          ))}
-        </div>
-        <p className="mt-6 text-sm text-muted">
-          Don&apos;t see your category?{' '}
-          <Link href="/quote" className="font-semibold text-accent underline-offset-2 hover:underline">
-            We source anything from China — request a quote
-          </Link>
-          .
-        </p>
       </section>
 
-      <section className="mx-auto mt-20 grid max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-[1fr_1fr] lg:items-center">
+      <section className="mx-auto grid max-w-[1200px] gap-10 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-2 lg:items-start">
         <div>
-          <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-muted">Why choose us</p>
-          <h2 className="font-display mt-3 text-4xl font-bold tracking-[-0.04em] sm:text-5xl">
-            Your eyes and ears in China
+          <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-muted">Why us</p>
+          <h2 className="font-display mt-3 text-5xl font-black uppercase leading-[0.9] tracking-[-0.03em] sm:text-6xl">
+            Your team in China
           </h2>
-          <p className="mt-4 text-base leading-7 text-ink/70">
-            We&apos;re not just a sourcing company — we&apos;re your personal shopping partner in
-            China. With no minimum orders and offices in both Dubai and China, international
-            sourcing stays simple.
+          <p className="mt-5 max-w-md text-base leading-7 text-ink/70">
+            Offices and warehouses in Dubai and China. Photos and videos before shipping. A personal
+            relationship manager on every order.
           </p>
-          <ul className="mt-7 space-y-3">
+          <ul className="mt-8 space-y-0 border-y border-line">
             {WHY_US.map((item) => (
-              <li key={item} className="flex items-start gap-3 text-sm leading-6 text-ink/80">
-                <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden />
-                <span>{item}</span>
+              <li
+                key={item}
+                className="border-b border-line py-3.5 text-sm font-medium leading-6 text-ink/85 last:border-b-0"
+              >
+                {item}
               </li>
             ))}
           </ul>
@@ -198,56 +187,55 @@ export default function HomePage() {
         <HomeInquiry />
       </section>
 
-      <section className="mx-auto mt-20 max-w-6xl px-4 sm:px-6">
-        <div className="max-w-2xl">
-          <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-muted">
-            Client testimonials
-          </p>
-          <h2 className="font-display mt-3 text-4xl font-bold tracking-[-0.04em] sm:text-5xl">
-            Trusted by 1,000+ customers
+      <section className="border-t border-line bg-paper-2 py-16 sm:py-20">
+        <div className="mx-auto max-w-[1200px] px-4 sm:px-6">
+          <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-muted">Proof</p>
+          <h2 className="font-display mt-3 text-5xl font-black uppercase leading-[0.9] tracking-[-0.03em]">
+            Clients talk.
           </h2>
-        </div>
-        <div className="mt-10 grid gap-4 lg:grid-cols-3">
-          {TESTIMONIALS.map((item, index) => (
-            <blockquote
-              key={item.name}
-              className="rounded-[28px] border border-line bg-white/75 p-6"
-            >
-              <div
-                className="h-1 w-12 rounded-full"
-                style={{ backgroundColor: SPECTRUM[(index + 2) % SPECTRUM.length] }}
-              />
-              <p className="mt-5 text-[15px] leading-7 text-ink/80">&ldquo;{item.quote}&rdquo;</p>
-              <footer className="mt-6">
-                <p className="font-semibold tracking-[-0.02em]">{item.name}</p>
-                <p className="text-sm text-muted">
-                  {item.role} · {item.place}
-                </p>
-              </footer>
-            </blockquote>
-          ))}
+          <div className="mt-12 grid gap-8 lg:grid-cols-3">
+            {TESTIMONIALS.map((item, index) => (
+              <blockquote key={item.name} className="border-t-4 pt-5" style={{ borderColor: SPECTRUM[index] }}>
+                <p className="text-[15px] leading-7 text-ink/80">&ldquo;{item.quote}&rdquo;</p>
+                <footer className="mt-6">
+                  <p className="font-display text-xl font-bold uppercase tracking-[-0.02em]">
+                    {item.name}
+                  </p>
+                  <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
+                    {item.role} · {item.place}
+                  </p>
+                </footer>
+              </blockquote>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="mx-auto mt-20 max-w-6xl px-4 pb-8 sm:px-6">
-        <div className="overflow-hidden rounded-[36px] border border-line bg-ink px-6 py-12 text-white sm:px-10 sm:py-14">
-          <div className="spectrum-line mb-8 h-1 w-28 rounded-full" />
-          <h2 className="font-display max-w-[16ch] text-4xl font-bold tracking-[-0.04em] sm:text-5xl">
-            Ready to source from China?
-          </h2>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-white/65">
-            No minimum order required. Tell us what you need, and your personal relationship
-            manager will handle everything — with pictures and videos before shipping.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <PrimaryCta className="!shadow-none" />
+      <section className="bg-signal py-16 text-white sm:py-20">
+        <div className="mx-auto flex max-w-[1200px] flex-col gap-8 px-4 sm:px-6 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <h2 className="font-display max-w-[12ch] text-5xl font-black uppercase leading-[0.88] tracking-[-0.03em] sm:text-6xl">
+              Ready to source?
+            </h2>
+            <p className="mt-4 max-w-lg text-base leading-7 text-white/85">
+              No minimum order. Tell us the product — your manager handles the rest, with pictures
+              and videos before it leaves China.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href="/quote"
+              className="bg-ink px-6 py-3.5 text-[12px] font-bold uppercase tracking-[0.18em] text-paper transition hover:bg-paper hover:text-ink"
+            >
+              Request a quote
+            </Link>
             <a
               href={waUrl(`Hi Seven Color — ready to start sourcing via ${BRAND.domain}`)}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-full border border-white/20 px-6 py-3.5 text-[12px] font-bold uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
+              className="border border-white px-6 py-3.5 text-[12px] font-bold uppercase tracking-[0.18em] text-white transition hover:bg-white hover:text-signal"
             >
-              WhatsApp us
+              WhatsApp
             </a>
           </div>
         </div>

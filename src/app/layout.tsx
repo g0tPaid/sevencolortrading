@@ -1,22 +1,23 @@
 import type { Metadata } from 'next';
-import { Manrope, Syne } from 'next/font/google';
+import { Big_Shoulders_Display, IBM_Plex_Sans } from 'next/font/google';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
 import { WhatsAppFloat } from '@/components/cta';
 import { BRAND } from '@/lib/brand';
 import './globals.css';
 
-const body = Manrope({
+const body = IBM_Plex_Sans({
   subsets: ['latin'],
   variable: '--font-body',
   display: 'swap',
+  weight: ['400', '500', '600', '700'],
 });
 
-const display = Syne({
+const display = Big_Shoulders_Display({
   subsets: ['latin'],
   variable: '--font-display',
   display: 'swap',
-  weight: ['500', '600', '700', '800'],
+  weight: ['500', '600', '700', '800', '900'],
 });
 
 export const metadata: Metadata = {

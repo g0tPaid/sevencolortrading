@@ -3,8 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
-import { BRAND, NAV } from '@/lib/brand';
+import { BRAND, NAV, SPECTRUM } from '@/lib/brand';
 import { cn } from '@/lib/utils';
 
 export function SiteHeader() {
@@ -12,19 +11,23 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-[#f7f8fb]/88 backdrop-blur-md">
-      <div className="spectrum-line h-[3px] w-full" />
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+    <header className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur-sm">
+      <div className="spectrum-rail rail-pulse" aria-hidden>
+        {SPECTRUM.map((color) => (
+          <span key={color} style={{ backgroundColor: color }} />
+        ))}
+      </div>
+      <div className="mx-auto flex max-w-[1200px] items-end justify-between gap-4 px-4 py-3 sm:px-6">
         <Link href="/" className="min-w-0" onClick={() => setOpen(false)}>
-          <span className="font-display block text-[22px] font-bold leading-none tracking-[-0.04em] text-ink sm:text-[26px]">
-            {BRAND.shortName}
+          <span className="font-display block text-[34px] font-black leading-none tracking-[-0.02em] text-ink sm:text-[42px]">
+            SEVEN COLOR
           </span>
-          <span className="mt-1 block text-[10px] font-semibold uppercase tracking-[0.22em] text-muted">
-            Trading · Dubai & China
+          <span className="mt-0.5 block text-[10px] font-semibold uppercase tracking-[0.28em] text-muted">
+            Trading Co · {BRAND.domain}
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-5 md:flex" aria-label="Primary">
           {NAV.map((item) => {
             const active = pathname === item.href;
             return (
@@ -32,36 +35,34 @@ export function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  'rounded-full px-3.5 py-2 text-[12px] font-semibold tracking-[0.08em] transition',
-                  active ? 'bg-ink text-white' : 'text-ink/75 hover:bg-ink/5 hover:text-ink',
+                  'text-[12px] font-semibold uppercase tracking-[0.16em] transition',
+                  active ? 'text-signal' : 'text-ink/70 hover:text-ink',
                 )}
               >
                 {item.label}
               </Link>
             );
           })}
-        </nav>
-
-        <div className="flex items-center gap-2">
           <Link
             href="/quote"
-            className="hidden rounded-full bg-accent px-4 py-2.5 text-[11px] font-bold uppercase tracking-[0.16em] text-white shadow-[0_10px_30px_rgba(225,29,72,0.25)] transition hover:brightness-110 sm:inline-flex"
+            className="bg-ink px-4 py-2.5 text-[11px] font-bold uppercase tracking-[0.18em] text-paper transition hover:bg-signal"
           >
-            Request a quote
+            Get quote
           </Link>
-          <button
-            type="button"
-            className="grid size-10 place-items-center rounded-full border border-line text-ink md:hidden"
-            aria-label={open ? 'Close menu' : 'Open menu'}
-            onClick={() => setOpen((v) => !v)}
-          >
-            {open ? <X className="size-5" /> : <Menu className="size-5" />}
-          </button>
-        </div>
+        </nav>
+
+        <button
+          type="button"
+          className="border border-ink px-3 py-2 text-[11px] font-bold uppercase tracking-[0.16em] md:hidden"
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          onClick={() => setOpen((v) => !v)}
+        >
+          {open ? 'Close' : 'Menu'}
+        </button>
       </div>
 
       {open ? (
-        <div className="border-t border-line bg-white px-4 py-4 md:hidden">
+        <div className="border-t border-line bg-paper-2 px-4 py-4 md:hidden">
           <nav className="flex flex-col gap-1" aria-label="Mobile">
             {NAV.map((item) => (
               <Link
@@ -69,20 +70,13 @@ export function SiteHeader() {
                 href={item.href}
                 onClick={() => setOpen(false)}
                 className={cn(
-                  'rounded-xl px-3 py-3 text-sm font-semibold',
-                  pathname === item.href ? 'bg-ink text-white' : 'text-ink hover:bg-paper-deep',
+                  'border-b border-line py-3 text-sm font-semibold uppercase tracking-[0.14em]',
+                  pathname === item.href ? 'text-signal' : 'text-ink',
                 )}
               >
                 {item.label}
               </Link>
             ))}
-            <Link
-              href="/quote"
-              onClick={() => setOpen(false)}
-              className="mt-2 rounded-xl bg-accent px-3 py-3 text-center text-sm font-bold text-white"
-            >
-              Request a quote
-            </Link>
           </nav>
         </div>
       ) : null}
