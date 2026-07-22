@@ -1,26 +1,133 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ink: #0b1220;
+  --ink-soft: #1a2336;
+  --paper: #f3f5f8;
+  --paper-deep: #e6ebf2;
+  --muted: #5b6475;
+  --line: rgba(11, 18, 32, 0.1);
+  --accent: #e11d48;
+  --accent-2: #2563eb;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--paper);
+  color: var(--ink);
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(ellipse 90% 55% at 80% -10%, rgba(37, 99, 235, 0.12), transparent 55%),
+    radial-gradient(ellipse 70% 45% at 0% 10%, rgba(225, 29, 72, 0.08), transparent 50%),
+    linear-gradient(180deg, #f7f8fb 0%, #eef1f6 100%);
+  color: var(--ink);
+  font-family: var(--font-body), "Manrope", system-ui, sans-serif;
+  text-rendering: geometricPrecision;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: #2563eb;
+  color: white;
+}
+
+.font-display {
+  font-family: var(--font-display), "Syne", system-ui, sans-serif;
+}
+
+@keyframes spectrum-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.spectrum-line {
+  background: linear-gradient(
+    90deg,
+    #e11d48,
+    #ea580c,
+    #ca8a04,
+    #16a34a,
+    #0891b2,
+    #2563eb,
+    #7c3aed,
+    #e11d48
+  );
+  background-size: 200% 100%;
+  animation: spectrum-shift 8s linear infinite;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rise-in {
+  animation: rise-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.rise-delay-1 {
+  animation-delay: 0.12s;
+}
+.rise-delay-2 {
+  animation-delay: 0.24s;
+}
+.rise-delay-3 {
+  animation-delay: 0.36s;
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.float-soft {
+  animation: float-soft 5.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spectrum-line,
+  .rise-in,
+  .float-soft {
+    animation: none !important;
+  }
 }
