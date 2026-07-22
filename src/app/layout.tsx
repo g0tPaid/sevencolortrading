@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Big_Shoulders_Display, IBM_Plex_Sans } from 'next/font/google';
+import { IBM_Plex_Sans, Oswald } from 'next/font/google';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
 import { WhatsAppFloat } from '@/components/cta';
@@ -13,11 +13,11 @@ const body = IBM_Plex_Sans({
   weight: ['400', '500', '600', '700'],
 });
 
-const display = Big_Shoulders_Display({
+const display = Oswald({
   subsets: ['latin'],
   variable: '--font-display',
   display: 'swap',
-  weight: ['500', '600', '700', '800', '900'],
+  weight: ['500', '600', '700'],
 });
 
 export const metadata: Metadata = {
