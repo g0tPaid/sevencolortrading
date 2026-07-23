@@ -1,6 +1,9 @@
 export const company = {
-  name: "Seven Color",
-  legalName: "Xiamen Ajmal Seven Color Trading Co Ltd",
+  name: "Sourcing Center",
+  brand: "Sourcing Center",
+  byline: "by Seven Color Trading Co Ltd · China",
+  legalName: "Seven Color Trading Co Ltd",
+  legalNameFull: "Xiamen Ajmal Seven Color Trading Co Ltd",
   tagline: "China sourcing infrastructure for modern procurement teams.",
   description:
     "End-to-end product sourcing from verified manufacturers in China — no MOQ, factory verification, QC, and door-to-door logistics across Dubai and global markets.",
@@ -173,7 +176,7 @@ export const verificationSteps = [
 export const faqs = [
   {
     q: "Is there a minimum order quantity?",
-    a: "No. Seven Color supports orders from a single unit to large container programs — at competitive wholesale pricing.",
+    a: "No. Sourcing Center supports orders from a single unit to large container programs — at competitive wholesale pricing.",
   },
   {
     q: "Where are your teams located?",

@@ -9,7 +9,10 @@ export function SiteFooter() {
       <Container className="py-16">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-1">
-            <p className="font-display text-xl font-semibold">Seven Color</p>
+            <p className="font-display text-xl font-semibold">Sourcing Center</p>
+            <p className="mt-1 text-xs text-paper/60 dark:text-muted">
+              by Seven Color Trading Co Ltd · China
+            </p>
             <p className="mt-3 text-sm leading-relaxed text-paper/70 dark:text-muted">
               {company.tagline}
             </p>

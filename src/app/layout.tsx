@@ -26,15 +26,15 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://sourcing.center"),
   title: {
-    default: "Sourcing Center · Seven Color",
+    default: "Sourcing Center by Seven Color Trading Co Ltd · China",
     template: "%s · Sourcing Center",
   },
   description:
-    "Enterprise China sourcing with no MOQ. Factory verification, quality inspection, private label, OEM/ODM, and logistics from Xiamen and Dubai.",
+    "Sourcing Center by Seven Color Trading Co Ltd, China — enterprise China sourcing with no MOQ, factory verification, QC, and logistics from Xiamen and Dubai.",
   openGraph: {
-    title: "Sourcing Center · Seven Color",
+    title: "Sourcing Center by Seven Color Trading Co Ltd · China",
     description:
-      "Procurement-grade sourcing infrastructure for teams that buy from China.",
+      "Procurement-grade China sourcing infrastructure — no MOQ, verified factories, QC, and global logistics.",
     type: "website",
     locale: "en_US",
   },

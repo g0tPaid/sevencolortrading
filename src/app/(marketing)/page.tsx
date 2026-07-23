@@ -32,13 +32,13 @@ export default function HomePage() {
         <Container className="relative grid min-h-0 items-center gap-8 py-10 sm:gap-12 sm:py-16 lg:min-h-[88vh] lg:grid-cols-[1.1fr_0.9fr] lg:py-24">
           <div>
             <SpectrumRail className="mb-6 w-28 sm:mb-8" />
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">
-              sourcing.center
+            <p className="font-display text-[2.35rem] font-semibold leading-[1.05] tracking-tight text-ink sm:text-5xl md:text-6xl lg:text-7xl">
+              Sourcing Center
             </p>
-            <p className="mt-2 font-display text-[2.35rem] font-semibold leading-[1.05] tracking-tight text-ink sm:text-5xl md:text-6xl lg:text-7xl">
-              Seven Color
+            <p className="mt-3 text-sm font-medium tracking-wide text-muted sm:text-base">
+              by Seven Color Trading Co Ltd · China
             </p>
-            <h1 className="mt-4 max-w-xl text-lg font-medium leading-snug text-ink-soft sm:mt-5 sm:text-2xl">
+            <h1 className="mt-5 max-w-xl text-lg font-medium leading-snug text-ink-soft sm:mt-6 sm:text-2xl">
               China sourcing infrastructure for procurement teams that refuse to guess.
             </h1>
             <p className="mt-4 max-w-lg text-sm leading-relaxed text-muted sm:mt-5 sm:text-lg">
@@ -149,7 +149,7 @@ export default function HomePage() {
           </div>
           <div>
             <SectionHeading
-              eyebrow="Why Seven Color"
+              eyebrow="Why Sourcing Center"
               title="Your eyes and ears in China"
               description="We operate as an extension of your procurement team — not a marketplace middleman."
             />
