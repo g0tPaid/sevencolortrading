@@ -1,5 +1,6 @@
 import { FloatingNav } from "@/components/layout/floating-nav";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { WhatsAppFloat } from "@/components/layout/whatsapp-float";
 
 export default function MarketingLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -15,6 +16,7 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
         {children}
       </main>
       <SiteFooter />
+      <WhatsAppFloat />
     </>
   );
 }

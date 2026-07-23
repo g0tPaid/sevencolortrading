@@ -1,6 +1,8 @@
 import Link from "next/link";
-import { ArrowRight, BadgeCheck, Building2, ShieldCheck } from "lucide-react";
-import { RfqForm } from "@/components/home/rfq-form";
+import { ArrowRight, ShieldCheck } from "lucide-react";
+import { HomeHero } from "@/components/home/home-hero";
+import { ProductIdeaSection } from "@/components/home/product-idea-section";
+import { RetailTrustSection } from "@/components/home/retail-trust-section";
 import { SourcingTimeline } from "@/components/home/sourcing-timeline";
 import { WorldShippingMap } from "@/components/home/world-map";
 import { Reveal } from "@/components/shared/reveal";
@@ -22,58 +24,11 @@ import {
 export default function HomePage() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 grid-fade opacity-60" aria-hidden />
-        <div
-          className="absolute -right-24 top-10 h-72 w-72 rounded-full bg-accent/20 blur-3xl"
-          aria-hidden
-        />
-        <Container className="relative grid min-h-0 items-center gap-8 py-10 sm:gap-12 sm:py-16 lg:min-h-[88vh] lg:grid-cols-[1.1fr_0.9fr] lg:py-24">
-          <div>
-            <SpectrumRail className="mb-6 w-28 sm:mb-8" />
-            <p className="font-display text-[2.35rem] font-semibold leading-[1.05] tracking-tight text-ink sm:text-5xl md:text-6xl lg:text-7xl">
-              Sourcing Center
-            </p>
-            <p className="mt-3 text-sm font-medium tracking-wide text-muted sm:text-base">
-              by Seven Color Trading Co Ltd · China
-            </p>
-            <h1 className="mt-5 max-w-xl text-lg font-medium leading-snug text-ink-soft sm:mt-6 sm:text-2xl">
-              China sourcing infrastructure for procurement teams that refuse to guess.
-            </h1>
-            <p className="mt-4 max-w-lg text-sm leading-relaxed text-muted sm:mt-5 sm:text-lg">
-              No MOQ. Verified factories. Photo & video QC. Freight from Xiamen and Dubai —
-              built like an enterprise desk, not a brochure site.
-            </p>
-            <div className="mt-6 flex w-full flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
-              <ButtonLink href="#rfq" className="w-full sm:w-auto">
-                Open sourcing request
-              </ButtonLink>
-              <ButtonLink href="/how-it-works" variant="secondary" className="w-full sm:w-auto">
-                See the workflow
-              </ButtonLink>
-            </div>
-            <div className="mt-8 flex flex-col gap-2 text-sm text-muted sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-x-6 sm:gap-y-3">
-              <span className="inline-flex items-center gap-2">
-                <BadgeCheck className="h-4 w-4 shrink-0 text-accent" /> No minimum order
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <Building2 className="h-4 w-4 shrink-0 text-accent" /> Dubai & China offices
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <ShieldCheck className="h-4 w-4 shrink-0 text-accent" /> Pre-shipment QC
-              </span>
-            </div>
-          </div>
-          <div id="rfq" className="md:animate-float scroll-mt-28">
-            <RfqForm />
-          </div>
-        </Container>
-      </section>
+      <HomeHero />
 
       {/* Stats */}
       <section className="border-y border-line bg-paper-elevated">
-        <Container className="grid grid-cols-2 gap-6 py-10 md:grid-cols-4">
+        <Container className="grid grid-cols-3 gap-6 py-10">
           {company.stats.map((stat, i) => (
             <Reveal key={stat.label} delay={i * 0.05}>
               <p className="font-display text-3xl font-semibold text-ink md:text-4xl">
@@ -85,13 +40,15 @@ export default function HomePage() {
         </Container>
       </section>
 
+      <ProductIdeaSection />
+
       {/* Categories */}
       <section className="py-20 sm:py-28">
         <Container>
           <SectionHeading
-            eyebrow="Product categories"
-            title="What we source"
-            description="From a single sample to container programs — electronics to industrial steel."
+            eyebrow="What we buy for you"
+            title="Anything from China — sample to container"
+            description="Electronics, home, fashion, industrial, steel, and private label — one desk handles it."
           />
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {categories.map((cat, i) => (
@@ -120,8 +77,8 @@ export default function HomePage() {
         <Container>
           <SectionHeading
             eyebrow="How it works"
-            title="Inquiry to delivery — one controlled path"
-            description="A four-stage sourcing timeline with on-ground verification before anything ships."
+            title="RFQ today. Proof before it ships."
+            description="Four clear steps — source, verify, inspect, deliver. You stay in control the whole way."
           />
           <div className="mt-14">
             <SourcingTimeline />
@@ -140,8 +97,8 @@ export default function HomePage() {
           <div>
             <SectionHeading
               eyebrow="Trade lanes"
-              title="Xiamen sourcing. Dubai logistics. Global delivery."
-              description="Live routes across our primary hubs — sea, air, and express with customs guidance."
+              title="China factory floor → your door"
+              description="Xiamen sourcing desk. Dubai hub. Sea, air, or express — with customs guidance included."
             />
             <div className="mt-8">
               <WorldShippingMap />
@@ -149,9 +106,9 @@ export default function HomePage() {
           </div>
           <div>
             <SectionHeading
-              eyebrow="Why Sourcing Center"
-              title="Your eyes and ears in China"
-              description="We operate as an extension of your procurement team — not a marketplace middleman."
+              eyebrow="Why buyers stay"
+              title="Your central command in China"
+              description="One team. One workflow. Idea to factory to door — not a marketplace free-for-all."
             />
             <ul className="mt-8 space-y-3">
               {whyUs.map((item) => (
@@ -172,8 +129,8 @@ export default function HomePage() {
       <section className="border-y border-line bg-ink-soft py-20 text-paper dark:bg-paper-elevated dark:text-ink sm:py-28">
         <Container>
           <SectionHeading
-            eyebrow="Industry expertise"
-            title="Built for buyers who ship for real"
+            eyebrow="Who we serve"
+            title="Built for teams that actually ship"
           />
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {industries.map((item) => (
@@ -196,13 +153,15 @@ export default function HomePage() {
         </Container>
       </section>
 
+      <RetailTrustSection />
+
       {/* Testimonials */}
       <section className="py-20 sm:py-28">
         <Container>
           <SectionHeading
             eyebrow="Trust"
-            title="Trusted by 1,000+ buyers"
-            description="From DTC founders to GCC retailers — verified delivery stories."
+            title="1,000+ buyers. Zero guessing."
+            description="DTC brands, GCC retailers, and project buyers who want proof — not promises."
           />
           <div className="mt-12 grid gap-4 lg:grid-cols-3">
             {testimonials.map((t) => (
@@ -226,7 +185,7 @@ export default function HomePage() {
       {/* FAQ */}
       <section className="border-t border-line bg-paper-elevated py-20 sm:py-28">
         <Container className="max-w-3xl">
-          <SectionHeading eyebrow="FAQ" title="Answers before you RFQ" align="center" />
+          <SectionHeading eyebrow="FAQ" title="Quick answers before you buy" align="center" />
           <div className="mt-10 space-y-3">
             {faqs.map((item) => (
               <details
@@ -249,11 +208,11 @@ export default function HomePage() {
           <div className="relative overflow-hidden rounded-[2rem] border border-line bg-ink px-8 py-14 text-paper dark:bg-accent dark:text-paper sm:px-12">
             <SpectrumRail className="absolute inset-x-0 top-0 rounded-none" />
             <p className="font-display text-3xl font-semibold sm:text-4xl">
-              Ready to source from China?
+              Have an idea. We&apos;ll make it real.
             </p>
             <p className="mt-4 max-w-xl text-paper/75">
-              Tell us what you need. Your relationship manager handles suppliers, QC, and
-              shipping — with proof before anything leaves the factory.
+              Design, source, inspect, and ship from China — with a relationship manager in
+              Xiamen and Dubai.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link

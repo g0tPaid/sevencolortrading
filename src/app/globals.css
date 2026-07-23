@@ -3,9 +3,10 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
-  --font-display: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-plex), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+  --font-display: var(--font-fraunces), "Times New Roman", Georgia, serif;
+  --font-brand: var(--font-cormorant), "Times New Roman", Georgia, serif;
+  --font-sans: var(--font-nunito), ui-rounded, "Segoe UI", sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
@@ -76,7 +77,14 @@ body {
 
 .font-display {
   font-family: var(--font-display);
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
+  font-optical-sizing: auto;
+}
+
+.font-logo {
+  font-family: var(--font-brand);
+  letter-spacing: -0.01em;
+  font-style: normal;
 }
 
 .spectrum-rail {
