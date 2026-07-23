@@ -21,8 +21,8 @@ export function V2Ideation() {
             From brand idea to manufacturable SKU
           </h2>
           <p className="mt-4 text-muted sm:text-lg">
-            Describe what you want to build. The platform returns products, costs, regions, and
-            logistics — before you talk to a factory.
+            Describe what you want to build. We map products, costs, regions, and logistics —
+            before you talk to a factory.
           </p>
         </div>
 
