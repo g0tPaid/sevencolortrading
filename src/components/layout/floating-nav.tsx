@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
+import { SourcingLogo } from "@/components/brand/sourcing-logo";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { ButtonLink } from "@/components/ui/primitives";
 import { services, industries } from "@/lib/content";
@@ -46,23 +46,8 @@ export function FloatingNav() {
             : "border-transparent bg-transparent",
         )}
       >
-        <Link href="/" className="flex min-w-0 items-center gap-2.5 py-1" onClick={() => setOpen(false)}>
-          <Image
-            src="/seven-color-badge.svg"
-            alt="Seven Color"
-            width={32}
-            height={38}
-            className="h-8 w-auto shrink-0"
-            priority
-          />
-          <span className="min-w-0">
-            <span className="block font-display text-sm font-semibold leading-tight tracking-tight text-ink sm:text-base">
-              Sourcing Center
-            </span>
-            <span className="block truncate text-[10px] leading-tight text-muted">
-              by Seven Color Trading Co Ltd · China
-            </span>
-          </span>
+        <Link href="/" className="flex min-w-0 items-center py-1" onClick={() => setOpen(false)}>
+          <SourcingLogo size="nav" />
         </Link>
 
         <nav className="ml-2 hidden items-center gap-1 lg:flex" aria-label="Primary">

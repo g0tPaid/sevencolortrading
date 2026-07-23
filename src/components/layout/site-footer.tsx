@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SourcingLogo } from "@/components/brand/sourcing-logo";
 import { Container, SpectrumRail } from "@/components/ui/primitives";
 import { company, services } from "@/lib/content";
 
@@ -9,10 +10,8 @@ export function SiteFooter() {
       <Container className="py-16">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-1">
-            <p className="font-display text-xl font-semibold">Sourcing Center</p>
-            <p className="mt-1 text-xs text-paper/60 dark:text-muted">
-              by Seven Color Trading Co Ltd · China
-            </p>
+            <SourcingLogo size="footer" onDark className="items-start dark:hidden" />
+            <SourcingLogo size="footer" className="hidden items-start dark:flex" />
             <p className="mt-3 text-sm leading-relaxed text-paper/70 dark:text-muted">
               {company.tagline}
             </p>

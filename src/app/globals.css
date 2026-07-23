@@ -4,6 +4,7 @@
 
 @theme inline {
   --font-display: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
+  --font-brand: var(--font-playfair), "Times New Roman", Georgia, serif;
   --font-sans: var(--font-plex), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 
@@ -77,6 +78,11 @@ body {
 .font-display {
   font-family: var(--font-display);
   letter-spacing: -0.03em;
+}
+
+.font-logo {
+  font-family: var(--font-brand);
+  letter-spacing: -0.02em;
 }
 
 .spectrum-rail {

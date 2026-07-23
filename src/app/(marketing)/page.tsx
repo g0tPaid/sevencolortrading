@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowRight, ShieldCheck } from "lucide-react";
+import { SourcingLogo } from "@/components/brand/sourcing-logo";
 import { RfqForm } from "@/components/home/rfq-form";
 import { SourcingTimeline } from "@/components/home/sourcing-timeline";
 import { WorldShippingMap } from "@/components/home/world-map";
@@ -30,24 +30,7 @@ export default function HomePage() {
         <div className="absolute inset-0 grid-fade opacity-50" aria-hidden />
         <Container className="relative grid items-center gap-8 py-10 sm:gap-10 sm:py-14 lg:min-h-[82vh] lg:grid-cols-[1fr_1fr] lg:gap-12 lg:py-20">
           <div>
-            <div className="mb-6 flex items-center gap-4 sm:gap-5">
-              <Image
-                src="/seven-color-badge.svg"
-                alt="Seven Color"
-                width={80}
-                height={96}
-                className="h-[72px] w-auto shrink-0 sm:h-24"
-                priority
-              />
-              <div>
-                <p className="font-display text-3xl font-semibold leading-none tracking-tight text-ink sm:text-5xl">
-                  Sourcing Center
-                </p>
-                <p className="mt-2 text-sm font-medium text-muted sm:text-base">
-                  by Seven Color Trading Co Ltd · China
-                </p>
-              </div>
-            </div>
+            <SourcingLogo size="hero" showByline className="items-start" />
 
             <ul className="mt-8 space-y-4 sm:mt-10">
               {highlights.map((item) => (
@@ -55,7 +38,7 @@ export default function HomePage() {
                   key={item}
                   className="flex items-center gap-3 font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl md:text-4xl"
                 >
-                  <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[#FF0040]" aria-hidden />
+                  <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[#E31C23]" aria-hidden />
                   {item}
                 </li>
               ))}
