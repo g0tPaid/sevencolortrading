@@ -45,15 +45,17 @@ export function FloatingNav() {
             : "border-transparent bg-transparent",
         )}
       >
-        <Link href="/" className="flex items-center gap-2.5 py-1" onClick={() => setOpen(false)}>
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg spectrum-rail text-[11px] font-bold text-white shadow-sm">
-            7C
+        <Link href="/" className="flex min-w-0 items-center gap-2.5 py-1" onClick={() => setOpen(false)}>
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg spectrum-rail text-[11px] font-bold text-white shadow-sm">
+            SC
           </span>
-          <span className="font-display text-sm font-semibold tracking-tight text-ink sm:text-base">
-            Seven Color
-          </span>
-          <span className="hidden text-[10px] uppercase tracking-[0.16em] text-muted sm:inline">
-            sourcing.center
+          <span className="min-w-0">
+            <span className="block font-display text-sm font-semibold leading-tight tracking-tight text-ink sm:text-base">
+              Sourcing Center
+            </span>
+            <span className="block truncate text-[10px] leading-tight text-muted">
+              by Seven Color Trading Co Ltd · China
+            </span>
           </span>
         </Link>
 
