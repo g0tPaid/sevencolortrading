@@ -67,11 +67,29 @@ export function SiteFooter() {
             </ul>
           </div>
         </div>
-        <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-paper/50 dark:border-line dark:text-muted sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} {company.legalName}</p>
-          <p>
-            {company.emails.corporate} · {company.phones[0]}
-          </p>
+        <div className="mt-12 space-y-5 border-t border-white/10 pt-6 dark:border-line">
+          <div className="grid gap-4 sm:grid-cols-2">
+            {company.locations.map((loc) => (
+              <a
+                key={loc.phone}
+                href={loc.href}
+                className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 transition hover:border-white/25 dark:border-line dark:bg-paper dark:hover:border-accent/40"
+              >
+                <p className="font-mono text-sm font-semibold tracking-tight text-paper dark:text-ink sm:text-base">
+                  {loc.phone}
+                </p>
+                <p className="mt-1 text-xs uppercase tracking-[0.14em] text-paper/55 dark:text-muted">
+                  {loc.label}
+                </p>
+              </a>
+            ))}
+          </div>
+          <div className="flex flex-col gap-2 text-xs text-paper/50 dark:text-muted sm:flex-row sm:items-center sm:justify-between">
+            <p>
+              © {new Date().getFullYear()} {company.legalName}
+            </p>
+            <p>{company.emails.corporate}</p>
+          </div>
         </div>
       </Container>
     </footer>

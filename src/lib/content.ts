@@ -35,9 +35,20 @@ export const company = {
   hours: "Monday – Sunday, 8:30 AM – 7:00 PM (GST / CST)",
   stats: [
     { label: "Clients served", value: "1,000+" },
-    { label: "Years in market", value: "10+" },
     { label: "Verified suppliers", value: "500+" },
     { label: "Countries reached", value: "50+" },
+  ],
+  locations: [
+    {
+      phone: "+8618059262730",
+      label: "China — HQ and warehouse",
+      href: "tel:+8618059262730",
+    },
+    {
+      phone: "+971589061969",
+      label: "Dubai — Branch and warehouse",
+      href: "tel:+971589061969",
+    },
   ],
 };
 

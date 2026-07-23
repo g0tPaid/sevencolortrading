@@ -59,7 +59,7 @@ export default function HomePage() {
 
       {/* Stats */}
       <section className="border-y border-line bg-paper-elevated">
-        <Container className="grid grid-cols-2 gap-6 py-10 md:grid-cols-4">
+        <Container className="grid grid-cols-3 gap-6 py-10">
           {company.stats.map((stat, i) => (
             <Reveal key={stat.label} delay={i * 0.05}>
               <p className="font-display text-3xl font-semibold text-ink md:text-4xl">
