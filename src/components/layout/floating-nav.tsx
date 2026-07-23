@@ -192,7 +192,7 @@ export function FloatingNav() {
                 className="mt-2 inline-flex w-full items-center justify-center rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper dark:bg-accent"
                 onClick={() => setOpen(false)}
               >
-                Start RFQ
+                Get a quote
               </Link>
             </div>
           </motion.div>
