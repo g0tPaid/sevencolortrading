@@ -42,7 +42,7 @@ export default function AboutPage() {
         </div>
       </Container>
       <Container className="pb-8">
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+        <div className="grid grid-cols-3 gap-4">
           {company.stats.map((s) => (
             <div key={s.label} className="rounded-2xl border border-line bg-paper-elevated p-5">
               <p className="font-display text-2xl font-semibold text-ink">{s.value}</p>
