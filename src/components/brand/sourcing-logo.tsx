@@ -12,9 +12,7 @@ type SourcingLogoProps = {
 };
 
 /**
- * Official sourcing.center wordmark:
- * "sourcing" — bold black serif with red tittle on the i
- * ".center" — smaller maroon sans underneath
+ * Official sourcing.center wordmark + Seven Color 7 mark.
  */
 export function SourcingLogo({
   className,
@@ -36,37 +34,43 @@ export function SourcingLogo({
         ? "mt-0.5 text-sm tracking-[0.16em]"
         : "mt-0.5 text-[10px] tracking-[0.14em] sm:text-[11px]";
 
-  const markSize = size === "hero" ? 32 : 22;
+  const sideMark = size === "hero" ? 64 : size === "footer" ? 40 : 36;
+  const byMark = size === "hero" ? 28 : 22;
 
   return (
-    <span className={cn("inline-flex flex-col items-center leading-none", className)}>
-      <span
-        className={cn(
-          "font-logo font-bold tracking-[-0.02em]",
-          onDark ? "text-white" : "text-ink",
-          sourcing,
-        )}
-      >
-        sourc
-        <span className="relative inline-block">
-          {/* Dotless i so we can place the brand red tittle */}
-          ı
+    <span className={cn("inline-flex flex-col leading-none", className)}>
+      <span className="inline-flex items-center gap-3 sm:gap-4">
+        <SevenColorMark size={sideMark} />
+        <span className="inline-flex flex-col items-start leading-none">
           <span
-            className="absolute left-1/2 top-[0.06em] h-[0.22em] w-[0.22em] -translate-x-1/2 rounded-full bg-[#E31C23]"
-            aria-hidden
-          />
+            className={cn(
+              "font-logo font-bold tracking-[-0.02em]",
+              onDark ? "text-white" : "text-ink",
+              sourcing,
+            )}
+          >
+            sourc
+            <span className="relative inline-block">
+              ı
+              <span
+                className="absolute left-1/2 top-[0.06em] h-[0.22em] w-[0.22em] -translate-x-1/2 rounded-full bg-[#E31C23]"
+                aria-hidden
+              />
+            </span>
+            ng
+          </span>
+          <span
+            className={cn(
+              "font-sans font-medium",
+              onDark ? "text-[#E85A6A]" : "text-[#9B1B2E] dark:text-[#E85A6A]",
+              center,
+            )}
+          >
+            .center
+          </span>
         </span>
-        ng
       </span>
-      <span
-        className={cn(
-          "font-sans font-medium",
-          onDark ? "text-[#E85A6A]" : "text-[#9B1B2E] dark:text-[#E85A6A]",
-          center,
-        )}
-      >
-        .center
-      </span>
+
       {showByline ? (
         <span
           className={cn(
@@ -76,11 +80,12 @@ export function SourcingLogo({
           )}
         >
           <span>by</span>
-          <SevenColorMark size={markSize} />
+          <SevenColorMark size={byMark} />
           <span>Seven Color Trading Co Ltd · China</span>
         </span>
       ) : null}
-      <span className="sr-only">sourcing.center</span>
+
+      <span className="sr-only">sourcing.center by Seven Color</span>
     </span>
   );
 }
