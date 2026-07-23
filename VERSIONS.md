@@ -7,5 +7,5 @@
 
 ## v2.0 — current
 - Branch: `cursor/sourcing-v2-os-447e`
-- Positioning: operating system for product ideation & sourcing
+- Positioning: Sourcing.center — the company for product ideation & sourcing from China (Seven Color Trading)
 - Aesthetic: Apple / Stripe / Linear — minimal, premium, enterprise

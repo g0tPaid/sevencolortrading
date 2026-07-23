@@ -96,7 +96,7 @@ export const supplySteps = [
 ] as const;
 
 export const whyPoints = [
-  { title: "One dashboard", text: "Ideas, factories, QC, and freight in a single OS." },
+  { title: "One dashboard", text: "Ideas, factories, QC, and freight in one place with your team." },
   { title: "Thousands of factories", text: "Mapped capacity across electronics, home, fashion, and industrial." },
   { title: "Verified suppliers", text: "License checks, audits, and production proof before you commit." },
   { title: "Factory audits", text: "On-ground teams in China validating what catalogs claim." },

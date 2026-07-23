@@ -26,9 +26,9 @@ export const metadata: Metadata = {
   description:
     "Discover winning product ideas, validate demand, connect with verified manufacturers, manage production, and source directly from China—all from one intelligent platform. By Seven Color Trading Co Ltd.",
   openGraph: {
-    title: "Sourcing Center — Product Ideation & Sourcing OS",
+    title: "Sourcing Center — Product Ideation & Sourcing from China",
     description:
-      "The operating system for product ideation and sourcing from China.",
+      "Sourcing.center by Seven Color Trading — product ideation, verified factories, QC, and logistics from China.",
     type: "website",
     locale: "en_US",
   },

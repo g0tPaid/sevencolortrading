@@ -15,11 +15,11 @@ export function V2DashboardPreview() {
               Client desk
             </p>
             <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-5xl">
-              Your sourcing command center
+              Your client desk
             </h2>
             <p className="mt-4 text-muted sm:text-lg">
-              Orders, QC, freight, and files — structured like a payments OS, built for China
-              sourcing.
+              Orders, messages, invoices, QC, photos, tracking, factory files, and payments —
+              clear, calm, and built for how we run sourcing.
             </p>
           </div>
           <Link

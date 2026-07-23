@@ -13,8 +13,12 @@ export function V2Why() {
             Why Sourcing.center
           </p>
           <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-5xl">
-            The operating system — not another agency
+            Your company for ideation, factories &amp; delivery
           </h2>
+          <p className="mt-4 max-w-xl text-muted sm:text-lg">
+            Seven Color Trading — one team from product idea to arrival, with China on the ground
+            and desks that stay with you.
+          </p>
         </div>
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {whyPoints.map((item, i) => (
