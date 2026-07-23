@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, ShieldCheck } from "lucide-react";
 import { HomeHero } from "@/components/home/home-hero";
 import { ProductIdeaSection } from "@/components/home/product-idea-section";
+import { RetailTrustSection } from "@/components/home/retail-trust-section";
 import { SourcingTimeline } from "@/components/home/sourcing-timeline";
 import { WorldShippingMap } from "@/components/home/world-map";
 import { Reveal } from "@/components/shared/reveal";
@@ -151,6 +152,8 @@ export default function HomePage() {
           </div>
         </Container>
       </section>
+
+      <RetailTrustSection />
 
       {/* Testimonials */}
       <section className="py-20 sm:py-28">

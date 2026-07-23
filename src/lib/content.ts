@@ -52,6 +52,11 @@ export const company = {
   ],
   credentials: {
     dunBradstreet: "Dun & Bradstreet registered",
+    retailVendors: ["Walmart", "Target", "Costco", "Amazon", "Home Depot"],
+    retailNote:
+      "Registered vendor pathways for major retailers including Walmart, Target, and more.",
+    shelfNote:
+      "If you’ve walked the aisles at big stores like Walmart, you’ve almost certainly seen products we helped source from China.",
     licenses: [
       { region: "China (Xiamen)", number: "91350200MAE8W9E67A", kind: "Business license" },
       { region: "UAE (Dubai / Al Ain)", number: "143609", kind: "Trade license" },

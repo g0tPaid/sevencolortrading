@@ -91,8 +91,21 @@ export function SiteFooter() {
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-paper/55 dark:text-muted">
               Credentials
             </p>
-            <p className="mt-2 text-sm font-medium text-paper dark:text-ink">
-              {company.credentials.dunBradstreet}
+            <div className="mt-3 flex items-center gap-3">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/dun-bradstreet.png"
+                alt="Dun & Bradstreet"
+                width={44}
+                height={44}
+                className="h-11 w-11 rounded-lg object-contain bg-white"
+              />
+              <p className="text-sm font-medium text-paper dark:text-ink">
+                {company.credentials.dunBradstreet}
+              </p>
+            </div>
+            <p className="mt-3 text-xs leading-relaxed text-paper/70 dark:text-muted">
+              Registered vendor pathways for Walmart, Target, and other major retailers.
             </p>
             <ul className="mt-3 space-y-2 text-xs text-paper/70 dark:text-muted">
               {company.credentials.licenses.map((lic) => (
