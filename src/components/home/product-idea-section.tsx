@@ -6,8 +6,8 @@ import { ButtonLink, Container } from "@/components/ui/primitives";
 const steps = [
   {
     n: "01",
-    title: "Share the idea",
-    text: "A sketch, a sample photo, or just a sentence — we turn it into a clear brief.",
+    title: "Share the idea (NDAs signed)",
+    text: "A sketch, a sample photo, or just a sentence — protected under NDA before we open the brief.",
   },
   {
     n: "02",
