@@ -1,49 +1,51 @@
-import type { Metadata } from 'next';
-import { IBM_Plex_Sans, Oswald } from 'next/font/google';
-import { SiteFooter } from '@/components/site-footer';
-import { SiteHeader } from '@/components/site-header';
-import { WhatsAppFloat } from '@/components/cta';
-import { BRAND } from '@/lib/brand';
-import './globals.css';
+import type { Metadata } from "next";
+import { IBM_Plex_Mono, IBM_Plex_Sans, Syne } from "next/font/google";
+import { ThemeProvider } from "@/components/layout/theme-provider";
+import "./globals.css";
 
-const body = IBM_Plex_Sans({
-  subsets: ['latin'],
-  variable: '--font-body',
-  display: 'swap',
-  weight: ['400', '500', '600', '700'],
+const syne = Syne({
+  subsets: ["latin"],
+  variable: "--font-syne",
+  display: "swap",
 });
 
-const display = Oswald({
-  subsets: ['latin'],
-  variable: '--font-display',
-  display: 'swap',
-  weight: ['500', '600', '700'],
+const plex = IBM_Plex_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-plex",
+  display: "swap",
+});
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-plex-mono",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://sevencolortrading.com"),
   title: {
-    default: `${BRAND.name} — Source from China`,
-    template: `%s · ${BRAND.name}`,
+    default: "Seven Color — China Sourcing Platform",
+    template: "%s · Seven Color",
   },
-  description: BRAND.description,
-  metadataBase: new URL(`https://${BRAND.domain}`),
+  description:
+    "Enterprise China sourcing with no MOQ. Factory verification, quality inspection, private label, OEM/ODM, and logistics from Xiamen and Dubai.",
   openGraph: {
-    title: BRAND.name,
-    description: BRAND.description,
-    siteName: BRAND.name,
-    type: 'website',
-    url: `https://${BRAND.domain}`,
+    title: "Seven Color — China Sourcing Platform",
+    description:
+      "Procurement-grade sourcing infrastructure for teams that buy from China.",
+    type: "website",
+    locale: "en_US",
   },
+  robots: { index: true, follow: true },
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={`${body.variable} ${display.variable} antialiased`}>
-        <SiteHeader />
-        {children}
-        <SiteFooter />
-        <WhatsAppFloat />
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${syne.variable} ${plex.variable} ${plexMono.variable} font-sans antialiased`}>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

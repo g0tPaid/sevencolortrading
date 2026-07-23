@@ -1,22 +1,14 @@
-# Seven Color Trading (v2)
+# Seven Color — China Sourcing Platform
 
-Modern sourcing website for **[sevencolortrading.com](https://sevencolortrading.com)** — version two of the Seven Color China sourcing brand.
-
-Content and business details were pulled from the live Seven Color site (`sevencolor.online`; `sevencolor.info` did not resolve in this environment). Contact already lists `info@sevencolortrading.com` for SMEs.
+Premium B2B sourcing platform for Seven Color Trading (sevencolor.online / sourcing.center).
 
 ## Stack
 
 - Next.js 15 (App Router)
-- Tailwind CSS 4
-- Framer Motion / Lucide
-
-## Pages
-
-- `/` — hero, how it works, categories, why us, testimonials, CTA
-- `/about` — mission, vision, offices, stats
-- `/services` — services + categories
-- `/quote` — WhatsApp quote form
-- `/contact` — offices, phones, WhatsApp contact form
+- TypeScript
+- Tailwind CSS v4
+- Framer Motion + GSAP
+- next-themes (dark/light)
 
 ## Develop
 
@@ -25,11 +17,14 @@ npm install
 npm run dev
 ```
 
-## Production
+## Build
 
 ```bash
 npm run build
 npm start
 ```
 
-Point `sevencolortrading.com` at the Railway / host deploy of this repo.
+## Structure
+
+- Marketing site: `/` and platform pages
+- Client desk UI: `/dashboard/*`
