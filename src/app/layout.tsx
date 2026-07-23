@@ -37,11 +37,11 @@ export const metadata: Metadata = {
     template: "%s · Sourcing Center",
   },
   description:
-    "Sourcing Center by Seven Color Trading Co Ltd, China — enterprise China sourcing with no MOQ, factory verification, QC, and logistics from Xiamen and Dubai.",
+    "Welcome to the Sourcing Center by Seven Color Trading Co Ltd, China — turn product ideas into real goods. Design, verified factories, QC, and logistics from Xiamen and Dubai. No MOQ.",
   openGraph: {
     title: "Sourcing Center by Seven Color Trading Co Ltd · China",
     description:
-      "Procurement-grade China sourcing infrastructure — no MOQ, verified factories, QC, and global logistics.",
+      "Do you have a product idea? Let's bring it to life — and source it from China with proof.",
     type: "website",
     locale: "en_US",
   },

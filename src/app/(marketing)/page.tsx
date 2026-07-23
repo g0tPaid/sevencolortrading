@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, ShieldCheck } from "lucide-react";
-import { SourcingLogo } from "@/components/brand/sourcing-logo";
-import { RfqForm } from "@/components/home/rfq-form";
+import { HomeHero } from "@/components/home/home-hero";
+import { ProductIdeaSection } from "@/components/home/product-idea-section";
 import { SourcingTimeline } from "@/components/home/sourcing-timeline";
 import { WorldShippingMap } from "@/components/home/world-map";
 import { Reveal } from "@/components/shared/reveal";
@@ -20,46 +20,10 @@ import {
   whyUs,
 } from "@/lib/content";
 
-const highlights = [
-  "NO MOQ — START FROM ONE UNIT",
-  "VERIFIED FACTORIES ONLY",
-  "PHOTO & VIDEO QC BEFORE SHIP",
-] as const;
-
 export default function HomePage() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 grid-fade opacity-50" aria-hidden />
-        <Container className="relative grid items-center gap-8 py-10 sm:gap-10 sm:py-14 lg:min-h-[82vh] lg:grid-cols-[1fr_1fr] lg:gap-12 lg:py-20">
-          <div>
-            <SourcingLogo size="hero" showByline className="items-start" />
-
-            <ul className="mt-8 space-y-4 sm:mt-10">
-              {highlights.map((item) => (
-                <li
-                  key={item}
-                  className="flex items-center gap-3 font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl md:text-4xl"
-                >
-                  <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[#E31C23]" aria-hidden />
-                  {item}
-                </li>
-              ))}
-            </ul>
-
-            <div className="mt-8">
-              <ButtonLink href="#rfq" className="w-full sm:w-auto">
-                Get a quote in 24h
-              </ButtonLink>
-            </div>
-          </div>
-
-          <div id="rfq" className="scroll-mt-28 md:animate-float">
-            <RfqForm />
-          </div>
-        </Container>
-      </section>
+      <HomeHero />
 
       {/* Stats */}
       <section className="border-y border-line bg-paper-elevated">
@@ -74,6 +38,8 @@ export default function HomePage() {
           ))}
         </Container>
       </section>
+
+      <ProductIdeaSection />
 
       {/* Categories */}
       <section className="py-20 sm:py-28">
@@ -239,11 +205,11 @@ export default function HomePage() {
           <div className="relative overflow-hidden rounded-[2rem] border border-line bg-ink px-8 py-14 text-paper dark:bg-accent dark:text-paper sm:px-12">
             <SpectrumRail className="absolute inset-x-0 top-0 rounded-none" />
             <p className="font-display text-3xl font-semibold sm:text-4xl">
-              Tell us what you need from China
+              Have an idea. We&apos;ll make it real.
             </p>
             <p className="mt-4 max-w-xl text-paper/75">
-              We find the factory, send photos and video, then ship — with a relationship manager
-              in China and Dubai.
+              Design, source, inspect, and ship from China — with a relationship manager in
+              Xiamen and Dubai.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link

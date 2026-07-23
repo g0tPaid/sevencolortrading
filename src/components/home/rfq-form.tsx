@@ -52,10 +52,10 @@ export function RfqForm({ compact = false }: { compact?: boolean }) {
       <div className="mb-5 flex items-center justify-between gap-3">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-            Free quote
+            Idea or RFQ
           </p>
           <h3 className="mt-1 font-display text-xl font-semibold text-ink sm:text-2xl">
-            Tell us what to source
+            Tell us what to build or source
           </h3>
         </div>
         <div className="hidden items-center gap-2 sm:flex">
@@ -77,7 +77,7 @@ export function RfqForm({ compact = false }: { compact?: boolean }) {
             required
             name="description"
             rows={compact ? 3 : 4}
-            placeholder="What do you need? Specs, materials, quantity, target budget…"
+            placeholder="Product idea, sketch notes, specs, quantity, target budget…"
             className="w-full resize-y rounded-2xl border border-line bg-paper px-4 py-3 text-ink outline-none ring-accent placeholder:text-muted/70 focus:ring-2"
           />
         </label>
