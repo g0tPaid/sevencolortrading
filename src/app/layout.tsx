@@ -24,11 +24,11 @@ export const metadata: Metadata = {
     template: "%s · Sourcing Center",
   },
   description:
-    "Discover winning product ideas, validate demand, connect with verified manufacturers, manage production, and source directly from China—all from one intelligent platform. By Seven Color Trading Co Ltd.",
+    "Sourcing.center by Seven Color Trading Co Ltd · China. Discover products, invent new ones under NDA, connect with verified manufacturers, manage production, and source from China.",
   openGraph: {
-    title: "Sourcing Center — Product Ideation & Sourcing from China",
+    title: "Sourcing Center by Seven Color Trading Co Ltd · China",
     description:
-      "Sourcing.center by Seven Color Trading — product ideation, verified factories, QC, and logistics from China.",
+      "Product ideation & sourcing from China — new inventions under NDA, verified factories, QC, and logistics. By Seven Color Trading Co Ltd.",
     type: "website",
     locale: "en_US",
   },

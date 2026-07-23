@@ -16,8 +16,8 @@ export function V2Why() {
             Your company for ideation, factories &amp; delivery
           </h2>
           <p className="mt-4 max-w-xl text-muted sm:text-lg">
-            Seven Color Trading — one team from product idea to arrival, with China on the ground
-            and desks that stay with you.
+            Sourcing.center by Seven Color Trading Co Ltd · China — one team from a brand-new
+            product idea to arrival, with China on the ground and desks that stay with you.
           </p>
         </div>
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

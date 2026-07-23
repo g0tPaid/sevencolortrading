@@ -7,5 +7,6 @@
 
 ## v2.0 — current
 - Branch: `cursor/sourcing-v2-os-447e`
-- Positioning: Sourcing.center — the company for product ideation & sourcing from China (Seven Color Trading)
+- Positioning: Sourcing.center by Seven Color Trading Co Ltd · China — company site for product ideation & sourcing (including brand-new inventions under NDA)
+- Carries forward v1 company data: byline, licenses, DUNS, offices, phones, WhatsApp, retail trust, NO MOQ / QC highlights
 - Aesthetic: Apple / Stripe / Linear — minimal, premium, enterprise

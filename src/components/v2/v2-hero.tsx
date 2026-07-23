@@ -4,8 +4,10 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Search } from "lucide-react";
+import { SourcingLogo } from "@/components/brand/sourcing-logo";
 import { Container } from "@/components/ui/primitives";
-import { heroExamples } from "@/lib/v2-content";
+import { company } from "@/lib/content";
+import { companyHighlights, heroExamples } from "@/lib/v2-content";
 
 export function V2Hero() {
   const [query, setQuery] = useState("");
@@ -31,19 +33,30 @@ export function V2Hero() {
       />
 
       <Container className="relative max-w-5xl text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex justify-center"
+        >
+          <SourcingLogo size="hero" showByline className="items-center text-center" />
+        </motion.div>
+
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-xs font-semibold uppercase tracking-[0.28em] text-accent"
+          transition={{ delay: 0.04 }}
+          className="mt-6 text-xs font-medium text-muted sm:text-sm"
         >
-          Sourcing.center
+          {company.byline}
+          <span className="mx-2 text-line">·</span>
+          Since {company.founded}
         </motion.p>
 
         <motion.h1
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.05, duration: 0.55 }}
-          className="mx-auto mt-6 max-w-4xl font-display text-4xl font-semibold leading-[1.08] tracking-tight text-ink sm:text-6xl md:text-7xl"
+          transition={{ delay: 0.08, duration: 0.55 }}
+          className="mx-auto mt-8 max-w-4xl font-display text-3xl font-semibold leading-[1.1] tracking-tight text-ink sm:text-5xl md:text-6xl"
         >
           One Platform for Product Ideation &amp; Sourcing
         </motion.h1>
@@ -51,18 +64,34 @@ export function V2Hero() {
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.12, duration: 0.5 }}
+          transition={{ delay: 0.14, duration: 0.5 }}
           className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg"
         >
-          Discover winning product ideas, validate demand, connect with verified manufacturers,
-          manage production, and source directly from China—all from one intelligent platform.
+          {company.description}
         </motion.p>
+
+        <motion.ul
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.18 }}
+          className="mx-auto mt-8 flex max-w-2xl flex-col items-center gap-2 sm:flex-row sm:justify-center sm:gap-5"
+        >
+          {companyHighlights.map((item) => (
+            <li
+              key={item}
+              className="flex items-center gap-2 text-[11px] font-semibold tracking-wide text-ink sm:text-xs"
+            >
+              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden />
+              {item}
+            </li>
+          ))}
+        </motion.ul>
 
         <motion.form
           id="rfq"
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
+          transition={{ delay: 0.22, duration: 0.5 }}
           onSubmit={(e) => e.preventDefault()}
           className="glass-card mx-auto mt-10 flex max-w-2xl scroll-mt-28 items-center gap-3 rounded-[1.75rem] px-4 py-3 sm:px-5 sm:py-4"
         >
@@ -116,10 +145,10 @@ export function V2Hero() {
             Start Sourcing <ArrowUpRight className="h-4 w-4" />
           </Link>
           <Link
-            href="#discovery"
+            href="#new-idea"
             className="inline-flex w-full items-center justify-center rounded-full border border-line bg-paper px-6 py-3 text-sm font-semibold text-ink transition hover:border-ink/20 sm:w-auto"
           >
-            Explore Products
+            I have a new product idea
           </Link>
         </motion.div>
       </Container>

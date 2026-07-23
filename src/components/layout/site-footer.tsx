@@ -10,10 +10,13 @@ export function SiteFooter() {
       <Container className="py-16">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-1">
-            <SourcingLogo size="footer" onDark className="items-start dark:hidden" />
-            <SourcingLogo size="footer" className="hidden items-start dark:flex" />
+            <SourcingLogo size="footer" showByline onDark className="items-start dark:hidden" />
+            <SourcingLogo size="footer" showByline className="hidden items-start dark:flex" />
             <p className="mt-3 text-sm leading-relaxed text-paper/70 dark:text-muted">
               {company.tagline}
+            </p>
+            <p className="mt-2 text-xs text-paper/55 dark:text-muted">
+              {company.legalNameFull}
             </p>
           </div>
           <div>

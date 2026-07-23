@@ -1,4 +1,4 @@
-/** Version 2 landing content — uses v1 company credentials elsewhere */
+/** Version 2 landing content — company facts always from src/lib/content.ts (v1) */
 
 export const heroExamples = [
   "Portable blender",
@@ -7,6 +7,21 @@ export const heroExamples = [
   "Hotel furniture",
   "Wedding dress",
   "Pet accessories",
+] as const;
+
+/** Brand-new invention examples for the ideation search */
+export const newIdeaExamples = [
+  "A foldable travel steamer for silk",
+  "Smart pet feeder with camera",
+  "Refillable skincare pod system",
+  "Modular hotel bedside light",
+  "Child-safe magnetic building tiles",
+] as const;
+
+export const companyHighlights = [
+  "NO MOQ — START FROM ONE UNIT",
+  "VERIFIED FACTORIES ONLY",
+  "PHOTO & VIDEO QC BEFORE SHIP",
 ] as const;
 
 export const discoveryFilters = [
@@ -75,6 +90,7 @@ export const trendingProducts = [
   },
 ] as const;
 
+/** Existing brand / catalog-style ideation demo */
 export const ideationDemo = {
   input: "I want to start a skincare brand.",
   products: ["Vitamin C serum set", "Clay mask jars", "Travel mini kit"],
@@ -84,6 +100,42 @@ export const ideationDemo = {
   margins: "48–65% retail",
   shipping: "Air 5–8d · Sea 22–30d",
 } as const;
+
+/** Brand-new product invention demo — NDA first, then development */
+export const newProductDemo = {
+  input: "I invented a foldable travel steamer that fits in a laptop sleeve.",
+  concept: "Compact dual-voltage garment steamer · silicone water tank · travel lock",
+  protection: "NDA signed before we open the brief with any factory",
+  development: "Materials · BOM · packaging · cost targets with buildable makers",
+  sampling: "Prototype samples first — start from 1 unit, scale when ready",
+  regions: "Shenzhen · Zhongshan (small appliances)",
+  costs: "Tooling quote + $8–$14 / unit at 500 pcs",
+  moq: "No MOQ for sampling · production from your call",
+  shipping: "Sample air 4–7d · bulk sea 22–30d",
+} as const;
+
+export const ideaPathSteps = [
+  {
+    n: "01",
+    title: "Share the idea (NDAs signed)",
+    text: "A sketch, a sample photo, or just a sentence — protected under NDA before we open the brief.",
+  },
+  {
+    n: "02",
+    title: "Shape the design",
+    text: "Materials, sizing, packaging, and cost targets — refined with factories that can actually build it.",
+  },
+  {
+    n: "03",
+    title: "Prototype & source",
+    text: "Samples first. Verified makers. No MOQ games — start small, scale when it’s right.",
+  },
+  {
+    n: "04",
+    title: "Prove & ship",
+    text: "Photo and video QC before anything leaves China. Then freight to your door.",
+  },
+] as const;
 
 export const supplySteps = [
   "China Factory",
@@ -103,8 +155,8 @@ export const whyPoints = [
   { title: "Inspection", text: "Photo & video QC — approve before anything ships." },
   { title: "Logistics", text: "Sea, air, and express with Dubai hub support." },
   { title: "Private label", text: "Packaging, branding, and white-label programs that scale." },
-  { title: "OEM / ODM", text: "From concept and tooling to mass production." },
-  { title: "Product development", text: "Turn a sketch into a manufacturable SKU." },
+  { title: "OEM / ODM", text: "From concept and tooling to mass production — including brand-new inventions." },
+  { title: "Product development", text: "Turn a sketch or new idea into a manufacturable SKU under NDA." },
 ] as const;
 
 export const workflowSteps = [

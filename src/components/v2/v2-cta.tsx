@@ -27,7 +27,8 @@ export function V2Cta() {
               Ready to build your next product?
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-paper/70 sm:text-lg">
-              Start your sourcing journey with Sourcing.center — ideation, factories, QC, and freight.
+              Start with Sourcing.center by Seven Color Trading Co Ltd · China — new ideas under NDA,
+              factories, QC, and freight.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Link
