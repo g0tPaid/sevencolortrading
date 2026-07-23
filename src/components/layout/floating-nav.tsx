@@ -131,7 +131,7 @@ export function FloatingNav() {
         <div className="ml-auto flex items-center gap-2">
           <ThemeToggle />
           <ButtonLink href="/contact" className="hidden sm:inline-flex" variant="primary">
-            Start RFQ
+            Get a quote
           </ButtonLink>
           <button
             type="button"

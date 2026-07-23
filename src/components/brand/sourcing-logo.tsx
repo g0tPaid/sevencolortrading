@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { SevenColorMark } from "@/components/brand/seven-color-mark";
 
 type SourcingLogoProps = {
   className?: string;
@@ -36,7 +36,7 @@ export function SourcingLogo({
         ? "mt-0.5 text-sm tracking-[0.16em]"
         : "mt-0.5 text-[10px] tracking-[0.14em] sm:text-[11px]";
 
-  const markSize = size === "hero" ? 18 : 14;
+  const markSize = size === "hero" ? 32 : 22;
 
   return (
     <span className={cn("inline-flex flex-col items-center leading-none", className)}>
@@ -70,20 +70,13 @@ export function SourcingLogo({
       {showByline ? (
         <span
           className={cn(
-            "mt-3 inline-flex items-center gap-1.5 text-center font-sans font-medium",
-            onDark ? "text-white/60" : "text-muted",
-            size === "hero" ? "text-sm sm:text-base" : "text-[10px]",
+            "mt-4 inline-flex items-center gap-2 font-sans font-medium",
+            onDark ? "text-white/70" : "text-ink-soft",
+            size === "hero" ? "text-sm sm:text-base" : "text-xs",
           )}
         >
-          by
-          <Image
-            src="/seven-color-badge.svg"
-            alt=""
-            width={markSize}
-            height={markSize}
-            className="inline-block rounded-[3px]"
-            aria-hidden
-          />
+          <span>by</span>
+          <SevenColorMark size={markSize} />
           <span>Seven Color Trading Co Ltd · China</span>
         </span>
       ) : null}

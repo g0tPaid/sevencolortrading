@@ -20,7 +20,11 @@ import {
   whyUs,
 } from "@/lib/content";
 
-const highlights = ["NO MOQ", "VERIFIED FACTORIES", "PHOTO AND VIDEO QC"] as const;
+const highlights = [
+  "NO MOQ — START FROM ONE UNIT",
+  "VERIFIED FACTORIES ONLY",
+  "PHOTO & VIDEO QC BEFORE SHIP",
+] as const;
 
 export default function HomePage() {
   return (
@@ -46,7 +50,7 @@ export default function HomePage() {
 
             <div className="mt-8">
               <ButtonLink href="#rfq" className="w-full sm:w-auto">
-                Start RFQ
+                Get a quote in 24h
               </ButtonLink>
             </div>
           </div>
@@ -75,9 +79,9 @@ export default function HomePage() {
       <section className="py-20 sm:py-28">
         <Container>
           <SectionHeading
-            eyebrow="Product categories"
-            title="What we source"
-            description="From a single sample to container programs — electronics to industrial steel."
+            eyebrow="What we buy for you"
+            title="Anything from China — sample to container"
+            description="Electronics, home, fashion, industrial, steel, and private label — one desk handles it."
           />
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {categories.map((cat, i) => (
@@ -106,8 +110,8 @@ export default function HomePage() {
         <Container>
           <SectionHeading
             eyebrow="How it works"
-            title="Inquiry to delivery — one controlled path"
-            description="A four-stage sourcing timeline with on-ground verification before anything ships."
+            title="RFQ today. Proof before it ships."
+            description="Four clear steps — source, verify, inspect, deliver. You stay in control the whole way."
           />
           <div className="mt-14">
             <SourcingTimeline />
@@ -126,8 +130,8 @@ export default function HomePage() {
           <div>
             <SectionHeading
               eyebrow="Trade lanes"
-              title="Xiamen sourcing. Dubai logistics. Global delivery."
-              description="Live routes across our primary hubs — sea, air, and express with customs guidance."
+              title="China factory floor → your door"
+              description="Xiamen sourcing desk. Dubai hub. Sea, air, or express — with customs guidance included."
             />
             <div className="mt-8">
               <WorldShippingMap />
@@ -135,9 +139,9 @@ export default function HomePage() {
           </div>
           <div>
             <SectionHeading
-              eyebrow="Why Sourcing Center"
-              title="Your eyes and ears in China"
-              description="We operate as an extension of your procurement team — not a marketplace middleman."
+              eyebrow="Why buyers stay"
+              title="Your team on the ground in China"
+              description="Not a marketplace. A sourcing partner that sends proof before goods leave the factory."
             />
             <ul className="mt-8 space-y-3">
               {whyUs.map((item) => (
@@ -158,8 +162,8 @@ export default function HomePage() {
       <section className="border-y border-line bg-ink-soft py-20 text-paper dark:bg-paper-elevated dark:text-ink sm:py-28">
         <Container>
           <SectionHeading
-            eyebrow="Industry expertise"
-            title="Built for buyers who ship for real"
+            eyebrow="Who we serve"
+            title="Built for teams that actually ship"
           />
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {industries.map((item) => (
@@ -187,8 +191,8 @@ export default function HomePage() {
         <Container>
           <SectionHeading
             eyebrow="Trust"
-            title="Trusted by 1,000+ buyers"
-            description="From DTC founders to GCC retailers — verified delivery stories."
+            title="1,000+ buyers. Zero guessing."
+            description="DTC brands, GCC retailers, and project buyers who want proof — not promises."
           />
           <div className="mt-12 grid gap-4 lg:grid-cols-3">
             {testimonials.map((t) => (
@@ -212,7 +216,7 @@ export default function HomePage() {
       {/* FAQ */}
       <section className="border-t border-line bg-paper-elevated py-20 sm:py-28">
         <Container className="max-w-3xl">
-          <SectionHeading eyebrow="FAQ" title="Answers before you RFQ" align="center" />
+          <SectionHeading eyebrow="FAQ" title="Quick answers before you buy" align="center" />
           <div className="mt-10 space-y-3">
             {faqs.map((item) => (
               <details
@@ -235,11 +239,11 @@ export default function HomePage() {
           <div className="relative overflow-hidden rounded-[2rem] border border-line bg-ink px-8 py-14 text-paper dark:bg-accent dark:text-paper sm:px-12">
             <SpectrumRail className="absolute inset-x-0 top-0 rounded-none" />
             <p className="font-display text-3xl font-semibold sm:text-4xl">
-              Ready to source from China?
+              Tell us what you need from China
             </p>
             <p className="mt-4 max-w-xl text-paper/75">
-              Tell us what you need. Your relationship manager handles suppliers, QC, and
-              shipping — with proof before anything leaves the factory.
+              We find the factory, send photos and video, then ship — with a relationship manager
+              in China and Dubai.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
