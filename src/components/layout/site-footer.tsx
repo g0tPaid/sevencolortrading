@@ -96,13 +96,18 @@ export function SiteFooter() {
               <img
                 src="/dun-bradstreet.png"
                 alt="Dun & Bradstreet"
-                width={44}
-                height={44}
-                className="h-11 w-11 rounded-lg object-contain bg-white"
+                width={48}
+                height={40}
+                className="h-10 w-auto object-contain"
               />
-              <p className="text-sm font-medium text-paper dark:text-ink">
-                {company.credentials.dunBradstreet}
-              </p>
+              <div>
+                <p className="text-sm font-medium text-paper dark:text-ink">
+                  {company.credentials.dunBradstreet}
+                </p>
+                <p className="mt-0.5 font-mono text-xs text-paper/60 dark:text-muted">
+                  DUNS {company.credentials.dunsNumber}
+                </p>
+              </div>
             </div>
             <p className="mt-3 text-xs leading-relaxed text-paper/70 dark:text-muted">
               Registered vendor pathways for Walmart, Target, and other major retailers.

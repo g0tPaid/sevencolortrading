@@ -42,6 +42,7 @@ export default function ContactPage() {
           <div className="rounded-3xl border border-line bg-paper-elevated p-6">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Credentials</p>
             <p className="mt-3 text-sm font-medium text-ink">{company.credentials.dunBradstreet}</p>
+            <p className="mt-1 font-mono text-sm text-muted">DUNS {company.credentials.dunsNumber}</p>
             <ul className="mt-3 space-y-1 text-sm text-muted">
               {company.credentials.licenses.map((lic) => (
                 <li key={lic.number}>

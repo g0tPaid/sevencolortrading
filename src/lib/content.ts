@@ -52,6 +52,7 @@ export const company = {
   ],
   credentials: {
     dunBradstreet: "Dun & Bradstreet registered",
+    dunsNumber: "509419282",
     retailVendors: ["Walmart", "Target", "Costco", "Amazon", "Home Depot"],
     retailNote:
       "Registered vendor pathways for major retailers including Walmart, Target, and more.",

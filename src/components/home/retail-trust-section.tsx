@@ -22,13 +22,13 @@ export function RetailTrustSection() {
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#E31C23]">
               Credentials
             </p>
-            <div className="flex items-center gap-4 rounded-3xl border border-line bg-paper px-5 py-4 shadow-sm">
+            <div className="flex items-center gap-4">
               <Image
                 src="/dun-bradstreet.png"
                 alt="Dun & Bradstreet"
-                width={72}
-                height={72}
-                className="h-[72px] w-[72px] object-contain"
+                width={88}
+                height={76}
+                className="h-[76px] w-auto object-contain"
                 unoptimized
               />
               <div>
@@ -37,6 +37,9 @@ export function RetailTrustSection() {
                 </p>
                 <p className="mt-1 text-sm font-medium text-[#9B1B2E] dark:text-[#E85A6A]">
                   Registered company
+                </p>
+                <p className="mt-1 font-mono text-sm text-muted">
+                  DUNS {credentials.dunsNumber}
                 </p>
               </div>
             </div>
