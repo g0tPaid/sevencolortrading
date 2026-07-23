@@ -1,236 +1,25 @@
-import Link from "next/link";
-import { ArrowRight, ShieldCheck } from "lucide-react";
-import { HomeHero } from "@/components/home/home-hero";
-import { ProductIdeaSection } from "@/components/home/product-idea-section";
-import { RetailTrustSection } from "@/components/home/retail-trust-section";
-import { SourcingTimeline } from "@/components/home/sourcing-timeline";
-import { WorldShippingMap } from "@/components/home/world-map";
-import { Reveal } from "@/components/shared/reveal";
-import {
-  ButtonLink,
-  Container,
-  SectionHeading,
-  SpectrumRail,
-} from "@/components/ui/primitives";
-import {
-  categories,
-  company,
-  faqs,
-  industries,
-  testimonials,
-  whyUs,
-} from "@/lib/content";
+import { V2Cta } from "@/components/v2/v2-cta";
+import { V2DashboardPreview } from "@/components/v2/v2-dashboard-preview";
+import { V2Discovery } from "@/components/v2/v2-discovery";
+import { V2Hero } from "@/components/v2/v2-hero";
+import { V2Ideation } from "@/components/v2/v2-ideation";
+import { V2Network } from "@/components/v2/v2-network";
+import { V2Trust } from "@/components/v2/v2-trust";
+import { V2Why } from "@/components/v2/v2-why";
+import { V2Workflow } from "@/components/v2/v2-workflow";
 
 export default function HomePage() {
   return (
     <>
-      <HomeHero />
-
-      {/* Stats */}
-      <section className="border-y border-line bg-paper-elevated">
-        <Container className="grid grid-cols-3 gap-6 py-10">
-          {company.stats.map((stat, i) => (
-            <Reveal key={stat.label} delay={i * 0.05}>
-              <p className="font-display text-3xl font-semibold text-ink md:text-4xl">
-                {stat.value}
-              </p>
-              <p className="mt-1 text-sm text-muted">{stat.label}</p>
-            </Reveal>
-          ))}
-        </Container>
-      </section>
-
-      <ProductIdeaSection />
-
-      {/* Categories */}
-      <section className="py-20 sm:py-28">
-        <Container>
-          <SectionHeading
-            eyebrow="What we buy for you"
-            title="Anything from China — sample to container"
-            description="Electronics, home, fashion, industrial, steel, and private label — one desk handles it."
-          />
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {categories.map((cat, i) => (
-              <Reveal key={cat.slug} delay={i * 0.04}>
-                <Link
-                  href="/services"
-                  className="group block rounded-3xl border border-line bg-paper-elevated p-6 transition hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-lg"
-                >
-                  <p className="font-mono text-xs text-accent">/{cat.slug}</p>
-                  <h3 className="mt-3 font-display text-xl font-semibold text-ink">
-                    {cat.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">{cat.description}</p>
-                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent opacity-0 transition group-hover:opacity-100">
-                    Explore <ArrowRight className="h-3.5 w-3.5" />
-                  </span>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* Timeline */}
-      <section className="border-y border-line bg-paper-elevated py-20 sm:py-28">
-        <Container>
-          <SectionHeading
-            eyebrow="How it works"
-            title="RFQ today. Proof before it ships."
-            description="Four clear steps — source, verify, inspect, deliver. You stay in control the whole way."
-          />
-          <div className="mt-14">
-            <SourcingTimeline />
-          </div>
-          <div className="mt-10">
-            <ButtonLink href="/how-it-works" variant="secondary">
-              Full process detail
-            </ButtonLink>
-          </div>
-        </Container>
-      </section>
-
-      {/* Map + Why */}
-      <section className="py-20 sm:py-28">
-        <Container className="grid gap-12 lg:grid-cols-2">
-          <div>
-            <SectionHeading
-              eyebrow="Trade lanes"
-              title="China factory floor → your door"
-              description="Xiamen sourcing desk. Dubai hub. Sea, air, or express — with customs guidance included."
-            />
-            <div className="mt-8">
-              <WorldShippingMap />
-            </div>
-          </div>
-          <div>
-            <SectionHeading
-              eyebrow="Why buyers stay"
-              title="Your central command in China"
-              description="One team. One workflow. Idea to factory to door — not a marketplace free-for-all."
-            />
-            <ul className="mt-8 space-y-3">
-              {whyUs.map((item) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-3 rounded-2xl border border-line bg-paper-elevated px-4 py-3 text-sm text-ink"
-                >
-                  <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </Container>
-      </section>
-
-      {/* Industries */}
-      <section className="border-y border-line bg-ink-soft py-20 text-paper dark:bg-paper-elevated dark:text-ink sm:py-28">
-        <Container>
-          <SectionHeading
-            eyebrow="Who we serve"
-            title="Built for teams that actually ship"
-          />
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {industries.map((item) => (
-              <div
-                key={item.title}
-                className="rounded-3xl border border-white/10 bg-white/5 p-6 dark:border-line dark:bg-paper"
-              >
-                <h3 className="font-display text-lg font-semibold">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-paper/70 dark:text-muted">
-                  {item.description}
-                </p>
-              </div>
-            ))}
-          </div>
-          <div className="mt-10">
-            <ButtonLink href="/industries" variant="secondary">
-              View industries
-            </ButtonLink>
-          </div>
-        </Container>
-      </section>
-
-      <RetailTrustSection />
-
-      {/* Testimonials */}
-      <section className="py-20 sm:py-28">
-        <Container>
-          <SectionHeading
-            eyebrow="Trust"
-            title="1,000+ buyers. Zero guessing."
-            description="DTC brands, GCC retailers, and project buyers who want proof — not promises."
-          />
-          <div className="mt-12 grid gap-4 lg:grid-cols-3">
-            {testimonials.map((t) => (
-              <blockquote
-                key={t.name}
-                className="rounded-3xl border border-line bg-paper-elevated p-6"
-              >
-                <p className="text-sm leading-relaxed text-ink">“{t.quote}”</p>
-                <footer className="mt-6 border-t border-line pt-4 text-sm">
-                  <p className="font-semibold text-ink">{t.name}</p>
-                  <p className="text-muted">
-                    {t.role} · {t.region}
-                  </p>
-                </footer>
-              </blockquote>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* FAQ */}
-      <section className="border-t border-line bg-paper-elevated py-20 sm:py-28">
-        <Container className="max-w-3xl">
-          <SectionHeading eyebrow="FAQ" title="Quick answers before you buy" align="center" />
-          <div className="mt-10 space-y-3">
-            {faqs.map((item) => (
-              <details
-                key={item.q}
-                className="group rounded-2xl border border-line bg-paper px-5 py-4"
-              >
-                <summary className="cursor-pointer list-none font-medium text-ink marker:content-none">
-                  {item.q}
-                </summary>
-                <p className="mt-3 text-sm leading-relaxed text-muted">{item.a}</p>
-              </details>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* CTA */}
-      <section className="py-20 sm:py-28">
-        <Container>
-          <div className="relative overflow-hidden rounded-[2rem] border border-line bg-ink px-8 py-14 text-paper dark:bg-accent dark:text-paper sm:px-12">
-            <SpectrumRail className="absolute inset-x-0 top-0 rounded-none" />
-            <p className="font-display text-3xl font-semibold sm:text-4xl">
-              Have an idea. We&apos;ll make it real.
-            </p>
-            <p className="mt-4 max-w-xl text-paper/75">
-              Design, source, inspect, and ship from China — with a relationship manager in
-              Xiamen and Dubai.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                href="/contact"
-                className="inline-flex rounded-full bg-paper px-5 py-2.5 text-sm font-medium text-ink"
-              >
-                Request a quote
-              </Link>
-              <Link
-                href="/dashboard"
-                className="inline-flex rounded-full border border-white/25 px-5 py-2.5 text-sm font-medium text-paper"
-              >
-                Open client desk
-              </Link>
-            </div>
-          </div>
-        </Container>
-      </section>
+      <V2Hero />
+      <V2Discovery />
+      <V2Ideation />
+      <V2Network />
+      <V2Why />
+      <V2Workflow />
+      <V2DashboardPreview />
+      <V2Trust />
+      <V2Cta />
     </>
   );
 }
