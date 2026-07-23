@@ -29,38 +29,43 @@ export default function HomePage() {
           className="absolute -right-24 top-10 h-72 w-72 rounded-full bg-accent/20 blur-3xl"
           aria-hidden
         />
-        <Container className="relative grid min-h-[88vh] items-center gap-12 py-16 lg:grid-cols-[1.1fr_0.9fr] lg:py-24">
+        <Container className="relative grid min-h-0 items-center gap-8 py-10 sm:gap-12 sm:py-16 lg:min-h-[88vh] lg:grid-cols-[1.1fr_0.9fr] lg:py-24">
           <div>
-            <SpectrumRail className="mb-8 w-28" />
-            <p className="font-display text-4xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-5xl md:text-6xl lg:text-7xl">
+            <SpectrumRail className="mb-6 w-28 sm:mb-8" />
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">
+              sourcing.center
+            </p>
+            <p className="mt-2 font-display text-[2.35rem] font-semibold leading-[1.05] tracking-tight text-ink sm:text-5xl md:text-6xl lg:text-7xl">
               Seven Color
             </p>
-            <h1 className="mt-5 max-w-xl text-xl font-medium leading-snug text-ink-soft sm:text-2xl">
+            <h1 className="mt-4 max-w-xl text-lg font-medium leading-snug text-ink-soft sm:mt-5 sm:text-2xl">
               China sourcing infrastructure for procurement teams that refuse to guess.
             </h1>
-            <p className="mt-5 max-w-lg text-base leading-relaxed text-muted sm:text-lg">
+            <p className="mt-4 max-w-lg text-sm leading-relaxed text-muted sm:mt-5 sm:text-lg">
               No MOQ. Verified factories. Photo & video QC. Freight from Xiamen and Dubai —
               built like an enterprise desk, not a brochure site.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <ButtonLink href="#rfq">Open sourcing request</ButtonLink>
-              <ButtonLink href="/how-it-works" variant="secondary">
+            <div className="mt-6 flex w-full flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
+              <ButtonLink href="#rfq" className="w-full sm:w-auto">
+                Open sourcing request
+              </ButtonLink>
+              <ButtonLink href="/how-it-works" variant="secondary" className="w-full sm:w-auto">
                 See the workflow
               </ButtonLink>
             </div>
-            <div className="mt-10 flex flex-wrap gap-x-6 gap-y-3 text-sm text-muted">
+            <div className="mt-8 flex flex-col gap-2 text-sm text-muted sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-x-6 sm:gap-y-3">
               <span className="inline-flex items-center gap-2">
-                <BadgeCheck className="h-4 w-4 text-accent" /> No minimum order
+                <BadgeCheck className="h-4 w-4 shrink-0 text-accent" /> No minimum order
               </span>
               <span className="inline-flex items-center gap-2">
-                <Building2 className="h-4 w-4 text-accent" /> Dubai & China offices
+                <Building2 className="h-4 w-4 shrink-0 text-accent" /> Dubai & China offices
               </span>
               <span className="inline-flex items-center gap-2">
-                <ShieldCheck className="h-4 w-4 text-accent" /> Pre-shipment QC
+                <ShieldCheck className="h-4 w-4 shrink-0 text-accent" /> Pre-shipment QC
               </span>
             </div>
           </div>
-          <div id="rfq" className="animate-float">
+          <div id="rfq" className="md:animate-float scroll-mt-28">
             <RfqForm />
           </div>
         </Container>

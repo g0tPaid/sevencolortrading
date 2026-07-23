@@ -18,7 +18,7 @@ const routes = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://sevencolortrading.com";
+  const base = "https://sourcing.center";
   return routes.map((path) => ({
     url: `${base}${path}`,
     lastModified: new Date(),
