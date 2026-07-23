@@ -62,6 +62,9 @@ export function SiteFooter() {
                     {o.city}, {o.country}
                   </p>
                   <p className="mt-1 text-xs leading-relaxed">{o.address}</p>
+                  <p className="mt-1.5 font-mono text-[11px] text-paper/55 dark:text-muted">
+                    License {o.license}
+                  </p>
                 </li>
               ))}
             </ul>
@@ -83,6 +86,26 @@ export function SiteFooter() {
                 </p>
               </a>
             ))}
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4 dark:border-line dark:bg-paper">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-paper/55 dark:text-muted">
+              Credentials
+            </p>
+            <p className="mt-2 text-sm font-medium text-paper dark:text-ink">
+              {company.credentials.dunBradstreet}
+            </p>
+            <ul className="mt-3 space-y-2 text-xs text-paper/70 dark:text-muted">
+              {company.credentials.licenses.map((lic) => (
+                <li key={lic.number} className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:gap-2">
+                  <span className="shrink-0 font-medium text-paper/90 dark:text-ink">
+                    {lic.region}
+                  </span>
+                  <span className="font-mono tracking-tight">
+                    {lic.kind} {lic.number}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
           <div className="flex flex-col gap-2 text-xs text-paper/50 dark:text-muted sm:flex-row sm:items-center sm:justify-between">
             <p>

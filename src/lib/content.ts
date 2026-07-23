@@ -50,6 +50,13 @@ export const company = {
       href: "tel:+971589061969",
     },
   ],
+  credentials: {
+    dunBradstreet: "Dun & Bradstreet registered",
+    licenses: [
+      { region: "China (Xiamen)", number: "91350200MAE8W9E67A", kind: "Business license" },
+      { region: "UAE (Dubai / Al Ain)", number: "143609", kind: "Trade license" },
+    ],
+  },
 };
 
 export const categories = [
