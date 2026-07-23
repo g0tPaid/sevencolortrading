@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ArrowRight, BadgeCheck, Building2, ShieldCheck } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, ShieldCheck } from "lucide-react";
 import { RfqForm } from "@/components/home/rfq-form";
 import { SourcingTimeline } from "@/components/home/sourcing-timeline";
 import { WorldShippingMap } from "@/components/home/world-map";
@@ -19,53 +20,55 @@ import {
   whyUs,
 } from "@/lib/content";
 
+const highlights = ["NO MOQ", "VERIFIED FACTORIES", "PHOTO AND VIDEO QC"] as const;
+
 export default function HomePage() {
   return (
     <>
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 grid-fade opacity-60" aria-hidden />
-        <div
-          className="absolute -right-24 top-10 h-72 w-72 rounded-full bg-accent/20 blur-3xl"
-          aria-hidden
-        />
-        <Container className="relative grid min-h-0 items-center gap-8 py-10 sm:gap-12 sm:py-16 lg:min-h-[88vh] lg:grid-cols-[1.1fr_0.9fr] lg:py-24">
+        <div className="absolute inset-0 grid-fade opacity-50" aria-hidden />
+        <Container className="relative grid items-center gap-8 py-10 sm:gap-10 sm:py-14 lg:min-h-[82vh] lg:grid-cols-[1fr_1fr] lg:gap-12 lg:py-20">
           <div>
-            <SpectrumRail className="mb-6 w-28 sm:mb-8" />
-            <p className="font-display text-[2.35rem] font-semibold leading-[1.05] tracking-tight text-ink sm:text-5xl md:text-6xl lg:text-7xl">
-              Sourcing Center
-            </p>
-            <p className="mt-3 text-sm font-medium tracking-wide text-muted sm:text-base">
-              by Seven Color Trading Co Ltd · China
-            </p>
-            <h1 className="mt-5 max-w-xl text-lg font-medium leading-snug text-ink-soft sm:mt-6 sm:text-2xl">
-              China sourcing infrastructure for procurement teams that refuse to guess.
-            </h1>
-            <p className="mt-4 max-w-lg text-sm leading-relaxed text-muted sm:mt-5 sm:text-lg">
-              No MOQ. Verified factories. Photo & video QC. Freight from Xiamen and Dubai —
-              built like an enterprise desk, not a brochure site.
-            </p>
-            <div className="mt-6 flex w-full flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
-              <ButtonLink href="#rfq" className="w-full sm:w-auto">
-                Open sourcing request
-              </ButtonLink>
-              <ButtonLink href="/how-it-works" variant="secondary" className="w-full sm:w-auto">
-                See the workflow
-              </ButtonLink>
+            <div className="mb-6 flex items-center gap-4 sm:gap-5">
+              <Image
+                src="/seven-color-badge.svg"
+                alt="Seven Color"
+                width={80}
+                height={96}
+                className="h-[72px] w-auto shrink-0 sm:h-24"
+                priority
+              />
+              <div>
+                <p className="font-display text-3xl font-semibold leading-none tracking-tight text-ink sm:text-5xl">
+                  Sourcing Center
+                </p>
+                <p className="mt-2 text-sm font-medium text-muted sm:text-base">
+                  by Seven Color Trading Co Ltd · China
+                </p>
+              </div>
             </div>
-            <div className="mt-8 flex flex-col gap-2 text-sm text-muted sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-x-6 sm:gap-y-3">
-              <span className="inline-flex items-center gap-2">
-                <BadgeCheck className="h-4 w-4 shrink-0 text-accent" /> No minimum order
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <Building2 className="h-4 w-4 shrink-0 text-accent" /> Dubai & China offices
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <ShieldCheck className="h-4 w-4 shrink-0 text-accent" /> Pre-shipment QC
-              </span>
+
+            <ul className="mt-8 space-y-4 sm:mt-10">
+              {highlights.map((item) => (
+                <li
+                  key={item}
+                  className="flex items-center gap-3 font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl md:text-4xl"
+                >
+                  <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[#FF0040]" aria-hidden />
+                  {item}
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-8">
+              <ButtonLink href="#rfq" className="w-full sm:w-auto">
+                Start RFQ
+              </ButtonLink>
             </div>
           </div>
-          <div id="rfq" className="md:animate-float scroll-mt-28">
+
+          <div id="rfq" className="scroll-mt-28 md:animate-float">
             <RfqForm />
           </div>
         </Container>

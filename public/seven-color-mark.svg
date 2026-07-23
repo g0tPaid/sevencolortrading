@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 100" fill="none" role="img" aria-label="Seven Color">
+  <path
+    fill="#FF0040"
+    d="M8 8h58v14H36L20 78H7L24 22h42V8H8zm50 14L40 78h13l18-56H58z"
+  />
+  <path
+    fill="#FF0040"
+    d="M16 82l10-8 6 8-10 10-6-10z"
+  />
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120" fill="none" role="img" aria-label="Seven Color">
+  <rect width="100" height="120" rx="14" fill="#0A0A0A"/>
+  <!-- Stylized geometric 7 with parallel stroke + base hook -->
+  <path
+    fill="#FF0040"
+    d="M18 22h58v14H48L32 88h-13L36 36h40V22H18zm52 14L52 88h13l18-52H70z"
+  />
+  <path
+    fill="#FF0040"
+    d="M28 92l10-8 6 8-10 10-6-10z"
+  />
+</svg>

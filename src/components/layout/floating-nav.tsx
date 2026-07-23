@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -46,9 +47,14 @@ export function FloatingNav() {
         )}
       >
         <Link href="/" className="flex min-w-0 items-center gap-2.5 py-1" onClick={() => setOpen(false)}>
-          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg spectrum-rail text-[11px] font-bold text-white shadow-sm">
-            SC
-          </span>
+          <Image
+            src="/seven-color-badge.svg"
+            alt="Seven Color"
+            width={32}
+            height={38}
+            className="h-8 w-auto shrink-0"
+            priority
+          />
           <span className="min-w-0">
             <span className="block font-display text-sm font-semibold leading-tight tracking-tight text-ink sm:text-base">
               Sourcing Center
