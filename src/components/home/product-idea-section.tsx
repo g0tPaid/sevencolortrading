@@ -49,9 +49,10 @@ export function ProductIdeaSection() {
             </span>
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-            Sourcing Center is more than finding factories. We help you turn an idea into a
-            real product — design, sampling, production, QC, and shipping — under one desk in
-            China and Dubai.
+            Think of us as your{" "}
+            <span className="font-semibold text-ink">central command for sourcing from China</span>
+            . One desk for ideas, design, factories, QC, and shipping — so you don&apos;t juggle
+            ten chats and guesswork.
           </p>
         </div>
 

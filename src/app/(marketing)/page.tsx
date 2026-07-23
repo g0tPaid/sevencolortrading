@@ -106,8 +106,8 @@ export default function HomePage() {
           <div>
             <SectionHeading
               eyebrow="Why buyers stay"
-              title="Your team on the ground in China"
-              description="Not a marketplace. A sourcing partner that sends proof before goods leave the factory."
+              title="Your central command in China"
+              description="One team. One workflow. Idea to factory to door — not a marketplace free-for-all."
             />
             <ul className="mt-8 space-y-3">
               {whyUs.map((item) => (

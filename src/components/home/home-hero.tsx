@@ -45,15 +45,17 @@ export function HomeHero() {
             transition={{ duration: 0.5, delay: 0.12 }}
             className="mt-8 max-w-xl"
           >
-            <h1 className="font-display text-3xl font-semibold leading-[1.12] tracking-tight text-ink sm:text-4xl md:text-[2.75rem]">
+            <h1 className="font-display text-3xl font-semibold leading-[1.15] tracking-tight text-ink sm:text-4xl md:text-[2.75rem]">
               Do you have a product idea?
               <span className="mt-2 block text-[#9B1B2E] dark:text-[#E85A6A]">
                 Let&apos;s bring it to life.
               </span>
             </h1>
             <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
-              From first sketch to factory floor — we design, source, inspect, and ship from
-              China. No MOQ. Proof before it leaves.
+              Your{" "}
+              <span className="font-semibold text-ink">central command for sourcing from China</span>
+              — idea, design, factories, QC, and shipping in one place. No MOQ. Proof before it
+              leaves.
             </p>
           </motion.div>
 

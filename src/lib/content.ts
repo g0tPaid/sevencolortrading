@@ -4,9 +4,9 @@ export const company = {
   byline: "by Seven Color Trading Co Ltd · China",
   legalName: "Seven Color Trading Co Ltd",
   legalNameFull: "Xiamen Ajmal Seven Color Trading Co Ltd",
-  tagline: "Have a product idea? We bring it to life — and source it from China.",
+  tagline: "Central command for sourcing from China — ideas to delivery.",
   description:
-    "Welcome to the Sourcing Center. Turn product ideas into real goods — design, verified factories, photo & video QC, and shipping from Xiamen and Dubai. No MOQ.",
+    "Welcome to the Sourcing Center. Your central command for China sourcing — turn product ideas into real goods with design, verified factories, QC, and shipping from Xiamen and Dubai. No MOQ.",
   founded: "2014",
   emails: {
     corporate: "info@sevencolor.online",
