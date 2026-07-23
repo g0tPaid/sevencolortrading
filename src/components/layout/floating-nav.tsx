@@ -52,6 +52,9 @@ export function FloatingNav() {
           <span className="font-display text-sm font-semibold tracking-tight text-ink sm:text-base">
             Seven Color
           </span>
+          <span className="hidden text-[10px] uppercase tracking-[0.16em] text-muted sm:inline">
+            sourcing.center
+          </span>
         </Link>
 
         <nav className="ml-2 hidden items-center gap-1 lg:flex" aria-label="Primary">

@@ -24,21 +24,34 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sevencolortrading.com"),
+  metadataBase: new URL("https://sourcing.center"),
   title: {
-    default: "Seven Color — China Sourcing Platform",
-    template: "%s · Seven Color",
+    default: "Sourcing Center · Seven Color",
+    template: "%s · Sourcing Center",
   },
   description:
     "Enterprise China sourcing with no MOQ. Factory verification, quality inspection, private label, OEM/ODM, and logistics from Xiamen and Dubai.",
   openGraph: {
-    title: "Seven Color — China Sourcing Platform",
+    title: "Sourcing Center · Seven Color",
     description:
       "Procurement-grade sourcing infrastructure for teams that buy from China.",
     type: "website",
     locale: "en_US",
   },
   robots: { index: true, follow: true },
+  other: {
+    "mobile-web-app-capable": "yes",
+  },
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f3f5f8" },
+    { media: "(prefers-color-scheme: dark)", color: "#07090d" },
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
