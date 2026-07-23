@@ -1,122 +1,140 @@
 @import "tailwindcss";
 
-:root {
-  --ink: #101010;
-  --paper: #ebebeb;
-  --paper-2: #f4f4f4;
-  --muted: #5c5c5c;
-  --line: #cfcfcf;
-  --signal: #ff2d2d;
-}
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
+  --font-display: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-plex), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
   --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
   --color-paper: var(--paper);
-  --color-paper-2: var(--paper-2);
-  --color-muted: var(--muted);
+  --color-paper-elevated: var(--paper-elevated);
   --color-line: var(--line);
-  --color-signal: var(--signal);
-  --font-sans: var(--font-body);
-  --font-display: var(--font-display);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-glow: var(--glow);
+}
+
+:root {
+  --ink: #0a0e17;
+  --ink-soft: #1a2233;
+  --paper: #f3f5f8;
+  --paper-elevated: #ffffff;
+  --line: rgba(10, 14, 23, 0.1);
+  --muted: #5b6577;
+  --accent: #0f766e;
+  --accent-soft: rgba(15, 118, 110, 0.12);
+  --glow: rgba(15, 118, 110, 0.35);
+  --spectrum: linear-gradient(
+    90deg,
+    #e11d48,
+    #ea580c,
+    #ca8a04,
+    #16a34a,
+    #0d9488,
+    #2563eb,
+    #7c3aed
+  );
+}
+
+.dark {
+  --ink: #f4f6fa;
+  --ink-soft: #c8d0de;
+  --paper: #07090d;
+  --paper-elevated: #10141c;
+  --line: rgba(244, 246, 250, 0.1);
+  --muted: #8b95a8;
+  --accent: #2dd4bf;
+  --accent-soft: rgba(45, 212, 191, 0.14);
+  --glow: rgba(45, 212, 191, 0.28);
 }
 
 * {
-  box-sizing: border-box;
+  border-color: var(--line);
 }
 
 html {
-  background: var(--paper);
-  color: var(--ink);
+  scroll-behavior: smooth;
 }
 
 body {
-  min-height: 100vh;
-  margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-body), "IBM Plex Sans", system-ui, sans-serif;
-  text-rendering: geometricPrecision;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: #101010;
-  color: #fff;
+  background: var(--accent-soft);
+  color: var(--ink);
 }
 
 .font-display {
-  font-family: var(--font-display), "Oswald", Impact, sans-serif;
+  font-family: var(--font-display);
+  letter-spacing: -0.03em;
 }
 
 .spectrum-rail {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  width: 100%;
-  height: 8px;
+  background-image: var(--spectrum);
 }
 
-.spectrum-rail > span {
-  display: block;
-  height: 100%;
+.glass {
+  background: color-mix(in oklab, var(--paper-elevated) 72%, transparent);
+  backdrop-filter: blur(18px) saturate(1.2);
+  border: 1px solid var(--line);
 }
 
-@keyframes hero-ken {
-  from {
-    transform: scale(1.08);
-  }
-  to {
-    transform: scale(1);
-  }
+.grid-fade {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--ink) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--ink) 6%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at center, black 20%, transparent 75%);
 }
 
-.hero-ken {
-  animation: hero-ken 12s ease-out both;
+.map-dot {
+  box-shadow: 0 0 0 6px color-mix(in oklab, var(--accent) 25%, transparent);
 }
 
-@keyframes slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(28px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.slide-up {
-  animation: slide-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.slide-delay-1 {
-  animation-delay: 0.15s;
-}
-.slide-delay-2 {
-  animation-delay: 0.3s;
-}
-
-@keyframes rail-pulse {
+@keyframes float-y {
   0%,
   100% {
-    opacity: 1;
+    transform: translateY(0);
   }
   50% {
-    opacity: 0.72;
+    transform: translateY(-8px);
   }
 }
 
-.rail-pulse {
-  animation: rail-pulse 3.8s ease-in-out infinite;
+.animate-float {
+  animation: float-y 5s ease-in-out infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.45);
+    opacity: 0;
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2.4s ease-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-ken,
-  .slide-up,
-  .rail-pulse {
-    animation: none !important;
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-float,
+  .animate-pulse-ring {
+    animation: none;
   }
 }
