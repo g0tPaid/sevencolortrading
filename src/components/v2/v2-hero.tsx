@@ -33,19 +33,28 @@ export function V2Hero() {
       />
 
       <Container className="relative max-w-5xl text-center">
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-xs font-semibold uppercase tracking-[0.28em] text-accent"
+        >
+          Welcome to the Sourcing Center
+        </motion.p>
+
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex justify-center"
+          transition={{ delay: 0.05 }}
+          className="mt-6 flex justify-center"
         >
-          <SourcingLogo size="hero" className="items-center text-center" />
+          <SourcingLogo size="hero" showByline className="items-center text-center" />
         </motion.div>
 
         <motion.h1
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.08, duration: 0.55 }}
-          className="mx-auto mt-8 max-w-4xl font-display text-3xl font-semibold leading-[1.1] tracking-tight text-ink sm:text-5xl md:text-6xl"
+          transition={{ delay: 0.1, duration: 0.55 }}
+          className="mx-auto mt-10 max-w-4xl font-display text-3xl font-semibold leading-[1.1] tracking-tight text-ink sm:text-5xl md:text-6xl"
         >
           One Platform for Product Ideation &amp; Sourcing
         </motion.h1>
