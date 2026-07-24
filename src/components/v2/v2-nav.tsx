@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { SourcingLogo } from "@/components/brand/sourcing-logo";
-import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { cn } from "@/lib/utils";
 
 const links = [
@@ -57,10 +56,9 @@ export function V2Nav() {
           ))}
         </nav>
         <div className="hidden items-center gap-2 md:flex">
-          <ThemeToggle />
           <Link
             href="#rfq"
-            className="rounded-full bg-ink px-4 py-2 text-sm font-medium text-paper transition hover:opacity-90 dark:bg-accent"
+            className="rounded-full bg-ink px-4 py-2 text-sm font-medium text-paper transition hover:opacity-90"
           >
             Start Sourcing
           </Link>
