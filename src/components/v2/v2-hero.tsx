@@ -39,7 +39,7 @@ export function V2Hero() {
           animate={{ opacity: 1, y: 0 }}
           className="text-xs font-semibold uppercase tracking-[0.28em] text-accent"
         >
-          Welcome to the Sourcing Center
+          Welcome
         </motion.p>
 
         <motion.div
