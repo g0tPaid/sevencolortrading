@@ -3,9 +3,9 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
-  --font-display: var(--font-cormorant), var(--font-playfair), "Times New Roman", Georgia, serif;
+  --font-display: var(--font-fraunces), var(--font-playfair), "Times New Roman", Georgia, serif;
   --font-brand: var(--font-playfair), "Times New Roman", Georgia, serif;
-  --font-headline: var(--font-cormorant), "Times New Roman", Georgia, serif;
+  --font-headline: var(--font-fraunces), "Times New Roman", Georgia, serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-inter), ui-monospace, monospace;
 
@@ -75,7 +75,10 @@ body {
 
 .font-headline {
   font-family: var(--font-headline);
-  letter-spacing: -0.02em;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-variation-settings: "SOFT" 70, "opsz" 144, "WONK" 1;
+  letter-spacing: -0.03em;
 }
 
 .font-logo {
