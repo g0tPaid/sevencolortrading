@@ -66,10 +66,10 @@ export function HomeHero() {
                 key={item.label}
                 className="rounded-[1.35rem] border border-[#E31C23]/30 bg-[rgba(227,28,35,0.06)] px-5 py-4"
               >
-                <p className="font-highlight text-2xl leading-tight text-[#E31C23] sm:text-[1.75rem]">
+                <p className="font-highlight text-[1.75rem] leading-tight text-[#E31C23] sm:text-[2rem]">
                   {item.label}
                 </p>
-                <p className="mt-1.5 text-sm font-medium text-ink sm:text-base">{item.detail}</p>
+                <p className="mt-2 text-sm font-medium text-ink sm:text-base">{item.detail}</p>
               </li>
             ))}
           </motion.ul>

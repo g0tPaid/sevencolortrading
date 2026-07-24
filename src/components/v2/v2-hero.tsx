@@ -128,10 +128,10 @@ export function V2Hero() {
               key={item.label}
               className="rounded-[1.5rem] border border-accent/30 bg-accent-soft px-5 py-5 text-center shadow-[0_12px_32px_rgba(214,0,0,0.08)] sm:px-6 sm:py-6"
             >
-              <p className="font-highlight text-[1.65rem] leading-[1.1] text-accent sm:text-2xl md:text-[1.85rem]">
+              <p className="font-highlight text-[1.85rem] leading-[1.05] text-accent sm:text-[2.05rem] md:text-[2.2rem]">
                 {item.label}
               </p>
-              <p className="mt-2 text-sm font-medium text-ink sm:text-base">{item.detail}</p>
+              <p className="mt-2.5 text-sm font-medium text-ink sm:text-base">{item.detail}</p>
             </li>
           ))}
         </motion.ul>

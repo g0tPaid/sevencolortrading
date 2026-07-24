@@ -20,7 +20,7 @@ export const newIdeaExamples = [
 
 export const companyHighlights = [
   {
-    label: "No MOQ",
+    label: "NO MOQ",
     detail: "Start from one unit",
   },
   {

@@ -82,12 +82,9 @@ body {
 }
 
 .font-highlight {
-  font-family: var(--font-headline);
-  font-optical-sizing: auto;
+  font-family: var(--font-brand);
   font-weight: 600;
-  font-style: italic;
-  font-variation-settings: "SOFT" 100, "opsz" 144, "WONK" 1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
 }
 
 .font-logo {
