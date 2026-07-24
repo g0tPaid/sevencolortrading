@@ -232,7 +232,7 @@ body {
   background: #ffffff;
   border: 1px solid rgba(17, 17, 17, 0.08);
   box-shadow: 0 14px 36px rgba(17, 17, 17, 0.04);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
 .workflow-step:hover {
@@ -243,4 +243,31 @@ body {
 .workflow-step-accent {
   border-color: rgba(214, 0, 0, 0.22);
   background: linear-gradient(180deg, rgba(214, 0, 0, 0.05), #ffffff 55%);
+}
+
+.workflow-step-active {
+  border-color: rgba(214, 0, 0, 0.55);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 20px 48px rgba(214, 0, 0, 0.16);
+  background: linear-gradient(180deg, rgba(214, 0, 0, 0.07), #ffffff 60%);
+}
+
+.workflow-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  color: #d60000;
+  background: rgba(214, 0, 0, 0.08);
+  border: 1px solid rgba(214, 0, 0, 0.18);
+}
+
+.workflow-arrow-active {
+  color: #ffffff;
+  background: linear-gradient(135deg, #b40000, #ff3b3b);
+  border-color: transparent;
+  box-shadow: 0 8px 20px rgba(214, 0, 0, 0.28);
 }
