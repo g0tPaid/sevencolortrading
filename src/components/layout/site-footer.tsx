@@ -5,9 +5,9 @@ import { company, services } from "@/lib/content";
 
 export function SiteFooter() {
   return (
-    <footer className="relative mt-24 border-t border-line bg-ink-soft text-paper dark:bg-paper-elevated dark:text-ink">
+    <footer className="relative mt-10 border-t border-line bg-ink-soft text-paper dark:bg-paper-elevated dark:text-ink">
       <SpectrumRail className="absolute inset-x-0 top-0 rounded-none" />
-      <Container className="py-16">
+      <Container className="py-12 sm:py-16">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-1">
             <SourcingLogo size="footer" showByline onDark className="items-start dark:hidden" />

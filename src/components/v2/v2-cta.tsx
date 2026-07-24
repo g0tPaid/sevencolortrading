@@ -7,7 +7,7 @@ import { Container } from "@/components/ui/primitives";
 
 export function V2Cta() {
   return (
-    <section className="pb-28 pt-8 sm:pb-36">
+    <section className="pb-16 pt-6 sm:pb-24 sm:pt-8">
       <Container>
         <motion.div
           initial={{ opacity: 0, y: 20 }}

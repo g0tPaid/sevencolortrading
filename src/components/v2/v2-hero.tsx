@@ -39,7 +39,7 @@ export function V2Hero() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden pt-20 pb-12 sm:pt-24 sm:pb-16">
+    <section className="relative overflow-hidden pt-20 pb-8 sm:pt-24 sm:pb-12">
       <div className="absolute inset-0 mission-grid" aria-hidden />
       <div
         className="pointer-events-none absolute left-1/2 top-16 h-[20rem] w-[20rem] -translate-x-1/2 rounded-full opacity-70 blur-3xl"

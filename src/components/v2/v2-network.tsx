@@ -7,7 +7,7 @@ import { supplySteps } from "@/lib/v2-content";
 
 export function V2Network() {
   return (
-    <section id="network" className="scroll-mt-28 py-24 sm:py-32">
+    <section id="network" className="scroll-mt-28 py-14 sm:py-20 lg:py-24">
       <Container>
         <div className="max-w-2xl">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">

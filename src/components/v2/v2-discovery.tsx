@@ -11,7 +11,7 @@ export function V2Discovery() {
   const [active, setActive] = useState<string>(discoveryFilters[0]);
 
   return (
-    <section id="discovery" className="scroll-mt-28 py-24 sm:py-32">
+    <section id="discovery" className="scroll-mt-28 py-14 sm:py-20 lg:py-24">
       <Container>
         <div className="max-w-2xl">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">

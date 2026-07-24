@@ -8,7 +8,7 @@ import { platformStats } from "@/lib/v2-content";
 
 export function V2Trust() {
   return (
-    <section id="trust" className="scroll-mt-28 py-24 sm:py-32">
+    <section id="trust" className="scroll-mt-28 py-14 sm:py-20 lg:py-24">
       <Container>
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">Trust</p>
@@ -21,7 +21,7 @@ export function V2Trust() {
           </p>
         </div>
 
-        <div className="mt-14 grid grid-cols-2 gap-6 md:grid-cols-4">
+        <div className="mt-8 grid grid-cols-2 gap-6 md:grid-cols-4 sm:mt-10">
           {platformStats.map((s, i) => (
             <motion.div
               key={s.label}
@@ -37,7 +37,7 @@ export function V2Trust() {
           ))}
         </div>
 
-        <div className="mt-12 grid gap-4 sm:grid-cols-2">
+        <div className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-2">
           {company.offices.map((o) => (
             <div key={o.city} className="glass-card rounded-[1.5rem] p-5 sm:p-6">
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">

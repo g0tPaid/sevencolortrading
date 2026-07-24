@@ -95,7 +95,7 @@ export function V2Ideation() {
         : null;
 
   return (
-    <section id="ideation" className="scroll-mt-28 border-y border-line bg-white py-24 sm:py-32">
+    <section id="ideation" className="scroll-mt-28 border-t border-line bg-white py-14 sm:py-20 lg:py-24">
       <Container>
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">
@@ -231,7 +231,7 @@ export function V2Ideation() {
         </div>
 
         {mode === "new" ? (
-          <div className="mx-auto mt-16 max-w-5xl">
+          <div className="mx-auto mt-10 sm:mt-14 max-w-5xl">
             <h3 className="text-center font-display text-2xl font-semibold text-ink sm:text-3xl">
               Do you have a product idea? Let&apos;s bring it to life.
             </h3>

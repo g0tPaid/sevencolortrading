@@ -29,20 +29,20 @@ const icons = [
 
 export function V2Workflow() {
   return (
-    <section id="workflow" className="scroll-mt-28 border-y border-line bg-white py-24 sm:py-32">
+    <section id="workflow" className="scroll-mt-28 border-t border-line bg-[#fafafa] py-14 sm:py-20 lg:py-24">
       <Container>
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">Workflow</p>
-          <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-5xl">
+          <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink sm:mt-4 sm:text-5xl">
             Idea to delivery — one timeline
           </h2>
-          <p className="mt-4 text-muted sm:text-lg">
+          <p className="mt-3 text-muted sm:mt-4 sm:text-lg">
             From the first sketch or SKU brief to goods at your door — one controlled path with
             Seven Color on the ground in China.
           </p>
         </div>
 
-        <div className="relative mx-auto mt-14 max-w-5xl">
+        <div className="relative mx-auto mt-8 max-w-5xl sm:mt-10">
           {/* Ambient rail */}
           <div
             className="pointer-events-none absolute inset-x-8 top-0 hidden h-full sm:block"
@@ -51,7 +51,7 @@ export function V2Workflow() {
             <div className="absolute left-1/2 top-6 bottom-6 w-px -translate-x-1/2 bg-gradient-to-b from-accent/40 via-line to-accent/40 lg:left-0 lg:top-1/2 lg:h-px lg:w-full lg:translate-x-0 lg:bg-gradient-to-r" />
           </div>
 
-          <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <ol className="grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
             {workflowSteps.map((step, i) => {
               const Icon = icons[i] ?? Lightbulb;
               const isFirst = i === 0;
