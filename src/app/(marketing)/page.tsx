@@ -1,5 +1,4 @@
 import { V2Cta } from "@/components/v2/v2-cta";
-import { V2DashboardPreview } from "@/components/v2/v2-dashboard-preview";
 import { V2Discovery } from "@/components/v2/v2-discovery";
 import { V2Hero } from "@/components/v2/v2-hero";
 import { V2Ideation } from "@/components/v2/v2-ideation";
@@ -17,7 +16,6 @@ export default function HomePage() {
       <V2Network />
       <V2Why />
       <V2Workflow />
-      <V2DashboardPreview />
       <V2Trust />
       <V2Cta />
     </>

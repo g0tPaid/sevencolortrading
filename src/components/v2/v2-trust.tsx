@@ -8,7 +8,7 @@ import { platformStats } from "@/lib/v2-content";
 
 export function V2Trust() {
   return (
-    <section className="py-24 sm:py-32">
+    <section id="trust" className="scroll-mt-28 py-24 sm:py-32">
       <Container>
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">Trust</p>

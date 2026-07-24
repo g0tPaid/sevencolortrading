@@ -12,7 +12,7 @@ const links = [
   { href: "#new-idea", label: "New idea" },
   { href: "#network", label: "Network" },
   { href: "#workflow", label: "Workflow" },
-  { href: "/dashboard", label: "Desk" },
+  { href: "#trust", label: "Trust" },
 ];
 
 export function V2Nav() {

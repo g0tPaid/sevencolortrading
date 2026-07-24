@@ -333,7 +333,7 @@ export const supplySteps = [
 ] as const;
 
 export const whyPoints = [
-  { title: "One dashboard", text: "Ideas, factories, QC, and freight in one place with your team." },
+  { title: "One partner", text: "Ideas, factories, QC, and freight handled by one China desk." },
   { title: "Thousands of factories", text: "Mapped capacity across electronics, home, fashion, and industrial." },
   { title: "Verified suppliers", text: "License checks, audits, and production proof before you commit." },
   { title: "Factory audits", text: "On-ground teams in China validating what catalogs claim." },
@@ -345,15 +345,42 @@ export const whyPoints = [
 ] as const;
 
 export const workflowSteps = [
-  "Idea",
-  "Research",
-  "Factory Matching",
-  "Quotation",
-  "Sampling",
-  "Production",
-  "Inspection",
-  "Shipping",
-  "Delivered",
+  {
+    title: "Idea",
+    text: "Share the SKU or invention — protected under NDA when it is new.",
+  },
+  {
+    title: "Research",
+    text: "Demand, specs, and cost bands before anyone tools up.",
+  },
+  {
+    title: "Factory matching",
+    text: "Verified makers in the right region for your category.",
+  },
+  {
+    title: "Quotation",
+    text: "Clear unit cost, tooling, MOQ, and lead time — no fog.",
+  },
+  {
+    title: "Sampling",
+    text: "Prototypes first. Approve the piece before volume.",
+  },
+  {
+    title: "Production",
+    text: "Line start with on-ground oversight in China.",
+  },
+  {
+    title: "Inspection",
+    text: "Photo & video QC — you sign off before it leaves.",
+  },
+  {
+    title: "Shipping",
+    text: "Sea, air, or express with tracked handoff.",
+  },
+  {
+    title: "Delivered",
+    text: "At your door — ready to sell or stock.",
+  },
 ] as const;
 
 export const dashboardModules = [
