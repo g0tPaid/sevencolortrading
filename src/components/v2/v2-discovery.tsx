@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/primitives";
@@ -53,9 +54,21 @@ export function V2Discovery() {
               whileHover={{ y: -4 }}
               className="glass-card overflow-hidden rounded-[1.75rem]"
             >
-              <div className={cn("h-40 bg-gradient-to-br", p.tone)}>
-                <div className="flex h-full items-end justify-between p-5">
-                  <span className="rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold text-white backdrop-blur">
+              <div className="relative h-48 overflow-hidden sm:h-52">
+                <Image
+                  src={p.image}
+                  alt={p.name}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover"
+                  priority={i < 3}
+                />
+                <div
+                  className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent"
+                  aria-hidden
+                />
+                <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-5">
+                  <span className="rounded-full bg-white/15 px-3 py-1 text-[11px] font-semibold text-white backdrop-blur">
                     {p.tag}
                   </span>
                   <span className="text-sm font-semibold text-emerald-300">{p.growth}</span>
