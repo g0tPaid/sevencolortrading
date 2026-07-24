@@ -129,6 +129,176 @@ export const newProductDemo = {
   shipping: "Sample air 4–7d · bulk sea 22–30d",
 } as const;
 
+type PathProfile = {
+  match: RegExp;
+  concept: (idea: string) => string;
+  regions: string;
+  costs: string;
+  development: string;
+  sampling: string;
+};
+
+const NEW_PRODUCT_PROFILES: PathProfile[] = [
+  {
+    match: /steam|iron|garment|laptop sleeve|travel steamer/i,
+    concept: () =>
+      "Compact dual-voltage garment steamer · silicone water tank · travel lock",
+    regions: "Shenzhen · Zhongshan (small appliances)",
+    costs: "Tooling quote + $8–$14 / unit at 500 pcs",
+    development: "Materials · BOM · packaging · cost targets with buildable makers",
+    sampling: "Prototype samples first — start from 1 unit, scale when ready",
+  },
+  {
+    match: /pet|dog|cat|feeder|carrier|animal/i,
+    concept: (idea) =>
+      `Pet-tech brief from your note · soft goods + electronics if needed · “${clip(idea)}”`,
+    regions: "Dongguan · Yiwu (pet · soft goods)",
+    costs: "Sample $12–$28 · bulk $6–$18 / unit at 300 pcs",
+    development: "Size grades · mesh/fabric BOM · safety tether · packaging insert",
+    sampling: "Soft prototype → fit test with pets → revise → pilot run",
+  },
+  {
+    match: /skin|beauty|serum|cosmetic|refill|pod/i,
+    concept: (idea) =>
+      `Beauty formula + pack system · airless / refill options · “${clip(idea)}”`,
+    regions: "Guangzhou · Shanghai (cosmetics)",
+    costs: "Formula + pack $1.40–$4.80 / unit at 1,000 pcs",
+    development: "INCI draft · pack tooling · stability · claim-safe labeling",
+    sampling: "Lab samples → pack mockups → pilot fill under NDA",
+  },
+  {
+    match: /light|lamp|led|mirror|electronics|smart|device|charger/i,
+    concept: (idea) =>
+      `Electronics DFM brief · PCB + enclosure · “${clip(idea)}”`,
+    regions: "Shenzhen · Dongguan (electronics)",
+    costs: "PCBA + enclosure $4–$16 / unit at 500 pcs",
+    development: "Schematic · enclosure · firmware scope · certifications path",
+    sampling: "Engineering sample → EVT → DVT → mass",
+  },
+  {
+    match: /furniture|chair|hotel|lobby|sofa|table/i,
+    concept: (idea) =>
+      `Hospitality furniture brief · frame + upholstery · “${clip(idea)}”`,
+    regions: "Foshan · Zhejiang (furniture)",
+    costs: "Sample $90–$180 · bulk $55–$140 / unit",
+    development: "CAD · foam/fabric BOM · knock-down packing · fire codes",
+    sampling: "1–2 showroom samples → revise · hotel pilot order",
+  },
+  {
+    match: /dress|apparel|fashion|fabric|textile|silk|gown/i,
+    concept: (idea) =>
+      `Apparel tech-pack path · fit + fabric · “${clip(idea)}”`,
+    regions: "Hangzhou · Guangzhou (apparel)",
+    costs: "Sample $35–$90 · bulk $18–$48 / unit at 50 pcs",
+    development: "Tech pack · graded sizes · fabric mill · trim board",
+    sampling: "Proto → fit sample → size set → bulk",
+  },
+  {
+    match: /pack|box|gift|packaging|label/i,
+    concept: (idea) =>
+      `Private-label packaging brief · rigid / folding · “${clip(idea)}”`,
+    regions: "Dongguan · Wenzhou (packaging)",
+    costs: "Tooling + $0.80–$2.80 / unit at 1,000 pcs",
+    development: "Dieline · material · foil/emboss · insert tray",
+    sampling: "White sample → printed proof → mass",
+  },
+];
+
+function clip(idea: string, n = 42) {
+  const t = idea.replace(/\s+/g, " ").trim();
+  return t.length > n ? `${t.slice(0, n)}…` : t;
+}
+
+export type DevelopmentPathResult = {
+  concept: string;
+  protection: string;
+  development: string;
+  sampling: string;
+  regions: string;
+  costs: string;
+  moq: string;
+  shipping: string;
+};
+
+/** Build a development-path card set from a free-text product idea. */
+export function mapDevelopmentPath(idea: string): DevelopmentPathResult {
+  const text = idea.trim();
+  const profile =
+    NEW_PRODUCT_PROFILES.find((p) => p.match.test(text)) ??
+    ({
+      match: /.*/,
+      concept: (i: string) =>
+        `Manufacturable concept brief · materials + form · “${clip(i || "your invention")}”`,
+      regions: "Guangdong · Zhejiang (matched to category)",
+      costs: "Sample quote first · unit cost after BOM lock",
+      development: "Materials · BOM · packaging · cost targets with buildable makers",
+      sampling: "Prototype samples first — start from 1 unit, scale when ready",
+    } satisfies PathProfile);
+
+  return {
+    concept: profile.concept(text || newProductDemo.input),
+    protection: "NDA signed before we open the brief with any factory",
+    development: profile.development,
+    sampling: profile.sampling,
+    regions: profile.regions,
+    costs: profile.costs,
+    moq: "No MOQ for sampling · production when you are ready",
+    shipping: "Sample air 4–7d · bulk sea 22–30d",
+  };
+}
+
+export type CatalogPlanResult = {
+  products: string;
+  costs: string;
+  regions: string;
+  moq: string;
+  margins: string;
+  shipping: string;
+};
+
+/** Build a catalog / brand plan card set from free text. */
+export function mapCatalogPlan(idea: string): CatalogPlanResult {
+  const text = idea.trim().toLowerCase();
+  if (/skin|beauty|serum|cosmetic/.test(text)) {
+    return {
+      products: "Vitamin C serum set · Clay mask jars · Travel mini kit",
+      costs: "$1.80–$4.60 / unit",
+      regions: "Guangdong · Zhejiang",
+      moq: "100–300 pcs",
+      margins: "48–65% retail",
+      shipping: "Air 5–8d · Sea 22–30d",
+    };
+  }
+  if (/pet|dog|cat/.test(text)) {
+    return {
+      products: "Soft travel carrier · Slow feeder bowl · Grooming kit",
+      costs: "$3.20–$14 / unit",
+      regions: "Yiwu · Dongguan",
+      moq: "50–200 pcs",
+      margins: "42–60% retail",
+      shipping: "Air 5–9d · Sea 22–30d",
+    };
+  }
+  if (/home|kitchen|blend|mirror|led/.test(text)) {
+    return {
+      products: "Portable blender · LED vanity mirror · Gift box set",
+      costs: "$3.80–$22 / unit",
+      regions: "Shenzhen · Zhongshan",
+      moq: "50–200 pcs",
+      margins: "45–62% retail",
+      shipping: "Air 5–8d · Sea 22–30d",
+    };
+  }
+  return {
+    products: ideationDemo.products.join(" · "),
+    costs: ideationDemo.costs,
+    regions: ideationDemo.regions,
+    moq: ideationDemo.moq,
+    margins: ideationDemo.margins,
+    shipping: ideationDemo.shipping,
+  };
+}
+
 export const ideaPathSteps = [
   {
     n: "01",

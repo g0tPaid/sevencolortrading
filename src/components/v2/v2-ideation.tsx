@@ -3,48 +3,96 @@
 import Link from "next/link";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { FileLock2, Lightbulb, Sparkles } from "lucide-react";
+import { FileLock2, Lightbulb, Loader2, Sparkles } from "lucide-react";
 import { Container } from "@/components/ui/primitives";
 import {
   ideaPathSteps,
   ideationDemo,
+  mapCatalogPlan,
+  mapDevelopmentPath,
   newProductDemo,
+  type CatalogPlanResult,
+  type DevelopmentPathResult,
 } from "@/lib/v2-content";
 
 type Mode = "catalog" | "new";
 
+function newRowsFrom(path: DevelopmentPathResult): [string, string][] {
+  return [
+    ["Concept brief", path.concept],
+    ["IP protection", path.protection],
+    ["Development path", path.development],
+    ["Sampling", path.sampling],
+    ["Manufacturing regions", path.regions],
+    ["Estimated costs", path.costs],
+    ["MOQ", path.moq],
+    ["Shipping estimate", path.shipping],
+  ];
+}
+
+function catalogRowsFrom(plan: CatalogPlanResult): [string, string][] {
+  return [
+    ["Recommended products", plan.products],
+    ["Estimated costs", plan.costs],
+    ["Manufacturing regions", plan.regions],
+    ["MOQ", plan.moq],
+    ["Margins", plan.margins],
+    ["Shipping estimate", plan.shipping],
+  ];
+}
+
 export function V2Ideation() {
   const [mode, setMode] = useState<Mode>("new");
   const [value, setValue] = useState<string>(newProductDemo.input);
-  const [ran, setRan] = useState(true);
+  const [runId, setRunId] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [path, setPath] = useState<DevelopmentPathResult | null>(null);
+  const [plan, setPlan] = useState<CatalogPlanResult | null>(null);
 
   function switchMode(next: Mode) {
     setMode(next);
     setValue(next === "new" ? newProductDemo.input : ideationDemo.input);
-    setRan(true);
+    setPath(null);
+    setPlan(null);
+    setRunId(0);
+    setError(null);
+    setLoading(false);
   }
 
-  const catalogRows: [string, string][] = [
-    ["Recommended products", ideationDemo.products.join(" · ")],
-    ["Estimated costs", ideationDemo.costs],
-    ["Manufacturing regions", ideationDemo.regions],
-    ["MOQ", ideationDemo.moq],
-    ["Margins", ideationDemo.margins],
-    ["Shipping estimate", ideationDemo.shipping],
-  ];
+  function runMapper() {
+    const idea = value.trim();
+    if (idea.length < 8) {
+      setError(
+        mode === "new"
+          ? "Add a bit more detail so we can map materials, makers, and sampling."
+          : "Describe the brand or category in a short sentence.",
+      );
+      return;
+    }
+    setError(null);
+    setLoading(true);
+    window.setTimeout(() => {
+      if (mode === "new") {
+        setPath(mapDevelopmentPath(idea));
+        setPlan(null);
+      } else {
+        setPlan(mapCatalogPlan(idea));
+        setPath(null);
+      }
+      setRunId((n) => n + 1);
+      setLoading(false);
+    }, 450);
+  }
 
-  const newRows: [string, string][] = [
-    ["Concept brief", newProductDemo.concept],
-    ["IP protection", newProductDemo.protection],
-    ["Development path", newProductDemo.development],
-    ["Sampling", newProductDemo.sampling],
-    ["Manufacturing regions", newProductDemo.regions],
-    ["Estimated costs", newProductDemo.costs],
-    ["MOQ", newProductDemo.moq],
-    ["Shipping estimate", newProductDemo.shipping],
-  ];
-
-  const rows = mode === "new" ? newRows : catalogRows;
+  const rows =
+    mode === "new"
+      ? path
+        ? newRowsFrom(path)
+        : null
+      : plan
+        ? catalogRowsFrom(plan)
+        : null;
 
   return (
     <section id="ideation" className="scroll-mt-28 border-y border-line bg-white py-24 sm:py-32">
@@ -100,7 +148,16 @@ export function V2Ideation() {
               id="idea-input"
               rows={3}
               value={value}
-              onChange={(e) => setValue(e.target.value)}
+              onChange={(e) => {
+                setValue(e.target.value);
+                if (error) setError(null);
+              }}
+              onKeyDown={(e) => {
+                if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
+                  e.preventDefault();
+                  runMapper();
+                }
+              }}
               placeholder={
                 mode === "new"
                   ? "I invented a… / I want to create a product that…"
@@ -108,14 +165,30 @@ export function V2Ideation() {
               }
               className="mt-2 w-full resize-none rounded-2xl border border-line bg-paper px-4 py-3 text-ink outline-none ring-accent focus:ring-2"
             />
+            {error ? (
+              <p className="mt-2 text-sm font-medium text-accent" role="alert">
+                {error}
+              </p>
+            ) : null}
             <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
               <button
                 type="button"
-                onClick={() => setRan(true)}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white"
+                onClick={runMapper}
+                disabled={loading}
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white disabled:opacity-70"
               >
-                <Sparkles className="h-4 w-4" />
-                {mode === "new" ? "Map development path" : "Generate plan"}
+                {loading ? (
+                  <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
+                ) : (
+                  <Sparkles className="h-4 w-4" aria-hidden />
+                )}
+                {loading
+                  ? mode === "new"
+                    ? "Mapping path…"
+                    : "Generating…"
+                  : mode === "new"
+                    ? "Map development path"
+                    : "Generate plan"}
               </button>
               <Link
                 href="#rfq"
@@ -126,9 +199,9 @@ export function V2Ideation() {
             </div>
           </div>
 
-          {ran ? (
+          {rows ? (
             <motion.div
-              key={mode}
+              key={`${mode}-${runId}`}
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               className="mt-5 grid gap-4 sm:grid-cols-2"
@@ -148,7 +221,13 @@ export function V2Ideation() {
                 </motion.div>
               ))}
             </motion.div>
-          ) : null}
+          ) : (
+            <p className="mt-5 text-center text-sm text-muted">
+              {mode === "new"
+                ? "Hit Map development path to see concept, NDA, sampling, regions, and cost targets."
+                : "Hit Generate plan for product matches, MOQ, margins, and shipping."}
+            </p>
+          )}
         </div>
 
         {mode === "new" ? (
