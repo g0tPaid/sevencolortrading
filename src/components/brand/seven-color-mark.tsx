@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-/** Official Seven Color mark — red geometric 7 on black */
+/** Official Seven Color mark — red geometric 7 on transparent / white */
 export function SevenColorMark({
   className,
   size = 40,
@@ -13,11 +13,11 @@ export function SevenColorMark({
 }) {
   return (
     <Image
-      src="/seven-color-mark.png"
+      src="/seven-color-mark-clear.png"
       alt={title}
       width={size}
       height={size}
-      className={cn("shrink-0 rounded-[6px] object-contain", className)}
+      className={cn("shrink-0 bg-white object-contain", className)}
       priority
       unoptimized
     />
