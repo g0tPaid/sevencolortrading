@@ -17,7 +17,7 @@ export function SevenColorMark({
       alt={title}
       width={size}
       height={size}
-      className={cn("shrink-0 bg-white object-contain", className)}
+      className={cn("shrink-0 bg-transparent object-contain", className)}
       priority
       unoptimized
     />
