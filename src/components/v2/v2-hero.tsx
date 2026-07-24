@@ -18,21 +18,12 @@ function AnimatedHeadlineWord({
   delay?: number;
 }) {
   return (
-    <motion.span
-      className="inline-block text-accent"
-      animate={{
-        y: [0, -6, 0, 4, 0],
-        opacity: [1, 0.85, 1, 0.9, 1],
-      }}
-      transition={{
-        duration: 3.2,
-        delay,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }}
+    <span
+      className="headline-shimmer inline-block"
+      style={{ animationDelay: `${delay}s` }}
     >
       {children}
-    </motion.span>
+    </span>
   );
 }
 
