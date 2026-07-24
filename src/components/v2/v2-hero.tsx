@@ -65,11 +65,7 @@ export function V2Hero() {
           transition={{ delay: 0.06, duration: 0.55 }}
           className="mt-3 flex justify-center sm:mt-4"
         >
-          <SourcingLogo
-            size="hero"
-            showByline
-            className="items-center [&>span:first-child]:items-center"
-          />
+          <SourcingLogo size="hero" showByline className="items-center" />
         </motion.div>
 
         <motion.div

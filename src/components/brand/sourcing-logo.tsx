@@ -11,8 +11,11 @@ type SourcingLogoProps = {
   onDark?: boolean;
 };
 
+const BRAND_RED = "#E31C23";
+
 /**
- * Official sourcing.center wordmark + Seven Color 7 mark.
+ * Official sourcing.center wordmark — single-line serif.
+ * Black “sourcing” with red i-dot · red period · red “center”.
  */
 export function SourcingLogo({
   className,
@@ -20,51 +23,36 @@ export function SourcingLogo({
   showByline = false,
   onDark = false,
 }: SourcingLogoProps) {
-  const sourcing =
+  const word =
     size === "hero"
-      ? "text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem]"
+      ? "text-[2.75rem] leading-none sm:text-6xl md:text-7xl lg:text-[5.25rem]"
       : size === "footer"
-        ? "text-3xl"
-        : "text-[1.35rem] sm:text-xl";
-
-  const center =
-    size === "hero"
-      ? "mt-1 text-lg tracking-[0.2em] sm:mt-1.5 sm:text-xl md:text-2xl"
-      : size === "footer"
-        ? "mt-0.5 text-sm tracking-[0.16em]"
-        : "mt-0.5 text-[10px] tracking-[0.14em] sm:text-[11px]";
+        ? "text-3xl leading-none"
+        : "text-[1.2rem] leading-none sm:text-[1.35rem]";
 
   const byMark = size === "hero" ? 26 : 22;
+  const ink = onDark ? "text-white" : "text-ink";
 
   return (
     <span className={cn("inline-flex flex-col leading-none", className)}>
-      <span className="inline-flex flex-col items-start leading-none">
-        <span
-          className={cn(
-            "font-logo font-bold tracking-[-0.02em]",
-            onDark ? "text-white" : "text-ink",
-            sourcing,
-          )}
-        >
-          sourc
-          <span className="relative inline-block">
-            ı
-            <span
-              className="absolute left-1/2 top-[0.06em] h-[0.22em] w-[0.22em] -translate-x-1/2 rounded-full bg-[#E31C23]"
-              aria-hidden
-            />
-          </span>
-          ng
+      <span
+        className={cn(
+          "font-logo inline-flex items-baseline font-bold tracking-[-0.03em]",
+          word,
+        )}
+        aria-hidden
+      >
+        <span className={ink}>sourc</span>
+        <span className={cn("relative inline-block", ink)}>
+          ı
+          <span
+            className="absolute left-1/2 top-[0.08em] h-[0.2em] w-[0.2em] -translate-x-1/2 rounded-full"
+            style={{ backgroundColor: BRAND_RED }}
+          />
         </span>
-        <span
-          className={cn(
-            "font-sans font-medium",
-            onDark ? "text-[#E85A6A]" : "text-[#9B1B2E] dark:text-[#E85A6A]",
-            center,
-          )}
-        >
-          .center
-        </span>
+        <span className={ink}>ng</span>
+        <span style={{ color: BRAND_RED }}>.</span>
+        <span style={{ color: BRAND_RED }}>center</span>
       </span>
 
       {showByline ? (
