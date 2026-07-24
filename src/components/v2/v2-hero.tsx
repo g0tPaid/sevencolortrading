@@ -135,22 +135,12 @@ export function V2Hero() {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.14, duration: 0.55 }}
-          className="font-headline mx-auto mt-12 max-w-5xl text-[2.4rem] font-semibold leading-[1.12] text-ink sm:mt-14 sm:text-5xl md:text-6xl lg:text-[4.6rem]"
+          className="font-headline mx-auto mt-12 max-w-5xl text-[2.4rem] font-semibold leading-[1.06] text-ink sm:mt-14 sm:text-5xl md:text-6xl lg:text-[4.6rem]"
         >
-          <span className="sr-only">
-            One Platform for Product Ideation &amp; Sourcing
-          </span>
-          <span aria-hidden className="inline">
-            One Platform for Product{" "}
-            <AnimatedHeadlineWord words={ideationWords} intervalMs={3000} />
-            {" "}
-            &amp;{" "}
-            <AnimatedHeadlineWord
-              words={sourcingWords}
-              intervalMs={3000}
-              delayMs={1500}
-            />
-          </span>
+          One Platform for Product <AnimatedHeadlineWord>Ideation</AnimatedHeadlineWord>
+          {" "}
+          &amp;{" "}
+          <AnimatedHeadlineWord delay={0.8}>Sourcing</AnimatedHeadlineWord>
         </motion.h1>
 
         <motion.p
