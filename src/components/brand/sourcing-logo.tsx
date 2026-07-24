@@ -22,19 +22,19 @@ export function SourcingLogo({
 }: SourcingLogoProps) {
   const sourcing =
     size === "hero"
-      ? "text-[2.75rem] sm:text-6xl md:text-7xl"
+      ? "text-6xl sm:text-7xl md:text-8xl lg:text-[6.5rem]"
       : size === "footer"
         ? "text-3xl"
         : "text-[1.35rem] sm:text-xl";
 
   const center =
     size === "hero"
-      ? "mt-1 text-base tracking-[0.18em] sm:mt-1.5 sm:text-lg"
+      ? "mt-2 text-xl tracking-[0.22em] sm:mt-2.5 sm:text-2xl md:text-3xl"
       : size === "footer"
         ? "mt-0.5 text-sm tracking-[0.16em]"
         : "mt-0.5 text-[10px] tracking-[0.14em] sm:text-[11px]";
 
-  const byMark = size === "hero" ? 28 : 22;
+  const byMark = size === "hero" ? 32 : 22;
 
   return (
     <span className={cn("inline-flex flex-col leading-none", className)}>
@@ -72,7 +72,7 @@ export function SourcingLogo({
           className={cn(
             "mt-4 inline-flex items-center gap-2 font-sans font-medium",
             onDark ? "text-white/70" : "text-ink-soft",
-            size === "hero" ? "text-sm sm:text-base" : "text-xs",
+            size === "hero" ? "mt-5 text-sm sm:text-base" : "text-xs",
           )}
         >
           <span>by</span>
