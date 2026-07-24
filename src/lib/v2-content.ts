@@ -330,6 +330,7 @@ export const supplySteps = [
   "USA",
   "Europe",
   "Middle East",
+  "Australia",
 ] as const;
 
 export const whyPoints = [

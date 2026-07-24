@@ -9,6 +9,7 @@ const hubs = [
   { id: "dubai", label: "Dubai", sub: "Hub", x: 653.5, y: 180 },
   { id: "europe", label: "Europe", sub: "Lanes", x: 527.8, y: 111 },
   { id: "usa", label: "USA", sub: "Lanes", x: 236.1, y: 144 },
+  { id: "australia", label: "Australia", sub: "Lanes", x: 900, y: 338 },
 ] as const;
 
 const routes = [
@@ -16,6 +17,7 @@ const routes = [
   { from: "dubai", to: "europe", delay: 0.7 },
   { from: "xiamen", to: "usa", delay: 1.4 },
   { from: "dubai", to: "usa", delay: 2.1 },
+  { from: "xiamen", to: "australia", delay: 2.8 },
 ] as const;
 
 function hubPos(id: string) {
@@ -24,7 +26,15 @@ function hubPos(id: string) {
 
 function arcPath(a: { x: number; y: number }, b: { x: number; y: number }) {
   const mx = (a.x + b.x) / 2;
-  const lift = 40 + Math.abs(a.x - b.x) * 0.06;
+  const dx = Math.abs(a.x - b.x);
+  const dy = b.y - a.y;
+  // Southbound lanes (e.g. China → Australia): bulge east instead of arcing north
+  if (dy > dx * 0.35) {
+    const bulge = 28 + dx * 0.12;
+    const my = (a.y + b.y) / 2;
+    return `M ${a.x} ${a.y} Q ${mx + bulge} ${my} ${b.x} ${b.y}`;
+  }
+  const lift = 40 + dx * 0.06;
   const my = Math.min(a.y, b.y) - lift;
   return `M ${a.x} ${a.y} Q ${mx} ${my} ${b.x} ${b.y}`;
 }
@@ -45,7 +55,7 @@ export function WorldShippingMap() {
         viewBox="0 0 1000 500"
         className="relative h-auto w-full"
         role="img"
-        aria-label="World shipping lanes from Xiamen and Dubai"
+        aria-label="World shipping lanes from Xiamen and Dubai to Europe, USA, and Australia"
       >
         <defs>
           <linearGradient id="laneGrad" x1="0%" y1="0%" x2="100%" y2="0%">
