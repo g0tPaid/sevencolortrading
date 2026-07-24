@@ -81,7 +81,7 @@ export function SourcingLogo({
         >
           <span>by</span>
           <SevenColorMark size={byMark} />
-          <span>Seven Color Trading Co Ltd · China</span>
+          <span>Seven Color Trading · China</span>
         </span>
       ) : null}
 
