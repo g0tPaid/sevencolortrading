@@ -86,7 +86,7 @@ export function V2Trust() {
                 {company.credentials.shelfNote}
               </p>
               <p className="mt-2 text-sm text-ink">
-                Registered vendor pathways for{" "}
+                Registered Vendor Pathways for{" "}
                 {company.credentials.retailVendors.slice(0, 3).join(", ")} and more.
               </p>
               <ul className="mt-4 space-y-1.5 text-xs text-muted">
