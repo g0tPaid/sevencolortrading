@@ -399,5 +399,5 @@ export const platformStats = [
   { value: "10,000+", label: "Factories" },
   { value: "150+", label: "Industries" },
   { value: "40+", label: "Countries" },
-  { value: "Millions", label: "Products" },
+  { value: "Since 2014", label: "On the ground in China" },
 ] as const;
