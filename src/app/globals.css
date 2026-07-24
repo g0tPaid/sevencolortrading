@@ -197,3 +197,33 @@ body {
 .map-dot {
   animation: pulse-dot 2.4s ease-in-out infinite;
 }
+
+.hero-cta-primary {
+  background: linear-gradient(135deg, #b40000 0%, #d60000 42%, #ff3b3b 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.18) inset,
+    0 18px 40px rgba(214, 0, 0, 0.28);
+  transition: box-shadow 0.35s ease, transform 0.35s ease;
+}
+
+.hero-cta-primary:hover {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.22) inset,
+    0 22px 48px rgba(214, 0, 0, 0.38);
+}
+
+.hero-cta-idea {
+  background: #ffffff;
+  border: 1px solid rgba(214, 0, 0, 0.28);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 16px 36px rgba(17, 17, 17, 0.06);
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.hero-cta-idea:hover {
+  border-color: rgba(214, 0, 0, 0.55);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 20px 44px rgba(214, 0, 0, 0.12);
+}

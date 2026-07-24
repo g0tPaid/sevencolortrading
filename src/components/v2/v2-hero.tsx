@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Search } from "lucide-react";
+import { ArrowUpRight, Lightbulb, Search, ShieldCheck } from "lucide-react";
 import { SourcingLogo } from "@/components/brand/sourcing-logo";
 import { Container } from "@/components/ui/primitives";
 import { company } from "@/lib/content";
@@ -178,23 +178,56 @@ export function V2Hero() {
         </motion.form>
 
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.28 }}
-          className="mt-5 flex flex-col items-center justify-center gap-2.5 sm:mt-6 sm:flex-row sm:gap-3"
+          className="mx-auto mt-6 grid max-w-2xl gap-3 sm:mt-8 sm:grid-cols-2 sm:gap-4"
         >
-          <Link
-            href="#ideation"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold text-paper transition hover:opacity-90 sm:w-auto dark:bg-accent"
-          >
-            Start Sourcing <ArrowUpRight className="h-4 w-4" />
-          </Link>
-          <Link
-            href="#new-idea"
-            className="inline-flex w-full items-center justify-center rounded-full border border-line bg-paper px-6 py-3 text-sm font-semibold text-ink transition hover:border-ink/20 sm:w-auto"
-          >
-            I have a new product idea
-          </Link>
+          <motion.div whileHover={{ y: -3 }} whileTap={{ scale: 0.985 }}>
+            <Link
+              href="#discovery"
+              className="hero-cta-primary group relative flex h-full flex-col overflow-hidden rounded-2xl px-5 py-5 text-left sm:px-6 sm:py-6"
+            >
+              <span
+                className="pointer-events-none absolute inset-0 opacity-0 transition duration-500 group-hover:opacity-100"
+                style={{
+                  background:
+                    "radial-gradient(circle at 20% 0%, rgba(255,255,255,0.22), transparent 55%)",
+                }}
+                aria-hidden
+              />
+              <span className="relative inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/75">
+                <Search className="h-3.5 w-3.5" aria-hidden />
+                Existing product
+              </span>
+              <span className="relative mt-2 inline-flex items-center gap-2 font-display text-xl font-semibold tracking-tight text-white sm:text-2xl">
+                Start sourcing
+                <ArrowUpRight className="h-5 w-5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </span>
+              <span className="relative mt-2 text-sm leading-snug text-white/80">
+                Match verified factories, MOQs, and lead times for SKUs that already exist.
+              </span>
+            </Link>
+          </motion.div>
+
+          <motion.div whileHover={{ y: -3 }} whileTap={{ scale: 0.985 }}>
+            <Link
+              href="#new-idea"
+              className="hero-cta-idea group relative flex h-full flex-col overflow-hidden rounded-2xl px-5 py-5 text-left sm:px-6 sm:py-6"
+            >
+              <span className="relative inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
+                <ShieldCheck className="h-3.5 w-3.5" aria-hidden />
+                Brand-new invention
+              </span>
+              <span className="relative mt-2 inline-flex items-center gap-2 font-display text-xl font-semibold tracking-tight text-ink sm:text-2xl">
+                <Lightbulb className="h-5 w-5 text-accent" aria-hidden />
+                I have a new product idea
+              </span>
+              <span className="relative mt-2 text-sm leading-snug text-muted">
+                NDA first — then we develop, sample, and source what has never been made.
+              </span>
+            </Link>
+          </motion.div>
         </motion.div>
       </Container>
     </section>

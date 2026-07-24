@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { ArrowUpRight, Lightbulb, Search, ShieldCheck } from "lucide-react";
 import { Container } from "@/components/ui/primitives";
 
 export function V2Cta() {
@@ -12,7 +13,7 @@ export function V2Cta() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="relative overflow-hidden rounded-[2rem] border border-line bg-ink px-8 py-16 text-center text-paper sm:px-12 sm:py-20"
+          className="relative overflow-hidden rounded-[2rem] border border-line bg-ink px-6 py-14 text-paper sm:px-12 sm:py-20"
         >
           <div
             className="pointer-events-none absolute inset-0 opacity-60"
@@ -22,27 +23,51 @@ export function V2Cta() {
             }}
             aria-hidden
           />
-          <div className="relative">
+          <div className="relative text-center">
             <h2 className="font-display text-3xl font-semibold tracking-tight sm:text-5xl">
               Ready to build your next product?
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-paper/70 sm:text-lg">
-              Start with Sourcing.center by Seven Color Trading Co Ltd · China — new ideas under NDA,
-              factories, QC, and freight.
+              Two clear doors — source an existing SKU, or invent something new under NDA with
+              Seven Color Trading Co Ltd · China.
             </p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Link
-                href="#rfq"
-                className="inline-flex rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white"
-              >
-                Start Sourcing
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-flex rounded-full border border-white/25 px-6 py-3 text-sm font-semibold text-paper"
-              >
-                Talk to the desk
-              </Link>
+            <div className="mx-auto mt-8 grid max-w-2xl gap-3 sm:grid-cols-2 sm:gap-4">
+              <motion.div whileHover={{ y: -3 }} whileTap={{ scale: 0.985 }}>
+                <Link
+                  href="#discovery"
+                  className="hero-cta-primary group flex h-full flex-col rounded-2xl px-5 py-5 text-left sm:px-6 sm:py-6"
+                >
+                  <span className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/75">
+                    <Search className="h-3.5 w-3.5" aria-hidden />
+                    Existing product
+                  </span>
+                  <span className="mt-2 inline-flex items-center gap-2 font-display text-xl font-semibold text-white">
+                    Start sourcing
+                    <ArrowUpRight className="h-5 w-5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </span>
+                  <span className="mt-2 text-sm text-white/80">
+                    Factories, MOQ, and lead times for products that already ship.
+                  </span>
+                </Link>
+              </motion.div>
+              <motion.div whileHover={{ y: -3 }} whileTap={{ scale: 0.985 }}>
+                <Link
+                  href="#new-idea"
+                  className="group flex h-full flex-col rounded-2xl border border-white/20 bg-white px-5 py-5 text-left text-ink sm:px-6 sm:py-6"
+                >
+                  <span className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
+                    <ShieldCheck className="h-3.5 w-3.5" aria-hidden />
+                    Brand-new invention
+                  </span>
+                  <span className="mt-2 inline-flex items-center gap-2 font-display text-xl font-semibold">
+                    <Lightbulb className="h-5 w-5 text-accent" aria-hidden />
+                    I have a new product idea
+                  </span>
+                  <span className="mt-2 text-sm text-muted">
+                    NDA first — develop, sample, and source what has never been made.
+                  </span>
+                </Link>
+              </motion.div>
             </div>
           </div>
         </motion.div>
