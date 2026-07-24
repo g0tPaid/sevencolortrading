@@ -50,6 +50,7 @@ export const trendingProducts = [
     moq: "50 pcs",
     price: "$3.80–$6.20",
     lead: "12–18 days",
+    image: "/products/portable-blender.jpg",
     tone: "from-[#1a1a1a] to-[#3a3a3a]",
   },
   {
@@ -59,6 +60,7 @@ export const trendingProducts = [
     moq: "100 pcs",
     price: "$14–$22",
     lead: "18–25 days",
+    image: "/products/led-mirror.jpg",
     tone: "from-[#111827] to-[#374151]",
   },
   {
@@ -68,6 +70,7 @@ export const trendingProducts = [
     moq: "200 pcs",
     price: "$1.10–$2.40",
     lead: "10–15 days",
+    image: "/products/luxury-gift-box.jpg",
     tone: "from-[#3f0d12] to-[#7f1d1d]",
   },
   {
@@ -77,6 +80,7 @@ export const trendingProducts = [
     moq: "20 pcs",
     price: "$85–$140",
     lead: "25–35 days",
+    image: "/products/hotel-lounge-chair.jpg",
     tone: "from-[#1c1917] to-[#44403c]",
   },
   {
@@ -86,6 +90,7 @@ export const trendingProducts = [
     moq: "100 pcs",
     price: "$9.50–$16",
     lead: "15–22 days",
+    image: "/products/pet-carrier.jpg",
     tone: "from-[#0c1a17] to-[#134e4a]",
   },
   {
@@ -95,6 +100,7 @@ export const trendingProducts = [
     moq: "30 pcs",
     price: "$28–$48",
     lead: "20–30 days",
+    image: "/products/evening-dress.jpg",
     tone: "from-[#1e1033] to-[#4c1d95]",
   },
 ] as const;
