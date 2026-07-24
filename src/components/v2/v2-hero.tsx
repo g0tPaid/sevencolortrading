@@ -38,19 +38,8 @@ export function V2Hero() {
           animate={{ opacity: 1, y: 0 }}
           className="flex justify-center"
         >
-          <SourcingLogo size="hero" showByline className="items-center text-center" />
+          <SourcingLogo size="hero" className="items-center text-center" />
         </motion.div>
-
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.04 }}
-          className="mt-6 text-xs font-medium text-muted sm:text-sm"
-        >
-          {company.byline}
-          <span className="mx-2 text-line">·</span>
-          Since {company.founded}
-        </motion.p>
 
         <motion.h1
           initial={{ opacity: 0, y: 18 }}
