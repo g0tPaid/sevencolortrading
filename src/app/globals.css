@@ -23,7 +23,7 @@
   --ink: #111111;
   --ink-soft: #1a1a1a;
   --paper: #ffffff;
-  --paper-elevated: #f7f7f8;
+  --paper-elevated: #ffffff;
   --line: rgba(17, 17, 17, 0.08);
   --muted: #666666;
   --accent: #d60000;
@@ -50,10 +50,11 @@
 
 html {
   scroll-behavior: smooth;
+  background: #ffffff;
 }
 
 body {
-  background: var(--paper);
+  background: #ffffff;
   color: var(--ink);
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;

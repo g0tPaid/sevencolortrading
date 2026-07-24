@@ -47,7 +47,7 @@ export function V2Ideation() {
   const rows = mode === "new" ? newRows : catalogRows;
 
   return (
-    <section id="ideation" className="scroll-mt-28 border-y border-line bg-paper-elevated py-24 sm:py-32">
+    <section id="ideation" className="scroll-mt-28 border-y border-line bg-white py-24 sm:py-32">
       <Container>
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">

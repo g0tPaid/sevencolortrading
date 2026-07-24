@@ -6,7 +6,7 @@ import { whyPoints } from "@/lib/v2-content";
 
 export function V2Why() {
   return (
-    <section className="border-y border-line bg-paper-elevated py-24 sm:py-32">
+    <section className="border-y border-line bg-white py-24 sm:py-32">
       <Container>
         <div className="max-w-2xl">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">

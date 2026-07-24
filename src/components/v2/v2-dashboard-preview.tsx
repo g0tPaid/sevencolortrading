@@ -7,7 +7,7 @@ import { dashboardModules } from "@/lib/v2-content";
 
 export function V2DashboardPreview() {
   return (
-    <section className="border-y border-line bg-paper-elevated py-24 sm:py-32">
+    <section className="border-y border-line bg-white py-24 sm:py-32">
       <Container>
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
