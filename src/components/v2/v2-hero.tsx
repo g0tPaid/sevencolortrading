@@ -54,6 +54,30 @@ export function V2Hero() {
           />
         </motion.div>
 
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="mx-auto mt-5 flex items-center justify-center gap-3"
+        >
+          <Image
+            src="/dun-bradstreet.png"
+            alt="Dun & Bradstreet"
+            width={56}
+            height={48}
+            className="h-10 w-auto object-contain sm:h-12"
+            unoptimized
+          />
+          <div className="text-left">
+            <p className="text-xs font-medium text-ink sm:text-sm">
+              {company.credentials.dunBradstreet}
+            </p>
+            <p className="mt-0.5 font-mono text-xs text-muted sm:text-sm">
+              DUNS {company.credentials.dunsNumber}
+            </p>
+          </div>
+        </motion.div>
+
         <motion.h1
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
