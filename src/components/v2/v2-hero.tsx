@@ -10,6 +10,58 @@ import { Container } from "@/components/ui/primitives";
 import { company } from "@/lib/content";
 import { companyHighlights, heroExamples } from "@/lib/v2-content";
 
+const ideationWords = ["Ideation", "Invention", "Development", "Concepts"] as const;
+const sourcingWords = ["Sourcing", "Manufacturing", "Production", "Logistics"] as const;
+
+function AnimatedHeadlineWord({
+  words,
+  intervalMs = 2800,
+  delayMs = 0,
+  className,
+}: {
+  words: readonly string[];
+  intervalMs?: number;
+  delayMs?: number;
+  className?: string;
+}) {
+  const [idx, setIdx] = useState(0);
+
+  useEffect(() => {
+    let intervalId = 0;
+    const startId = window.setTimeout(() => {
+      intervalId = window.setInterval(() => {
+        setIdx((i) => (i + 1) % words.length);
+      }, intervalMs);
+    }, delayMs);
+    return () => {
+      window.clearTimeout(startId);
+      window.clearInterval(intervalId);
+    };
+  }, [words.length, intervalMs, delayMs]);
+
+  return (
+    <span
+      className={`relative inline-flex h-[1.15em] min-w-[7.5ch] overflow-hidden align-bottom sm:min-w-[8.5ch] ${className ?? ""}`}
+    >
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.span
+          key={words[idx]}
+          initial={{ y: "80%", opacity: 0, filter: "blur(4px)" }}
+          animate={{ y: "0%", opacity: 1, filter: "blur(0px)" }}
+          exit={{ y: "-70%", opacity: 0, filter: "blur(4px)" }}
+          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute inset-x-0 top-0 whitespace-nowrap text-accent"
+        >
+          {words[idx]}
+        </motion.span>
+      </AnimatePresence>
+      <span className="invisible whitespace-nowrap" aria-hidden>
+        {words.reduce((a, b) => (a.length >= b.length ? a : b))}
+      </span>
+    </span>
+  );
+}
+
 export function V2Hero() {
   const [query, setQuery] = useState("");
   const [exampleIdx, setExampleIdx] = useState(0);
@@ -83,9 +135,22 @@ export function V2Hero() {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.14, duration: 0.55 }}
-          className="font-headline mx-auto mt-12 max-w-5xl text-[2.4rem] font-semibold leading-[1.06] text-ink sm:mt-14 sm:text-5xl md:text-6xl lg:text-[4.6rem]"
+          className="font-headline mx-auto mt-12 max-w-5xl text-[2.4rem] font-semibold leading-[1.12] text-ink sm:mt-14 sm:text-5xl md:text-6xl lg:text-[4.6rem]"
         >
-          One Platform for Product Ideation &amp; Sourcing
+          <span className="sr-only">
+            One Platform for Product Ideation &amp; Sourcing
+          </span>
+          <span aria-hidden className="inline">
+            One Platform for Product{" "}
+            <AnimatedHeadlineWord words={ideationWords} intervalMs={3000} />
+            {" "}
+            &amp;{" "}
+            <AnimatedHeadlineWord
+              words={sourcingWords}
+              intervalMs={3000}
+              delayMs={1500}
+            />
+          </span>
         </motion.h1>
 
         <motion.p
