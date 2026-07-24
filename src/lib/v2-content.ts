@@ -20,15 +20,15 @@ export const newIdeaExamples = [
 
 export const companyHighlights = [
   {
-    label: "NO MOQ",
+    label: "No MOQ",
     detail: "Start from one unit",
   },
   {
-    label: "VERIFIED FACTORIES",
+    label: "Verified Factories",
     detail: "Audited suppliers only",
   },
   {
-    label: "PHOTO & VIDEO QC",
+    label: "Photo & Video QC",
     detail: "Approve before it ships",
   },
 ] as const;

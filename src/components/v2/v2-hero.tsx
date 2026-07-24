@@ -121,17 +121,17 @@ export function V2Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.18 }}
-          className="mx-auto mt-5 grid max-w-3xl gap-2.5 sm:mt-6 sm:grid-cols-3 sm:gap-3"
+          className="mx-auto mt-6 grid max-w-4xl gap-3 sm:mt-8 sm:grid-cols-3 sm:gap-4"
         >
           {companyHighlights.map((item) => (
             <li
               key={item.label}
-              className="rounded-2xl border border-accent/25 bg-accent-soft px-4 py-3 text-center shadow-[0_8px_24px_rgba(214,0,0,0.06)]"
+              className="rounded-[1.5rem] border border-accent/30 bg-accent-soft px-5 py-5 text-center shadow-[0_12px_32px_rgba(214,0,0,0.08)] sm:px-6 sm:py-6"
             >
-              <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-accent sm:text-xs">
+              <p className="font-highlight text-[1.65rem] leading-[1.1] text-accent sm:text-2xl md:text-[1.85rem]">
                 {item.label}
               </p>
-              <p className="mt-1 text-xs font-medium text-ink sm:text-sm">{item.detail}</p>
+              <p className="mt-2 text-sm font-medium text-ink sm:text-base">{item.detail}</p>
             </li>
           ))}
         </motion.ul>

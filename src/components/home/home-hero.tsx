@@ -64,12 +64,12 @@ export function HomeHero() {
             {companyHighlights.map((item) => (
               <li
                 key={item.label}
-                className="rounded-2xl border border-[#E31C23]/25 bg-[rgba(227,28,35,0.06)] px-4 py-3"
+                className="rounded-[1.35rem] border border-[#E31C23]/30 bg-[rgba(227,28,35,0.06)] px-5 py-4"
               >
-                <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#E31C23]">
+                <p className="font-highlight text-2xl leading-tight text-[#E31C23] sm:text-[1.75rem]">
                   {item.label}
                 </p>
-                <p className="mt-1 text-sm font-medium text-ink">{item.detail}</p>
+                <p className="mt-1.5 text-sm font-medium text-ink sm:text-base">{item.detail}</p>
               </li>
             ))}
           </motion.ul>
