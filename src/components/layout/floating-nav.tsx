@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
+import { SourcingLogo } from "@/components/brand/sourcing-logo";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { ButtonLink } from "@/components/ui/primitives";
 import { services, industries } from "@/lib/content";
@@ -45,18 +46,8 @@ export function FloatingNav() {
             : "border-transparent bg-transparent",
         )}
       >
-        <Link href="/" className="flex min-w-0 items-center gap-2.5 py-1" onClick={() => setOpen(false)}>
-          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg spectrum-rail text-[11px] font-bold text-white shadow-sm">
-            SC
-          </span>
-          <span className="min-w-0">
-            <span className="block font-display text-sm font-semibold leading-tight tracking-tight text-ink sm:text-base">
-              Sourcing Center
-            </span>
-            <span className="block truncate text-[10px] leading-tight text-muted">
-              by Seven Color Trading Co Ltd · China
-            </span>
-          </span>
+        <Link href="/" className="flex min-w-0 items-center py-1" onClick={() => setOpen(false)}>
+          <SourcingLogo size="nav" />
         </Link>
 
         <nav className="ml-2 hidden items-center gap-1 lg:flex" aria-label="Primary">
@@ -129,18 +120,12 @@ export function FloatingNav() {
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/dashboard"
-            className="rounded-full px-3 py-2 text-sm text-muted transition hover:text-ink"
-          >
-            Client desk
-          </Link>
         </nav>
 
         <div className="ml-auto flex items-center gap-2">
           <ThemeToggle />
           <ButtonLink href="/contact" className="hidden sm:inline-flex" variant="primary">
-            Start RFQ
+            Get a quote
           </ButtonLink>
           <button
             type="button"
@@ -183,13 +168,6 @@ export function FloatingNav() {
                 </Link>
               ))}
               <Link
-                href="/dashboard"
-                className="rounded-xl px-3 py-2.5 text-sm text-muted"
-                onClick={() => setOpen(false)}
-              >
-                Client desk
-              </Link>
-              <Link
                 href="/about"
                 className="rounded-xl px-3 py-2.5 text-sm text-muted"
                 onClick={() => setOpen(false)}
@@ -201,7 +179,7 @@ export function FloatingNav() {
                 className="mt-2 inline-flex w-full items-center justify-center rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper dark:bg-accent"
                 onClick={() => setOpen(false)}
               >
-                Start RFQ
+                Get a quote
               </Link>
             </div>
           </motion.div>
