@@ -44,7 +44,6 @@ export function SiteFooter() {
                 ["Case studies", "/case-studies"],
                 ["Knowledge", "/knowledge"],
                 ["Contact", "/contact"],
-                ["Client desk", "/dashboard"],
               ].map(([label, href]) => (
                 <li key={href}>
                   <Link href={href} className="text-paper/80 hover:text-paper dark:text-muted dark:hover:text-ink">

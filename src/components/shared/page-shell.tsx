@@ -40,8 +40,8 @@ export function CtaBand({
           <p className="mt-3 max-w-xl text-muted">{description}</p>
           <div className="mt-6 flex flex-wrap gap-3">
             <ButtonLink href="/contact">Get a quote in 24h</ButtonLink>
-            <ButtonLink href="/dashboard" variant="secondary">
-              Client desk
+            <ButtonLink href="/#new-idea" variant="secondary">
+              I have a new product idea
             </ButtonLink>
           </div>
         </div>

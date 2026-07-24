@@ -120,12 +120,6 @@ export function FloatingNav() {
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/dashboard"
-            className="rounded-full px-3 py-2 text-sm text-muted transition hover:text-ink"
-          >
-            Client desk
-          </Link>
         </nav>
 
         <div className="ml-auto flex items-center gap-2">
@@ -173,13 +167,6 @@ export function FloatingNav() {
                   {link.label}
                 </Link>
               ))}
-              <Link
-                href="/dashboard"
-                className="rounded-xl px-3 py-2.5 text-sm text-muted"
-                onClick={() => setOpen(false)}
-              >
-                Client desk
-              </Link>
               <Link
                 href="/about"
                 className="rounded-xl px-3 py-2.5 text-sm text-muted"
