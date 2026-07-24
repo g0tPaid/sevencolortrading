@@ -4,9 +4,9 @@ export const company = {
   byline: "by Seven Color Trading Co Ltd · China",
   legalName: "Seven Color Trading Co Ltd",
   legalNameFull: "Xiamen Ajmal Seven Color Trading Co Ltd",
-  tagline: "One platform for product ideation & sourcing from China.",
+  tagline: "One Platform for Product Ideation & Sourcing from China.",
   description:
-    "Discover winning product ideas, validate demand, connect with verified manufacturers, manage production, and source directly from China—all from one intelligent platform.",
+    "Discover winning product ideas, validate demand, connect with verified manufacturers, manage production, and source directly from China — all from one intelligent platform.",
   founded: "2014",
   emails: {
     corporate: "info@sevencolor.online",
@@ -51,16 +51,16 @@ export const company = {
     },
   ],
   credentials: {
-    dunBradstreet: "Dun & Bradstreet registered",
+    dunBradstreet: "Dun & Bradstreet Registered",
     dunsNumber: "509419282",
     retailVendors: ["Walmart", "Target", "Costco", "Amazon", "Home Depot"],
     retailNote:
       "Registered vendor pathways for major retailers including Walmart, Target, and more.",
     shelfNote:
-      "If you’ve walked the aisles at big stores like Walmart, you’ve almost certainly seen products we helped source from China.",
+      "If you've walked the aisles at big stores like Walmart, you've almost certainly seen products we helped source from China.",
     licenses: [
-      { region: "China (Xiamen)", number: "91350200MAE8W9E67A", kind: "Business license" },
-      { region: "UAE (Dubai / Al Ain)", number: "143609", kind: "Trade license" },
+      { region: "China (Xiamen)", number: "91350200MAE8W9E67A", kind: "Business License" },
+      { region: "UAE (Dubai / Al Ain)", number: "143609", kind: "Trade License" },
     ],
   },
 };

@@ -113,7 +113,7 @@ export function SiteFooter() {
               </div>
             </div>
             <p className="mt-3 text-xs leading-relaxed text-paper/70 dark:text-muted">
-              Registered vendor pathways for Walmart, Target, and other major retailers.
+              Registered Vendor Pathways for Walmart, Target, and other major retailers.
             </p>
             <ul className="mt-3 space-y-2 text-xs text-paper/70 dark:text-muted">
               {company.credentials.licenses.map((lic) => (

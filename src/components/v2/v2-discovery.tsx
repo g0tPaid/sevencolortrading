@@ -20,7 +20,7 @@ export function V2Discovery() {
             Find what&apos;s worth making
           </h2>
           <p className="mt-4 text-muted sm:text-lg">
-            Signal over catalog noise — growth, margin, MOQ, and lead time in one glance.
+            Signal over catalog noise — growth, margin, MOQ, and lead time at a glance.
           </p>
         </div>
 

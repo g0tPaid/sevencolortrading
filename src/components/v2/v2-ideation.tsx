@@ -57,8 +57,8 @@ export function V2Ideation() {
             Existing products — or a brand-new invention
           </h2>
           <p className="mt-4 text-muted sm:text-lg">
-            Already know the SKU? We match factories. Have something never made before? We protect
-            it under NDA, develop it, sample it, and source it from China.
+            Already know the SKU? We match factories. Have something that has never been made
+            before? We protect it under NDA, develop it, sample it, and source it from China.
           </p>
         </div>
 

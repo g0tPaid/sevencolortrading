@@ -4,12 +4,7 @@ import { motion } from "framer-motion";
 import { SourcingLogo } from "@/components/brand/sourcing-logo";
 import { RfqForm } from "@/components/home/rfq-form";
 import { ButtonLink, Container } from "@/components/ui/primitives";
-
-const highlights = [
-  "NO MOQ — START FROM ONE UNIT",
-  "VERIFIED FACTORIES ONLY",
-  "PHOTO & VIDEO QC BEFORE SHIP",
-] as const;
+import { companyHighlights } from "@/lib/v2-content";
 
 export function HomeHero() {
   return (
@@ -54,6 +49,7 @@ export function HomeHero() {
             <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
               Your{" "}
               <span className="font-semibold text-ink">central command for sourcing from China</span>
+              {" "}
               — idea, design, factories, QC, and shipping in one place. No MOQ. Proof before it
               leaves.
             </p>
@@ -63,15 +59,17 @@ export function HomeHero() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, delay: 0.2 }}
-            className="mt-7 space-y-2.5"
+            className="mt-7 grid gap-2.5 sm:grid-cols-1"
           >
-            {highlights.map((item) => (
+            {companyHighlights.map((item) => (
               <li
-                key={item}
-                className="flex items-center gap-2.5 text-sm font-semibold tracking-wide text-ink sm:text-base"
+                key={item.label}
+                className="rounded-2xl border border-[#E31C23]/25 bg-[rgba(227,28,35,0.06)] px-4 py-3"
               >
-                <span className="h-2 w-2 shrink-0 rounded-full bg-[#E31C23]" aria-hidden />
-                {item}
+                <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#E31C23]">
+                  {item.label}
+                </p>
+                <p className="mt-1 text-sm font-medium text-ink">{item.detail}</p>
               </li>
             ))}
           </motion.ul>

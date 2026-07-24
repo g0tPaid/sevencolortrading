@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Sourcing Center by Seven Color Trading Co Ltd · China",
     description:
-      "Product ideation & sourcing from China — new inventions under NDA, verified factories, QC, and logistics. By Seven Color Trading Co Ltd.",
+      "Product ideation and sourcing from China — new inventions under NDA, verified factories, QC, and logistics. By Seven Color Trading Co Ltd.",
     type: "website",
     locale: "en_US",
   },

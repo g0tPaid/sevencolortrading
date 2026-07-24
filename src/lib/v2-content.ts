@@ -19,9 +19,18 @@ export const newIdeaExamples = [
 ] as const;
 
 export const companyHighlights = [
-  "NO MOQ — START FROM ONE UNIT",
-  "VERIFIED FACTORIES ONLY",
-  "PHOTO & VIDEO QC BEFORE SHIP",
+  {
+    label: "NO MOQ",
+    detail: "Start from one unit",
+  },
+  {
+    label: "VERIFIED FACTORIES",
+    detail: "Audited suppliers only",
+  },
+  {
+    label: "PHOTO & VIDEO QC",
+    detail: "Approve before it ships",
+  },
 ] as const;
 
 export const discoveryFilters = [
@@ -110,7 +119,7 @@ export const newProductDemo = {
   sampling: "Prototype samples first — start from 1 unit, scale when ready",
   regions: "Shenzhen · Zhongshan (small appliances)",
   costs: "Tooling quote + $8–$14 / unit at 500 pcs",
-  moq: "No MOQ for sampling · production from your call",
+  moq: "No MOQ for sampling · production when you are ready",
   shipping: "Sample air 4–7d · bulk sea 22–30d",
 } as const;
 
@@ -128,7 +137,7 @@ export const ideaPathSteps = [
   {
     n: "03",
     title: "Prototype & source",
-    text: "Samples first. Verified makers. No MOQ games — start small, scale when it’s right.",
+    text: "Samples first. Verified makers. No MOQ games — start small, and scale when it is right.",
   },
   {
     n: "04",

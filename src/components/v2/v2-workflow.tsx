@@ -11,7 +11,7 @@ export function V2Workflow() {
         <div className="max-w-2xl">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">Workflow</p>
           <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-5xl">
-            Idea to delivered — one timeline
+            Idea to delivery — one timeline
           </h2>
         </div>
 

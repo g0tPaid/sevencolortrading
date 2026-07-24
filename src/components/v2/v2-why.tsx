@@ -13,11 +13,11 @@ export function V2Why() {
             Why Sourcing.center
           </p>
           <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-5xl">
-            Your company for ideation, factories &amp; delivery
+            Your company for ideation, factories, and delivery
           </h2>
           <p className="mt-4 max-w-xl text-muted sm:text-lg">
             Sourcing.center by Seven Color Trading Co Ltd · China — one team from a brand-new
-            product idea to arrival, with China on the ground and desks that stay with you.
+            product idea through to arrival, with China on the ground and desks that stay with you.
           </p>
         </div>
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
