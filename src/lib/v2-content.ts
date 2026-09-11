@@ -333,13 +333,43 @@ export const supplySteps = [
   "Australia",
 ] as const;
 
+export const fulfillment = {
+  eyebrow: "3PL",
+  title: "World-class fulfillment in our own warehouses",
+  description:
+    "Receive, store, pick, pack, and ship — not through a broker. We run full 3PL in Xiamen and Dubai, tied directly to your sourcing desk.",
+} as const;
+
+export const fulfillmentSteps = [
+  { title: "Receive", text: "Inbound from the factory floor into our warehouse — counted and photographed." },
+  { title: "Store", text: "Hold stock in Xiamen or Dubai until you release it, with no marketplace middleman." },
+  { title: "Pick", text: "Orders pulled to your SKU list — one unit or a container program." },
+  { title: "Pack", text: "Cartons, labeling, and consolidations staged for the lane you actually buy." },
+  { title: "Ship", text: "Sea, air, or express with tracking — China HQ and Dubai hub on the same desk." },
+] as const;
+
+export const fulfillmentHubs = [
+  {
+    city: "Xiamen",
+    country: "China",
+    role: "HQ warehouse",
+    text: "Sourcing headquarters and warehouse — inbound from factories, QC, and export staging.",
+  },
+  {
+    city: "Dubai / Al Ain",
+    country: "UAE",
+    role: "Branch warehouse",
+    text: "Regional hub for GCC replenishment — stage, pick, and ship closer to your market.",
+  },
+] as const;
+
 export const whyPoints = [
   { title: "One partner", text: "Ideas, factories, QC, and freight handled by one China desk." },
   { title: "Thousands of factories", text: "Mapped capacity across electronics, home, fashion, and industrial." },
   { title: "Verified suppliers", text: "License checks, audits, and production proof before you commit." },
   { title: "Factory audits", text: "On-ground teams in China validating what catalogs claim." },
   { title: "Inspection", text: "Photo & video QC — approve before anything ships." },
-  { title: "Logistics", text: "Sea, air, and express with Dubai hub support." },
+  { title: "Logistics", text: "Own 3PL in Xiamen and Dubai — plus sea, air, and express." },
   { title: "Private label", text: "Packaging, branding, and white-label programs that scale." },
   { title: "OEM / ODM", text: "From concept and tooling to mass production — including brand-new inventions." },
   { title: "Product development", text: "Turn a sketch or new idea into a manufacturable SKU under NDA." },

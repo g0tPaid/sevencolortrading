@@ -148,8 +148,8 @@ export const services = [
   },
   {
     href: "/logistics",
-    title: "Logistics",
-    description: "Sea, air, and express freight with customs guidance to your door.",
+    title: "3PL & Logistics",
+    description: "Own warehouses in Xiamen and Dubai, then sea, air, and express to your door.",
   },
   {
     href: "/services",
