@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Lightbulb, Search, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, Lightbulb, Search, ShieldCheck, Warehouse } from "lucide-react";
 import { SourcingLogo } from "@/components/brand/sourcing-logo";
 import { Container } from "@/components/ui/primitives";
 import { company } from "@/lib/content";
@@ -228,6 +228,31 @@ export function V2Hero() {
               </span>
             </Link>
           </motion.div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.34 }}
+          className="mx-auto mt-4 max-w-2xl"
+        >
+          <Link
+            href="#3pl"
+            className="group flex items-center gap-4 rounded-2xl border border-accent/35 bg-accent-soft px-5 py-4 text-left shadow-[0_12px_32px_rgba(214,0,0,0.1)] transition hover:border-accent/55"
+          >
+            <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent text-white">
+              <Warehouse className="h-5 w-5" aria-hidden />
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
+                3PL · Xiamen &amp; Dubai
+              </span>
+              <span className="mt-0.5 block text-sm font-medium text-ink sm:text-base">
+                Own warehouses — receive, store, pick, pack, ship
+              </span>
+            </span>
+            <ArrowUpRight className="h-5 w-5 shrink-0 text-accent transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </Link>
         </motion.div>
       </Container>
     </section>

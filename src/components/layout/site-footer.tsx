@@ -26,8 +26,20 @@ export function SiteFooter() {
             <ul className="mt-4 space-y-2 text-sm">
               {services.map((s) => (
                 <li key={s.href}>
-                  <Link href={s.href} className="text-paper/80 hover:text-paper dark:text-muted dark:hover:text-ink">
+                  <Link
+                    href={s.href}
+                    className={
+                      s.href === "/logistics"
+                        ? "inline-flex items-center gap-2 font-semibold text-accent hover:opacity-90"
+                        : "text-paper/80 hover:text-paper dark:text-muted dark:hover:text-ink"
+                    }
+                  >
                     {s.title}
+                    {s.href === "/logistics" ? (
+                      <span className="rounded-full bg-accent px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white">
+                        3PL
+                      </span>
+                    ) : null}
                   </Link>
                 </li>
               ))}

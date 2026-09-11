@@ -19,7 +19,9 @@ export default function LogisticsPage() {
         description="Full 3PL in Xiamen and Dubai, tied to the sourcing desk. Then sea, air, or express with tracking your ops team can trust."
       />
       <Container className="py-16">
-        <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">{fulfillment.eyebrow}</p>
+        <p className="inline-flex items-center rounded-full bg-accent px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-white">
+          {fulfillment.eyebrow}
+        </p>
         <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
           {fulfillment.title}
         </h2>
