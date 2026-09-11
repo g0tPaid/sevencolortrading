@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Fraunces, Inter, Playfair_Display } from "next/font/google";
+import { JsonLd } from "@/components/seo/json-ld";
 import { ThemeProvider } from "@/components/layout/theme-provider";
+import { organizationJsonLd, siteUrl, defaultDescription, seoKeywords } from "@/lib/seo";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -25,21 +27,35 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sourcing.center"),
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "Sourcing Center — One Platform for Product Ideation & Sourcing",
+    default: "Sourcing Center — China Sourcing, Ideation & 3PL in Xiamen and Dubai",
     template: "%s · Sourcing Center",
   },
-  description:
-    "Sourcing.center by Seven Color Trading Co Ltd · China. Discover products, invent new ones under NDA, connect with verified manufacturers, manage production, and source from China.",
+  description: defaultDescription,
+  keywords: seoKeywords,
+  applicationName: "Sourcing Center",
+  authors: [{ name: "Seven Color Trading Co Ltd", url: siteUrl }],
+  creator: "Seven Color Trading Co Ltd",
+  publisher: "Seven Color Trading Co Ltd",
+  category: "business",
   openGraph: {
-    title: "Sourcing Center by Seven Color Trading Co Ltd · China",
-    description:
-      "Product ideation and sourcing from China — new inventions under NDA, verified factories, QC, and logistics. By Seven Color Trading Co Ltd.",
+    title: "Sourcing Center — China Sourcing & Own 3PL Warehouses",
+    description: defaultDescription,
     type: "website",
     locale: "en_US",
+    siteName: "Sourcing Center",
   },
-  robots: { index: true, follow: true },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sourcing Center — China Sourcing & Own 3PL Warehouses",
+    description: defaultDescription,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+  },
   other: { "mobile-web-app-capable": "yes" },
 };
 
@@ -60,6 +76,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         className={`${playfair.variable} ${fraunces.variable} ${inter.variable} font-sans antialiased`}
       >
         <ThemeProvider>{children}</ThemeProvider>
+        <JsonLd data={organizationJsonLd()} />
       </body>
     </html>
   );
