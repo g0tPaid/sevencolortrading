@@ -56,10 +56,10 @@ export function SiteFooter() {
                 ["Case studies", "/case-studies"],
                 ["Knowledge", "/knowledge"],
                 ["Contact", "/contact"],
-                ["Factory registration", "/factories/register"],
                 ["Visit China", "/visit"],
-                ["Dropshipping", "/dropshipping"],
                 ["3PL", "/3pl"],
+                ["Factories", "/factories/register"],
+                ["Dropshipping", "/dropshipping"],
               ].map(([label, href]) => (
                 <li key={href}>
                   <Link href={href} className="text-paper/80 hover:text-paper dark:text-muted dark:hover:text-ink">
