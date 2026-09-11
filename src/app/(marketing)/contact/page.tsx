@@ -6,7 +6,8 @@ import { company } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Contact Seven Color sourcing desks in Dubai and Xiamen. RFQ response within 24 hours.",
+  description:
+    "Contact Sourcing Center / Seven Color Trading for China sourcing or 3PL in Xiamen and Dubai. RFQ response within 24 hours.",
 };
 
 export default function ContactPage() {

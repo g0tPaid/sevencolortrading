@@ -6,7 +6,8 @@ import { categories, services } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Services",
-  description: "Full China sourcing desk — verification, QC, private label, OEM/ODM, and logistics.",
+  description:
+    "Full China sourcing desk — factory verification, QC, private label, OEM/ODM, and own 3PL warehouses in Xiamen and Dubai.",
 };
 
 export default function ServicesPage() {

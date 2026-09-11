@@ -6,7 +6,8 @@ import { knowledgeArticles } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Knowledge Center",
-  description: "Guides on RFQs, factory audits, Incoterms, and private label for China importers.",
+  description:
+    "Guides on 3PL warehouses in Xiamen and Dubai, RFQs, factory audits, Incoterms, and private label for China importers.",
 };
 
 export default function KnowledgePage() {

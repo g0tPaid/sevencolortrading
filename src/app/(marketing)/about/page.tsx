@@ -5,7 +5,8 @@ import { company } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Since 2014, Seven Color has connected buyers to verified manufacturers across China with desks in Xiamen and Dubai.",
+  description:
+    "Since 2014, Seven Color Trading Co Ltd has sourced from verified China factories and run its own 3PL warehouses in Xiamen and Dubai. DUNS 509419282.",
 };
 
 export default function AboutPage() {
