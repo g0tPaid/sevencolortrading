@@ -28,3 +28,16 @@ npm start
 
 - Marketing site: `/` and platform pages
 - Client desk UI: `/dashboard/*`
+
+## Admin desk auth
+
+Password-protected `/login` session for `/dashboard/*` and sensitive admin APIs.
+
+Railway / production env vars:
+
+- `ADMIN_USERNAME` (required)
+- `ADMIN_PASSWORD` (required)
+- `ADMIN_SESSION_SECRET` (optional but recommended — HMAC key for `sc_admin_session` cookie; if unset, derived from `ADMIN_PASSWORD` + a fixed app salt)
+
+In development, unset credentials fall back to `admin` / `admin`.
+
