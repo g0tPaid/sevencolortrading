@@ -26,7 +26,6 @@ export default function HomePage() {
   return (
     <>
       <V2Hero />
-      <V2ChinaVisit />
       <V2Ideation />
       <V2Network />
       <V2ThreePl />
@@ -34,6 +33,7 @@ export default function HomePage() {
       <V2Why />
       <V2Workflow />
       <V2Trust />
+      <V2ChinaVisit />
       <V2Cta />
     </>
   );
