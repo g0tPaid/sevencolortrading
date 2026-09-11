@@ -32,9 +32,9 @@ export function RfqForm({ compact = false }: { compact?: boolean }) {
         animate={{ opacity: 1, scale: 1 }}
         className="rounded-3xl border border-line bg-paper-elevated p-8 text-center"
       >
-        <p className="font-display text-2xl font-semibold text-ink">RFQ received</p>
+        <p className="font-display text-2xl font-semibold text-ink">Got it — we&apos;re on it</p>
         <p className="mt-3 text-sm text-muted">
-          A relationship manager will respond within 24 hours with sourcing options.
+          Expect sourcing options within 24 hours from our China or Dubai desk.
         </p>
       </motion.div>
     );
@@ -52,10 +52,10 @@ export function RfqForm({ compact = false }: { compact?: boolean }) {
       <div className="mb-5 flex items-center justify-between gap-3">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-            Sourcing desk
+            Idea or RFQ
           </p>
           <h3 className="mt-1 font-display text-xl font-semibold text-ink sm:text-2xl">
-            Start an RFQ
+            Tell us what to build or source
           </h3>
         </div>
         <div className="hidden items-center gap-2 sm:flex">
@@ -77,7 +77,7 @@ export function RfqForm({ compact = false }: { compact?: boolean }) {
             required
             name="description"
             rows={compact ? 3 : 4}
-            placeholder="What do you need? Specs, materials, quantity, target budget…"
+            placeholder="Product idea, sketch notes, specs, quantity, target budget…"
             className="w-full resize-y rounded-2xl border border-line bg-paper px-4 py-3 text-ink outline-none ring-accent placeholder:text-muted/70 focus:ring-2"
           />
         </label>
@@ -141,10 +141,10 @@ export function RfqForm({ compact = false }: { compact?: boolean }) {
         className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-medium text-paper transition hover:opacity-90 dark:bg-accent dark:text-paper"
       >
         <Send className="h-4 w-4" />
-        Submit sourcing request
+        Get my quote
       </button>
       <p className="mt-3 text-center text-[11px] text-muted">
-        No MOQ · Response within 24 hours · Dubai & China desks
+        No MOQ · Reply in 24h · China HQ & Dubai branch
       </p>
     </form>
   );

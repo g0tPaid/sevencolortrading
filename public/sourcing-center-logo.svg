@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 120" role="img" aria-label="sourcing.center">
+  <rect width="720" height="120" fill="#ffffff"/>
+  <!-- Single-line serif wordmark: black sourcing, red i-dot / period / center -->
+  <text
+    x="360"
+    y="78"
+    text-anchor="middle"
+    font-family="Georgia, 'Times New Roman', Times, serif"
+    font-size="72"
+    font-weight="700"
+    letter-spacing="-1.5"
+  >
+    <tspan fill="#0a0a0a">sourc</tspan>
+    <tspan fill="#0a0a0a">ı</tspan>
+    <tspan fill="#0a0a0a">ng</tspan>
+    <tspan fill="#E31C23">.</tspan>
+    <tspan fill="#E31C23">center</tspan>
+  </text>
+  <!-- Cover native i-dot region and place brand red circle -->
+  <rect x="268" y="28" width="18" height="16" fill="#ffffff"/>
+  <circle cx="277" cy="36" r="7" fill="#E31C23"/>
+</svg>

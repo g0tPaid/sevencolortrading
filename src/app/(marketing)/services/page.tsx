@@ -14,8 +14,8 @@ export default function ServicesPage() {
     <>
       <PageHero
         eyebrow="Services"
-        title="A complete sourcing operating system"
-        description="Every capability your procurement team needs between RFQ and delivery — without marketplace noise."
+        title="A complete China sourcing company"
+        description="Every capability your procurement team needs between RFQ and delivery — verification, QC, private label, OEM/ODM, and logistics."
       />
       <Container className="grid gap-4 py-16 md:grid-cols-2">
         {services.map((s) => (

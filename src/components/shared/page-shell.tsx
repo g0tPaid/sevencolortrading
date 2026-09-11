@@ -26,8 +26,8 @@ export function PageHero({
 }
 
 export function CtaBand({
-  title = "Talk to the sourcing desk",
-  description = "Share your RFQ — we respond within 24 hours from Dubai or Xiamen.",
+  title = "Ready when you are",
+  description = "Send your RFQ — a relationship manager replies within 24 hours from China or Dubai.",
 }: {
   title?: string;
   description?: string;
@@ -39,9 +39,9 @@ export function CtaBand({
           <h2 className="font-display text-3xl font-semibold text-ink">{title}</h2>
           <p className="mt-3 max-w-xl text-muted">{description}</p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <ButtonLink href="/contact">Start RFQ</ButtonLink>
-            <ButtonLink href="/dashboard" variant="secondary">
-              Client desk
+            <ButtonLink href="/contact">Get a quote in 24h</ButtonLink>
+            <ButtonLink href="/#new-idea" variant="secondary">
+              I have a new product idea
             </ButtonLink>
           </div>
         </div>

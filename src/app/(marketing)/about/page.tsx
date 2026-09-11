@@ -38,11 +38,15 @@ export default function AboutPage() {
               </li>
             ))}
           </ul>
-          <p className="mt-8 text-sm text-muted">{company.hours}</p>
+          <p className="mt-8 text-sm font-medium text-ink">{company.credentials.dunBradstreet}</p>
+          <p className="mt-1 font-mono text-sm text-muted">DUNS {company.credentials.dunsNumber}</p>
+          <p className="mt-2 text-sm text-muted">{company.credentials.retailNote}</p>
+          <p className="mt-2 text-sm text-muted">{company.credentials.shelfNote}</p>
+          <p className="mt-4 text-sm text-muted">{company.hours}</p>
         </div>
       </Container>
       <Container className="pb-8">
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+        <div className="grid grid-cols-3 gap-4">
           {company.stats.map((s) => (
             <div key={s.label} className="rounded-2xl border border-line bg-paper-elevated p-5">
               <p className="font-display text-2xl font-semibold text-ink">{s.value}</p>

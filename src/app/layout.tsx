@@ -1,47 +1,46 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, IBM_Plex_Sans, Syne } from "next/font/google";
+import { Fraunces, Inter, Playfair_Display } from "next/font/google";
 import { ThemeProvider } from "@/components/layout/theme-provider";
 import "./globals.css";
 
-const syne = Syne({
+const playfair = Playfair_Display({
   subsets: ["latin"],
-  variable: "--font-syne",
+  weight: ["500", "600", "700"],
+  variable: "--font-playfair",
   display: "swap",
 });
 
-const plex = IBM_Plex_Sans({
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  axes: ["SOFT", "opsz", "WONK"],
+  variable: "--font-fraunces",
+  display: "swap",
+});
+
+const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-plex",
-  display: "swap",
-});
-
-const plexMono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-plex-mono",
+  variable: "--font-inter",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://sourcing.center"),
   title: {
-    default: "Sourcing Center by Seven Color Trading Co Ltd · China",
+    default: "Sourcing Center — One Platform for Product Ideation & Sourcing",
     template: "%s · Sourcing Center",
   },
   description:
-    "Sourcing Center by Seven Color Trading Co Ltd, China — enterprise China sourcing with no MOQ, factory verification, QC, and logistics from Xiamen and Dubai.",
+    "Sourcing.center by Seven Color Trading Co Ltd · China. Discover products, invent new ones under NDA, connect with verified manufacturers, manage production, and source from China.",
   openGraph: {
     title: "Sourcing Center by Seven Color Trading Co Ltd · China",
     description:
-      "Procurement-grade China sourcing infrastructure — no MOQ, verified factories, QC, and global logistics.",
+      "Product ideation and sourcing from China — new inventions under NDA, verified factories, QC, and logistics. By Seven Color Trading Co Ltd.",
     type: "website",
     locale: "en_US",
   },
   robots: { index: true, follow: true },
-  other: {
-    "mobile-web-app-capable": "yes",
-  },
+  other: { "mobile-web-app-capable": "yes" },
 };
 
 export const viewport = {
@@ -49,15 +48,17 @@ export const viewport = {
   initialScale: 1,
   maximumScale: 5,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f3f5f8" },
-    { media: "(prefers-color-scheme: dark)", color: "#07090d" },
+    { media: "(prefers-color-scheme: light)", color: "#FFFFFF" },
+    { media: "(prefers-color-scheme: dark)", color: "#0A0A0A" },
   ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${syne.variable} ${plex.variable} ${plexMono.variable} font-sans antialiased`}>
+      <body
+        className={`${playfair.variable} ${fraunces.variable} ${inter.variable} font-sans antialiased`}
+      >
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

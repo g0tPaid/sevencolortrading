@@ -13,6 +13,7 @@ import {
   Receipt,
   Ship,
 } from "lucide-react";
+import { SourcingLogo } from "@/components/brand/sourcing-logo";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { cn } from "@/lib/utils";
 
@@ -34,16 +35,9 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen bg-paper">
       <header className="sticky top-0 z-40 border-b border-line bg-paper-elevated/90 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3 sm:px-6">
-          <Link href="/" className="flex min-w-0 items-center gap-2">
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg spectrum-rail text-[11px] font-bold text-white">
-              SC
-            </span>
-            <span className="min-w-0">
-              <span className="block font-display text-sm font-semibold leading-tight text-ink">
-                Sourcing Center
-              </span>
-              <span className="block truncate text-[10px] text-muted">Client desk</span>
-            </span>
+          <Link href="/" className="flex min-w-0 items-center gap-3">
+            <SourcingLogo size="nav" />
+            <span className="hidden truncate text-[10px] text-muted sm:block">Client desk</span>
           </Link>
           <div className="ml-auto flex items-center gap-2">
             <Link
