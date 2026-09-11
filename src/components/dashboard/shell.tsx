@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
 import {
   Boxes,
   Camera,
@@ -9,6 +10,7 @@ import {
   FileText,
   FolderOpen,
   LayoutDashboard,
+  LogOut,
   MessageSquare,
   PackageSearch,
   Receipt,
@@ -32,6 +34,20 @@ const links = [
 
 export function DashboardShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
+  const [loggingOut, setLoggingOut] = useState(false);
+
+  async function handleLogout() {
+    if (loggingOut) return;
+    setLoggingOut(true);
+    try {
+      await fetch("/api/admin/logout", { method: "POST" });
+    } catch {
+      // still send user to login
+    }
+    router.replace("/login");
+    router.refresh();
+  }
 
   return (
     <div className="min-h-screen bg-paper">
@@ -39,7 +55,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
         <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3 sm:px-6">
           <Link href="/" className="flex min-w-0 items-center gap-3">
             <SourcingLogo size="nav" />
-            <span className="hidden truncate text-[10px] text-muted sm:block">Client desk</span>
+            <span className="hidden truncate text-[10px] text-muted sm:block">Admin</span>
           </Link>
           <div className="ml-auto flex items-center gap-2">
             <Link
@@ -48,6 +64,15 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
             >
               Marketing site
             </Link>
+            <button
+              type="button"
+              onClick={handleLogout}
+              disabled={loggingOut}
+              className="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-xs text-muted transition hover:border-accent/50 hover:text-ink disabled:opacity-60"
+            >
+              <LogOut className="h-3.5 w-3.5" />
+              {loggingOut ? "Signing out…" : "Logout"}
+            </button>
             <ThemeToggle />
           </div>
         </div>
@@ -81,7 +106,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
           <div className="mt-4 hidden rounded-2xl border border-line bg-paper p-3 lg:block">
             <PackageSearch className="h-4 w-4 text-accent" />
             <p className="mt-2 text-xs leading-relaxed text-muted">
-              Demo client desk UI — connect auth and APIs for production.
+              Admin desk — Seven Color Trading
             </p>
           </div>
         </aside>

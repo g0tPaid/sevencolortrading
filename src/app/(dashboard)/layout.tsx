@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { DashboardShell } from "@/components/dashboard/shell";
 
 export const metadata: Metadata = {
-  title: "Client desk",
+  title: "Admin",
   robots: { index: false, follow: false },
 };
 

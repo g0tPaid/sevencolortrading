@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { requireAdminSession } from "@/lib/admin-auth";
 import { isApplicationStatus } from "@/lib/factory-applications";
 import { updateApplicationStatus } from "@/lib/factory-applications-store";
 
@@ -9,6 +10,9 @@ export async function PATCH(
   request: Request,
   { params }: { params: Promise<{ id: string }> },
 ) {
+  const auth = await requireAdminSession(request);
+  if (!auth.ok) return auth.response;
+
   const { id } = await params;
   if (!id) {
     return NextResponse.json({ ok: false, error: "Missing id" }, { status: 400 });

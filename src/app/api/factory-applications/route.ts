@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { requireAdminSession } from "@/lib/admin-auth";
 import { createApplication, listApplications } from "@/lib/factory-applications-store";
 import {
   isExportExperience,
@@ -60,7 +61,10 @@ function honeypotFilled(body: Record<string, unknown>): boolean {
   return bait.length > 0;
 }
 
-export async function GET() {
+export async function GET(request: Request) {
+  const auth = await requireAdminSession(request);
+  if (!auth.ok) return auth.response;
+
   const applications = await listApplications();
   return NextResponse.json(
     { applications },
