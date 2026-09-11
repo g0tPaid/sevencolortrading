@@ -9,7 +9,8 @@ import { V2Dropshipping } from "@/components/v2/v2-dropshipping";
 import { V2Trust } from "@/components/v2/v2-trust";
 import { V2Why } from "@/components/v2/v2-why";
 import { V2Workflow } from "@/components/v2/v2-workflow";
-import { absoluteUrl, defaultDescription } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
+import { absoluteUrl, defaultDescription, homepageAggregateFaqJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "China Sourcing, Factory Visits, 3PL & Dropshipping from Xiamen and Dubai",
@@ -25,6 +26,7 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
+      <JsonLd data={homepageAggregateFaqJsonLd()} />
       <V2Hero />
       <V2Ideation />
       <V2Network />

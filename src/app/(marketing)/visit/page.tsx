@@ -3,7 +3,8 @@ import { ChinaVisitForm } from "@/components/v2/china-visit-form";
 import { CtaBand } from "@/components/shared/page-shell";
 import { Container } from "@/components/ui/primitives";
 import { company } from "@/lib/content";
-import { absoluteUrl } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
+import { absoluteUrl, visitFaqJsonLd } from "@/lib/seo";
 import { chinaVisit, chinaVisitDays, chinaVisitIncludes } from "@/lib/v2-content";
 
 export const metadata: Metadata = {
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
 export default function VisitPage() {
   return (
     <>
+      <JsonLd data={visitFaqJsonLd()} />
       <Container className="pb-16 pt-28 sm:pt-32">
         <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted">
           {company.legalName} · Xiamen desk
