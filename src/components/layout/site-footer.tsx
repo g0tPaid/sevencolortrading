@@ -29,7 +29,7 @@ export function SiteFooter() {
                   <Link
                     href={s.href}
                     className={
-                      s.href === "/3pl"
+                      s.href === "/3pl" || s.href === "/dropshipping"
                         ? "inline-flex items-center gap-2 font-semibold text-accent hover:opacity-90"
                         : "text-paper/80 hover:text-paper dark:text-muted dark:hover:text-ink"
                     }
@@ -57,6 +57,8 @@ export function SiteFooter() {
                 ["Knowledge", "/knowledge"],
                 ["Contact", "/contact"],
                 ["Visit China", "/visit"],
+                ["Dropshipping", "/dropshipping"],
+                ["3PL", "/3pl"],
                 ["Admin", "/admin"],
               ].map(([label, href]) => (
                 <li key={href}>

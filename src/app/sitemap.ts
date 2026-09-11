@@ -6,6 +6,7 @@ const routes: Array<{ path: string; priority: number; changeFrequency: MetadataR
   { path: "", priority: 1, changeFrequency: "weekly" },
   { path: "/visit", priority: 0.92, changeFrequency: "weekly" },
   { path: "/3pl", priority: 0.95, changeFrequency: "weekly" },
+  { path: "/dropshipping", priority: 0.93, changeFrequency: "weekly" },
   { path: "/logistics", priority: 0.9, changeFrequency: "weekly" },
   { path: "/about", priority: 0.8, changeFrequency: "monthly" },
   { path: "/services", priority: 0.8, changeFrequency: "monthly" },

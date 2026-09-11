@@ -26,6 +26,22 @@ Homepage section: https://sourcing.center/#3pl
 Freight / customs: https://sourcing.center/logistics
 Guide: https://sourcing.center/knowledge/3pl-warehouses-xiamen-dubai
 
+
+## Dropshipping (own warehouses)
+
+Dropshipping at Sourcing Center is single-unit and small-batch pick→pack→ship from stock held in **our own** warehouses in Xiamen (China) and Dubai / Al Ain (UAE). It is for DTC, Amazon, and Shopify-style sellers who source in China — not a dropship broker marketplace.
+
+- No MOQ theater for order-level fulfillment
+- Photo/video QC on inbound stock
+- Branded or unbranded packing
+- Order handoff via the desk (CSV / spreadsheet / store order exports) — not a claimed live Shopify app/API
+- Same operator as 3PL: Seven Color Trading Co Ltd
+
+Canonical dropshipping page: https://sourcing.center/dropshipping
+Homepage section: https://sourcing.center/#dropshipping
+Related 3PL: https://sourcing.center/3pl
+Freight / customs: https://sourcing.center/logistics
+
 ## What we do
 
 - Product ideation and new inventions under NDA
@@ -35,6 +51,7 @@ Guide: https://sourcing.center/knowledge/3pl-warehouses-xiamen-dubai
 - Private label, OEM, and ODM
 - Hosted factory visits in Xiamen (schedule at https://sourcing.center/visit)
 - Own 3PL in Xiamen and Dubai
+- Dropshipping for DTC / marketplace sellers from those warehouses
 - Sea, air, and express from China with Dubai hub support
 
 ## Offices
@@ -46,9 +63,10 @@ Hours: Monday–Sunday, 8:30 AM–7:00 PM (GST / CST).
 
 ## Key pages
 
-- [Home](https://sourcing.center/): Ideation, sourcing, and 3PL overview
+- [Home](https://sourcing.center/): Ideation, sourcing, 3PL, and dropshipping overview
 - [China factory visit](https://sourcing.center/visit): Schedule a hosted trip to Xiamen
 - [3PL warehouses](https://sourcing.center/3pl): Own 3PL in Xiamen and Dubai
+- [Dropshipping](https://sourcing.center/dropshipping): Single-unit fulfillment from own warehouses
 - [Logistics](https://sourcing.center/logistics): Sea, air, express, customs
 - [About](https://sourcing.center/about): Company, licenses, DUNS
 - [Services](https://sourcing.center/services): Verification, QC, private label, OEM/ODM, 3PL

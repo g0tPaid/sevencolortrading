@@ -83,6 +83,13 @@ export function V2Cta() {
               Own 3PL in Xiamen &amp; Dubai
               <ArrowUpRight className="h-4 w-4" aria-hidden />
             </Link>
+            <Link
+              href="/dropshipping"
+              className="mt-3 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-paper transition hover:bg-white/15 sm:ml-3"
+            >
+              Dropship from our warehouses
+              <ArrowUpRight className="h-4 w-4" aria-hidden />
+            </Link>
           </div>
         </motion.div>
       </Container>
