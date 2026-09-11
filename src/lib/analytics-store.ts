@@ -6,10 +6,26 @@ const FALLBACK_DIR = "/tmp/sourcing-analytics";
 const STORE_FILE = "analytics.json";
 const MAX_DAYS = 120;
 const MAX_VISITORS_PER_DAY = 5000;
+const MAX_SESSIONS = 2000;
+const TOP_COUNTRIES = 15;
+const RECENT_SESSIONS = 20;
 
 export type PeriodStats = {
   pageviews: number;
   uniques: number;
+};
+
+export type CountryStat = {
+  code: string;
+  visits: number;
+  pageviews: number;
+};
+
+export type RecentSession = {
+  country: string;
+  durationSeconds: number;
+  pageviews: number;
+  lastSeen: string;
 };
 
 export type AnalyticsStats = {
@@ -17,6 +33,10 @@ export type AnalyticsStats = {
   week: PeriodStats;
   allTime: PeriodStats;
   since: string;
+  avgDurationSeconds: number;
+  sessionCount: number;
+  countries: CountryStat[];
+  recentSessions: RecentSession[];
 };
 
 type DayBucket = {
@@ -25,11 +45,25 @@ type DayBucket = {
   visitors: string[];
 };
 
+type SessionRecord = {
+  country: string;
+  firstSeen: string;
+  lastSeen: string;
+  pageviews: number;
+};
+
+type CountryBucket = {
+  visits: number;
+  pageviews: number;
+};
+
 type AnalyticsStore = {
   totalPageviews: number;
   totalUniques: number;
   createdAt: string;
   days: Record<string, DayBucket>;
+  sessions: Record<string, SessionRecord>;
+  countries: Record<string, CountryBucket>;
 };
 
 let writeChain: Promise<unknown> = Promise.resolve();
@@ -86,11 +120,34 @@ function emptyStore(at = new Date()): AnalyticsStore {
     totalUniques: 0,
     createdAt: at.toISOString(),
     days: {},
+    sessions: {},
+    countries: {},
   };
 }
 
 function asNumber(value: unknown, fallback = 0): number {
   return typeof value === "number" && Number.isFinite(value) ? value : fallback;
+}
+
+function normalizeCountryCode(value: unknown): string {
+  if (typeof value !== "string") return "ZZ";
+  const code = value.trim().toUpperCase();
+  if (!/^[A-Z]{2}$/.test(code)) return "ZZ";
+  return code;
+}
+
+function normalizeSession(raw: unknown): SessionRecord | null {
+  if (!raw || typeof raw !== "object") return null;
+  const row = raw as Record<string, unknown>;
+  const firstSeen = typeof row.firstSeen === "string" ? row.firstSeen : null;
+  const lastSeen = typeof row.lastSeen === "string" ? row.lastSeen : firstSeen;
+  if (!firstSeen || !lastSeen) return null;
+  return {
+    country: normalizeCountryCode(row.country),
+    firstSeen,
+    lastSeen,
+    pageviews: Math.max(0, asNumber(row.pageviews)),
+  };
 }
 
 function normalizeStore(raw: unknown): AnalyticsStore {
@@ -112,11 +169,34 @@ function normalizeStore(raw: unknown): AnalyticsStore {
     }
   }
 
+  const sessions: Record<string, SessionRecord> = {};
+  if (data.sessions && typeof data.sessions === "object") {
+    for (const [hash, value] of Object.entries(data.sessions as Record<string, unknown>)) {
+      const session = normalizeSession(value);
+      if (session) sessions[hash] = session;
+    }
+  }
+
+  const countries: Record<string, CountryBucket> = {};
+  if (data.countries && typeof data.countries === "object") {
+    for (const [code, value] of Object.entries(data.countries as Record<string, unknown>)) {
+      if (!value || typeof value !== "object") continue;
+      const bucket = value as Record<string, unknown>;
+      const normalized = normalizeCountryCode(code);
+      countries[normalized] = {
+        visits: Math.max(0, asNumber(bucket.visits)),
+        pageviews: Math.max(0, asNumber(bucket.pageviews)),
+      };
+    }
+  }
+
   return {
     totalPageviews: Math.max(0, asNumber(data.totalPageviews)),
     totalUniques: Math.max(0, asNumber(data.totalUniques)),
     createdAt: typeof data.createdAt === "string" ? data.createdAt : emptyStore().createdAt,
     days,
+    sessions,
+    countries,
   };
 }
 
@@ -171,6 +251,42 @@ function pruneDays(store: AnalyticsStore, todayKey: string): void {
   }
 }
 
+function sessionDurationSeconds(session: SessionRecord): number {
+  const first = Date.parse(session.firstSeen);
+  const last = Date.parse(session.lastSeen);
+  if (!Number.isFinite(first) || !Number.isFinite(last)) return 0;
+  return Math.max(0, Math.floor((last - first) / 1000));
+}
+
+function ensureCountry(store: AnalyticsStore, code: string): CountryBucket {
+  const key = normalizeCountryCode(code);
+  const existing = store.countries[key];
+  if (existing) return existing;
+  const created: CountryBucket = { visits: 0, pageviews: 0 };
+  store.countries[key] = created;
+  return created;
+}
+
+function pruneSessions(store: AnalyticsStore): void {
+  const entries = Object.entries(store.sessions);
+  if (entries.length <= MAX_SESSIONS) return;
+
+  entries.sort((a, b) => a[1].lastSeen.localeCompare(b[1].lastSeen));
+  const removeCount = entries.length - MAX_SESSIONS;
+  for (let i = 0; i < removeCount; i += 1) {
+    const [hash, session] = entries[i];
+    delete store.sessions[hash];
+    const bucket = store.countries[session.country];
+    if (bucket) {
+      bucket.visits = Math.max(0, bucket.visits - 1);
+      bucket.pageviews = Math.max(0, bucket.pageviews - session.pageviews);
+      if (bucket.visits === 0 && bucket.pageviews === 0) {
+        delete store.countries[session.country];
+      }
+    }
+  }
+}
+
 function hashVisitorId(visitorId: string): string {
   return createHash("sha256").update(`sc:${visitorId}`).digest("hex").slice(0, 20);
 }
@@ -208,10 +324,12 @@ function periodFromDays(store: AnalyticsStore, keys: string[]): PeriodStats {
 
 function recordHitSync({
   visitorId,
+  country,
   at = new Date(),
 }: {
   visitorId: string;
   path: string;
+  country?: string;
   at?: Date;
 }): void {
   if (!visitorId) return;
@@ -222,6 +340,8 @@ function recordHitSync({
 
   const day = ensureDay(store, todayKey);
   const hash = hashVisitorId(visitorId);
+  const iso = at.toISOString();
+  const resolvedCountry = normalizeCountryCode(country ?? "ZZ");
 
   store.totalPageviews += 1;
   day.pageviews += 1;
@@ -235,6 +355,63 @@ function recordHitSync({
     if (!seenAllTime) store.totalUniques += 1;
   }
 
+  const existing = store.sessions[hash];
+  if (!existing) {
+    store.sessions[hash] = {
+      country: resolvedCountry,
+      firstSeen: iso,
+      lastSeen: iso,
+      pageviews: 1,
+    };
+    const bucket = ensureCountry(store, resolvedCountry);
+    bucket.visits += 1;
+    bucket.pageviews += 1;
+  } else {
+    existing.pageviews += 1;
+    existing.lastSeen = iso;
+
+    if (resolvedCountry !== "ZZ" && (existing.country === "ZZ" || !existing.country)) {
+      const oldCode = existing.country || "ZZ";
+      if (oldCode !== resolvedCountry) {
+        const oldBucket = store.countries[oldCode];
+        if (oldBucket) {
+          oldBucket.visits = Math.max(0, oldBucket.visits - 1);
+          oldBucket.pageviews = Math.max(0, oldBucket.pageviews - (existing.pageviews - 1));
+          if (oldBucket.visits === 0 && oldBucket.pageviews === 0) {
+            delete store.countries[oldCode];
+          }
+        }
+        existing.country = resolvedCountry;
+        const next = ensureCountry(store, resolvedCountry);
+        next.visits += 1;
+        next.pageviews += existing.pageviews - 1;
+      }
+    }
+
+    const bucket = ensureCountry(store, existing.country);
+    bucket.pageviews += 1;
+  }
+
+  pruneSessions(store);
+  saveStore(store);
+}
+
+function recordPulseSync({
+  visitorId,
+  at = new Date(),
+}: {
+  visitorId: string;
+  at?: Date;
+}): void {
+  if (!visitorId) return;
+
+  const store = loadStore();
+  const hash = hashVisitorId(visitorId);
+  const session = store.sessions[hash];
+  if (!session) return;
+
+  session.lastSeen = at.toISOString();
+  pruneSessions(store);
   saveStore(store);
 }
 
@@ -250,18 +427,73 @@ function getStatsSync(at = new Date()): AnalyticsStats {
     Object.keys(store.days).sort()[0] ||
     at.toISOString();
 
+  const sessionList = Object.values(store.sessions);
+  const durations = sessionList.map(sessionDurationSeconds);
+  const lasting = durations.filter((d) => d >= 1);
+  const avgSource = lasting.length > 0 ? lasting : durations;
+  const avgDurationSeconds =
+    avgSource.length === 0
+      ? 0
+      : Math.round(avgSource.reduce((sum, d) => sum + d, 0) / avgSource.length);
+
+  const countries = Object.entries(store.countries)
+    .map(([code, bucket]) => ({
+      code,
+      visits: bucket.visits,
+      pageviews: bucket.pageviews,
+    }))
+    .sort((a, b) => b.visits - a.visits || b.pageviews - a.pageviews || a.code.localeCompare(b.code))
+    .slice(0, TOP_COUNTRIES);
+
+  const recentSessions = Object.values(store.sessions)
+    .slice()
+    .sort((a, b) => b.lastSeen.localeCompare(a.lastSeen))
+    .slice(0, RECENT_SESSIONS)
+    .map((session) => ({
+      country: session.country,
+      durationSeconds: sessionDurationSeconds(session),
+      pageviews: session.pageviews,
+      lastSeen: session.lastSeen,
+    }));
+
   return {
     today: { pageviews: today.pageviews, uniques: today.uniques },
     week,
     allTime: { pageviews: store.totalPageviews, uniques: store.totalUniques },
     since,
+    avgDurationSeconds,
+    sessionCount: sessionList.length,
+    countries,
+    recentSessions,
   };
 }
 
-export function recordHit(input: { visitorId: string; path: string; at?: Date }): Promise<void> {
+export function recordHit(input: {
+  visitorId: string;
+  path: string;
+  country?: string;
+  at?: Date;
+}): Promise<void> {
   return withLock(() => recordHitSync(input));
+}
+
+export function recordPulse(input: { visitorId: string; at?: Date }): Promise<void> {
+  return withLock(() => recordPulseSync(input));
 }
 
 export function getStats(at?: Date): Promise<AnalyticsStats> {
   return withLock(() => getStatsSync(at));
+}
+
+export function formatDuration(seconds: number): string {
+  const total = Math.max(0, Math.floor(seconds));
+  if (total < 60) return `${total}s`;
+  const mins = Math.floor(total / 60);
+  const secs = total % 60;
+  if (mins < 60) return secs > 0 ? `${mins}m ${secs}s` : `${mins}m`;
+  const hours = Math.floor(mins / 60);
+  const remMins = mins % 60;
+  if (remMins === 0 && secs === 0) return `${hours}h`;
+  if (secs === 0) return `${hours}h ${remMins}m`;
+  return `${hours}h ${remMins}m ${secs}s`;
 }

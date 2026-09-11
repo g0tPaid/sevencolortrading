@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { recordHit } from "@/lib/analytics-store";
+import { recordHit, recordPulse } from "@/lib/analytics-store";
+import { resolveCountry } from "@/lib/geo";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -8,6 +9,8 @@ const COOKIE = "sc_vid";
 const ONE_YEAR = 60 * 60 * 24 * 365;
 const BOT_UA = /bot|crawl|spider|slurp|facebookexternalhit|preview/i;
 const IGNORED_PREFIXES = ["/api", "/dashboard", "/admin", "/_next"];
+
+type HitType = "pageview" | "heartbeat" | "leave";
 
 function readCookie(header: string | null, name: string): string | undefined {
   if (!header) return undefined;
@@ -30,8 +33,16 @@ function normalizePath(input: unknown): string {
   return path.startsWith("/") ? path : `/${path}`;
 }
 
-function shouldIgnore(path: string, ua: string): boolean {
-  if (BOT_UA.test(ua)) return true;
+function normalizeType(input: unknown): HitType {
+  if (input === "heartbeat" || input === "leave" || input === "pageview") return input;
+  return "pageview";
+}
+
+function isBot(ua: string): boolean {
+  return BOT_UA.test(ua);
+}
+
+function shouldIgnorePath(path: string): boolean {
   return IGNORED_PREFIXES.some((prefix) => path === prefix || path.startsWith(`${prefix}/`));
 }
 
@@ -41,22 +52,34 @@ function mintVisitorId(): string {
 
 export async function POST(request: Request) {
   let path = "/";
+  let type: HitType = "pageview";
   try {
-    const body = (await request.json()) as { path?: unknown };
+    const body = (await request.json()) as { path?: unknown; type?: unknown };
     path = normalizePath(body?.path);
+    type = normalizeType(body?.type);
   } catch {
     path = "/";
+    type = "pageview";
   }
 
   const ua = request.headers.get("user-agent") || "";
-  if (shouldIgnore(path, ua)) {
+  if (isBot(ua)) {
+    return NextResponse.json({ ok: true });
+  }
+
+  if (type === "pageview" && shouldIgnorePath(path)) {
     return NextResponse.json({ ok: true });
   }
 
   const existing = readCookie(request.headers.get("cookie"), COOKIE);
   const visitorId = existing && existing.length >= 8 ? existing : mintVisitorId();
 
-  await recordHit({ visitorId, path });
+  if (type === "pageview") {
+    const country = await resolveCountry(request.headers);
+    await recordHit({ visitorId, path, country });
+  } else {
+    await recordPulse({ visitorId });
+  }
 
   const response = NextResponse.json({ ok: true });
   if (!existing || existing !== visitorId) {
