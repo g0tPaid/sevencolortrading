@@ -56,6 +56,7 @@ export function SiteFooter() {
                 ["Case studies", "/case-studies"],
                 ["Knowledge", "/knowledge"],
                 ["Contact", "/contact"],
+                ["Factory registration", "/factories/register"],
                 ["Visit China", "/visit"],
                 ["Dropshipping", "/dropshipping"],
                 ["3PL", "/3pl"],

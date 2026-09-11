@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/primitives";
 import { company } from "@/lib/content";
@@ -103,6 +104,14 @@ export function V2Trust() {
             </div>
           </div>
         </div>
+
+        <p className="mt-8 text-center text-sm text-muted">
+          Chinese factory looking to supply our buyers?{" "}
+          <Link href="/factories/register" className="font-medium text-ink underline-offset-4 hover:underline">
+            Factory registration
+          </Link>
+          <span className="text-muted"> · 工厂登记</span>
+        </p>
       </Container>
     </section>
   );

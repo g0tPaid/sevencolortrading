@@ -14,6 +14,7 @@ const routes: Array<{ path: string; priority: number; changeFrequency: MetadataR
   { path: "/industries", priority: 0.6, changeFrequency: "monthly" },
   { path: "/how-it-works", priority: 0.6, changeFrequency: "monthly" },
   { path: "/factory-verification", priority: 0.6, changeFrequency: "monthly" },
+  { path: "/factories/register", priority: 0.65, changeFrequency: "monthly" },
   { path: "/quality-inspection", priority: 0.6, changeFrequency: "monthly" },
   { path: "/private-label", priority: 0.6, changeFrequency: "monthly" },
   { path: "/oem-odm", priority: 0.6, changeFrequency: "monthly" },
