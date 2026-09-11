@@ -14,8 +14,7 @@ type SourcingLogoProps = {
 const BRAND_RED = "#E31C23";
 
 /**
- * Official sourcing.center wordmark — single-line serif.
- * Black “sourcing” with red i-dot · red period · red “center”.
+ * Official sourcing.center wordmark with the Seven Color 7 on Apple glass.
  */
 export function SourcingLogo({
   className,
@@ -30,29 +29,32 @@ export function SourcingLogo({
         ? "text-3xl leading-none"
         : "text-[1.2rem] leading-none sm:text-[1.35rem]";
 
-  const byMark = size === "hero" ? 26 : 22;
+  const sideMark = size === "hero" ? 64 : size === "footer" ? 40 : 36;
   const ink = onDark ? "text-white" : "text-ink";
 
   return (
     <span className={cn("inline-flex flex-col leading-none", className)}>
-      <span
-        className={cn(
-          "font-logo inline-flex items-baseline font-bold tracking-[-0.03em]",
-          word,
-        )}
-        aria-hidden
-      >
-        <span className={ink}>sourc</span>
-        <span className={cn("relative inline-block", ink)}>
-          ı
-          <span
-            className="absolute left-1/2 top-[0.08em] h-[0.2em] w-[0.2em] -translate-x-1/2 rounded-full"
-            style={{ backgroundColor: BRAND_RED }}
-          />
+      <span className="inline-flex items-center gap-3 sm:gap-4">
+        <SevenColorMark size={sideMark} />
+        <span
+          className={cn(
+            "font-logo inline-flex items-baseline font-bold tracking-[-0.03em]",
+            word,
+          )}
+          aria-hidden
+        >
+          <span className={ink}>sourc</span>
+          <span className={cn("relative inline-block", ink)}>
+            ı
+            <span
+              className="absolute left-1/2 top-[0.08em] h-[0.2em] w-[0.2em] -translate-x-1/2 rounded-full"
+              style={{ backgroundColor: BRAND_RED }}
+            />
+          </span>
+          <span className={ink}>ng</span>
+          <span style={{ color: BRAND_RED }}>.</span>
+          <span style={{ color: BRAND_RED }}>center</span>
         </span>
-        <span className={ink}>ng</span>
-        <span style={{ color: BRAND_RED }}>.</span>
-        <span style={{ color: BRAND_RED }}>center</span>
       </span>
 
       {showByline ? (
@@ -63,9 +65,7 @@ export function SourcingLogo({
             size === "hero" ? "mt-2.5 text-xs sm:mt-3 sm:text-sm" : "text-xs",
           )}
         >
-          <span>by</span>
-          <SevenColorMark size={byMark} />
-          <span>Seven Color Trading · China</span>
+          <span>by Seven Color Trading · China</span>
         </span>
       ) : null}
 
