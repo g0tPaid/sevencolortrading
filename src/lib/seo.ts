@@ -1,5 +1,14 @@
 import { company } from "@/lib/content";
-import { fulfillment, fulfillmentFaqs, fulfillmentHubs, fulfillmentSteps } from "@/lib/v2-content";
+import {
+  dropshipping,
+  dropshippingBenefits,
+  dropshippingFaqs,
+  dropshippingSteps,
+  fulfillment,
+  fulfillmentFaqs,
+  fulfillmentHubs,
+  fulfillmentSteps,
+} from "@/lib/v2-content";
 
 export const siteUrl = "https://sourcing.center";
 
@@ -18,10 +27,16 @@ export const seoKeywords = [
   "pick pack ship China",
   "GCC 3PL",
   "Al Ain warehouse",
+  "dropshipping from China",
+  "China warehouse dropship",
+  "Xiamen dropshipping",
+  "Dubai dropship warehouse",
+  "DTC China fulfillment",
+  "Amazon seller China warehouse",
 ];
 
 export const defaultDescription =
-  "Sourcing.center by Seven Color Trading Co Ltd. Product ideation and China sourcing, plus own 3PL warehouses in Xiamen and Dubai — receive, store, pick, pack, and ship. Not a broker.";
+  "Sourcing.center by Seven Color Trading Co Ltd. Product ideation and China sourcing, own 3PL in Xiamen and Dubai, and dropshipping for DTC sellers — receive, store, pick, pack, and ship. Not a broker.";
 
 export function absoluteUrl(path = "") {
   if (!path) return siteUrl;
@@ -122,6 +137,29 @@ export function organizationJsonLd() {
           closes: "19:00",
         },
       },
+      {
+        "@type": "Service",
+        "@id": `${siteUrl}/dropshipping#service`,
+        name: "Dropshipping from own warehouses in Xiamen and Dubai",
+        serviceType: "Dropshipping fulfillment",
+        url: `${siteUrl}/dropshipping`,
+        description: dropshipping.description,
+        provider: { "@id": `${siteUrl}/#organization` },
+        areaServed: ["CN", "AE", "US", "EU", "GCC"],
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Dropship operations",
+          itemListElement: dropshippingSteps.map((step, i) => ({
+            "@type": "Offer",
+            position: i + 1,
+            itemOffered: {
+              "@type": "Service",
+              name: step.title,
+              description: step.text,
+            },
+          })),
+        },
+      },
     ],
   };
 }
@@ -156,6 +194,43 @@ export function threePlPageJsonLd() {
       cssSelector: ["h1", "h2", "[data-seo-answer]"],
     },
     mainEntity: fulfillmentHubs.map((hub) => ({
+      "@type": "Place",
+      name: `${hub.city} ${hub.role}`,
+      description: hub.text,
+    })),
+  };
+}
+
+export function dropshippingFaqJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: dropshippingFaqs.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a,
+      },
+    })),
+  };
+}
+
+export function dropshippingPageJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${siteUrl}/dropshipping#webpage`,
+    url: `${siteUrl}/dropshipping`,
+    name: "Dropshipping from China warehouses in Xiamen and Dubai | Sourcing Center",
+    description: dropshipping.description,
+    isPartOf: { "@id": `${siteUrl}/#website` },
+    about: { "@id": `${siteUrl}/dropshipping#service` },
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h1", "h2", "[data-seo-answer]"],
+    },
+    mainEntity: dropshippingBenefits.map((hub) => ({
       "@type": "Place",
       name: `${hub.city} ${hub.role}`,
       description: hub.text,

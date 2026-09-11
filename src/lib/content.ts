@@ -157,6 +157,11 @@ export const services = [
     description: "Own 3PL warehouses in Xiamen and Dubai — receive, store, pick, pack, and ship — then sea, air, and express.",
   },
   {
+    href: "/dropshipping",
+    title: "Dropshipping",
+    description: "Single-unit and small-batch pick→pack→ship from stock held in our Xiamen and Dubai warehouses for DTC and marketplace sellers.",
+  },
+  {
     href: "/services",
     title: "Full Sourcing Desk",
     description: "Dedicated relationship managers in China and Dubai.",

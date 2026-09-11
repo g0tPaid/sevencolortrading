@@ -353,6 +353,74 @@ export const fulfillmentHubs = [
   },
 ] as const;
 
+export const dropshipping = {
+  eyebrow: "Dropship",
+  title: "Single-unit fulfillment from our own China & UAE warehouses",
+  description:
+    "For DTC, Amazon, and Shopify-style sellers who source in China and need pick→pack→ship from stock held in warehouses we operate in Xiamen and Dubai / Al Ain — not a dropship broker marketplace. Same desk as sourcing, QC, and 3PL.",
+} as const;
+
+export const dropshippingFaqs = [
+  {
+    q: "Does Sourcing Center offer dropshipping from China?",
+    a: "Yes. Seven Color Trading Co Ltd dropships from its own warehouses in Xiamen, China and Dubai / Al Ain, UAE. Stock you source sits with us; we pick, pack, and ship single units or small batches to your customers — not through a third-party dropship broker.",
+  },
+  {
+    q: "Is this a dropship broker or marketplace?",
+    a: "No. We operate the warehouses. Dropshipping here means receive→store→pick→pack→ship from inventory held in our Xiamen or Dubai facilities, tied to the same sourcing relationship manager — not a catalog of random suppliers you never meet.",
+  },
+  {
+    q: "Who is China warehouse dropshipping for?",
+    a: "DTC brands, Amazon and marketplace sellers, and Shopify-style stores that source in China and need no-MOQ theater fulfillment: photo/video QC on inbound, then order-level pick and pack with branded or unbranded options.",
+  },
+  {
+    q: "How do I hand off customer orders?",
+    a: "Through the desk — CSV, spreadsheet, or store order exports. A relationship manager runs pick lists against your held stock. We do not claim a live Shopify app or public API unless one is published on the site.",
+  },
+  {
+    q: "How does dropshipping relate to Sourcing Center 3PL?",
+    a: "Dropshipping is the single-unit / small-batch lane on the same own-warehouse 3PL. Bulk receive, storage, and container programs live on /3pl; freight lanes and customs on /logistics. One company, two warehouse hubs.",
+  },
+] as const;
+
+export const dropshippingSteps = [
+  {
+    title: "Receive stock",
+    text: "Inbound from the factory into our warehouse — counted, photographed, and QC’d before it sits on the shelf.",
+  },
+  {
+    title: "Hold",
+    text: "Inventory held in Xiamen or Dubai under your account until customer orders release it.",
+  },
+  {
+    title: "Pick order",
+    text: "Single units or small batches pulled to your order list — no MOQ theater for DTC volume.",
+  },
+  {
+    title: "Pack",
+    text: "Branded or unbranded packing, inserts, and labeling staged the way your store sells.",
+  },
+  {
+    title: "Ship to customer",
+    text: "Express or the lane you buy — tracking shared with your desk, China HQ and Dubai on the same team.",
+  },
+] as const;
+
+export const dropshippingBenefits = [
+  {
+    city: "Xiamen",
+    country: "China",
+    role: "China dropship hub",
+    text: "Hold sourced stock at HQ — photo/video QC on inbound, then pick and pack straight to your end customer.",
+  },
+  {
+    city: "Dubai / Al Ain",
+    country: "UAE",
+    role: "GCC dropship hub",
+    text: "Stage closer to Middle East buyers — faster last-mile for regional DTC and marketplace orders.",
+  },
+] as const;
+
 export const whyPoints = [
   { title: "One partner", text: "Ideas, factories, QC, and freight handled by one China desk." },
   { title: "Thousands of factories", text: "Mapped capacity across electronics, home, fashion, and industrial." },
