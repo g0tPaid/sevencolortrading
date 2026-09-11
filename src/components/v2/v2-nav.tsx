@@ -11,6 +11,7 @@ const links = [
   { href: "#new-idea", label: "New idea" },
   { href: "#network", label: "Network" },
   { href: "/3pl", label: "3PL", highlight: true },
+  { href: "/factories/register", label: "Factories" },
   { href: "/dropshipping", label: "Dropship" },
   { href: "#workflow", label: "Workflow" },
   { href: "#trust", label: "Trust" },
