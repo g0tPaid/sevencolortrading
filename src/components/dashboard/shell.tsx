@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import {
   Boxes,
   Camera,
+  Factory,
   FileText,
   FolderOpen,
   LayoutDashboard,
@@ -26,6 +27,7 @@ const links = [
   { href: "/dashboard/inspections", label: "Inspection Photos", icon: Camera },
   { href: "/dashboard/shipments", label: "Shipment Tracking", icon: Ship },
   { href: "/dashboard/documents", label: "Documents", icon: FolderOpen },
+  { href: "/dashboard/factory-applications", label: "Factory applications", icon: Factory },
 ];
 
 export function DashboardShell({ children }: { children: React.ReactNode }) {

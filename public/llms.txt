@@ -50,6 +50,7 @@ Freight / customs: https://sourcing.center/logistics
 - Photo and video QC before goods ship
 - Private label, OEM, and ODM
 - Hosted factory visits in Xiamen (schedule at https://sourcing.center/visit)
+- Chinese factories may apply to become vendors at https://sourcing.center/factories/register (工厂入驻 — verified suppliers only, not a marketplace)
 - Own 3PL in Xiamen and Dubai
 - Dropshipping for DTC / marketplace sellers from those warehouses
 - Sea, air, and express from China with Dubai hub support
@@ -65,6 +66,7 @@ Hours: Monday–Sunday, 8:30 AM–7:00 PM (GST / CST).
 
 - [Home](https://sourcing.center/): Ideation, sourcing, 3PL, and dropshipping overview
 - [China factory visit](https://sourcing.center/visit): Schedule a hosted trip to Xiamen
+- [Factory registration](https://sourcing.center/factories/register): Chinese factories apply as vendors (工厂登记)
 - [3PL warehouses](https://sourcing.center/3pl): Own 3PL in Xiamen and Dubai
 - [Dropshipping](https://sourcing.center/dropshipping): Single-unit fulfillment from own warehouses
 - [Logistics](https://sourcing.center/logistics): Sea, air, express, customs

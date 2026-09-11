@@ -3,6 +3,7 @@ import {
   Boxes,
   Camera,
   Eye,
+  Factory,
   FileText,
   MessageSquare,
   Receipt,
@@ -10,6 +11,7 @@ import {
   Users,
 } from "lucide-react";
 import { getStats } from "@/lib/analytics-store";
+import { listApplications } from "@/lib/factory-applications-store";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -28,7 +30,8 @@ function formatCount(n: number): string {
 }
 
 export default async function DashboardHomePage() {
-  const stats = await getStats();
+  const [stats, applications] = await Promise.all([getStats(), listApplications()]);
+  const pendingFactories = applications.filter((row) => row.status === "pending").length;
 
   const periods = [
     { label: "Today", pageviews: stats.today.pageviews, uniques: stats.today.uniques },
@@ -77,6 +80,26 @@ export default async function DashboardHomePage() {
           Counts public marketing pages only. Stored on the server. Periods use UTC calendar days.
         </p>
       </section>
+
+      <Link
+        href="/dashboard/factory-applications"
+        className="flex items-center justify-between gap-4 rounded-3xl border border-line bg-paper-elevated p-6 transition hover:border-accent/40"
+      >
+        <div>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">Vendors</p>
+          <h2 className="mt-1 font-display text-2xl font-semibold text-ink">Factory applications</h2>
+          <p className="mt-2 text-sm text-muted">
+            {pendingFactories === 0
+              ? "No pending factory applications."
+              : `${pendingFactories} pending ${pendingFactories === 1 ? "application" : "applications"} to review.`}
+          </p>
+        </div>
+        <div className="text-right">
+          <p className="font-display text-3xl font-semibold text-ink">{formatCount(pendingFactories)}</p>
+          <p className="mt-1 text-xs text-muted">pending</p>
+          <Factory className="ml-auto mt-3 h-5 w-5 text-accent" aria-hidden />
+        </div>
+      </Link>
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {cards.map(({ href, label, value, icon: Icon }) => (
