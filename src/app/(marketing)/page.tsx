@@ -3,6 +3,7 @@ import { V2Discovery } from "@/components/v2/v2-discovery";
 import { V2Hero } from "@/components/v2/v2-hero";
 import { V2Ideation } from "@/components/v2/v2-ideation";
 import { V2Network } from "@/components/v2/v2-network";
+import { V2ThreePl } from "@/components/v2/v2-3pl";
 import { V2Trust } from "@/components/v2/v2-trust";
 import { V2Why } from "@/components/v2/v2-why";
 import { V2Workflow } from "@/components/v2/v2-workflow";
@@ -14,6 +15,7 @@ export default function HomePage() {
       <V2Discovery />
       <V2Ideation />
       <V2Network />
+      <V2ThreePl />
       <V2Why />
       <V2Workflow />
       <V2Trust />

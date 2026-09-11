@@ -11,6 +11,7 @@ const links = [
   { href: "#discovery", label: "Discover" },
   { href: "#new-idea", label: "New idea" },
   { href: "#network", label: "Network" },
+  { href: "/#3pl", label: "3PL" },
   { href: "#workflow", label: "Workflow" },
   { href: "#trust", label: "Trust" },
 ];
