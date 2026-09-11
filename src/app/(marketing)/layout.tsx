@@ -1,3 +1,4 @@
+import { PageviewBeacon } from "@/components/analytics/pageview-beacon";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { WhatsAppFloat } from "@/components/layout/whatsapp-float";
 import { V2Nav } from "@/components/v2/v2-nav";
@@ -17,6 +18,7 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
       </main>
       <SiteFooter />
       <WhatsAppFloat />
+      <PageviewBeacon />
     </>
   );
 }

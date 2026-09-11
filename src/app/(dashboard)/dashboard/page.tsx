@@ -2,11 +2,17 @@ import Link from "next/link";
 import {
   Boxes,
   Camera,
+  Eye,
   FileText,
   MessageSquare,
   Receipt,
   Ship,
+  Users,
 } from "lucide-react";
+import { getStats } from "@/lib/analytics-store";
+
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 const cards = [
   { href: "/dashboard/orders", label: "Active orders", value: "12", icon: Boxes },
@@ -17,7 +23,19 @@ const cards = [
   { href: "/dashboard/shipments", label: "In transit", value: "5", icon: Ship },
 ];
 
-export default function DashboardHomePage() {
+function formatCount(n: number): string {
+  return n.toLocaleString("en-US");
+}
+
+export default async function DashboardHomePage() {
+  const stats = await getStats();
+
+  const periods = [
+    { label: "Today", pageviews: stats.today.pageviews, uniques: stats.today.uniques },
+    { label: "Last 7 days", pageviews: stats.week.pageviews, uniques: stats.week.uniques },
+    { label: "All time", pageviews: stats.allTime.pageviews, uniques: stats.allTime.uniques },
+  ];
+
   return (
     <div className="space-y-6">
       <div>
@@ -26,6 +44,40 @@ export default function DashboardHomePage() {
           Track orders, QC, documents, and shipments across your Seven Color programs.
         </p>
       </div>
+
+      <section className="rounded-3xl border border-line bg-paper-elevated p-6">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">Traffic</p>
+            <h2 className="mt-1 font-display text-2xl font-semibold text-ink">Website visitors</h2>
+          </div>
+          <Users className="h-5 w-5 text-accent" aria-hidden />
+        </div>
+
+        <div className="mt-6 grid gap-4 sm:grid-cols-3">
+          {periods.map((period) => (
+            <div key={period.label} className="rounded-2xl border border-line bg-paper p-4">
+              <p className="text-sm text-muted">{period.label}</p>
+              <p className="mt-3 flex items-baseline gap-2">
+                <span className="font-display text-3xl font-semibold text-ink">
+                  {formatCount(period.pageviews)}
+                </span>
+                <span className="text-xs text-muted">pageviews</span>
+              </p>
+              <p className="mt-2 flex items-center gap-1.5 text-sm text-ink">
+                <Eye className="h-3.5 w-3.5 text-accent" aria-hidden />
+                <span className="font-medium">{formatCount(period.uniques)}</span>
+                <span className="text-muted">unique visitors</span>
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <p className="mt-4 text-xs text-muted">
+          Counts public marketing pages only. Stored on the server. Periods use UTC calendar days.
+        </p>
+      </section>
+
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {cards.map(({ href, label, value, icon: Icon }) => (
           <Link
