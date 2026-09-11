@@ -59,7 +59,6 @@ export function SiteFooter() {
                 ["Visit China", "/visit"],
                 ["Dropshipping", "/dropshipping"],
                 ["3PL", "/3pl"],
-                ["Admin", "/admin"],
               ].map(([label, href]) => (
                 <li key={href}>
                   <Link href={href} className="text-paper/80 hover:text-paper dark:text-muted dark:hover:text-ink">
