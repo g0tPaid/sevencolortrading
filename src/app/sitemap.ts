@@ -30,11 +30,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: route.priority,
   }));
 
+  const citeable = new Set([
+    "3pl-warehouses-xiamen-dubai",
+    "china-sourcing-company-xiamen-dubai-3pl",
+    "dropshipping-from-china-own-warehouse",
+    "factory-visit-xiamen-hosted-sourcing-trip",
+    "china-3pl-vs-broker-vs-fba",
+  ]);
+
   const articles = knowledgeArticles.map((article) => ({
     url: `${siteUrl}/knowledge/${article.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
-    priority: article.slug.includes("3pl") ? 0.75 : 0.55,
+    priority: citeable.has(article.slug) ? 0.75 : 0.55,
   }));
 
   return [...staticRoutes, ...articles];

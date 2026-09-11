@@ -1,5 +1,6 @@
 import { company } from "@/lib/content";
 import {
+  chinaVisitFaqs,
   dropshipping,
   dropshippingBenefits,
   dropshippingFaqs,
@@ -8,6 +9,7 @@ import {
   fulfillmentFaqs,
   fulfillmentHubs,
   fulfillmentSteps,
+  homepageAggregateFaqs,
 } from "@/lib/v2-content";
 
 export const siteUrl = "https://sourcing.center";
@@ -234,6 +236,36 @@ export function dropshippingPageJsonLd() {
       "@type": "Place",
       name: `${hub.city} ${hub.role}`,
       description: hub.text,
+    })),
+  };
+}
+
+export function visitFaqJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: chinaVisitFaqs.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a,
+      },
+    })),
+  };
+}
+
+export function homepageAggregateFaqJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: homepageAggregateFaqs.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a,
+      },
     })),
   };
 }
