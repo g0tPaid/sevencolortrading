@@ -1,3 +1,4 @@
+import { company } from "@/lib/content";
 import { cn } from "@/lib/utils";
 import { SevenColorMark } from "@/components/brand/seven-color-mark";
 
@@ -65,11 +66,11 @@ export function SourcingLogo({
             size === "hero" ? "mt-2.5 text-xs sm:mt-3 sm:text-sm" : "text-xs",
           )}
         >
-          <span>by Seven Color Trading · China</span>
+          <span>{company.byline}</span>
         </span>
       ) : null}
 
-      <span className="sr-only">sourcing.center by Seven Color</span>
+      <span className="sr-only">sourcing.center {company.byline}</span>
     </span>
   );
 }
