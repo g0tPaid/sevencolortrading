@@ -4,31 +4,17 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import {
-  Boxes,
-  Camera,
   Factory,
-  FileText,
-  FolderOpen,
   LayoutDashboard,
   LogOut,
-  MessageSquare,
   PackageSearch,
-  Receipt,
-  Ship,
 } from "lucide-react";
 import { SourcingLogo } from "@/components/brand/sourcing-logo";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { cn } from "@/lib/utils";
 
 const links = [
-  { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
-  { href: "/dashboard/orders", label: "Orders", icon: Boxes },
-  { href: "/dashboard/messages", label: "Messages", icon: MessageSquare },
-  { href: "/dashboard/invoices", label: "Invoices", icon: Receipt },
-  { href: "/dashboard/qc-reports", label: "QC Reports", icon: FileText },
-  { href: "/dashboard/inspections", label: "Inspection Photos", icon: Camera },
-  { href: "/dashboard/shipments", label: "Shipment Tracking", icon: Ship },
-  { href: "/dashboard/documents", label: "Documents", icon: FolderOpen },
+  { href: "/dashboard", label: "Page views", icon: LayoutDashboard },
   { href: "/dashboard/factory-applications", label: "Factory applications", icon: Factory },
 ];
 
