@@ -30,7 +30,7 @@ export function RfqForm({ compact = false }: { compact?: boolean }) {
       <motion.div
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="rounded-3xl border border-line bg-paper-elevated p-8 text-center"
+        className="glass-panel rounded-[1.75rem] p-8 text-center"
       >
         <p className="font-display text-2xl font-semibold text-ink">Got it — we&apos;re on it</p>
         <p className="mt-3 text-sm text-muted">
@@ -44,7 +44,7 @@ export function RfqForm({ compact = false }: { compact?: boolean }) {
     <form
       onSubmit={onSubmit}
       className={cn(
-        "rounded-3xl border border-line bg-paper-elevated shadow-[0_24px_80px_rgba(0,0,0,0.08)]",
+        "glass-panel rounded-[1.75rem]",
         compact ? "p-5" : "p-6 sm:p-8",
       )}
       aria-label="AI sourcing request form"
@@ -78,7 +78,7 @@ export function RfqForm({ compact = false }: { compact?: boolean }) {
             name="description"
             rows={compact ? 3 : 4}
             placeholder="Product idea, sketch notes, specs, quantity, target budget…"
-            className="w-full resize-y rounded-2xl border border-line bg-paper px-4 py-3 text-ink outline-none ring-accent placeholder:text-muted/70 focus:ring-2"
+            className="glass-input w-full resize-y rounded-2xl px-4 py-3 text-ink outline-none placeholder:text-muted/70"
           />
         </label>
         <label className="block text-sm">
@@ -86,7 +86,7 @@ export function RfqForm({ compact = false }: { compact?: boolean }) {
           <input
             name="quantity"
             placeholder="e.g. 500 pcs"
-            className="w-full rounded-2xl border border-line bg-paper px-4 py-3 text-ink outline-none ring-accent placeholder:text-muted/70 focus:ring-2"
+            className="glass-input w-full rounded-2xl px-4 py-3 text-ink outline-none placeholder:text-muted/70"
           />
         </label>
         <label className="block text-sm">
@@ -94,7 +94,7 @@ export function RfqForm({ compact = false }: { compact?: boolean }) {
           <input
             name="budget"
             placeholder="e.g. AED 35 / unit"
-            className="w-full rounded-2xl border border-line bg-paper px-4 py-3 text-ink outline-none ring-accent placeholder:text-muted/70 focus:ring-2"
+            className="glass-input w-full rounded-2xl px-4 py-3 text-ink outline-none placeholder:text-muted/70"
           />
         </label>
         <label className="block text-sm">
@@ -102,7 +102,7 @@ export function RfqForm({ compact = false }: { compact?: boolean }) {
           <input
             required
             name="name"
-            className="w-full rounded-2xl border border-line bg-paper px-4 py-3 text-ink outline-none ring-accent focus:ring-2"
+            className="glass-input w-full rounded-2xl px-4 py-3 text-ink outline-none"
           />
         </label>
         <label className="block text-sm">
@@ -111,12 +111,12 @@ export function RfqForm({ compact = false }: { compact?: boolean }) {
             required
             type="email"
             name="email"
-            className="w-full rounded-2xl border border-line bg-paper px-4 py-3 text-ink outline-none ring-accent focus:ring-2"
+            className="glass-input w-full rounded-2xl px-4 py-3 text-ink outline-none"
           />
         </label>
       </div>
 
-      <label className="mt-4 flex cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-line bg-paper px-4 py-6 text-center transition hover:border-accent/50">
+      <label className="glass-chip mt-4 flex cursor-pointer flex-col items-center justify-center rounded-2xl border-dashed px-4 py-6 text-center transition hover:border-accent/50">
         <Upload className="mb-2 h-5 w-5 text-accent" />
         <span className="text-sm font-medium text-ink">Upload RFQ files</span>
         <span className="mt-1 text-xs text-muted">Images, PDF, or Excel — optional</span>

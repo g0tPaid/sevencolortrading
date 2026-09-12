@@ -18,7 +18,7 @@ export default function CaseStudiesPage() {
       />
       <Container className="grid gap-4 py-16 lg:grid-cols-3">
         {caseStudies.map((c) => (
-          <article key={c.title} className="rounded-3xl border border-line bg-paper-elevated p-7">
+          <article key={c.title} className="glass-card rounded-[1.5rem] p-7">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">{c.industry}</p>
             <h2 className="mt-3 font-display text-xl font-semibold text-ink">{c.title}</h2>
             <p className="mt-3 text-sm font-medium text-ink">{c.result}</p>

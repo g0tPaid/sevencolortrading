@@ -20,7 +20,7 @@ export default function ServicesPage() {
       />
       <Container className="grid gap-4 py-16 md:grid-cols-2">
         {services.map((s) => (
-          <Link key={s.href} href={s.href} className="rounded-3xl border border-line bg-paper-elevated p-7 transition hover:border-accent/40">
+          <Link key={s.href} href={s.href} className="glass-card glass-card-hover rounded-[1.5rem] p-7">
             <h2 className="font-display text-2xl font-semibold text-ink">{s.title}</h2>
             <p className="mt-3 text-sm leading-relaxed text-muted">{s.description}</p>
           </Link>
@@ -30,7 +30,7 @@ export default function ServicesPage() {
         <h2 className="font-display text-2xl font-semibold text-ink">Categories we cover</h2>
         <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {categories.map((c) => (
-            <div key={c.slug} className="rounded-2xl border border-line px-5 py-4">
+            <div key={c.slug} className="glass-card rounded-2xl px-5 py-4">
               <p className="font-medium text-ink">{c.title}</p>
               <p className="mt-1 text-sm text-muted">{c.description}</p>
             </div>

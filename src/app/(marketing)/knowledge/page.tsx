@@ -20,7 +20,7 @@ export default function KnowledgePage() {
       />
       <Container className="grid gap-4 py-16 md:grid-cols-2">
         {knowledgeArticles.map((a) => (
-          <Link key={a.slug} href={`/knowledge/${a.slug}`} className="rounded-3xl border border-line bg-paper-elevated p-7 transition hover:border-accent/40">
+          <Link key={a.slug} href={`/knowledge/${a.slug}`} className="glass-card glass-card-hover rounded-[1.5rem] p-7">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">{a.category}</p>
             <h2 className="mt-3 font-display text-xl font-semibold text-ink">{a.title}</h2>
             <p className="mt-3 text-sm text-muted">{a.readTime} read</p>

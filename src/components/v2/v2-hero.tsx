@@ -26,15 +26,36 @@ function AnimatedHeadlineWord({
   );
 }
 
+const shortcuts = [
+  {
+    href: "#visit",
+    icon: Plane,
+    kicker: "China visit",
+    text: "Schedule a factory trip — Xiamen hosts you",
+  },
+  {
+    href: "#3pl",
+    icon: Warehouse,
+    kicker: "3PL · Xiamen & Dubai",
+    text: "Own warehouses — receive, store, pick, pack, ship",
+  },
+  {
+    href: "#dropshipping",
+    icon: Package,
+    kicker: "Dropship",
+    text: "Single-unit pick & pack for DTC sellers",
+  },
+] as const;
+
 export function V2Hero() {
   return (
-    <section className="relative overflow-hidden pt-20 pb-8 sm:pt-24 sm:pb-12">
+    <section className="relative overflow-hidden pb-10 pt-24 sm:pb-14 sm:pt-28">
       <div className="absolute inset-0 mission-grid" aria-hidden />
       <div
-        className="pointer-events-none absolute left-1/2 top-16 h-[20rem] w-[20rem] -translate-x-1/2 rounded-full opacity-70 blur-3xl"
+        className="pointer-events-none absolute left-1/2 top-20 h-[22rem] w-[22rem] -translate-x-1/2 rounded-full opacity-80 blur-3xl"
         style={{
           background:
-            "radial-gradient(circle, rgba(214,0,0,0.12), transparent 68%)",
+            "radial-gradient(circle, rgba(214,0,0,0.1), transparent 68%)",
         }}
         aria-hidden
       />
@@ -43,7 +64,7 @@ export function V2Hero() {
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-xs font-semibold uppercase tracking-[0.28em] text-accent"
+          className="section-kicker"
         >
           Welcome to
         </motion.p>
@@ -61,21 +82,21 @@ export function V2Hero() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="mx-auto mt-3 flex items-center justify-center gap-2.5 sm:mt-4"
+          className="glass-chip mx-auto mt-4 inline-flex items-center justify-center gap-2.5 rounded-full px-3.5 py-2 sm:mt-5"
         >
           <Image
             src="/dun-bradstreet.png"
             alt="Dun & Bradstreet"
             width={48}
             height={40}
-            className="h-8 w-auto object-contain sm:h-9"
+            className="h-7 w-auto object-contain sm:h-8"
             unoptimized
           />
           <div className="text-left">
             <p className="text-[11px] font-medium text-ink sm:text-xs">
               {company.credentials.dunBradstreet}
             </p>
-            <p className="mt-0.5 font-mono text-[11px] text-muted sm:text-xs">
+            <p className="font-mono text-[10px] text-muted sm:text-[11px]">
               DUNS {company.credentials.dunsNumber}
             </p>
           </div>
@@ -85,7 +106,7 @@ export function V2Hero() {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.14, duration: 0.55 }}
-          className="font-headline mx-auto mt-6 max-w-5xl text-[2.1rem] font-semibold leading-[1.06] text-ink sm:mt-8 sm:text-5xl md:text-6xl lg:text-[4.25rem]"
+          className="font-headline mx-auto mt-6 max-w-5xl text-[2.05rem] font-semibold leading-[1.08] text-ink sm:mt-8 sm:text-5xl md:text-6xl lg:text-[4.1rem]"
         >
           One Platform for Product <AnimatedHeadlineWord>Ideation</AnimatedHeadlineWord>
           {" "}
@@ -111,12 +132,12 @@ export function V2Hero() {
           {companyHighlights.map((item) => (
             <li
               key={item.label}
-              className="rounded-[1.5rem] border border-accent/30 bg-accent-soft px-5 py-5 text-center shadow-[0_12px_32px_rgba(214,0,0,0.08)] sm:px-6 sm:py-6"
+              className="glass-card rounded-[1.5rem] px-5 py-5 text-center sm:px-6 sm:py-6"
             >
-              <p className="font-highlight text-[1.85rem] leading-[1.05] text-accent sm:text-[2.05rem] md:text-[2.2rem]">
+              <p className="font-highlight text-[1.7rem] leading-[1.05] text-accent sm:text-[1.95rem] md:text-[2.1rem]">
                 {item.label}
               </p>
-              <p className="mt-2.5 text-sm font-medium text-ink sm:text-base">{item.detail}</p>
+              <p className="mt-2 text-sm font-medium text-ink sm:text-[15px]">{item.detail}</p>
             </li>
           ))}
         </motion.ul>
@@ -130,8 +151,8 @@ export function V2Hero() {
         >
           <motion.div whileHover={{ y: -3 }} whileTap={{ scale: 0.985 }}>
             <Link
-              href="#rfq"
-              className="hero-cta-primary group relative flex h-full flex-col overflow-hidden rounded-2xl px-5 py-5 text-left sm:px-6 sm:py-6"
+              href="/contact"
+              className="hero-cta-primary group relative flex h-full flex-col overflow-hidden rounded-[1.35rem] px-5 py-5 text-left sm:px-6 sm:py-6"
             >
               <span
                 className="pointer-events-none absolute inset-0 opacity-0 transition duration-500 group-hover:opacity-100"
@@ -158,7 +179,7 @@ export function V2Hero() {
           <motion.div whileHover={{ y: -3 }} whileTap={{ scale: 0.985 }}>
             <Link
               href="#new-idea"
-              className="hero-cta-idea group relative flex h-full flex-col overflow-hidden rounded-2xl px-5 py-5 text-left sm:px-6 sm:py-6"
+              className="hero-cta-idea group relative flex h-full flex-col overflow-hidden rounded-[1.35rem] px-5 py-5 text-left sm:px-6 sm:py-6"
             >
               <span className="relative inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
                 <ShieldCheck className="h-3.5 w-3.5" aria-hidden />
@@ -181,57 +202,26 @@ export function V2Hero() {
           transition={{ delay: 0.34 }}
           className="mx-auto mt-4 grid max-w-3xl gap-3 sm:grid-cols-3"
         >
-          <Link
-            href="#visit"
-            className="group flex items-center gap-4 rounded-2xl border border-accent/35 bg-accent-soft px-5 py-4 text-left shadow-[0_12px_32px_rgba(214,0,0,0.1)] transition hover:border-accent/55"
-          >
-            <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent text-white">
-              <Plane className="h-5 w-5" aria-hidden />
-            </span>
-            <span className="min-w-0 flex-1">
-              <span className="block text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
-                China visit
+          {shortcuts.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="glass-card glass-card-hover group flex items-center gap-3.5 rounded-[1.35rem] px-4 py-4 text-left sm:px-5"
+            >
+              <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-accent/10 text-accent">
+                <item.icon className="h-5 w-5" aria-hidden />
               </span>
-              <span className="mt-0.5 block text-sm font-medium text-ink sm:text-base">
-                Schedule a factory trip — Xiamen hosts you
+              <span className="min-w-0 flex-1">
+                <span className="block text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
+                  {item.kicker}
+                </span>
+                <span className="mt-0.5 block text-sm font-medium leading-snug text-ink">
+                  {item.text}
+                </span>
               </span>
-            </span>
-            <ArrowUpRight className="h-5 w-5 shrink-0 text-accent transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </Link>
-          <Link
-            href="#3pl"
-            className="group flex items-center gap-4 rounded-2xl border border-accent/35 bg-accent-soft px-5 py-4 text-left shadow-[0_12px_32px_rgba(214,0,0,0.1)] transition hover:border-accent/55"
-          >
-            <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent text-white">
-              <Warehouse className="h-5 w-5" aria-hidden />
-            </span>
-            <span className="min-w-0 flex-1">
-              <span className="block text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
-                3PL · Xiamen &amp; Dubai
-              </span>
-              <span className="mt-0.5 block text-sm font-medium text-ink sm:text-base">
-                Own warehouses — receive, store, pick, pack, ship
-              </span>
-            </span>
-            <ArrowUpRight className="h-5 w-5 shrink-0 text-accent transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </Link>
-          <Link
-            href="#dropshipping"
-            className="group flex items-center gap-4 rounded-2xl border border-accent/35 bg-accent-soft px-5 py-4 text-left shadow-[0_12px_32px_rgba(214,0,0,0.1)] transition hover:border-accent/55 sm:col-span-1"
-          >
-            <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent text-white">
-              <Package className="h-5 w-5" aria-hidden />
-            </span>
-            <span className="min-w-0 flex-1">
-              <span className="block text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
-                Dropship
-              </span>
-              <span className="mt-0.5 block text-sm font-medium text-ink sm:text-base">
-                Single-unit pick &amp; pack for DTC sellers
-              </span>
-            </span>
-            <ArrowUpRight className="h-5 w-5 shrink-0 text-accent transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </Link>
+              <ArrowUpRight className="h-4 w-4 shrink-0 text-muted transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent" />
+            </Link>
+          ))}
         </motion.div>
       </Container>
     </section>

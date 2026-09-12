@@ -21,7 +21,7 @@ export function ChinaVisitForm() {
       <motion.div
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="rounded-[1.75rem] border border-line bg-paper p-8 text-center"
+        className="glass-panel rounded-[1.75rem] p-8 text-center"
       >
         <p className="font-display text-2xl font-semibold text-ink">Visit request received</p>
         <p className="mt-3 text-sm text-muted">
@@ -34,7 +34,7 @@ export function ChinaVisitForm() {
   return (
     <form
       onSubmit={onSubmit}
-      className="rounded-[1.75rem] border border-line bg-paper p-5 shadow-[0_20px_60px_rgba(17,17,17,0.08)] sm:p-7"
+      className="glass-panel rounded-[1.75rem] p-5 sm:p-7"
       aria-label="Schedule a China factory visit"
     >
       <div className="mb-5 flex items-center gap-2">
@@ -50,14 +50,14 @@ export function ChinaVisitForm() {
           <input
             required
             name="name"
-            className="w-full rounded-2xl border border-line bg-paper-elevated px-4 py-3 text-ink outline-none ring-accent focus:ring-2"
+            className="glass-input w-full rounded-2xl px-4 py-3 text-ink outline-none"
           />
         </label>
         <label className="block text-sm">
           <span className="mb-1.5 block text-muted">Company</span>
           <input
             name="company"
-            className="w-full rounded-2xl border border-line bg-paper-elevated px-4 py-3 text-ink outline-none ring-accent focus:ring-2"
+            className="glass-input w-full rounded-2xl px-4 py-3 text-ink outline-none"
           />
         </label>
         <label className="block text-sm">
@@ -66,7 +66,7 @@ export function ChinaVisitForm() {
             required
             type="email"
             name="email"
-            className="w-full rounded-2xl border border-line bg-paper-elevated px-4 py-3 text-ink outline-none ring-accent focus:ring-2"
+            className="glass-input w-full rounded-2xl px-4 py-3 text-ink outline-none"
           />
         </label>
         <label className="block text-sm">
@@ -75,7 +75,7 @@ export function ChinaVisitForm() {
             required
             name="phone"
             placeholder="+971 … or +86 …"
-            className="w-full rounded-2xl border border-line bg-paper-elevated px-4 py-3 text-ink outline-none ring-accent placeholder:text-muted/70 focus:ring-2"
+            className="glass-input w-full rounded-2xl px-4 py-3 text-ink outline-none placeholder:text-muted/70"
           />
         </label>
         <label className="block text-sm">
@@ -84,7 +84,7 @@ export function ChinaVisitForm() {
             required
             type="date"
             name="startDate"
-            className="w-full rounded-2xl border border-line bg-paper-elevated px-4 py-3 text-ink outline-none ring-accent focus:ring-2"
+            className="glass-input w-full rounded-2xl px-4 py-3 text-ink outline-none"
           />
         </label>
         <label className="block text-sm">
@@ -92,7 +92,7 @@ export function ChinaVisitForm() {
           <select
             name="duration"
             defaultValue="3 days"
-            className="w-full rounded-2xl border border-line bg-paper-elevated px-4 py-3 text-ink outline-none ring-accent focus:ring-2"
+            className="glass-input w-full rounded-2xl px-4 py-3 text-ink outline-none"
           >
             {chinaVisitDurations.map((d) => (
               <option key={d} value={d}>
@@ -108,14 +108,14 @@ export function ChinaVisitForm() {
             type="number"
             min={1}
             defaultValue={1}
-            className="w-full rounded-2xl border border-line bg-paper-elevated px-4 py-3 text-ink outline-none ring-accent focus:ring-2"
+            className="glass-input w-full rounded-2xl px-4 py-3 text-ink outline-none"
           />
         </label>
         <label className="block text-sm">
           <span className="mb-1.5 block text-muted">Focus</span>
           <select
             name="focus"
-            className="w-full rounded-2xl border border-line bg-paper-elevated px-4 py-3 text-ink outline-none ring-accent focus:ring-2"
+            className="glass-input w-full rounded-2xl px-4 py-3 text-ink outline-none"
           >
             {chinaVisitFocus.map((d) => (
               <option key={d} value={d}>
@@ -130,7 +130,7 @@ export function ChinaVisitForm() {
             name="notes"
             rows={3}
             placeholder="Category, factories you already like, whether you want the 3PL warehouse, Canton Fair overlap…"
-            className="w-full resize-y rounded-2xl border border-line bg-paper-elevated px-4 py-3 text-ink outline-none ring-accent placeholder:text-muted/70 focus:ring-2"
+            className="glass-input w-full resize-y rounded-2xl px-4 py-3 text-ink outline-none placeholder:text-muted/70"
           />
         </label>
       </div>

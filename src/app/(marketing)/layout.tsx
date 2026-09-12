@@ -13,7 +13,7 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
         Skip to content
       </a>
       <V2Nav />
-      <main id="main" className="min-h-screen">
+      <main id="main" className="relative min-h-screen">
         {children}
       </main>
       <SiteFooter />

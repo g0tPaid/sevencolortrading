@@ -45,7 +45,7 @@ export default function LogisticsPage() {
         </p>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {fulfillmentSteps.map((step) => (
-            <div key={step.title} className="rounded-3xl border border-line bg-paper-elevated p-6">
+            <div key={step.title} className="glass-card rounded-[1.5rem] p-6">
               <h3 className="font-display text-xl font-semibold text-ink">3PL {step.title}</h3>
               <p className="mt-2 text-sm text-muted">{step.text}</p>
             </div>
@@ -53,7 +53,7 @@ export default function LogisticsPage() {
         </div>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           {fulfillmentHubs.map((hub) => (
-            <div key={hub.city} className="rounded-3xl border border-line bg-paper p-6">
+            <div key={hub.city} className="glass-card rounded-[1.5rem] p-6">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">{hub.role}</p>
               <h3 className="mt-2 font-display text-xl font-semibold text-ink">
                 {hub.city} · {hub.country}
@@ -78,7 +78,7 @@ export default function LogisticsPage() {
             ["Air freight", "Launch windows and urgent replenishment."],
             ["Express", "Samples and small parcels with door delivery."],
           ].map(([t, d]) => (
-            <div key={t} className="rounded-3xl border border-line bg-paper-elevated p-6">
+            <div key={t} className="glass-card rounded-[1.5rem] p-6">
               <h3 className="font-display text-xl font-semibold text-ink">{t}</h3>
               <p className="mt-2 text-sm text-muted">{d}</p>
             </div>

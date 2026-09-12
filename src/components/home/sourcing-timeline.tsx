@@ -64,7 +64,7 @@ export function SourcingTimeline() {
               index % 2 === 1 ? "md:text-right" : ""
             }`}
           >
-            <div className={index % 2 === 1 ? "md:order-2 md:text-left" : ""}>
+            <div className={`glass-card rounded-[1.35rem] p-5 ${index % 2 === 1 ? "md:order-2 md:text-left" : ""}`}>
               <p className="font-mono text-xs text-accent">{item.step} · {item.duration}</p>
               <h3 className="mt-2 font-display text-2xl font-semibold text-ink">{item.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted sm:text-base">

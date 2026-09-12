@@ -82,7 +82,7 @@ function FieldLabel({
 }
 
 const inputClass =
-  "w-full rounded-2xl border border-line bg-paper-elevated px-4 py-3 text-ink outline-none ring-accent placeholder:text-muted/70 focus:ring-2";
+  "glass-input w-full rounded-2xl px-4 py-3 text-ink outline-none placeholder:text-muted/70";
 
 export function FactoryRegisterForm() {
   const [form, setForm] = useState<FormState>(emptyForm);
@@ -199,7 +199,7 @@ export function FactoryRegisterForm() {
       <motion.div
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="rounded-[1.75rem] border border-line bg-paper p-8 text-center shadow-[0_20px_60px_rgba(17,17,17,0.08)]"
+        className="glass-panel rounded-[1.75rem] p-8 text-center"
       >
         <span className="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-full bg-accent-soft text-accent">
           <Check className="h-6 w-6" aria-hidden />
@@ -219,7 +219,7 @@ export function FactoryRegisterForm() {
   return (
     <form
       onSubmit={onSubmit}
-      className="relative rounded-[1.75rem] border border-line bg-paper p-5 shadow-[0_20px_60px_rgba(17,17,17,0.08)] sm:p-7"
+      className="glass-panel relative rounded-[1.75rem] p-5 sm:p-7"
       aria-label="Factory vendor registration"
     >
       <div className="mb-5 flex items-center gap-2">
@@ -346,7 +346,7 @@ export function FactoryRegisterForm() {
                     "rounded-full border px-3 py-1.5 text-xs font-medium capitalize transition",
                     on
                       ? "border-accent bg-accent text-white"
-                      : "border-line bg-paper-elevated text-muted hover:border-accent/40 hover:text-ink",
+                      : "glass-chip text-muted hover:text-ink",
                   )}
                 >
                   {tag}
@@ -359,7 +359,7 @@ export function FactoryRegisterForm() {
               {categories.map((tag) => (
                 <li
                   key={tag}
-                  className="inline-flex items-center gap-1 rounded-full border border-line bg-paper-elevated px-2.5 py-1 text-xs text-ink"
+                  className="glass-chip inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs text-ink"
                 >
                   {tag}
                   <button

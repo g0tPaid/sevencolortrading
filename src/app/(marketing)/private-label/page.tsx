@@ -17,7 +17,7 @@ export default function PrivateLabelPage() {
       />
       <Container className="grid gap-4 py-16 md:grid-cols-3">
         {["Brand packaging", "Label & insert control", "Retail-ready cartons"].map((t) => (
-          <div key={t} className="rounded-3xl border border-line bg-paper-elevated p-7">
+          <div key={t} className="glass-card rounded-[1.5rem] p-7">
             <h2 className="font-display text-xl font-semibold text-ink">{t}</h2>
             <p className="mt-3 text-sm text-muted">
               Artwork checks, sample approvals, and production oversight before mass release.

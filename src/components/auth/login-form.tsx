@@ -48,7 +48,7 @@ export function LoginForm({ nextPath }: { nextPath: string | null }) {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-paper">
+    <div className="flex min-h-screen flex-col bg-canvas">
       <header className="flex items-center justify-between border-b border-line px-4 py-3 sm:px-6">
         <Link href="/" className="flex items-center gap-3">
           <SourcingLogo size="nav" />
@@ -68,7 +68,7 @@ export function LoginForm({ nextPath }: { nextPath: string | null }) {
           Sign in to the Sourcing Center admin desk.
         </p>
 
-        <form onSubmit={onSubmit} className="mt-8 space-y-4 rounded-3xl border border-line bg-paper-elevated p-6 shadow-sm">
+        <form onSubmit={onSubmit} className="glass-panel mt-8 space-y-4 rounded-[1.75rem] p-6">
           <div>
             <label htmlFor="username" className="block text-xs font-medium text-muted">
               Username
@@ -80,7 +80,7 @@ export function LoginForm({ nextPath }: { nextPath: string | null }) {
               required
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="mt-1.5 w-full rounded-2xl border border-line bg-paper px-3 py-2.5 text-sm text-ink outline-none ring-accent focus:ring-2"
+              className="glass-input mt-1.5 w-full rounded-2xl px-3 py-2.5 text-sm text-ink outline-none"
             />
           </div>
           <div>
@@ -95,7 +95,7 @@ export function LoginForm({ nextPath }: { nextPath: string | null }) {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="mt-1.5 w-full rounded-2xl border border-line bg-paper px-3 py-2.5 text-sm text-ink outline-none ring-accent focus:ring-2"
+              className="glass-input mt-1.5 w-full rounded-2xl px-3 py-2.5 text-sm text-ink outline-none"
             />
           </div>
 
