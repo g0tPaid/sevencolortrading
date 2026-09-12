@@ -1,14 +1,11 @@
+import { countryFromHeaders, normalizeCountry } from "@/lib/geo-detect";
+
 const PRIVATE_IP =
   /^(?:127\.|10\.|192\.168\.|172\.(?:1[6-9]|2\d|3[01])\.|::1$|fc|fd|fe80)/i;
 
 const countryCache = new Map<string, string>();
 
-function normalizeCountry(code: string | null | undefined): string | null {
-  if (!code) return null;
-  const trimmed = code.trim().toUpperCase();
-  if (!/^[A-Z]{2}$/.test(trimmed) || trimmed === "XX") return null;
-  return trimmed;
-}
+export { countryFromHeaders, normalizeCountry } from "@/lib/geo-detect";
 
 function firstForwardedIp(header: string | null): string | null {
   if (!header) return null;
@@ -67,10 +64,8 @@ async function lookupCountryCode(ip: string): Promise<string> {
 /** Resolve visitor country. Never throws. Returns ISO code or "ZZ". */
 export async function resolveCountry(headers: Headers): Promise<string> {
   try {
-    const cf =
-      normalizeCountry(headers.get("cf-ipcountry")) ??
-      normalizeCountry(headers.get("CF-IPCountry"));
-    if (cf) return cf;
+    const fromHeader = countryFromHeaders(headers);
+    if (fromHeader) return fromHeader;
 
     const ip = clientIpFromHeaders(headers);
     if (!ip || isPrivateIp(ip)) return "ZZ";

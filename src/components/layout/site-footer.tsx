@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SourcingLogo } from "@/components/brand/sourcing-logo";
+import { FactoryLabel } from "@/components/layout/factory-label";
 import { Container, SpectrumRail } from "@/components/ui/primitives";
 import { company, services } from "@/lib/content";
 
@@ -63,7 +64,7 @@ export function SiteFooter() {
               ].map(([label, href]) => (
                 <li key={href}>
                   <Link href={href} className="text-paper/80 hover:text-paper">
-                    {label}
+                    {href === "/factories/register" ? <FactoryLabel /> : label}
                   </Link>
                 </li>
               ))}

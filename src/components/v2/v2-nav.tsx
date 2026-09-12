@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { SourcingLogo } from "@/components/brand/sourcing-logo";
+import { FactoryLabel } from "@/components/layout/factory-label";
 import { cn } from "@/lib/utils";
 
 const pageLinks = [
@@ -61,12 +62,13 @@ export function V2Nav() {
               href={l.href}
               className={cn(
                 "rounded-full px-2.5 py-1.5 text-[13px] transition",
+                l.href === "/factories/register" && "whitespace-nowrap",
                 l.highlight
                   ? "font-semibold text-accent hover:bg-accent-soft"
                   : "text-muted hover:bg-white/50 hover:text-ink",
               )}
             >
-              {l.label}
+              {l.href === "/factories/register" ? <FactoryLabel /> : l.label}
             </Link>
           ))}
         </nav>
@@ -107,7 +109,7 @@ export function V2Nav() {
                     l.highlight ? "font-semibold text-accent" : "text-ink",
                   )}
                 >
-                  {l.label}
+                  {l.href === "/factories/register" ? <FactoryLabel /> : l.label}
                 </Link>
               ))}
               <div className="my-1 h-px bg-line" />

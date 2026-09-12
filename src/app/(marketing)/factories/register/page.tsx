@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { FactoryRegisterForm } from "@/components/factories/factory-register-form";
+import { FactoryLabel } from "@/components/layout/factory-label";
 import { CtaBand } from "@/components/shared/page-shell";
 import { Container } from "@/components/ui/primitives";
 import { company } from "@/lib/content";
@@ -55,7 +56,7 @@ export default function FactoryRegisterPage() {
           {company.legalName} · Xiamen · 工厂登记
         </p>
         <h1 className="mt-3 max-w-3xl font-display text-3xl font-semibold tracking-tight text-ink sm:text-5xl">
-          Factories — register as a vendor
+          <FactoryLabel /> — register as a vendor
         </h1>
         <p className="mt-2 font-display text-xl text-accent sm:text-2xl">工厂供应商登记</p>
         <p className="mt-4 max-w-2xl text-muted sm:text-lg">
