@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { recordHit, recordPulse } from "@/lib/analytics-store";
+import { FACTORY_ZH_COOKIE, GEO_COUNTRY_COOKIE, geoCookieOptions } from "@/lib/geo-detect";
 import { resolveCountry } from "@/lib/geo";
 
 export const runtime = "nodejs";
@@ -74,14 +75,26 @@ export async function POST(request: Request) {
   const existing = readCookie(request.headers.get("cookie"), COOKIE);
   const visitorId = existing && existing.length >= 8 ? existing : mintVisitorId();
 
+  let resolvedCountry: string | null = null;
   if (type === "pageview") {
-    const country = await resolveCountry(request.headers);
-    await recordHit({ visitorId, path, country });
+    resolvedCountry = await resolveCountry(request.headers);
+    await recordHit({ visitorId, path, country: resolvedCountry });
   } else {
     await recordPulse({ visitorId });
   }
 
   const response = NextResponse.json({ ok: true });
+  if (resolvedCountry && resolvedCountry !== "ZZ") {
+    const cookies = geoCookieOptions();
+    response.cookies.set({
+      name: GEO_COUNTRY_COOKIE,
+      value: resolvedCountry,
+      ...cookies,
+    });
+    if (resolvedCountry === "CN") {
+      response.cookies.set({ name: FACTORY_ZH_COOKIE, value: "1", ...cookies });
+    }
+  }
   if (!existing || existing !== visitorId) {
     response.cookies.set({
       name: COOKIE,
