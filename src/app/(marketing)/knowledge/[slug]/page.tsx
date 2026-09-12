@@ -42,7 +42,7 @@ function FaqBlock({ items }: { items: readonly { q: string; a: string }[] }) {
   return (
     <dl className="mt-6 space-y-4">
       {items.map((item) => (
-        <div key={item.q} className="rounded-2xl border border-line bg-paper-elevated p-5">
+        <div key={item.q} className="glass-card rounded-2xl p-5">
           <dt className="font-medium text-ink">{item.q}</dt>
           <dd className="mt-2 text-sm leading-relaxed" data-seo-answer>
             {item.a}
@@ -54,7 +54,7 @@ function FaqBlock({ items }: { items: readonly { q: string; a: string }[] }) {
 }
 
 function Bullet({ children }: { children: ReactNode }) {
-  return <li className="rounded-2xl border border-line bg-paper-elevated px-4 py-3">{children}</li>;
+  return <li className="glass-card rounded-2xl px-4 py-3">{children}</li>;
 }
 
 export default async function KnowledgeArticlePage({ params }: { params: Promise<{ slug: string }> }) {

@@ -18,7 +18,7 @@ export default function OemOdmPage() {
       <Container className="py-16">
         <div className="grid gap-4 md:grid-cols-4">
           {["Brief", "Prototype", "Tooling", "Mass production"].map((s, i) => (
-            <div key={s} className="rounded-3xl border border-line bg-paper-elevated p-6">
+            <div key={s} className="glass-card rounded-[1.5rem] p-6">
               <p className="font-mono text-xs text-accent">{String(i + 1).padStart(2, "0")}</p>
               <p className="mt-3 font-display text-lg font-semibold text-ink">{s}</p>
             </div>

@@ -28,7 +28,7 @@ export default function AboutPage() {
             To be the sourcing partner procurement teams trust for quality, integrity, and operational clarity — from first sample to repeat containers.
           </p>
         </div>
-        <div className="rounded-3xl border border-line bg-paper-elevated p-8">
+        <div className="glass-card rounded-[1.75rem] p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">Offices</p>
           <ul className="mt-6 space-y-6">
             {company.offices.map((o) => (
@@ -49,7 +49,7 @@ export default function AboutPage() {
       <Container className="pb-8">
         <div className="grid grid-cols-3 gap-4">
           {company.stats.map((s) => (
-            <div key={s.label} className="rounded-2xl border border-line bg-paper-elevated p-5">
+            <div key={s.label} className="glass-card rounded-2xl p-5">
               <p className="font-display text-2xl font-semibold text-ink">{s.value}</p>
               <p className="mt-1 text-sm text-muted">{s.label}</p>
             </div>

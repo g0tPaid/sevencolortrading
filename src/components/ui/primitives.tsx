@@ -20,7 +20,7 @@ export function ButtonLink({
         variant === "primary" &&
           "bg-ink text-paper hover:opacity-90 dark:bg-accent dark:text-paper",
         variant === "secondary" &&
-          "border border-line bg-paper-elevated text-ink hover:border-accent/50",
+          "glass-chip text-ink hover:border-accent/40",
         variant === "ghost" && "text-muted hover:text-ink",
         className,
       )}
@@ -44,7 +44,7 @@ export function SectionHeading({
   return (
     <div className={cn(align === "center" && "mx-auto max-w-2xl text-center")}>
       {eyebrow ? (
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-accent">
+        <p className="section-kicker mb-3">
           {eyebrow}
         </p>
       ) : null}

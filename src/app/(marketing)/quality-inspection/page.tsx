@@ -26,7 +26,7 @@ export default function QualityInspectionPage() {
       />
       <Container className="grid gap-4 py-16 sm:grid-cols-2 lg:grid-cols-3">
         {checks.map((c) => (
-          <div key={c} className="rounded-3xl border border-line bg-paper-elevated p-6 text-sm font-medium text-ink">
+          <div key={c} className="glass-card rounded-[1.5rem] p-6 text-sm font-medium text-ink">
             {c}
           </div>
         ))}

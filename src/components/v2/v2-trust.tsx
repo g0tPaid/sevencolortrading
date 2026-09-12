@@ -9,10 +9,10 @@ import { platformStats } from "@/lib/v2-content";
 
 export function V2Trust() {
   return (
-    <section id="trust" className="scroll-mt-28 py-14 sm:py-20 lg:py-24">
+    <section id="trust" className="section-y scroll-mt-28">
       <Container>
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">Trust</p>
+          <p className="section-kicker">Trust</p>
           <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-5xl">
             Sourcing.center {company.byline}
           </h2>

@@ -30,7 +30,7 @@ export default function VisitPage() {
     <>
       <JsonLd data={visitFaqJsonLd()} />
       <Container className="pb-16 pt-28 sm:pt-32">
-        <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted">
+        <p className="section-kicker">
           {company.legalName} · Xiamen desk
         </p>
         <h1 className="mt-3 max-w-3xl font-display text-3xl font-semibold tracking-tight text-ink sm:text-5xl">
@@ -40,12 +40,12 @@ export default function VisitPage() {
         <div className="mt-10 grid items-start gap-8 lg:grid-cols-[1fr_1fr]">
           <div className="space-y-4">
             {chinaVisitDays.map((day) => (
-              <article key={day.title} className="rounded-3xl border border-line bg-paper-elevated p-6">
+              <article key={day.title} className="glass-card rounded-[1.5rem] p-6">
                 <h2 className="font-display text-xl font-semibold text-ink">{day.title}</h2>
                 <p className="mt-2 text-sm text-muted">{day.text}</p>
               </article>
             ))}
-            <ul className="rounded-3xl border border-line bg-paper p-6 text-sm text-ink">
+            <ul className="glass-card rounded-[1.5rem] p-6 text-sm text-ink">
               {chinaVisitIncludes.map((item) => (
                 <li key={item} className="border-b border-line py-2 last:border-0 last:pb-0 first:pt-0">
                   {item}

@@ -41,7 +41,7 @@ function arcPath(a: { x: number; y: number }, b: { x: number; y: number }) {
 
 export function WorldShippingMap() {
   return (
-    <div className="relative overflow-hidden rounded-[2rem] border border-line bg-[#050b12] p-2 text-paper sm:p-3">
+    <div className="relative overflow-hidden rounded-[1.75rem] bg-[#050b12] p-2 text-paper sm:p-3">
       <div
         className="pointer-events-none absolute inset-0"
         style={{

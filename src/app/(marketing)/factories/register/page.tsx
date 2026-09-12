@@ -51,7 +51,7 @@ export default function FactoryRegisterPage() {
   return (
     <>
       <Container className="pb-16 pt-28 sm:pt-32">
-        <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted">
+        <p className="section-kicker">
           {company.legalName} · Xiamen · 工厂登记
         </p>
         <h1 className="mt-3 max-w-3xl font-display text-3xl font-semibold tracking-tight text-ink sm:text-5xl">
@@ -69,7 +69,7 @@ export default function FactoryRegisterPage() {
         <div className="mt-10 grid items-start gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="space-y-4">
             {points.map((point) => (
-              <article key={point.title} className="rounded-3xl border border-line bg-paper-elevated p-6">
+              <article key={point.title} className="glass-card rounded-[1.5rem] p-6">
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">{point.zh}</p>
                 <h2 className="mt-2 font-display text-xl font-semibold text-ink">{point.title}</h2>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{point.text}</p>

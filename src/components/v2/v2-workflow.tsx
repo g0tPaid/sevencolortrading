@@ -134,10 +134,10 @@ export function V2Workflow() {
   }
 
   return (
-    <section id="workflow" className="scroll-mt-28 border-t border-line bg-[#fafafa] py-14 sm:py-20 lg:py-24">
+    <section id="workflow" className="section-y scroll-mt-28">
       <Container>
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">Workflow</p>
+          <p className="section-kicker">Workflow</p>
           <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink sm:mt-4 sm:text-5xl">
             Idea to delivery — one timeline
           </h2>

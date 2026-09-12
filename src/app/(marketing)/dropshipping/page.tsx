@@ -42,7 +42,7 @@ export default function DropshippingPage() {
       <JsonLd data={dropshippingPageJsonLd()} />
       <JsonLd data={dropshippingFaqJsonLd()} />
       <Container className="pb-16 pt-28 sm:pt-32">
-        <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted">
+        <p className="section-kicker">
           Seven Color Trading Co Ltd · own warehouses · not a broker
         </p>
         <h1 className="mt-3">
@@ -62,7 +62,7 @@ export default function DropshippingPage() {
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {dropshippingSteps.map((step) => (
-            <article key={step.title} className="rounded-3xl border border-line bg-paper-elevated p-6">
+            <article key={step.title} className="glass-card rounded-[1.5rem] p-6">
               <h3 className="font-display text-xl font-semibold text-ink">{step.title}</h3>
               <p className="mt-2 text-sm text-muted">{step.text}</p>
             </article>
@@ -70,7 +70,7 @@ export default function DropshippingPage() {
         </div>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           {dropshippingBenefits.map((hub) => (
-            <article key={hub.city} className="rounded-3xl border border-line bg-paper p-6">
+            <article key={hub.city} className="glass-card rounded-[1.5rem] p-6">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">{hub.role}</p>
               <h3 className="mt-2 font-display text-xl font-semibold text-ink">
                 {hub.city} · {hub.country}
@@ -89,7 +89,7 @@ export default function DropshippingPage() {
           </h2>
           <dl className="mt-8 grid gap-4 md:grid-cols-2">
             {dropshippingFaqs.map((item) => (
-              <div key={item.q} className="rounded-3xl border border-line bg-paper-elevated p-6">
+              <div key={item.q} className="glass-card rounded-[1.5rem] p-6">
                 <dt className="font-display text-lg font-semibold text-ink">{item.q}</dt>
                 <dd className="mt-2 text-sm leading-relaxed text-muted" data-seo-answer>
                   {item.a}

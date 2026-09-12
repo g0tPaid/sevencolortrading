@@ -7,22 +7,14 @@ import { Container } from "@/components/ui/primitives";
 
 export function V2Cta() {
   return (
-    <section className="pb-16 pt-6 sm:pb-24 sm:pt-8">
+    <section className="pb-16 pt-4 sm:pb-24 sm:pt-6">
       <Container>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="relative overflow-hidden rounded-[2rem] border border-line bg-ink px-6 py-14 text-paper sm:px-12 sm:py-20"
+          className="glass-dark relative overflow-hidden rounded-[2rem] px-6 py-14 text-paper sm:px-12 sm:py-20"
         >
-          <div
-            className="pointer-events-none absolute inset-0 opacity-60"
-            style={{
-              background:
-                "radial-gradient(ellipse 50% 60% at 50% 0%, rgba(214,0,0,0.35), transparent 60%)",
-            }}
-            aria-hidden
-          />
           <div className="relative text-center">
             <h2 className="font-display text-3xl font-semibold tracking-tight sm:text-5xl">
               Ready to build your next product?
@@ -34,8 +26,8 @@ export function V2Cta() {
             <div className="mx-auto mt-8 grid max-w-2xl gap-3 sm:grid-cols-2 sm:gap-4">
               <motion.div whileHover={{ y: -3 }} whileTap={{ scale: 0.985 }}>
                 <Link
-                  href="#rfq"
-                  className="hero-cta-primary group flex h-full flex-col rounded-2xl px-5 py-5 text-left sm:px-6 sm:py-6"
+                  href="/contact"
+                  className="hero-cta-primary group flex h-full flex-col rounded-[1.35rem] px-5 py-5 text-left sm:px-6 sm:py-6"
                 >
                   <span className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/75">
                     <Search className="h-3.5 w-3.5" aria-hidden />
@@ -53,7 +45,7 @@ export function V2Cta() {
               <motion.div whileHover={{ y: -3 }} whileTap={{ scale: 0.985 }}>
                 <Link
                   href="#new-idea"
-                  className="group flex h-full flex-col rounded-2xl border border-white/20 bg-white px-5 py-5 text-left text-ink sm:px-6 sm:py-6"
+                  className="group flex h-full flex-col rounded-[1.35rem] border border-white/15 bg-white px-5 py-5 text-left text-ink sm:px-6 sm:py-6"
                 >
                   <span className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
                     <ShieldCheck className="h-3.5 w-3.5" aria-hidden />
@@ -71,21 +63,21 @@ export function V2Cta() {
             </div>
             <Link
               href="/visit"
-              className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-paper transition hover:bg-white/15"
+              className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-paper transition hover:bg-white/15"
             >
               Schedule a China factory visit
               <ArrowUpRight className="h-4 w-4" aria-hidden />
             </Link>
             <Link
               href="/3pl"
-              className="mt-3 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-paper transition hover:bg-white/15 sm:ml-3"
+              className="mt-3 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-paper transition hover:bg-white/15 sm:ml-3"
             >
               Own 3PL in Xiamen &amp; Dubai
               <ArrowUpRight className="h-4 w-4" aria-hidden />
             </Link>
             <Link
               href="/dropshipping"
-              className="mt-3 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-paper transition hover:bg-white/15 sm:ml-3"
+              className="mt-3 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-paper transition hover:bg-white/15 sm:ml-3"
             >
               Dropship from our warehouses
               <ArrowUpRight className="h-4 w-4" aria-hidden />

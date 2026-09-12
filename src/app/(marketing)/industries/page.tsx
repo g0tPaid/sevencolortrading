@@ -18,7 +18,7 @@ export default function IndustriesPage() {
       />
       <Container className="grid gap-4 py-16 md:grid-cols-2 lg:grid-cols-3">
         {industries.map((item) => (
-          <article key={item.title} className="rounded-3xl border border-line bg-paper-elevated p-7">
+          <article key={item.title} className="glass-card rounded-[1.5rem] p-7">
             <h2 className="font-display text-xl font-semibold text-ink">{item.title}</h2>
             <p className="mt-3 text-sm leading-relaxed text-muted">{item.description}</p>
           </article>
