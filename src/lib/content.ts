@@ -230,29 +230,7 @@ export const faqs = [
   },
 ];
 
-export const caseStudies = [
-  {
-    title: "GCC retail replenishment",
-    industry: "Retail",
-    result: "12-day China → UAE cycle with photo QC on every SKU.",
-    summary:
-      "A multi-store retailer needed flexible quantities across home goods. We verified two factories, locked pricing, and ran weekly inspection batches through Dubai.",
-  },
-  {
-    title: "DTC electronics launch",
-    industry: "E-commerce",
-    result: "First production lot approved in 18 days.",
-    summary:
-      "A US brand launched accessories with no MOQ sampling, private-label packaging, and air freight for the initial drop.",
-  },
-  {
-    title: "Hospitality FF&E program",
-    industry: "Hospitality",
-    result: "Project delivery coordinated across three suppliers.",
-    summary:
-      "Custom furniture and fixtures sourced, inspected, and containerized for a Gulf fit-out with consolidated logistics.",
-  },
-];
+export { caseStudies } from "@/lib/case-studies";
 
 export const knowledgeArticles = [
   {

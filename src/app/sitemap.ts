@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { caseStudies } from "@/lib/case-studies";
 import { knowledgeArticles } from "@/lib/content";
 import { siteUrl } from "@/lib/seo";
 
@@ -18,7 +19,8 @@ const routes: Array<{ path: string; priority: number; changeFrequency: MetadataR
   { path: "/quality-inspection", priority: 0.6, changeFrequency: "monthly" },
   { path: "/private-label", priority: 0.6, changeFrequency: "monthly" },
   { path: "/oem-odm", priority: 0.6, changeFrequency: "monthly" },
-  { path: "/case-studies", priority: 0.5, changeFrequency: "monthly" },
+  { path: "/case-studies", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/reviews", priority: 0.7, changeFrequency: "weekly" },
   { path: "/knowledge", priority: 0.7, changeFrequency: "weekly" },
 ];
 
@@ -45,5 +47,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: citeable.has(article.slug) ? 0.75 : 0.55,
   }));
 
-  return [...staticRoutes, ...articles];
+  const studies = caseStudies.map((study) => ({
+    url: `${siteUrl}/case-studies/${study.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.65,
+  }));
+
+  return [...staticRoutes, ...articles, ...studies];
 }

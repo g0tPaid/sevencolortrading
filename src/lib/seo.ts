@@ -35,6 +35,8 @@ export const seoKeywords = [
   "Dubai dropship warehouse",
   "DTC China fulfillment",
   "Amazon seller China warehouse",
+  "China sourcing reviews",
+  "Seven Color Trading reviews",
 ];
 
 export const defaultDescription =
@@ -267,5 +269,69 @@ export function homepageAggregateFaqJsonLd() {
         text: item.a,
       },
     })),
+  };
+}
+
+function breadcrumbJsonLd(items: Array<{ name: string; path: string }>) {
+  return {
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      item: absoluteUrl(item.path),
+    })),
+  };
+}
+
+/** WebPage + breadcrumb only. No AggregateRating until approved reviews exist. */
+export function reviewsPageJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${siteUrl}/reviews#webpage`,
+    url: `${siteUrl}/reviews`,
+    name: "Reviews | Sourcing Center",
+    description:
+      "Buyer notes about Seven Color Trading / sourcing.center — China factory sourcing, Xiamen and Dubai 3PL, and hosted factory visits.",
+    isPartOf: { "@id": `${siteUrl}/#website` },
+    breadcrumb: breadcrumbJsonLd([
+      { name: "Home", path: "/" },
+      { name: "Reviews", path: "/reviews" },
+    ]),
+  };
+}
+
+export function caseStudiesIndexJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${siteUrl}/case-studies#webpage`,
+    url: `${siteUrl}/case-studies`,
+    name: "Case Studies | Sourcing Center",
+    description:
+      "Example sourcing programs from Seven Color Trading — factory matching, Xiamen/Dubai 3PL, and hosted QC visits.",
+    isPartOf: { "@id": `${siteUrl}/#website` },
+    breadcrumb: breadcrumbJsonLd([
+      { name: "Home", path: "/" },
+      { name: "Case studies", path: "/case-studies" },
+    ]),
+  };
+}
+
+export function caseStudyPageJsonLd(study: { slug: string; title: string; summary: string }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${siteUrl}/case-studies/${study.slug}#webpage`,
+    url: `${siteUrl}/case-studies/${study.slug}`,
+    name: `${study.title} | Sourcing Center`,
+    description: study.summary,
+    isPartOf: { "@id": `${siteUrl}/#website` },
+    breadcrumb: breadcrumbJsonLd([
+      { name: "Home", path: "/" },
+      { name: "Case studies", path: "/case-studies" },
+      { name: study.title, path: `/case-studies/${study.slug}` },
+    ]),
   };
 }

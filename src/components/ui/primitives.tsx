@@ -12,19 +12,26 @@ export function ButtonLink({
   variant?: "primary" | "secondary" | "ghost";
   className?: string;
 }) {
+  const classes = cn(
+    "inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper",
+    variant === "primary" &&
+      "bg-ink text-paper hover:opacity-90 dark:bg-accent dark:text-paper",
+    variant === "secondary" &&
+      "glass-chip text-ink hover:border-accent/40",
+    variant === "ghost" && "text-muted hover:text-ink",
+    className,
+  );
+
+  if (href.startsWith("http")) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" className={classes}>
+        {children}
+      </a>
+    );
+  }
+
   return (
-    <Link
-      href={href}
-      className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper",
-        variant === "primary" &&
-          "bg-ink text-paper hover:opacity-90 dark:bg-accent dark:text-paper",
-        variant === "secondary" &&
-          "glass-chip text-ink hover:border-accent/40",
-        variant === "ghost" && "text-muted hover:text-ink",
-        className,
-      )}
-    >
+    <Link href={href} className={classes}>
       {children}
     </Link>
   );

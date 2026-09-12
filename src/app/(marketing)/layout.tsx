@@ -1,11 +1,12 @@
 import { PageviewBeacon } from "@/components/analytics/pageview-beacon";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { WhatsAppFloat } from "@/components/layout/whatsapp-float";
+import { WhatsAppProvider } from "@/components/layout/whatsapp-context";
 import { V2Nav } from "@/components/v2/v2-nav";
 
 export default function MarketingLayout({ children }: { children: React.ReactNode }) {
   return (
-    <>
+    <WhatsAppProvider>
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-sm focus:text-paper"
@@ -19,6 +20,6 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
       <SiteFooter />
       <WhatsAppFloat />
       <PageviewBeacon />
-    </>
+    </WhatsAppProvider>
   );
 }
