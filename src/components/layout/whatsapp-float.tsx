@@ -23,10 +23,10 @@ export function WhatsAppFloat() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
-      className="whatsapp-float fixed bottom-5 right-4 z-[70] inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2 focus-visible:ring-offset-canvas sm:bottom-6 sm:right-6 sm:px-3.5 sm:py-2.5"
+      className="whatsapp-float fixed bottom-5 right-4 z-[70] inline-flex min-h-16 items-center gap-3 rounded-full px-5 py-3.5 text-base font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2 focus-visible:ring-offset-canvas sm:bottom-6 sm:right-6 sm:min-h-14 sm:gap-2.5 sm:px-4 sm:py-3 sm:text-[15px]"
     >
       <span className="whatsapp-float-icon">
-        <WhatsAppGlyph className="h-3.5 w-3.5" />
+        <WhatsAppGlyph className="h-5 w-5 sm:h-4 sm:w-4" />
       </span>
       <span className="pr-0.5">WhatsApp</span>
     </a>
