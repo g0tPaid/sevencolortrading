@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { FactoryRegisterForm } from "@/components/factories/factory-register-form";
 import { FactoryLabel } from "@/components/layout/factory-label";
+import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
 import { CtaBand } from "@/components/shared/page-shell";
 import { Container } from "@/components/ui/primitives";
 import { company } from "@/lib/content";
 import { absoluteUrl } from "@/lib/seo";
+import { whatsappPresets } from "@/lib/whatsapp";
 
 const description =
   "Chinese factories apply to become verified vendors for Sourcing Center buyers via Seven Color Trading Co Ltd in Xiamen. 工厂入驻 / 申请成为供应商 — not a marketplace free-for-all.";
@@ -81,6 +83,7 @@ function FactoryJoinBrief() {
 export default function FactoryRegisterPage() {
   return (
     <>
+      <WhatsAppPrefill message={whatsappPresets.factories} />
       <Container className="pb-16 pt-28 sm:pt-32">
         <p className="section-kicker">
           {company.legalName} · Xiamen · 工厂登记
@@ -107,6 +110,7 @@ export default function FactoryRegisterPage() {
       <CtaBand
         title="Already a buyer?"
         description="Send an RFQ and a relationship manager replies within 24 hours from China or Dubai."
+        whatsappMessage={whatsappPresets.rfq}
       />
     </>
   );

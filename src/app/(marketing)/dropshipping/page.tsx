@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { JsonLd } from "@/components/seo/json-ld";
+import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
 import { CtaBand } from "@/components/shared/page-shell";
 import { Container } from "@/components/ui/primitives";
 import { company } from "@/lib/content";
 import { absoluteUrl, dropshippingFaqJsonLd, dropshippingPageJsonLd } from "@/lib/seo";
+import { whatsappPresets } from "@/lib/whatsapp";
 import {
   dropshipping,
   dropshippingBenefits,
@@ -41,6 +43,7 @@ export default function DropshippingPage() {
     <>
       <JsonLd data={dropshippingPageJsonLd()} />
       <JsonLd data={dropshippingFaqJsonLd()} />
+      <WhatsAppPrefill message={whatsappPresets.dropshipping} />
       <Container className="pb-16 pt-28 sm:pt-32">
         <p className="section-kicker">
           Seven Color Trading Co Ltd · own warehouses · not a broker
@@ -117,6 +120,7 @@ export default function DropshippingPage() {
       <CtaBand
         title="Talk to the dropship desk"
         description="Tell us the SKU, expected order volume, and whether stock should sit in Xiamen or Dubai. Hand off orders by CSV, spreadsheet, or store export — a relationship manager replies within 24 hours."
+        whatsappMessage={whatsappPresets.dropshipping}
       />
     </>
   );

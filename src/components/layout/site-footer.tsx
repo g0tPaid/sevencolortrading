@@ -55,7 +55,9 @@ export function SiteFooter() {
                 ["How it works", "/how-it-works"],
                 ["Case studies", "/case-studies"],
                 ["Knowledge", "/knowledge"],
+                ["Compare", "/compare"],
                 ["Reviews", "/reviews"],
+                ["Updates", "/updates"],
                 ["Contact", "/contact"],
                 ["Visit China", "/visit"],
                 ["3PL", "/3pl"],
@@ -113,7 +115,7 @@ export function SiteFooter() {
             <div className="mt-3 flex items-center gap-3">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/dun-bradstreet.png"
+                src="/dnb-mark.png"
                 alt="Dun & Bradstreet"
                 width={48}
                 height={40}

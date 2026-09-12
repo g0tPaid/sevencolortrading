@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { ProofChips } from "@/components/trust/proof-chips";
 import { Container, SectionHeading, ButtonLink } from "@/components/ui/primitives";
+import { whatsappHref, whatsappPresets } from "@/lib/whatsapp";
 
 export function pageMetadata(title: string, description: string): Metadata {
   return { title, description };
@@ -27,9 +29,11 @@ export function PageHero({
 export function CtaBand({
   title = "Ready when you are",
   description = "Send your RFQ — a relationship manager replies within 24 hours from China or Dubai.",
+  whatsappMessage = whatsappPresets.rfq,
 }: {
   title?: string;
   description?: string;
+  whatsappMessage?: string;
 }) {
   return (
     <section className="pb-16 pt-6 sm:pb-20">
@@ -39,10 +43,14 @@ export function CtaBand({
           <p className="mt-3 max-w-xl text-muted">{description}</p>
           <div className="mt-6 flex flex-wrap gap-3">
             <ButtonLink href="/contact">Get a quote in 24h</ButtonLink>
-            <ButtonLink href="/#new-idea" variant="secondary">
+            <ButtonLink href={whatsappHref(whatsappMessage)} variant="secondary">
+              WhatsApp
+            </ButtonLink>
+            <ButtonLink href="/#new-idea" variant="ghost">
               I have a new product idea
             </ButtonLink>
           </div>
+          <ProofChips className="mt-6 justify-start" />
         </div>
       </Container>
     </section>

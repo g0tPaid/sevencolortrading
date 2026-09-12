@@ -63,7 +63,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         </h1>
         <p className="mt-4 max-w-2xl text-muted sm:text-lg">{study.summary}</p>
         <SampleNote>
-          Example program. Metrics below are illustrative of how the desk operates — not published client KPIs.
+          Example engagement. Ranges below are conservative and typical of the desk — not published client KPIs.
         </SampleNote>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-3">
@@ -72,7 +72,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               <p className="font-display text-2xl font-semibold text-ink">{metric.value}</p>
               <p className="mt-1 text-sm text-muted">{metric.label}</p>
               <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-accent">
-                Illustrative
+                Example engagement
               </p>
             </div>
           ))}
@@ -106,7 +106,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               id="related-case-studies"
               className="font-display text-2xl font-semibold tracking-tight text-ink"
             >
-              Other example programs
+              Other example engagements
             </h2>
             <div className="mt-6 grid gap-4 md:grid-cols-2">
               {related.map((item) => (

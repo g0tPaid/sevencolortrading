@@ -69,12 +69,11 @@ export function V2Trust() {
         <div className="glass-card mx-auto mt-10 max-w-3xl rounded-[1.75rem] p-6 sm:p-8">
           <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-center">
             <Image
-              src="/dun-bradstreet.png"
+              src="/dnb-mark.png"
               alt="Dun & Bradstreet"
               width={72}
               height={62}
               className="h-[62px] w-auto object-contain"
-              unoptimized
             />
             <div>
               <p className="font-display text-xl font-semibold text-ink">

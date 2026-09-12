@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Lightbulb, Search, ShieldCheck } from "lucide-react";
+import { ProofChips } from "@/components/trust/proof-chips";
 import { Container } from "@/components/ui/primitives";
+import { whatsappHref, whatsappPresets } from "@/lib/whatsapp";
 
 export function V2Cta() {
   return (
@@ -82,6 +84,16 @@ export function V2Cta() {
               Dropship from our warehouses
               <ArrowUpRight className="h-4 w-4" aria-hidden />
             </Link>
+            <a
+              href={whatsappHref(whatsappPresets.home)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-paper transition hover:bg-white/15 sm:ml-3"
+            >
+              WhatsApp the desk
+              <ArrowUpRight className="h-4 w-4" aria-hidden />
+            </a>
+            <ProofChips tone="dark" className="mt-8" />
           </div>
         </motion.div>
       </Container>

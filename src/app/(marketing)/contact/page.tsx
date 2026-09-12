@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { RfqForm } from "@/components/home/rfq-form";
+import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
+import { ProofChips } from "@/components/trust/proof-chips";
 import { PageHero } from "@/components/shared/page-shell";
-import { Container } from "@/components/ui/primitives";
+import { ButtonLink, Container } from "@/components/ui/primitives";
 import { company } from "@/lib/content";
+import { whatsappHref, whatsappPresets } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -13,6 +16,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
+      <WhatsAppPrefill message={whatsappPresets.rfq} />
       <PageHero
         eyebrow="Contact"
         title="Talk to a relationship manager"
@@ -20,6 +24,7 @@ export default function ContactPage() {
       />
       <Container className="grid gap-10 py-16 lg:grid-cols-2">
         <div className="space-y-6">
+          <ProofChips className="justify-start" />
           <div className="glass-card rounded-[1.5rem] p-6">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Email</p>
             <p className="mt-3 text-ink">{company.emails.corporate} (Corporate)</p>
@@ -32,6 +37,9 @@ export default function ContactPage() {
                 <li key={p}>{p}</li>
               ))}
             </ul>
+            <ButtonLink href={whatsappHref(whatsappPresets.rfq)} className="mt-4">
+              Prefill WhatsApp
+            </ButtonLink>
           </div>
           {company.offices.map((o) => (
             <div key={o.city} className="glass-card rounded-[1.5rem] p-6">

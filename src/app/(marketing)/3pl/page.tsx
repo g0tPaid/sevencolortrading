@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { JsonLd } from "@/components/seo/json-ld";
+import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
 import { CtaBand } from "@/components/shared/page-shell";
+import { ProofChips } from "@/components/trust/proof-chips";
 import { Container } from "@/components/ui/primitives";
 import { company } from "@/lib/content";
 import { absoluteUrl, threePlFaqJsonLd, threePlPageJsonLd } from "@/lib/seo";
 import { fulfillment, fulfillmentFaqs, fulfillmentHubs, fulfillmentSteps } from "@/lib/v2-content";
+import { whatsappPresets } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
   title: "3PL Warehouses in Xiamen & Dubai",
@@ -34,6 +37,7 @@ export default function ThreePlPage() {
     <>
       <JsonLd data={threePlPageJsonLd()} />
       <JsonLd data={threePlFaqJsonLd()} />
+      <WhatsAppPrefill message={whatsappPresets.threePl} />
       <Container className="pb-16 pt-28 sm:pt-32">
         <p className="section-kicker">
           Seven Color Trading Co Ltd · own warehouses · not a broker
@@ -51,6 +55,7 @@ export default function ThreePlPage() {
           Legal entity {company.legalNameFull}. DUNS {company.credentials.dunsNumber}. Desks and warehouses in{" "}
           {fulfillmentHubs.map((h) => `${h.city}, ${h.country}`).join(" and ")}.
         </p>
+        <ProofChips className="mt-6 justify-start" />
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {fulfillmentSteps.map((step) => (
@@ -99,6 +104,7 @@ export default function ThreePlPage() {
       <CtaBand
         title="Talk to the 3PL desk"
         description="Tell us the SKU, quantity, and whether stock should sit in Xiamen or Dubai. A relationship manager replies within 24 hours."
+        whatsappMessage={whatsappPresets.threePl}
       />
     </>
   );

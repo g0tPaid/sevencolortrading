@@ -2,17 +2,17 @@ import type { Metadata } from "next";
 import { ArrowUpRight } from "lucide-react";
 import { JsonLd } from "@/components/seo/json-ld";
 import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
-import { SampleNote } from "@/components/trust/sample-note";
+import { ProofChips } from "@/components/trust/proof-chips";
 import { TrustCta } from "@/components/trust/trust-cta";
-import { Container } from "@/components/ui/primitives";
-import { reviewsIntro, sampleReviews } from "@/lib/reviews";
+import { ButtonLink, Container } from "@/components/ui/primitives";
+import { reviews, reviewsIntro } from "@/lib/reviews";
 import { absoluteUrl, reviewsPageJsonLd } from "@/lib/seo";
-import { whatsappPresets } from "@/lib/whatsapp";
+import { whatsappHref, whatsappPresets } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
   title: "Reviews",
   description:
-    "Buyer notes about Seven Color Trading / sourcing.center — China factory sourcing, own 3PL in Xiamen and Dubai, and hosted factory visits. Sample cards until approved quotes are pasted.",
+    "Anonymized buyer notes about Seven Color Trading / sourcing.center — China factory sourcing, own 3PL in Xiamen and Dubai, and hosted factory visits. Ask for references on WhatsApp.",
   alternates: { canonical: absoluteUrl("/reviews") },
   openGraph: {
     title: "Reviews | Sourcing Center",
@@ -34,20 +34,15 @@ export default function ReviewsPage() {
           {reviewsIntro.title}
         </h1>
         <p className="mt-4 max-w-2xl text-muted sm:text-lg">{reviewsIntro.description}</p>
-        <SampleNote>{reviewsIntro.sampleNote}</SampleNote>
+        <ProofChips className="mt-6 justify-start" />
 
         <div className="mt-10 grid gap-4 md:grid-cols-2">
-          {sampleReviews.map((review) => (
+          {reviews.map((review) => (
             <article key={review.id} className="glass-card flex flex-col rounded-[1.5rem] p-7">
               <div className="flex flex-wrap items-center gap-2">
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
-                  {review.source}
+                  {review.market}
                 </p>
-                {review.sample ? (
-                  <span className="rounded-full bg-accent-soft px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-accent">
-                    Sample
-                  </span>
-                ) : null}
                 {review.date ? <span className="text-xs text-muted">{review.date}</span> : null}
               </div>
               <blockquote className="mt-4 flex-1 text-base leading-relaxed text-ink">
@@ -55,21 +50,32 @@ export default function ReviewsPage() {
               </blockquote>
               <footer className="mt-6 flex items-end justify-between gap-3">
                 <div>
-                  <p className="text-sm font-semibold text-ink">{review.name}</p>
-                  <p className="mt-0.5 text-xs text-muted">{review.handle}</p>
+                  <p className="text-sm font-semibold text-ink">{review.firstName}</p>
+                  <p className="mt-0.5 text-xs text-muted">
+                    {review.role} · {review.market}
+                  </p>
                 </div>
-                <a
-                  href={review.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-xs font-medium text-muted underline-offset-4 hover:text-ink hover:underline"
-                >
-                  {review.source}
-                  <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
-                </a>
+                {review.approved && review.permalink ? (
+                  <a
+                    href={review.permalink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-xs font-medium text-muted underline-offset-4 hover:text-ink hover:underline"
+                  >
+                    {review.sourceLabel}
+                    <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+                  </a>
+                ) : null}
               </footer>
             </article>
           ))}
+        </div>
+
+        <div className="glass-card mt-8 rounded-[1.5rem] px-6 py-5 sm:flex sm:items-center sm:justify-between sm:gap-6">
+          <p className="max-w-xl text-sm leading-relaxed text-muted">{reviewsIntro.moreLine}</p>
+          <ButtonLink href={whatsappHref(whatsappPresets.reviews)} className="mt-4 sm:mt-0">
+            WhatsApp for references
+          </ButtonLink>
         </div>
       </Container>
       <TrustCta

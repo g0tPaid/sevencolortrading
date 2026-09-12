@@ -5,6 +5,7 @@ import {
   isExportExperience,
   type CreateApplicationInput,
 } from "@/lib/factory-applications";
+import { notifyFactoryApplication } from "@/lib/factory-notify";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -146,5 +147,8 @@ export async function POST(request: Request) {
   };
 
   const created = await createApplication(input);
+  void notifyFactoryApplication(created).catch((error) => {
+    console.error("[factory-notify] unexpected", error);
+  });
   return NextResponse.json({ ok: true, id: created.id });
 }

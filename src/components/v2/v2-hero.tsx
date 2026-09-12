@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Lightbulb, Package, Plane, Search, ShieldCheck, Warehouse } from "lucide-react";
 import { SourcingLogo } from "@/components/brand/sourcing-logo";
+import { ProofChips } from "@/components/trust/proof-chips";
 import { Container } from "@/components/ui/primitives";
 import { company } from "@/lib/content";
 import { companyHighlights } from "@/lib/v2-content";
@@ -85,12 +86,11 @@ export function V2Hero() {
           className="glass-chip mx-auto mt-4 inline-flex items-center justify-center gap-2.5 rounded-full px-3.5 py-2 sm:mt-5"
         >
           <Image
-            src="/dun-bradstreet.png"
+            src="/dnb-mark.png"
             alt="Dun & Bradstreet"
             width={48}
             height={40}
             className="h-7 w-auto object-contain sm:h-8"
-            unoptimized
           />
           <div className="text-left">
             <p className="text-[11px] font-medium text-ink sm:text-xs">
@@ -195,6 +195,8 @@ export function V2Hero() {
             </Link>
           </motion.div>
         </motion.div>
+
+        <ProofChips className="mt-5" />
 
         <motion.div
           initial={{ opacity: 0, y: 12 }}

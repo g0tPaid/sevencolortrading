@@ -1,3 +1,4 @@
+import { ProofChips } from "@/components/trust/proof-chips";
 import { ButtonLink, Container } from "@/components/ui/primitives";
 import { whatsappHref } from "@/lib/whatsapp";
 
@@ -22,6 +23,7 @@ export function TrustCta({
               WhatsApp
             </ButtonLink>
           </div>
+          <ProofChips className="mt-6 justify-start" />
         </div>
       </Container>
     </section>
