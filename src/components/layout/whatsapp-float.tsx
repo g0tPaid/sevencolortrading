@@ -1,9 +1,9 @@
 "use client";
 
-const WHATSAPP = "8618059262730";
-const MESSAGE = encodeURIComponent(
-  "Hi Seven Color — I'd like help sourcing from China via Sourcing Center.",
-);
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useWhatsAppPrefill } from "@/components/layout/whatsapp-context";
+import { DEFAULT_WHATSAPP_MESSAGE, whatsappHref } from "@/lib/whatsapp";
 
 function WhatsAppGlyph({ className }: { className?: string }) {
   return (
@@ -17,9 +17,21 @@ function WhatsAppGlyph({ className }: { className?: string }) {
 }
 
 export function WhatsAppFloat() {
+  const pathname = usePathname();
+  const { message: contextMessage } = useWhatsAppPrefill();
+  const [queryText, setQueryText] = useState<string | null>(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const next = params.get("text")?.trim();
+    setQueryText(next || null);
+  }, [pathname]);
+
+  const href = whatsappHref(queryText ?? contextMessage ?? DEFAULT_WHATSAPP_MESSAGE);
+
   return (
     <a
-      href={`https://wa.me/${WHATSAPP}?text=${MESSAGE}`}
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"

@@ -1,32 +1,67 @@
 import type { Metadata } from "next";
-import { PageHero, CtaBand } from "@/components/shared/page-shell";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { JsonLd } from "@/components/seo/json-ld";
+import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
+import { SampleNote } from "@/components/trust/sample-note";
+import { TrustCta } from "@/components/trust/trust-cta";
 import { Container } from "@/components/ui/primitives";
-import { caseStudies } from "@/lib/content";
+import { caseStudies, caseStudiesIntro } from "@/lib/case-studies";
+import { absoluteUrl, caseStudiesIndexJsonLd } from "@/lib/seo";
+import { whatsappPresets } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
   title: "Case Studies",
-  description: "Selected Seven Color sourcing programs across retail, ecommerce, and hospitality.",
+  description:
+    "Example programs from Seven Color Trading / sourcing.center — China factory sourcing, Xiamen and Dubai 3PL, and hosted factory visits. Illustrative metrics until approved client facts are pasted.",
+  alternates: { canonical: absoluteUrl("/case-studies") },
+  openGraph: {
+    title: "Case Studies | Sourcing Center",
+    description: caseStudiesIntro.description,
+    url: absoluteUrl("/case-studies"),
+    type: "website",
+  },
 };
 
 export default function CaseStudiesPage() {
   return (
     <>
-      <PageHero
-        eyebrow="Case studies"
-        title="Outcomes, not slogans"
-        description="Representative programs showing how the desk operates under real constraints."
-      />
-      <Container className="grid gap-4 py-16 lg:grid-cols-3">
-        {caseStudies.map((c) => (
-          <article key={c.title} className="glass-card rounded-[1.5rem] p-7">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">{c.industry}</p>
-            <h2 className="mt-3 font-display text-xl font-semibold text-ink">{c.title}</h2>
-            <p className="mt-3 text-sm font-medium text-ink">{c.result}</p>
-            <p className="mt-3 text-sm leading-relaxed text-muted">{c.summary}</p>
-          </article>
-        ))}
+      <JsonLd data={caseStudiesIndexJsonLd()} />
+      <WhatsAppPrefill message={whatsappPresets.caseStudies} />
+      <Container className="pb-10 pt-28 sm:pt-32">
+        <p className="section-kicker">{caseStudiesIntro.eyebrow}</p>
+        <h1 className="mt-3 max-w-3xl font-display text-3xl font-semibold tracking-tight text-ink sm:text-5xl">
+          {caseStudiesIntro.title}
+        </h1>
+        <p className="mt-4 max-w-2xl text-muted sm:text-lg">{caseStudiesIntro.description}</p>
+        <SampleNote>{caseStudiesIntro.sampleNote}</SampleNote>
+
+        <div className="mt-10 grid gap-4 lg:grid-cols-3">
+          {caseStudies.map((study) => (
+            <Link
+              key={study.slug}
+              href={`/case-studies/${study.slug}`}
+              className="glass-card glass-card-hover flex flex-col rounded-[1.5rem] p-7"
+            >
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
+                {study.industry}
+              </p>
+              <h2 className="mt-3 font-display text-xl font-semibold text-ink">{study.title}</h2>
+              <p className="mt-3 text-sm font-medium text-ink">{study.result}</p>
+              <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">{study.summary}</p>
+              <span className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-ink">
+                Read case study
+                <ArrowUpRight className="h-4 w-4" aria-hidden />
+              </span>
+            </Link>
+          ))}
+        </div>
       </Container>
-      <CtaBand />
+      <TrustCta
+        title="Want a program like these?"
+        description="Tell the desk the SKU, quantity, and whether you need factory matching, 3PL, or a Xiamen visit."
+        whatsappMessage={whatsappPresets.caseStudies}
+      />
     </>
   );
 }

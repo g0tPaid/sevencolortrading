@@ -13,6 +13,7 @@ const pageLinks = [
   { href: "/dropshipping", label: "Dropship" },
   { href: "/#visit", label: "Visit China" },
   { href: "/knowledge", label: "Knowledge" },
+  { href: "/reviews", label: "Reviews" },
 ];
 
 const homeLinks = [
@@ -59,7 +60,7 @@ export function V2Nav() {
               key={l.href}
               href={l.href}
               className={cn(
-                "rounded-full px-3 py-1.5 text-[13px] transition",
+                "rounded-full px-2.5 py-1.5 text-[13px] transition",
                 l.highlight
                   ? "font-semibold text-accent hover:bg-accent-soft"
                   : "text-muted hover:bg-white/50 hover:text-ink",

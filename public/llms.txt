@@ -99,6 +99,8 @@ Hours: Monday–Sunday, 8:30 AM–7:00 PM (GST / CST).
 - [Own-warehouse dropship guide](https://sourcing.center/knowledge/dropshipping-from-china-own-warehouse)
 - [Hosted factory visit guide](https://sourcing.center/knowledge/factory-visit-xiamen-hosted-sourcing-trip)
 - [3PL vs broker vs FBA](https://sourcing.center/knowledge/china-3pl-vs-broker-vs-fba)
+- [Reviews](https://sourcing.center/reviews): Buyer notes (sample cards until approved quotes are pasted)
+- [Case studies](https://sourcing.center/case-studies): Example programs — factory sourcing, Xiamen/Dubai 3PL, hosted QC visit
 - [llms.txt](https://sourcing.center/llms.txt): This file
 
 ## Optional

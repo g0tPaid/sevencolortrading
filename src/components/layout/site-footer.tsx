@@ -54,6 +54,7 @@ export function SiteFooter() {
                 ["How it works", "/how-it-works"],
                 ["Case studies", "/case-studies"],
                 ["Knowledge", "/knowledge"],
+                ["Reviews", "/reviews"],
                 ["Contact", "/contact"],
                 ["Visit China", "/visit"],
                 ["3PL", "/3pl"],
