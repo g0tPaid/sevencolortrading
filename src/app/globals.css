@@ -505,8 +505,8 @@ body::before {
 
 .whatsapp-float-icon {
   display: inline-flex;
-  height: 2rem;
-  width: 2rem;
+  height: 2.5rem;
+  width: 2.5rem;
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
@@ -517,6 +517,13 @@ body::before {
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.4) inset,
     0 8px 16px rgba(37, 211, 102, 0.34);
+}
+
+@media (min-width: 640px) {
+  .whatsapp-float-icon {
+    height: 2rem;
+    width: 2rem;
+  }
 }
 
 .dark .whatsapp-float {
