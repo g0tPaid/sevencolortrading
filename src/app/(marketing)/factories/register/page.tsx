@@ -30,23 +30,53 @@ export const metadata: Metadata = {
   },
 };
 
-const points = [
+const joinBenefits = [
   {
-    title: "Verified factories only",
-    zh: "仅核实工厂",
-    text: "We shortlist manufacturers for Sourcing Center buyers. License, capacity, and quality still get checked on the ground in China.",
+    en: "Reach overseas buyers through Seven Color Trading’s sourcing network.",
+    zh: "对接海外买家：进入已通过 Seven Color Trading 采购的进口商与品牌的供应商短名单。",
   },
   {
-    title: "Not a public marketplace",
-    zh: "并非公开集市",
-    text: "Submitting this form does not list you for anyone to browse. The Xiamen desk reviews applications and contacts factories when there is a buyer fit.",
+    en: "Get considered for buyer RFQs and hosted factory visits from the Xiamen desk.",
+    zh: "询盘与访厂：有机会承接买家询盘，并纳入厦门团队安排的访华验厂行程。",
   },
   {
-    title: "Supply our programs",
-    zh: "对接我们的采购项目",
-    text: "Goods move through Seven Color Trading Co Ltd — sourcing, QC, and own 3PL in Xiamen and Dubai — not through an anonymous catalog.",
+    en: "Partner with a China–UAE trade company that already runs sourcing, photo/video QC, and 3PL hubs in Xiamen and Dubai.",
+    zh: "中阿贸易伙伴：与已负责采购、验货，并在厦门、迪拜自营仓储（3PL）的贸易公司合作。",
   },
-];
+  {
+    en: "Applications are reviewed for license, capacity, and buyer fit — not an automatic public listing.",
+    zh: "审核入驻：厦门团队审核执照、产能与匹配度；提交申请不会自动公开展示。",
+  },
+] as const;
+
+function FactoryJoinBrief() {
+  return (
+    <article className="glass-card rounded-[1.5rem] p-6 sm:p-7">
+      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">为什么入驻</p>
+      <h2 className="mt-2 font-display text-xl font-semibold text-ink sm:text-2xl">Why join</h2>
+      <p className="mt-3 text-sm leading-relaxed text-muted">
+        Apply to join Seven Color Trading’s vendor shortlist for Sourcing Center buyers. We are a
+        China–UAE sourcing partner — not a public marketplace.
+      </p>
+      <p className="mt-1.5 text-sm leading-relaxed text-muted" lang="zh-CN">
+        入驻 Seven Color Trading 供应商库，对接 Sourcing Center 的海外买家。我们是中阿采购合作方，不是公开集市。
+      </p>
+      <ul className="mt-5 space-y-3.5">
+        {joinBenefits.map((item) => (
+          <li key={item.en} className="flex gap-3">
+            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden />
+            <div>
+              <p className="text-sm leading-relaxed text-ink">{item.en}</p>
+              <p className="mt-0.5 text-sm leading-relaxed text-muted" lang="zh-CN">
+                {item.zh}
+              </p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </article>
+  );
+}
 
 export default function FactoryRegisterPage() {
   return (
@@ -68,14 +98,8 @@ export default function FactoryRegisterPage() {
         </p>
 
         <div className="mt-10 grid items-start gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="space-y-4">
-            {points.map((point) => (
-              <article key={point.title} className="glass-card rounded-[1.5rem] p-6">
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">{point.zh}</p>
-                <h2 className="mt-2 font-display text-xl font-semibold text-ink">{point.title}</h2>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{point.text}</p>
-              </article>
-            ))}
+          <div className="lg:sticky lg:top-28">
+            <FactoryJoinBrief />
           </div>
           <FactoryRegisterForm />
         </div>
