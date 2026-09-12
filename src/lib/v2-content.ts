@@ -1,14 +1,5 @@
 /** Version 2 landing content — company facts always from src/lib/content.ts (v1) */
 
-export const heroExamples = [
-  "Portable blender",
-  "Luxury packaging",
-  "LED mirror",
-  "Hotel furniture",
-  "Wedding dress",
-  "Pet accessories",
-] as const;
-
 /** Brand-new invention examples for the ideation search */
 export const newIdeaExamples = [
   "A foldable travel steamer for silk",
