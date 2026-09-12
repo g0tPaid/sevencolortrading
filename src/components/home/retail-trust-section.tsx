@@ -24,11 +24,12 @@ export function RetailTrustSection() {
             </p>
             <div className="flex items-center gap-4">
               <Image
-                src="/dnb-mark.png"
+                src="/dun-bradstreet.png"
                 alt="Dun & Bradstreet"
                 width={88}
                 height={76}
                 className="h-[76px] w-auto object-contain"
+                unoptimized
               />
               <div>
                 <p className="font-display text-2xl font-semibold text-ink">

@@ -86,11 +86,12 @@ export function V2Hero() {
           className="glass-chip mx-auto mt-4 inline-flex items-center justify-center gap-2.5 rounded-full px-3.5 py-2 sm:mt-5"
         >
           <Image
-            src="/dnb-mark.png"
+            src="/dun-bradstreet.png"
             alt="Dun & Bradstreet"
             width={48}
             height={40}
             className="h-7 w-auto object-contain sm:h-8"
+            unoptimized
           />
           <div className="text-left">
             <p className="text-[11px] font-medium text-ink sm:text-xs">

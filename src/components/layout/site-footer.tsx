@@ -115,7 +115,7 @@ export function SiteFooter() {
             <div className="mt-3 flex items-center gap-3">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/dnb-mark.png"
+                src="/dun-bradstreet.png"
                 alt="Dun & Bradstreet"
                 width={48}
                 height={40}
