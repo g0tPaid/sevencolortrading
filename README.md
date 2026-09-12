@@ -41,3 +41,17 @@ Railway / production env vars:
 
 In development, unset credentials fall back to `admin` / `admin`.
 
+## Factory application alerts
+
+When a factory submits `/factories/register`, the application is **always saved**. Ops notify is best-effort and must not fail the public form.
+
+Railway / production env (all optional):
+
+- `FACTORY_NOTIFY_WEBHOOK` — `POST` JSON (`text` + `application`) to Slack, Discord, Make, or a WhatsApp automation
+- `FACTORY_NOTIFY_EMAIL` — recipient address for the ops alert
+- `RESEND_API_KEY` — required to actually send the email (https://api.resend.com/emails)
+- `FACTORY_NOTIFY_FROM` — optional From address (defaults to `info@sevencolor.online`)
+
+If a notify call fails, the API still returns `{ ok: true }` and logs `[factory-notify]`.
+
+

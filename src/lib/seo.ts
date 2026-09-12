@@ -37,6 +37,9 @@ export const seoKeywords = [
   "Amazon seller China warehouse",
   "China sourcing reviews",
   "Seven Color Trading reviews",
+  "sourcing agent vs Alibaba",
+  "China 3PL vs freight",
+  "factory visit vs QC",
 ];
 
 export const defaultDescription =
@@ -333,5 +336,47 @@ export function caseStudyPageJsonLd(study: { slug: string; title: string; summar
       { name: "Case studies", path: "/case-studies" },
       { name: study.title, path: `/case-studies/${study.slug}` },
     ]),
+  };
+}
+
+export function comparePageFaqJsonLd(page: {
+  slug: string;
+  title: string;
+  description: string;
+  faqs: Array<{ q: string; a: string }>;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${siteUrl}/compare/${page.slug}#webpage`,
+        url: `${siteUrl}/compare/${page.slug}`,
+        name: `${page.title} | Sourcing Center`,
+        description: page.description,
+        isPartOf: { "@id": `${siteUrl}/#website` },
+        speakable: {
+          "@type": "SpeakableSpecification",
+          cssSelector: ["h1", "h2", "[data-seo-answer]"],
+        },
+        breadcrumb: breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Compare", path: "/compare" },
+          { name: page.title, path: `/compare/${page.slug}` },
+        ]),
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${siteUrl}/compare/${page.slug}#faq`,
+        mainEntity: page.faqs.map((item) => ({
+          "@type": "Question",
+          name: item.q,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.a,
+          },
+        })),
+      },
+    ],
   };
 }

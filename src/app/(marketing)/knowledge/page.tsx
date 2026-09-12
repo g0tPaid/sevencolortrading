@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
 import { PageHero, CtaBand } from "@/components/shared/page-shell";
+import { whatsappPresets } from "@/lib/whatsapp";
 import { Container } from "@/components/ui/primitives";
 import { caseStudies } from "@/lib/case-studies";
+import { comparePages } from "@/lib/compare";
 import { knowledgeArticles } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -14,6 +17,7 @@ export const metadata: Metadata = {
 export default function KnowledgePage() {
   return (
     <>
+      <WhatsAppPrefill message={whatsappPresets.rfq} />
       <PageHero
         eyebrow="Knowledge center"
         title="Procurement notes from the field"
@@ -31,9 +35,38 @@ export default function KnowledgePage() {
       <Container className="pb-8">
         <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
           <div>
+            <p className="section-kicker">Compare</p>
+            <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+              Answer-shaped comparisons
+            </h2>
+          </div>
+          <Link
+            href="/compare"
+            className="text-sm font-medium text-ink underline decoration-accent/40 underline-offset-4"
+          >
+            All comparisons
+          </Link>
+        </div>
+        <div className="mb-16 grid gap-4 lg:grid-cols-3">
+          {comparePages.map((page) => (
+            <Link
+              key={page.slug}
+              href={`/compare/${page.slug}`}
+              className="glass-card glass-card-hover rounded-[1.5rem] p-7"
+            >
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
+                {page.eyebrow}
+              </p>
+              <h3 className="mt-3 font-display text-xl font-semibold text-ink">{page.title}</h3>
+              <p className="mt-3 text-sm text-muted">{page.description}</p>
+            </Link>
+          ))}
+        </div>
+        <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
+          <div>
             <p className="section-kicker">Case studies</p>
             <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
-              Example programs from the desk
+              Example engagements from the desk
             </h2>
           </div>
           <Link

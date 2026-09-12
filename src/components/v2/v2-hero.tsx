@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Lightbulb, Package, Plane, Search, ShieldCheck, Warehouse } from "lucide-react";
 import { SourcingLogo } from "@/components/brand/sourcing-logo";
+import { ProofChips } from "@/components/trust/proof-chips";
 import { Container } from "@/components/ui/primitives";
 import { company } from "@/lib/content";
 import { companyHighlights } from "@/lib/v2-content";
@@ -195,6 +196,8 @@ export function V2Hero() {
             </Link>
           </motion.div>
         </motion.div>
+
+        <ProofChips className="mt-5" />
 
         <motion.div
           initial={{ opacity: 0, y: 12 }}

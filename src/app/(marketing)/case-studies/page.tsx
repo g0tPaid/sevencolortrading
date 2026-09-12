@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { JsonLd } from "@/components/seo/json-ld";
 import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
+import { ProofChips } from "@/components/trust/proof-chips";
 import { SampleNote } from "@/components/trust/sample-note";
 import { TrustCta } from "@/components/trust/trust-cta";
 import { Container } from "@/components/ui/primitives";
@@ -13,7 +14,7 @@ import { whatsappPresets } from "@/lib/whatsapp";
 export const metadata: Metadata = {
   title: "Case Studies",
   description:
-    "Example programs from Seven Color Trading / sourcing.center — China factory sourcing, Xiamen and Dubai 3PL, and hosted factory visits. Illustrative metrics until approved client facts are pasted.",
+    "Example engagements from Seven Color Trading / sourcing.center — China factory sourcing, Xiamen and Dubai 3PL, and hosted factory visits. Conservative anonymized outcomes.",
   alternates: { canonical: absoluteUrl("/case-studies") },
   openGraph: {
     title: "Case Studies | Sourcing Center",
@@ -34,7 +35,8 @@ export default function CaseStudiesPage() {
           {caseStudiesIntro.title}
         </h1>
         <p className="mt-4 max-w-2xl text-muted sm:text-lg">{caseStudiesIntro.description}</p>
-        <SampleNote>{caseStudiesIntro.sampleNote}</SampleNote>
+        <SampleNote>{caseStudiesIntro.exampleNote}</SampleNote>
+        <ProofChips className="mt-5 justify-start" />
 
         <div className="mt-10 grid gap-4 lg:grid-cols-3">
           {caseStudies.map((study) => (
@@ -43,14 +45,21 @@ export default function CaseStudiesPage() {
               href={`/case-studies/${study.slug}`}
               className="glass-card glass-card-hover flex flex-col rounded-[1.5rem] p-7"
             >
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
-                {study.industry}
-              </p>
+              <div className="flex flex-wrap items-center gap-2">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
+                  {study.industry}
+                </p>
+                {study.exampleEngagement ? (
+                  <span className="rounded-full bg-accent-soft px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-accent">
+                    Example engagement
+                  </span>
+                ) : null}
+              </div>
               <h2 className="mt-3 font-display text-xl font-semibold text-ink">{study.title}</h2>
               <p className="mt-3 text-sm font-medium text-ink">{study.result}</p>
               <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">{study.summary}</p>
               <span className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-ink">
-                Read case study
+                Problem → Result
                 <ArrowUpRight className="h-4 w-4" aria-hidden />
               </span>
             </Link>

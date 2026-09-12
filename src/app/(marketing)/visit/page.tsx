@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import { ChinaVisitForm } from "@/components/v2/china-visit-form";
+import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
 import { CtaBand } from "@/components/shared/page-shell";
+import { ProofChips } from "@/components/trust/proof-chips";
 import { Container } from "@/components/ui/primitives";
 import { company } from "@/lib/content";
 import { JsonLd } from "@/components/seo/json-ld";
 import { absoluteUrl, visitFaqJsonLd } from "@/lib/seo";
 import { chinaVisit, chinaVisitDays, chinaVisitIncludes } from "@/lib/v2-content";
+import { whatsappPresets } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
   title: "Schedule a Factory Visit in China",
@@ -29,6 +32,7 @@ export default function VisitPage() {
   return (
     <>
       <JsonLd data={visitFaqJsonLd()} />
+      <WhatsAppPrefill message={whatsappPresets.factoryVisit} />
       <Container className="pb-16 pt-28 sm:pt-32">
         <p className="section-kicker">
           {company.legalName} · Xiamen desk
@@ -37,6 +41,7 @@ export default function VisitPage() {
           {chinaVisit.title}
         </h1>
         <p className="mt-4 max-w-2xl text-muted sm:text-lg">{chinaVisit.description}</p>
+        <ProofChips className="mt-6 justify-start" />
         <div className="mt-10 grid items-start gap-8 lg:grid-cols-[1fr_1fr]">
           <div className="space-y-4">
             {chinaVisitDays.map((day) => (
@@ -59,6 +64,7 @@ export default function VisitPage() {
       <CtaBand
         title="Prefer WhatsApp first?"
         description="Message the China desk and we will lock dates the same day."
+        whatsappMessage={whatsappPresets.factoryVisit}
       />
     </>
   );

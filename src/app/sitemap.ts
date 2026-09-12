@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { caseStudies } from "@/lib/case-studies";
+import { comparePages } from "@/lib/compare";
 import { knowledgeArticles } from "@/lib/content";
 import { siteUrl } from "@/lib/seo";
 
@@ -22,6 +23,8 @@ const routes: Array<{ path: string; priority: number; changeFrequency: MetadataR
   { path: "/case-studies", priority: 0.7, changeFrequency: "monthly" },
   { path: "/reviews", priority: 0.7, changeFrequency: "weekly" },
   { path: "/knowledge", priority: 0.7, changeFrequency: "weekly" },
+  { path: "/compare", priority: 0.72, changeFrequency: "weekly" },
+  { path: "/updates", priority: 0.45, changeFrequency: "weekly" },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -54,5 +57,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.65,
   }));
 
-  return [...staticRoutes, ...articles, ...studies];
+  const compares = comparePages.map((page) => ({
+    url: `${siteUrl}/compare/${page.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.74,
+  }));
+
+  return [...staticRoutes, ...articles, ...studies, ...compares];
 }
