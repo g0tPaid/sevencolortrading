@@ -35,8 +35,10 @@ export function V2Nav() {
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
+    document.body.dataset.navOpen = open ? "true" : "";
     return () => {
       document.body.style.overflow = "";
+      delete document.body.dataset.navOpen;
     };
   }, [open]);
 
@@ -91,7 +93,7 @@ export function V2Nav() {
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            className="glass-panel pointer-events-auto mx-auto mt-2 max-w-6xl rounded-[1.75rem] p-3 sm:p-4 lg:hidden"
+            className="glass-sheet pointer-events-auto mx-auto mt-2 max-w-6xl rounded-[1.75rem] p-3 sm:p-4 lg:hidden"
           >
             <div className="flex flex-col">
               {pageLinks.map((l) => (
