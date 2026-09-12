@@ -33,12 +33,12 @@ export default function HomePage() {
       <WhatsAppPrefill message={whatsappPresets.home} />
       <V2Hero />
       <UpdatesStrip />
+      <V2Workflow />
       <V2Ideation />
       <V2Network />
       <V2ThreePl />
       <V2Dropshipping />
       <V2Why />
-      <V2Workflow />
       <V2Trust />
       <V2ChinaVisit />
       <V2Cta />
