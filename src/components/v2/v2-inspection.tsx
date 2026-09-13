@@ -4,7 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight, ClipboardCheck } from "lucide-react";
 import { Container } from "@/components/ui/primitives";
-import { inspection, inspectionServices } from "@/lib/v2-content";
+import { inspection, inspectionPrice, inspectionServices } from "@/lib/v2-content";
 import { whatsappHref, whatsappPresets } from "@/lib/whatsapp";
 
 export function V2Inspection() {
@@ -29,6 +29,16 @@ export function V2Inspection() {
               </span>
             </h2>
             <p className="mt-4 max-w-2xl text-paper/70 sm:text-lg">{inspection.description}</p>
+
+            <div className="glass-dark-solid mt-6 inline-flex flex-col gap-1 rounded-[1.35rem] px-5 py-4 sm:flex-row sm:items-baseline sm:gap-4 sm:px-6 sm:py-5">
+              <p className="font-display text-4xl font-semibold tracking-tight text-accent sm:text-5xl">
+                USD 110
+              </p>
+              <div>
+                <p className="font-display text-xl font-semibold text-paper">{inspectionPrice.period}</p>
+                <p className="mt-0.5 text-sm text-paper/65">{inspectionPrice.note}</p>
+              </div>
+            </div>
 
             <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
               {inspectionServices.map((item, i) => (

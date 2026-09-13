@@ -473,6 +473,13 @@ export const inspection = {
     "Seven Color inspectors walk the factory or our Xiamen warehouse: factory audits, pre-shipment (PSI), during production (DUPRO), loading supervision, and photo/video defect packs. Complementary to hosted visits, sourcing, and own-warehouse 3PL — not a remote-only checklist.",
 } as const;
 
+export const inspectionPrice = {
+  amount: "USD 110",
+  period: "/ day",
+  display: "USD 110 / day",
+  note: "Per inspector day · on the ground in China",
+} as const;
+
 export const inspectionServices = [
   {
     title: "Factory audits",
@@ -550,6 +557,10 @@ export const inspectionFaqs = [
   {
     q: "When should I book inspection vs a factory visit?",
     a: "Book inspection when you need proof on a lot you are already buying. Book a hosted visit when you need to see capacity and lock the standard in person. Many buyers visit once, then run PSI or DUPRO on later lots from the same desk.",
+  },
+  {
+    q: "How much does inspection cost?",
+    a: "USD 110 per inspector day for on-the-ground inspection in China. Message the desk with SKU, location, and spec to confirm how many days the job needs.",
   },
   {
     q: "How do I start an inspection?",

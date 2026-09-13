@@ -10,6 +10,7 @@ import { absoluteUrl, inspectionFaqJsonLd, inspectionPageJsonLd } from "@/lib/se
 import {
   inspection,
   inspectionFaqs,
+  inspectionPrice,
   inspectionServices,
   inspectionSteps,
   inspectionWhen,
@@ -58,7 +59,17 @@ export default function InspectionPage() {
           </span>
         </h1>
         <p className="mt-4 max-w-2xl text-muted sm:text-lg">{inspection.description}</p>
-        <p className="mt-4 max-w-2xl text-sm text-muted">
+        <aside className="glass-panel mt-8 max-w-xl rounded-[1.75rem] px-6 py-6 sm:px-8 sm:py-7">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">Price</p>
+          <p className="mt-2 font-display text-5xl font-semibold tracking-tight text-ink sm:text-6xl">
+            USD 110
+            <span className="ml-2 font-display text-2xl font-semibold text-muted sm:text-3xl">
+              {inspectionPrice.period}
+            </span>
+          </p>
+          <p className="mt-2 text-sm text-muted">{inspectionPrice.note}</p>
+        </aside>
+        <p className="mt-6 max-w-2xl text-sm text-muted">
           Legal entity {company.legalNameFull}. Inspectors work from the Xiamen, China desk — complementary
           to hosted factory visits, sourcing, and own-warehouse 3PL. We do not claim a third-party
           inspection accreditation on this page.
@@ -166,7 +177,7 @@ export default function InspectionPage() {
       </Container>
       <CtaBand
         title="Talk to the inspection desk"
-        description="Send the SKU, quantity, factory or warehouse location, and spec. A relationship manager in Xiamen replies within 24 hours."
+        description="USD 110 / day per inspector. Send the SKU, quantity, factory or warehouse location, and spec — a relationship manager in Xiamen replies within 24 hours."
         whatsappMessage={whatsappPresets.inspection}
       />
     </>
