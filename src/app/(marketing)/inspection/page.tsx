@@ -58,18 +58,18 @@ export default function InspectionPage() {
             {inspection.title}
           </span>
         </h1>
-        <p className="mt-4 max-w-2xl text-muted sm:text-lg">{inspection.description}</p>
-        <aside className="glass-panel mt-8 max-w-xl rounded-[1.75rem] px-6 py-6 sm:px-8 sm:py-7">
+        <p className="mt-4 max-w-2xl text-ink-soft sm:text-lg">{inspection.description}</p>
+        <aside className="glass-panel mt-8 max-w-xl rounded-[1.75rem] px-6 py-6 text-ink sm:px-8 sm:py-7">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">Price</p>
           <p className="mt-2 font-display text-5xl font-semibold tracking-tight text-ink sm:text-6xl">
-            USD 110
-            <span className="ml-2 font-display text-2xl font-semibold text-muted sm:text-3xl">
+            {inspectionPrice.amount}
+            <span className="ml-2 font-display text-2xl font-semibold text-ink-soft sm:text-3xl">
               {inspectionPrice.period}
             </span>
           </p>
-          <p className="mt-2 text-sm text-muted">{inspectionPrice.note}</p>
+          <p className="mt-2 text-sm leading-relaxed text-ink-soft">{inspectionPrice.note}</p>
         </aside>
-        <p className="mt-6 max-w-2xl text-sm text-muted">
+        <p className="mt-6 max-w-2xl text-sm text-ink-soft">
           Legal entity {company.legalNameFull}. Inspectors work from the Xiamen, China desk — complementary
           to hosted factory visits, sourcing, and own-warehouse 3PL. We do not claim a third-party
           inspection accreditation on this page.
@@ -87,7 +87,7 @@ export default function InspectionPage() {
             {inspectionServices.map((item) => (
               <article key={item.title} className="glass-card rounded-[1.5rem] p-6">
                 <h3 className="font-display text-xl font-semibold text-ink">{item.title}</h3>
-                <p className="mt-2 text-sm text-muted">{item.text}</p>
+                <p className="mt-2 text-sm leading-relaxed text-ink-soft">{item.text}</p>
               </article>
             ))}
           </div>
@@ -104,7 +104,7 @@ export default function InspectionPage() {
             {inspectionWhen.map((item) => (
               <article key={item.title} className="glass-card rounded-[1.5rem] p-6">
                 <h3 className="font-display text-xl font-semibold text-ink">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{item.text}</p>
+                <p className="mt-2 text-sm leading-relaxed text-ink-soft">{item.text}</p>
               </article>
             ))}
           </div>
@@ -124,7 +124,7 @@ export default function InspectionPage() {
                   {String(i + 1).padStart(2, "0")}
                 </p>
                 <h3 className="mt-2 font-display text-xl font-semibold text-ink">{step.title}</h3>
-                <p className="mt-2 text-sm text-muted">{step.text}</p>
+                <p className="mt-2 text-sm leading-relaxed text-ink-soft">{step.text}</p>
               </article>
             ))}
           </div>
@@ -141,7 +141,7 @@ export default function InspectionPage() {
             {inspectionFaqs.map((item) => (
               <div key={item.q} className="glass-card rounded-[1.5rem] p-6">
                 <dt className="font-display text-lg font-semibold text-ink">{item.q}</dt>
-                <dd className="mt-2 text-sm leading-relaxed text-muted" data-seo-answer>
+                <dd className="mt-2 text-sm leading-relaxed text-ink-soft" data-seo-answer>
                   {item.a}
                 </dd>
               </div>
@@ -149,7 +149,7 @@ export default function InspectionPage() {
           </dl>
         </section>
 
-        <p className="mt-10 text-sm text-muted">
+        <p className="mt-10 text-sm text-ink-soft">
           Deciding between flying in and a lot-level check?{" "}
           <Link
             href="/compare/factory-visit-vs-remote-qc"
