@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { ChinaVisitForm } from "@/components/v2/china-visit-form";
 import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
 import { CtaBand } from "@/components/shared/page-shell";
@@ -57,6 +58,23 @@ export default function VisitPage() {
                 </li>
               ))}
             </ul>
+            <p className="mt-4 text-sm text-muted">
+              Need a lot-level check without flying?{" "}
+              <Link
+                href="/inspection"
+                className="font-medium text-ink underline decoration-accent/40 underline-offset-4"
+              >
+                On-the-ground inspection
+              </Link>{" "}
+              from the same Xiamen desk — or compare{" "}
+              <Link
+                href="/compare/factory-visit-vs-remote-qc"
+                className="font-medium text-ink underline decoration-accent/40 underline-offset-4"
+              >
+                visit vs QC
+              </Link>
+              .
+            </p>
           </div>
           <ChinaVisitForm />
         </div>

@@ -184,13 +184,13 @@ export const comparePages: ComparePage[] = [
       },
       {
         q: "How do I book either path?",
-        a: "Visit: sourcing.center/visit or WhatsApp the China desk (+86 180 5926 2730). Remote QC starts from an RFQ — the relationship manager attaches the inspection pack to the PO.",
+        a: "Visit: sourcing.center/visit or WhatsApp the China desk (+86 180 5926 2730). On-the-ground inspection (PSI / DUPRO / loading) starts at sourcing.center/inspection — the relationship manager attaches the evidence pack to the PO.",
       },
     ],
     related: [
       { href: "/visit", label: "Schedule a China visit" },
       { href: "/case-studies/factory-visit-qc", label: "Visit example engagement" },
-      { href: "/quality-inspection", label: "Quality inspection" },
+      { href: "/inspection", label: "Inspection services" },
     ],
     whatsappPreset: "compareVisit",
   },

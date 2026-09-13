@@ -145,7 +145,14 @@ export default async function KnowledgeArticlePage({ params }: { params: Promise
                 .
               </Bullet>
               <Bullet>
-                Hosted factory visit:{" "}
+                On-the-ground inspection:{" "}
+                <Link
+                  href="/inspection"
+                  className="font-medium text-ink underline decoration-accent/40 underline-offset-4"
+                >
+                  sourcing.center/inspection
+                </Link>
+                · Hosted factory visit:{" "}
                 <Link href="/visit" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
                   sourcing.center/visit
                 </Link>
