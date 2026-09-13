@@ -8,6 +8,7 @@ import { V2Ideation } from "@/components/v2/v2-ideation";
 import { V2Network } from "@/components/v2/v2-network";
 import { V2ThreePl } from "@/components/v2/v2-3pl";
 import { V2Dropshipping } from "@/components/v2/v2-dropshipping";
+import { V2Inspection } from "@/components/v2/v2-inspection";
 import { V2Trust } from "@/components/v2/v2-trust";
 import { V2Why } from "@/components/v2/v2-why";
 import { V2Workflow } from "@/components/v2/v2-workflow";
@@ -38,6 +39,7 @@ export default function HomePage() {
       <V2Network />
       <V2ThreePl />
       <V2Dropshipping />
+      <V2Inspection />
       <V2Why />
       <V2Trust />
       <V2ChinaVisit />

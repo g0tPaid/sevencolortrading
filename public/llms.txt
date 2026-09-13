@@ -21,6 +21,15 @@ Typical fit:
 - Sellers who want receive→store→pick→pack→ship in operator-owned warehouses in Xiamen (China) and Dubai / Al Ain (UAE)
 - DTC / Amazon / Shopify-style sellers dropshipping from own stock after China sourcing
 - Buyers who want a hosted factory visit + warehouse walk-through in Xiamen on the same desk
+- Buyers who need on-the-ground inspection in China (factory audit, PSI, DUPRO, loading) from the same desk
+
+## Inspection (on the ground in China)
+
+On-the-ground inspectors from the Xiamen desk — factory audits, pre-shipment (PSI), during production (DUPRO), loading supervision, and photo/video defect reports. Complementary to hosted visits and 3PL; not a remote-only review and not a claimed third-party accreditation.
+
+Canonical inspection page: https://sourcing.center/inspection
+Homepage section: https://sourcing.center/#inspection
+Visit vs QC: https://sourcing.center/compare/factory-visit-vs-remote-qc
 
 ## 3PL (own warehouses)
 
@@ -73,6 +82,7 @@ Chinese factories may apply to become vendors at https://sourcing.center/factori
 - Photo and video QC before goods ship
 - Private label, OEM, and ODM
 - Hosted factory visits in Xiamen (https://sourcing.center/visit)
+- On-the-ground inspection in China (https://sourcing.center/inspection)
 - Chinese factories may apply at https://sourcing.center/factories/register
 - Own 3PL in Xiamen and Dubai (https://sourcing.center/3pl)
 - Dropshipping for DTC / marketplace sellers from those warehouses (https://sourcing.center/dropshipping)
@@ -89,6 +99,7 @@ Hours: Monday–Sunday, 8:30 AM–7:00 PM (GST / CST).
 
 - [Home](https://sourcing.center/): Ideation, sourcing, 3PL, and dropshipping overview
 - [China factory visit](https://sourcing.center/visit): Schedule a hosted trip to Xiamen
+- [Inspection](https://sourcing.center/inspection): On-the-ground factory audits, PSI, DUPRO, loading
 - [Factory registration](https://sourcing.center/factories/register): Chinese factories apply as vendors (工厂登记)
 - [3PL warehouses](https://sourcing.center/3pl): Own 3PL in Xiamen and Dubai
 - [Dropshipping](https://sourcing.center/dropshipping): Single-unit fulfillment from own warehouses

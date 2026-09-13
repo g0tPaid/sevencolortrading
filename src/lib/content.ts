@@ -132,9 +132,10 @@ export const services = [
     description: "On-ground audits, license checks, and production capacity reviews.",
   },
   {
-    href: "/quality-inspection",
-    title: "Quality Inspection",
-    description: "Pre-shipment QC with photos, videos, and structured defect reports.",
+    href: "/inspection",
+    title: "Inspection",
+    description:
+      "On-the-ground factory audits, PSI, DUPRO, loading supervision, and photo/video defect reports in China.",
   },
   {
     href: "/private-label",

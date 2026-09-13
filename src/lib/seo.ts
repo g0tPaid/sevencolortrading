@@ -10,6 +10,9 @@ import {
   fulfillmentHubs,
   fulfillmentSteps,
   homepageAggregateFaqs,
+  inspection,
+  inspectionFaqs,
+  inspectionServices,
 } from "@/lib/v2-content";
 
 export const siteUrl = "https://sourcing.center";
@@ -40,6 +43,11 @@ export const seoKeywords = [
   "sourcing agent vs Alibaba",
   "China 3PL vs freight",
   "factory visit vs QC",
+  "China inspection services",
+  "pre-shipment inspection China",
+  "DUPRO inspection China",
+  "factory audit Xiamen",
+  "loading supervision China",
 ];
 
 export const defaultDescription =
@@ -167,6 +175,29 @@ export function organizationJsonLd() {
           })),
         },
       },
+      {
+        "@type": "Service",
+        "@id": `${siteUrl}/inspection#service`,
+        name: "On-the-ground inspection services in China",
+        serviceType: "Product inspection",
+        url: `${siteUrl}/inspection`,
+        description: inspection.description,
+        provider: { "@id": `${siteUrl}/#organization` },
+        areaServed: ["CN"],
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Inspection operations",
+          itemListElement: inspectionServices.map((step, i) => ({
+            "@type": "Offer",
+            position: i + 1,
+            itemOffered: {
+              "@type": "Service",
+              name: step.title,
+              description: step.text,
+            },
+          })),
+        },
+      },
     ],
   };
 }
@@ -242,6 +273,38 @@ export function dropshippingPageJsonLd() {
       name: `${hub.city} ${hub.role}`,
       description: hub.text,
     })),
+  };
+}
+
+export function inspectionFaqJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: inspectionFaqs.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a,
+      },
+    })),
+  };
+}
+
+export function inspectionPageJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${siteUrl}/inspection#webpage`,
+    url: `${siteUrl}/inspection`,
+    name: "Inspection services in China | Sourcing Center",
+    description: inspection.description,
+    isPartOf: { "@id": `${siteUrl}/#website` },
+    about: { "@id": `${siteUrl}/inspection#service` },
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h1", "h2", "[data-seo-answer]"],
+    },
   };
 }
 
