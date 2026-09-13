@@ -17,7 +17,7 @@ export function V2Inspection() {
       <Container>
         <div className="glass-dark relative overflow-hidden rounded-[2rem] px-5 pb-12 pt-14 text-paper sm:px-10 sm:pb-16 sm:pt-16 lg:px-14">
           <div className="relative">
-            <p className="text-sm font-medium uppercase tracking-[0.22em] text-paper/55">
+            <p className="text-sm font-medium uppercase tracking-[0.22em] text-paper/70">
               On the ground in China · not remote-only
             </p>
             <h2 id="inspection-heading" className="mt-3 max-w-4xl">
@@ -28,15 +28,15 @@ export function V2Inspection() {
                 {inspection.title}
               </span>
             </h2>
-            <p className="mt-4 max-w-2xl text-paper/70 sm:text-lg">{inspection.description}</p>
+            <p className="mt-4 max-w-2xl text-paper/80 sm:text-lg">{inspection.description}</p>
 
-            <div className="glass-dark-solid mt-6 inline-flex flex-col gap-1 rounded-[1.35rem] px-5 py-4 sm:flex-row sm:items-baseline sm:gap-4 sm:px-6 sm:py-5">
+            <div className="glass-dark-solid mt-6 inline-flex flex-col gap-1 rounded-[1.35rem] px-5 py-4 text-ink sm:flex-row sm:items-baseline sm:gap-4 sm:px-6 sm:py-5">
               <p className="font-display text-4xl font-semibold tracking-tight text-accent sm:text-5xl">
-                USD 110
+                {inspectionPrice.amount}
               </p>
               <div>
-                <p className="font-display text-xl font-semibold text-paper">{inspectionPrice.period}</p>
-                <p className="mt-0.5 text-sm text-paper/65">{inspectionPrice.note}</p>
+                <p className="font-display text-xl font-semibold text-ink">{inspectionPrice.period}</p>
+                <p className="mt-0.5 text-sm text-ink-soft">{inspectionPrice.note}</p>
               </div>
             </div>
 
@@ -54,7 +54,7 @@ export function V2Inspection() {
                     {String(i + 1).padStart(2, "0")}
                   </p>
                   <h3 className="mt-2 font-display text-xl font-semibold text-paper">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-paper/65">{item.text}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-paper/80">{item.text}</p>
                 </motion.li>
               ))}
             </ul>
