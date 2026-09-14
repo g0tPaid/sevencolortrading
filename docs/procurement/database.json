@@ -6,7 +6,7 @@
   "metrics": {
     "organizations_researched": 50,
     "qualified_60_plus": 41,
-    "registrations_started": 1,
+    "registrations_started": 2,
     "registrations_submitted": 1,
     "rfqs_discovered": 0
   },
@@ -159,8 +159,8 @@
       "registration_type": "Foreign supplier / no-CR account available",
       "categories": "Government goods including furniture and supplies",
       "fit": 84,
-      "status": "READY TO REGISTER",
-      "notes": "Official .gov.sa. Foreign suppliers can create account without Saudi CR. Nafath for in-KSA users. Tender purchase fees possible later — never pay without approval.",
+      "status": "IN PROGRESS",
+      "notes": "Official .gov.sa. Starting foreign / no-CR account. Nafath is for in-KSA users — skip. Tick T&Cs. Stop for tender fees and passport. See etimad.md.",
       "docs_typical": "Foreign business license, representative details",
       "last_checked": "2026-09-14"
     },

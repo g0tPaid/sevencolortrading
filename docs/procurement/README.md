@@ -48,3 +48,4 @@ Bank account **numbers** live only in gitignored `vault/bank-accounts.md` (this 
 | `registering-entity.md` | Locked: Chinese company + MoF branch warning |
 | `china-company-field-map.md` | Exact fields we may type on portals |
 | `emirates-epic.md` | Live Emirates form state + policy summaries |
+| `etimad.md` | Live Etimad foreign-supplier registration |

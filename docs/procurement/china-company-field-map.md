@@ -52,7 +52,7 @@ Sourcing / import-export, furniture & hospitality FF&E, electronics, fashion/tex
 ## First-wave as this Chinese company
 
 1. Emirates epic — https://epic.emirates.com/ — **submitted, pending activation**; username `ajmal.sevencolor` (`emirates-epic.md`)  
-2. Etimad foreign account  
+2. Etimad foreign account — https://login.etimad.sa/Account/Login?culture=en — **starting** (`etimad.md`)  
 3. NEOM  
 4. Emaar (bank facts on file — still no passport)  
 5. Marriott interest  

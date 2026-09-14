@@ -163,3 +163,11 @@ Continue Emirates: select 0–10, save Basic Profile, complete confirmation. Fix
 - Watch info@sevencolortrading.com for activation.
 
 **Next:** Etimad foreign / no-CR account. Then NEOM, Emaar, Marriott.
+
+## 2026-09-14 — Session 9 (Etimad)
+
+**Owner:** yes — start Etimad with the same field map.
+
+Official URL: https://login.etimad.sa/Account/Login?culture=en — “New Account for No CR entities of the type foreign supplier”.
+
+Tick all T&Cs. Employees 0–10. Turnover 150000. USD bank if asked. Stop for fees, passport upload, tenders. OTP to +86 180 5926 2730 may block until owner reads the SMS.
