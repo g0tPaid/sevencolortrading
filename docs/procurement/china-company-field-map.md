@@ -23,13 +23,14 @@ Source: China business license (EN + ZH) received 2026-09-14. Passport of legal 
 | Company email | info@sevencolortrading.com |
 | Phone / mobile (OTP) | +86 180 5926 2730 |
 | Average annual turnover (USD) | Owner range **100,000–200,000**. If the field needs one number, type **150000**. |
+| Number of employees | **0–10** (owner 2026-09-14). If the portal uses bands, pick 0–10 / 1–10. |
 | Bank (international / USD) | Bank of China, Xiamen. Account name: 厦门安杰七彩贸易有限公司 / XIAMEN AJMAL SEVEN COLOR TRADING CO., LTD. Beneficiary: BANK OF CHINA XIAMEN BRANCH. Address: NO.40 HUBIN NORTH ROAD, XIAMEN, FUJIAN, CHINA. Overseas SWIFT: BKCHCNBJ73A. USD + RMB account numbers are in gitignored `vault/bank-accounts.md` (public repo — never commit numbers). |
 | Bank (RMB) | Same bank. Domestic/FX SWIFT: BKCHCNBJ720. Prefer USD for overseas portals. |
 
 ## Standing owner orders (2026-09-14)
 
 - **Tick all** supplier policies / codes of conduct / anti-bribery / safety acknowledgements on portals.
-- Still **stop** for: portal or tender **fees**, submitting tenders/quotes, **passport/ID upload**, inventing employees or ISO.
+- Still **stop** for: portal or tender **fees**, submitting tenders/quotes, **passport/ID upload**, inventing ISO.
 
 ## Do not type (UNKNOWN or do not invent)
 
@@ -37,7 +38,7 @@ Source: China business license (EN + ZH) received 2026-09-14. Passport of legal 
 | --- | --- |
 | Postal code | UNKNOWN — leave blank |
 | Business scope (itemized English list) | License says refer to Xiamen registration / publicity system — do not invent NACE/UNSPSC lines beyond published site categories |
-| Employees | UNKNOWN — leave blank; stop if the field is required |
+| Employees | Use **0–10**. Do not pick a larger band. |
 | Bank account numbers | Type from `vault/bank-accounts.md` only — never put the digits in git |
 | ISO / insurance | Not documented — No / blank |
 | Year established | Use **2025-01-06**, not website “2014” |

@@ -29,7 +29,7 @@ If a portal field is not in (1) or (2): **UNKNOWN — OWNER APPROVAL REQUIRED**.
 - Pay portal or tender **fees**
 - Submit quotes / tenders
 - Send outreach emails (drafts only)
-- Invent employees or ISO
+- Invent ISO (employees now locked at 0–10)
 
 Bank account **numbers** live only in gitignored `vault/bank-accounts.md` (this GitHub repo is public).
 

@@ -145,3 +145,9 @@ No OTP, no password prompt, no bank fields, no fee, no passport upload yet.
 **Stopped:** Number of Employees is a mandatory dropdown: `0-10` / `10-50` / `50-250` / `Above 250`. Left blank.
 
 **Need from owner:** which employee band. Also check info@sevencolortrading.com for epic username/password (portal asks for a password we never set in-session).
+
+## 2026-09-14 — Session 8 (employees + password)
+
+**Owner:** employees **0–10**. Password received — stored in gitignored vault only (public repo).
+
+Continue Emirates: select 0–10, save Basic Profile, complete confirmation. Fix timezone to Asia/Shanghai if Registration Data unlocks. Do not upload passport. Do not pay fees.
