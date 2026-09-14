@@ -206,3 +206,10 @@ Proceeded on official Emaar Oracle link. Sent access code to info@sevencolortrad
 5. Emirates activation email if it arrived
 6. Etimad: open New Account for foreign/no-CR from a home/office browser (cloud IP is blocked)
 
+## 2026-09-14 — Session 12 (resend codes)
+
+Owner: resend access codes, they will paste them.
+
+Emaar: new access code sent to info@sevencolortrading.com, expires 15 minutes. Tab open.
+Marriott: form filled, VERIFY YOUR EMAIL clicked again. Same inbox.
+
