@@ -6,7 +6,7 @@
   "metrics": {
     "organizations_researched": 50,
     "qualified_60_plus": 41,
-    "registrations_started": 2,
+    "registrations_started": 5,
     "registrations_submitted": 1,
     "rfqs_discovered": 0
   },
@@ -74,8 +74,8 @@
       "registration_type": "Self-register (Oracle Cloud); invitation link also used",
       "categories": "FF&E, furniture, fit-out, hospitality OS&E",
       "fit": 90,
-      "status": "READY TO REGISTER",
-      "notes": "Official Emaar asset domain. Registration includes bank accounts + questionnaire — STOP before bank fields and T&Cs. User guide: assets.emaar.com/fusion/suppliermannuals/pdf/EMAARSupplierRegistrationUserGuide.pdf",
+      "status": "IN PROGRESS",
+      "notes": "Starting from assets.emaar.com/emaar-supplier/. Bank USD allowed. No passport. See emaar.md.",
       "docs_typical": "License, contacts, address, bank (do not fill until approved), product/services",
       "last_checked": "2026-09-14"
     },
@@ -176,8 +176,8 @@
       "registration_type": "Self-register then questionnaire / invitation",
       "fit": 82,
       "categories": "FF&E, furniture, construction products, hospitality",
-      "status": "READY TO REGISTER",
-      "notes": "Official neom.com. FAQ mentions https://nexxe.gep.com after account exists. Accepting terms — STOP. Localisation scoring may apply.",
+      "status": "IN PROGRESS",
+      "notes": "Starting from official neom.com suppliers page then GEP. Free. Tick terms. See neom.md.",
       "docs_typical": "Company details, supporting documents, terms acceptance",
       "last_checked": "2026-09-14"
     },
@@ -193,8 +193,8 @@
       "registration_type": "Self-register expression of interest",
       "categories": "FF&E, OS&E, hospitality products",
       "fit": 80,
-      "status": "READY TO REGISTER",
-      "notes": "Official help article. Registration is interest only — no contract guarantee. Use official portal link from that page (do not use unofficial 'Marriott supplier' clones).",
+      "status": "IN PROGRESS",
+      "notes": "Starting from official help.marriott.com supply-partnership article only. Interest, not a contract. See marriott.md.",
       "docs_typical": "Company profile",
       "last_checked": "2026-09-14"
     },
