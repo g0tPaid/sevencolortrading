@@ -193,3 +193,16 @@ Same field map. Tick all T&Cs. Employees 0–10. Turnover 150000. USD bank if as
 **Marriott SupplierOne:** Form filled from official help article link. T&Cs ticked. Verify Email clicked. **Need 6-digit code** from info@sevencolortrading.com. Postal **361000** used because the field was required.
 
 No passport. No fees. Etimad still WAF-blocked. Emirates still pending activation.
+
+## 2026-09-14 — Session 11 (owner: just do it)
+
+Proceeded on official Emaar Oracle link. Sent access code to info@sevencolortrading.com (15 min). Marriott verify clicked again. DEWA stopped: UAE license only. Aldar public register loops to procurement page. NEOM still CAPTCHA.
+
+**Need from owner (only things I cannot do):**
+1. Emaar one-time code in info@sevencolortrading.com (or say expired → resend)
+2. Marriott 6-digit code in the same inbox
+3. NEOM: complete GEP reCAPTCHA in a normal browser (username ajmal.sevencolor)
+4. Any SMS OTP on +86 180 5926 2730
+5. Emirates activation email if it arrived
+6. Etimad: open New Account for foreign/no-CR from a home/office browser (cloud IP is blocked)
+

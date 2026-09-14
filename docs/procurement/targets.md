@@ -9,9 +9,9 @@ Scores are commercial fit for **China sourcing + inspection + own Xiamen/Dubai 3
 | 1 | T001 | Emirates Group epic | 94 | SUBMITTED — PENDING ACTIVATION | https://epic.emirates.com/ |
 | 2 | T002 | Dubai eSupply | 93 | READY TO REGISTER | https://esupply.dubai.gov.ae/web/ |
 | 3 | T003 | UAE MoF Federal Supplier Register | 92 | AWAITING OWNER (UAE PASS) | https://procurement.gov.ae/ |
-| 4 | T004 | Emaar | 90 | STOPPED — ORACLE HOST NAMED DEV | https://assets.emaar.com/emaar-supplier/ |
-| 5 | T005 | Aldar | 88 | READY TO REGISTER | https://www.aldar.com/en/explore-aldar/about-aldar/procurement/strategic-sourcing |
-| 6 | T006 | DEWA | 88 | READY TO REGISTER | https://www.dewa.gov.ae/en/supplier/main-services/registration-supplier-services |
+| 4 | T004 | Emaar | 90 | OTP SENT — NEED EMAIL CODE | https://assets.emaar.com/emaar-supplier/ |
+| 5 | T005 | Aldar | 88 | NO PUBLIC SELF-REGISTER | https://www.aldar.com/en/explore-aldar/about-aldar/procurement/strategic-sourcing |
+| 6 | T006 | DEWA | 88 | UAE LICENSE ONLY — HOLD | https://www.dewa.gov.ae/en/supplier/main-services/registration-supplier-services |
 | 7 | T025 | Jumeirah Group | 87 | RESEARCHING | portal not yet verified |
 | 8 | T028 | Dubai Holding | 86 | RESEARCHING | portal not yet verified |
 | 9 | T007 | Etihad Airways | 86 | AWAITING OWNER | email FinanceMasterData@etihad.ae — **draft only** |

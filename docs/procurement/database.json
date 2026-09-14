@@ -74,8 +74,8 @@
       "registration_type": "Self-register (Oracle Cloud); invitation link also used",
       "categories": "FF&E, furniture, fit-out, hospitality OS&E",
       "fit": 90,
-      "status": "STOPPED — ORACLE HOST NAMED DEV",
-      "notes": "Official assets.emaar.com Continue Registration opens emhm-dev3.fa.em2.oraclecloud.com. No data submitted. See emaar.md.",
+      "status": "OTP SENT — NEED EMAIL CODE",
+      "notes": "Official Continue Registration used. Access code sent to info@sevencolortrading.com. See emaar.md.",
       "docs_typical": "License, contacts, address, bank (do not fill until approved), product/services",
       "last_checked": "2026-09-14"
     },
@@ -91,8 +91,8 @@
       "registration_type": "Portal register + Supplier Code of Business Conduct",
       "categories": "FF&E, construction materials, fit-out",
       "fit": 88,
-      "status": "READY TO REGISTER",
-      "notes": "Official. Must accept Supplier Code of Business Conduct — STOP for legal review. Call 800ALDAR.",
+      "status": "NO PUBLIC SELF-REGISTER",
+      "notes": "Supplier Login / Register here on aldar.com loops back to procurement page. Likely invitation. Tick code of conduct when a real form exists.",
       "docs_typical": "License, code of conduct acknowledgement, prequalification pack",
       "last_checked": "2026-09-14"
     },
@@ -108,8 +108,8 @@
       "registration_type": "Self-enroll (free; ~3 working days)",
       "categories": "Equipment, furniture, general supplies, MRO",
       "fit": 88,
-      "status": "READY TO REGISTER",
-      "notes": "Official dewa.gov.ae. Separate vendor-registration SAP page also exists. STOP before declarations.",
+      "status": "UAE LICENSE ONLY — HOLD",
+      "notes": "srm.dewa.gov.ae enrolment requires Dubai Unified License or UAE trade license. No China-company path. Do not enter 143609 until branch question is answered.",
       "docs_typical": "Trade license and enrolment attachments",
       "last_checked": "2026-09-14"
     },
