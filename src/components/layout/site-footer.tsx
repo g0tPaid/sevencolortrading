@@ -16,7 +16,7 @@ export function SiteFooter() {
               {company.tagline}
             </p>
             <p className="mt-2 text-xs text-paper/55">
-              {company.legalNameFull}
+              {company.legalNameFull} · since {company.founded}
             </p>
           </div>
           <div>
@@ -55,6 +55,7 @@ export function SiteFooter() {
                 ["How it works", "/how-it-works"],
                 ["Case studies", "/case-studies"],
                 ["Knowledge", "/knowledge"],
+                ["FAQ", "/faq"],
                 ["Compare", "/compare"],
                 ["Reviews", "/reviews"],
                 ["Updates", "/updates"],

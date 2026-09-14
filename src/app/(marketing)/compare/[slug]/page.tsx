@@ -7,7 +7,9 @@ import { CtaBand } from "@/components/shared/page-shell";
 import { ProofChips } from "@/components/trust/proof-chips";
 import { Container } from "@/components/ui/primitives";
 import { comparePages, getComparePage } from "@/lib/compare";
-import { absoluteUrl, comparePageFaqJsonLd } from "@/lib/seo";
+import { comparePageFaqJsonLd, routeMetadata } from "@/lib/seo";
+import { compareMeta } from "@/lib/route-seo";
+import { breadcrumbGraph } from "@/lib/structured-data";
 import { whatsappPresets } from "@/lib/whatsapp";
 
 export function generateStaticParams() {
@@ -22,17 +24,13 @@ export async function generateMetadata({
   const { slug } = await params;
   const page = getComparePage(slug);
   if (!page) return { title: "Compare" };
-  return {
-    title: page.title,
-    description: page.description,
-    alternates: { canonical: absoluteUrl(`/compare/${page.slug}`) },
-    openGraph: {
-      title: `${page.title} | Sourcing Center`,
-      description: page.description,
-      url: absoluteUrl(`/compare/${page.slug}`),
-      type: "article",
-    },
-  };
+  const meta = compareMeta[slug];
+  return routeMetadata({
+    title: meta?.title ?? page.title,
+    description: meta?.description ?? page.description,
+    path: `/compare/${page.slug}`,
+    type: "article",
+  });
 }
 
 export default async function CompareDetailPage({
@@ -49,6 +47,13 @@ export default async function CompareDetailPage({
   return (
     <>
       <JsonLd data={comparePageFaqJsonLd(page)} />
+      <JsonLd
+        data={breadcrumbGraph([
+          { name: "Home", path: "/" },
+          { name: "Compare", path: "/compare" },
+          { name: page.title, path: `/compare/${page.slug}` },
+        ])}
+      />
       <WhatsAppPrefill message={whatsappMessage} />
       <Container className="pb-10 pt-28 sm:pt-32">
         <nav className="text-xs text-muted" aria-label="Breadcrumb">

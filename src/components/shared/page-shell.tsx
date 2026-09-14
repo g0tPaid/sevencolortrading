@@ -20,7 +20,7 @@ export function PageHero({
     <section className="relative overflow-hidden pb-12 pt-28 sm:pb-16 sm:pt-32">
       <div className="absolute inset-0 grid-fade opacity-50" aria-hidden />
       <Container className="relative">
-        <SectionHeading eyebrow={eyebrow} title={title} description={description} />
+        <SectionHeading as="h1" eyebrow={eyebrow} title={title} description={description} />
       </Container>
     </section>
   );

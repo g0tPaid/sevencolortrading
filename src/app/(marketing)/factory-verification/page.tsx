@@ -3,10 +3,9 @@ import { PageHero, CtaBand } from "@/components/shared/page-shell";
 import { Container } from "@/components/ui/primitives";
 import { verificationSteps } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Factory Verification",
-  description: "On-ground factory audits, license checks, and capacity validation in China.",
-};
+import { pages } from "@/lib/route-seo";
+
+export const metadata: Metadata = pages.factoryVerification;
 
 export default function FactoryVerificationPage() {
   return (

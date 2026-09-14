@@ -5,7 +5,9 @@ import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
 import { CtaBand } from "@/components/shared/page-shell";
 import { Container } from "@/components/ui/primitives";
 import { company } from "@/lib/content";
-import { absoluteUrl, dropshippingFaqJsonLd, dropshippingPageJsonLd } from "@/lib/seo";
+import { dropshippingFaqJsonLd, dropshippingPageJsonLd } from "@/lib/seo";
+import { pages } from "@/lib/route-seo";
+import { offerNode } from "@/lib/structured-data";
 import { whatsappPresets } from "@/lib/whatsapp";
 import {
   dropshipping,
@@ -14,35 +16,14 @@ import {
   dropshippingSteps,
 } from "@/lib/v2-content";
 
-export const metadata: Metadata = {
-  title: "Dropshipping from China Warehouses in Xiamen & Dubai",
-  description:
-    "Dropship single units and small batches from Seven Color Trading own warehouses in Xiamen, China and Dubai / Al Ain, UAE. Photo/video QC, pick→pack→ship for DTC, Amazon, and Shopify-style sellers. Not a dropship broker.",
-  keywords: [
-    "dropshipping from China",
-    "China warehouse dropship",
-    "Xiamen dropshipping",
-    "Dubai dropshipping warehouse",
-    "DTC China fulfillment",
-    "Amazon seller China warehouse",
-    "pick pack ship China",
-    "Seven Color Trading dropshipping",
-  ],
-  alternates: { canonical: absoluteUrl("/dropshipping") },
-  openGraph: {
-    title: "Dropshipping from China Warehouses | Sourcing Center",
-    description:
-      "Single-unit and small-batch dropship from own warehouses in Xiamen and Dubai — receive, store, pick, pack, and ship to your customers.",
-    url: absoluteUrl("/dropshipping"),
-    type: "website",
-  },
-};
+export const metadata: Metadata = pages.dropshipping;
 
 export default function DropshippingPage() {
   return (
     <>
       <JsonLd data={dropshippingPageJsonLd()} />
       <JsonLd data={dropshippingFaqJsonLd()} />
+      <JsonLd data={offerNode("dropshipping")} />
       <WhatsAppPrefill message={whatsappPresets.dropshipping} />
       <Container className="pb-16 pt-28 sm:pt-32">
         <p className="section-kicker">
@@ -113,6 +94,10 @@ export default function DropshippingPage() {
             className="font-medium text-ink underline decoration-accent/40 underline-offset-4"
           >
             Freight lanes and customs
+          </Link>
+          . Lot-level QC:{" "}
+          <Link href="/inspection" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
+            inspection at USD 110 per inspector day
           </Link>
           .
         </p>

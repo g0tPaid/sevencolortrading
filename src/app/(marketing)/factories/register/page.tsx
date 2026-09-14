@@ -5,32 +5,10 @@ import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
 import { CtaBand } from "@/components/shared/page-shell";
 import { Container } from "@/components/ui/primitives";
 import { company } from "@/lib/content";
-import { absoluteUrl } from "@/lib/seo";
 import { whatsappPresets } from "@/lib/whatsapp";
+import { pages } from "@/lib/route-seo";
 
-const description =
-  "Chinese factories apply to become verified vendors for Sourcing Center buyers via Seven Color Trading Co Ltd in Xiamen. 工厂入驻 / 申请成为供应商 — not a marketplace free-for-all.";
-
-export const metadata: Metadata = {
-  title: "Factory Vendor Registration in China / 工厂入驻",
-  description,
-  keywords: [
-    "factory vendor registration China",
-    "Chinese factory supplier application",
-    "工厂入驻",
-    "工厂登记",
-    "申请成为供应商",
-    "工厂供应商登记",
-    "Seven Color Trading factory vendor",
-    "Sourcing Center supplier registration",
-  ],
-  alternates: { canonical: absoluteUrl("/factories/register") },
-  openGraph: {
-    title: "Factory Vendor Registration | Sourcing Center",
-    description,
-    url: absoluteUrl("/factories/register"),
-  },
-};
+export const metadata: Metadata = pages.factoriesRegister;
 
 const joinBenefits = [
   {

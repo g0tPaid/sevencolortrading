@@ -2,12 +2,9 @@ import type { Metadata } from "next";
 import { PageHero, CtaBand } from "@/components/shared/page-shell";
 import { Container } from "@/components/ui/primitives";
 import { company } from "@/lib/content";
+import { pages } from "@/lib/route-seo";
 
-export const metadata: Metadata = {
-  title: "About",
-  description:
-    "Since 2014, Seven Color Trading Co Ltd has sourced from verified China factories and run its own 3PL warehouses in Xiamen and Dubai. DUNS 509419282.",
-};
+export const metadata: Metadata = pages.about;
 
 export default function AboutPage() {
   return (

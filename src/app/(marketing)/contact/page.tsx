@@ -1,21 +1,23 @@
 import type { Metadata } from "next";
 import { RfqForm } from "@/components/home/rfq-form";
 import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
+import { CommonQuestions } from "@/components/seo/common-questions";
+import { JsonLd } from "@/components/seo/json-ld";
 import { ProofChips } from "@/components/trust/proof-chips";
 import { PageHero } from "@/components/shared/page-shell";
 import { ButtonLink, Container } from "@/components/ui/primitives";
 import { company } from "@/lib/content";
+import { serviceCommonQuestions } from "@/lib/faq";
+import { pages } from "@/lib/route-seo";
+import { offerNode, serviceCopy } from "@/lib/structured-data";
 import { whatsappHref, whatsappPresets } from "@/lib/whatsapp";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description:
-    "Contact Sourcing Center / Seven Color Trading for China sourcing or 3PL in Xiamen and Dubai. RFQ response within 24 hours.",
-};
+export const metadata: Metadata = pages.contact;
 
 export default function ContactPage() {
   return (
     <>
+      <JsonLd data={offerNode("sourcing")} />
       <WhatsAppPrefill message={whatsappPresets.rfq} />
       <PageHero
         eyebrow="Contact"
@@ -25,6 +27,9 @@ export default function ContactPage() {
       <Container className="grid gap-10 py-16 lg:grid-cols-2">
         <div className="space-y-6">
           <ProofChips className="justify-start" />
+          <p className="text-sm leading-relaxed text-muted" data-seo-answer>
+            {serviceCopy.sourcing.description}
+          </p>
           <div className="glass-card rounded-[1.5rem] p-6">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Email</p>
             <p className="mt-3 text-ink">{company.emails.corporate} (Corporate)</p>
@@ -62,6 +67,9 @@ export default function ContactPage() {
           </div>
         </div>
         <RfqForm />
+      </Container>
+      <Container className="pb-16">
+        <CommonQuestions items={serviceCommonQuestions.sourcing} />
       </Container>
     </>
   );

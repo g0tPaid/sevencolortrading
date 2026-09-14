@@ -3,10 +3,9 @@ import { SourcingTimeline } from "@/components/home/sourcing-timeline";
 import { PageHero, CtaBand } from "@/components/shared/page-shell";
 import { Container } from "@/components/ui/primitives";
 
-export const metadata: Metadata = {
-  title: "How It Works",
-  description: "Four-step China sourcing process from RFQ to delivery with QC and logistics.",
-};
+import { pages } from "@/lib/route-seo";
+
+export const metadata: Metadata = pages.howItWorks;
 
 export default function HowItWorksPage() {
   return (

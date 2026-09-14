@@ -7,32 +7,20 @@ import { ProofChips } from "@/components/trust/proof-chips";
 import { Container } from "@/components/ui/primitives";
 import { company } from "@/lib/content";
 import { JsonLd } from "@/components/seo/json-ld";
-import { absoluteUrl, visitFaqJsonLd } from "@/lib/seo";
-import { chinaVisit, chinaVisitDays, chinaVisitIncludes } from "@/lib/v2-content";
+import { CommonQuestions } from "@/components/seo/common-questions";
+import { visitFaqJsonLd } from "@/lib/seo";
+import { pages } from "@/lib/route-seo";
+import { offerNode } from "@/lib/structured-data";
+import { chinaVisit, chinaVisitDays, chinaVisitFaqs, chinaVisitIncludes } from "@/lib/v2-content";
 import { whatsappPresets } from "@/lib/whatsapp";
 
-export const metadata: Metadata = {
-  title: "Schedule a Factory Visit in China",
-  description:
-    "Book a hosted factory visit in Xiamen with Seven Color Trading — airport pickup, verified factories, warehouse, and QC. Not a tourist tour.",
-  keywords: [
-    "China factory visit",
-    "schedule factory tour Xiamen",
-    "sourcing trip China",
-    "Seven Color Trading visit",
-  ],
-  alternates: { canonical: absoluteUrl("/visit") },
-  openGraph: {
-    title: "Schedule a Factory Visit in China | Sourcing Center",
-    description: chinaVisit.description,
-    url: absoluteUrl("/visit"),
-  },
-};
+export const metadata: Metadata = pages.visit;
 
 export default function VisitPage() {
   return (
     <>
       <JsonLd data={visitFaqJsonLd()} />
+      <JsonLd data={offerNode("visit")} />
       <WhatsAppPrefill message={whatsappPresets.factoryVisit} />
       <Container className="pb-16 pt-28 sm:pt-32">
         <p className="section-kicker">
@@ -73,11 +61,16 @@ export default function VisitPage() {
               >
                 visit vs QC
               </Link>
+              . After the trip, hold stock in{" "}
+              <Link href="/3pl" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
+                Xiamen or Dubai 3PL
+              </Link>
               .
             </p>
           </div>
           <ChinaVisitForm />
         </div>
+        <CommonQuestions items={chinaVisitFaqs} heading="Common questions" />
       </Container>
       <CtaBand
         title="Prefer WhatsApp first?"

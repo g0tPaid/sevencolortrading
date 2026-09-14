@@ -4,16 +4,10 @@ import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
 import { CtaBand } from "@/components/shared/page-shell";
 import { Container } from "@/components/ui/primitives";
 import { siteUpdates, updatesIntro } from "@/lib/updates";
-import { absoluteUrl } from "@/lib/seo";
 import { whatsappPresets } from "@/lib/whatsapp";
+import { pages } from "@/lib/route-seo";
 
-export const metadata: Metadata = {
-  title: "Updates",
-  description:
-    "Dated one-liners from the Sourcing Center desk — pointers into Knowledge, case studies, and comparison pages.",
-  alternates: { canonical: absoluteUrl("/updates") },
-  robots: { index: true, follow: true },
-};
+export const metadata: Metadata = pages.updates;
 
 export default function UpdatesPage() {
   return (

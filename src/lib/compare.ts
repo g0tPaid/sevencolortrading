@@ -75,7 +75,7 @@ export const comparePages: ComparePage[] = [
     ],
     related: [
       { href: "/case-studies/china-factory-sourcing", label: "Factory sourcing example" },
-      { href: "/knowledge/how-to-write-an-rfq", label: "How to write an RFQ" },
+      { href: "/knowledge/how-to-source-from-china", label: "How to source from China" },
       { href: "/reviews", label: "Buyer notes" },
     ],
     whatsappPreset: "compareAgent",
@@ -191,6 +191,7 @@ export const comparePages: ComparePage[] = [
       { href: "/visit", label: "Schedule a China visit" },
       { href: "/case-studies/factory-visit-qc", label: "Visit example engagement" },
       { href: "/inspection", label: "Inspection services" },
+      { href: "/knowledge/china-quality-inspection-guide", label: "China inspection guide" },
     ],
     whatsappPreset: "compareVisit",
   },

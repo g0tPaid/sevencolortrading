@@ -19,6 +19,12 @@ export const updatesIntro = {
 
 export const siteUpdates: SiteUpdate[] = [
   {
+    date: "14 Sep 2026",
+    iso: "2026-09-14",
+    title: "How to source from China — factory to delivery, plus inspection guide",
+    href: "/knowledge/how-to-source-from-china",
+  },
+  {
     date: "12 Sep 2026",
     iso: "2026-09-12",
     title: "Sourcing agent vs Alibaba — when a desk beats a marketplace",

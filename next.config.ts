@@ -9,6 +9,8 @@ const nextConfig: NextConfig = {
       { source: "/admin/:path*", destination: "/dashboard/:path*", permanent: false },
       { source: "/quality-inspection", destination: "/inspection", permanent: true },
       { source: "/qc", destination: "/inspection", permanent: true },
+      { source: "/inspect", destination: "/inspection", permanent: true },
+      { source: "/dropship", destination: "/dropshipping", permanent: true },
     ];
   },
 };
