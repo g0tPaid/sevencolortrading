@@ -25,6 +25,7 @@ const nextConfig: NextConfig = {
       { source: "/inspect", destination: "/inspection", permanent: true },
       { source: "/dropship", destination: "/dropshipping", permanent: true },
       { source: "/fba", destination: "/amazon-fba", permanent: true },
+      { source: "/factory-website", destination: "/factory-growth", permanent: true },
     ];
   },
 };

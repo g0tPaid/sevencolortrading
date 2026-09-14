@@ -41,7 +41,9 @@ function summary(app: FactoryApplication) {
 function textBody(app: FactoryApplication): string {
   const s = summary(app);
   return [
-    `New factory application ${s.id}`,
+    app.sourcePath.includes("factory-growth")
+      ? `New factory growth inquiry ${s.id}`
+      : `New factory application ${s.id}`,
     `Company: ${s.companyNameEn}${s.companyNameZh ? ` / ${s.companyNameZh}` : ""}`,
     `Contact: ${s.contactName}`,
     `Phone: ${s.phone}${s.wechat ? ` · WeChat ${s.wechat}` : ""}`,
@@ -103,7 +105,9 @@ async function notifyEmail(app: FactoryApplication): Promise<void> {
     body: JSON.stringify({
       from: `Sourcing Center <${from}>`,
       to: [to],
-      subject: `Factory application: ${app.companyNameEn}`,
+      subject: app.sourcePath.includes("factory-growth")
+        ? `Factory growth inquiry: ${app.companyNameEn}`
+        : `Factory application: ${app.companyNameEn}`,
       text: textBody(app),
     }),
     signal: AbortSignal.timeout(8000),

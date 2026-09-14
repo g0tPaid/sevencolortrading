@@ -68,6 +68,7 @@ export function SiteFooter() {
                 ["Amazon FBA", "/amazon-fba"],
                 ["3PL", "/3pl"],
                 ["Factories", "/factories/register"],
+                ["Factory growth", "/factory-growth"],
                 ["Dropshipping", "/dropshipping"],
               ].map(([label, href]) => (
                 <li key={href}>

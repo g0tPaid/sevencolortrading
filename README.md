@@ -54,4 +54,6 @@ Railway / production env (all optional):
 
 If a notify call fails, the API still returns `{ ok: true }` and logs `[factory-notify]`.
 
+Factory international-presence inquiries from `/factory-growth` are stored in the same applications file with `sourcePath: "/factory-growth"` and use the same notify channels. They are not vendor registrations.
+
 
