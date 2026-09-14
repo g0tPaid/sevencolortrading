@@ -12,7 +12,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About"
         title="Connecting businesses to global manufacturing"
-        description="Seven Color simplifies China procurement with transparent sourcing, on-ground verification, and logistics through Dubai and Xiamen."
+        description="Seven Color simplifies China procurement with transparent sourcing, on-ground verification, and logistics through our China hub in Xiamen and Dubai."
       />
       <Container className="grid gap-10 py-16 lg:grid-cols-2">
         <div>

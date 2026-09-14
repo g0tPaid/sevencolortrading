@@ -22,6 +22,10 @@ import {
 export const siteUrl = "https://sourcing.center";
 
 export const seoKeywords = [
+  "China sourcing desk",
+  "China sourcing agent",
+  "source from China",
+  "Visit China factories",
   "factory visit China",
   "schedule China sourcing trip",
   "3PL China",
@@ -55,10 +59,11 @@ export const seoKeywords = [
   "Amazon FBA private label China",
   "Amazon FBA prep China",
   "private label Amazon FBA sourcing",
+  "on the ground in China",
 ];
 
 export const defaultDescription =
-  "China sourcing agent with own 3PL in Xiamen and Dubai. No MOQ, photo/video QC, inspection at USD 110/day, dropshipping, and visits since 2014.";
+  "China sourcing desk with factories across China. Visit China, own 3PL from our Xiamen warehouse and Dubai hub. No MOQ, QC, inspection USD 110/day since 2014.";
 
 export function absoluteUrl(path = "") {
   if (!path) return siteUrl;
@@ -91,7 +96,7 @@ export function organizationJsonLd() {
         department: [
           {
             "@type": "Warehouse",
-            name: "Sourcing Center 3PL — Xiamen HQ warehouse",
+            name: "Sourcing Center 3PL — China hub warehouse in Xiamen",
             address: {
               "@type": "PostalAddress",
               streetAddress: company.offices[1]?.address,
@@ -125,7 +130,7 @@ export function organizationJsonLd() {
       {
         "@type": "Service",
         "@id": `${siteUrl}/3pl#service`,
-        name: "3PL warehouse fulfillment in Xiamen and Dubai",
+        name: "China 3PL warehouse fulfillment (Xiamen and Dubai hubs)",
         serviceType: "Third-party logistics",
         url: `${siteUrl}/3pl`,
         description: fulfillment.description,
@@ -162,7 +167,7 @@ export function organizationJsonLd() {
       {
         "@type": "Service",
         "@id": `${siteUrl}/dropshipping#service`,
-        name: "Dropshipping from own warehouses in Xiamen and Dubai",
+        name: "Dropshipping from own warehouses in China and Dubai",
         serviceType: "Dropshipping fulfillment",
         url: `${siteUrl}/dropshipping`,
         description: dropshipping.description,
@@ -230,7 +235,7 @@ export function threePlPageJsonLd() {
     "@type": "WebPage",
     "@id": `${siteUrl}/3pl#webpage`,
     url: `${siteUrl}/3pl`,
-    name: "3PL warehouses in Xiamen and Dubai | Sourcing Center",
+    name: "China 3PL warehouses in Xiamen and Dubai | Sourcing Center",
     description: fulfillment.description,
     isPartOf: { "@id": `${siteUrl}/#website` },
     about: { "@id": `${siteUrl}/3pl#service` },
@@ -267,7 +272,7 @@ export function dropshippingPageJsonLd() {
     "@type": "WebPage",
     "@id": `${siteUrl}/dropshipping#webpage`,
     url: `${siteUrl}/dropshipping`,
-    name: "Dropshipping from China warehouses in Xiamen and Dubai | Sourcing Center",
+    name: "Dropshipping from China warehouses | Sourcing Center",
     description: dropshipping.description,
     isPartOf: { "@id": `${siteUrl}/#website` },
     about: { "@id": `${siteUrl}/dropshipping#service` },
@@ -403,7 +408,7 @@ export function reviewsPageJsonLd() {
     url: `${siteUrl}/reviews`,
     name: "Reviews | Sourcing Center",
     description:
-      "Buyer notes about Seven Color Trading / sourcing.center — China factory sourcing, Xiamen and Dubai 3PL, and hosted factory visits.",
+      "Buyer notes about Seven Color Trading / sourcing.center — China factory sourcing, own 3PL, and Visit China factory visits.",
     isPartOf: { "@id": `${siteUrl}/#website` },
     breadcrumb: breadcrumbJsonLd([
       { name: "Home", path: "/" },
@@ -420,7 +425,7 @@ export function caseStudiesIndexJsonLd() {
     url: `${siteUrl}/case-studies`,
     name: "Case Studies | Sourcing Center",
     description:
-      "Example sourcing programs from Seven Color Trading — factory matching, Xiamen/Dubai 3PL, and hosted QC visits.",
+      "Example sourcing programs from Seven Color Trading — factory matching across China, own 3PL, and Visit China QC trips.",
     isPartOf: { "@id": `${siteUrl}/#website` },
     breadcrumb: breadcrumbJsonLd([
       { name: "Home", path: "/" },

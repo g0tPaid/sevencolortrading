@@ -27,7 +27,7 @@ export const reviewsIntro = {
   eyebrow: "Reviews",
   title: "What buyers say after the factory floor",
   description:
-    "First-name notes from importers and brands who used Seven Color Trading — sourcing.center — for China factory matching, own 3PL in Xiamen and Dubai, or a hosted visit. Family names stay off the page.",
+    "First-name notes from importers and brands who used Seven Color Trading — sourcing.center — for China factory matching, own 3PL from our Xiamen warehouse and Dubai, or a Visit China trip. Family names stay off the page.",
   moreLine:
     "More reviews on Reddit / ask us for references. We will share approved notes and a desk intro on WhatsApp.",
 } as const;
@@ -41,7 +41,7 @@ export const reviews: Review[] = [
   {
     id: "daniel-dtc-us",
     quote:
-      "Needed a real factory for a first SKU, not another marketplace thread. The Xiamen desk sent two maker options, a sample video, and a unit cost we could plan around — without a catalog-MOQ speech.",
+      "Needed a real factory for a first SKU, not another marketplace thread. The China desk sent two maker options, a sample video, and a unit cost we could plan around — without a catalog-MOQ speech.",
     firstName: "Daniel",
     role: "DTC founder",
     market: "United States",

@@ -23,9 +23,9 @@ export async function generateMetadata({
   const study = getCaseStudy(slug);
   if (!study) return { title: "Case study" };
   const titles: Record<string, string> = {
-    "china-factory-sourcing": "China Factory Sourcing Case: First SKU from Xiamen",
-    "xiamen-dubai-3pl": "Xiamen and Dubai 3PL Case Study on One Operator Desk",
-    "factory-visit-qc": "Hosted Factory Visit and On-Floor QC Case, Xiamen",
+    "china-factory-sourcing": "China Factory Sourcing Case: First SKU Path in China",
+    "xiamen-dubai-3pl": "China and Dubai 3PL Case Study on One Operator Desk",
+    "factory-visit-qc": "Visit China Factories: Hosted QC Trip Case Study Page",
   };
   return routeMetadata({
     title: titles[study.slug] ?? study.title,

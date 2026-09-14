@@ -20,7 +20,7 @@ export default function LogisticsPage() {
       <PageHero
         eyebrow="3PL & Logistics"
         title="Warehouses we run — freight that matches how you buy"
-        description="Full 3PL in Xiamen and Dubai, tied to the sourcing desk. Then sea, air, or express with tracking your ops team can trust."
+        description="Full 3PL from our China hub in Xiamen and Dubai, tied to the sourcing desk. Then sea, air, or express with tracking your ops team can trust."
       />
       <Container className="py-16">
         <h2>

@@ -16,8 +16,8 @@ const joinBenefits = [
     zh: "对接海外买家：进入已通过 Seven Color Trading 采购的进口商与品牌的供应商短名单。",
   },
   {
-    en: "Get considered for buyer RFQs and hosted factory visits from the Xiamen desk.",
-    zh: "询盘与访厂：有机会承接买家询盘，并纳入厦门团队安排的访华验厂行程。",
+    en: "Get considered for buyer RFQs and hosted factory visits from the China desk.",
+    zh: "询盘与访厂：有机会承接买家询盘，并纳入中国团队安排的访华验厂行程。",
   },
   {
     en: "Partner with a China–UAE trade company that already runs sourcing, photo/video QC, and 3PL hubs in Xiamen and Dubai.",
@@ -25,7 +25,7 @@ const joinBenefits = [
   },
   {
     en: "Applications are reviewed for license, capacity, and buyer fit — not an automatic public listing.",
-    zh: "审核入驻：厦门团队审核执照、产能与匹配度；提交申请不会自动公开展示。",
+    zh: "审核入驻：中国团队审核执照、产能与匹配度；提交申请不会自动公开展示。",
   },
 ] as const;
 
@@ -64,15 +64,15 @@ export default function FactoryRegisterPage() {
       <WhatsAppPrefill message={whatsappPresets.factories} />
       <Container className="pb-16 pt-28 sm:pt-32">
         <p className="section-kicker">
-          {company.legalName} · Xiamen · 工厂登记
+          {company.legalName} · China · 工厂登记
         </p>
         <h1 className="mt-3 max-w-3xl font-display text-3xl font-semibold tracking-tight text-ink sm:text-5xl">
           <FactoryLabel /> — register as a vendor
         </h1>
         <p className="mt-2 font-display text-xl text-accent sm:text-2xl">工厂供应商登记</p>
         <p className="mt-4 max-w-2xl text-muted sm:text-lg">
-          Apply to supply Sourcing Center buyers through {company.legalNameFull} in Xiamen. We work
-          with verified factories only — this is not a marketplace free-for-all.
+          Apply to supply Sourcing Center buyers through {company.legalNameFull}. We work
+          with verified factories across China — this is not a marketplace free-for-all.
         </p>
         <p className="mt-2 max-w-2xl text-sm text-muted">
           申请成为供应商，向 Sourcing Center 买家供货。我们只合作经核实的工厂，不会对所有申请自动上架。

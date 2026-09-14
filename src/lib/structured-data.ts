@@ -26,7 +26,7 @@ export const serviceCopy = {
     name: "China factory sourcing (no MOQ)",
     serviceType: "Product sourcing",
     description:
-      "China factory sourcing with no required MOQ — start from 1 unit. Photo and video QC before goods ship. Operated by Xiamen Ajmal Seven Color Trading Co Ltd since 2014, with own warehouses in Xiamen and Dubai / Al Ain.",
+      "China factory sourcing with no required MOQ — start from 1 unit. Photo and video QC before goods ship. China desk of Xiamen Ajmal Seven Color Trading Co Ltd since 2014, with own warehouses: China hub in Xiamen and Dubai / Al Ain.",
   },
   "oem-odm": {
     path: "/oem-odm",
@@ -49,13 +49,13 @@ export const serviceCopy = {
   },
   "3pl": {
     path: "/3pl",
-    name: "3PL warehouse fulfillment in Xiamen and Dubai",
+    name: "China 3PL warehouse fulfillment (Xiamen and Dubai hubs)",
     serviceType: "Third-party logistics",
     description: fulfillment.description,
   },
   dropshipping: {
     path: "/dropshipping",
-    name: "Dropshipping from own warehouses in Xiamen and Dubai",
+    name: "Dropshipping from own warehouses in China and Dubai",
     serviceType: "Dropshipping fulfillment",
     description: dropshipping.description,
   },
@@ -64,11 +64,11 @@ export const serviceCopy = {
     name: "Sea, air, and express freight from China",
     serviceType: "Freight forwarding",
     description:
-      "Sea, air, and express freight from China with Dubai hub support — after goods are received in our Xiamen or Dubai / Al Ain warehouses. Consolidate in China, stage through Dubai when needed, and deliver with tracking.",
+      "Sea, air, and express freight from China with Dubai hub support — after goods are received in our China hub in Xiamen or Dubai / Al Ain warehouses. Consolidate in China, stage through Dubai when needed, and deliver with tracking.",
   },
   visit: {
     path: "/visit",
-    name: "Hosted factory visits in Xiamen (3-day program)",
+    name: "Visit China — hosted factory visits based in Xiamen",
     serviceType: "Hosted factory visit",
     description: chinaVisit.description,
   },
@@ -129,7 +129,7 @@ export function organizationNode(): JsonLdNode {
     email: [company.emails.sme, company.emails.corporate],
     telephone: ["+86 180 5926 2730", "+971 58 906 1969"],
     description:
-      "Sourcing Center by Xiamen Ajmal Seven Color Trading Co Ltd. China factory sourcing with own 3PL warehouses in Xiamen and Dubai / Al Ain.",
+      "China sourcing desk of Xiamen Ajmal Seven Color Trading Co Ltd. Source from factories across China. Own 3PL warehouses: China hub in Xiamen and Dubai / Al Ain.",
     brand: { "@type": "Brand", name: company.brand },
     identifier: [
       {
@@ -177,7 +177,9 @@ export function organizationNode(): JsonLdNode {
       "Dropshipping",
       "Freight forwarding",
       "Factory visits",
+      "Visit China",
     ],
+    areaServed: ["CN", "AE", "US", "EU", "GCC"],
     location: [{ "@id": xiamenId }, { "@id": alAinId }],
   };
 }
@@ -186,7 +188,7 @@ export function xiamenLocalBusinessNode(): JsonLdNode {
   return {
     "@type": ["LocalBusiness", "Warehouse"],
     "@id": xiamenId,
-    name: "Sourcing Center — Xiamen HQ and warehouse",
+    name: "Sourcing Center — China hub and warehouse in Xiamen",
     legalName: company.legalNameFull,
     url: siteUrl,
     parentOrganization: { "@id": orgId },
@@ -197,7 +199,7 @@ export function xiamenLocalBusinessNode(): JsonLdNode {
     address: postalAddress(xiamenOffice, "Fujian", "CN"),
     openingHoursSpecification: openingHours(),
     description:
-      "China HQ and warehouse of Xiamen Ajmal Seven Color Trading Co Ltd. Business license 91350200MAE8W9E67A. Huli Avenue, Huli District, Xiamen, Fujian, China.",
+      "China hub and warehouse of Xiamen Ajmal Seven Color Trading Co Ltd — on-the-ground base for factory sourcing across China. Business license 91350200MAE8W9E67A. Huli Avenue, Huli District, Xiamen, Fujian, China.",
   };
 }
 

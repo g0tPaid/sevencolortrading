@@ -28,7 +28,7 @@ export const caseStudiesIntro = {
   eyebrow: "Case studies",
   title: "How the desk actually runs",
   description:
-    "Three anonymized programs — factory sourcing, own-warehouse 3PL in Xiamen and Dubai, and a hosted visit with QC. Figures are conservative ranges from example engagements, not published client KPIs.",
+    "Three anonymized programs — factory sourcing across China, own-warehouse 3PL from our Xiamen warehouse and Dubai, and a hosted Visit China trip with QC. Figures are conservative ranges from example engagements, not published client KPIs.",
   exampleNote:
     "Example engagements. Ranges are typical of how the desk operates — swap in approved client facts when they are cleared to publish.",
 } as const;
@@ -44,7 +44,7 @@ export const caseStudies: CaseStudy[] = [
     problem:
       "Buildable idea, no China network. Marketplace quotes ignored the spec, asked for a 3,000-piece first run, and offered no photo proof before a deposit.",
     whatWeDid: [
-      "NDA before the brief left the Xiamen desk.",
+      "NDA before the brief left the China desk.",
       "Shortlisted two verified makers in the right cluster.",
       "Sample from one unit: materials, pack, photographed cost target.",
       "Held production until the buyer approved the photo/video pack.",
@@ -61,7 +61,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "xiamen-dubai-3pl",
-    title: "Xiamen and Dubai 3PL on one desk",
+    title: "China hub and Dubai 3PL on one desk",
     industry: "3PL",
     summary:
       "A GCC retailer already bought in China but lost time between factory release, a brokered warehouse, and Dubai inbound.",
@@ -69,7 +69,7 @@ export const caseStudies: CaseStudy[] = [
     problem:
       "Counts in one inbox, QC in another, Dubai inbound in a third. They needed receive, store, pick, pack, and ship next to the factory relationship.",
     whatWeDid: [
-      "Received lots into the Xiamen HQ warehouse — counted and photographed.",
+      "Received lots into our China hub warehouse in Xiamen — counted and photographed.",
       "Photo QC on inbound before stock sat as sellable.",
       "Staged replenishment in the Dubai / Al Ain warehouse.",
       "Released pick waves from either hub on the same manager.",
@@ -89,7 +89,7 @@ export const caseStudies: CaseStudy[] = [
     title: "Hosted factory visit and QC on the floor",
     industry: "Visit / QC",
     summary:
-      "A buyer would not commit a container on catalog photos. The Xiamen desk hosted a working trip — warehouse, two factories, inspection standard, then terms.",
+      "A buyer would not commit a container on catalog photos. The China desk hosted a working Visit China trip — warehouse, two factories, inspection standard, then terms.",
     result: "QC pack and commercial brief locked before the flight home.",
     problem:
       "Catalog images and a video call were not enough to release a deposit. They needed to walk capacity and agree defect language in the same room as the factory.",

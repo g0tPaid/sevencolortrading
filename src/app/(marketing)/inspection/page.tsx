@@ -30,7 +30,7 @@ export default function InspectionPage() {
       <WhatsAppPrefill message={whatsappPresets.inspection} />
       <Container className="pb-16 pt-28 sm:pt-32">
         <p className="section-kicker">
-          {company.legalName} · Xiamen desk · on the ground
+          {company.legalName} · China desk · on the ground
         </p>
         <h1 className="mt-3">
           <span className="block font-display text-[4.25rem] font-semibold leading-[0.85] tracking-tight text-accent sm:text-[7rem] lg:text-[8.5rem]">
@@ -52,7 +52,7 @@ export default function InspectionPage() {
           <p className="mt-2 text-sm leading-relaxed text-ink-soft">{inspectionPrice.note}</p>
         </aside>
         <p className="mt-6 max-w-2xl text-sm text-ink-soft">
-          Legal entity {company.legalNameFull}. Inspectors work from the Xiamen, China desk — complementary
+          Legal entity {company.legalNameFull}. Inspectors work from the China desk, based in Xiamen — complementary
           to hosted factory visits, sourcing, and own-warehouse 3PL. We do not claim a third-party
           inspection accreditation on this page.
         </p>
@@ -170,7 +170,7 @@ export default function InspectionPage() {
       </Container>
       <CtaBand
         title="Talk to the inspection desk"
-        description="USD 110 / day per inspector. Send the SKU, quantity, factory or warehouse location, and spec — a relationship manager in Xiamen replies within 24 hours."
+        description="USD 110 / day per inspector. Send the SKU, quantity, factory or warehouse location, and spec — a relationship manager in China replies within 24 hours."
         whatsappMessage={whatsappPresets.inspection}
       />
     </>

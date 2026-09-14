@@ -17,7 +17,7 @@ export function V2ThreePl() {
         <div className="glass-dark relative overflow-hidden rounded-[2rem] px-5 pb-12 pt-14 text-paper sm:px-10 sm:pb-16 sm:pt-16 lg:px-14">
           <div className="relative">
             <p className="text-sm font-medium uppercase tracking-[0.22em] text-paper/55">
-              Own warehouses · not a broker · Xiamen &amp; Dubai
+              Own warehouses · not a broker · China hub in Xiamen &amp; Dubai
             </p>
             <h2 id="three-pl-heading" className="mt-3 max-w-4xl">
               <span className="block font-display text-[3.75rem] font-semibold leading-[0.88] tracking-tight text-accent sm:text-[6.5rem] lg:text-[7.5rem]">

@@ -24,7 +24,7 @@ export default function VisitPage() {
       <WhatsAppPrefill message={whatsappPresets.factoryVisit} />
       <Container className="pb-16 pt-28 sm:pt-32">
         <p className="section-kicker">
-          {company.legalName} · Xiamen desk
+          {company.legalName} · China desk
         </p>
         <h1 className="mt-3 max-w-3xl font-display text-3xl font-semibold tracking-tight text-ink sm:text-5xl">
           {chinaVisit.title}
@@ -54,7 +54,7 @@ export default function VisitPage() {
               >
                 On-the-ground inspection
               </Link>{" "}
-              from the same Xiamen desk — or compare{" "}
+              from the same China desk — or compare{" "}
               <Link
                 href="/compare/factory-visit-vs-remote-qc"
                 className="font-medium text-ink underline decoration-accent/40 underline-offset-4"

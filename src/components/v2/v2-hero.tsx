@@ -32,13 +32,13 @@ const shortcuts = [
     href: "#visit",
     icon: Plane,
     kicker: "China visit",
-    text: "Schedule a factory trip — Xiamen hosts you",
+    text: "Schedule a factory trip — we host you in China",
   },
   {
     href: "#3pl",
     icon: Warehouse,
-    kicker: "3PL · Xiamen & Dubai",
-    text: "Own warehouses — receive, store, pick, pack, ship",
+    kicker: "3PL · China & UAE",
+    text: "Own warehouses in Xiamen and Dubai",
   },
   {
     href: "#dropshipping",

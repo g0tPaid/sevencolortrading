@@ -25,7 +25,7 @@ export function ChinaVisitForm() {
       >
         <p className="font-display text-2xl font-semibold text-ink">Visit request received</p>
         <p className="mt-3 text-sm text-muted">
-          The Xiamen desk will confirm factories, hotel, and pickup within 24 hours.
+          The China desk will confirm factories, hotel, and pickup within 24 hours.
         </p>
       </motion.div>
     );
@@ -142,7 +142,7 @@ export function ChinaVisitForm() {
         Request China visit
       </button>
       <p className="mt-3 text-center text-[11px] text-muted">
-        Hosted in Xiamen · reply in 24h · not a brokered tourist tour
+        Hosted in China · based in Xiamen · reply in 24h · not a brokered tourist tour
       </p>
     </form>
   );

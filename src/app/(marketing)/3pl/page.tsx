@@ -87,7 +87,7 @@ export default function ThreePlPage() {
           </Link>
           . Walk the HQ warehouse in person:{" "}
           <Link href="/visit" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
-            hosted factory visit in Xiamen
+            hosted factory visit in China
           </Link>
           . Private-label goods headed to Amazon:{" "}
           <Link href="/amazon-fba" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">

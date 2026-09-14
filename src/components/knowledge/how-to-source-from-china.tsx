@@ -24,15 +24,15 @@ export function HowToSourceFromChinaArticle() {
     <>
       <P>
         Sourcing from China is a sequence, not a catalog click. Xiamen Ajmal Seven Color Trading Co
-        Ltd (brand: Sourcing Center, sourcing.center) has run that sequence from Xiamen since 2014,
-        with a second warehouse in Dubai / Al Ain. DUNS 509419282. This guide is the path buyers
-        actually walk: define the product, find factories, sample, negotiate, inspect, ship, and
-        receive. There is no required MOQ — you can start from 1 unit — and inspection, when you
-        want a formal lot check, is USD 110 per inspector day.
+        Ltd (brand: Sourcing Center, sourcing.center) has run that sequence from China since 2014 —
+        on the ground, with our China hub in Xiamen and a second warehouse in Dubai / Al Ain. DUNS
+        509419282. This guide is the path buyers actually walk: define the product, find factories,
+        sample, negotiate, inspect, ship, and receive. There is no required MOQ — you can start from
+        1 unit — and inspection, when you want a formal lot check, is USD 110 per inspector day.
       </P>
       <P>
         Use this page as a working checklist. When you are ready to hand the brief to a desk that
-        already operates warehouses in Xiamen and Dubai,{" "}
+        already operates warehouses at our China hub in Xiamen and in Dubai,{" "}
         <ArticleLink href="/contact">send an RFQ on the contact page</ArticleLink>.
       </P>
 
@@ -48,7 +48,7 @@ export function HowToSourceFromChinaArticle() {
       <P>
         Include quantity honesty. “About 10,000 later” is not an order. “One sample now, 300 if the
         sample passes, 3,000 if the first lot sells” is a path a verified maker can plan around. The
-        Xiamen desk maps 10,000+ factories across 150+ industries; matching still starts from a spec
+        China desk maps 10,000+ factories across 150+ industries; matching still starts from a spec
         you can photograph.
       </P>
 
@@ -56,7 +56,7 @@ export function HowToSourceFromChinaArticle() {
       <P>
         Listings are a scan, not a factory. A sourcing desk shortlists verified manufacturers —
         license, export path, capacity, and whether they actually make the goods or trade someone
-        else’s line. Sourcing Center does that from Xiamen HQ (Huli Avenue, Huli District, Xiamen,
+        else’s line. Sourcing Center does that from our China hub in Xiamen (Huli Avenue, Huli District, Xiamen,
         Fujian, China; China license 91350200MAE8W9E67A). Chinese factories that want to join the
         vendor shortlist apply at the{" "}
         <ArticleLink href="/factories/register">factory registration page</ArticleLink>
@@ -84,14 +84,14 @@ export function HowToSourceFromChinaArticle() {
         If you cannot fly, that photo/video pack is still an on-the-ground check, not a remote
         desktop review. When you need a formal lot standard, book{" "}
         <ArticleLink href="/inspection">inspection</ArticleLink> at USD 110 per inspector day, or a{" "}
-        <ArticleLink href="/visit">hosted 3-day factory visit in Xiamen</ArticleLink> when the first
+        <ArticleLink href="/visit">hosted 3-day Visit China factory trip based out of Xiamen</ArticleLink> when the first
         commitment is large.
       </P>
 
       <H2>4. Negotiate</H2>
       <P>
         Unit cost, tooling, lead time, payment terms, and Incoterms belong in writing. The
-        relationship manager in Xiamen or Dubai / Al Ain (UAE license 143609, Suite No 21, ESA
+        relationship manager in China or Dubai / Al Ain (UAE license 143609, Suite No 21, ESA
         Building, Near Nael Enclave, Al Ain) quotes against the spec you approved, not against a
         listing screenshot. Registered vendor pathways for Walmart, Target, and Costco matter when
         the channel needs retailer-ready packing — they are not a claim that every SKU is already on
@@ -175,7 +175,7 @@ export function HowToSourceFromChinaArticle() {
       </P>
       <P>
         A typical first engagement looks like this. Week one: RFQ lands, NDA if the SKU is new, and
-        the Xiamen relationship manager maps two or three verified makers. Week two: samples leave
+        the China relationship manager maps two or three verified makers. Week two: samples leave
         by air from 1 unit, with photos on the way. Week three: you approve or reject; if you
         approve, you either book DUPRO/PSI at USD 110 per inspector day or fly the 3-day visit to
         lock the standard on the floor. Goods then sit in Xiamen or Dubai, or they load. Nothing in
@@ -218,7 +218,7 @@ export function HowToSourceFromChinaArticle() {
               [
                 "Find factories",
                 "Public catalog; identity can be a trading layer.",
-                "Verified makers from the Xiamen desk; 10,000+ factory map.",
+                "Verified makers from the China desk; 10,000+ factory map.",
               ],
               [
                 "Samples",
