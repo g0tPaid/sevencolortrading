@@ -235,6 +235,22 @@ export { caseStudies } from "@/lib/case-studies";
 
 export const knowledgeArticles = [
   {
+    slug: "how-to-source-from-china",
+    title: "How to source from China: factory to delivery",
+    category: "Procurement",
+    readTime: "9 min",
+    excerpt:
+      "Define the product, find factories, sample, negotiate, inspect, ship, and receive. Marketplace vs sourcing desk. No MOQ, Xiamen and Dubai 3PL, USD 110 per inspector day.",
+  },
+  {
+    slug: "china-quality-inspection-guide",
+    title: "China quality inspection guide: PSI, DUPRO, AQL",
+    category: "Verification",
+    readTime: "9 min",
+    excerpt:
+      "Factory audit, DUPRO, PSI, loading supervision, photo/video QC, and AQL. Remote vs on-the-ground. USD 110 per inspector day from the Xiamen desk.",
+  },
+  {
     slug: "3pl-warehouses-xiamen-dubai",
     title: "3PL warehouses in Xiamen and Dubai for China importers",
     category: "3PL",
@@ -279,24 +295,32 @@ export const knowledgeArticles = [
     title: "How to write an RFQ Chinese factories actually respond to",
     category: "Procurement",
     readTime: "6 min",
+    excerpt:
+      "RFQ fields Chinese factories actually respond to: specs, quantity, target price, photos, Incoterms. No-MOQ sampling from 1 unit via the Xiamen desk.",
   },
   {
     slug: "factory-audit-checklist",
     title: "Factory audit checklist for first-time importers",
     category: "Verification",
     readTime: "8 min",
+    excerpt:
+      "License, lines, capacity, quality system, and payment safeguards before you deposit. Pair with on-the-ground inspection at USD 110 per inspector day.",
   },
   {
     slug: "incoterms-for-gcc",
     title: "Incoterms that matter for China → GCC shipping",
     category: "Logistics",
     readTime: "7 min",
+    excerpt:
+      "Incoterms for China to GCC freight when stock can sit in Xiamen or Dubai / Al Ain. Sea, air, and express from the same desk as Sourcing Center 3PL.",
   },
   {
     slug: "private-label-packaging",
     title: "Private label packaging: what to approve before mass production",
     category: "OEM / ODM",
     readTime: "5 min",
+    excerpt:
+      "Artwork, labels, inserts, and carton marks to lock before a private-label run in China. Photo/video QC and optional PSI at USD 110 per inspector day.",
   },
 ];
 

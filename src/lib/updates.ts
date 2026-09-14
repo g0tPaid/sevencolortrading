@@ -17,7 +17,12 @@ export const updatesIntro = {
     "Short dated pointers into Knowledge, case studies, and comparison pages — not a news feed.",
 } as const;
 
-export const siteUpdates: SiteUpdate[] = [
+  {
+    date: "14 Sep 2026",
+    iso: "2026-09-14",
+    title: "How to source from China — factory to delivery, plus inspection guide",
+    href: "/knowledge/how-to-source-from-china",
+  },
   {
     date: "12 Sep 2026",
     iso: "2026-09-12",

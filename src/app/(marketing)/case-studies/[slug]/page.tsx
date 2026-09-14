@@ -7,7 +7,7 @@ import { SampleNote } from "@/components/trust/sample-note";
 import { TrustCta } from "@/components/trust/trust-cta";
 import { Container } from "@/components/ui/primitives";
 import { caseStudies, getCaseStudy } from "@/lib/case-studies";
-import { absoluteUrl, caseStudyPageJsonLd } from "@/lib/seo";
+import { caseStudyPageJsonLd, routeMetadata } from "@/lib/seo";
 import { whatsappPresets } from "@/lib/whatsapp";
 
 export function generateStaticParams() {
@@ -22,17 +22,17 @@ export async function generateMetadata({
   const { slug } = await params;
   const study = getCaseStudy(slug);
   if (!study) return { title: "Case study" };
-  return {
-    title: study.title,
-    description: study.summary,
-    alternates: { canonical: absoluteUrl(`/case-studies/${study.slug}`) },
-    openGraph: {
-      title: `${study.title} | Sourcing Center`,
-      description: study.summary,
-      url: absoluteUrl(`/case-studies/${study.slug}`),
-      type: "article",
-    },
+  const titles: Record<string, string> = {
+    "china-factory-sourcing": "China Factory Sourcing Case: First SKU from Xiamen",
+    "xiamen-dubai-3pl": "Xiamen and Dubai 3PL Case Study on One Operator Desk",
+    "factory-visit-qc": "Hosted Factory Visit and On-Floor QC Case, Xiamen",
   };
+  return routeMetadata({
+    title: titles[study.slug] ?? study.title,
+    description: study.summary.slice(0, 160),
+    path: `/case-studies/${study.slug}`,
+    type: "article",
+  });
 }
 
 export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {

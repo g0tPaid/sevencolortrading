@@ -1,28 +1,22 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { WorldShippingMap } from "@/components/home/world-map";
+import { CommonQuestions } from "@/components/seo/common-questions";
+import { JsonLd } from "@/components/seo/json-ld";
 import { PageHero, CtaBand } from "@/components/shared/page-shell";
 import { Container } from "@/components/ui/primitives";
-import { absoluteUrl } from "@/lib/seo";
+import { company } from "@/lib/content";
+import { serviceCommonQuestions } from "@/lib/faq";
+import { pages } from "@/lib/route-seo";
+import { offerNode, serviceCopy } from "@/lib/structured-data";
 import { fulfillment, fulfillmentHubs, fulfillmentSteps } from "@/lib/v2-content";
 
-export const metadata: Metadata = {
-  title: "3PL, Freight & Customs from China",
-  description:
-    "Own 3PL warehouses in Xiamen and Dubai plus sea, air, and express freight. Sourcing Center consolidates in China, stages through the UAE, and delivers with tracking.",
-  keywords: ["3PL China freight", "sea air express from China", "Dubai hub logistics", "Xiamen warehouse shipping"],
-  alternates: { canonical: absoluteUrl("/logistics") },
-  openGraph: {
-    title: "3PL, Freight & Customs from China | Sourcing Center",
-    description:
-      "Warehouses we run in Xiamen and Dubai, then sea, air, or express with tracking.",
-    url: absoluteUrl("/logistics"),
-  },
-};
+export const metadata: Metadata = pages.logistics;
 
 export default function LogisticsPage() {
   return (
     <>
+      <JsonLd data={offerNode("logistics")} />
       <PageHero
         eyebrow="3PL & Logistics"
         title="Warehouses we run — freight that matches how you buy"
@@ -38,9 +32,24 @@ export default function LogisticsPage() {
           </span>
         </h2>
         <p className="mt-3 max-w-2xl text-muted">{fulfillment.description}</p>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted" data-seo-answer>
+          {serviceCopy.logistics.description}
+        </p>
+        <p className="mt-3 text-sm text-muted">
+          Legal entity {company.legalNameFull}. DUNS {company.credentials.dunsNumber}. Since{" "}
+          {company.founded}.
+        </p>
         <p className="mt-3 text-sm">
           <Link href="/3pl" className="font-medium text-accent underline-offset-4 hover:underline">
             Full 3PL warehouse page
+          </Link>
+          {" · "}
+          <Link href="/inspection" className="font-medium text-accent underline-offset-4 hover:underline">
+            Inspection before freight
+          </Link>
+          {" · "}
+          <Link href="/visit" className="font-medium text-accent underline-offset-4 hover:underline">
+            Hosted factory visit
           </Link>
         </p>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
@@ -84,6 +93,7 @@ export default function LogisticsPage() {
             </div>
           ))}
         </div>
+        <CommonQuestions items={serviceCommonQuestions.logistics} />
       </Container>
       <CtaBand />
     </>

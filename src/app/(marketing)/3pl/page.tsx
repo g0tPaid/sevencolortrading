@@ -6,37 +6,20 @@ import { CtaBand } from "@/components/shared/page-shell";
 import { ProofChips } from "@/components/trust/proof-chips";
 import { Container } from "@/components/ui/primitives";
 import { company } from "@/lib/content";
-import { absoluteUrl, threePlFaqJsonLd, threePlPageJsonLd } from "@/lib/seo";
+import { threePlFaqJsonLd, threePlPageJsonLd } from "@/lib/seo";
+import { pages } from "@/lib/route-seo";
+import { offerNode } from "@/lib/structured-data";
 import { fulfillment, fulfillmentFaqs, fulfillmentHubs, fulfillmentSteps } from "@/lib/v2-content";
 import { whatsappPresets } from "@/lib/whatsapp";
 
-export const metadata: Metadata = {
-  title: "3PL Warehouses in Xiamen & Dubai",
-  description:
-    "Own 3PL in Xiamen, China and Dubai / Al Ain, UAE. Sourcing Center receives, stores, picks, packs, and ships from warehouses we operate — tied to China factory sourcing. Not a broker.",
-  keywords: [
-    "3PL Xiamen",
-    "3PL Dubai",
-    "3PL China warehouse",
-    "Al Ain 3PL",
-    "China pick pack ship",
-    "Seven Color Trading 3PL",
-  ],
-  alternates: { canonical: absoluteUrl("/3pl") },
-  openGraph: {
-    title: "3PL Warehouses in Xiamen & Dubai | Sourcing Center",
-    description:
-      "Own 3PL warehouses in China and the UAE. Receive, store, pick, pack, and ship with Seven Color Trading Co Ltd.",
-    url: absoluteUrl("/3pl"),
-    type: "website",
-  },
-};
+export const metadata: Metadata = pages.threePl;
 
 export default function ThreePlPage() {
   return (
     <>
       <JsonLd data={threePlPageJsonLd()} />
       <JsonLd data={threePlFaqJsonLd()} />
+      <JsonLd data={offerNode("3pl")} />
       <WhatsAppPrefill message={whatsappPresets.threePl} />
       <Container className="pb-16 pt-28 sm:pt-32">
         <p className="section-kicker">
@@ -97,6 +80,14 @@ export default function ThreePlPage() {
           Need sea, air, or express after the warehouse?{" "}
           <Link href="/logistics" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
             Freight lanes and customs
+          </Link>
+          . Lot-level QC before inbound:{" "}
+          <Link href="/inspection" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
+            inspection at USD 110 per inspector day
+          </Link>
+          . Walk the HQ warehouse in person:{" "}
+          <Link href="/visit" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
+            hosted factory visit in Xiamen
           </Link>
           .
         </p>

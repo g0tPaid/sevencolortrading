@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { company } from "@/lib/content";
 import {
   chinaVisitFaqs,
@@ -51,7 +52,7 @@ export const seoKeywords = [
 ];
 
 export const defaultDescription =
-  "Sourcing.center by Seven Color Trading Co Ltd. Product ideation and China sourcing, own 3PL in Xiamen and Dubai, and dropshipping for DTC sellers — receive, store, pick, pack, and ship. Not a broker.";
+  "China sourcing agent with own 3PL in Xiamen and Dubai. No MOQ, photo/video QC, inspection at USD 110/day, dropshipping, and visits since 2014.";
 
 export function absoluteUrl(path = "") {
   if (!path) return siteUrl;
@@ -399,6 +400,38 @@ export function caseStudyPageJsonLd(study: { slug: string; title: string; summar
       { name: "Case studies", path: "/case-studies" },
       { name: study.title, path: `/case-studies/${study.slug}` },
     ]),
+  };
+}
+
+export function routeMetadata({
+  title,
+  description,
+  path,
+  type = "website",
+}: {
+  title: string;
+  description: string;
+  path: string;
+  type?: "website" | "article";
+}): Metadata {
+  const url = absoluteUrl(path);
+  return {
+    title: { absolute: title },
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      title,
+      description,
+      type,
+      url,
+      siteName: "Sourcing Center",
+      locale: "en_US",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
   };
 }
 

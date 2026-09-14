@@ -8,11 +8,9 @@ import { caseStudies } from "@/lib/case-studies";
 import { comparePages } from "@/lib/compare";
 import { knowledgeArticles } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Knowledge Center",
-  description:
-    "Guides on 3PL warehouses in Xiamen and Dubai, RFQs, factory audits, Incoterms, and private label for China importers.",
-};
+import { pages } from "@/lib/route-seo";
+
+export const metadata: Metadata = pages.knowledge;
 
 export default function KnowledgePage() {
   return (
@@ -24,6 +22,27 @@ export default function KnowledgePage() {
         description="Practical writing for teams buying from China — not generic trade blog filler."
       />
       <Container className="grid gap-4 py-16 md:grid-cols-2">
+        <p className="md:col-span-2 text-sm text-muted">
+          Start with the{" "}
+          <Link href="/faq" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
+            China sourcing FAQ
+          </Link>{" "}
+          or a field guide below. How-to path:{" "}
+          <Link
+            href="/knowledge/how-to-source-from-china"
+            className="font-medium text-ink underline decoration-accent/40 underline-offset-4"
+          >
+            how to source from China
+          </Link>
+          {" · "}
+          <Link
+            href="/knowledge/china-quality-inspection-guide"
+            className="font-medium text-ink underline decoration-accent/40 underline-offset-4"
+          >
+            China quality inspection guide
+          </Link>
+          .
+        </p>
         {knowledgeArticles.map((a) => (
           <Link key={a.slug} href={`/knowledge/${a.slug}`} className="glass-card glass-card-hover rounded-[1.5rem] p-7">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">{a.category}</p>

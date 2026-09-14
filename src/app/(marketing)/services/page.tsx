@@ -4,11 +4,9 @@ import { PageHero, CtaBand } from "@/components/shared/page-shell";
 import { Container } from "@/components/ui/primitives";
 import { categories, services } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Services",
-  description:
-    "Full China sourcing desk — factory verification, QC, private label, OEM/ODM, and own 3PL warehouses in Xiamen and Dubai.",
-};
+import { pages } from "@/lib/route-seo";
+
+export const metadata: Metadata = pages.services;
 
 export default function ServicesPage() {
   return (

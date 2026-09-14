@@ -6,15 +6,10 @@ import { CtaBand } from "@/components/shared/page-shell";
 import { ProofChips } from "@/components/trust/proof-chips";
 import { Container } from "@/components/ui/primitives";
 import { comparePages } from "@/lib/compare";
-import { absoluteUrl } from "@/lib/seo";
 import { whatsappPresets } from "@/lib/whatsapp";
+import { pages } from "@/lib/route-seo";
 
-export const metadata: Metadata = {
-  title: "Compare",
-  description:
-    "Answer-shaped comparisons from Seven Color Trading: sourcing agent vs Alibaba, China 3PL vs DIY freight, and factory visit vs remote QC.",
-  alternates: { canonical: absoluteUrl("/compare") },
-};
+export const metadata: Metadata = pages.compare;
 
 export default function CompareIndexPage() {
   return (

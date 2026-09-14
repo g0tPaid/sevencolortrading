@@ -6,7 +6,9 @@ import { CtaBand } from "@/components/shared/page-shell";
 import { ProofChips } from "@/components/trust/proof-chips";
 import { Container } from "@/components/ui/primitives";
 import { company } from "@/lib/content";
-import { absoluteUrl, inspectionFaqJsonLd, inspectionPageJsonLd } from "@/lib/seo";
+import { inspectionFaqJsonLd, inspectionPageJsonLd } from "@/lib/seo";
+import { pages } from "@/lib/route-seo";
+import { offerNode } from "@/lib/structured-data";
 import {
   inspection,
   inspectionFaqs,
@@ -17,34 +19,14 @@ import {
 } from "@/lib/v2-content";
 import { whatsappPresets } from "@/lib/whatsapp";
 
-export const metadata: Metadata = {
-  title: "Inspection Services in China",
-  description:
-    "On-the-ground inspection in China from Seven Color Trading — factory audits, pre-shipment (PSI), during production (DUPRO), loading supervision, and photo/video defect reports. Not remote-only.",
-  keywords: [
-    "China inspection services",
-    "pre-shipment inspection China",
-    "DUPRO inspection China",
-    "factory audit Xiamen",
-    "loading supervision China",
-    "photo video QC China",
-    "Seven Color Trading inspection",
-  ],
-  alternates: { canonical: absoluteUrl("/inspection") },
-  openGraph: {
-    title: "Inspection Services in China | Sourcing Center",
-    description:
-      "Factory audits, PSI, DUPRO, loading supervision, and photo/video defect packs — inspectors on the ground in China.",
-    url: absoluteUrl("/inspection"),
-    type: "website",
-  },
-};
+export const metadata: Metadata = pages.inspection;
 
 export default function InspectionPage() {
   return (
     <>
       <JsonLd data={inspectionPageJsonLd()} />
       <JsonLd data={inspectionFaqJsonLd()} />
+      <JsonLd data={offerNode("inspection")} />
       <WhatsAppPrefill message={whatsappPresets.inspection} />
       <Container className="pb-16 pt-28 sm:pt-32">
         <p className="section-kicker">
@@ -171,6 +153,13 @@ export default function InspectionPage() {
             className="font-medium text-ink underline decoration-accent/40 underline-offset-4"
           >
             factory audit notes
+          </Link>
+          . Full inspection field guide:{" "}
+          <Link
+            href="/knowledge/china-quality-inspection-guide"
+            className="font-medium text-ink underline decoration-accent/40 underline-offset-4"
+          >
+            China quality inspection guide
           </Link>
           .
         </p>

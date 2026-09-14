@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { UpdatesStrip } from "@/components/home/updates-strip";
 import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
 import { V2ChinaVisit } from "@/components/v2/v2-china-visit";
@@ -12,20 +13,15 @@ import { V2Inspection } from "@/components/v2/v2-inspection";
 import { V2Trust } from "@/components/v2/v2-trust";
 import { V2Why } from "@/components/v2/v2-why";
 import { V2Workflow } from "@/components/v2/v2-workflow";
+import { CommonQuestions } from "@/components/seo/common-questions";
 import { JsonLd } from "@/components/seo/json-ld";
-import { absoluteUrl, defaultDescription, homepageAggregateFaqJsonLd } from "@/lib/seo";
+import { Container } from "@/components/ui/primitives";
+import { pages } from "@/lib/route-seo";
+import { homepageAggregateFaqJsonLd } from "@/lib/seo";
+import { homepageAggregateFaqs } from "@/lib/v2-content";
 import { whatsappPresets } from "@/lib/whatsapp";
 
-export const metadata: Metadata = {
-  title: "China Sourcing, Factory Visits, 3PL & Dropshipping from Xiamen and Dubai",
-  description: defaultDescription,
-  alternates: { canonical: absoluteUrl("/") },
-  openGraph: {
-    title: "Sourcing Center — China Sourcing, Own 3PL & Dropshipping",
-    description: defaultDescription,
-    url: absoluteUrl("/"),
-  },
-};
+export const metadata: Metadata = pages.home;
 
 export default function HomePage() {
   return (
@@ -43,6 +39,16 @@ export default function HomePage() {
       <V2Why />
       <V2Trust />
       <V2ChinaVisit />
+      <Container className="pb-4">
+        <CommonQuestions items={homepageAggregateFaqs} heading="Common questions" />
+        <p className="mt-6 text-sm text-muted">
+          Full list:{" "}
+          <Link href="/faq" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
+            sourcing.center/faq
+          </Link>
+          .
+        </p>
+      </Container>
       <V2Cta />
     </>
   );

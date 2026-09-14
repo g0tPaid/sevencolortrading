@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Fraunces, Inter, Playfair_Display } from "next/font/google";
 import { JsonLd } from "@/components/seo/json-ld";
 import { ThemeProvider } from "@/components/layout/theme-provider";
-import { organizationJsonLd, siteUrl, defaultDescription, seoKeywords } from "@/lib/seo";
+import { defaultDescription, siteUrl, seoKeywords } from "@/lib/seo";
+import { siteWideGraph } from "@/lib/structured-data";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -29,7 +30,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Sourcing Center — China Sourcing, Ideation & 3PL in Xiamen and Dubai",
+    default: "China Sourcing Agent with Own Xiamen & Dubai Warehouses",
     template: "%s · Sourcing Center",
   },
   description: defaultDescription,
@@ -40,15 +41,16 @@ export const metadata: Metadata = {
   publisher: "Seven Color Trading Co Ltd",
   category: "business",
   openGraph: {
-    title: "Sourcing Center — China Sourcing & Own 3PL Warehouses",
+    title: "China Sourcing Agent with Own Xiamen & Dubai Warehouses",
     description: defaultDescription,
     type: "website",
     locale: "en_US",
     siteName: "Sourcing Center",
+    url: siteUrl,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sourcing Center — China Sourcing & Own 3PL Warehouses",
+    title: "China Sourcing Agent with Own Xiamen & Dubai Warehouses",
     description: defaultDescription,
   },
   robots: {
@@ -81,11 +83,13 @@ export const viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <JsonLd data={siteWideGraph()} />
+      </head>
       <body
         className={`${playfair.variable} ${fraunces.variable} ${inter.variable} font-sans antialiased`}
       >
         <ThemeProvider>{children}</ThemeProvider>
-        <JsonLd data={organizationJsonLd()} />
       </body>
     </html>
   );

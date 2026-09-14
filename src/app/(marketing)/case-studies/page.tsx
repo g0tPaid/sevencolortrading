@@ -8,21 +8,11 @@ import { SampleNote } from "@/components/trust/sample-note";
 import { TrustCta } from "@/components/trust/trust-cta";
 import { Container } from "@/components/ui/primitives";
 import { caseStudies, caseStudiesIntro } from "@/lib/case-studies";
-import { absoluteUrl, caseStudiesIndexJsonLd } from "@/lib/seo";
+import { caseStudiesIndexJsonLd } from "@/lib/seo";
 import { whatsappPresets } from "@/lib/whatsapp";
+import { pages } from "@/lib/route-seo";
 
-export const metadata: Metadata = {
-  title: "Case Studies",
-  description:
-    "Example engagements from Seven Color Trading / sourcing.center — China factory sourcing, Xiamen and Dubai 3PL, and hosted factory visits. Conservative anonymized outcomes.",
-  alternates: { canonical: absoluteUrl("/case-studies") },
-  openGraph: {
-    title: "Case Studies | Sourcing Center",
-    description: caseStudiesIntro.description,
-    url: absoluteUrl("/case-studies"),
-    type: "website",
-  },
-};
+export const metadata: Metadata = pages.caseStudies;
 
 export default function CaseStudiesPage() {
   return (

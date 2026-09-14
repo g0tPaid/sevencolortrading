@@ -42,11 +42,13 @@ export function SectionHeading({
   title,
   description,
   align = "left",
+  as: HeadingTag = "h2",
 }: {
   eyebrow?: string;
   title: string;
   description?: string;
   align?: "left" | "center";
+  as?: "h1" | "h2";
 }) {
   return (
     <div className={cn(align === "center" && "mx-auto max-w-2xl text-center")}>
@@ -55,9 +57,9 @@ export function SectionHeading({
           {eyebrow}
         </p>
       ) : null}
-      <h2 className="font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl md:text-5xl">
+      <HeadingTag className="font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl md:text-5xl">
         {title}
-      </h2>
+      </HeadingTag>
       {description ? (
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
           {description}

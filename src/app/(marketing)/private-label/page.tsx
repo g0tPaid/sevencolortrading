@@ -2,10 +2,9 @@ import type { Metadata } from "next";
 import { PageHero, CtaBand } from "@/components/shared/page-shell";
 import { Container } from "@/components/ui/primitives";
 
-export const metadata: Metadata = {
-  title: "Private Label",
-  description: "Private label and white-label manufacturing with packaging, branding, and QC.",
-};
+import { pages } from "@/lib/route-seo";
+
+export const metadata: Metadata = pages.privateLabel;
 
 export default function PrivateLabelPage() {
   return (

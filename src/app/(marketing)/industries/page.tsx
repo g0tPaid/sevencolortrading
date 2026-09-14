@@ -3,10 +3,9 @@ import { PageHero, CtaBand } from "@/components/shared/page-shell";
 import { Container } from "@/components/ui/primitives";
 import { industries } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Industries",
-  description: "Industry playbooks for ecommerce, retail, hospitality, industrial, fashion, and construction buyers.",
-};
+import { pages } from "@/lib/route-seo";
+
+export const metadata: Metadata = pages.industries;
 
 export default function IndustriesPage() {
   return (

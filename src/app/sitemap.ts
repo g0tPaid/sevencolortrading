@@ -22,6 +22,7 @@ const routes: Array<{ path: string; priority: number; changeFrequency: MetadataR
   { path: "/oem-odm", priority: 0.6, changeFrequency: "monthly" },
   { path: "/case-studies", priority: 0.7, changeFrequency: "monthly" },
   { path: "/reviews", priority: 0.7, changeFrequency: "weekly" },
+  { path: "/faq", priority: 0.9, changeFrequency: "weekly" },
   { path: "/knowledge", priority: 0.7, changeFrequency: "weekly" },
   { path: "/compare", priority: 0.72, changeFrequency: "weekly" },
   { path: "/updates", priority: 0.45, changeFrequency: "weekly" },
@@ -36,6 +37,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   const citeable = new Set([
+    "how-to-source-from-china",
+    "china-quality-inspection-guide",
     "3pl-warehouses-xiamen-dubai",
     "china-sourcing-company-xiamen-dubai-3pl",
     "dropshipping-from-china-own-warehouse",

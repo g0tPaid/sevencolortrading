@@ -2,10 +2,15 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ChinaQualityInspectionGuide } from "@/components/knowledge/china-quality-inspection-guide";
+import { HowToSourceFromChinaArticle } from "@/components/knowledge/how-to-source-from-china";
+import { JsonLd } from "@/components/seo/json-ld";
 import { PageHero, CtaBand } from "@/components/shared/page-shell";
 import { Container } from "@/components/ui/primitives";
 import { knowledgeArticles } from "@/lib/content";
-import { absoluteUrl } from "@/lib/seo";
+import { knowledgeMeta } from "@/lib/route-seo";
+import { routeMetadata } from "@/lib/seo";
+import { breadcrumbGraph } from "@/lib/structured-data";
 import {
   chinaVisitFaqs,
   dropshippingFaqs,
@@ -16,25 +21,24 @@ export function generateStaticParams() {
   return knowledgeArticles.map((a) => ({ slug: a.slug }));
 }
 
-export function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  return params.then(({ slug }) => {
-    const article = knowledgeArticles.find((a) => a.slug === slug);
-    if (!article) return { title: "Article" };
-    const description =
-      "excerpt" in article && article.excerpt
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const article = knowledgeArticles.find((a) => a.slug === slug);
+  if (!article) return { title: "Article" };
+  const meta = knowledgeMeta[slug];
+  return routeMetadata({
+    title: meta?.title ?? article.title,
+    description:
+      meta?.description ??
+      ("excerpt" in article && article.excerpt
         ? article.excerpt
-        : `${article.category} guide from Sourcing Center (Seven Color Trading Co Ltd) in Xiamen and Dubai.`;
-    return {
-      title: article.title,
-      description,
-      alternates: { canonical: absoluteUrl(`/knowledge/${article.slug}`) },
-      openGraph: {
-        title: `${article.title} | Sourcing Center`,
-        description,
-        url: absoluteUrl(`/knowledge/${article.slug}`),
-        type: "article",
-      },
-    };
+        : `${article.category} guide from Sourcing Center (Seven Color Trading Co Ltd) in Xiamen and Dubai.`),
+    path: `/knowledge/${article.slug}`,
+    type: "article",
   });
 }
 
@@ -68,16 +72,39 @@ export default async function KnowledgeArticlePage({ params }: { params: Promise
   const isDropship = slug === "dropshipping-from-china-own-warehouse";
   const isVisit = slug === "factory-visit-xiamen-hosted-sourcing-trip";
   const isCompare = slug === "china-3pl-vs-broker-vs-fba";
-  const isSpecial = isThreePl || isCompany || isDropship || isVisit || isCompare;
+  const isHowTo = slug === "how-to-source-from-china";
+  const isInspectGuide = slug === "china-quality-inspection-guide";
+  const isSpecial =
+    isThreePl || isCompany || isDropship || isVisit || isCompare || isHowTo || isInspectGuide;
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbGraph([
+          { name: "Home", path: "/" },
+          { name: "Knowledge", path: "/knowledge" },
+          { name: article.title, path: `/knowledge/${article.slug}` },
+        ])}
+      />
       <PageHero
         eyebrow={article.category}
         title={article.title}
         description={`${article.readTime} read · Field notes from Seven Color desks in Xiamen and Dubai.`}
       />
       <Container className="prose-none max-w-3xl py-16 text-muted">
+        <nav className="mb-8 text-xs text-muted" aria-label="Breadcrumb">
+          <Link href="/knowledge" className="hover:text-ink">
+            Knowledge
+          </Link>
+          <span className="px-2" aria-hidden>
+            /
+          </span>
+          <span className="text-ink">{article.title}</span>
+        </nav>
+        {isHowTo ? <HowToSourceFromChinaArticle /> : null}
+        {isInspectGuide ? <ChinaQualityInspectionGuide /> : null}
+        {!isHowTo && !isInspectGuide ? (
+          <>
         <p className="text-base leading-relaxed text-ink">
           {excerpt ??
             `This briefing summarizes how our Xiamen and Dubai teams run ${article.category.toLowerCase()} work for active buyers. Use it as a checklist when preparing an RFQ or reviewing a supplier.`}
@@ -293,6 +320,8 @@ export default async function KnowledgeArticlePage({ params }: { params: Promise
             <Bullet>Align Incoterms, lead time, and payment terms in writing.</Bullet>
             <Bullet>Confirm packaging and labeling against your market requirements.</Bullet>
           </ul>
+        ) : null}
+          </>
         ) : null}
       </Container>
       <CtaBand />

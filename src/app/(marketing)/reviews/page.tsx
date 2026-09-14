@@ -6,22 +6,11 @@ import { ProofChips } from "@/components/trust/proof-chips";
 import { TrustCta } from "@/components/trust/trust-cta";
 import { ButtonLink, Container } from "@/components/ui/primitives";
 import { reviews, reviewsIntro } from "@/lib/reviews";
-import { absoluteUrl, reviewsPageJsonLd } from "@/lib/seo";
+import { reviewsPageJsonLd } from "@/lib/seo";
 import { whatsappHref, whatsappPresets } from "@/lib/whatsapp";
+import { pages } from "@/lib/route-seo";
 
-export const metadata: Metadata = {
-  title: "Reviews",
-  description:
-    "Anonymized buyer notes about Seven Color Trading / sourcing.center — China factory sourcing, own 3PL in Xiamen and Dubai, and hosted factory visits. Ask for references on WhatsApp.",
-  alternates: { canonical: absoluteUrl("/reviews") },
-  openGraph: {
-    title: "Reviews | Sourcing Center",
-    description:
-      "What buyers say after the factory floor — Seven Color Trading, sourcing.center.",
-    url: absoluteUrl("/reviews"),
-    type: "website",
-  },
-};
+export const metadata: Metadata = pages.reviews;
 
 export default function ReviewsPage() {
   return (
