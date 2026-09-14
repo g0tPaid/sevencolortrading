@@ -216,14 +216,14 @@ export function FactoryRegisterForm() {
         <p className="mt-5 font-mono text-[11px] text-muted">Ref {submittedId.slice(0, 8)}</p>
         <p className="mt-6 text-sm leading-relaxed text-muted">
           Optional and separate — vendor registration stays free:{" "}
-          <Link href="/factory-growth#packages" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
+          <Link href="/factory-growth" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
             Factory international presence
           </Link>
           .
         </p>
         <p className="mt-1 text-sm text-muted" lang="zh-CN">
           可选且独立（登记仍然免费）：
-          <Link href="/factory-growth#packages" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
+          <Link href="/factory-growth" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
             工厂出海形象服务
           </Link>
         </p>
