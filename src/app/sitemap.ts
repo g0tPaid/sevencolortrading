@@ -27,6 +27,8 @@ const routes: Array<{ path: string; priority: number; changeFrequency: MetadataR
   { path: "/knowledge", priority: 0.7, changeFrequency: "weekly" },
   { path: "/compare", priority: 0.72, changeFrequency: "weekly" },
   { path: "/updates", priority: 0.45, changeFrequency: "weekly" },
+  { path: "/llms.txt", priority: 0.4, changeFrequency: "monthly" },
+  { path: "/llms-full.txt", priority: 0.35, changeFrequency: "monthly" },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

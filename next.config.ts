@@ -5,6 +5,19 @@ const nextConfig: NextConfig = {
   outputFileTracingRoot: path.join(__dirname),
   async redirects() {
     return [
+      // Host consolidation: www → apex (covers public files middleware matcher skips).
+      {
+        source: "/",
+        has: [{ type: "host", value: "www.sourcing.center" }],
+        destination: "https://sourcing.center/",
+        statusCode: 301,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.sourcing.center" }],
+        destination: "https://sourcing.center/:path*",
+        statusCode: 301,
+      },
       { source: "/admin", destination: "/dashboard", permanent: false },
       { source: "/admin/:path*", destination: "/dashboard/:path*", permanent: false },
       { source: "/quality-inspection", destination: "/inspection", permanent: true },

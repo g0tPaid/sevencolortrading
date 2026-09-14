@@ -8,6 +8,26 @@ import {
   shouldShowFactoryZh,
 } from "@/lib/geo-detect";
 
+const WWW_HOST = "www.sourcing.center";
+const APEX_ORIGIN = "https://sourcing.center";
+
+/** Public hostname from the proxy/client. Never use nextUrl.hostname (often the internal bind). */
+function requestHostname(request: NextRequest): string {
+  const forwarded = request.headers.get("x-forwarded-host");
+  const raw = forwarded?.split(",")[0]?.trim() || request.headers.get("host") || "";
+  return raw.split(":")[0]?.toLowerCase() ?? "";
+}
+
+/** 301 www → apex, same path + query. Skips localhost, Railway internals, and the apex host. */
+function wwwToApexRedirect(request: NextRequest): NextResponse | null {
+  if (requestHostname(request) !== WWW_HOST) return null;
+  const dest = new URL(
+    `${request.nextUrl.pathname}${request.nextUrl.search}`,
+    APEX_ORIGIN,
+  );
+  return NextResponse.redirect(dest, 301);
+}
+
 function loginRedirect(request: NextRequest): NextResponse {
   const next = `${request.nextUrl.pathname}${request.nextUrl.search}`;
   const url = request.nextUrl.clone();
@@ -67,6 +87,9 @@ function applyFactoryGeoHint(request: NextRequest, response: NextResponse) {
 }
 
 export async function middleware(request: NextRequest) {
+  const hostRedirect = wwwToApexRedirect(request);
+  if (hostRedirect) return hostRedirect;
+
   const { pathname } = request.nextUrl;
   const method = request.method;
 

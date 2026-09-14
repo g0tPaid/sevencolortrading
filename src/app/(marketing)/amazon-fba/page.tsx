@@ -3,7 +3,7 @@ import Link from "next/link";
 import { CommonQuestions } from "@/components/seo/common-questions";
 import { JsonLd } from "@/components/seo/json-ld";
 import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
-import { CtaBand } from "@/components/shared/page-shell";
+import { CtaBand, ServiceBadgeHero } from "@/components/shared/page-shell";
 import { ProofChips } from "@/components/trust/proof-chips";
 import { Container } from "@/components/ui/primitives";
 import { company } from "@/lib/content";
@@ -32,14 +32,7 @@ export default function AmazonFbaPage() {
         <p className="section-kicker">
           {company.legalName} · China desk · private label for Amazon FBA
         </p>
-        <h1 className="mt-3">
-          <span className="block font-display text-[4.25rem] font-semibold leading-[0.85] tracking-tight text-accent sm:text-[7rem] lg:text-[8.5rem]">
-            {amazonFba.eyebrow}
-          </span>
-          <span className="mt-5 block font-display text-3xl font-semibold tracking-tight text-ink sm:text-5xl">
-            {amazonFba.title}
-          </span>
-        </h1>
+        <ServiceBadgeHero badge={amazonFba.eyebrow} subtitle={amazonFba.title} />
         <p className="mt-4 max-w-2xl text-ink-soft sm:text-lg">{amazonFba.description}</p>
         <p className="mt-6 max-w-2xl text-sm text-ink-soft">
           Legal entity {company.legalNameFull}. Founded {company.founded}. DUNS{" "}
