@@ -10,7 +10,7 @@
 | Company profile | License facts beat website copy (`china-company-field-map.md`) |
 | Document index | License indexed; passport and bank numbers local only |
 | Procurement database | **50 targets** researched and scored |
-| Registrations started | **Emirates epic** pending activation. **Etimad** official form WAF-blocked from this cloud IP |
+| Registrations started | Emirates pending activation. Etimad WAF-blocked. NEOM captcha. Emaar Oracle-dev host. Marriott email code |
 | Registering entity | **LOCKED: Chinese company** (`registering-entity.md`) |
 | RFQ monitoring | Not started |
 

@@ -74,8 +74,8 @@
       "registration_type": "Self-register (Oracle Cloud); invitation link also used",
       "categories": "FF&E, furniture, fit-out, hospitality OS&E",
       "fit": 90,
-      "status": "IN PROGRESS",
-      "notes": "Starting from assets.emaar.com/emaar-supplier/. Bank USD allowed. No passport. See emaar.md.",
+      "status": "STOPPED — ORACLE HOST NAMED DEV",
+      "notes": "Official assets.emaar.com Continue Registration opens emhm-dev3.fa.em2.oraclecloud.com. No data submitted. See emaar.md.",
       "docs_typical": "License, contacts, address, bank (do not fill until approved), product/services",
       "last_checked": "2026-09-14"
     },
@@ -176,8 +176,8 @@
       "registration_type": "Self-register then questionnaire / invitation",
       "fit": 82,
       "categories": "FF&E, furniture, construction products, hospitality",
-      "status": "IN PROGRESS",
-      "notes": "Starting from official neom.com suppliers page then GEP. Free. Tick terms. See neom.md.",
+      "status": "FORM FILLED — CAPTCHA BLOCK",
+      "notes": "GEP form filled from neom.com Apply online. Username ajmal.sevencolor. T&Cs ticked. Not submitted (reCAPTCHA). See neom.md.",
       "docs_typical": "Company details, supporting documents, terms acceptance",
       "last_checked": "2026-09-14"
     },
@@ -193,8 +193,8 @@
       "registration_type": "Self-register expression of interest",
       "categories": "FF&E, OS&E, hospitality products",
       "fit": 80,
-      "status": "IN PROGRESS",
-      "notes": "Starting from official help.marriott.com supply-partnership article only. Interest, not a contract. See marriott.md.",
+      "status": "EMAIL VERIFY PENDING",
+      "notes": "Official help article linked marriott.supplierone.co. Form filled. Verify Email clicked. Need 6-digit code. Postal 361000 used. See marriott.md.",
       "docs_typical": "Company profile",
       "last_checked": "2026-09-14"
     },

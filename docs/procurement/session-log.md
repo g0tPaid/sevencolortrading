@@ -183,3 +183,13 @@ Owner must open the same link from a normal home/office browser, or say **yes** 
 **Owner:** ok try others (skip Etimad WAF).
 
 Same field map. Tick all T&Cs. Employees 0–10. Turnover 150000. USD bank if asked. No passport. No fees. Start each portal from the buyer’s own domain.
+
+## 2026-09-14 — Session 10 result
+
+**NEOM / GEP:** Apply online from neom.com. Username `ajmal.sevencolor`. T&Cs ticked. **Not submitted** — reCAPTCHA failed in cloud browser. Password in vault.
+
+**Emaar:** Official video completed. Continue Registration → `emhm-dev3.fa.em2.oraclecloud.com`. **Stopped** (host name contains dev). No data sent.
+
+**Marriott SupplierOne:** Form filled from official help article link. T&Cs ticked. Verify Email clicked. **Need 6-digit code** from info@sevencolortrading.com. Postal **361000** used because the field was required.
+
+No passport. No fees. Etimad still WAF-blocked. Emirates still pending activation.

@@ -36,7 +36,7 @@ Source: China business license (EN + ZH) received 2026-09-14. Passport of legal 
 
 | Field | Rule |
 | --- | --- |
-| Postal code | UNKNOWN — leave blank |
+| Postal code | UNKNOWN on most portals. **Marriott required one — 361000 used** (common Xiamen code). Confirm or correct. |
 | Business scope (itemized English list) | License says refer to Xiamen registration / publicity system — do not invent NACE/UNSPSC lines beyond published site categories |
 | Employees | Use **0–10**. Do not pick a larger band. |
 | Bank account numbers | Type from `vault/bank-accounts.md` only — never put the digits in git |
@@ -53,8 +53,8 @@ Sourcing / import-export, furniture & hospitality FF&E, electronics, fashion/tex
 
 1. Emirates epic — https://epic.emirates.com/ — **submitted, pending activation**; username `ajmal.sevencolor` (`emirates-epic.md`)  
 2. Etimad foreign account — https://login.etimad.sa/Account/Login?culture=en — **WAF-blocked from cloud IP** (`etimad.md`)  
-3. NEOM — https://www.neom.com/en-us/our-business/suppliers — **starting** (`neom.md`)  
-4. Emaar — https://assets.emaar.com/emaar-supplier/ — **starting** (`emaar.md`)  
-5. Marriott interest — https://help.marriott.com/s/article/marriott-supply-partnership — **starting** (`marriott.md`)  
+3. NEOM — https://www.neom.com/en-us/our-business/suppliers — **account form filled, CAPTCHA not submitted** (`neom.md`)  
+4. Emaar — https://assets.emaar.com/emaar-supplier/ — **stopped: official Continue link is Oracle host named dev3** (`emaar.md`)  
+5. Marriott interest — marriott.supplierone.co via help.marriott.com — **email verify pending** (`marriott.md`)  
 
 **HOLD:** UAE MoF Foreign Supplier (branch question). DEWA / eSupply later (local docs / possible fees).
