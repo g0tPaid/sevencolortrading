@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { FactoryGrowthPill } from "@/components/factories/factory-growth-pill";
 import { FactoryRegisterForm } from "@/components/factories/factory-register-form";
 import { FactoryLabel } from "@/components/layout/factory-label";
 import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
@@ -71,6 +72,7 @@ export default function FactoryRegisterPage() {
           <FactoryLabel /> — register as a vendor
         </h1>
         <p className="mt-2 font-display text-xl text-accent sm:text-2xl">工厂供应商登记</p>
+        <FactoryGrowthPill className="mt-5" />
         <p className="mt-4 max-w-2xl text-muted sm:text-lg">
           Apply to supply Sourcing Center buyers through {company.legalNameFull}. We work
           with verified factories across China — this is not a marketplace free-for-all.
@@ -103,7 +105,7 @@ export default function FactoryRegisterPage() {
             供应商登记免费，绝不要求先购买任何套餐。若您还希望面向海外买家做专业英文工厂官网或平台商品上架，可了解工厂出海形象服务。
           </p>
           <Link
-            href="/factory-growth"
+            href="/factory-growth#packages"
             className="mt-5 inline-flex items-center justify-center rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition hover:opacity-90"
           >
             Factory growth · 工厂国际化服务
