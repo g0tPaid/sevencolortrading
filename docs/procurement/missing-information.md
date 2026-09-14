@@ -12,7 +12,7 @@ Registrations cannot start until the items below exist. The agent will not guess
 4. ~~Portal email~~ **Locked:** info@sevencolortrading.com. ~~Mobile~~ **Locked:** +86 180 5926 2730.
 5. **Company chop (公章)** if a form must be stamped.
 6. **Answer:** is UAE license 143609 a **branch of this Chinese company** or a **separate UAE company**? This decides whether we can use MoF “Foreign Supplier”.
-7. **Bank letter** — only when a named portal requires it; do not send in chat.
+7. ~~Bank details~~ **Received** (USD + RMB Bank of China Xiamen — numbers in gitignored vault). Bank **letter** still missing if a portal wants a stamped letter.
 
 ## Needed for stronger RFQ access
 
@@ -26,7 +26,7 @@ Registrations cannot start until the items below exist. The agent will not guess
 
 - ~~Which legal entity~~ **Done: Chinese company.**
 - Who is the portal admin email? (Default `info@sevencolor.online` unless you specify otherwise.)
-- Approve accepting **Emirates epic** terms when shown (first portal).
+- ~~Approve Emirates epic terms~~ **Done 2026-09-14** — tick all similar supplier policies going forward.
 - Confirm **USD 110 / day** may be stated as the inspection commercial rate on capability docs.
 - MoF / eSupply / DEWA: hold until branch question (#6) and fee/eligibility are clear.
 

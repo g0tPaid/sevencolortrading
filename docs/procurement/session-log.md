@@ -120,3 +120,14 @@ No OTP, no password prompt, no bank fields, no fee, no passport upload yet.
 - After yes: continue Basic Profile + categories. Still do not invent employees/turnover; still do not upload passport or bank; still do not pay fees.
 
 **Not started yet:** Etimad, NEOM, Emaar, Marriott.
+
+## 2026-09-14 — Session 7 (owner: yes on policies + turnover + bank)
+
+**Owner**
+
+- Tick the three Emirates policies and continue.
+- Next time: tick all similar supplier policies.
+- Annual turnover: USD 100,000–200,000 (use 150000 if one number).
+- Bank of China Xiamen (USD + RMB). Numbers stored in gitignored vault only (public repo).
+
+**This session continues Emirates:** tick I Agree, Basic Profile (turnover 150000; employees still blank), categories, bank USD if reached. Do not upload passport. Do not invent headcount.

@@ -2,15 +2,15 @@
 
 **Confidential — internal use.** Not linked from the public site. Next session: read this file first, then `session-log.md` and `database.json`. Do not repeat completed research.
 
-## Status (session 6)
+## Status (session 7)
 
 | Phase | Status |
 | --- | --- |
-| Inspect project / documents | China license + legal-rep passport in gitignored vault |
+| Inspect project / documents | China license + passport + bank facts in gitignored vault |
 | Company profile | License facts beat website copy (`china-company-field-map.md`) |
-| Document index | License indexed; passport on file locally only |
+| Document index | License indexed; passport and bank numbers local only |
 | Procurement database | **50 targets** researched and scored |
-| Registrations started | **Emirates epic** — username `ajmal.sevencolor`; stopped at 3 policy checkboxes |
+| Registrations started | **Emirates epic** — owner approved policies; continuing Basic Profile / categories / USD bank |
 | Registering entity | **LOCKED: Chinese company** (`registering-entity.md`) |
 | RFQ monitoring | Not started |
 
@@ -24,18 +24,21 @@ If a portal field is not in (1) or (2): **UNKNOWN — OWNER APPROVAL REQUIRED**.
 
 ## Do not do without owner approval
 
-- Accept terms, codes of conduct, or legal declarations
-- Upload licenses, IDs, bank letters, or financials
-- Pay portal or tender fees
+- **Supplier policies / codes of conduct:** owner standing order 2026-09-14 — **tick all**
+- Upload **passport / ID** (still per-portal)
+- Pay portal or tender **fees**
 - Submit quotes / tenders
 - Send outreach emails (drafts only)
+- Invent employees or ISO
+
+Bank account **numbers** live only in gitignored `vault/bank-accounts.md` (this GitHub repo is public).
 
 ## File map
 
 | File | Purpose |
 | --- | --- |
 | `company-profile.md` | Verified vs unknown fields |
-| `document-index.md` | Vault index (empty) |
+| `document-index.md` | Vault index |
 | `missing-information.md` | What the owner must provide |
 | `descriptions.md` | Approved copy variants (from published site) |
 | `database.json` | Machine-readable target DB |

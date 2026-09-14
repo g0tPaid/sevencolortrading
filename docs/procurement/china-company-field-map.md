@@ -22,6 +22,14 @@ Source: China business license (EN + ZH) received 2026-09-14. Passport of legal 
 | Website | https://sourcing.center |
 | Company email | info@sevencolortrading.com |
 | Phone / mobile (OTP) | +86 180 5926 2730 |
+| Average annual turnover (USD) | Owner range **100,000–200,000**. If the field needs one number, type **150000**. |
+| Bank (international / USD) | Bank of China, Xiamen. Account name: 厦门安杰七彩贸易有限公司 / XIAMEN AJMAL SEVEN COLOR TRADING CO., LTD. Beneficiary: BANK OF CHINA XIAMEN BRANCH. Address: NO.40 HUBIN NORTH ROAD, XIAMEN, FUJIAN, CHINA. Overseas SWIFT: BKCHCNBJ73A. USD + RMB account numbers are in gitignored `vault/bank-accounts.md` (public repo — never commit numbers). |
+| Bank (RMB) | Same bank. Domestic/FX SWIFT: BKCHCNBJ720. Prefer USD for overseas portals. |
+
+## Standing owner orders (2026-09-14)
+
+- **Tick all** supplier policies / codes of conduct / anti-bribery / safety acknowledgements on portals.
+- Still **stop** for: portal or tender **fees**, submitting tenders/quotes, **passport/ID upload**, inventing employees or ISO.
 
 ## Do not type (UNKNOWN or do not invent)
 
@@ -29,8 +37,8 @@ Source: China business license (EN + ZH) received 2026-09-14. Passport of legal 
 | --- | --- |
 | Postal code | UNKNOWN — leave blank |
 | Business scope (itemized English list) | License says refer to Xiamen registration / publicity system — do not invent NACE/UNSPSC lines beyond published site categories |
-| Employees / turnover | UNKNOWN |
-| Bank / IBAN / SWIFT | UNKNOWN — STOP |
+| Employees | UNKNOWN — leave blank; stop if the field is required |
+| Bank account numbers | Type from `vault/bank-accounts.md` only — never put the digits in git |
 | ISO / insurance | Not documented — No / blank |
 | Year established | Use **2025-01-06**, not website “2014” |
 | Registered address | Use **Yuehua Road FTZ**, not website “Huli Avenue” |
@@ -42,10 +50,10 @@ Sourcing / import-export, furniture & hospitality FF&E, electronics, fashion/tex
 
 ## First-wave as this Chinese company
 
-1. Emirates epic — https://epic.emirates.com/ — **started**; username `ajmal.sevencolor`; stop at three policy checkboxes (`emirates-epic.md`)  
+1. Emirates epic — https://epic.emirates.com/ — **in progress**; username `ajmal.sevencolor`; owner approved the three policies + turnover + bank (`emirates-epic.md`)  
 2. Etimad foreign account  
 3. NEOM  
-4. Emaar (stop at bank)  
+4. Emaar (bank facts on file — still no passport)  
 5. Marriott interest  
 
 **HOLD:** UAE MoF Foreign Supplier (branch question). DEWA / eSupply later (local docs / possible fees).
