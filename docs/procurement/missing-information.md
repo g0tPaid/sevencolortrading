@@ -9,7 +9,7 @@ Registrations cannot start until the items below exist. The agent will not guess
 1. ~~China business license~~ **Received** (EN + ZH).
 2. **China tax registration certificate** if a portal rejects USCC-only.
 3. ~~Legal representative passport~~ **Received locally** — not in git; upload only with per-portal approval.
-4. ~~Portal email~~ **Locked:** info@sevencolortrading.com. Still need **mobile** for SMS OTPs.
+4. ~~Portal email~~ **Locked:** info@sevencolortrading.com. ~~Mobile~~ **Locked:** +86 180 5926 2730.
 5. **Company chop (公章)** if a form must be stamped.
 6. **Answer:** is UAE license 143609 a **branch of this Chinese company** or a **separate UAE company**? This decides whether we can use MoF “Foreign Supplier”.
 7. **Bank letter** — only when a named portal requires it; do not send in chat.

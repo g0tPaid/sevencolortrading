@@ -21,7 +21,7 @@ Source: China business license (EN + ZH) received 2026-09-14. Passport of legal 
 | DUNS | 509419282 |
 | Website | https://sourcing.center |
 | Company email | info@sevencolortrading.com |
-| Phone | +86 180 5926 2730 |
+| Phone / mobile (OTP) | +86 180 5926 2730 |
 
 ## Do not type (UNKNOWN or do not invent)
 

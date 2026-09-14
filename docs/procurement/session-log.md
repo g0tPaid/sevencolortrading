@@ -69,3 +69,9 @@
 **Still not done:** no portal account created; no passport uploaded to any buyer.
 
 **Need:** mobile for OTP; approve Emirates epic T&Cs when we open that portal; 143609 branch vs separate company (MoF only).
+
+## 2026-09-14 — Session 4 (mobile)
+
+**Owner:** portal mobile **+86 180 5926 2730**.
+
+Still no portal account. Next: owner says **yes** to open Emirates epic (stop at terms).

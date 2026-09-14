@@ -16,7 +16,7 @@
 | Legal representative | AJMAL ABDUL JABBAR AHAMED | — |
 | Registration authority | Xiamen Municipal Administration for Market Supervision | — |
 | License document date | 25 February 2025 (duplicate 2-1) | — |
-| Phone | +86 180 5926 2730 | — |
+| Phone / SMS OTP | +86 180 5926 2730 | — |
 | Website | https://sourcing.center | — |
 | Email | info@sevencolortrading.com | info@sevencolor.online unless a form needs a second email |
 
