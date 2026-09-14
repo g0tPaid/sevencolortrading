@@ -18,6 +18,7 @@ const routes: Array<{ path: string; priority: number; changeFrequency: MetadataR
   { path: "/factory-verification", priority: 0.6, changeFrequency: "monthly" },
   { path: "/factories/register", priority: 0.65, changeFrequency: "monthly" },
   { path: "/inspection", priority: 0.92, changeFrequency: "weekly" },
+  { path: "/amazon-fba", priority: 0.92, changeFrequency: "weekly" },
   { path: "/private-label", priority: 0.6, changeFrequency: "monthly" },
   { path: "/oem-odm", priority: 0.6, changeFrequency: "monthly" },
   { path: "/case-studies", priority: 0.7, changeFrequency: "monthly" },

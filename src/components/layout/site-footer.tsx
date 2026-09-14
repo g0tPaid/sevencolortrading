@@ -29,7 +29,10 @@ export function SiteFooter() {
                   <Link
                     href={s.href}
                     className={
-                      s.href === "/3pl" || s.href === "/dropshipping" || s.href === "/inspection"
+                      s.href === "/3pl" ||
+                      s.href === "/dropshipping" ||
+                      s.href === "/inspection" ||
+                      s.href === "/amazon-fba"
                         ? "inline-flex items-center gap-2 font-semibold text-accent hover:opacity-90"
                         : "text-paper/80 hover:text-paper"
                     }
@@ -62,6 +65,7 @@ export function SiteFooter() {
                 ["Contact", "/contact"],
                 ["Visit China", "/visit"],
                 ["Inspection", "/inspection"],
+                ["Amazon FBA", "/amazon-fba"],
                 ["3PL", "/3pl"],
                 ["Factories", "/factories/register"],
                 ["Dropshipping", "/dropshipping"],

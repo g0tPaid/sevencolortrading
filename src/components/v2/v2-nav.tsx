@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 const pageLinks = [
   { href: "/3pl", label: "3PL", highlight: true },
   { href: "/inspection", label: "Inspection" },
+  { href: "/amazon-fba", label: "Amazon FBA" },
   { href: "/factories/register", label: "Factories" },
   { href: "/dropshipping", label: "Dropship" },
   { href: "/#visit", label: "Visit China" },
@@ -23,6 +24,7 @@ const homeLinks = [
   { href: "/#network", label: "Network" },
   { href: "/#workflow", label: "Workflow" },
   { href: "/#inspection", label: "Inspection" },
+  { href: "/#amazon-fba", label: "Amazon FBA" },
   { href: "/#trust", label: "Trust" },
 ];
 

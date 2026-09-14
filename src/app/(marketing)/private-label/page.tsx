@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageHero, CtaBand } from "@/components/shared/page-shell";
 import { Container } from "@/components/ui/primitives";
 
@@ -23,6 +24,17 @@ export default function PrivateLabelPage() {
             </p>
           </div>
         ))}
+        <p className="md:col-span-3 mt-2 text-sm text-muted">
+          Heading to Amazon inbound?{" "}
+          <Link href="/amazon-fba" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
+            Amazon FBA private label
+          </Link>{" "}
+          covers OEM, inspection, carton marks, and freight. Develop the product first on{" "}
+          <Link href="/oem-odm" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
+            OEM / ODM
+          </Link>
+          .
+        </p>
       </Container>
       <CtaBand />
     </>

@@ -147,6 +147,10 @@ export default function InspectionPage() {
           <Link href="/3pl" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
             Own 3PL warehouses
           </Link>
+          . Private-label inbound to Amazon:{" "}
+          <Link href="/amazon-fba" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
+            Amazon FBA prep
+          </Link>
           . Audit checklist:{" "}
           <Link
             href="/knowledge/factory-audit-checklist"

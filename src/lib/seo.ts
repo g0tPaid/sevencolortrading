@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { company } from "@/lib/content";
 import {
+  amazonFba,
+  amazonFbaFaqs,
+  amazonFbaSteps,
   chinaVisitFaqs,
   dropshipping,
   dropshippingBenefits,
@@ -49,6 +52,9 @@ export const seoKeywords = [
   "DUPRO inspection China",
   "factory audit Xiamen",
   "loading supervision China",
+  "Amazon FBA private label China",
+  "Amazon FBA prep China",
+  "private label Amazon FBA sourcing",
 ];
 
 export const defaultDescription =
@@ -306,6 +312,43 @@ export function inspectionPageJsonLd() {
       "@type": "SpeakableSpecification",
       cssSelector: ["h1", "h2", "[data-seo-answer]"],
     },
+  };
+}
+
+export function amazonFbaFaqJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: amazonFbaFaqs.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a,
+      },
+    })),
+  };
+}
+
+export function amazonFbaPageJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${siteUrl}/amazon-fba#webpage`,
+    url: `${siteUrl}/amazon-fba`,
+    name: "Amazon FBA private label from China | Sourcing Center",
+    description: amazonFba.description,
+    isPartOf: { "@id": `${siteUrl}/#website` },
+    about: { "@id": `${siteUrl}/amazon-fba#service` },
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h1", "h2", "[data-seo-answer]"],
+    },
+    mainEntity: amazonFbaSteps.map((step) => ({
+      "@type": "Service",
+      name: step.title,
+      description: step.text,
+    })),
   };
 }
 

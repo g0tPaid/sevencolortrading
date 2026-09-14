@@ -2,6 +2,7 @@ import { company } from "@/lib/content";
 import { faqItems } from "@/lib/faq";
 import { siteUrl } from "@/lib/seo";
 import {
+  amazonFba,
   chinaVisit,
   dropshipping,
   fulfillment,
@@ -33,6 +34,12 @@ export const serviceCopy = {
     serviceType: "OEM/ODM product development",
     description:
       "OEM/ODM and new product development under NDA first — from concept and tooling to mass production with IP-aware workflows. Brand-new inventions stay closed until the NDA is signed.",
+  },
+  "amazon-fba": {
+    path: "/amazon-fba",
+    name: "Amazon FBA private label from China",
+    serviceType: "Amazon FBA private label",
+    description: amazonFba.description,
   },
   inspection: {
     path: "/inspection",
@@ -164,6 +171,7 @@ export function organizationNode(): JsonLdNode {
     knowsAbout: [
       "China factory sourcing",
       "OEM/ODM",
+      "Amazon FBA private label",
       "Product inspection",
       "Third-party logistics",
       "Dropshipping",

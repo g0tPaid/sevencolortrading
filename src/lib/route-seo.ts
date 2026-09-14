@@ -20,6 +20,12 @@ export const pages = {
       "OEM/ODM and new product development under NDA first. Concept, tooling, sampling, and mass production from the Xiamen desk. Founded 2014. DUNS 509419282.",
     path: "/oem-odm",
   }),
+  amazonFba: routeMetadata({
+    title: "Amazon FBA Private Label from China | OEM and Prep",
+    description:
+      "Private-label in China for Amazon FBA with sourcing.center: OEM, branding, packaging, inspection, carton marks, and freight to Amazon or Xiamen/Dubai 3PL.",
+    path: "/amazon-fba",
+  }),
   inspection: routeMetadata({
     title: "China Inspection Service — USD 110/Day, PSI & DUPRO",
     description:
@@ -53,7 +59,7 @@ export const pages = {
   faq: routeMetadata({
     title: "China Sourcing FAQs — MOQ, QC, 3PL, and Inspection",
     description:
-      "Answers on no-MOQ China sourcing, USD 110/day inspection, own 3PL in Xiamen and Dubai, dropshipping, freight, hosted visits, licenses, DUNS 509419282.",
+      "Answers on no-MOQ China sourcing, USD 110/day inspection, Amazon FBA private label, own 3PL in Xiamen and Dubai, dropshipping, freight, visits, DUNS 509419282.",
     path: "/faq",
   }),
   about: routeMetadata({
@@ -65,7 +71,7 @@ export const pages = {
   services: routeMetadata({
     title: "China Sourcing Services: QC, OEM, 3PL, Dropshipping",
     description:
-      "Full China sourcing desk: factory verification, USD 110/day inspection, OEM/ODM, hosted visits, own 3PL in Xiamen and Dubai, and dropshipping from stock.",
+      "Full China sourcing desk: USD 110/day inspection, OEM/ODM, Amazon FBA private label, hosted visits, own 3PL in Xiamen and Dubai, and dropshipping.",
     path: "/services",
   }),
   knowledge: routeMetadata({

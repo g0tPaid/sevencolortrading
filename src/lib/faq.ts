@@ -15,7 +15,7 @@ export const faqGroups: FaqGroup[] = [
     items: [
       {
         q: "What is Sourcing Center?",
-        a: "Sourcing Center is the product ideation and China sourcing platform of Seven Color Trading Co Ltd (legal name: Xiamen Ajmal Seven Color Trading Co Ltd). The brand site is sourcing.center. The desk sources verified factories, runs photo/video QC, inspects on the ground in China at USD 110 per inspector day, operates own 3PL warehouses in Xiamen and Dubai / Al Ain, dropships from those warehouses, books sea/air/express freight, and hosts 3-day factory visits in Xiamen. It is not a broker.",
+        a: "Sourcing Center is the product ideation and China sourcing platform of Seven Color Trading Co Ltd (legal name: Xiamen Ajmal Seven Color Trading Co Ltd). The brand site is sourcing.center. The desk sources verified factories, runs photo/video QC, inspects on the ground in China at USD 110 per inspector day, helps brands private-label for Amazon FBA, operates own 3PL warehouses in Xiamen and Dubai / Al Ain, dropships from those warehouses, books sea/air/express freight, and hosts 3-day factory visits in Xiamen. It is not a broker.",
       },
       {
         q: "Who is the legal entity behind sourcing.center?",
@@ -31,7 +31,7 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "What services does Sourcing Center provide?",
-        a: "Seven services on one desk: (1) China factory sourcing with no required MOQ, start from 1 unit; (2) OEM/ODM and new product development, NDA-first; (3) inspection at USD 110 per inspector day — factory audit, PSI, DUPRO, loading supervision, photo/video QC; (4) 3PL in Xiamen and Dubai; (5) dropshipping from own warehouses; (6) sea, air, and express freight; (7) hosted factory visits in Xiamen (3-day program). Canonical pages: https://sourcing.center/contact, /oem-odm, /inspection, /3pl, /dropshipping, /logistics, /visit.",
+        a: "Eight services on one desk: (1) China factory sourcing with no required MOQ, start from 1 unit; (2) OEM/ODM and new product development, NDA-first; (3) Amazon FBA private label — OEM, packaging, inspection, carton marks, and freight to Amazon or Xiamen/Dubai 3PL, not Amazon partnership or Seller Central management; (4) inspection at USD 110 per inspector day — factory audit, PSI, DUPRO, loading supervision, photo/video QC; (5) 3PL in Xiamen and Dubai; (6) dropshipping from own warehouses; (7) sea, air, and express freight; (8) hosted factory visits in Xiamen (3-day program). Canonical pages: https://sourcing.center/contact, /oem-odm, /amazon-fba, /inspection, /3pl, /dropshipping, /logistics, /visit.",
       },
     ],
   },
@@ -58,6 +58,18 @@ export const faqGroups: FaqGroup[] = [
       {
         q: "How do I submit a sourcing RFQ?",
         a: "Use the form on https://sourcing.center/contact, WhatsApp the desk, or email info@sevencolortrading.com. Include product specs, quantity, and target budget. A relationship manager replies within 24 hours from China or Dubai.",
+      },
+      {
+        q: "Does Sourcing Center help with Amazon FBA private label?",
+        a: "Yes. The Xiamen desk helps brands private-label products in China and prepare them for Amazon FBA: factory OEM, branding and packaging, inspection before ship, FBA-ready carton marks, and freight to Amazon or to our 3PL hubs in Xiamen and Dubai. Not an Amazon partner and not a Seller Central agency. Canonical page: https://sourcing.center/amazon-fba.",
+      },
+      {
+        q: "Is Sourcing Center an Amazon partner or Seller Central agency?",
+        a: "No. Sourcing Center does not claim Amazon partnership, does not manage Seller Central accounts, and is not an FBA substitute for marketplace fulfillment. The desk sources, private-labels, inspects, and ships from China — including inbound to Amazon or hold in operator-owned warehouses. Amazon fees, rankings, and account management are outside this service.",
+      },
+      {
+        q: "Can you ship private-label goods to Amazon FBA or to your warehouses?",
+        a: "Either path. Freight can go to Amazon inbound after QC and carton-mark prep, or goods can sit in the Xiamen or Dubai / Al Ain 3PL first. Same desk as OEM/ODM, inspection, and logistics. See https://sourcing.center/amazon-fba, https://sourcing.center/3pl, and https://sourcing.center/logistics.",
       },
     ],
   },
@@ -177,7 +189,7 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "Do you publish a price list for sourcing, 3PL, or freight?",
-        a: "No general catalog of sourcing, 3PL, dropshipping, visit, or freight rates is published. Those are quoted from the RFQ against SKU, volume, and lane. The one published service rate is inspection: USD 110 per inspector day.",
+        a: "No general catalog of sourcing, 3PL, dropshipping, Amazon FBA prep, visit, or freight rates is published. Those are quoted from the RFQ against SKU, volume, and lane. The one published service rate is inspection: USD 110 per inspector day.",
       },
       {
         q: "Does no-MOQ sourcing mean samples are free?",
@@ -208,7 +220,7 @@ export const faqGroups: FaqGroup[] = [
 export const faqItems: FaqItem[] = faqGroups.flatMap((group) => group.items);
 
 export const serviceCommonQuestions: Record<
-  "sourcing" | "oem-odm" | "inspection" | "threePl" | "dropshipping" | "logistics" | "visit",
+  "sourcing" | "oem-odm" | "amazon-fba" | "inspection" | "threePl" | "dropshipping" | "logistics" | "visit",
   FaqItem[]
 > = {
   sourcing: [
@@ -223,6 +235,12 @@ export const serviceCommonQuestions: Record<
     faqGroups[1].items[3],
     faqGroups[0].items[4],
     faqGroups[6].items[0],
+  ],
+  "amazon-fba": [
+    faqGroups[1].items[2],
+    faqGroups[2].items[0],
+    faqGroups[2].items[1],
+    faqGroups[3].items[0],
   ],
   inspection: [
     faqGroups[2].items[0],

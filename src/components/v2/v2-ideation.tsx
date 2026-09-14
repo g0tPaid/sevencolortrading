@@ -262,6 +262,12 @@ export function V2Ideation() {
               >
                 OEM / ODM path
               </Link>
+              <Link
+                href="/amazon-fba"
+                className="glass-chip inline-flex rounded-full px-6 py-3 text-sm font-semibold text-ink"
+              >
+                Amazon FBA private label
+              </Link>
             </div>
           </div>
         ) : null}
