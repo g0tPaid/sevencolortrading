@@ -40,8 +40,12 @@ export default function OemOdmPage() {
           After sampling, lock quality with{" "}
           <Link href="/inspection" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
             on-the-ground inspection
-          </Link>{" "}
-          or a{" "}
+          </Link>
+          , prep a{" "}
+          <Link href="/amazon-fba" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
+            Amazon FBA private-label inbound
+          </Link>
+          , or book a{" "}
           <Link href="/visit" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
             hosted factory visit in Xiamen
           </Link>

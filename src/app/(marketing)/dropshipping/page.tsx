@@ -99,6 +99,10 @@ export default function DropshippingPage() {
           <Link href="/inspection" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
             inspection at USD 110 per inspector day
           </Link>
+          . Private-label inbound to Amazon:{" "}
+          <Link href="/amazon-fba" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
+            Amazon FBA prep
+          </Link>
           .
         </p>
       </Container>

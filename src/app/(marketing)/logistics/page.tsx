@@ -51,6 +51,10 @@ export default function LogisticsPage() {
           <Link href="/visit" className="font-medium text-accent underline-offset-4 hover:underline">
             Hosted factory visit
           </Link>
+          {" · "}
+          <Link href="/amazon-fba" className="font-medium text-accent underline-offset-4 hover:underline">
+            Amazon FBA private label
+          </Link>
         </p>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {fulfillmentSteps.map((step) => (

@@ -21,6 +21,12 @@ export const siteUpdates: SiteUpdate[] = [
   {
     date: "14 Sep 2026",
     iso: "2026-09-14",
+    title: "Amazon FBA private label — OEM, packaging, QC, and freight from China",
+    href: "/amazon-fba",
+  },
+  {
+    date: "14 Sep 2026",
+    iso: "2026-09-14",
     title: "How to source from China — factory to delivery, plus inspection guide",
     href: "/knowledge/how-to-source-from-china",
   },

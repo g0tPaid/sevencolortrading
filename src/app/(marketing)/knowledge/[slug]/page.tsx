@@ -179,6 +179,13 @@ export default async function KnowledgeArticlePage({ params }: { params: Promise
                 >
                   sourcing.center/inspection
                 </Link>
+                · Amazon FBA private label:{" "}
+                <Link
+                  href="/amazon-fba"
+                  className="font-medium text-ink underline decoration-accent/40 underline-offset-4"
+                >
+                  sourcing.center/amazon-fba
+                </Link>
                 · Hosted factory visit:{" "}
                 <Link href="/visit" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
                   sourcing.center/visit
@@ -290,6 +297,14 @@ export default async function KnowledgeArticlePage({ params }: { params: Promise
                 Choose Sourcing Center when you want sourcing + own warehouses on one desk. Service page:{" "}
                 <Link href="/3pl" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
                   sourcing.center/3pl
+                </Link>
+                . If you need China-side private label and FBA-ready carton prep (not Amazon account
+                management):{" "}
+                <Link
+                  href="/amazon-fba"
+                  className="font-medium text-ink underline decoration-accent/40 underline-offset-4"
+                >
+                  sourcing.center/amazon-fba
                 </Link>
                 .
               </Bullet>

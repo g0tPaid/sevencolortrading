@@ -20,6 +20,8 @@ export const whatsappPresets = {
     "Hi Seven Color — I'm looking at a hosted factory visit / QC trip from the Xiamen desk.",
   inspection:
     "Hi Seven Color — I need on-the-ground inspection in China (factory audit / PSI / DUPRO / loading) via Sourcing Center.",
+  amazonFba:
+    "Hi Seven Color — I want to private-label a product in China and prepare it for Amazon FBA (OEM, packaging, QC, carton marks, freight).",
   factories:
     "Hi Seven Color — I'm a factory applying via sourcing.center/factories/register (工厂入驻).",
   dropshipping:

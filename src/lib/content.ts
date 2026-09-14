@@ -148,6 +148,12 @@ export const services = [
     description: "From concept and tooling to mass production with IP-aware workflows.",
   },
   {
+    href: "/amazon-fba",
+    title: "Amazon FBA Private Label",
+    description:
+      "Private-label products in China and prepare them for Amazon FBA: OEM, packaging, inspection, carton marks, and freight to Amazon or Xiamen/Dubai 3PL.",
+  },
+  {
     href: "/visit",
     title: "China Factory Visit",
     description: "Schedule a hosted trip to Xiamen — factories, warehouse, QC, and pickup. Not a tourist tour.",
