@@ -19,7 +19,7 @@ Scores are commercial fit for **China sourcing + inspection + own Xiamen/Dubai 3
 
 ## Strong — next after first wave
 
-T009 Etimad (84), T026 Rotana (84), T027 Nakheel (83), T010 NEOM (82), T033 Landmark (82), T030 Dubai Airports (81), T038 Red Sea Global (81), T011 Marriott (80), T031 Abu Dhabi Airports (80), T032 Al-Futtaim (80), T034 LuLu (80), T043 Qatar Airways (80), T049 ADNEC (79), T012 Hilton (78), T035 DAMAC (78), T013 Walmart (78), T044 HIA (77), T015 IHG (76), T014 Avendra (76), T040 Qiddiya (76).
+T009 Etimad (84, IN PROGRESS), T026 Rotana (84), T027 Nakheel (83), T010 NEOM (82), T033 Landmark (82), T030 Dubai Airports (81), T038 Red Sea Global (81), T011 Marriott (80), T031 Abu Dhabi Airports (80), T032 Al-Futtaim (80), T034 LuLu (80), T043 Qatar Airways (80), T049 ADNEC (79), T012 Hilton (78), T035 DAMAC (78), T013 Walmart (78), T044 HIA (77), T015 IHG (76), T014 Avendra (76), T040 Qiddiya (76).
 
 ## Do not prioritize now
 
