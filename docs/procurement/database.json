@@ -23,8 +23,8 @@
       "registration_type": "Self-register (reviewed by Supplier Relations)",
       "categories": "FF&E, hotel/airline supplies, uniforms, equipment, general merchandise",
       "fit": 94,
-      "status": "IN PROGRESS — STOPPED AT LEGAL",
-      "notes": "Username ajmal.sevencolor created. Company/user fields filled from China license. STOPPED on Compliance: Anti-Bribery, Safety, Supplier Code of Conduct unchecked. See emirates-epic.md. No fee, no bank, no passport upload. Timezone was wrongly set to Mexico CDT/CST — fix after credentials.",
+      "status": "IN PROGRESS — NEED EMPLOYEE COUNT",
+      "notes": "Username ajmal.sevencolor. Policies ticked. License uploaded. Turnover 150000. 3 categories. STOPPED: Number of Employees mandatory dropdown 0-10 / 10-50 / 50-250 / Above 250. No bank page. No passport. Check email for password. See emirates-epic.md.",
       "docs_typical": "Trade license, company profile, category selection, compliance acknowledgement",
       "last_checked": "2026-09-14"
     },

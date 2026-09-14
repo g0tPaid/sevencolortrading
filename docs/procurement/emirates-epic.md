@@ -1,73 +1,55 @@
 # Emirates epic — live registration (T001)
 
 **Portal:** https://epic.emirates.com/  
-**Status:** In progress. **STOPPED** on Compliance — three “I Agree” boxes unchecked.  
-**Username created:** `ajmal.sevencolor`  
-**Do not tick I Agree until the owner reviews the three policies below.**
+**Username:** `ajmal.sevencolor`  
+**Status:** Almost complete. **STOPPED** — Number of Employees is mandatory and still unknown. No bank page on this portal. Passport not uploaded.
 
-## Filled (verified China license + owner contacts)
+## Owner approvals already used
+
+- Three Compliance policies ticked (Anti-Bribery, Safety, Supplier Code of Conduct)
+- Standing order: tick all similar supplier policies on later portals
+- Turnover: **150000** USD (owner range 100k–200k)
+- China trade license EN uploaded
+- Bank numbers on file for other portals; Emirates did not show a bank step
+
+## Filled
 
 | Field | Value |
 | --- | --- |
 | Organisation | XIAMEN AJMAL SEVEN COLOR TRADING CO., LTD |
-| Address | Room 208 (Area B), No. 10-2, Yuehua Road, Xiamen Area of China (Fujian) Pilot Free Trade Zone |
-| Country / city | China / Xiamen |
+| Address | Room 208 (Area B), No. 10-2, Yuehua Road, FTZ Xiamen |
 | License / USCC | 91350200MAE8W9E67A |
 | Email | info@sevencolortrading.com |
 | Phone | +86 180 5926 2730 |
 | Website | https://sourcing.center |
 | User | AJMAL ABDUL JABBAR AHAMED |
 | Username | ajmal.sevencolor |
-| Postal code | left blank (UNKNOWN) |
+| Year of Establishment | 2025 |
+| Average turnover (USD) | 150000 |
+| Alternative trading name | Sourcing Center |
+| VAT/TRN | No |
+| Parent company | No |
+| SME / National SME / CAGE | No |
+| Trade license file | china-business-license-en.jpg |
+| License expiry on form | **31/12/2099** (license face has no expiry; placeholder for “long-term” — owner should confirm) |
+| Categories | 1300011 Corporate Goods & Services — General Corporate Procurement; 2300011 Properties & Facilities — Construction; 2300015 Properties & Facilities — Furniture |
+| Postal code | blank |
+| Number of Employees | **blank — BLOCKER** |
 
-**Timezone on the form was set wrongly to CDT/CST (Mexico).** Correct to Asia/Shanghai or Asia/Dubai after credentials, before any later submit. Registration Data is now locked until credentials are issued.
+**Timezone** was wrongly set to Mexico CDT/CST during first fill; Registration Data is locked until login. Fix after password/credentials.
 
-## Not filled (do not invent)
+## Not done
 
-- Year of Establishment — may use **2025** / **6 January 2025** from license when that page is open
-- Number of Employees — UNKNOWN
-- Average Turnover Last 3 Years (USD) — UNKNOWN
-- Company Capabilities Overview — use published-site copy only (`descriptions.md`)
-- VAT/TRN, SME flags, CAGE — UNKNOWN / No unless documented
-- Trade license file upload — vault has scans; **do not upload until owner approves this portal’s upload**
-- Bank — not reached
-- Passport — not reached; do not upload
+- Number of Employees (mandatory dropdown)
+- Bank (page never appeared)
+- Passport (not uploaded, as required)
+- Final activation / submit (blocked on employees)
+- Password: portal says use username and password; we never got a password prompt in-session. Check **info@sevencolortrading.com** for epic credentials.
 
-## Onboarding index (as of 2026-09-14)
+## Confirmation message (verbatim)
 
-- Basic Profile — incomplete (red)
-- Compliance — current page (red)
-- My Category Selection — 0 selected
-- Registration Confirmation — not reached
-- Registration Data — locked until login credentials
+“The Registration process is not complete. Access the Log In page and use your selected Username and Password to complete the Registration process. The Activation of your account will be evaluated once all required fields and Category information, where requested have been provided.”
 
-No OTP, no password prompt, no fee, no bank fields, no passport upload yet.
+## Next owner input
 
-## Legal gate — three required policies
-
-Each has an “Instructional Attachment” PDF on the Compliance page. Summaries below are factual extracts for owner review, **not legal advice**.
-
-### 1. Anti-Bribery & Corruption Policy
-
-**File:** Anti-Bribery and Corruption Policy.pdf (~111 KB)
-
-Emirates Group states a zero-tolerance approach to bribery and corruption worldwide. Suppliers must not make or receive bribes, kickbacks, or improper payments to influence business decisions. Facilitating payments are restricted except in limited lawful cases needing senior approval. Gifts, hospitality, and sponsored travel are constrained. Business partners must acknowledge the policy, comply, and indemnify the Group against breaches. Accurate books are required; whistleblowers are protected; non-compliance can mean contract termination and civil/criminal penalties.
-
-### 2. Safety Policy (Contractors Safety Document)
-
-**File:** Contractors_Safety_document.pdf (~377 KB)
-
-Contractors working for Emirates Group must meet HSE standards aligned with the Group ISMS and UAE safety law. Pre-qualification, training, PPE, accident reporting, and sub-contractor control are required. Emirates may audit and stop unsafe work. The document is written for **on-site contractors** (scaffolding, electrical, height, lifting, etc.). A China trading / sourcing company with no on-site Emirates contract work still has to tick this box to finish registration; operational site duties would apply if work is later awarded on Emirates premises.
-
-### 3. Supplier Code of Conduct 2025
-
-**File:** EKG Supplier Code of Conduct 2025.pdf (~3.3 MB)
-
-Applies to all suppliers of goods and services. Covers human rights (no forced/child labour, no document retention, fair wages, safe work), anti-bribery, competition, sanctions/export control, data privacy, environment (ISO 14001 or equivalent is **expected**, not claimed by us), whistleblowing, audits, and information security (including access-log retention). Non-compliance can mean corrective action or termination. Cascade to the supplier’s own supply chain is expected.
-
-**Optional Question 4:** upload our own code of conduct — leave empty (we have none on file).
-
-## Owner decision needed
-
-Reply **yes** to approve ticking all three “I Agree” boxes and continue Basic Profile + categories (still no bank, no passport, no fee).  
-Reply **no** to abandon or pause this registration.
+Send **Number of Employees** (or the dropdown band, e.g. 1–10). Do not guess. Then we enter it and finish.

@@ -10,7 +10,7 @@
 | Company profile | License facts beat website copy (`china-company-field-map.md`) |
 | Document index | License indexed; passport and bank numbers local only |
 | Procurement database | **50 targets** researched and scored |
-| Registrations started | **Emirates epic** — owner approved policies; continuing Basic Profile / categories / USD bank |
+| Registrations started | **Emirates epic** — policies ticked; blocked on Number of Employees dropdown |
 | Registering entity | **LOCKED: Chinese company** (`registering-entity.md`) |
 | RFQ monitoring | Not started |
 

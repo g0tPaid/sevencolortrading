@@ -11,7 +11,7 @@ Accounts: Emirates username `ajmal.sevencolor` created — **not submitted**. No
 - **Stopped at:** Compliance — Anti-Bribery, Safety Policy, Supplier Code of Conduct. “I Agree” unchecked.
 - **Why it matters:** Accepting those three PDFs is a legal/ethics declaration.
 - **Source:** China license + owner email/mobile. No employees, turnover, bank, or passport used.
-- **Decision needed:** Owner approve the three policies, then continue Basic Profile + categories.
+- **Decision needed:** Number of Employees dropdown (`0-10` / `10-50` / `50-250` / `Above 250`). Then finish confirmation. Check email for password.
 
 ## T002 — Dubai eSupply
 

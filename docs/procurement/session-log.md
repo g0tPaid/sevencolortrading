@@ -131,3 +131,17 @@ No OTP, no password prompt, no bank fields, no fee, no passport upload yet.
 - Bank of China Xiamen (USD + RMB). Numbers stored in gitignored vault only (public repo).
 
 **This session continues Emirates:** tick I Agree, Basic Profile (turnover 150000; employees still blank), categories, bank USD if reached. Do not upload passport. Do not invent headcount.
+
+## 2026-09-14 — Session 7 result
+
+**Done on epic**
+
+- Ticked all three I Agree boxes.
+- Uploaded China license EN. Year 2025. Turnover 150000. Capabilities + Sourcing Center trading name. VAT/SME/CAGE = No.
+- Categories: 1300011 General Corporate Procurement; 2300011 Construction; 2300015 Furniture.
+- License expiry typed as 31/12/2099 (no expiry on license face).
+- No bank page. No passport upload. No fee.
+
+**Stopped:** Number of Employees is a mandatory dropdown: `0-10` / `10-50` / `50-250` / `Above 250`. Left blank.
+
+**Need from owner:** which employee band. Also check info@sevencolortrading.com for epic username/password (portal asks for a password we never set in-session).
