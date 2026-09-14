@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { JsonLd } from "@/components/seo/json-ld";
 import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
-import { CtaBand } from "@/components/shared/page-shell";
+import { CtaBand, ServiceBadgeHero } from "@/components/shared/page-shell";
 import { ProofChips } from "@/components/trust/proof-chips";
 import { Container } from "@/components/ui/primitives";
 import { company } from "@/lib/content";
@@ -25,14 +25,7 @@ export default function ThreePlPage() {
         <p className="section-kicker">
           Seven Color Trading Co Ltd · own warehouses · not a broker
         </p>
-        <h1 className="mt-3">
-          <span className="block font-display text-[4.25rem] font-semibold leading-[0.85] tracking-tight text-accent sm:text-[7rem] lg:text-[8.5rem]">
-            {fulfillment.eyebrow}
-          </span>
-          <span className="mt-5 block font-display text-3xl font-semibold tracking-tight text-ink sm:text-5xl">
-            {fulfillment.title}
-          </span>
-        </h1>
+        <ServiceBadgeHero badge={fulfillment.eyebrow} subtitle={fulfillment.title} />
         <p className="mt-4 max-w-2xl text-muted sm:text-lg">{fulfillment.description}</p>
         <p className="mt-4 max-w-2xl text-sm text-muted">
           Legal entity {company.legalNameFull}. DUNS {company.credentials.dunsNumber}. Desks and warehouses in{" "}

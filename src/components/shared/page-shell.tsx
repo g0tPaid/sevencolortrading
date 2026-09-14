@@ -26,6 +26,21 @@ export function PageHero({
   );
 }
 
+/** Giant badge + subtitle H1. sr-only em dash keeps stripped-tag text from gluing ("InspectOn-the-ground…"). */
+export function ServiceBadgeHero({ badge, subtitle }: { badge: string; subtitle: string }) {
+  return (
+    <h1 className="mt-3">
+      <span className="block font-display text-[4.25rem] font-semibold leading-[0.85] tracking-tight text-accent sm:text-[7rem] lg:text-[8.5rem]">
+        {badge}
+      </span>
+      <span className="sr-only"> — </span>
+      <span className="mt-5 block font-display text-3xl font-semibold tracking-tight text-ink sm:text-5xl">
+        {subtitle}
+      </span>
+    </h1>
+  );
+}
+
 export function CtaBand({
   title = "Ready when you are",
   description = "Send your RFQ — a relationship manager replies within 24 hours from China or Dubai.",
