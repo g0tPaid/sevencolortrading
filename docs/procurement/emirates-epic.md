@@ -2,15 +2,17 @@
 
 **Portal:** https://epic.emirates.com/  
 **Username:** `ajmal.sevencolor`  
-**Status:** Almost complete. **STOPPED** — Number of Employees is mandatory and still unknown. No bank page on this portal. Passport not uploaded.
+**Status:** **Registration phase complete.** Waiting for Emirates to evaluate and email activation. Login after activation. Password in gitignored `vault/credentials.md` only.
 
-## Owner approvals already used
+## Owner approvals used
 
-- Three Compliance policies ticked (Anti-Bribery, Safety, Supplier Code of Conduct)
-- Standing order: tick all similar supplier policies on later portals
-- Turnover: **150000** USD (owner range 100k–200k)
+- Three Compliance policies ticked
+- Standing order: tick all similar supplier policies later
+- Turnover: **150000** USD
+- Employees: **0–10**
 - China trade license EN uploaded
-- Bank numbers on file for other portals; Emirates did not show a bank step
+- Bank numbers on file for other portals; Emirates had no bank step
+- Passport not uploaded
 
 ## Filled
 
@@ -25,31 +27,21 @@
 | User | AJMAL ABDUL JABBAR AHAMED |
 | Username | ajmal.sevencolor |
 | Year of Establishment | 2025 |
+| Number of Employees | 0–10 |
 | Average turnover (USD) | 150000 |
 | Alternative trading name | Sourcing Center |
 | VAT/TRN | No |
 | Parent company | No |
 | SME / National SME / CAGE | No |
 | Trade license file | china-business-license-en.jpg |
-| License expiry on form | **31/12/2099** (license face has no expiry; placeholder for “long-term” — owner should confirm) |
-| Categories | 1300011 Corporate Goods & Services — General Corporate Procurement; 2300011 Properties & Facilities — Construction; 2300015 Properties & Facilities — Furniture |
+| License expiry on form | 31/12/2099 (license face has no expiry) |
+| Categories | 1300011 General Corporate Procurement; 2300011 Construction; 2300015 Furniture |
 | Postal code | blank |
-| Number of Employees | **blank — BLOCKER** |
 
-**Timezone** was wrongly set to Mexico CDT/CST during first fill; Registration Data is locked until login. Fix after password/credentials.
+**Timezone** still Mexico CDT/CST — Registration Data locked until after activation. Fix to Asia/Shanghai on first post-activation login.
 
-## Not done
+## Portal message (verbatim)
 
-- Number of Employees (mandatory dropdown)
-- Bank (page never appeared)
-- Passport (not uploaded, as required)
-- Final activation / submit (blocked on employees)
-- Password: portal says use username and password; we never got a password prompt in-session. Check **info@sevencolortrading.com** for epic credentials.
+“The Registration phase of your Account has been Completed. The Activation of your account will be evaluated and communicated to you via email. You will be able to log in with your selected username and the Password you received on registration once your account has been activated.”
 
-## Confirmation message (verbatim)
-
-“The Registration process is not complete. Access the Log In page and use your selected Username and Password to complete the Registration process. The Activation of your account will be evaluated once all required fields and Category information, where requested have been provided.”
-
-## Next owner input
-
-Send **Number of Employees** (or the dropdown band, e.g. 1–10). Do not guess. Then we enter it and finish.
+Watch **info@sevencolortrading.com** for activation. No fee paid. No bank page. No passport.

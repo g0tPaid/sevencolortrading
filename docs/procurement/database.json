@@ -1,13 +1,13 @@
 {
   "version": 1,
   "updated": "2026-09-14",
-  "source_of_truth": "Official buyer domains + published sourcing.center facts. No registrations submitted.",
+  "source_of_truth": "Official buyer domains + published sourcing.center facts + owner-approved field map.",
   "registering_entity": "Xiamen Ajmal Seven Color Trading Co Ltd (China) — owner lock 2026-09-14",
   "metrics": {
     "organizations_researched": 50,
     "qualified_60_plus": 41,
     "registrations_started": 1,
-    "registrations_submitted": 0,
+    "registrations_submitted": 1,
     "rfqs_discovered": 0
   },
   "targets": [
@@ -23,8 +23,8 @@
       "registration_type": "Self-register (reviewed by Supplier Relations)",
       "categories": "FF&E, hotel/airline supplies, uniforms, equipment, general merchandise",
       "fit": 94,
-      "status": "IN PROGRESS — NEED EMPLOYEE COUNT",
-      "notes": "Username ajmal.sevencolor. Policies ticked. License uploaded. Turnover 150000. 3 categories. STOPPED: Number of Employees mandatory dropdown 0-10 / 10-50 / 50-250 / Above 250. No bank page. No passport. Check email for password. See emirates-epic.md.",
+      "status": "SUBMITTED — PENDING ACTIVATION",
+      "notes": "Username ajmal.sevencolor. Employees 0-10. Turnover 150000. License uploaded. 3 categories. Registration phase completed; activation by email. Timezone still Mexico until post-activation login. Password in gitignored vault. See emirates-epic.md.",
       "docs_typical": "Trade license, company profile, category selection, compliance acknowledgement",
       "last_checked": "2026-09-14"
     },

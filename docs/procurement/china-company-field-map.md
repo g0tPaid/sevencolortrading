@@ -51,7 +51,7 @@ Sourcing / import-export, furniture & hospitality FF&E, electronics, fashion/tex
 
 ## First-wave as this Chinese company
 
-1. Emirates epic — https://epic.emirates.com/ — **in progress**; username `ajmal.sevencolor`; owner approved the three policies + turnover + bank (`emirates-epic.md`)  
+1. Emirates epic — https://epic.emirates.com/ — **submitted, pending activation**; username `ajmal.sevencolor` (`emirates-epic.md`)  
 2. Etimad foreign account  
 3. NEOM  
 4. Emaar (bank facts on file — still no passport)  

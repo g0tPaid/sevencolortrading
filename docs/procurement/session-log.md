@@ -151,3 +151,15 @@ No OTP, no password prompt, no bank fields, no fee, no passport upload yet.
 **Owner:** employees **0–10**. Password received — stored in gitignored vault only (public repo).
 
 Continue Emirates: select 0–10, save Basic Profile, complete confirmation. Fix timezone to Asia/Shanghai if Registration Data unlocks. Do not upload passport. Do not pay fees.
+
+## 2026-09-14 — Session 8 result
+
+**Emirates epic registration phase complete.**
+
+- Employees set to **0–10**. Basic Profile all mandatory complete.
+- Portal: “The Registration phase of your Account has been Completed. The Activation of your account will be evaluated and communicated to you via email.”
+- Timezone still locked (Mexico CDT/CST) until after activation.
+- Password stored in gitignored vault only.
+- Watch info@sevencolortrading.com for activation.
+
+**Next:** Etimad foreign / no-CR account. Then NEOM, Emaar, Marriott.
