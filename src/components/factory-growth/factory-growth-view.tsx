@@ -6,7 +6,6 @@ import { Reveal } from "@/components/shared/reveal";
 import { ButtonLink, Container } from "@/components/ui/primitives";
 import {
   PRICE_GROWTH,
-  PRICE_MARKETING,
   PRICE_WEBSITE,
   buyerChecklist,
   compareRows,
@@ -27,8 +26,9 @@ import {
   growthFaqs,
   type PackageId,
 } from "@/lib/factory-growth";
-import { whatsappHref, whatsappPresets } from "@/lib/whatsapp";
+import { whatsappHref } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
+import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
 import { FactoryWebsiteMockup } from "./factory-website-mockup";
 import { GrowthInquiryForm } from "./growth-inquiry-form";
 import { LanguageSwitcher } from "./language-switcher";
@@ -53,6 +53,7 @@ export function FactoryGrowthView() {
 
   return (
     <div lang={lang === "zh" ? "zh-CN" : "en"} className="pt-24 sm:pt-28">
+      <WhatsAppPrefill message={t(growthCopy.whatsappPreset)} />
       <Container className="relative pb-16 pt-2 sm:pt-4">
         <div className="mb-5 flex justify-end">
           <LanguageSwitcher />
@@ -215,7 +216,7 @@ export function FactoryGrowthView() {
             <table className="w-full text-left text-sm">
               <thead className="bg-white/50 text-xs uppercase tracking-[0.12em] text-muted">
                 <tr>
-                  <th className="px-5 py-3 font-medium">{lang === "zh" ? "项目" : "Feature"}</th>
+                  <th className="px-5 py-3 font-medium">{t(growthCopy.compareFeatureCol)}</th>
                   <th className="px-5 py-3 font-medium">{t(growthCopy.websiteName)}</th>
                   <th className="px-5 py-3 font-medium">{t(growthCopy.growthName)}</th>
                 </tr>
@@ -506,7 +507,7 @@ export function FactoryGrowthView() {
               <ButtonLink href="/factories/register" variant="ghost">
                 {t(growthCopy.crossRegister)}
               </ButtonLink>
-              <ButtonLink href={whatsappHref(whatsappPresets.factoryGrowth)} variant="secondary">
+              <ButtonLink href={whatsappHref(t(growthCopy.whatsappPreset))} variant="secondary">
                 WhatsApp
               </ButtonLink>
             </div>
@@ -516,7 +517,7 @@ export function FactoryGrowthView() {
                 /factories/register
               </Link>
               {" · "}
-              {PRICE_WEBSITE} · {PRICE_GROWTH} · from {PRICE_MARKETING} / 3 months
+              {t(growthCopy.finalPriceLine)}
             </p>
           </div>
         </Reveal>

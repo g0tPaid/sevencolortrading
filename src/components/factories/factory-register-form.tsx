@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Check, Factory, Send, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { FactoryGrowthPill } from "@/components/factories/factory-growth-pill";
 
 const SUGGESTED_CATEGORIES = [
   "electronics",
@@ -215,15 +216,15 @@ export function FactoryRegisterForm() {
         <p className="mt-5 font-mono text-[11px] text-muted">Ref {submittedId.slice(0, 8)}</p>
         <p className="mt-6 text-sm leading-relaxed text-muted">
           Optional and separate — vendor registration stays free:{" "}
-          <Link href="/factory-growth" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
+          <Link href="/factory-growth#packages" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
             Factory international presence
           </Link>
           .
         </p>
         <p className="mt-1 text-sm text-muted" lang="zh-CN">
           可选且独立（登记仍然免费）：
-          <Link href="/factory-growth" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
-            工厂国际化形象服务
+          <Link href="/factory-growth#packages" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
+            工厂出海形象服务
           </Link>
         </p>
       </motion.div>
@@ -243,6 +244,7 @@ export function FactoryRegisterForm() {
           <h3 className="font-display text-xl font-semibold text-ink">Apply to become a vendor</h3>
         </div>
       </div>
+      <FactoryGrowthPill className="mb-6" />
 
       <div
         className="absolute -left-[10000px] h-px w-px overflow-hidden"

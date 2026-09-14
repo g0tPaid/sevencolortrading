@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { FactoryGrowthPage } from "@/components/factory-growth/factory-growth-page";
 import { JsonLd } from "@/components/seo/json-ld";
-import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
 import {
   factoryGrowthBreadcrumbJsonLd,
   factoryGrowthFaqJsonLd,
@@ -10,18 +9,26 @@ import {
   growthSeo,
 } from "@/lib/factory-growth";
 import { pages } from "@/lib/route-seo";
-import { whatsappPresets } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
   ...pages.factoryGrowth,
+  title: { absolute: growthSeo.titleOg },
+  description: growthSeo.descriptionSocial,
   keywords: [...growthSeo.keywords],
   openGraph: {
     ...pages.factoryGrowth.openGraph,
-    locale: "en_US",
-    alternateLocale: ["zh_CN"],
+    title: growthSeo.titleOg,
+    description: growthSeo.descriptionSocial,
+    locale: "zh_CN",
+    alternateLocale: ["en_US"],
+  },
+  twitter: {
+    ...pages.factoryGrowth.twitter,
+    title: growthSeo.titleOg,
+    description: growthSeo.descriptionSocial,
   },
   other: {
-    "og:locale:alternate": "zh_CN",
+    "og:locale:alternate": "en_US",
   },
   alternates: {
     ...pages.factoryGrowth.alternates,
@@ -39,7 +46,6 @@ export default function FactoryGrowthRoute() {
       <JsonLd data={factoryGrowthServiceJsonLd()} />
       <JsonLd data={factoryGrowthFaqJsonLd()} />
       <JsonLd data={factoryGrowthBreadcrumbJsonLd()} />
-      <WhatsAppPrefill message={whatsappPresets.factoryGrowth} />
       <FactoryGrowthPage />
     </>
   );

@@ -1,3 +1,4 @@
+import { GROWTH_PATH, growthSeo } from "@/lib/factory-growth";
 import { routeMetadata } from "@/lib/seo";
 
 /** Buyer-intent titles (50–60 chars) and descriptions (140–160 chars). ASCII sourcing.center only. */
@@ -135,10 +136,9 @@ export const pages = {
     path: "/factories/register",
   }),
   factoryGrowth: routeMetadata({
-    title: "Factory International Presence for Chinese Plants",
-    description:
-      "Helping Chinese factories build a professional international presence: English website ¥3,888, buyer growth ¥4,888, marketplace management from ¥2,888/3 months. Vendor registration stays free.",
-    path: "/factory-growth",
+    title: growthSeo.titleOg,
+    description: growthSeo.descriptionSocial,
+    path: GROWTH_PATH,
   }),
 } as const;
 
