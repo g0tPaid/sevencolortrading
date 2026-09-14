@@ -223,7 +223,7 @@ export function FactoryRegisterForm() {
         <p className="mt-1 text-sm text-muted" lang="zh-CN">
           可选且独立（登记仍然免费）：
           <Link href="/factory-growth" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
-            工厂国际化形象服务
+            工厂出海形象服务
           </Link>
         </p>
       </motion.div>

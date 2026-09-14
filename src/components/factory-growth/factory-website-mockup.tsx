@@ -12,7 +12,7 @@ export function FactoryWebsiteMockup() {
       ? ["工厂", "产品", "能力", "联系"]
       : ["Factory", "Products", "Capability", "Contact"];
   const headline =
-    lang === "zh" ? "面向国际买家的制造能力" : "Manufacturing built for international buyers";
+    lang === "zh" ? "面向国际买家的制造实力" : "Manufacturing built for international buyers";
   const sub =
     lang === "zh"
       ? "产品页只展示工厂提供的真实规格与照片。"

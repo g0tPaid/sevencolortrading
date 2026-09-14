@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { FactoryGrowthPage } from "@/components/factory-growth/factory-growth-page";
 import { JsonLd } from "@/components/seo/json-ld";
-import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
 import {
   factoryGrowthBreadcrumbJsonLd,
   factoryGrowthFaqJsonLd,
@@ -10,7 +9,6 @@ import {
   growthSeo,
 } from "@/lib/factory-growth";
 import { pages } from "@/lib/route-seo";
-import { whatsappPresets } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
   ...pages.factoryGrowth,
@@ -39,7 +37,6 @@ export default function FactoryGrowthRoute() {
       <JsonLd data={factoryGrowthServiceJsonLd()} />
       <JsonLd data={factoryGrowthFaqJsonLd()} />
       <JsonLd data={factoryGrowthBreadcrumbJsonLd()} />
-      <WhatsAppPrefill message={whatsappPresets.factoryGrowth} />
       <FactoryGrowthPage />
     </>
   );

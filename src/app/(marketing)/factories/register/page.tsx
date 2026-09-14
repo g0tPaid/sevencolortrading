@@ -100,7 +100,7 @@ export default function FactoryRegisterPage() {
             Factory International Growth Services.
           </p>
           <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted" lang="zh-CN">
-            供应商登记免费，绝不要求先购买任何套餐。若您还希望面向海外买家打造专业英文工厂官网或平台listing，可了解工厂国际化增长服务。
+            供应商登记免费，绝不要求先购买任何套餐。若您还希望面向海外买家做专业英文工厂官网或平台商品上架，可了解工厂出海形象服务。
           </p>
           <Link
             href="/factory-growth"

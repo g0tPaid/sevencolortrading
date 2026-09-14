@@ -43,7 +43,7 @@ export function MarketplaceMockups() {
   const { t, lang } = useFactoryGrowthUi();
   const note =
     lang === "zh"
-      ? "示意结构，非官方后台，也不使用平台商标。"
+      ? "仅示意结构，不是官方后台，也不使用平台商标。"
       : "Structural mockup only — not an official console, and no marketplace marks.";
   const title = lang === "zh" ? "标题来自工厂资料" : "Title from factory files";
   const spec = lang === "zh" ? "型号 · 仅工厂提供的规格" : "SKU · factory-supplied specs only";
