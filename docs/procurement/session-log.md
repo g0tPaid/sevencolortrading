@@ -75,3 +75,48 @@
 **Owner:** portal mobile **+86 180 5926 2730**.
 
 Still no portal account. Next: owner says **yes** to open Emirates epic (stop at terms).
+
+## 2026-09-14 — Session 5 (Emirates epic started)
+
+**Portal:** https://epic.emirates.com/ (domain verified).
+
+**Filled (Chinese company, verified fields):**
+- Organisation: XIAMEN AJMAL SEVEN COLOR TRADING CO., LTD
+- Address: Room 208 (Area B), No. 10-2, Yuehua Road, FTZ Xiamen
+- Country: China · City: Xiamen
+- License: 91350200MAE8W9E67A
+- Email: info@sevencolortrading.com
+- Phone: +86 180 5926 2730
+- Website: https://sourcing.center
+- User: AJMAL ABDUL JABBAR AHAMED
+- Username created on portal: ajmal.sevencolor
+- Time zone on form: **wrongly set to CDT/CST (Mexico)** — correct to Asia/Shanghai or Asia/Dubai before submit
+- Postal code: left blank
+
+**STOPPED — owner approval required (legal):**
+Emirates requires “I Agree” on:
+1. Anti Bribery & Corruption Policy
+2. Safety Policy
+3. Supplier Code of Conduct
+
+No OTP, no password prompt, no bank fields, no fee, no passport upload yet.
+
+**Do not tick I Agree until owner reviews the three policies.**
+
+## 2026-09-14 — Session 6 (Emirates legal gate)
+
+**Owner:** yes — start Emirates epic, stop at terms.
+
+**Done**
+
+- Confirmed still on epic Compliance / Additional Documents.
+- Extracted the three required policy PDFs (summaries in `emirates-epic.md`).
+- Left all three “I Agree” boxes **unchecked**.
+- Registration Data now locked until credentials; timezone cannot be corrected until login.
+
+**Waiting on owner**
+
+- Approve or reject ticking Anti-Bribery, Safety, and Supplier Code of Conduct.
+- After yes: continue Basic Profile + categories. Still do not invent employees/turnover; still do not upload passport or bank; still do not pay fees.
+
+**Not started yet:** Etimad, NEOM, Emaar, Marriott.

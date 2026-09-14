@@ -1,16 +1,17 @@
 # First-wave registrations — stop gates
 
-No accounts created this session. No documents uploaded. No emails sent.
+Accounts: Emirates username `ajmal.sevencolor` created — **not submitted**. No documents uploaded. No emails sent.
 
 **Registrant:** Chinese company only (`registering-entity.md`). Do not enter UAE license 143609 as the legal entity.
 
 ## T001 — Emirates epic
 
 - **What the portal is:** Official Emirates Group supplier onboarding and tendering (epic.emirates.com).
-- **What we would submit:** Legal name, addresses, licenses, contacts, category selection, compliance acknowledgements.
-- **Why it matters:** Accepting compliance forms is a legal/ethics declaration.
-- **Source:** Published profile + license scans (missing).
-- **Decision needed:** Approve starting an epic account; who is the admin user; approve T&Cs when shown.
+- **What we submitted so far:** Company + user fields from the China license map. Username `ajmal.sevencolor`. Live notes: `emirates-epic.md`.
+- **Stopped at:** Compliance — Anti-Bribery, Safety Policy, Supplier Code of Conduct. “I Agree” unchecked.
+- **Why it matters:** Accepting those three PDFs is a legal/ethics declaration.
+- **Source:** China license + owner email/mobile. No employees, turnover, bank, or passport used.
+- **Decision needed:** Owner approve the three policies, then continue Basic Profile + categories.
 
 ## T002 — Dubai eSupply
 

@@ -6,7 +6,7 @@ Scores are commercial fit for **China sourcing + inspection + own Xiamen/Dubai 3
 
 | Rank | ID | Organization | Fit | Status | Official registration |
 | ---: | --- | --- | ---: | --- | --- |
-| 1 | T001 | Emirates Group epic | 94 | READY TO REGISTER | https://epic.emirates.com/ |
+| 1 | T001 | Emirates Group epic | 94 | IN PROGRESS — STOPPED AT LEGAL | https://epic.emirates.com/ |
 | 2 | T002 | Dubai eSupply | 93 | READY TO REGISTER | https://esupply.dubai.gov.ae/web/ |
 | 3 | T003 | UAE MoF Federal Supplier Register | 92 | AWAITING OWNER (UAE PASS) | https://procurement.gov.ae/ |
 | 4 | T004 | Emaar | 90 | READY TO REGISTER | https://assets.emaar.com/emaar-supplier/ |

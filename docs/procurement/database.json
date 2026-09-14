@@ -6,7 +6,7 @@
   "metrics": {
     "organizations_researched": 50,
     "qualified_60_plus": 41,
-    "registrations_started": 0,
+    "registrations_started": 1,
     "registrations_submitted": 0,
     "rfqs_discovered": 0
   },
@@ -23,8 +23,8 @@
       "registration_type": "Self-register (reviewed by Supplier Relations)",
       "categories": "FF&E, hotel/airline supplies, uniforms, equipment, general merchandise",
       "fit": 94,
-      "status": "READY TO REGISTER",
-      "notes": "Official. No registration fee (Emirates states they never charge). Requires compliance forms / T&Cs — STOP for owner approval before final submit. High recurring FF&E and OS&E.",
+      "status": "IN PROGRESS — STOPPED AT LEGAL",
+      "notes": "Username ajmal.sevencolor created. Company/user fields filled from China license. STOPPED on Compliance: Anti-Bribery, Safety, Supplier Code of Conduct unchecked. See emirates-epic.md. No fee, no bank, no passport upload. Timezone was wrongly set to Mexico CDT/CST — fix after credentials.",
       "docs_typical": "Trade license, company profile, category selection, compliance acknowledgement",
       "last_checked": "2026-09-14"
     },

@@ -42,7 +42,7 @@ Sourcing / import-export, furniture & hospitality FF&E, electronics, fashion/tex
 
 ## First-wave as this Chinese company
 
-1. Emirates epic — https://epic.emirates.com/ — **next**, stop at T&Cs  
+1. Emirates epic — https://epic.emirates.com/ — **started**; username `ajmal.sevencolor`; stop at three policy checkboxes (`emirates-epic.md`)  
 2. Etimad foreign account  
 3. NEOM  
 4. Emaar (stop at bank)  

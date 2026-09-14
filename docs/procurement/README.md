@@ -2,21 +2,21 @@
 
 **Confidential — internal use.** Not linked from the public site. Next session: read this file first, then `session-log.md` and `database.json`. Do not repeat completed research.
 
-## Status (session 1)
+## Status (session 6)
 
 | Phase | Status |
 | --- | --- |
-| Inspect project / documents | Done — **no uploaded company documents found** |
-| Company profile | Draft from **published site facts only** |
-| Document index | Created — vault is empty |
+| Inspect project / documents | China license + legal-rep passport in gitignored vault |
+| Company profile | License facts beat website copy (`china-company-field-map.md`) |
+| Document index | License indexed; passport on file locally only |
 | Procurement database | **50 targets** researched and scored |
-| Registrations started | **None** — blocked on China license scan + owner approval |
+| Registrations started | **Emirates epic** — username `ajmal.sevencolor`; stopped at 3 policy checkboxes |
 | Registering entity | **LOCKED: Chinese company** (`registering-entity.md`) |
-| RFQ monitoring | Not started — no portal logins yet |
+| RFQ monitoring | Not started |
 
 ## Source of truth
 
-1. Approved documents (none in repo yet)
+1. Approved documents (China license in gitignored `vault/`; facts indexed in `document-index.md`)
 2. Published site content in `src/lib/content.ts` and `public/llms.txt`
 3. Official buyer portals verified by domain (`.gov.ae`, `.gov.sa`, company TLD)
 
@@ -44,3 +44,4 @@ If a portal field is not in (1) or (2): **UNKNOWN — OWNER APPROVAL REQUIRED**.
 | `session-log.md` | Session history |
 | `registering-entity.md` | Locked: Chinese company + MoF branch warning |
 | `china-company-field-map.md` | Exact fields we may type on portals |
+| `emirates-epic.md` | Live Emirates form state + policy summaries |
