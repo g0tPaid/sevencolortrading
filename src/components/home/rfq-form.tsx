@@ -17,7 +17,7 @@ const nextSteps = [
   {
     step: "01",
     title: "Desk reads your brief",
-    text: "A relationship manager in Xiamen or Dubai opens the RFQ the same business day.",
+    text: "A relationship manager in China or Dubai opens the RFQ the same business day.",
   },
   {
     step: "02",
@@ -27,7 +27,7 @@ const nextSteps = [
   {
     step: "03",
     title: "You choose the next move",
-    text: "Sample, hosted factory visit, or stock into our Xiamen / Dubai warehouse.",
+    text: "Sample, Visit China factory trip, or stock into our Xiamen / Dubai warehouse.",
   },
 ];
 

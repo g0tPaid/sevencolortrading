@@ -30,7 +30,7 @@ export default function AmazonFbaPage() {
       <WhatsAppPrefill message={whatsappPresets.amazonFba} />
       <Container className="pb-16 pt-28 sm:pt-32">
         <p className="section-kicker">
-          {company.legalName} · Xiamen desk · private label for Amazon FBA
+          {company.legalName} · China desk · private label for Amazon FBA
         </p>
         <h1 className="mt-3">
           <span className="block font-display text-[4.25rem] font-semibold leading-[0.85] tracking-tight text-accent sm:text-[7rem] lg:text-[8.5rem]">

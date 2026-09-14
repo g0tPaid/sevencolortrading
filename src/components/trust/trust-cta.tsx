@@ -4,7 +4,7 @@ import { whatsappHref } from "@/lib/whatsapp";
 
 export function TrustCta({
   title = "Start a sourcing conversation",
-  description = "Send an RFQ to the Xiamen or Dubai desk — or message WhatsApp with this page already in the thread.",
+  description = "Send an RFQ to the China or Dubai desk — or message WhatsApp with this page already in the thread.",
   whatsappMessage,
 }: {
   title?: string;

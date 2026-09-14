@@ -17,8 +17,8 @@ export function V2Trust() {
             Sourcing.center {company.byline}
           </h2>
           <p className="mt-4 text-muted sm:text-lg">
-            {company.legalNameFull}. On the ground in China since {company.founded}, with desks in
-            Xiamen and Dubai.
+            {company.legalNameFull}. On the ground in China since {company.founded}, with our China hub
+            in Xiamen and a Dubai / Al Ain warehouse.
           </p>
         </div>
 

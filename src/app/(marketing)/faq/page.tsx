@@ -14,7 +14,7 @@ export default function FaqPage() {
       <PageHero
         eyebrow={`${faqItems.length} answers`}
         title="Common questions about sourcing from China"
-        description="Buyer questions on no-MOQ sourcing, OEM/ODM, Amazon FBA private label, USD 110 per inspector day, own 3PL in Xiamen and Dubai / Al Ain, dropshipping, freight, and hosted factory visits. Legal entity Xiamen Ajmal Seven Color Trading Co Ltd, since 2014, DUNS 509419282."
+        description="Buyer questions on no-MOQ sourcing, OEM/ODM, Amazon FBA private label, USD 110 per inspector day, own 3PL from our Xiamen warehouse and Dubai / Al Ain, dropshipping, freight, and Visit China factory visits. Legal entity Xiamen Ajmal Seven Color Trading Co Ltd, since 2014, DUNS 509419282."
       />
       <Container className="max-w-3xl pb-16">
         {faqGroups.map((group) => (
@@ -42,7 +42,7 @@ export default function FaqPage() {
       </Container>
       <CtaBand
         title="Still deciding?"
-        description="Send the SKU, quantity, and destination — a relationship manager in Xiamen or Dubai replies within 24 hours."
+        description="Send the SKU, quantity, and destination — a relationship manager in China or Dubai replies within 24 hours."
       />
     </>
   );

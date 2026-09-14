@@ -47,7 +47,7 @@ export default function OemOdmPage() {
           </Link>
           , or book a{" "}
           <Link href="/visit" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
-            hosted factory visit in Xiamen
+            hosted factory visit in China
           </Link>
           . Start the RFQ on{" "}
           <Link href="/contact" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">

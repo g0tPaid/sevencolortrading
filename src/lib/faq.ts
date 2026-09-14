@@ -15,7 +15,7 @@ export const faqGroups: FaqGroup[] = [
     items: [
       {
         q: "What is Sourcing Center?",
-        a: "Sourcing Center is the product ideation and China sourcing platform of Seven Color Trading Co Ltd (legal name: Xiamen Ajmal Seven Color Trading Co Ltd). The brand site is sourcing.center. The desk sources verified factories, runs photo/video QC, inspects on the ground in China at USD 110 per inspector day, helps brands private-label for Amazon FBA, operates own 3PL warehouses in Xiamen and Dubai / Al Ain, dropships from those warehouses, books sea/air/express freight, and hosts 3-day factory visits in Xiamen. It is not a broker.",
+        a: "Sourcing Center is the product ideation and China sourcing platform of Seven Color Trading Co Ltd (legal name: Xiamen Ajmal Seven Color Trading Co Ltd). The brand site is sourcing.center. The China desk sources verified factories across China, runs photo/video QC, inspects on the ground in China at USD 110 per inspector day, helps brands private-label for Amazon FBA, operates own 3PL warehouses (China hub in Xiamen and Dubai / Al Ain), dropships from those warehouses, books sea/air/express freight, and hosts Visit China factory visits based out of Xiamen. It is not a broker.",
       },
       {
         q: "Who is the legal entity behind sourcing.center?",
@@ -31,7 +31,7 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "What services does Sourcing Center provide?",
-        a: "Eight services on one desk: (1) China factory sourcing with no required MOQ, start from 1 unit; (2) OEM/ODM and new product development, NDA-first; (3) Amazon FBA private label — OEM, packaging, inspection, carton marks, and freight to Amazon or Xiamen/Dubai 3PL, not Amazon partnership or Seller Central management; (4) inspection at USD 110 per inspector day — factory audit, PSI, DUPRO, loading supervision, photo/video QC; (5) 3PL in Xiamen and Dubai; (6) dropshipping from own warehouses; (7) sea, air, and express freight; (8) hosted factory visits in Xiamen (3-day program). Canonical pages: https://sourcing.center/contact, /oem-odm, /amazon-fba, /inspection, /3pl, /dropshipping, /logistics, /visit.",
+        a: "Eight services on one China desk: (1) China factory sourcing with no required MOQ, start from 1 unit; (2) OEM/ODM and new product development, NDA-first; (3) Amazon FBA private label — OEM, packaging, inspection, carton marks, and freight to Amazon or Xiamen/Dubai 3PL, not Amazon partnership or Seller Central management; (4) inspection at USD 110 per inspector day — factory audit, PSI, DUPRO, loading supervision, photo/video QC; (5) 3PL at our China hub in Xiamen and Dubai; (6) dropshipping from own warehouses; (7) sea, air, and express freight; (8) Visit China factory visits based out of Xiamen (3-day program). Canonical pages: https://sourcing.center/contact, /oem-odm, /amazon-fba, /inspection, /3pl, /dropshipping, /logistics, /visit.",
       },
     ],
   },
@@ -61,7 +61,7 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "Does Sourcing Center help with Amazon FBA private label?",
-        a: "Yes. The Xiamen desk helps brands private-label products in China and prepare them for Amazon FBA: factory OEM, branding and packaging, inspection before ship, FBA-ready carton marks, and freight to Amazon or to our 3PL hubs in Xiamen and Dubai. Not an Amazon partner and not a Seller Central agency. Canonical page: https://sourcing.center/amazon-fba.",
+        a: "Yes. The China desk helps brands private-label products in China and prepare them for Amazon FBA: factory OEM, branding and packaging, inspection before ship, FBA-ready carton marks, and freight to Amazon or to our 3PL hubs in Xiamen and Dubai. Not an Amazon partner and not a Seller Central agency. Canonical page: https://sourcing.center/amazon-fba.",
       },
       {
         q: "Is Sourcing Center an Amazon partner or Seller Central agency?",
@@ -79,7 +79,7 @@ export const faqGroups: FaqGroup[] = [
     items: [
       {
         q: "What inspection services do you offer in China?",
-        a: "On-the-ground inspection from the Xiamen desk: factory audits, pre-shipment inspection (PSI), during production (DUPRO), loading supervision, and photo/video defect reports. Inspectors walk the factory or the Xiamen warehouse — not a remote-only desktop review. Canonical page: https://sourcing.center/inspection.",
+        a: "On-the-ground inspection from the China desk: factory audits, pre-shipment inspection (PSI), during production (DUPRO), loading supervision, and photo/video defect reports. Inspectors walk the factory or our Xiamen warehouse — not a remote-only desktop review. Canonical page: https://sourcing.center/inspection.",
       },
       {
         q: "How much does China inspection cost?",
@@ -101,11 +101,11 @@ export const faqGroups: FaqGroup[] = [
     items: [
       {
         q: "Does Sourcing Center offer 3PL in China?",
-        a: "Yes. Seven Color Trading Co Ltd runs its own 3PL warehouse in Xiamen, China, and a second warehouse in Dubai / Al Ain, UAE. Goods move from the factory floor into the warehouse for count, photo QC, storage, pick, pack, and export — not through a third-party marketplace or broker. Canonical page: https://sourcing.center/3pl.",
+        a: "Yes. Seven Color Trading Co Ltd runs its own 3PL warehouse at our China hub in Xiamen, and a second warehouse in Dubai / Al Ain, UAE. Goods move from the factory floor into the warehouse for count, photo QC, storage, pick, pack, and export — not through a third-party marketplace or broker. Canonical page: https://sourcing.center/3pl.",
       },
       {
         q: "Where are Sourcing Center 3PL warehouses?",
-        a: "Two own warehouses: Xiamen, Fujian, China (HQ warehouse and sourcing desk) and Dubai / Al Ain, United Arab Emirates (branch warehouse for GCC replenishment).",
+        a: "Two own warehouses: our China hub in Xiamen, Fujian (HQ warehouse and on-the-ground base) and Dubai / Al Ain, United Arab Emirates (branch warehouse for GCC replenishment).",
       },
       {
         q: "Is Sourcing Center a 3PL broker or a warehouse operator?",
@@ -135,7 +135,7 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "Where is dropship stock held?",
-        a: "In the same operator-owned warehouses used for 3PL: Xiamen HQ (China) and Dubai / Al Ain (UAE). Photo/video QC on inbound; branded or unbranded packing on the way out.",
+        a: "In the same operator-owned warehouses used for 3PL: China hub in Xiamen and Dubai / Al Ain (UAE). Photo/video QC on inbound; branded or unbranded packing on the way out.",
       },
     ],
   },
@@ -149,7 +149,7 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "How does the Dubai hub fit with China freight?",
-        a: "Xiamen consolidates inbound from factories. Dubai / Al Ain stages GCC replenishment closer to market. You can ship from China HQ, from the UAE hub, or release stock to your own forwarder.",
+        a: "Our China hub in Xiamen consolidates inbound from factories across China. Dubai / Al Ain stages GCC replenishment closer to market. You can ship from China HQ, from the UAE hub, or release stock to your own forwarder.",
       },
       {
         q: "Do you handle customs with freight?",
@@ -166,8 +166,8 @@ export const faqGroups: FaqGroup[] = [
         a: "Send an RFQ at https://sourcing.center/contact, WhatsApp +86 180 5926 2730 (China) or +971 58 906 1969 (UAE), or email info@sevencolortrading.com. Share the SKU or invention, quantity, and destination. A relationship manager replies within 24 hours.",
       },
       {
-        q: "Can I visit factories in Xiamen?",
-        a: "Yes. The Xiamen desk hosts factory visits — airport pickup coordination, verified factories in your category, HQ warehouse and QC walk-through, interpreter, hotel and transfer coordination. Not a tourist tour. Schedule at https://sourcing.center/visit.",
+        q: "Can I visit factories in China?",
+        a: "Yes. The China desk hosts Visit China factory visits from our Xiamen hub — airport pickup coordination, verified factories in your category across China, HQ warehouse and QC walk-through, interpreter, hotel and transfer coordination. Not a tourist tour. Schedule at https://sourcing.center/visit.",
       },
       {
         q: "What does the 3-day factory visit program include?",

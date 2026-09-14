@@ -39,7 +39,7 @@ export const siteUpdates: SiteUpdate[] = [
   {
     date: "8 Sep 2026",
     iso: "2026-09-08",
-    title: "Hosted factory visit in Xiamen: what the three days actually include",
+    title: "Visit China factories: what the three days actually include",
     href: "/knowledge/factory-visit-xiamen-hosted-sourcing-trip",
   },
   {
@@ -51,7 +51,7 @@ export const siteUpdates: SiteUpdate[] = [
   {
     date: "14 Aug 2026",
     iso: "2026-08-14",
-    title: "Example engagement: Xiamen and Dubai 3PL on one desk",
+    title: "Example engagement: China hub and Dubai 3PL on one desk",
     href: "/case-studies/xiamen-dubai-3pl",
   },
   {

@@ -35,9 +35,9 @@ export const comparePages: ComparePage[] = [
       name: "Sourcing Center desk",
       tag: "On-ground agent",
       points: [
-        "Xiamen relationship manager shortlists verified makers — not a public catalog dump.",
+        "China relationship manager shortlists verified makers — not a public catalog dump.",
         "Photo/video QC before goods leave; hold the ship until you sign off.",
-        "Own 3PL in Xiamen and Dubai on the same desk as sourcing.",
+        "Own 3PL from our Xiamen warehouse and Dubai on the same desk as sourcing.",
         "Hosted factory visit when catalog photos are not enough.",
         "D&B registered China–UAE trade company, not a listing account.",
       ],
@@ -92,7 +92,7 @@ export const comparePages: ComparePage[] = [
       name: "Sourcing Center 3PL",
       tag: "Operator",
       points: [
-        "Own warehouses in Xiamen (HQ) and Dubai / Al Ain — not a brokered slot.",
+        "Own warehouses at our China hub in Xiamen (HQ) and Dubai / Al Ain — not a brokered slot.",
         "Inbound from the factory floor is counted and photographed before it sits as stock.",
         "Pick, pack, and ship from either hub on one relationship manager.",
         "Sea, air, or express after the warehouse — same company as sourcing.",
@@ -142,9 +142,9 @@ export const comparePages: ComparePage[] = [
     eyebrow: "Compare",
     title: "Factory visit vs remote QC only",
     description:
-      "When a hosted Xiamen trip is worth the flight, and when photo/video inspection from the desk is enough.",
+      "When a hosted Visit China trip is worth the flight, and when photo/video inspection from the desk is enough.",
     answer:
-      "Remote QC (photo/video packs, hold-the-ship) is the default for replenishment and known makers. A hosted factory visit is for first commitments, new tooling, or when catalog photos cannot unlock a deposit. Sourcing Center runs both from the Xiamen desk — same warehouses, same interpreter-ready floor visits, not a tourist tour.",
+      "Remote QC (photo/video packs, hold-the-ship) is the default for replenishment and known makers. A hosted factory visit is for first commitments, new tooling, or when catalog photos cannot unlock a deposit. Sourcing Center runs both from the China desk — Visit China based out of Xiamen, same warehouses, same interpreter-ready floor visits, not a tourist tour.",
     left: {
       name: "Hosted factory visit",
       tag: "On the floor",
@@ -172,7 +172,7 @@ export const comparePages: ComparePage[] = [
     faqs: [
       {
         q: "What is included in a Sourcing Center factory visit?",
-        a: "A hosted working trip from the Xiamen desk: airport coordination, HQ warehouse, verified factory appointments, interpreter, hotel and transfer coordination, then QC standard and commercial wrap. Not a tourist factory tour.",
+        a: "A hosted working trip from the China desk, based out of Xiamen: airport coordination, HQ warehouse, verified factory appointments across China, interpreter, hotel and transfer coordination, then QC standard and commercial wrap. Not a tourist factory tour.",
       },
       {
         q: "Is remote QC enough for a first order?",

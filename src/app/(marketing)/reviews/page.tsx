@@ -69,7 +69,7 @@ export default function ReviewsPage() {
       </Container>
       <TrustCta
         title="Ready to start sourcing?"
-        description="A relationship manager in Xiamen or Dubai replies within 24 hours. WhatsApp opens with this page already named in the message."
+        description="A relationship manager in China or Dubai replies within 24 hours. WhatsApp opens with this page already named in the message."
         whatsappMessage={whatsappPresets.reviews}
       />
     </>

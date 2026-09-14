@@ -5,7 +5,7 @@ import { WORLD_LAND_PATH } from "@/components/home/world-land-path";
 
 /** Equirectangular hub positions (Natural Earth 110m fit to 1000×500) */
 const hubs = [
-  { id: "xiamen", label: "Xiamen", sub: "China HQ", x: 828, y: 182 },
+  { id: "xiamen", label: "Xiamen", sub: "China hub", x: 828, y: 182 },
   { id: "dubai", label: "Dubai", sub: "Hub", x: 653.5, y: 180 },
   { id: "europe", label: "Europe", sub: "Lanes", x: 527.8, y: 111 },
   { id: "usa", label: "USA", sub: "Lanes", x: 236.1, y: 144 },
@@ -55,7 +55,7 @@ export function WorldShippingMap() {
         viewBox="0 0 1000 500"
         className="relative h-auto w-full"
         role="img"
-        aria-label="World shipping lanes from Xiamen and Dubai to Europe, USA, and Australia"
+        aria-label="World shipping lanes from our China hub in Xiamen and Dubai to Europe, USA, and Australia"
       >
         <defs>
           <linearGradient id="laneGrad" x1="0%" y1="0%" x2="100%" y2="0%">

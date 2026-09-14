@@ -24,7 +24,7 @@ export function ChinaQualityInspectionGuide() {
     <>
       <P>
         Catalog photos are not an inspection. Xiamen Ajmal Seven Color Trading Co Ltd (Sourcing
-        Center, sourcing.center) runs on-the-ground QC from the Xiamen desk: factory audits,
+        Center, sourcing.center) runs on-the-ground QC from the China desk: factory audits,
         during-production (DUPRO), pre-shipment (PSI), loading supervision, and photo/video defect
         packs. The published rate is USD 110 per inspector day. Inspectors walk the factory or the
         company warehouse — this is not a remote-only desktop review, and the site does not claim a
@@ -47,7 +47,7 @@ export function ChinaQualityInspectionGuide() {
         order, a new factory, or whenever listing photos are the only “proof” you have been sent.
       </P>
       <P>
-        The Xiamen team already runs this as part of{" "}
+        The China team already runs this as part of{" "}
         <ArticleLink href="/factory-verification">factory verification</ArticleLink>. A longer
         importer checklist lives in{" "}
         <ArticleLink href="/knowledge/factory-audit-checklist">
@@ -115,7 +115,7 @@ export function ChinaQualityInspectionGuide() {
       <P>
         On-the-ground: inspector at the factory or the Xiamen warehouse at USD 110 per inspector
         day. Remote-looking: you receive the pack. Hosted visit: you walk the line yourself on a
-        3-day Xiamen program (airport coordination, verified factories, HQ warehouse, interpreter).
+        3-day Visit China program based out of Xiamen (airport coordination, verified factories, HQ warehouse, interpreter).
         Many buyers visit once, then run PSI or DUPRO on later lots. Inspection is complementary to
         visits and to 3PL — not a substitute for either when you still need capacity proof or
         storage.
@@ -136,8 +136,8 @@ export function ChinaQualityInspectionGuide() {
         audited KPIs.
       </P>
       <P>
-        A fail should stop the lane. The Xiamen desk can hold goods until you sign off, then load or
-        move the lot into 3PL. Inbound to Xiamen HQ is counted and photographed even on
+        A fail should stop the lane. The China desk can hold goods until you sign off, then load or
+        move the lot into 3PL. Inbound to our China hub in Xiamen is counted and photographed even on
         replenishment; a formal PSI is for when the risk is a container, not a carton. Dubai / Al Ain
         is the GCC stage, not a second factory-audit site — audits, DUPRO, and PSI for China
         production stay with the China desk. Private-label packing marks belong in the brief; see{" "}

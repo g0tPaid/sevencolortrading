@@ -207,10 +207,10 @@ export function FactoryRegisterForm() {
         <p className="mt-4 font-display text-2xl font-semibold text-ink">Application received</p>
         <p className="mt-1 text-sm text-muted">申请已提交</p>
         <p className="mt-4 text-sm leading-relaxed text-muted">
-          The Xiamen desk will review your factory and contact you if we have a buyer fit. This is not
+          The China desk will review your factory and contact you if we have a buyer fit. This is not
           an automatic listing.
         </p>
-        <p className="mt-2 text-sm text-muted">厦门团队将审核贵厂资料；合适时再与您联系，并非自动上架。</p>
+        <p className="mt-2 text-sm text-muted">中国团队将审核贵厂资料；合适时再与您联系，并非自动上架。</p>
         <p className="mt-5 font-mono text-[11px] text-muted">Ref {submittedId.slice(0, 8)}</p>
       </motion.div>
     );
@@ -466,7 +466,7 @@ export function FactoryRegisterForm() {
         {submitting ? "Submitting…" : "Submit application · 提交申请"}
       </button>
       <p className="mt-3 text-center text-[11px] text-muted">
-        Verified factories only · 仅核实工厂 · Xiamen desk replies when there is a fit
+        Verified factories only · 仅核实工厂 · China desk replies when there is a fit
       </p>
     </form>
   );

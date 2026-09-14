@@ -15,9 +15,9 @@ export const whatsappPresets = {
   factorySourcing:
     "Hi Seven Color — I'm looking at the new-product factory sourcing case study and want a similar program.",
   threePl:
-    "Hi Seven Color — I'm looking at Xiamen/Dubai 3PL fulfillment and want to talk through stock and lanes.",
+    "Hi Seven Color — I'm looking at China/Dubai 3PL fulfillment and want to talk through stock and lanes.",
   factoryVisit:
-    "Hi Seven Color — I'm looking at a hosted factory visit / QC trip from the Xiamen desk.",
+    "Hi Seven Color — I'm looking at a hosted Visit China factory trip based out of Xiamen.",
   inspection:
     "Hi Seven Color — I need on-the-ground inspection in China (factory audit / PSI / DUPRO / loading) via Sourcing Center.",
   amazonFba:
@@ -25,13 +25,13 @@ export const whatsappPresets = {
   factories:
     "Hi Seven Color — I'm a factory applying via sourcing.center/factories/register (工厂入驻).",
   dropshipping:
-    "Hi Seven Color — I want to dropship from your Xiamen or Dubai warehouse stock.",
+    "Hi Seven Color — I want to dropship from your China (Xiamen) or Dubai warehouse stock.",
   compareAgent:
     "Hi Seven Color — I read sourcing agent vs Alibaba on sourcing.center and want a sourcing desk, not a marketplace.",
   compareFreight:
     "Hi Seven Color — I read China 3PL vs DIY freight on sourcing.center and want own-warehouse fulfillment.",
   compareVisit:
-    "Hi Seven Color — I read factory visit vs remote QC on sourcing.center and want to talk through a Xiamen trip.",
+    "Hi Seven Color — I read factory visit vs remote QC on sourcing.center and want to talk through a Visit China trip.",
   updates:
     "Hi Seven Color — I saw an update on sourcing.center and want to start a sourcing conversation.",
 } as const;
