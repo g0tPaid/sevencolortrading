@@ -102,7 +102,10 @@ export default function AmazonFbaPage() {
           </dl>
         </section>
 
-        <CommonQuestions items={serviceCommonQuestions["amazon-fba"]} />
+        <CommonQuestions
+          items={serviceCommonQuestions["amazon-fba"]}
+          heading="Related OEM, inspection, and 3PL questions"
+        />
 
         <p className="mt-10 text-sm text-ink-soft">
           Develop the SKU first:{" "}

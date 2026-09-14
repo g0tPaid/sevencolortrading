@@ -237,10 +237,10 @@ export const serviceCommonQuestions: Record<
     faqGroups[6].items[0],
   ],
   "amazon-fba": [
-    faqGroups[1].items[5],
-    faqGroups[1].items[6],
-    faqGroups[1].items[7],
+    faqGroups[1].items[2],
+    faqGroups[2].items[0],
     faqGroups[2].items[1],
+    faqGroups[3].items[0],
   ],
   inspection: [
     faqGroups[2].items[0],
