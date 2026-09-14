@@ -114,6 +114,11 @@ export function FactoryApplicationsTable({
                   {row.companyNameZh ? (
                     <p className="mt-0.5 text-sm text-muted">{row.companyNameZh}</p>
                   ) : null}
+                  {row.sourcePath === "/factory-growth" ? (
+                    <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">
+                      Growth inquiry
+                    </p>
+                  ) : null}
                 </div>
                 <div className="flex flex-wrap items-center gap-2">
                   <span

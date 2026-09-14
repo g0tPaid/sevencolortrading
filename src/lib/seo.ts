@@ -60,6 +60,8 @@ export const seoKeywords = [
   "Amazon FBA prep China",
   "private label Amazon FBA sourcing",
   "on the ground in China",
+  "Chinese factory website",
+  "factory international presence",
 ];
 
 export const defaultDescription =

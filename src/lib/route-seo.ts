@@ -134,6 +134,12 @@ export const pages = {
       "Chinese factories apply to supply Sourcing Center buyers via Xiamen Ajmal Seven Color Trading Co Ltd. 工厂入驻 — reviewed vendors, not a marketplace.",
     path: "/factories/register",
   }),
+  factoryGrowth: routeMetadata({
+    title: "Factory International Presence for Chinese Plants",
+    description:
+      "Helping Chinese factories build a professional international presence: English website ¥3,888, buyer growth ¥4,888, marketplace management from ¥2,888/3 months. Vendor registration stays free.",
+    path: "/factory-growth",
+  }),
 } as const;
 
 export const knowledgeMeta: Record<string, { title: string; description: string }> = {

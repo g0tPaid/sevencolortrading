@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Check, Factory, Send, X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -212,6 +213,19 @@ export function FactoryRegisterForm() {
         </p>
         <p className="mt-2 text-sm text-muted">中国团队将审核贵厂资料；合适时再与您联系，并非自动上架。</p>
         <p className="mt-5 font-mono text-[11px] text-muted">Ref {submittedId.slice(0, 8)}</p>
+        <p className="mt-6 text-sm leading-relaxed text-muted">
+          Optional and separate — vendor registration stays free:{" "}
+          <Link href="/factory-growth" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
+            Factory international presence
+          </Link>
+          .
+        </p>
+        <p className="mt-1 text-sm text-muted" lang="zh-CN">
+          可选且独立（登记仍然免费）：
+          <Link href="/factory-growth" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
+            工厂国际化形象服务
+          </Link>
+        </p>
       </motion.div>
     );
   }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { FactoryRegisterForm } from "@/components/factories/factory-register-form";
 import { FactoryLabel } from "@/components/layout/factory-label";
 import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
@@ -84,6 +85,30 @@ export default function FactoryRegisterPage() {
           </div>
           <FactoryRegisterForm />
         </div>
+
+        <aside className="mt-10 glass-card rounded-[1.5rem] p-6 sm:p-7">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
+            Optional next step · 可选下一步
+          </p>
+          <h2 className="mt-2 font-display text-xl font-semibold text-ink sm:text-2xl">
+            Build an international presence — separately from vendor registration
+          </h2>
+          <p className="mt-2 font-display text-lg text-accent">国际化形象服务，与供应商登记相互独立</p>
+          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted">
+            Registering as a vendor is free and is never tied to a purchase. If you also want a
+            professional English factory website or marketplace listings for overseas buyers, see
+            Factory International Growth Services.
+          </p>
+          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted" lang="zh-CN">
+            供应商登记免费，绝不要求先购买任何套餐。若您还希望面向海外买家打造专业英文工厂官网或平台listing，可了解工厂国际化增长服务。
+          </p>
+          <Link
+            href="/factory-growth"
+            className="mt-5 inline-flex items-center justify-center rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition hover:opacity-90"
+          >
+            Factory growth · 工厂国际化服务
+          </Link>
+        </aside>
       </Container>
       <CtaBand
         title="Already a buyer?"

@@ -24,6 +24,8 @@ export const whatsappPresets = {
     "Hi Seven Color — I want to private-label a product in China and prepare it for Amazon FBA (OEM, packaging, QC, carton marks, freight).",
   factories:
     "Hi Seven Color — I'm a factory applying via sourcing.center/factories/register (工厂入驻).",
+  factoryGrowth:
+    "Hi Seven Color — I'm a factory inquiring about international presence services on sourcing.center/factory-growth.",
   dropshipping:
     "Hi Seven Color — I want to dropship from your China (Xiamen) or Dubai warehouse stock.",
   compareAgent:
