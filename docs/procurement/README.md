@@ -49,3 +49,6 @@ Bank account **numbers** live only in gitignored `vault/bank-accounts.md` (this 
 | `china-company-field-map.md` | Exact fields we may type on portals |
 | `emirates-epic.md` | Live Emirates form state + policy summaries |
 | `etimad.md` | Live Etimad foreign-supplier registration |
+| `neom.md` | Live NEOM / GEP registration |
+| `emaar.md` | Live Emaar Oracle registration |
+| `marriott.md` | Live Marriott interest registration |

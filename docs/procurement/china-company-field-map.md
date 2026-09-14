@@ -53,8 +53,8 @@ Sourcing / import-export, furniture & hospitality FF&E, electronics, fashion/tex
 
 1. Emirates epic — https://epic.emirates.com/ — **submitted, pending activation**; username `ajmal.sevencolor` (`emirates-epic.md`)  
 2. Etimad foreign account — https://login.etimad.sa/Account/Login?culture=en — **WAF-blocked from cloud IP** (`etimad.md`)  
-3. NEOM  
-4. Emaar (bank facts on file — still no passport)  
-5. Marriott interest  
+3. NEOM — https://www.neom.com/en-us/our-business/suppliers — **starting** (`neom.md`)  
+4. Emaar — https://assets.emaar.com/emaar-supplier/ — **starting** (`emaar.md`)  
+5. Marriott interest — https://help.marriott.com/s/article/marriott-supply-partnership — **starting** (`marriott.md`)  
 
 **HOLD:** UAE MoF Foreign Supplier (branch question). DEWA / eSupply later (local docs / possible fees).

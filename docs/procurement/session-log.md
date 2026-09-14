@@ -177,3 +177,9 @@ Tick all T&Cs. Employees 0–10. Turnover 150000. USD bank if asked. Stop for fe
 **Etimad not created.** Official foreign / no-CR link is `login.etimad.sa/Suppliers/CreateInstitution`. The Saudi WAF rejects that URL from this cloud datacenter (“requested URL was rejected”; call 19990). No fields submitted. No uploads. No fee.
 
 Owner must open the same link from a normal home/office browser, or say **yes** to start NEOM next.
+
+## 2026-09-14 — Session 10 (NEOM, Emaar, Marriott)
+
+**Owner:** ok try others (skip Etimad WAF).
+
+Same field map. Tick all T&Cs. Employees 0–10. Turnover 150000. USD bank if asked. No passport. No fees. Start each portal from the buyer’s own domain.
