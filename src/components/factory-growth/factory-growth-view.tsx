@@ -120,27 +120,132 @@ export function FactoryGrowthView() {
         </Reveal>
 
         <Reveal className="mt-20">
-          <SectionKicker>{t(growthCopy.overviewKicker)}</SectionKicker>
+          <SectionKicker>{t(growthCopy.whyKicker)}</SectionKicker>
           <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-ink sm:text-4xl">
-            {t(growthCopy.overviewTitle)}
+            {t(growthCopy.whyTitle)}
           </h2>
+          <p className="mt-4 max-w-2xl text-muted">{t(growthCopy.whyBody)}</p>
           <div className="mt-8 grid gap-4 lg:grid-cols-3">
-            {serviceOverview.map((item) => (
-              <a
-                key={item.title.en}
-                href={item.href}
-                className="glass-card glass-card-hover rounded-[1.5rem] p-6"
-              >
-                <h3 className="font-display text-xl font-semibold text-ink">{t(item.title)}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{t(item.text)}</p>
-                <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent">
-                  {t(growthCopy.ctaCompare)}
-                  <ArrowRight className="h-3.5 w-3.5" aria-hidden />
-                </span>
-              </a>
+            {whyCards.map((card) => (
+              <article key={card.title.en} className="glass-card rounded-[1.5rem] p-6">
+                <h3 className="font-display text-lg font-semibold text-ink">{t(card.title)}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{t(card.text)}</p>
+              </article>
             ))}
           </div>
         </Reveal>
+
+        <Reveal className="mt-20">
+          <SectionKicker>{t(growthCopy.needKicker)}</SectionKicker>
+          <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-ink sm:text-4xl">
+            {t(growthCopy.needTitle)}
+          </h2>
+          <p className="mt-4 max-w-2xl text-muted">{t(growthCopy.needBody)}</p>
+          <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+            {materialsNeeded.map((item) => (
+              <li key={item.en} className="glass-card flex gap-3 rounded-[1.35rem] p-4 text-sm text-ink">
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden />
+                {t(item)}
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+
+        <Reveal className="mt-20">
+          <SectionKicker>{t(growthCopy.processKicker)}</SectionKicker>
+          <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-ink sm:text-4xl">
+            {t(growthCopy.processTitle)}
+          </h2>
+          <p className="mt-4 max-w-2xl text-muted">{t(growthCopy.processNote)}</p>
+          <ol className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {processSteps.map((step) => (
+              <li
+                key={step.n}
+                className={cn(
+                  "glass-card rounded-[1.5rem] p-5",
+                  step.n === "06" && "lg:col-span-3",
+                )}
+              >
+                <p className="font-mono text-[11px] text-accent">{step.n}</p>
+                <h3 className="mt-2 font-display text-lg font-semibold text-ink">{t(step.title)}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{t(step.text)}</p>
+              </li>
+            ))}
+          </ol>
+        </Reveal>
+
+        <Reveal className="mt-20">
+          <SectionKicker>{t(growthCopy.honestyKicker)}</SectionKicker>
+          <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-ink sm:text-4xl">
+            {t(growthCopy.honestyTitle)}
+          </h2>
+          <div className="mt-8 grid gap-4 lg:grid-cols-2">
+            <article className="glass-card rounded-[1.5rem] p-6">
+              <h3 className="font-display text-xl font-semibold text-ink">
+                {t(growthCopy.noPromiseTitle)}
+              </h3>
+              <ul className="mt-4 space-y-3">
+                {noPromises.map((item) => (
+                  <li key={item.en} className="text-sm leading-relaxed text-muted">
+                    {t(item)}
+                  </li>
+                ))}
+              </ul>
+            </article>
+            <article className="glass-card rounded-[1.5rem] p-6">
+              <h3 className="font-display text-xl font-semibold text-ink">{t(growthCopy.focusTitle)}</h3>
+              <ul className="mt-4 space-y-3">
+                {focusPoints.map((item) => (
+                  <li key={item.en} className="flex gap-2.5 text-sm leading-relaxed text-ink">
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden />
+                    <span>{t(item)}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          </div>
+        </Reveal>
+
+        <Reveal className="mt-20">
+          <SectionKicker>{t(growthCopy.workflowKicker)}</SectionKicker>
+          <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-ink sm:text-4xl">
+            {t(growthCopy.workflowTitle)}
+          </h2>
+          <p className="mt-4 max-w-2xl text-muted">{t(growthCopy.workflowNote)}</p>
+          <ol className="mt-8 grid gap-3 sm:grid-cols-5">
+            {workflowSteps.map((step) => (
+              <li key={step.title.en} className="glass-card rounded-[1.35rem] p-4">
+                <p className="font-mono text-[11px] text-accent">{t(step.kicker)}</p>
+                <p className="mt-2 font-display text-base font-semibold text-ink">{t(step.title)}</p>
+              </li>
+            ))}
+          </ol>
+        </Reveal>
+
+        <div id="overview" className="mt-20 scroll-mt-32">
+          <Reveal>
+            <SectionKicker>{t(growthCopy.overviewKicker)}</SectionKicker>
+            <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-ink sm:text-4xl">
+              {t(growthCopy.overviewTitle)}
+            </h2>
+            <div className="mt-8 grid gap-4 lg:grid-cols-3">
+              {serviceOverview.map((item) => (
+                <a
+                  key={item.title.en}
+                  href={item.href}
+                  className="glass-card glass-card-hover rounded-[1.5rem] p-6"
+                >
+                  <h3 className="font-display text-xl font-semibold text-ink">{t(item.title)}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">{t(item.text)}</p>
+                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent">
+                    {t(growthCopy.ctaCompare)}
+                    <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+                  </span>
+                </a>
+              ))}
+            </div>
+          </Reveal>
+        </div>
 
         <div id="packages" className="mt-20 scroll-mt-32">
           <SectionKicker>{t(growthCopy.packagesKicker)}</SectionKicker>
@@ -291,22 +396,6 @@ export function FactoryGrowthView() {
         </Reveal>
 
         <Reveal className="mt-20">
-          <SectionKicker>{t(growthCopy.workflowKicker)}</SectionKicker>
-          <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-ink sm:text-4xl">
-            {t(growthCopy.workflowTitle)}
-          </h2>
-          <p className="mt-4 max-w-2xl text-muted">{t(growthCopy.workflowNote)}</p>
-          <ol className="mt-8 grid gap-3 sm:grid-cols-5">
-            {workflowSteps.map((step) => (
-              <li key={step.title.en} className="glass-card rounded-[1.35rem] p-4">
-                <p className="font-mono text-[11px] text-accent">{t(step.kicker)}</p>
-                <p className="mt-2 font-display text-base font-semibold text-ink">{t(step.title)}</p>
-              </li>
-            ))}
-          </ol>
-        </Reveal>
-
-        <Reveal className="mt-20" >
           <article
             id="package-marketing"
             className="glass-panel scroll-mt-28 rounded-[1.75rem] p-6 sm:p-8"
@@ -357,61 +446,6 @@ export function FactoryGrowthView() {
         </Reveal>
 
         <Reveal className="mt-20">
-          <SectionKicker>{t(growthCopy.whyKicker)}</SectionKicker>
-          <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-ink sm:text-4xl">
-            {t(growthCopy.whyTitle)}
-          </h2>
-          <p className="mt-4 max-w-2xl text-muted">{t(growthCopy.whyBody)}</p>
-          <div className="mt-8 grid gap-4 lg:grid-cols-3">
-            {whyCards.map((card) => (
-              <article key={card.title.en} className="glass-card rounded-[1.5rem] p-6">
-                <h3 className="font-display text-lg font-semibold text-ink">{t(card.title)}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{t(card.text)}</p>
-              </article>
-            ))}
-          </div>
-        </Reveal>
-
-        <Reveal className="mt-20">
-          <SectionKicker>{t(growthCopy.needKicker)}</SectionKicker>
-          <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-ink sm:text-4xl">
-            {t(growthCopy.needTitle)}
-          </h2>
-          <p className="mt-4 max-w-2xl text-muted">{t(growthCopy.needBody)}</p>
-          <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-            {materialsNeeded.map((item) => (
-              <li key={item.en} className="glass-card flex gap-3 rounded-[1.35rem] p-4 text-sm text-ink">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden />
-                {t(item)}
-              </li>
-            ))}
-          </ul>
-        </Reveal>
-
-        <Reveal className="mt-20">
-          <SectionKicker>{t(growthCopy.processKicker)}</SectionKicker>
-          <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-ink sm:text-4xl">
-            {t(growthCopy.processTitle)}
-          </h2>
-          <p className="mt-4 max-w-2xl text-muted">{t(growthCopy.processNote)}</p>
-          <ol className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {processSteps.map((step) => (
-              <li
-                key={step.n}
-                className={cn(
-                  "glass-card rounded-[1.5rem] p-5",
-                  step.n === "06" && "lg:col-span-3",
-                )}
-              >
-                <p className="font-mono text-[11px] text-accent">{step.n}</p>
-                <h3 className="mt-2 font-display text-lg font-semibold text-ink">{t(step.title)}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{t(step.text)}</p>
-              </li>
-            ))}
-          </ol>
-        </Reveal>
-
-        <Reveal className="mt-20">
           <article className="glass-panel rounded-[1.75rem] p-6 sm:p-8">
             <SectionKicker>{t(growthCopy.crossKicker)}</SectionKicker>
             <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
@@ -450,38 +484,6 @@ export function FactoryGrowthView() {
               </div>
             ))}
           </dl>
-        </Reveal>
-
-        <Reveal className="mt-20">
-          <SectionKicker>{t(growthCopy.honestyKicker)}</SectionKicker>
-          <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-ink sm:text-4xl">
-            {t(growthCopy.honestyTitle)}
-          </h2>
-          <div className="mt-8 grid gap-4 lg:grid-cols-2">
-            <article className="glass-card rounded-[1.5rem] p-6">
-              <h3 className="font-display text-xl font-semibold text-ink">
-                {t(growthCopy.noPromiseTitle)}
-              </h3>
-              <ul className="mt-4 space-y-3">
-                {noPromises.map((item) => (
-                  <li key={item.en} className="text-sm leading-relaxed text-muted">
-                    {t(item)}
-                  </li>
-                ))}
-              </ul>
-            </article>
-            <article className="glass-card rounded-[1.5rem] p-6">
-              <h3 className="font-display text-xl font-semibold text-ink">{t(growthCopy.focusTitle)}</h3>
-              <ul className="mt-4 space-y-3">
-                {focusPoints.map((item) => (
-                  <li key={item.en} className="flex gap-2.5 text-sm leading-relaxed text-ink">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden />
-                    <span>{t(item)}</span>
-                  </li>
-                ))}
-              </ul>
-            </article>
-          </div>
         </Reveal>
 
         <Reveal className="mt-20 mb-8">

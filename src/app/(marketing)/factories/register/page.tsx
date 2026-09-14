@@ -105,10 +105,10 @@ export default function FactoryRegisterPage() {
             供应商登记免费，绝不要求先购买任何套餐。若您还希望面向海外买家做专业英文工厂官网或平台商品上架，可了解工厂出海形象服务。
           </p>
           <Link
-            href="/factory-growth#packages"
+            href="/factory-growth"
             className="mt-5 inline-flex items-center justify-center rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition hover:opacity-90"
           >
-            Factory growth · 工厂国际化服务
+            Factory growth · 工厂国际形象
           </Link>
         </aside>
       </Container>

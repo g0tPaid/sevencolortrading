@@ -671,15 +671,15 @@ export const formFields = {
 export const growthSeo = {
   /** English document/schema name — not the Facebook preview title. */
   title: "Factory International Presence for Chinese Plants",
-  /** OG/Twitter/document title: bilingual, compact (~60 chars). */
-  titleOg: "工厂国际形象 · Factory International Presence",
+  /** OG/Twitter/document title: bilingual, benefit-led, no prices. */
+  titleOg: "工厂国际形象 · 让海外买家认真看待您的工厂 | Factory International Presence",
   description:
-    "Helping Chinese factories build a professional international presence: English website ¥3,888, buyer growth ¥4,888, marketplace management from ¥2,888/3 months. Vendor registration stays free.",
+    "Helping Chinese factories build a professional international presence: English factory website, buyer growth, and optional three-month operations. Vendor registration stays free.",
   descriptionZh:
-    "帮工厂把国际形象做专业：英文官网 ¥3,888，买家增长版 ¥4,888，3个月起价 ¥2,888。供应商登记免费、与购买无关。",
-  /** Meta + OG + Twitter description: Chinese-led, short English after. */
+    "帮中国工厂做专业英文官网和国际形象，让海外买家认真看待您的工厂。官网、增长、三个月运营可选；供应商登记仍免费。",
+  /** Meta + OG + Twitter description: Chinese-led, no ¥ amounts. */
   descriptionSocial:
-    "帮工厂把国际形象做专业：英文官网 ¥3,888，买家增长版 ¥4,888，3个月起价 ¥2,888。供应商登记免费、与购买无关。 English factory website and marketplace prep; inquiry only.",
+    "帮中国工厂做专业英文官网和国际形象，让海外买家认真看待您的工厂。官网、增长、三个月运营可选；供应商登记仍免费。 Professional English factory site + international presence for Chinese manufacturers.",
   keywords: [
     "Chinese factory website",
     "factory international presence",
