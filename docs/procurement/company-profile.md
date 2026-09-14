@@ -38,7 +38,7 @@
 
 | Field | Value | Source |
 | --- | --- | --- |
-|     Email (portal admin) | info@sevencolortrading.com | Owner 2026-09-14 |
+| Email (portal admin) | info@sevencolortrading.com | Owner 2026-09-14 |
 | Email (corporate, site) | info@sevencolor.online | Site — secondary only |
 | Phone China HQ | +86 180 5926 2730 | Site |
 | Phone Dubai | +971 58 906 1969 | Site |

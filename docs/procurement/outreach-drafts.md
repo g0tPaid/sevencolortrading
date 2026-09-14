@@ -15,7 +15,7 @@ We are a China–UAE sourcing desk (Xiamen HQ and Al Ain / Dubai warehouse, UAE 
 
 Relevant supply: hospitality and airline OS&E, furniture/FF&E, private-label goods, and related China procurement with photo/video QC before shipment.
 
-Contact: info@sevencolor.online · +971 58 906 1969 · +86 180 5926 2730
+Contact: info@sevencolortrading.com · +86 180 5926 2730
 
 Thank you.
 
