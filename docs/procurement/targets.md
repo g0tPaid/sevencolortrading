@@ -9,7 +9,7 @@ Scores are commercial fit for **China sourcing + inspection + own Xiamen/Dubai 3
 | 1 | T001 | Emirates Group epic | 94 | SUBMITTED — PENDING ACTIVATION | https://epic.emirates.com/ |
 | 2 | T002 | Dubai eSupply | 93 | READY TO REGISTER | https://esupply.dubai.gov.ae/web/ |
 | 3 | T003 | UAE MoF Federal Supplier Register | 92 | AWAITING OWNER (UAE PASS) | https://procurement.gov.ae/ |
-| 4 | T004 | Emaar | 90 | READY TO REGISTER | https://assets.emaar.com/emaar-supplier/ |
+| 4 | T004 | Emaar | 90 | STOPPED — ORACLE HOST NAMED DEV | https://assets.emaar.com/emaar-supplier/ |
 | 5 | T005 | Aldar | 88 | READY TO REGISTER | https://www.aldar.com/en/explore-aldar/about-aldar/procurement/strategic-sourcing |
 | 6 | T006 | DEWA | 88 | READY TO REGISTER | https://www.dewa.gov.ae/en/supplier/main-services/registration-supplier-services |
 | 7 | T025 | Jumeirah Group | 87 | RESEARCHING | portal not yet verified |
@@ -19,7 +19,7 @@ Scores are commercial fit for **China sourcing + inspection + own Xiamen/Dubai 3
 
 ## Strong — next after first wave
 
-T009 Etimad (84, BLOCKED FROM CLOUD IP), T026 Rotana (84), T027 Nakheel (83), T010 NEOM (82), T033 Landmark (82), T030 Dubai Airports (81), T038 Red Sea Global (81), T011 Marriott (80), T031 Abu Dhabi Airports (80), T032 Al-Futtaim (80), T034 LuLu (80), T043 Qatar Airways (80), T049 ADNEC (79), T012 Hilton (78), T035 DAMAC (78), T013 Walmart (78), T044 HIA (77), T015 IHG (76), T014 Avendra (76), T040 Qiddiya (76).
+T009 Etimad (84, BLOCKED FROM CLOUD IP), T026 Rotana (84), T027 Nakheel (83), T010 NEOM (82, CAPTCHA), T033 Landmark (82), T030 Dubai Airports (81), T038 Red Sea Global (81), T011 Marriott (80, EMAIL CODE), T031 Abu Dhabi Airports (80), T032 Al-Futtaim (80), T034 LuLu (80), T043 Qatar Airways (80), T049 ADNEC (79), T012 Hilton (78), T035 DAMAC (78), T013 Walmart (78), T044 HIA (77), T015 IHG (76), T014 Avendra (76), T040 Qiddiya (76).
 
 ## Do not prioritize now
 
