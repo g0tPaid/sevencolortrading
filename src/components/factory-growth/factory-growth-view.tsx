@@ -53,13 +53,10 @@ export function FactoryGrowthView() {
 
   return (
     <div lang={lang === "zh" ? "zh-CN" : "en"} className="pt-24 sm:pt-28">
-      <div className="pointer-events-none sticky top-[4.6rem] z-40 flex justify-end px-5 sm:px-6 lg:px-8">
-        <div className="pointer-events-auto">
+      <Container className="relative pb-16 pt-2 sm:pt-4">
+        <div className="mb-5 flex justify-end">
           <LanguageSwitcher />
         </div>
-      </div>
-
-      <Container className="relative pb-16 pt-6 sm:pt-8">
         <section className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
             <SectionKicker>{t(growthCopy.kicker)}</SectionKicker>
@@ -144,7 +141,7 @@ export function FactoryGrowthView() {
           </div>
         </Reveal>
 
-        <div id="packages" className="mt-20 scroll-mt-28">
+        <div id="packages" className="mt-20 scroll-mt-32">
           <SectionKicker>{t(growthCopy.packagesKicker)}</SectionKicker>
           <div className="mt-8 grid items-stretch gap-6 lg:grid-cols-2">
             <article
@@ -299,15 +296,10 @@ export function FactoryGrowthView() {
           </h2>
           <p className="mt-4 max-w-2xl text-muted">{t(growthCopy.workflowNote)}</p>
           <ol className="mt-8 grid gap-3 sm:grid-cols-5">
-            {workflowSteps.map((step, i) => (
+            {workflowSteps.map((step) => (
               <li key={step.title.en} className="glass-card rounded-[1.35rem] p-4">
                 <p className="font-mono text-[11px] text-accent">{t(step.kicker)}</p>
                 <p className="mt-2 font-display text-base font-semibold text-ink">{t(step.title)}</p>
-                {i < workflowSteps.length - 1 ? (
-                  <p className="mt-3 hidden text-[11px] uppercase tracking-[0.14em] text-muted sm:block">
-                    →
-                  </p>
-                ) : null}
               </li>
             ))}
           </ol>

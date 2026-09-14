@@ -14,7 +14,7 @@ import { whatsappPresets } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
   ...pages.factoryGrowth,
-  keywords: growthSeo.keywords,
+  keywords: [...growthSeo.keywords],
   openGraph: {
     ...pages.factoryGrowth.openGraph,
     locale: "en_US",

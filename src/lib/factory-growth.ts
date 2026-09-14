@@ -579,10 +579,10 @@ export const growthFaqs: Array<{ q: Bilingual; a: Bilingual }> = [
     },
   },
   {
-    q: { en: "Is the marketing service ¥2,888 per month?", zh: "营销服务是每月 ¥2,888 吗？" },
+    q: { en: "Is the 3-month marketing service billed monthly?", zh: "三个月营销服务是按月收费吗？" },
     a: {
-      en: `No. International Marketplace & Marketing Management starts from ${PRICE_MARKETING} for three months, not per month. It is not ${PRICE_MARKETING}/month, and it is not an auto-renewing subscription. Scope is customized.`,
-      zh: `不是。海外电商平台与国际营销管理为三个月起价 ${PRICE_MARKETING}，不是每月 ${PRICE_MARKETING}，也不会自动续费。范围按工厂情况定制。`,
+      en: `No. International Marketplace & Marketing Management starts from ${PRICE_MARKETING} for three months — not a monthly rate, and not an auto-renewing subscription. Scope is customized.`,
+      zh: `不是。海外电商平台与国际营销管理为三个月起价 ${PRICE_MARKETING}，不是月费，也不会自动续费。范围按工厂情况定制。`,
     },
   },
   {

@@ -11,6 +11,7 @@ import {
   type PackageId,
 } from "@/lib/factory-growth";
 import { useFactoryGrowthUi } from "./locale-context";
+import { LanguageSwitcher } from "./language-switcher";
 
 const inputClass =
   "glass-input w-full rounded-2xl px-4 py-3 text-ink outline-none placeholder:text-muted/70";
@@ -134,7 +135,7 @@ export function GrowthInquiryForm() {
       <motion.div
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="glass-panel rounded-[1.75rem] p-8 text-center"
+        className="glass-panel scroll-mt-32 rounded-[1.75rem] p-8 text-center"
         id="inquiry"
       >
         <span className="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-full bg-accent-soft text-accent">
@@ -153,17 +154,20 @@ export function GrowthInquiryForm() {
     <form
       id="inquiry"
       onSubmit={onSubmit}
-      className="glass-panel relative scroll-mt-28 rounded-[1.75rem] p-5 sm:p-7"
+      className="glass-panel relative scroll-mt-32 rounded-[1.75rem] p-5 sm:p-7"
       aria-label={t(growthCopy.formTitle)}
     >
-      <div className="mb-5">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-          {t(growthCopy.formKicker)}
-        </p>
-        <h2 className="mt-1 font-display text-xl font-semibold text-ink sm:text-2xl">
-          {t(growthCopy.formTitle)}
-        </h2>
-        <p className="mt-2 text-sm text-muted">{t(growthCopy.formLead)}</p>
+      <div className="mb-5 flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+            {t(growthCopy.formKicker)}
+          </p>
+          <h2 className="mt-1 font-display text-xl font-semibold text-ink sm:text-2xl">
+            {t(growthCopy.formTitle)}
+          </h2>
+          <p className="mt-2 text-sm text-muted">{t(growthCopy.formLead)}</p>
+        </div>
+        <LanguageSwitcher />
       </div>
 
       <div
