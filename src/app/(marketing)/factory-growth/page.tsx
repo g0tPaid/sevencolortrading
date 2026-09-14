@@ -12,14 +12,23 @@ import { pages } from "@/lib/route-seo";
 
 export const metadata: Metadata = {
   ...pages.factoryGrowth,
+  title: { absolute: growthSeo.titleOg },
+  description: growthSeo.descriptionSocial,
   keywords: [...growthSeo.keywords],
   openGraph: {
     ...pages.factoryGrowth.openGraph,
-    locale: "en_US",
-    alternateLocale: ["zh_CN"],
+    title: growthSeo.titleOg,
+    description: growthSeo.descriptionSocial,
+    locale: "zh_CN",
+    alternateLocale: ["en_US"],
+  },
+  twitter: {
+    ...pages.factoryGrowth.twitter,
+    title: growthSeo.titleOg,
+    description: growthSeo.descriptionSocial,
   },
   other: {
-    "og:locale:alternate": "zh_CN",
+    "og:locale:alternate": "en_US",
   },
   alternates: {
     ...pages.factoryGrowth.alternates,
