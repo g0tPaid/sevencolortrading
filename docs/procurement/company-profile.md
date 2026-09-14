@@ -1,7 +1,8 @@
 # Company profile — sourcing.center
 
 **Authority:** Published website / `src/lib/content.ts` / `public/llms.txt` only.  
-**Documents on file:** none. Fields not listed below are **UNKNOWN**.
+**Documents on file:** none. Fields not listed below are **UNKNOWN**.  
+**Portal registrant (owner lock, 2026-09-14):** Chinese company only — see `registering-entity.md`.
 
 ## Identity
 

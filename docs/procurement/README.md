@@ -10,7 +10,8 @@
 | Company profile | Draft from **published site facts only** |
 | Document index | Created — vault is empty |
 | Procurement database | **50 targets** researched and scored |
-| Registrations started | **None** — blocked on documents + owner approval |
+| Registrations started | **None** — blocked on China license scan + owner approval |
+| Registering entity | **LOCKED: Chinese company** (`registering-entity.md`) |
 | RFQ monitoring | Not started — no portal logins yet |
 
 ## Source of truth
@@ -41,3 +42,5 @@ If a portal field is not in (1) or (2): **UNKNOWN — OWNER APPROVAL REQUIRED**.
 | `targets.md` | Ranked human table + next actions |
 | `registration-gates.md` | First-wave portals and stop reasons |
 | `session-log.md` | Session history |
+| `registering-entity.md` | Locked: Chinese company + MoF branch warning |
+| `china-company-field-map.md` | Exact fields we may type on portals |

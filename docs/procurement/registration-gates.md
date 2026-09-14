@@ -2,6 +2,8 @@
 
 No accounts created this session. No documents uploaded. No emails sent.
 
+**Registrant:** Chinese company only (`registering-entity.md`). Do not enter UAE license 143609 as the legal entity.
+
 ## T001 — Emirates epic
 
 - **What the portal is:** Official Emirates Group supplier onboarding and tendering (epic.emirates.com).

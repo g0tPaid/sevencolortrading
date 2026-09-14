@@ -31,3 +31,19 @@
 2. If licenses present: prepare (not submit) Emirates + eSupply + DEWA field maps.
 3. Finish official URLs for Jumeirah, Dubai Holding, MAF procurement, Rotana, Landmark, Qatar Airways.
 4. Do not repeat the first-50 research unless a URL changed.
+
+## 2026-09-14 — Session 2 (entity lock)
+
+**Owner:** register as **Chinese company**.
+
+**Done**
+
+- Locked registrant: Xiamen Ajmal Seven Color Trading Co Ltd / license 91350200MAE8W9E67A.
+- Wrote `registering-entity.md` and `china-company-field-map.md`.
+- Rechecked MoF: Foreign Supplier = outside UAE **and no local branch**. Published Al Ain office + license 143609 → **MoF on HOLD** until owner says whether 143609 is a branch or a separate company.
+- First-wave as China company (no submission): Emirates epic, Etimad, NEOM, Emaar, Marriott.
+- DEWA / eSupply: possible fees or local-chamber docs — later, not forced.
+
+**Still not done:** no portal accounts, no uploads, no emails.
+
+**Need from owner:** China license scan, tax cert if separate, legal-rep passport, portal admin name, answer on 143609 vs Chinese company.
