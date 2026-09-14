@@ -171,3 +171,9 @@ Continue Emirates: select 0–10, save Basic Profile, complete confirmation. Fix
 Official URL: https://login.etimad.sa/Account/Login?culture=en — “New Account for No CR entities of the type foreign supplier”.
 
 Tick all T&Cs. Employees 0–10. Turnover 150000. USD bank if asked. Stop for fees, passport upload, tenders. OTP to +86 180 5926 2730 may block until owner reads the SMS.
+
+## 2026-09-14 — Session 9 result
+
+**Etimad not created.** Official foreign / no-CR link is `login.etimad.sa/Suppliers/CreateInstitution`. The Saudi WAF rejects that URL from this cloud datacenter (“requested URL was rejected”; call 19990). No fields submitted. No uploads. No fee.
+
+Owner must open the same link from a normal home/office browser, or say **yes** to start NEOM next.

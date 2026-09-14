@@ -1,17 +1,21 @@
 # First-wave registrations — stop gates
 
-Accounts: Emirates username `ajmal.sevencolor` created — **not submitted**. No documents uploaded. No emails sent.
+Accounts: Emirates username `ajmal.sevencolor` — registration phase complete, pending email activation. Etimad not created (WAF). No emails sent.
 
 **Registrant:** Chinese company only (`registering-entity.md`). Do not enter UAE license 143609 as the legal entity.
 
 ## T001 — Emirates epic
 
 - **What the portal is:** Official Emirates Group supplier onboarding and tendering (epic.emirates.com).
-- **What we submitted so far:** Company + user fields from the China license map. Username `ajmal.sevencolor`. Live notes: `emirates-epic.md`.
-- **Stopped at:** Compliance — Anti-Bribery, Safety Policy, Supplier Code of Conduct. “I Agree” unchecked.
-- **Why it matters:** Accepting those three PDFs is a legal/ethics declaration.
-- **Source:** China license + owner email/mobile. No employees, turnover, bank, or passport used.
-- **Decision needed:** None for first submit. Watch email for activation. Fix timezone on first login after activation.
+- **Submitted:** China license map, employees 0–10, turnover 150000, three categories, three policies. Username `ajmal.sevencolor`. Notes: `emirates-epic.md`.
+- **Waiting:** activation email to info@sevencolortrading.com. Fix timezone after first login.
+- **Not done:** bank (no page), passport, fees.
+
+## T009 — Etimad
+
+- **What:** Official Saudi government procurement (etimad.sa). Foreign / no-CR account.
+- **Blocked:** `/Suppliers/CreateInstitution` rejected by platform WAF from cloud datacenter IPs. Support 19990.
+- **Decision:** Owner opens the form from a home/office browser, or skip to NEOM.
 
 ## T002 — Dubai eSupply
 

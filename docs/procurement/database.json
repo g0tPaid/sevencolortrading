@@ -159,8 +159,8 @@
       "registration_type": "Foreign supplier / no-CR account available",
       "categories": "Government goods including furniture and supplies",
       "fit": 84,
-      "status": "IN PROGRESS",
-      "notes": "Official .gov.sa. Starting foreign / no-CR account. Nafath is for in-KSA users — skip. Tick T&Cs. Stop for tender fees and passport. See etimad.md.",
+      "status": "BLOCKED — WAF FROM CLOUD IP",
+      "notes": "Official foreign no-CR path is /Suppliers/CreateInstitution. WAF rejects datacenter IPs (Support ID example 3112896272736700339; call 19990). Owner must use a home/office browser. No account created. See etimad.md.",
       "docs_typical": "Foreign business license, representative details",
       "last_checked": "2026-09-14"
     },
