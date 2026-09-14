@@ -1,21 +1,22 @@
 # Document vault index
 
-**Vault location:** not created — owner has not uploaded documents to this workspace.  
-Never modify originals. Never submit expired docs unless the buyer accepts them.
+**Physical files:** `docs/procurement/vault/` (gitignored). Never commit scans. Never modify originals.
 
-| ID | Document name | Type | Issuing authority | Issue date | Expiry | Company name on doc | Registration number | Country | File location | Status |
+| ID | Document name | Type | Issuing authority | Issue / doc date | Expiry | Company / person on doc | Number | Country | File (local) | Status |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| DOC-001 | China business license | License | UNKNOWN | UNKNOWN | UNKNOWN | Expected: Xiamen Ajmal Seven Color Trading Co Ltd | Expected on site: 91350200MAE8W9E67A | CN | — | MISSING |
-| DOC-002 | UAE trade license | License | UNKNOWN | UNKNOWN | UNKNOWN | Expected: Seven Color / Ajmal entity — confirm exact name on license | Expected on site: 143609 | AE | — | MISSING |
-| DOC-003 | VAT / TRN certificate | Tax | UNKNOWN | UNKNOWN | UNKNOWN | UNKNOWN | UNKNOWN | AE? | — | MISSING |
-| DOC-004 | Bank letter + account details | Bank | UNKNOWN | UNKNOWN | UNKNOWN | UNKNOWN | — | UNKNOWN | — | MISSING — do not request/store in chat logs |
-| DOC-005 | Authorized signatory ID / passport | Identity | — | UNKNOWN | UNKNOWN | — | — | UNKNOWN | — | MISSING — owner approval before any upload |
-| DOC-006 | Company profile / capability PDF | Presentation | Internal | — | — | — | — | — | — | MISSING |
-| DOC-007 | Insurance certificate | Insurance | UNKNOWN | UNKNOWN | UNKNOWN | UNKNOWN | UNKNOWN | UNKNOWN | — | MISSING |
-| DOC-008 | ISO / quality certificates | Certification | — | — | — | — | — | — | — | NOT DOCUMENTED — do not claim |
-| DOC-009 | D&B confirmation | Credit | Dun & Bradstreet | UNKNOWN | UNKNOWN | Site: DUNS 509419282 | 509419282 | — | Site only | NUMBER PUBLISHED; certificate MISSING |
-| DOC-010 | Retail vendor letters (Walmart etc.) | Reference | UNKNOWN | UNKNOWN | UNKNOWN | UNKNOWN | UNKNOWN | UNKNOWN | — | MISSING — do not claim live vendor IDs |
-| DOC-011 | Warehouse / 3PL photos or lease | Facility | UNKNOWN | UNKNOWN | UNKNOWN | UNKNOWN | — | CN / AE | — | MISSING |
-| DOC-012 | Inspection rate sheet | Commercial | Internal | — | — | — | — | — | Site: USD 110 / day | PUBLISHED RATE ONLY |
+| DOC-001 | Business License Duplicate (2-1) EN | License | Xiamen Municipal Administration for Market Supervision | 2025-02-25 (inc. 2025-01-06) | Not stated on face | XIAMEN AJMAL SEVEN COLOR TRADING CO., LTD | 91350200MAE8W9E67A | CN | vault/china-business-license-en.jpg | ON FILE |
+| DOC-002 | 营业执照 ZH | License | 厦门市市场监督管理局 | 2025-02-25 (成立 2025-01-06) | Not stated on face | 厦门安杰七彩贸易有限公司 | 91350200MAE8W9E67A | CN | vault/china-business-license-zh.jpg | ON FILE |
+| DOC-003 | China tax cert (if separate) | Tax | — | — | — | — | — | CN | — | MISSING — USCC may serve as tax ID; confirm if portal asks for extra cert |
+| DOC-004 | Bank letter | Bank | — | — | — | — | — | — | — | MISSING |
+| DOC-005 | Legal representative passport | Identity | Republic of India | — | — | Matches license legal representative name | — | IN | vault/legal-rep-passport.jpg | ON FILE LOCAL ONLY — do not commit; do not upload until portal-specific approval |
+| DOC-006 | Capability PDF | Presentation | — | — | — | — | — | — | — | MISSING |
+| DOC-007 | Insurance | Insurance | — | — | — | — | — | — | — | MISSING |
+| DOC-008 | ISO | Certification | — | — | — | — | — | — | — | NOT DOCUMENTED |
+| DOC-009 | D&B | Credit | Dun & Bradstreet | — | — | — | 509419282 | — | Site only | NUMBER PUBLISHED |
+| DOC-010 | UAE trade license 143609 | License | — | — | — | — | 143609 | AE | — | NOT USED as registrant; scan still useful later |
+| DOC-011 | Company chop | Stamp | — | — | — | — | — | CN | — | MISSING if a form must be chopped |
 
-When files arrive: copy into `docs/procurement/vault/` (gitignored if confidential), fill this table, never alter the PDF.
+**Conflicts with website (license wins on legal forms):**
+
+- Incorporation **6 January 2025** vs site “Founded 2014”
+- Domicile **Yuehua Road, Fujian FTZ Xiamen** vs site “Huli Avenue, Huli District”

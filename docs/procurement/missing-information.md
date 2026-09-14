@@ -6,11 +6,11 @@ Registrations cannot start until the items below exist. The agent will not guess
 
 ## Blocking (Chinese registrant)
 
-1. **Scan of China business license 91350200MAE8W9E67A** — Chinese + English names, issue/expiry, legal representative, registered capital if printed.
-2. **China tax registration certificate** if it is a separate document from the business license (UAE MoF foreign-supplier list asks for a tax registration certificate).
-3. **Passport of the owner / legal representative named on the license.**
-4. **Portal admin** — full name, title, email, mobile (China-based preferred).
-5. **Company chop (公章)** scan if a portal asks to stamp a form.
+1. ~~China business license~~ **Received** (EN + ZH).
+2. **China tax registration certificate** if a portal rejects USCC-only.
+3. ~~Legal representative passport~~ **Received locally** — not in git; upload only with per-portal approval.
+4. ~~Portal email~~ **Locked:** info@sevencolortrading.com. Still need **mobile** for SMS OTPs.
+5. **Company chop (公章)** if a form must be stamped.
 6. **Answer:** is UAE license 143609 a **branch of this Chinese company** or a **separate UAE company**? This decides whether we can use MoF “Foreign Supplier”.
 7. **Bank letter** — only when a named portal requires it; do not send in chat.
 

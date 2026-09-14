@@ -2,7 +2,9 @@
 
 **Authority:** Published website / `src/lib/content.ts` / `public/llms.txt` only.  
 **Documents on file:** none. Fields not listed below are **UNKNOWN**.  
-**Portal registrant (owner lock, 2026-09-14):** Chinese company only — see `registering-entity.md`.
+**Portal registrant (owner lock, 2026-09-14):** Chinese company only — see `registering-entity.md`.  
+**Portal email (owner, 2026-09-14):** info@sevencolortrading.com  
+**License scan:** received. Website “2014” and “Huli Avenue” are **not** used on legal forms.
 
 ## Identity
 
@@ -20,8 +22,14 @@
 
 | Field | Value | Source |
 | --- | --- | --- |
-| China HQ / warehouse | Xiamen Ajmal Seven Color Trading Co Ltd, Huli Avenue, Huli District, Xiamen City, Fujian, China | Site |
-| China business license | 91350200MAE8W9E67A | Site |
+| China registered name (EN) | XIAMEN AJMAL SEVEN COLOR TRADING CO., LTD | License |
+| China registered name (ZH) | 厦门安杰七彩贸易有限公司 | License |
+| China registered address | Room 208 (Area B), No. 10-2, Yuehua Road, Xiamen Area of China (Fujian) Pilot Free Trade Zone | License |
+| China business license / USCC | 91350200MAE8W9E67A | License |
+| Date of incorporation | 6 January 2025 | License |
+| Registered capital | RMB 10,000 | License |
+| Legal representative | AJMAL ABDUL JABBAR AHAMED | License |
+| China HQ (marketing site only) | Huli Avenue, Huli District, Xiamen — **not on this license** | Site — do not use as registered office |
 | UAE office / warehouse | Suite No 21, ESA Building, Near Nael Enclave, Al Ain, United Arab Emirates | Site |
 | UAE trade license | 143609 | Site |
 | Countries of operation (published) | China (Xiamen HQ), UAE (Dubai / Al Ain branch) | Site |
@@ -30,8 +38,8 @@
 
 | Field | Value | Source |
 | --- | --- | --- |
-| Email (corporate) | info@sevencolor.online | Site |
-| Email (SME) | info@sevencolortrading.com | Site |
+|     Email (portal admin) | info@sevencolortrading.com | Owner 2026-09-14 |
+| Email (corporate, site) | info@sevencolor.online | Site — secondary only |
 | Phone China HQ | +86 180 5926 2730 | Site |
 | Phone Dubai | +971 58 906 1969 | Site |
 | Phone (third listed) | +91 7736 667 000 | Site — role UNKNOWN |

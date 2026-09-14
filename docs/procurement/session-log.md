@@ -46,4 +46,26 @@
 
 **Still not done:** no portal accounts, no uploads, no emails.
 
-**Need from owner:** China license scan, tax cert if separate, legal-rep passport, portal admin name, answer on 143609 vs Chinese company.
+**Need from owner (session 2):** China license scan, tax cert if separate, legal-rep passport, portal admin name, answer on 143609 vs Chinese company.
+
+## 2026-09-14 — Session 3 (documents + email)
+
+**Received**
+
+- China business license EN + ZH (indexed; vault gitignored).
+- Legal representative passport (vault only; **not committed**; name matches license).
+- Portal email: **info@sevencolortrading.com**
+
+**License facts now used on forms**
+
+- XIAMEN AJMAL SEVEN COLOR TRADING CO., LTD / 厦门安杰七彩贸易有限公司
+- USCC 91350200MAE8W9E67A
+- Room 208 (Area B), No. 10-2, Yuehua Road, Fujian FTZ Xiamen
+- Incorporated 6 January 2025; capital RMB 10,000
+- Legal representative AJMAL ABDUL JABBAR AHAMED
+
+**Do not use on legal forms:** website “founded 2014”; website “Huli Avenue”.
+
+**Still not done:** no portal account created; no passport uploaded to any buyer.
+
+**Need:** mobile for OTP; approve Emirates epic T&Cs when we open that portal; 143609 branch vs separate company (MoF only).
