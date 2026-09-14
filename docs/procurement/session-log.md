@@ -213,3 +213,7 @@ Owner: resend access codes, they will paste them.
 Emaar: new access code sent to info@sevencolortrading.com, expires 15 minutes. Tab open.
 Marriott: form filled, VERIFY YOUR EMAIL clicked again. Same inbox.
 
+## 2026-09-14 — Session 13
+
+Owner sent Emaar code `a4Xz4PrJ`. Portal rejected it (expired or superseded). New access code sent to info@sevencolortrading.com, 15 min, tab open. Wait for the **newest** Emaar email.
+
