@@ -151,4 +151,6 @@ Comparisons:
 Knowledge:
 - https://sourcing.center/knowledge/how-to-source-from-china
 - https://sourcing.center/knowledge/china-quality-inspection-guide
-Updates: https://sourcing.center/updates
+Updates: https://sourcing.center/updates (dated pointers into Knowledge/compare/cases — not a newsroom)
+News: https://sourcing.center/news (bilingual EN/中文 China sourcing briefs for importers — manufacturing, supply chain, tariffs, logistics, factory/policy. Cited sources only; no invented facts. Seed explainer: https://sourcing.center/news/how-this-news-desk-works)
+

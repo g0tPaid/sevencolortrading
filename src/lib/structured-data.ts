@@ -178,6 +178,7 @@ export function organizationNode(): JsonLdNode {
       "Freight forwarding",
       "Factory visits",
       "Visit China",
+      "China sourcing news",
     ],
     areaServed: ["CN", "AE", "US", "EU", "GCC"],
     location: [{ "@id": xiamenId }, { "@id": alAinId }],

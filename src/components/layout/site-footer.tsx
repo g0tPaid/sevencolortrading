@@ -62,6 +62,7 @@ export function SiteFooter() {
                 ["Compare", "/compare"],
                 ["Reviews", "/reviews"],
                 ["Updates", "/updates"],
+                ["News", "/news"],
                 ["Contact", "/contact"],
                 ["Visit China", "/visit"],
                 ["Inspection", "/inspection"],

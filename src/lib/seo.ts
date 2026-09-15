@@ -62,6 +62,9 @@ export const seoKeywords = [
   "on the ground in China",
   "Chinese factory website",
   "factory international presence",
+  "China sourcing news",
+  "China manufacturing news for importers",
+  "China supply chain news",
 ];
 
 export const defaultDescription =

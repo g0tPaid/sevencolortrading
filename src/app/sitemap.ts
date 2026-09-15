@@ -2,7 +2,12 @@ import type { MetadataRoute } from "next";
 import { caseStudies } from "@/lib/case-studies";
 import { comparePages } from "@/lib/compare";
 import { knowledgeArticles } from "@/lib/content";
+import { NEWS_PATH, newsPostPath } from "@/lib/news";
+import { listNews } from "@/lib/news-store";
 import { siteUrl } from "@/lib/seo";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 const routes: Array<{ path: string; priority: number; changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] }> = [
   { path: "", priority: 1, changeFrequency: "weekly" },
@@ -28,11 +33,13 @@ const routes: Array<{ path: string; priority: number; changeFrequency: MetadataR
   { path: "/knowledge", priority: 0.7, changeFrequency: "weekly" },
   { path: "/compare", priority: 0.72, changeFrequency: "weekly" },
   { path: "/updates", priority: 0.45, changeFrequency: "weekly" },
+  { path: NEWS_PATH, priority: 0.78, changeFrequency: "daily" },
   { path: "/llms.txt", priority: 0.4, changeFrequency: "monthly" },
   { path: "/llms-full.txt", priority: 0.35, changeFrequency: "monthly" },
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const posts = await listNews();
   const staticRoutes = routes.map((route) => ({
     url: `${siteUrl}${route.path}`,
     lastModified: new Date(),
@@ -71,5 +78,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.74,
   }));
 
-  return [...staticRoutes, ...articles, ...studies, ...compares];
+  const news = posts.map((post) => ({
+    url: `${siteUrl}${newsPostPath(post.slug)}`,
+    lastModified: new Date(post.updatedAt ?? post.date),
+    changeFrequency: "weekly" as const,
+    priority: 0.7,
+  }));
+
+  return [...staticRoutes, ...articles, ...studies, ...compares, ...news];
 }
