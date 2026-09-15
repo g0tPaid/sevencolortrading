@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Fraunces, Inter, Playfair_Display } from "next/font/google";
+import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import { JsonLd } from "@/components/seo/json-ld";
 import { ThemeProvider } from "@/components/layout/theme-provider";
+import { gaMeasurementIdFromEnv } from "@/lib/ga";
 import { defaultDescription, siteUrl, seoKeywords } from "@/lib/seo";
 import { siteWideGraph } from "@/lib/structured-data";
 import "./globals.css";
@@ -81,6 +83,8 @@ export const viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const gaId = gaMeasurementIdFromEnv();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -89,6 +93,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body
         className={`${playfair.variable} ${fraunces.variable} ${inter.variable} font-sans antialiased`}
       >
+        <GoogleAnalytics measurementId={gaId} />
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

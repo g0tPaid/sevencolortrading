@@ -41,6 +41,24 @@ Railway / production env vars:
 
 In development, unset credentials fall back to `admin` / `admin`.
 
+## Google Analytics 4
+
+The first-party `/dashboard` visitor counter stays. GA4 is separate and loads only when a measurement ID is set.
+
+Railway / production env:
+
+- `GA_MEASUREMENT_ID` — GA4 ID (`G-XXXXXXXXXX`). Read at runtime via `/api/ga`, so a Railway variable + restart is enough even on prerendered pages. `NEXT_PUBLIC_GA_MEASUREMENT_ID` also works.
+
+Do not commit the ID. Create the property at https://analytics.google.com (Data stream → Web → `https://sourcing.center`), then paste the Measurement ID into Railway Variables.
+
+Tracked:
+
+- `page_view` on each App Router navigation
+- `generate_lead` after a saved RFQ, Visit China request, factory application, or factory-growth inquiry
+- `contact` when the WhatsApp float is clicked
+
+No names, emails, or phone numbers are sent to Google.
+
 ## Daily China sourcing news
 
 Public hub: `/news` (index) and `/news/[slug]` (bilingual EN | 中文). `/updates` stays as dated desk notes.

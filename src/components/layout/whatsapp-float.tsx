@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useWhatsAppPrefill } from "@/components/layout/whatsapp-context";
 import { DEFAULT_WHATSAPP_MESSAGE, whatsappHref } from "@/lib/whatsapp";
+import { trackGaEvent } from "@/lib/ga";
 
 function WhatsAppGlyph({ className }: { className?: string }) {
   return (
@@ -35,6 +36,7 @@ export function WhatsAppFloat() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
+      onClick={() => trackGaEvent("contact", { method: "whatsapp" })}
       className="whatsapp-float fixed bottom-5 right-4 z-[70] inline-flex min-h-16 items-center gap-3 rounded-full px-5 py-3.5 text-base font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2 focus-visible:ring-offset-canvas sm:bottom-6 sm:right-6 sm:min-h-14 sm:gap-2.5 sm:px-4 sm:py-3 sm:text-[15px]"
     >
       <span className="whatsapp-float-icon">
