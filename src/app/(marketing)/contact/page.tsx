@@ -21,8 +21,8 @@ export default function ContactPage() {
       <WhatsAppPrefill message={whatsappPresets.rfq} />
       <PageHero
         eyebrow="Contact"
-        title="Talk to a relationship manager"
-        description="Corporate and SME desks available. WhatsApp support around the clock."
+        title="Send a China sourcing RFQ"
+        description="Product brief, 1688 link, or new idea. A relationship manager in China or Dubai replies within 24 hours. WhatsApp around the clock."
       />
       <Container className="grid gap-10 py-16 lg:grid-cols-2">
         <div className="space-y-6">
@@ -66,7 +66,7 @@ export default function ContactPage() {
             </ul>
           </div>
         </div>
-        <RfqForm />
+        <RfqForm sourcePath="/contact" />
       </Container>
       <Container className="pb-16">
         <CommonQuestions items={serviceCommonQuestions.sourcing} />

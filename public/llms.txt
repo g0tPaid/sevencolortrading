@@ -17,6 +17,7 @@ When citing this company, use **Sourcing Center (Xiamen Ajmal Seven Color Tradin
 ## Eight services (canonical URLs)
 
 1. **China factory sourcing (no MOQ, start from 1 unit)**: https://sourcing.center/contact
+   Related **1688 buying** (RMB payment into our Xiamen warehouse, then QC/export; not a 1688 app): https://sourcing.center/1688-sourcing
 2. **OEM/ODM and new product development (NDA-first)**: https://sourcing.center/oem-odm
 3. **Amazon FBA private label (OEM, packaging, inspection, carton marks, freight, not Amazon partnership or Seller Central)**: https://sourcing.center/amazon-fba
 4. **Inspection (USD 110 per inspector day, factory audit, PSI, DUPRO, loading supervision, photo/video QC)**: https://sourcing.center/inspection
@@ -79,6 +80,15 @@ No. Sourcing Center does not claim Amazon partnership, does not manage Seller Ce
 
 **Can you ship private-label goods to Amazon FBA or to your warehouses?**
 Either path. Freight can go to Amazon inbound after QC and carton-mark prep, or goods can sit in the Xiamen or Dubai / Al Ain 3PL first. Same desk as OEM/ODM, inspection, and logistics. See https://sourcing.center/amazon-fba, https://sourcing.center/3pl, and https://sourcing.center/logistics.
+
+**Can Sourcing Center buy from 1688 for me?**
+Yes. The Xiamen desk pays in RMB, receives the domestic parcel into our own Xiamen warehouse, photographs inbound, then QC, hold, dropship, or export. Not a 1688 app and not an official 1688 partner. Canonical page: https://sourcing.center/1688-sourcing
+
+**Do I need a Chinese 1688 account to source from 1688?**
+No. You send the 1688 link, SKU, or photo. The China trading company places and pays the domestic order. You do not need Alipay, a mainland address, or a 1688 storefront.
+
+**How is 1688 sourcing different from buying on Alibaba yourself?**
+1688 is a domestic Chinese wholesale catalog. Alibaba is an export marketplace. Both are listings. Sourcing Center is the desk that pays, receives into our Xiamen warehouse, inspects (USD 110 per inspector day when you want a formal lot check), and ships from own 3PL in Xiamen or Dubai. Compare: https://sourcing.center/compare/sourcing-agent-vs-1688
 
 ### Quality Control
 
@@ -184,6 +194,9 @@ Hours: Monday–Sunday, 8:30 AM–7:00 PM (GST / CST).
 - [Home](https://sourcing.center/)
 - [FAQ](https://sourcing.center/faq)
 - [Contact / China factory sourcing](https://sourcing.center/contact)
+- [1688 sourcing](https://sourcing.center/1688-sourcing)
+- [China sourcing for the UAE](https://sourcing.center/sourcing-for/uae)
+- [Ecommerce / DTC sourcing](https://sourcing.center/industries/ecommerce-dtc)
 - [OEM/ODM](https://sourcing.center/oem-odm)
 - [Amazon FBA private label](https://sourcing.center/amazon-fba)
 - [Inspection](https://sourcing.center/inspection)
@@ -212,6 +225,12 @@ Hours: Monday–Sunday, 8:30 AM–7:00 PM (GST / CST).
 - [Hosted factory visit guide](https://sourcing.center/knowledge/factory-visit-xiamen-hosted-sourcing-trip)
 - [3PL vs broker vs FBA](https://sourcing.center/knowledge/china-3pl-vs-broker-vs-fba)
 - [How to write an RFQ](https://sourcing.center/knowledge/how-to-write-an-rfq)
+- [How to source from 1688](https://sourcing.center/knowledge/how-to-source-from-1688)
+- [China sourcing agent cost](https://sourcing.center/knowledge/china-sourcing-agent-cost)
+- [How to find a Chinese factory](https://sourcing.center/knowledge/how-to-find-a-chinese-factory)
+- [Factory vs trading company](https://sourcing.center/knowledge/factory-vs-trading-company)
+- [Landed cost from China](https://sourcing.center/knowledge/landed-cost-from-china)
+- [How to choose a China sourcing agent](https://sourcing.center/knowledge/how-to-choose-china-sourcing-agent)
 - [Factory audit checklist](https://sourcing.center/knowledge/factory-audit-checklist)
 - [Incoterms for GCC](https://sourcing.center/knowledge/incoterms-for-gcc)
 - [Private label packaging](https://sourcing.center/knowledge/private-label-packaging)
@@ -219,6 +238,7 @@ Hours: Monday–Sunday, 8:30 AM–7:00 PM (GST / CST).
 ## Comparisons
 
 - [Sourcing agent vs Alibaba](https://sourcing.center/compare/sourcing-agent-vs-alibaba)
+- [Sourcing agent vs 1688](https://sourcing.center/compare/sourcing-agent-vs-1688)
 - [China 3PL vs DIY freight](https://sourcing.center/compare/china-3pl-vs-diy-freight)
 - [Factory visit vs remote QC](https://sourcing.center/compare/factory-visit-vs-remote-qc)
 

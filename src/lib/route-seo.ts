@@ -4,9 +4,9 @@ import { routeMetadata } from "@/lib/seo";
 /** Buyer-intent titles (50–60 chars) and descriptions (140–160 chars). ASCII sourcing.center only. */
 export const pages = {
   home: routeMetadata({
-    title: "China Sourcing Agent: Visit China, Own 3PL Warehouses",
+    title: "China Sourcing Agent: Visit China, Own 3PL, 1688 Buying",
     description:
-      "China sourcing desk with factories across China. Visit China, own 3PL from our Xiamen warehouse and Dubai hub. No MOQ, QC, inspection USD 110/day since 2014.",
+      "China sourcing agent with factories, 1688 buying into our Xiamen warehouse, Visit China, own 3PL in Xiamen and Dubai. No MOQ. Inspection USD 110/day since 2014.",
     path: "/",
   }),
   contact: routeMetadata({
@@ -146,6 +146,24 @@ export const pages = {
     description: growthSeo.descriptionSocial,
     path: GROWTH_PATH,
   }),
+  sourcing1688: routeMetadata({
+    title: "1688 Sourcing Agent: We Buy, QC in Xiamen, Export",
+    description:
+      "China desk pays 1688 in RMB, receives into our Xiamen warehouse, photo/video QC, then 3PL or freight. Not a 1688 app. Inspection USD 110/day.",
+    path: "/1688-sourcing",
+  }),
+  sourcingForUae: routeMetadata({
+    title: "China Sourcing for the UAE: Own Dubai / Al Ain Warehouse",
+    description:
+      "China factory desk plus operator-owned UAE warehouse in Al Ain. Inspect in China, stage GCC stock in Dubai / Al Ain. License 143609. Since 2014.",
+    path: "/sourcing-for/uae",
+  }),
+  industriesEcommerceDtc: routeMetadata({
+    title: "China Sourcing for DTC and Ecommerce Sellers",
+    description:
+      "No-MOQ sampling, photo/video QC, Amazon FBA private-label prep, and own-warehouse dropship from Xiamen and Dubai. One China desk, not a broker.",
+    path: "/industries/ecommerce-dtc",
+  }),
 } as const;
 
 export const knowledgeMeta: Record<string, { title: string; description: string }> = {
@@ -199,6 +217,36 @@ export const knowledgeMeta: Record<string, { title: string; description: string 
     description:
       "Incoterms for China to GCC freight when stock can sit in Xiamen or Dubai / Al Ain. Sea, air, and express from the same desk as Sourcing Center 3PL.",
   },
+  "how-to-choose-china-sourcing-agent": {
+    title: "How to Choose a China Sourcing Agent (Verify the Desk)",
+    description:
+      "Legal name, licenses, DUNS, own warehouses vs broker, on-ground inspection, published vs quoted prices. No #1 claim. Checklist from Sourcing Center.",
+  },
+  "how-to-source-from-1688": {
+    title: "How to Source from 1688 Without a Chinese Account",
+    description:
+      "1688 is a domestic catalog. Xiamen desk pays in RMB, receives into our warehouse, inspects, then exports. Not a 1688 app. Guide from Sourcing Center.",
+  },
+  "china-sourcing-agent-cost": {
+    title: "China Sourcing Agent Cost: USD 110 Inspection, RFQ Quotes",
+    description:
+      "Published inspection rate: USD 110 per inspector day. Sourcing, 3PL, and freight are quoted from the RFQ. No invented commission percentage.",
+  },
+  "how-to-find-a-chinese-factory": {
+    title: "How to Find a Chinese Factory You Can Actually Buy From",
+    description:
+      "Listings are a scan. License, factory vs trader, samples from 1 unit, and verification from the Xiamen desk of Sourcing Center.",
+  },
+  "factory-vs-trading-company": {
+    title: "Factory vs Trading Company in China: What to Verify",
+    description:
+      "A trader is not automatically a red flag. A hidden trader is. License, line walk, and who issues the invoice. Field note from Sourcing Center.",
+  },
+  "landed-cost-from-china": {
+    title: "Landed Cost from China: Checklist, Not a Duty Table",
+    description:
+      "Stack EXW, inland, USD 110/day inspection, freight, and your destination fees. Sourcing Center does not publish HS-code duty tables.",
+  },
   "private-label-packaging": {
     title: "Private Label Packaging: Approve Before Production",
     description:
@@ -221,5 +269,10 @@ export const compareMeta: Record<string, { title: string; description: string }>
     title: "Visit China vs Remote QC: When to Walk the Factory Floor",
     description:
       "Hosted Visit China trip from Xiamen versus inspection at USD 110/day. Same China desk for both. Photo/video is the report, not a remote-only check.",
+  },
+  "sourcing-agent-vs-1688": {
+    title: "Sourcing Agent vs 1688: When a China Desk Buys for You",
+    description:
+      "1688 is a domestic catalog. Sourcing Center pays in RMB, receives into our Xiamen warehouse, inspects, and exports from own 3PL in Xiamen and Dubai.",
   },
 };

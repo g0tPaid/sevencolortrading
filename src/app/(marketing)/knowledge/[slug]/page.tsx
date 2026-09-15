@@ -3,6 +3,18 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChinaQualityInspectionGuide } from "@/components/knowledge/china-quality-inspection-guide";
+import {
+  ChinaSourcingAgentCostArticle,
+  FactoryAuditChecklistArticle,
+  FactoryVsTradingCompanyArticle,
+  HowToChooseChinaSourcingAgentArticle,
+  HowToFindAChineseFactoryArticle,
+  HowToSourceFrom1688Article,
+  HowToWriteAnRfqArticle,
+  IncotermsForGccArticle,
+  LandedCostFromChinaArticle,
+  PrivateLabelPackagingArticle,
+} from "@/components/knowledge/expanded-guides";
 import { HowToSourceFromChinaArticle } from "@/components/knowledge/how-to-source-from-china";
 import { JsonLd } from "@/components/seo/json-ld";
 import { PageHero, CtaBand } from "@/components/shared/page-shell";
@@ -74,8 +86,21 @@ export default async function KnowledgeArticlePage({ params }: { params: Promise
   const isCompare = slug === "china-3pl-vs-broker-vs-fba";
   const isHowTo = slug === "how-to-source-from-china";
   const isInspectGuide = slug === "china-quality-inspection-guide";
+  const expandedBody: Record<string, ReactNode> = {
+    "how-to-write-an-rfq": <HowToWriteAnRfqArticle />,
+    "factory-audit-checklist": <FactoryAuditChecklistArticle />,
+    "incoterms-for-gcc": <IncotermsForGccArticle />,
+    "private-label-packaging": <PrivateLabelPackagingArticle />,
+    "how-to-source-from-1688": <HowToSourceFrom1688Article />,
+    "china-sourcing-agent-cost": <ChinaSourcingAgentCostArticle />,
+    "how-to-find-a-chinese-factory": <HowToFindAChineseFactoryArticle />,
+    "factory-vs-trading-company": <FactoryVsTradingCompanyArticle />,
+    "landed-cost-from-china": <LandedCostFromChinaArticle />,
+    "how-to-choose-china-sourcing-agent": <HowToChooseChinaSourcingAgentArticle />,
+  };
+  const expanded = expandedBody[slug];
   const isSpecial =
-    isThreePl || isCompany || isDropship || isVisit || isCompare || isHowTo || isInspectGuide;
+    isThreePl || isCompany || isDropship || isVisit || isCompare || isHowTo || isInspectGuide || Boolean(expanded);
 
   return (
     <>
@@ -103,7 +128,8 @@ export default async function KnowledgeArticlePage({ params }: { params: Promise
         </nav>
         {isHowTo ? <HowToSourceFromChinaArticle /> : null}
         {isInspectGuide ? <ChinaQualityInspectionGuide /> : null}
-        {!isHowTo && !isInspectGuide ? (
+        {expanded}
+        {!isHowTo && !isInspectGuide && !expanded ? (
           <>
         <p className="text-base leading-relaxed text-ink">
           {excerpt ??

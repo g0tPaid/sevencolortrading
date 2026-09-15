@@ -32,7 +32,8 @@ export function SiteFooter() {
                       s.href === "/3pl" ||
                       s.href === "/dropshipping" ||
                       s.href === "/inspection" ||
-                      s.href === "/amazon-fba"
+                      s.href === "/amazon-fba" ||
+                      s.href === "/1688-sourcing"
                         ? "inline-flex items-center gap-2 font-semibold text-accent hover:opacity-90"
                         : "text-paper/80 hover:text-paper"
                     }
@@ -63,6 +64,8 @@ export function SiteFooter() {
                 ["Reviews", "/reviews"],
                 ["Updates", "/updates"],
                 ["News", "/news"],
+                ["1688 sourcing", "/1688-sourcing"],
+                ["UAE / GCC", "/sourcing-for/uae"],
                 ["Contact", "/contact"],
                 ["Visit China", "/visit"],
                 ["Inspection", "/inspection"],

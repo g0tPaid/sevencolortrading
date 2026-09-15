@@ -36,8 +36,11 @@ export const whatsappPresets = {
     "Hi Seven Color, I read factory visit vs remote QC on sourcing.center and want to talk through a Visit China trip.",
   updates:
     "Hi Seven Color, I saw an update on sourcing.center and want to start a sourcing conversation.",
-  news:
-    "Hi Seven Color, I read China sourcing news on sourcing.center/news and want the factory-floor read for my SKU.",
+  news: "Hi Seven Color, I read China sourcing news on sourcing.center/news and want the factory-floor read for my SKU.",
+  sourcing1688:
+    "Hi Seven Color, I have a 1688 link / domestic SKU and want the Xiamen desk to buy, QC, and export via sourcing.center/1688-sourcing.",
+  uae:
+    "Hi Seven Color, I want China sourcing with stock staged in the Dubai / Al Ain warehouse for the UAE / GCC.",
 } as const;
 
 export type WhatsAppPreset = keyof typeof whatsappPresets;

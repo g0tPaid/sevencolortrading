@@ -95,7 +95,7 @@ export function HomeHero() {
           transition={{ duration: 0.55, delay: 0.15 }}
           className="scroll-mt-28 md:animate-float"
         >
-          <RfqForm />
+          <RfqForm sourcePath="/" />
         </motion.div>
       </Container>
     </section>

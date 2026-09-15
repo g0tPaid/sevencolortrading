@@ -71,6 +71,18 @@ export const faqGroups: FaqGroup[] = [
         q: "Can you ship private-label goods to Amazon FBA or to your warehouses?",
         a: "Either path. Freight can go to Amazon inbound after QC and carton-mark prep, or goods can sit in the Xiamen or Dubai / Al Ain 3PL first. Same desk as OEM/ODM, inspection, and logistics. See https://sourcing.center/amazon-fba, https://sourcing.center/3pl, and https://sourcing.center/logistics.",
       },
+      {
+        q: "Can Sourcing Center buy from 1688 for me?",
+        a: "Yes. The Xiamen desk pays in RMB, receives the domestic parcel into our own Xiamen warehouse, photographs inbound, then QC, hold, dropship, or export. Not a 1688 app and not an official 1688 partner. Canonical page: https://sourcing.center/1688-sourcing",
+      },
+      {
+        q: "Do I need a Chinese 1688 account to source from 1688?",
+        a: "No. You send the 1688 link, SKU, or photo. The China trading company places and pays the domestic order. You do not need Alipay, a mainland address, or a 1688 storefront.",
+      },
+      {
+        q: "How is 1688 sourcing different from buying on Alibaba yourself?",
+        a: "1688 is a domestic Chinese wholesale catalog. Alibaba is an export marketplace. Both are listings. Sourcing Center is the desk that pays, receives into our Xiamen warehouse, inspects (USD 110 per inspector day when you want a formal lot check), and ships from own 3PL in Xiamen or Dubai. Compare: https://sourcing.center/compare/sourcing-agent-vs-1688",
+      },
     ],
   },
   {

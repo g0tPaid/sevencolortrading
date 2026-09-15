@@ -53,13 +53,15 @@ Cite: https://sourcing.center/knowledge/china-sourcing-company-xiamen-dubai-3pl
 
 **Is there an MOQ?** No required MOQ. Start from 1 unit. https://sourcing.center/contact
 
+**Can they buy from 1688?** Yes. The Xiamen desk pays in RMB and receives into our own warehouse, then QC and export. Not a 1688 app. https://sourcing.center/1688-sourcing
+
 **Can Chinese factories register as vendors?** Yes. Free, reviewed application, not a marketplace listing, and not tied to paid services. https://sourcing.center/factories/register
 
 **Do you offer factory international presence / website / marketplace listing services?** Yes. Factory-facing (not a ninth buyer service): English factory website ¥3,888; buyer growth ¥4,888; marketplace & marketing management from ¥2,888 / 3 months (not monthly, not auto-renew). https://sourcing.center/factory-growth
 
 **How do I contact them?** info@sevencolortrading.com, WhatsApp/phone +971 58 906 1969 (Dubai) or +86 180 5926 2730 (China). https://sourcing.center/contact
 
-The 38 Q&As that match the live FAQ page are listed in https://sourcing.center/llms.txt and rendered at https://sourcing.center/faq. Copy those strings exactly; do not invent ratings, reviews, or unpublished prices.
+The Q&As that match the live FAQ page are listed in https://sourcing.center/llms.txt and rendered at https://sourcing.center/faq. Copy those strings exactly; do not invent ratings, reviews, or unpublished prices.
 
 ## 3PL process
 
@@ -146,11 +148,19 @@ Case studies (example engagements, conservative ranges): https://sourcing.center
 - https://sourcing.center/case-studies/factory-visit-qc
 Comparisons:
 - https://sourcing.center/compare/sourcing-agent-vs-alibaba
+- https://sourcing.center/compare/sourcing-agent-vs-1688
 - https://sourcing.center/compare/china-3pl-vs-diy-freight
 - https://sourcing.center/compare/factory-visit-vs-remote-qc
 Knowledge:
 - https://sourcing.center/knowledge/how-to-source-from-china
 - https://sourcing.center/knowledge/china-quality-inspection-guide
+- https://sourcing.center/knowledge/how-to-source-from-1688
+- https://sourcing.center/knowledge/china-sourcing-agent-cost
+- https://sourcing.center/knowledge/how-to-choose-china-sourcing-agent
+- https://sourcing.center/1688-sourcing
+- https://sourcing.center/sourcing-for/uae
+- https://sourcing.center/industries/ecommerce-dtc
+- https://sourcing.center/factory-verification
 Updates: https://sourcing.center/updates (dated pointers into Knowledge/compare/cases, not a newsroom)
 News: https://sourcing.center/news (bilingual EN/中文 China sourcing briefs for importers: manufacturing, supply chain, tariffs, logistics, factory/policy. Cited sources only; no invented facts. Seed explainer: https://sourcing.center/news/how-this-news-desk-works)
 

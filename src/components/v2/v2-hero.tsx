@@ -109,10 +109,9 @@ export function V2Hero() {
           transition={{ delay: 0.14, duration: 0.55 }}
           className="font-headline mx-auto mt-6 max-w-5xl text-[2.05rem] font-semibold leading-[1.08] text-ink sm:mt-8 sm:text-5xl md:text-6xl lg:text-[4.1rem]"
         >
-          One Platform for Product <AnimatedHeadlineWord>Ideation</AnimatedHeadlineWord>
+          One <AnimatedHeadlineWord>China</AnimatedHeadlineWord>
           {" "}
-          &amp;{" "}
-          <AnimatedHeadlineWord delay={0.8}>Sourcing</AnimatedHeadlineWord>
+          sourcing agent: factories, own 3PL, Visit China
         </motion.h1>
 
         <motion.p
