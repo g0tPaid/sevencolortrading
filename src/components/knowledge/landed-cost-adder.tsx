@@ -32,19 +32,21 @@ export function LandedCostAdder() {
         the published rate of USD 110 per inspector day. Everything else is your input.
       </p>
       <div className="mt-5 grid gap-3 sm:grid-cols-2">
-        {[
-          ["EXW / FOB unit (USD)", exw, setExw],
-          ["Quantity", qty, setQty],
-          ["Inland to warehouse (USD)", inland, setInland],
-          ["Inspector days", days, setDays],
-          ["International freight (USD)", freight, setFreight],
-          ["Your destination fees (USD)", destination, setDestination],
-        ].map(([label, value, setter]) => (
-          <label key={String(label)} className="block text-sm">
-            <span className="mb-1.5 block text-muted">{label}</span>
+        {(
+          [
+            { label: "EXW / FOB unit (USD)", value: exw, onChange: setExw },
+            { label: "Quantity", value: qty, onChange: setQty },
+            { label: "Inland to warehouse (USD)", value: inland, onChange: setInland },
+            { label: "Inspector days", value: days, onChange: setDays },
+            { label: "International freight (USD)", value: freight, onChange: setFreight },
+            { label: "Your destination fees (USD)", value: destination, onChange: setDestination },
+          ] as const
+        ).map((field) => (
+          <label key={field.label} className="block text-sm">
+            <span className="mb-1.5 block text-muted">{field.label}</span>
             <input
-              value={String(value)}
-              onChange={(e) => (setter as (v: string) => void)(e.target.value)}
+              value={field.value}
+              onChange={(e) => field.onChange(e.target.value)}
               inputMode="decimal"
               className="glass-input w-full rounded-2xl px-4 py-3 text-ink outline-none"
             />
