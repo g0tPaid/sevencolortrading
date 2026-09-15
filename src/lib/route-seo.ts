@@ -4,15 +4,15 @@ import { routeMetadata } from "@/lib/seo";
 /** Buyer-intent titles (50–60 chars) and descriptions (140–160 chars). ASCII sourcing.center only. */
 export const pages = {
   home: routeMetadata({
-    title: "China Sourcing Agent — Visit China, Own 3PL Warehouses",
+    title: "China Sourcing Agent: Visit China, Own 3PL Warehouses",
     description:
       "China sourcing desk with factories across China. Visit China, own 3PL from our Xiamen warehouse and Dubai hub. No MOQ, QC, inspection USD 110/day since 2014.",
     path: "/",
   }),
   contact: routeMetadata({
-    title: "China Factory Sourcing — No MOQ and Photo/Video QC",
+    title: "China Factory Sourcing: No MOQ and Photo/Video QC",
     description:
-      "China factory sourcing with no MOQ — start from 1 unit. Photo/video QC. Legal entity Xiamen Ajmal Seven Color Trading Co Ltd since 2014. DUNS 509419282.",
+      "China factory sourcing with no MOQ, start from 1 unit. Photo/video QC. Legal entity Xiamen Ajmal Seven Color Trading Co Ltd since 2014. DUNS 509419282.",
     path: "/contact",
   }),
   oemOdm: routeMetadata({
@@ -28,7 +28,7 @@ export const pages = {
     path: "/amazon-fba",
   }),
   inspection: routeMetadata({
-    title: "China Inspection Service — USD 110/Day, PSI & DUPRO",
+    title: "China Inspection Service: USD 110/Day, PSI & DUPRO",
     description:
       "On-the-ground China inspection at USD 110 per inspector day: factory audit, PSI, DUPRO, loading supervision, photo/video QC. Not a remote-only review.",
     path: "/inspection",
@@ -36,11 +36,11 @@ export const pages = {
   threePl: routeMetadata({
     title: "China 3PL: Own Warehouses in Xiamen and Dubai / Al Ain",
     description:
-      "Own China 3PL from our Xiamen warehouse and Dubai / Al Ain hub — receive, store, pick, pack, and ship. Operator-owned, not a 3PL broker. Since 2014.",
+      "Own China 3PL from our Xiamen warehouse and Dubai / Al Ain hub, receive, store, pick, pack, and ship. Operator-owned, not a 3PL broker. Since 2014.",
     path: "/3pl",
   }),
   dropshipping: routeMetadata({
-    title: "Dropshipping from China — Own Xiamen and Dubai Hubs",
+    title: "Dropshipping from China: Own Xiamen and Dubai Hubs",
     description:
       "Dropship single units from own warehouses: China hub in Xiamen and Dubai / Al Ain. Photo/video QC for DTC and marketplace sellers. Not a dropship broker.",
     path: "/dropshipping",
@@ -52,13 +52,13 @@ export const pages = {
     path: "/logistics",
   }),
   visit: routeMetadata({
-    title: "Visit China Factories — Hosted Trip Based in Xiamen",
+    title: "Visit China Factories: Hosted Trip Based in Xiamen",
     description:
       "Visit China factories from our Xiamen hub: airport pickup, verified lines, warehouse and QC, interpreter. Not a tourist tour. On the ground since 2014.",
     path: "/visit",
   }),
   faq: routeMetadata({
-    title: "China Sourcing FAQs — MOQ, QC, 3PL, and Inspection",
+    title: "China Sourcing FAQs: MOQ, QC, 3PL, and Inspection",
     description:
       "Answers on no-MOQ China sourcing, USD 110/day inspection, Amazon FBA private label, own China/UAE 3PL, dropshipping, freight, Visit China, DUNS 509419282.",
     path: "/faq",
@@ -84,11 +84,11 @@ export const pages = {
   compare: routeMetadata({
     title: "Compare China Sourcing Agent, 3PL, and Factory Visits",
     description:
-      "Sourcing agent vs Alibaba, China 3PL vs DIY freight, factory visit vs remote QC. Straight answers from the China desk — operating since 2014.",
+      "Sourcing agent vs Alibaba, China 3PL vs DIY freight, factory visit vs remote QC. Straight answers from the China desk, operating since 2014.",
     path: "/compare",
   }),
   howItWorks: routeMetadata({
-    title: "How China Factory Sourcing Works — RFQ to Delivery",
+    title: "How China Factory Sourcing Works: RFQ to Delivery",
     description:
       "Four-step China sourcing: share requirements, source verified factories, photo/video QC, then ship. No MOQ. Own 3PL from Xiamen warehouse and Dubai since 2014.",
     path: "/how-it-works",
@@ -114,7 +114,7 @@ export const pages = {
   reviews: routeMetadata({
     title: "Buyer Notes on China Sourcing, 3PL, and Factory Visits",
     description:
-      "Anonymized buyer notes on sourcing.center — China factory sourcing, own 3PL, Visit China. Ask the desk for references. No star ratings used.",
+      "Anonymized buyer notes on sourcing.center, China factory sourcing, own 3PL, Visit China. Ask the desk for references. No star ratings used.",
     path: "/reviews",
   }),
   caseStudies: routeMetadata({
@@ -130,7 +130,7 @@ export const pages = {
     path: "/updates",
   }),
   news: routeMetadata({
-    title: "China Sourcing News — Manufacturing, Tariffs, Logistics",
+    title: "China Sourcing News: Manufacturing, Tariffs, Logistics",
     description:
       "Bilingual China sourcing news for importers: factories, supply chain, tariffs, logistics, and policy. Cited briefs from the Xiamen desk. English and 中文.",
     path: "/news",
@@ -138,7 +138,7 @@ export const pages = {
   factoriesRegister: routeMetadata({
     title: "China Factory Vendor Registration (工厂入驻) for Buyers",
     description:
-      "Chinese factories apply to supply Sourcing Center buyers via Xiamen Ajmal Seven Color Trading Co Ltd. 工厂入驻 — reviewed vendors, not a marketplace.",
+      "Chinese factories apply to supply Sourcing Center buyers via Xiamen Ajmal Seven Color Trading Co Ltd. 工厂入驻: reviewed vendors, not a marketplace.",
     path: "/factories/register",
   }),
   factoryGrowth: routeMetadata({
@@ -172,7 +172,7 @@ export const knowledgeMeta: Record<string, { title: string; description: string 
   "dropshipping-from-china-own-warehouse": {
     title: "Dropshipping from China: Own Warehouse vs a Broker",
     description:
-      "Dropship from stock in Sourcing Center warehouses — China hub in Xiamen and Dubai — after China sourcing and photo/video QC. Not a dropship broker marketplace.",
+      "Dropship from stock in Sourcing Center warehouses (China hub in Xiamen and Dubai) after China sourcing and photo/video QC. Not a dropship broker marketplace.",
   },
   "factory-visit-xiamen-hosted-sourcing-trip": {
     title: "Visit China Factories: Hosted Trip from Xiamen Hub",
@@ -208,7 +208,7 @@ export const knowledgeMeta: Record<string, { title: string; description: string 
 
 export const compareMeta: Record<string, { title: string; description: string }> = {
   "sourcing-agent-vs-alibaba": {
-    title: "Sourcing Agent vs Alibaba — When a China Desk Wins",
+    title: "Sourcing Agent vs Alibaba: When a China Desk Wins",
     description:
       "Alibaba is a catalog. Sourcing Center is an on-ground China desk: verified factories, no MOQ, photo/video QC, own 3PL from Xiamen and Dubai, visits since 2014.",
   },

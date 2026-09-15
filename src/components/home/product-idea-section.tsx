@@ -7,17 +7,17 @@ const steps = [
   {
     n: "01",
     title: "Share the idea (NDAs signed)",
-    text: "A sketch, a sample photo, or just a sentence — protected under NDA before we open the brief.",
+    text: "A sketch, a sample photo, or just a sentence, protected under NDA before we open the brief.",
   },
   {
     n: "02",
     title: "Shape the design",
-    text: "Materials, sizing, packaging, and cost targets — refined with factories that can actually build it.",
+    text: "Materials, sizing, packaging, and cost targets, refined with factories that can actually build it.",
   },
   {
     n: "03",
     title: "Prototype & source",
-    text: "Samples first. Verified makers. No MOQ games — start small, scale when it’s right.",
+    text: "Samples first. Verified makers. No MOQ games, start small, scale when it’s right.",
   },
   {
     n: "04",
@@ -51,7 +51,7 @@ export function ProductIdeaSection() {
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
             Think of us as your{" "}
             <span className="font-semibold text-ink">central command for sourcing from China</span>
-            . One desk for ideas, design, factories, QC, and shipping — so you don&apos;t juggle
+            . One desk for ideas, design, factories, QC, and shipping, so you don&apos;t juggle
             ten chats and guesswork.
           </p>
         </div>

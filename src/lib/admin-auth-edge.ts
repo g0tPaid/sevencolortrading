@@ -3,8 +3,8 @@
  * Used by middleware and shared by Node route handlers via admin-auth.ts.
  *
  * Env:
- * - ADMIN_SESSION_SECRET (recommended) — HMAC key for session tokens
- * - ADMIN_PASSWORD — used only to derive a fallback key when SESSION_SECRET is unset
+ * - ADMIN_SESSION_SECRET (recommended): HMAC key for session tokens
+ * - ADMIN_PASSWORD: used only to derive a fallback key when SESSION_SECRET is unset
  *
  * Prefer setting ADMIN_SESSION_SECRET in production so rotating the password
  * does not invalidate/re-derive session keys unexpectedly.

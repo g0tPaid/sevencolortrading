@@ -13,7 +13,7 @@ export default function PrivateLabelPage() {
       <PageHero
         eyebrow="Private label"
         title="Your brand on proven manufacturing lines"
-        description="From packaging artwork to carton marks — we coordinate private label programs with factories that can actually scale."
+        description="From packaging artwork to carton marks, we coordinate private label programs with factories that can actually scale."
       />
       <Container className="grid gap-4 py-16 md:grid-cols-3">
         {["Brand packaging", "Label & insert control", "Retail-ready cartons"].map((t) => (

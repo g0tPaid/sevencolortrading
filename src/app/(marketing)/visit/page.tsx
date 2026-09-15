@@ -54,7 +54,7 @@ export default function VisitPage() {
               >
                 On-the-ground inspection
               </Link>{" "}
-              from the same China desk — or compare{" "}
+              from the same China desk, or compare{" "}
               <Link
                 href="/compare/factory-visit-vs-remote-qc"
                 className="font-medium text-ink underline decoration-accent/40 underline-offset-4"

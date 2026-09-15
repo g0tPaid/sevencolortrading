@@ -3,7 +3,7 @@
 import { growthCopy } from "@/lib/factory-growth";
 import { useFactoryGrowthUi } from "./locale-context";
 
-/** Decorative English factory site for international buyers — no fake stats, awards, or testimonials. */
+/** Decorative English factory site for international buyers. No fake stats, awards, or testimonials. */
 export function FactoryWebsiteMockup() {
   const { t, lang } = useFactoryGrowthUi();
 

@@ -8,7 +8,7 @@ export type Bilingual = { en: string; zh: string };
 
 export const GROWTH_PATH = "/factory-growth";
 
-/** Exact published prices — never present as monthly. */
+/** Exact published prices. Never present as monthly. */
 export const GROWTH_PRICES = {
   websiteCny: 3888,
   growthCny: 4888,
@@ -34,19 +34,19 @@ export function isPackageId(value: unknown): value is PackageId {
 
 export const packageLabels: Record<PackageId, Bilingual> = {
   website: {
-    en: `International Factory Website — ${PRICE_WEBSITE}`,
-    zh: `国际工厂官网基础版 — ${PRICE_WEBSITE}`,
+    en: `International Factory Website: ${PRICE_WEBSITE}`,
+    zh: `国际工厂官网基础版：${PRICE_WEBSITE}`,
   },
   growth: {
-    en: `International Buyer Growth — ${PRICE_GROWTH}`,
-    zh: `国际买家增长版 — ${PRICE_GROWTH}`,
+    en: `International Buyer Growth: ${PRICE_GROWTH}`,
+    zh: `国际买家增长版：${PRICE_GROWTH}`,
   },
   marketing: {
-    en: `International Marketplace & Marketing Management — from ${PRICE_MARKETING} / 3 months`,
-    zh: `海外电商平台与国际营销管理 — 三个月起价 ${PRICE_MARKETING}`,
+    en: `International Marketplace & Marketing Management: from ${PRICE_MARKETING} / 3 months`,
+    zh: `海外电商平台与国际营销管理：三个月起价 ${PRICE_MARKETING}`,
   },
   unsure: {
-    en: "Not sure yet — please advise",
+    en: "Not sure yet, please advise",
     zh: "还不确定，想先听听建议",
   },
 };
@@ -65,7 +65,7 @@ export const growthCopy = {
     zh: "打造工厂面向国际买家的专业形象",
   },
   subhead: {
-    en: "Helping Chinese factories build a professional international presence — so overseas buyers can take you seriously before they ever visit the line.",
+    en: "Helping Chinese factories build a professional international presence, so overseas buyers can take you seriously before they ever visit the line.",
     zh: "帮中国工厂把国际形象做专业，让海外买家还没来看厂，就能认真看待您的实力和产品。",
   },
   concept: {
@@ -73,7 +73,7 @@ export const growthCopy = {
     zh: "工厂 → 国际形象 → 国际买家。",
   },
   support: {
-    en: "Xiamen desk replies in English and 中文. This is an inquiry — not a checkout. Vendor registration stays free and separate.",
+    en: "Xiamen desk replies in English and 中文. This is an inquiry, not a checkout. Vendor registration stays free and separate.",
     zh: "厦门团队提供中英文沟通。本页仅接受咨询，不支持在线付款。供应商登记仍然免费，与是否购买本页服务无关。",
   },
   ctaStart: { en: "Get Started", zh: "开始咨询" },
@@ -123,7 +123,7 @@ export const growthCopy = {
   },
 
   compareKicker: { en: "Compare", zh: "套餐对比" },
-  compareTitle: { en: "Website or Growth — side by side", zh: "基础版与增长版对比" },
+  compareTitle: { en: "Website or Growth, side by side", zh: "基础版与增长版对比" },
   compareFeatureCol: { en: "Feature", zh: "对比项" },
 
   upgradeKicker: { en: "Why Growth", zh: "为什么升级" },
@@ -132,13 +132,13 @@ export const growthCopy = {
     zh: `为什么升级增长版？多花 ${PRICE_UPGRADE}，多一层面向国际买家的准备。`,
   },
   upgradeBody: {
-    en: `The difference is ${PRICE_UPGRADE} — not a new website from scratch. Growth adds listing-starter work and a stronger buyer path on top of the same professional factory site.`,
+    en: `The difference is ${PRICE_UPGRADE}, not a new website from scratch. Growth adds listing-starter work and a stronger buyer path on top of the same professional factory site.`,
     zh: `差价是 ${PRICE_UPGRADE}，不是重新做一套网站。增长版是在同一套工厂官网上，补上商品上架起步，以及更完整的买家询盘路径。`,
   },
 
   marketKicker: { en: "Amazon US + eBay", zh: "Amazon 美国站 + eBay" },
   marketTitle: {
-    en: "Marketplace readiness — without affiliation claims",
+    en: "Marketplace readiness, without affiliation claims",
     zh: "平台准备说明（非官方合作）",
   },
   marketBody: {
@@ -154,7 +154,7 @@ export const growthCopy = {
     zh: `平台准备资料包包含在国际工厂官网基础版（${PRICE_WEBSITE}）中。`,
   },
   marketGrowthNote: {
-    en: `Listing Starter — up to 5 listings from your real product data — is included in International Buyer Growth (${PRICE_GROWTH}).`,
+    en: `Listing Starter (up to 5 listings from your real product data) is included in International Buyer Growth (${PRICE_GROWTH}).`,
     zh: `商品上架起步（最多5个平台商品页面，全部基于您提供的真实产品资料）包含在国际买家增长版（${PRICE_GROWTH}）中。`,
   },
 
@@ -164,7 +164,7 @@ export const growthCopy = {
     zh: "从工厂产品到国际客户",
   },
   workflowNote: {
-    en: "Specs, photos, and claims come from you. We structure and present them — we do not invent them.",
+    en: "Specs, photos, and claims come from you. We structure and present them, we do not invent them.",
     zh: "规格、图片和说法都来自工厂提供的资料。我们负责整理和呈现，绝不编造。",
   },
 
@@ -178,7 +178,7 @@ export const growthCopy = {
     zh: `三个月起价 ${PRICE_MARKETING}`,
   },
   marketingBody: {
-    en: "A scoped three-month engagement to keep marketplace materials and light international marketing in motion. Quoted from your catalogue, channels, and capacity — not a fixed monthly plan and not auto-renewed.",
+    en: "A scoped three-month engagement to keep marketplace materials and light international marketing in motion. Quoted from your catalogue, channels, and capacity, not a fixed monthly plan and not auto-renewed.",
     zh: "三个月服务，范围按您的产品、渠道和产能来定：维护平台资料，并配合轻度国际营销。按项目报价，不是月套餐，也不会自动续费。",
   },
   marketingDisclaimer: {
@@ -189,7 +189,7 @@ export const growthCopy = {
 
   timelineKicker: { en: "Three months", zh: "三个月节奏" },
   timelineTitle: {
-    en: "A working rhythm — not a results guarantee",
+    en: "A working rhythm, not a results guarantee",
     zh: "这是工作节奏，不是结果承诺",
   },
 
@@ -199,7 +199,7 @@ export const growthCopy = {
     zh: "为什么交给 sourcing.center",
   },
   whyBody: {
-    en: "We already sit between Chinese factories and international buyers — sourcing, QC, and 3PL from Xiamen and Dubai. This service uses that intersection. We are not a generic web-design agency, and we do not claim to be the largest or #1 anything.",
+    en: "We already sit between Chinese factories and international buyers, sourcing, QC, and 3PL from Xiamen and Dubai. This service uses that intersection. We are not a generic web-design agency, and we do not claim to be the largest or #1 anything.",
     zh: "我们本来就做中国工厂和海外买家之间的事：厦门、迪拜的采购、验货和仓储。这项服务就是冲着这个位置来的。我们不是普通建站公司，也不自称第一、最大。",
   },
 
@@ -232,7 +232,7 @@ export const growthCopy = {
   formKicker: { en: "Inquiry", zh: "咨询表单" },
   formTitle: { en: "Tell the Xiamen desk about your factory", zh: "向厦门团队介绍您的工厂" },
   formLead: {
-    en: "Send an inquiry. We contact you — there is no online payment on this page.",
+    en: "Send an inquiry. We contact you, there is no online payment on this page.",
     zh: "提交咨询后由我们联系您。本页不支持在线付款。",
   },
   formSubmit: { en: "Send inquiry", zh: "提交咨询" },
@@ -243,7 +243,7 @@ export const growthCopy = {
     zh: "厦门团队会查看您的资料并与您联系。这不是付款，也不等于供应商审核通过。",
   },
   whatsappPreset: {
-    en: "Hi Seven Color — I'm a factory inquiring about international presence services on sourcing.center/factory-growth.",
+    en: "Hi Seven Color, I'm a factory inquiring about international presence services on sourcing.center/factory-growth.",
     zh: "您好，Seven Color，我是工厂这边，想咨询 sourcing.center/factory-growth 的国际形象服务。",
   },
 
@@ -251,7 +251,7 @@ export const growthCopy = {
   faqTitle: { en: "Straight answers", zh: "有话直说" },
 
   honestyKicker: { en: "Transparency", zh: "坦诚说明" },
-  honestyTitle: { en: "What we don't promise — and what we focus on", zh: "我们不承诺什么，又专注什么" },
+  honestyTitle: { en: "What we don't promise, and what we focus on", zh: "我们不承诺什么，又专注什么" },
   noPromiseTitle: { en: "What we don't promise", zh: "我们不承诺" },
   focusTitle: { en: "What we focus on", zh: "我们专注" },
 
@@ -260,7 +260,7 @@ export const growthCopy = {
     zh: "要把工厂正经亮给国际买家了吗？",
   },
   finalBody: {
-    en: "Start with an inquiry. Compare packages if you want a number. Register as a vendor if you also want to supply Sourcing Center buyers — that path stays free.",
+    en: "Start with an inquiry. Compare packages if you want a number. Register as a vendor if you also want to supply Sourcing Center buyers, that path stays free.",
     zh: "可以从咨询开始；要比价就看套餐。如果也想对接 Sourcing Center 的买家，供应商登记仍然免费。",
   },
   finalPriceLine: {
@@ -280,7 +280,7 @@ export const problemCards: Array<{ title: Bilingual; text: Bilingual }> = [
   {
     title: { en: "Products with real photos and real specs", zh: "实拍照片，真实参数" },
     text: {
-      en: "They need SKU logic, materials, and what you actually make — not stock photos or invented numbers.",
+      en: "They need SKU logic, materials, and what you actually make, not stock photos or invented numbers.",
       zh: "要看品类逻辑、材料和您真正在产的货，不要图库照片或编造的数字。",
     },
   },
@@ -294,8 +294,8 @@ export const problemCards: Array<{ title: Bilingual; text: Bilingual }> = [
   {
     title: { en: "Export-ready signals, honestly stated", zh: "出口合作信号，如实写" },
     text: {
-      en: "License, process, markets you already ship to — only what you can stand behind.",
-      zh: "执照、工艺、已经出过的市场——只写您能负责的。",
+      en: "License, process, markets you already ship to (only what you can stand behind).",
+      zh: "执照、工艺、已经出过的市场，只写您能负责的。",
     },
   },
 ];
@@ -311,7 +311,7 @@ export const buyerChecklist: Array<{ title: Bilingual; text: Bilingual }> = [
   },
   {
     title: { en: "Real photographs", zh: "实拍照片" },
-    text: { en: "Products and, where you allow, workshop shots — not borrowed images.", zh: "产品实拍；您同意的话可配车间照片。不用盗图。" },
+    text: { en: "Products and, where you allow, workshop shots, not borrowed images.", zh: "产品实拍；您同意的话可配车间照片。不用盗图。" },
   },
   {
     title: { en: "Specifications you own", zh: "规格以您为准" },
@@ -323,7 +323,7 @@ export const buyerChecklist: Array<{ title: Bilingual; text: Bilingual }> = [
   },
   {
     title: { en: "Capacity, plainly", zh: "产能说明" },
-    text: { en: "Lines, shifts, or monthly output as you state it — no inflated figures.", zh: "产线、班次或月产量，按您说的如实写，不夸大。" },
+    text: { en: "Lines, shifts, or monthly output as you state it, no inflated figures.", zh: "产线、班次或月产量，按您说的如实写，不夸大。" },
   },
   {
     title: { en: "Quality process", zh: "质量控制" },
@@ -347,7 +347,7 @@ export const serviceOverview: Array<{ title: Bilingual; text: Bilingual; href: s
   {
     title: { en: "International Factory Website", zh: "国际工厂官网" },
     text: {
-      en: "A professional English site that presents the plant to overseas buyers — not a generic agency template.",
+      en: "A professional English site that presents the plant to overseas buyers, not a generic agency template.",
       zh: "给海外买家看的专业英文工厂官网，不是普通建站模板。",
     },
     href: "#package-website",
@@ -373,11 +373,11 @@ export const serviceOverview: Array<{ title: Bilingual; text: Bilingual; href: s
 export const websiteFeatures: Bilingual[] = [
   { en: "English factory website structured for international buyers", zh: "按国际买家阅读习惯来排的英文工厂官网" },
   { en: "Home, factory profile, product pages, and contact / inquiry", zh: "首页、工厂介绍、产品页、联系与询盘" },
-  { en: "Mobile-first layout in the sourcing.center visual language of clarity — on your domain", zh: "手机优先的清晰版式，用您自己的域名" },
-  { en: "Copy drafted from your materials — we do not invent specs, awards, or volumes", zh: "文案基于您提供的资料撰写，不编造参数、奖项或产量" },
+  { en: "Mobile-first layout in the sourcing.center visual language of clarity, on your domain", zh: "手机优先的清晰版式，用您自己的域名" },
+  { en: "Copy drafted from your materials, we do not invent specs, awards, or volumes", zh: "文案基于您提供的资料撰写，不编造参数、奖项或产量" },
   { en: "Product catalog from your photos and data (we will flag gaps instead of filling them with fiction)", zh: "产品目录来自您的照片和资料（缺什么会明说，不会拿虚构内容凑）" },
   { en: "WhatsApp, email, and WeChat contact paths", zh: "WhatsApp、邮箱与微信联系方式" },
-  { en: "Marketplace readiness kit for Amazon US and eBay (account/listing prep materials — not approval)", zh: "Amazon 美国站与 eBay 的平台准备资料包（用于开店和上架准备，不代表审核通过）" },
+  { en: "Marketplace readiness kit for Amazon US and eBay (account/listing prep materials, not approval)", zh: "Amazon 美国站与 eBay 的平台准备资料包（用于开店和上架准备，不代表审核通过）" },
   { en: "Basic international SEO for factory and product terms you actually use", zh: "针对您真实在用的工厂词、产品词，做基础国际 SEO" },
   { en: "One guided revision round after first draft", zh: "初稿后包含一轮带说明的修改" },
   { en: "Launch support and a short handover for your team", zh: "上线协助，并向您的团队做简短交接" },
@@ -450,9 +450,9 @@ export const workflowSteps: Array<{ kicker: Bilingual; title: Bilingual }> = [
 
 export const marketingPoints: Bilingual[] = [
   { en: "Listing maintenance from updates you send (new photos, discontinued SKUs, packing changes)", zh: "按您提供的更新维护平台商品页面（新照片、停产型号、包装变化等）" },
-  { en: "Light international marketing coordination — content and channel notes, not fake ad spend claims", zh: "轻度国际营销配合：内容与渠道建议，不虚构广告投放效果" },
+  { en: "Light international marketing coordination, content and channel notes, not fake ad spend claims", zh: "轻度国际营销配合：内容与渠道建议，不虚构广告投放效果" },
   { en: "A single Xiamen contact for the three-month window", zh: "三个月内由厦门团队专人对接" },
-  { en: "Written scope before work starts — customized, not a hidden monthly subscription", zh: "开工前书面确认范围：按项目定制，不是隐性包月" },
+  { en: "Written scope before work starts, customized, not a hidden monthly subscription", zh: "开工前书面确认范围：按项目定制，不是隐性包月" },
 ];
 
 export const timelineMonths: Array<{ month: Bilingual; title: Bilingual; text: Bilingual }> = [
@@ -476,7 +476,7 @@ export const timelineMonths: Array<{ month: Bilingual; title: Bilingual; text: B
     month: { en: "Month 3", zh: "第3个月" },
     title: { en: "Optimization", zh: "优化收尾" },
     text: {
-      en: "Refine wording and structure from what we learned. Optimization means clearer presentation — not guaranteed rank or sales.",
+      en: "Refine wording and structure from what we learned. Optimization means clearer presentation, not guaranteed rank or sales.",
       zh: "根据前两个月的情况，把表达和结构再收一收。优化是指呈现更清楚，不保证排名或销售。",
     },
   },
@@ -511,7 +511,7 @@ export const materialsNeeded: Bilingual[] = [
   { en: "Location (city, province) and a short plant introduction", zh: "所在地（城市、省份）及工厂简介" },
   { en: "Main products and the specifications you already use with buyers", zh: "主营产品，以及您已经在跟买家沟通时用的规格" },
   { en: "Product photos you own (and workshop photos if you wish to show them)", zh: "您有权使用的产品照片（要展示车间可另附）" },
-  { en: "MOQ, lead time, packing, and export markets — even if approximate", zh: "起订量、交期、包装和出口市场（大概范围也可以）" },
+  { en: "MOQ, lead time, packing, and export markets, even if approximate", zh: "起订量、交期、包装和出口市场（大概范围也可以）" },
   { en: "Business license and certificates you want shown", zh: "希望展示的营业执照与认证" },
   { en: "Existing website, Alibaba page, or marketplace URLs", zh: "现有官网、阿里巴巴页面或平台链接" },
   { en: "Contacts that international buyers may use (email, phone, WeChat, WhatsApp)", zh: "国际买家可用的联系方式（邮箱、电话、微信、WhatsApp）" },
@@ -531,7 +531,7 @@ export const processSteps: Array<{ n: string; title: Bilingual; text: Bilingual 
   {
     n: "03",
     title: { en: "Build", zh: "制作" },
-    text: { en: "Website and, for Growth, listing drafts — always from your specs and photos.", zh: "做官网；增长版同时起草上架内容。始终基于您的参数和照片。" },
+    text: { en: "Website and, for Growth, listing drafts, always from your specs and photos.", zh: "做官网；增长版同时起草上架内容。始终基于您的参数和照片。" },
   },
   {
     n: "04",
@@ -541,12 +541,12 @@ export const processSteps: Array<{ n: string; title: Bilingual; text: Bilingual 
   {
     n: "05",
     title: { en: "Launch", zh: "上线" },
-    text: { en: "Site goes live on your domain; listings submitted only with your marketplace access — never your password in our forms.", zh: "官网在您的域名上线；商品上架仅在您提供平台操作权限时提交——表单里绝不要求账号密码。" },
+    text: { en: "Site goes live on your domain; listings submitted only with your marketplace access, never your password in our forms.", zh: "官网在您的域名上线；商品上架仅在您提供平台操作权限时提交，表单里绝不要求账号密码。" },
   },
   {
     n: "06",
     title: { en: "Manage (optional)", zh: "运营（可选）" },
-    text: { en: "If you add the 3-month service: foundation, growth, optimization — scoped, not auto-renewed.", zh: "如加选三个月服务：基础搭建、拓展推进、优化收尾——事先定范围，不自动续费。" },
+    text: { en: "If you add the 3-month service: foundation, growth, optimization (scoped, not auto-renewed).", zh: "如加选三个月服务：基础搭建、拓展推进、优化收尾（事先定范围，不自动续费）。" },
   },
 ];
 
@@ -576,28 +576,28 @@ export const growthFaqs: Array<{ q: Bilingual; a: Bilingual }> = [
   {
     q: { en: "Do you guarantee buyers?", zh: "能保证带来买家吗？" },
     a: {
-      en: "No. We do not guarantee buyers, inquiries, or orders. A professional international presence makes it easier for serious buyers to understand and contact you. Whether they purchase is their decision — and marketplace platforms decide their own approval and ranking. Anyone who guarantees buyers is overselling.",
+      en: "No. We do not guarantee buyers, inquiries, or orders. A professional international presence makes it easier for serious buyers to understand and contact you. Whether they purchase is their decision, and marketplace platforms decide their own approval and ranking. Anyone who guarantees buyers is overselling.",
       zh: "不能。我们不保证买家、询盘或订单。专业的国际形象，是让认真的买家更容易理解并联系您。买不买由对方决定；平台审核与排名也由平台决定。任何保证“一定有买家”的说法都不可信。",
     },
   },
   {
     q: { en: "What is the difference between ¥3,888 and ¥4,888?", zh: "¥3,888 和 ¥4,888 有什么区别？" },
     a: {
-      en: `International Factory Website (${PRICE_WEBSITE}) is the professional English factory site plus a marketplace readiness kit. International Buyer Growth (${PRICE_GROWTH}) includes all of that, plus Listing Starter (up to 5 listings) and a stronger buyer path — ${PRICE_UPGRADE} more, not a second website.`,
-      zh: `国际工厂官网基础版（${PRICE_WEBSITE}）是专业英文工厂官网，外加平台准备资料包。国际买家增长版（${PRICE_GROWTH}）包含以上全部，再加最多5个商品上架起步，以及更完整的买家路径——多 ${PRICE_UPGRADE}，不是再做一套网站。`,
+      en: `International Factory Website (${PRICE_WEBSITE}) is the professional English factory site plus a marketplace readiness kit. International Buyer Growth (${PRICE_GROWTH}) includes all of that, plus Listing Starter (up to 5 listings) and a stronger buyer path, ${PRICE_UPGRADE} more, not a second website.`,
+      zh: `国际工厂官网基础版（${PRICE_WEBSITE}）是专业英文工厂官网，外加平台准备资料包。国际买家增长版（${PRICE_GROWTH}）包含以上全部，再加最多5个商品上架起步，以及更完整的买家路径，多 ${PRICE_UPGRADE}，不是再做一套网站。`,
     },
   },
   {
     q: { en: "Is the 3-month marketing service billed monthly?", zh: "三个月营销服务是按月收费吗？" },
     a: {
-      en: `No. International Marketplace & Marketing Management starts from ${PRICE_MARKETING} for three months — not a monthly rate, and not an auto-renewing subscription. Scope is customized.`,
+      en: `No. International Marketplace & Marketing Management starts from ${PRICE_MARKETING} for three months, not a monthly rate, and not an auto-renewing subscription. Scope is customized.`,
       zh: `不是。海外电商平台与国际营销管理是三个月起价 ${PRICE_MARKETING}，不是月费，也不会自动续费。范围按工厂情况定制。`,
     },
   },
   {
     q: { en: "Do you need our Amazon or eBay passwords?", zh: "需要提供亚马逊或 eBay 密码吗？" },
     a: {
-      en: "No. Never send marketplace passwords through this site or this form. If listing work requires access, we will agree a safe method with you separately — not a password field on a public page.",
+      en: "No. Never send marketplace passwords through this site or this form. If listing work requires access, we will agree a safe method with you separately, not a password field on a public page.",
       zh: "不需要。请不要通过本网站或本表单发送任何平台密码。如果上架工作需要操作权限，我们会另行约定安全方式，不会在公开页面设密码栏。",
     },
   },
@@ -618,7 +618,7 @@ export const growthFaqs: Array<{ q: Bilingual; a: Bilingual }> = [
   {
     q: { en: "We already have a Chinese website. Is this still useful?", zh: "我们已经有中文网站，还有必要做吗？" },
     a: {
-      en: "Often yes. International buyers rarely treat a domestic Chinese site as export-ready. This work is an international layer — English structure, inquiry paths, and optional marketplace listings — not a duplicate of your domestic brochure.",
+      en: "Often yes. International buyers rarely treat a domestic Chinese site as export-ready. This work is an international layer (English structure, inquiry paths, and optional marketplace listings), not a duplicate of your domestic brochure.",
       zh: "通常有必要。国际买家很少把国内中文站当作可以出口合作的依据。这项服务是加上国际化这一层：英文结构、询盘路径，以及可选的平台商品上架，不是把国内宣传册再复制一份。",
     },
   },
@@ -657,10 +657,10 @@ export const formFields = {
   website: { en: "Existing website", zh: "现有网站" },
   package: { en: "Package interested in", zh: "意向套餐" },
   message: { en: "Message", zh: "补充说明" },
-  locationPh: { en: "City, province — e.g. Xiamen, Fujian", zh: "城市、省份，例如：厦门，福建" },
+  locationPh: { en: "City, province (e.g. Xiamen, Fujian)", zh: "城市、省份，例如：厦门，福建" },
   productsPh: { en: "What you actually manufacture", zh: "请填写真实在产的产品" },
   websitePh: { en: "https:// or leave blank", zh: "https:// 或留空" },
-  messagePh: { en: "Markets, timeline, or questions — optional", zh: "目标市场、时间安排或问题（选填）" },
+  messagePh: { en: "Markets, timeline, or questions (optional)", zh: "目标市场、时间安排或问题（选填）" },
   required: { en: "Please complete the required fields.", zh: "请填写必填项。" },
   invalidEmail: { en: "Please enter a valid email.", zh: "请输入有效邮箱。" },
   invalidPhone: { en: "Please enter a valid phone number.", zh: "请输入有效电话号码。" },
@@ -669,7 +669,7 @@ export const formFields = {
 } as const;
 
 export const growthSeo = {
-  /** English document/schema name — not the Facebook preview title. */
+  /** English document/schema name, not the Facebook preview title. */
   title: "Factory International Presence for Chinese Plants",
   /** OG/Twitter/document title: bilingual, benefit-led, no prices. */
   titleOg: "工厂国际形象 · 让海外买家认真看待您的工厂 | Factory International Presence",

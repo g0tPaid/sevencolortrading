@@ -19,7 +19,7 @@ export default function LogisticsPage() {
       <JsonLd data={offerNode("logistics")} />
       <PageHero
         eyebrow="3PL & Logistics"
-        title="Warehouses we run — freight that matches how you buy"
+        title="Warehouses we run, freight that matches how you buy"
         description="Full 3PL from our China hub in Xiamen and Dubai, tied to the sourcing desk. Then sea, air, or express with tracking your ops team can trust."
       />
       <Container className="py-16">

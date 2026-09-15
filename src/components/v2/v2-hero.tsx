@@ -32,7 +32,7 @@ const shortcuts = [
     href: "#visit",
     icon: Plane,
     kicker: "China visit",
-    text: "Schedule a factory trip — we host you in China",
+    text: "Schedule a factory trip. We host you in China",
   },
   {
     href: "#3pl",
@@ -191,7 +191,7 @@ export function V2Hero() {
                 I have a new product idea
               </span>
               <span className="relative mt-2 text-sm leading-snug text-muted">
-                NDA first — then we develop, sample, and source what has never been made.
+                NDA first. Then we develop, sample, and source what has never been made.
               </span>
             </Link>
           </motion.div>

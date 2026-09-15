@@ -12,7 +12,7 @@ export function V2Network() {
         <div className="max-w-2xl">
           <p className="section-kicker">Global supply network</p>
           <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-5xl">
-            China to your market — one controlled path
+            China to your market: one controlled path
           </h2>
           <p className="mt-4 text-muted sm:text-lg">
             Factories, warehouse, inspection, and freight lanes visualized like mission control.

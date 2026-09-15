@@ -107,7 +107,7 @@ export async function POST(request: Request) {
       errors.push({
         index: i,
         error:
-          "Invalid post — need slug, date, bilingual title/summary/takeaway, sourceName, sourceUrl",
+          "Invalid post: need slug, date, bilingual title/summary/takeaway, sourceName, sourceUrl",
       });
       continue;
     }

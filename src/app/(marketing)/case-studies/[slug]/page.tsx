@@ -63,7 +63,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         </h1>
         <p className="mt-4 max-w-2xl text-muted sm:text-lg">{study.summary}</p>
         <SampleNote>
-          Example engagement. Ranges below are conservative and typical of the desk — not published client KPIs.
+          Example engagement. Ranges below are conservative and typical of the desk, not published client KPIs.
         </SampleNote>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-3">

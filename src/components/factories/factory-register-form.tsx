@@ -215,7 +215,7 @@ export function FactoryRegisterForm() {
         <p className="mt-2 text-sm text-muted">中国团队将审核贵厂资料；合适时再与您联系，并非自动上架。</p>
         <p className="mt-5 font-mono text-[11px] text-muted">Ref {submittedId.slice(0, 8)}</p>
         <p className="mt-6 text-sm leading-relaxed text-muted">
-          Optional and separate — vendor registration stays free:{" "}
+          Optional and separate. Vendor registration stays free:{" "}
           <Link href="/factory-growth" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
             Factory international presence
           </Link>
@@ -274,7 +274,7 @@ export function FactoryRegisterForm() {
           />
         </label>
         <label className="block text-sm sm:col-span-2">
-          <FieldLabel en="Company name (Chinese)" zh="公司名称（中文）— 建议填写" />
+          <FieldLabel en="Company name (Chinese)" zh="公司名称（中文），建议填写" />
           <input
             name="companyNameZh"
             value={form.companyNameZh}
@@ -401,7 +401,7 @@ export function FactoryRegisterForm() {
                 setField("categoryDraft", "");
               }
             }}
-            placeholder="Type a category and press Enter — 输入品类后回车"
+            placeholder="Type a category and press Enter，输入品类后回车"
             className={inputClass}
           />
         </div>

@@ -22,7 +22,7 @@ export default function AboutPage() {
           </p>
           <h2 className="mt-10 font-display text-2xl font-semibold text-ink">Vision</h2>
           <p className="mt-3 text-muted leading-relaxed">
-            To be the sourcing partner procurement teams trust for quality, integrity, and operational clarity — from first sample to repeat containers.
+            To be the sourcing partner procurement teams trust for quality, integrity, and operational clarity, from first sample to repeat containers.
           </p>
         </div>
         <div className="glass-card rounded-[1.75rem] p-8">

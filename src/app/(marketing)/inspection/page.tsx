@@ -45,7 +45,7 @@ export default function InspectionPage() {
           <p className="mt-2 text-sm leading-relaxed text-ink-soft">{inspectionPrice.note}</p>
         </aside>
         <p className="mt-6 max-w-2xl text-sm text-ink-soft">
-          Legal entity {company.legalNameFull}. Inspectors work from the China desk, based in Xiamen — complementary
+          Legal entity {company.legalNameFull}. Inspectors work from the China desk, based in Xiamen, complementary
           to hosted factory visits, sourcing, and own-warehouse 3PL. We do not claim a third-party
           inspection accreditation on this page.
         </p>
@@ -163,7 +163,7 @@ export default function InspectionPage() {
       </Container>
       <CtaBand
         title="Talk to the inspection desk"
-        description="USD 110 / day per inspector. Send the SKU, quantity, factory or warehouse location, and spec — a relationship manager in China replies within 24 hours."
+        description="USD 110 / day per inspector. Send the SKU, quantity, factory or warehouse location, and spec. A relationship manager in China replies within 24 hours."
         whatsappMessage={whatsappPresets.inspection}
       />
     </>

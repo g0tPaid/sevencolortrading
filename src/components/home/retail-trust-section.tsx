@@ -44,7 +44,7 @@ export function RetailTrustSection() {
               </div>
             </div>
             <p className="max-w-md text-sm leading-relaxed text-muted">
-              Verified business identity for global trade — the trust layer buyers and retailers
+              Verified business identity for global trade, the trust layer buyers and retailers
               look for before they commit.
             </p>
           </motion.div>
@@ -66,7 +66,7 @@ export function RetailTrustSection() {
               <span className="font-semibold">registered vendor</span> for major retailers
               including{" "}
               <span className="font-semibold">Walmart</span>,{" "}
-              <span className="font-semibold">Target</span>, and more — plus the sourcing desk
+              <span className="font-semibold">Target</span>, and more, plus the sourcing desk
               behind countless SKUs that land in big-box aisles worldwide.
             </p>
 

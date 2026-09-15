@@ -101,7 +101,7 @@ export default function DropshippingPage() {
       </Container>
       <CtaBand
         title="Talk to the dropship desk"
-        description="Tell us the SKU, expected order volume, and whether stock should sit in Xiamen or Dubai. Hand off orders by CSV, spreadsheet, or store export — a relationship manager replies within 24 hours."
+        description="Tell us the SKU, expected order volume, and whether stock should sit in Xiamen or Dubai. Hand off orders by CSV, spreadsheet, or store export. A relationship manager replies within 24 hours."
         whatsappMessage={whatsappPresets.dropshipping}
       />
     </>

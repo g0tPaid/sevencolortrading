@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { GROWTH_PATH } from "@/lib/factory-growth";
 import { cn } from "@/lib/utils";
 
-/** Optional factory-growth chip — never presented as a condition of free vendor registration. */
+/** Optional factory-growth chip. Never presented as a condition of free vendor registration. */
 export function FactoryGrowthPill({ className }: { className?: string }) {
   return (
     <div className={cn("flex flex-wrap items-center gap-x-3 gap-y-1.5", className)}>

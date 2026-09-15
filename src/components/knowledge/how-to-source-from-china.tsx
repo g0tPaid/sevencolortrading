@@ -24,11 +24,11 @@ export function HowToSourceFromChinaArticle() {
     <>
       <P>
         Sourcing from China is a sequence, not a catalog click. Xiamen Ajmal Seven Color Trading Co
-        Ltd (brand: Sourcing Center, sourcing.center) has run that sequence from China since 2014 —
+        Ltd (brand: Sourcing Center, sourcing.center) has run that sequence from China since 2014,
         on the ground, with our China hub in Xiamen and a second warehouse in Dubai / Al Ain. DUNS
         509419282. This guide is the path buyers actually walk: define the product, find factories,
-        sample, negotiate, inspect, ship, and receive. There is no required MOQ — you can start from
-        1 unit — and inspection, when you want a formal lot check, is USD 110 per inspector day.
+        sample, negotiate, inspect, ship, and receive. There is no required MOQ (you can start from
+        1 unit) and inspection, when you want a formal lot check, is USD 110 per inspector day.
       </P>
       <P>
         Use this page as a working checklist. When you are ready to hand the brief to a desk that
@@ -42,8 +42,8 @@ export function HowToSourceFromChinaArticle() {
         “something like the photo.” Lock the SKU family, materials, dimensions, colors, certifications
         your market needs, packaging, and a target landed cost. If the product is a brand-new
         invention, do not send the brief to a public marketplace.{" "}
-        <ArticleLink href="/oem-odm">OEM/ODM at Sourcing Center is NDA-first</ArticleLink>
-        — the idea stays closed until the NDA is signed, then concept, tooling, and sampling.
+        <ArticleLink href="/oem-odm">OEM/ODM at Sourcing Center is NDA-first</ArticleLink>.
+        The idea stays closed until the NDA is signed, then concept, tooling, and sampling.
       </P>
       <P>
         Include quantity honesty. “About 10,000 later” is not an order. “One sample now, 300 if the
@@ -54,7 +54,7 @@ export function HowToSourceFromChinaArticle() {
 
       <H2>2. Find factories</H2>
       <P>
-        Listings are a scan, not a factory. A sourcing desk shortlists verified manufacturers —
+        Listings are a scan, not a factory. A sourcing desk shortlists verified manufacturers:
         license, export path, capacity, and whether they actually make the goods or trade someone
         else’s line. Sourcing Center does that from our China hub in Xiamen (Huli Avenue, Huli District, Xiamen,
         Fujian, China; China license 91350200MAE8W9E67A). Chinese factories that want to join the
@@ -75,7 +75,7 @@ export function HowToSourceFromChinaArticle() {
       <H2>3. Samples</H2>
       <P>
         Samples are the first physical proof. No required MOQ means you can start from 1 unit; it
-        does not mean the unit is free. Approve the piece — measurements, finish, packing — before
+        does not mean the unit is free. Approve the piece (measurements, finish, packing) before
         anyone tools for volume. For a new invention, prototype first, then a pilot. Photo and video
         from the desk travel with the sample so your team can reject without waiting for a second
         airbill.
@@ -94,7 +94,7 @@ export function HowToSourceFromChinaArticle() {
         relationship manager in China or Dubai / Al Ain (UAE license 143609, Suite No 21, ESA
         Building, Near Nael Enclave, Al Ain) quotes against the spec you approved, not against a
         listing screenshot. Registered vendor pathways for Walmart, Target, and Costco matter when
-        the channel needs retailer-ready packing — they are not a claim that every SKU is already on
+        the channel needs retailer-ready packing, they are not a claim that every SKU is already on
         those shelves.
       </P>
       <P>
@@ -128,7 +128,7 @@ export function HowToSourceFromChinaArticle() {
       <H2>6. Shipping</H2>
       <P>
         After QC, goods can load out of the factory, or move into Sourcing Center’s own 3PL in
-        Xiamen or Dubai / Al Ain — receive, store, pick, pack, ship. That is operator-owned
+        Xiamen or Dubai / Al Ain, receive, store, pick, pack, ship. That is operator-owned
         warehousing, not a brokered slot. Sea, air, and express leave from those hubs with tracking
         on the same relationship manager.{" "}
         <ArticleLink href="/3pl">3PL warehouses</ArticleLink> ·{" "}
@@ -138,7 +138,7 @@ export function HowToSourceFromChinaArticle() {
       <P>
         DTC and marketplace sellers who need single-unit outbound from the same stock use{" "}
         <ArticleLink href="/dropshipping">dropshipping from own warehouses</ArticleLink>
-        — CSV / spreadsheet / store export handoff, not a claimed live Shopify app.
+        (CSV / spreadsheet / store export handoff, not a claimed live Shopify app).
       </P>
 
       <H2>7. Receive</H2>
@@ -158,7 +158,7 @@ export function HowToSourceFromChinaArticle() {
         Do not send only a target retail price and ask the factory to “make it work.”
       </P>
       <P>
-        This page does not publish deposit percentages or bank details — those are deal terms.
+        This page does not publish deposit percentages or bank details, those are deal terms.
         What the desk does publish, and what you should verify before you wire anyone: legal name
         Xiamen Ajmal Seven Color Trading Co Ltd, DUNS 509419282, China license 91350200MAE8W9E67A,
         UAE license 143609, and the two warehouse addresses on{" "}
@@ -171,7 +171,7 @@ export function HowToSourceFromChinaArticle() {
         first commitments and new tooling, not for every repeat PO. Inspection at USD 110 per
         inspector day covers the lots you cannot fly for. Own 3PL covers stock you are not ready to
         put on a truck the same week it leaves the factory. If you sell DTC, held stock in Xiamen or
-        Dubai can pick as single units — still your inventory, not a broker catalog.
+        Dubai can pick as single units, still your inventory, not a broker catalog.
       </P>
       <P>
         A typical first engagement looks like this. Week one: RFQ lands, NDA if the SKU is new, and
@@ -192,7 +192,7 @@ export function HowToSourceFromChinaArticle() {
         If you already have a factory and only need a warehouse, start at the 3PL page. If you
         already have a PO and only need a lot check, start at inspection. If you have a sketch, start
         at OEM/ODM under NDA, then contact. The legal name on the wire should match Xiamen Ajmal
-        Seven Color Trading Co Ltd — DUNS 509419282 — not a similarly named trader.
+        Seven Color Trading Co Ltd (DUNS 509419282), not a similarly named trader.
       </P>
 
       <H2>Marketplace vs sourcing desk</H2>
@@ -223,7 +223,7 @@ export function HowToSourceFromChinaArticle() {
               [
                 "Samples",
                 "MOQ theater is common.",
-                "No required MOQ — start from 1 unit.",
+                "No required MOQ. Start from 1 unit.",
               ],
               [
                 "Negotiate",
@@ -238,7 +238,7 @@ export function HowToSourceFromChinaArticle() {
               [
                 "Shipping",
                 "You stitch factory, 3PL, and forwarder.",
-                "Own 3PL, then sea/air/express — or your carrier.",
+                "Own 3PL, then sea/air/express, or your carrier.",
               ],
               [
                 "Receive",
@@ -274,7 +274,7 @@ export function HowToSourceFromChinaArticle() {
       </P>
 
       <div className="mt-10">
-        <ButtonLink href="/contact">Start sourcing — RFQ in 24 hours</ButtonLink>
+        <ButtonLink href="/contact">Start sourcing: RFQ in 24 hours</ButtonLink>
       </div>
     </>
   );

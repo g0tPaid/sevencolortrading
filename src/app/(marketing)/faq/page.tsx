@@ -42,7 +42,7 @@ export default function FaqPage() {
       </Container>
       <CtaBand
         title="Still deciding?"
-        description="Send the SKU, quantity, and destination — a relationship manager in China or Dubai replies within 24 hours."
+        description="Send the SKU, quantity, and destination. A relationship manager in China or Dubai replies within 24 hours."
       />
     </>
   );

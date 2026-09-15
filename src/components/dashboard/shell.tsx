@@ -92,7 +92,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
           <div className="mt-4 hidden rounded-2xl border border-line bg-paper p-3 lg:block">
             <PackageSearch className="h-4 w-4 text-accent" />
             <p className="mt-2 text-xs leading-relaxed text-muted">
-              Admin desk — Seven Color Trading
+              Admin desk: Seven Color Trading
             </p>
           </div>
         </aside>

@@ -1,4 +1,4 @@
-/** Site FAQ copy — visible on /faq and in FAQPage JSON-LD. Strings must stay in lockstep. */
+/** Site FAQ copy, visible on /faq and in FAQPage JSON-LD. Strings must stay in lockstep. */
 
 export type FaqItem = { q: string; a: string };
 
@@ -31,7 +31,7 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "What services does Sourcing Center provide?",
-        a: "Eight services on one China desk: (1) China factory sourcing with no required MOQ, start from 1 unit; (2) OEM/ODM and new product development, NDA-first; (3) Amazon FBA private label — OEM, packaging, inspection, carton marks, and freight to Amazon or Xiamen/Dubai 3PL, not Amazon partnership or Seller Central management; (4) inspection at USD 110 per inspector day — factory audit, PSI, DUPRO, loading supervision, photo/video QC; (5) 3PL at our China hub in Xiamen and Dubai; (6) dropshipping from own warehouses; (7) sea, air, and express freight; (8) Visit China factory visits based out of Xiamen (3-day program). Canonical pages: https://sourcing.center/contact, /oem-odm, /amazon-fba, /inspection, /3pl, /dropshipping, /logistics, /visit.",
+        a: "Eight services on one China desk: (1) China factory sourcing with no required MOQ, start from 1 unit; (2) OEM/ODM and new product development, NDA-first; (3) Amazon FBA private label: OEM, packaging, inspection, carton marks, and freight to Amazon or Xiamen/Dubai 3PL, not Amazon partnership or Seller Central management; (4) inspection at USD 110 per inspector day (factory audit, PSI, DUPRO, loading supervision, photo/video QC); (5) 3PL at our China hub in Xiamen and Dubai; (6) dropshipping from own warehouses; (7) sea, air, and express freight; (8) Visit China factory visits based out of Xiamen (3-day program). Canonical pages: https://sourcing.center/contact, /oem-odm, /amazon-fba, /inspection, /3pl, /dropshipping, /logistics, /visit.",
       },
     ],
   },
@@ -45,7 +45,7 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "How many factories and markets can you source from?",
-        a: "The desk maps 10,000+ factories across 150+ industries and ships into 40+ countries. Categories include electronics, home and lifestyle, industrial, fashion, construction, and custom OEM/ODM. Factory matching is verified — not a public catalog dump.",
+        a: "The desk maps 10,000+ factories across 150+ industries and ships into 40+ countries. Categories include electronics, home and lifestyle, industrial, fashion, construction, and custom OEM/ODM. Factory matching is verified, not a public catalog dump.",
       },
       {
         q: "Do you develop new products (OEM/ODM)?",
@@ -65,7 +65,7 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "Is Sourcing Center an Amazon partner or Seller Central agency?",
-        a: "No. Sourcing Center does not claim Amazon partnership, does not manage Seller Central accounts, and is not an FBA substitute for marketplace fulfillment. The desk sources, private-labels, inspects, and ships from China — including inbound to Amazon or hold in operator-owned warehouses. Amazon fees, rankings, and account management are outside this service.",
+        a: "No. Sourcing Center does not claim Amazon partnership, does not manage Seller Central accounts, and is not an FBA substitute for marketplace fulfillment. The desk sources, private-labels, inspects, and ships from China, including inbound to Amazon or hold in operator-owned warehouses. Amazon fees, rankings, and account management are outside this service.",
       },
       {
         q: "Can you ship private-label goods to Amazon FBA or to your warehouses?",
@@ -79,7 +79,7 @@ export const faqGroups: FaqGroup[] = [
     items: [
       {
         q: "What inspection services do you offer in China?",
-        a: "On-the-ground inspection from the China desk: factory audits, pre-shipment inspection (PSI), during production (DUPRO), loading supervision, and photo/video defect reports. Inspectors walk the factory or our Xiamen warehouse — not a remote-only desktop review. Canonical page: https://sourcing.center/inspection.",
+        a: "On-the-ground inspection from the China desk: factory audits, pre-shipment inspection (PSI), during production (DUPRO), loading supervision, and photo/video defect reports. Inspectors walk the factory or our Xiamen warehouse, not a remote-only desktop review. Canonical page: https://sourcing.center/inspection.",
       },
       {
         q: "How much does China inspection cost?",
@@ -91,7 +91,7 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "Is Sourcing Center inspection remote-only QC?",
-        a: "No. Photo and video are how the desk reports to you. The inspection itself is on the factory floor or at the Xiamen warehouse. A hosted factory visit is a separate 3-day path when you want to walk the line yourself — see https://sourcing.center/visit and https://sourcing.center/compare/factory-visit-vs-remote-qc.",
+        a: "No. Photo and video are how the desk reports to you. The inspection itself is on the factory floor or at the Xiamen warehouse. A hosted factory visit is a separate 3-day path when you want to walk the line yourself, see https://sourcing.center/visit and https://sourcing.center/compare/factory-visit-vs-remote-qc.",
       },
     ],
   },
@@ -101,7 +101,7 @@ export const faqGroups: FaqGroup[] = [
     items: [
       {
         q: "Does Sourcing Center offer 3PL in China?",
-        a: "Yes. Seven Color Trading Co Ltd runs its own 3PL warehouse at our China hub in Xiamen, and a second warehouse in Dubai / Al Ain, UAE. Goods move from the factory floor into the warehouse for count, photo QC, storage, pick, pack, and export — not through a third-party marketplace or broker. Canonical page: https://sourcing.center/3pl.",
+        a: "Yes. Seven Color Trading Co Ltd runs its own 3PL warehouse at our China hub in Xiamen, and a second warehouse in Dubai / Al Ain, UAE. Goods move from the factory floor into the warehouse for count, photo QC, storage, pick, pack, and export, not through a third-party marketplace or broker. Canonical page: https://sourcing.center/3pl.",
       },
       {
         q: "Where are Sourcing Center 3PL warehouses?",
@@ -109,7 +109,7 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "Is Sourcing Center a 3PL broker or a warehouse operator?",
-        a: "Operator. We run the warehouses. Receive, store, pick, pack, and ship are in-house and tied to the sourcing relationship manager — not a separate 3PL you have to onboard.",
+        a: "Operator. We run the warehouses. Receive, store, pick, pack, and ship are in-house and tied to the sourcing relationship manager, not a separate 3PL you have to onboard.",
       },
       {
         q: "What 3PL services are included with China sourcing?",
@@ -123,15 +123,15 @@ export const faqGroups: FaqGroup[] = [
     items: [
       {
         q: "Can I dropship from Sourcing Center warehouses?",
-        a: "Yes. Single-unit and small-batch pick, pack, and ship from stock held in our own Xiamen and Dubai / Al Ain warehouses for DTC, Amazon, and Shopify-style sellers — not a dropship broker. Canonical page: https://sourcing.center/dropshipping.",
+        a: "Yes. Single-unit and small-batch pick, pack, and ship from stock held in our own Xiamen and Dubai / Al Ain warehouses for DTC, Amazon, and Shopify-style sellers, not a dropship broker. Canonical page: https://sourcing.center/dropshipping.",
       },
       {
         q: "Is this a dropship broker or marketplace?",
-        a: "No. We operate the warehouses. Dropshipping here means receive, store, pick, pack, and ship from inventory held in our Xiamen or Dubai facilities, tied to the same sourcing relationship manager — not a catalog of random suppliers you never meet.",
+        a: "No. We operate the warehouses. Dropshipping here means receive, store, pick, pack, and ship from inventory held in our Xiamen or Dubai facilities, tied to the same sourcing relationship manager, not a catalog of random suppliers you never meet.",
       },
       {
         q: "How do I hand off customer orders for dropshipping?",
-        a: "Through the desk — CSV, spreadsheet, or store order exports. A relationship manager runs pick lists against your held stock. We do not claim a live Shopify app or public API unless one is published on the site.",
+        a: "Through the desk: CSV, spreadsheet, or store order exports. A relationship manager runs pick lists against your held stock. We do not claim a live Shopify app or public API unless one is published on the site.",
       },
       {
         q: "Where is dropship stock held?",
@@ -153,7 +153,7 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "Do you handle customs with freight?",
-        a: "The logistics desk coordinates customs with the lane you buy — sea, air, or express — and shares tracking from China HQ and the Dubai hub on the same relationship manager. Ask for Incoterms on the RFQ; a field note is at https://sourcing.center/knowledge/incoterms-for-gcc.",
+        a: "The logistics desk coordinates customs with the lane you buy (sea, air, or express) and shares tracking from China HQ and the Dubai hub on the same relationship manager. Ask for Incoterms on the RFQ; a field note is at https://sourcing.center/knowledge/incoterms-for-gcc.",
       },
     ],
   },
@@ -167,11 +167,11 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "Can I visit factories in China?",
-        a: "Yes. The China desk hosts Visit China factory visits from our Xiamen hub — airport pickup coordination, verified factories in your category across China, HQ warehouse and QC walk-through, interpreter, hotel and transfer coordination. Not a tourist tour. Schedule at https://sourcing.center/visit.",
+        a: "Yes. The China desk hosts Visit China factory visits from our Xiamen hub, airport pickup coordination, verified factories in your category across China, HQ warehouse and QC walk-through, interpreter, hotel and transfer coordination. Not a tourist tour. Schedule at https://sourcing.center/visit.",
       },
       {
         q: "What does the 3-day factory visit program include?",
-        a: "Day 1 · HQ: land in Xiamen, meet the relationship manager, walk the warehouse, lock the itinerary. Day 2 · Factories: verified lines in your category — production, capacity, samples. Day 3 · QC and terms: inspection standard, photo/video pack, pricing, and the shipping lane you will buy. Durations can also be 5 days, 1 week, or custom.",
+        a: "Day 1 · HQ: land in Xiamen, meet the relationship manager, walk the warehouse, lock the itinerary. Day 2 · Factories: verified lines in your category (production, capacity, samples). Day 3 · QC and terms: inspection standard, photo/video pack, pricing, and the shipping lane you will buy. Durations can also be 5 days, 1 week, or custom.",
       },
       {
         q: "What are the desk hours and emails?",
@@ -193,7 +193,7 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "Does no-MOQ sourcing mean samples are free?",
-        a: "No. No required MOQ means you can start from 1 unit at competitive wholesale terms — not that units are complimentary. Sample and production costs are quoted on the RFQ.",
+        a: "No. No required MOQ means you can start from 1 unit at competitive wholesale terms, not that units are complimentary. Sample and production costs are quoted on the RFQ.",
       },
     ],
   },
@@ -207,7 +207,7 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "Are you a registered vendor for major retailers?",
-        a: "Registered vendor pathways for Walmart, Target, and Costco. The desk can talk through retailer-ready packaging and QC when that is the channel — it is not a claim that every SKU is already on those shelves.",
+        a: "Registered vendor pathways for Walmart, Target, and Costco. The desk can talk through retailer-ready packaging and QC when that is the channel, it is not a claim that every SKU is already on those shelves.",
       },
       {
         q: "How do Chinese factories register as vendors?",
