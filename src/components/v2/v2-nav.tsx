@@ -16,6 +16,7 @@ const pageLinks = [
   { href: "/dropshipping", label: "Dropship" },
   { href: "/#visit", label: "Visit China" },
   { href: "/knowledge", label: "Knowledge" },
+  { href: "/news", label: "News" },
   { href: "/reviews", label: "Reviews" },
 ];
 
@@ -116,13 +117,6 @@ export function V2Nav() {
                   {l.href === "/factories/register" ? <FactoryLabel /> : l.label}
                 </Link>
               ))}
-              <Link
-                href="/news"
-                onClick={() => setOpen(false)}
-                className="rounded-2xl px-3 py-3 text-[15px] text-ink"
-              >
-                News
-              </Link>
               <div className="my-1 h-px bg-line" />
               {homeLinks.map((l) => (
                 <Link
