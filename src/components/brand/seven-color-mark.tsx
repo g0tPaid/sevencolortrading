@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-/** Official Seven Color mark — red geometric 7 on Apple-style glass. */
+/** Official Seven Color mark: red geometric 7 on Apple-style glass. */
 export function SevenColorMark({
   className,
   size = 40,

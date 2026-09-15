@@ -19,7 +19,7 @@ export default function KnowledgePage() {
       <PageHero
         eyebrow="Knowledge center"
         title="Procurement notes from the field"
-        description="Practical writing for teams buying from China — not generic trade blog filler."
+        description="Practical writing for teams buying from China, not generic trade blog filler."
       />
       <Container className="grid gap-4 py-16 md:grid-cols-2">
         <p className="md:col-span-2 text-sm text-muted">

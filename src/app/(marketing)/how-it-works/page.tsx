@@ -13,7 +13,7 @@ export default function HowItWorksPage() {
       <PageHero
         eyebrow="How it works"
         title="A controlled path from inquiry to door delivery"
-        description="Share requirements once. We source, verify, inspect, and ship — with proof at every gate."
+        description="Share requirements once. We source, verify, inspect, and ship, with proof at every gate."
       />
       <Container className="py-16">
         <SourcingTimeline />

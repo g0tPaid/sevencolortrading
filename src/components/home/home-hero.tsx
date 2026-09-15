@@ -49,8 +49,7 @@ export function HomeHero() {
             <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
               Your{" "}
               <span className="font-semibold text-ink">central command for sourcing from China</span>
-              {" "}
-              — idea, design, factories, QC, and shipping in one place. No MOQ. Proof before it
+              : idea, design, factories, QC, and shipping in one place. No MOQ. Proof before it
               leaves.
             </p>
           </motion.div>

@@ -6,7 +6,7 @@
  * - ADMIN_PASSWORD
  *
  * Optional:
- * - ADMIN_SESSION_SECRET — HMAC key for session cookies; if unset, a stable key
+ * - ADMIN_SESSION_SECRET: HMAC key for session cookies; if unset, a stable key
  *   is derived from ADMIN_PASSWORD + a fixed app salt (see admin-auth-edge.ts).
  *   Prefer setting ADMIN_SESSION_SECRET explicitly.
  *
@@ -64,7 +64,7 @@ export function getAdminCredentialsConfig(): AdminCredentialsConfig {
   if (!warnedDevFallback) {
     warnedDevFallback = true;
     console.warn(
-      "[admin-auth] ADMIN_USERNAME/ADMIN_PASSWORD unset — using dev fallback admin/admin. Set env vars for production.",
+      "[admin-auth] ADMIN_USERNAME/ADMIN_PASSWORD unset. Using dev fallback admin/admin. Set env vars for production.",
     );
   }
   return { configured: true, username: "admin", password: "admin", source: "dev-fallback" };

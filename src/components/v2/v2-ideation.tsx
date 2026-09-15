@@ -100,7 +100,7 @@ export function V2Ideation() {
         <div className="mx-auto max-w-3xl text-center">
           <p className="section-kicker">Product ideation</p>
           <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-5xl">
-            Existing products — or a brand-new invention
+            Existing products, or a brand-new invention
           </h2>
           <p className="mt-4 text-muted sm:text-lg">
             Already know the SKU? We match factories. Have something that has never been made

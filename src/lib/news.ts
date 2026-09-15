@@ -1,5 +1,5 @@
 /**
- * Daily China sourcing news — bilingual briefs for importers and procurement.
+ * Daily China sourcing news: bilingual briefs for importers and procurement.
  * Pages read the merged store (volume JSON + this seed). Do not invent tariff or
  * policy facts here; the seed is a desk meta note, not a news story.
  */
@@ -66,8 +66,8 @@ export const newsCopy = {
   sourceLabel: { en: "Source", zh: "来源" },
   tagsLabel: { en: "Topics", zh: "标签" },
   relatedUpdates: {
-    en: "Dated desk notes — not a news feed",
-    zh: "工作台短讯 — 不是新闻流",
+    en: "Dated desk notes, not a news feed",
+    zh: "工作台短讯，不是新闻流",
   },
   relatedUpdatesCta: { en: "Updates", zh: "Updates" },
   allNews: { en: "All news", zh: "全部新闻" },
@@ -79,7 +79,7 @@ export const newsCopy = {
     zh: "需要结合工厂一线解读这条新闻？",
   },
   ctaBody: {
-    en: "The China desk can map a cited development to your SKU, QC, and lane — from Xiamen, with Dubai 3PL when the stock needs a hub.",
+    en: "The China desk can map a cited development to your SKU, QC, and lane, from Xiamen, with Dubai 3PL when the stock needs a hub.",
     zh: "厦门采购台可以把公开新闻对应到您的 SKU、质检与物流路径；需要中转时再用迪拜仓。",
   },
 } as const;
@@ -117,7 +117,7 @@ export const seedNewsPosts: NewsPost[] = [
     titleEn: "How Sourcing Center publishes China sourcing news",
     titleZh: "采购中心如何发布中国采购新闻",
     summaryEn:
-      "This page is the bilingual news hub for sourcing.center — China factory sourcing, manufacturing, supply chain, tariffs, logistics, and policy that importers actually have to act on. It is a desk note about the section, not a report of a market event.",
+      "This page is the bilingual news hub for sourcing.center, China factory sourcing, manufacturing, supply chain, tariffs, logistics, and policy that importers actually have to act on. It is a desk note about the section, not a report of a market event.",
     summaryZh:
       "本页是 sourcing.center 的中英双语新闻栏目：中国工厂采购、制造、供应链、关税、物流，以及进口商需要跟进的政策动向。本文是栏目说明，不是某条市场新闻。",
     takeawayEn:
@@ -333,7 +333,7 @@ function newsFaqGraph(faqs: NewsFaq[], id: string, url: string): JsonLdNode {
 }
 
 export function newsIndexMetadataTitle(): string {
-  return "China Sourcing News — Manufacturing, Tariffs, Logistics";
+  return "China Sourcing News: Manufacturing, Tariffs, Logistics";
 }
 
 export function newsIndexMetadataDescription(): string {

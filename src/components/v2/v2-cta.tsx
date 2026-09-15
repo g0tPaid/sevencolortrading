@@ -22,7 +22,7 @@ export function V2Cta() {
               Ready to build your next product?
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-paper/70 sm:text-lg">
-              Two clear doors — source an existing SKU, or invent something new under NDA with
+              Two clear doors: source an existing SKU, or invent something new under NDA with
               Seven Color Trading Co Ltd · China.
             </p>
             <div className="mx-auto mt-8 grid max-w-2xl gap-3 sm:grid-cols-2 sm:gap-4">
@@ -58,7 +58,7 @@ export function V2Cta() {
                     I have a new product idea
                   </span>
                   <span className="mt-2 text-sm text-muted">
-                    NDA first — develop, sample, and source what has never been made.
+                    NDA first. Develop, sample, and source what has never been made.
                   </span>
                 </Link>
               </motion.div>
@@ -81,7 +81,7 @@ export function V2Cta() {
               href="/3pl"
               className="mt-3 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-paper transition hover:bg-white/15 sm:ml-3"
             >
-              Own 3PL — Xiamen warehouse &amp; Dubai
+              Own 3PL: Xiamen warehouse &amp; Dubai
               <ArrowUpRight className="h-4 w-4" aria-hidden />
             </Link>
             <Link

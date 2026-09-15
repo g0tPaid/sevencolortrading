@@ -27,7 +27,7 @@ export function ChinaQualityInspectionGuide() {
         Center, sourcing.center) runs on-the-ground QC from the China desk: factory audits,
         during-production (DUPRO), pre-shipment (PSI), loading supervision, and photo/video defect
         packs. The published rate is USD 110 per inspector day. Inspectors walk the factory or the
-        company warehouse — this is not a remote-only desktop review, and the site does not claim a
+        company warehouse, this is not a remote-only desktop review, and the site does not claim a
         third-party inspection accreditation.
       </P>
       <P>
@@ -60,7 +60,7 @@ export function ChinaQualityInspectionGuide() {
       <P>
         DUPRO samples the run while workmanship, measurements, and packaging can still be
         corrected. Book it when the PO is large, the spec is new, or a previous lot drifted. The
-        inspector is on the line in China — not reviewing a folder of JPEGs from a hotel. Findings
+        inspector is on the line in China, not reviewing a folder of JPEGs from a hotel. Findings
         come back as a photo/video pack and a written defect list you can approve or reject.
       </P>
       <P>
@@ -78,7 +78,7 @@ export function ChinaQualityInspectionGuide() {
       <P>
         After a pass, goods can load to your forwarder or move into{" "}
         <ArticleLink href="/3pl">own 3PL stock in Xiamen or Dubai</ArticleLink>
-        for pick, pack, and later release — including{" "}
+        for pick, pack, and later release, including{" "}
         <ArticleLink href="/dropshipping">dropship units</ArticleLink> from the same inventory.
       </P>
 
@@ -117,7 +117,7 @@ export function ChinaQualityInspectionGuide() {
         day. Remote-looking: you receive the pack. Hosted visit: you walk the line yourself on a
         3-day Visit China program based out of Xiamen (airport coordination, verified factories, HQ warehouse, interpreter).
         Many buyers visit once, then run PSI or DUPRO on later lots. Inspection is complementary to
-        visits and to 3PL — not a substitute for either when you still need capacity proof or
+        visits and to 3PL, not a substitute for either when you still need capacity proof or
         storage.
       </P>
       <P>
@@ -139,7 +139,7 @@ export function ChinaQualityInspectionGuide() {
         A fail should stop the lane. The China desk can hold goods until you sign off, then load or
         move the lot into 3PL. Inbound to our China hub in Xiamen is counted and photographed even on
         replenishment; a formal PSI is for when the risk is a container, not a carton. Dubai / Al Ain
-        is the GCC stage, not a second factory-audit site — audits, DUPRO, and PSI for China
+        is the GCC stage, not a second factory-audit site, audits, DUPRO, and PSI for China
         production stay with the China desk. Private-label packing marks belong in the brief; see{" "}
         <ArticleLink href="/knowledge/private-label-packaging">
           private label packaging
@@ -149,7 +149,7 @@ export function ChinaQualityInspectionGuide() {
       <P>
         Brief the inspector the way you would brief a buyer on your own payroll. Attach the golden
         sample photos, the measurement sheet, the carton mark, and the defect language from the last
-        lot if this is a repeat PO. If it is a first PO, say so — that is usually an audit plus PSI,
+        lot if this is a repeat PO. If it is a first PO, say so, that is usually an audit plus PSI,
         not PSI alone. If you specified an AQL plan, paste it. If you did not, you will still get a
         defect list and a photo pack; you decide hold or ship. Day-count is confirmed against the
         factory address in China; the published rate remains USD 110 per inspector day.
@@ -199,7 +199,7 @@ export function ChinaQualityInspectionGuide() {
               [
                 "Container stuffing",
                 "Loading supervision",
-                "Count, seal, dock photos — what you approved is what left.",
+                "Count, seal, dock photos, what you approved is what left.",
               ],
               [
                 "Any of the above",
@@ -238,7 +238,7 @@ export function ChinaQualityInspectionGuide() {
       </P>
 
       <div className="mt-10">
-        <ButtonLink href="/inspection">Book inspection — USD 110 / inspector day</ButtonLink>
+        <ButtonLink href="/inspection">Book inspection: USD 110 / inspector day</ButtonLink>
       </div>
     </>
   );

@@ -139,10 +139,10 @@ export function V2Workflow() {
         <div className="mx-auto max-w-3xl text-center">
           <p className="section-kicker">Workflow</p>
           <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink sm:mt-4 sm:text-5xl">
-            Idea to delivery — one timeline
+            Idea to delivery: one timeline
           </h2>
           <p className="mt-3 text-muted sm:mt-4 sm:text-lg">
-            From the first sketch or SKU brief to goods at your door — one controlled path with
+            From the first sketch or SKU brief to goods at your door, one controlled path with
             Seven Color on the ground in China.
           </p>
         </div>

@@ -101,7 +101,7 @@ export function organizationJsonLd() {
         department: [
           {
             "@type": "Warehouse",
-            name: "Sourcing Center 3PL — China hub warehouse in Xiamen",
+            name: "Sourcing Center 3PL: China hub warehouse in Xiamen",
             address: {
               "@type": "PostalAddress",
               streetAddress: company.offices[1]?.address,
@@ -112,7 +112,7 @@ export function organizationJsonLd() {
           },
           {
             "@type": "Warehouse",
-            name: "Sourcing Center 3PL — Dubai / Al Ain warehouse",
+            name: "Sourcing Center 3PL: Dubai / Al Ain warehouse",
             address: {
               "@type": "PostalAddress",
               streetAddress: company.offices[0]?.address,
@@ -413,7 +413,7 @@ export function reviewsPageJsonLd() {
     url: `${siteUrl}/reviews`,
     name: "Reviews | Sourcing Center",
     description:
-      "Buyer notes about Seven Color Trading / sourcing.center — China factory sourcing, own 3PL, and Visit China factory visits.",
+      "Buyer notes about Seven Color Trading / sourcing.center, China factory sourcing, own 3PL, and Visit China factory visits.",
     isPartOf: { "@id": `${siteUrl}/#website` },
     breadcrumb: breadcrumbJsonLd([
       { name: "Home", path: "/" },
@@ -430,7 +430,7 @@ export function caseStudiesIndexJsonLd() {
     url: `${siteUrl}/case-studies`,
     name: "Case Studies | Sourcing Center",
     description:
-      "Example sourcing programs from Seven Color Trading — factory matching across China, own 3PL, and Visit China QC trips.",
+      "Example sourcing programs from Seven Color Trading, factory matching across China, own 3PL, and Visit China QC trips.",
     isPartOf: { "@id": `${siteUrl}/#website` },
     breadcrumb: breadcrumbJsonLd([
       { name: "Home", path: "/" },

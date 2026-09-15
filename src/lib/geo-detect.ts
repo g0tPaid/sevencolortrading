@@ -23,7 +23,7 @@ function headerValue(headers: Headers, name: string): string | null {
   return headers.get(name) ?? headers.get(name.toUpperCase());
 }
 
-/** Country from CDN / platform headers only — no IP lookup. */
+/** Country from CDN / platform headers only. No IP lookup. */
 export function countryFromHeaders(headers: Headers): string | null {
   for (const name of COUNTRY_HEADERS) {
     const code = normalizeCountry(headerValue(headers, name));

@@ -30,7 +30,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "China Sourcing Agent — Visit China, Own 3PL Warehouses",
+    default: "China Sourcing Agent: Visit China, Own 3PL Warehouses",
     template: "%s · Sourcing Center",
   },
   description: defaultDescription,
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   publisher: "Seven Color Trading Co Ltd",
   category: "business",
   openGraph: {
-    title: "China Sourcing Agent — Visit China, Own 3PL Warehouses",
+    title: "China Sourcing Agent: Visit China, Own 3PL Warehouses",
     description: defaultDescription,
     type: "website",
     locale: "en_US",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "China Sourcing Agent — Visit China, Own 3PL Warehouses",
+    title: "China Sourcing Agent: Visit China, Own 3PL Warehouses",
     description: defaultDescription,
   },
   robots: {

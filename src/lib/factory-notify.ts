@@ -3,7 +3,7 @@ import { company } from "@/lib/content";
 
 /**
  * Best-effort ops alert after a factory application is saved.
- * Never throw to the request path — callers must catch / allSettled.
+ * Never throw to the request path. Callers must catch / allSettled.
  *
  * Railway / production env:
  * - FACTORY_NOTIFY_WEBHOOK  POST JSON (Slack, Discord, Make, WhatsApp automation)
@@ -90,7 +90,7 @@ async function notifyEmail(app: FactoryApplication): Promise<void> {
   const apiKey = env("RESEND_API_KEY");
   if (!apiKey) {
     console.warn(
-      "[factory-notify] FACTORY_NOTIFY_EMAIL is set but RESEND_API_KEY is missing — skip email",
+      "[factory-notify] FACTORY_NOTIFY_EMAIL is set but RESEND_API_KEY is missing; skip email",
     );
     return;
   }

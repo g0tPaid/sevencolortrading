@@ -21,8 +21,8 @@ export default function CompareIndexPage() {
           Straight answers, not catalog copy
         </h1>
         <p className="mt-4 max-w-2xl text-muted sm:text-lg">
-          Three pages for buyers choosing between a marketplace, DIY freight, or a remote QC pack —
-          and a China desk with own warehouses — China hub in Xiamen and Dubai.
+          Three pages for buyers choosing between a marketplace, DIY freight, or a remote QC pack,
+          and a China desk with own warehouses (China hub in Xiamen and Dubai).
         </p>
         <ProofChips className="mt-6 justify-start" />
         <div className="mt-10 grid gap-4 lg:grid-cols-3">

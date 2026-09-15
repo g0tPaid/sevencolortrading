@@ -26,7 +26,7 @@ const joinBenefits = [
     zh: "中阿贸易伙伴：与已负责采购、验货，并在厦门、迪拜自营仓储（3PL）的贸易公司合作。",
   },
   {
-    en: "Applications are reviewed for license, capacity, and buyer fit — not an automatic public listing.",
+    en: "Applications are reviewed for license, capacity, and buyer fit, not an automatic public listing.",
     zh: "审核入驻：中国团队审核执照、产能与匹配度；提交申请不会自动公开展示。",
   },
 ] as const;
@@ -38,7 +38,7 @@ function FactoryJoinBrief() {
       <h2 className="mt-2 font-display text-xl font-semibold text-ink sm:text-2xl">Why join</h2>
       <p className="mt-3 text-sm leading-relaxed text-muted">
         Apply to join Seven Color Trading’s vendor shortlist for Sourcing Center buyers. We are a
-        China–UAE sourcing partner — not a public marketplace.
+        China–UAE sourcing partner, not a public marketplace.
       </p>
       <p className="mt-1.5 text-sm leading-relaxed text-muted" lang="zh-CN">
         入驻 Seven Color Trading 供应商库，对接 Sourcing Center 的海外买家。我们是中阿采购合作方，不是公开集市。
@@ -69,13 +69,13 @@ export default function FactoryRegisterPage() {
           {company.legalName} · China · 工厂登记
         </p>
         <h1 className="mt-3 max-w-3xl font-display text-3xl font-semibold tracking-tight text-ink sm:text-5xl">
-          <FactoryLabel /> — register as a vendor
+          <FactoryLabel />: register as a vendor
         </h1>
         <p className="mt-2 font-display text-xl text-accent sm:text-2xl">工厂供应商登记</p>
         <FactoryGrowthPill className="mt-5" />
         <p className="mt-4 max-w-2xl text-muted sm:text-lg">
           Apply to supply Sourcing Center buyers through {company.legalNameFull}. We work
-          with verified factories across China — this is not a marketplace free-for-all.
+          with verified factories across China, this is not a marketplace free-for-all.
         </p>
         <p className="mt-2 max-w-2xl text-sm text-muted">
           申请成为供应商，向 Sourcing Center 买家供货。我们只合作经核实的工厂，不会对所有申请自动上架。
@@ -93,7 +93,7 @@ export default function FactoryRegisterPage() {
             Optional next step · 可选下一步
           </p>
           <h2 className="mt-2 font-display text-xl font-semibold text-ink sm:text-2xl">
-            Build an international presence — separately from vendor registration
+            Build an international presence, separately from vendor registration
           </h2>
           <p className="mt-2 font-display text-lg text-accent">国际化形象服务，与供应商登记相互独立</p>
           <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted">

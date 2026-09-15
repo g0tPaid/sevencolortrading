@@ -26,14 +26,14 @@ export const serviceCopy = {
     name: "China factory sourcing (no MOQ)",
     serviceType: "Product sourcing",
     description:
-      "China factory sourcing with no required MOQ — start from 1 unit. Photo and video QC before goods ship. China desk of Xiamen Ajmal Seven Color Trading Co Ltd since 2014, with own warehouses: China hub in Xiamen and Dubai / Al Ain.",
+      "China factory sourcing with no required MOQ, start from 1 unit. Photo and video QC before goods ship. China desk of Xiamen Ajmal Seven Color Trading Co Ltd since 2014, with own warehouses: China hub in Xiamen and Dubai / Al Ain.",
   },
   "oem-odm": {
     path: "/oem-odm",
     name: "OEM/ODM and new product development (NDA-first)",
     serviceType: "OEM/ODM product development",
     description:
-      "OEM/ODM and new product development under NDA first — from concept and tooling to mass production with IP-aware workflows. Brand-new inventions stay closed until the NDA is signed.",
+      "OEM/ODM and new product development under NDA first, from concept and tooling to mass production with IP-aware workflows. Brand-new inventions stay closed until the NDA is signed.",
   },
   "amazon-fba": {
     path: "/amazon-fba",
@@ -64,11 +64,11 @@ export const serviceCopy = {
     name: "Sea, air, and express freight from China",
     serviceType: "Freight forwarding",
     description:
-      "Sea, air, and express freight from China with Dubai hub support — after goods are received in our China hub in Xiamen or Dubai / Al Ain warehouses. Consolidate in China, stage through Dubai when needed, and deliver with tracking.",
+      "Sea, air, and express freight from China with Dubai hub support, after goods are received in our China hub in Xiamen or Dubai / Al Ain warehouses. Consolidate in China, stage through Dubai when needed, and deliver with tracking.",
   },
   visit: {
     path: "/visit",
-    name: "Visit China — hosted factory visits based in Xiamen",
+    name: "Visit China: hosted factory visits based in Xiamen",
     serviceType: "Hosted factory visit",
     description: chinaVisit.description,
   },
@@ -189,7 +189,7 @@ export function xiamenLocalBusinessNode(): JsonLdNode {
   return {
     "@type": ["LocalBusiness", "Warehouse"],
     "@id": xiamenId,
-    name: "Sourcing Center — China hub and warehouse in Xiamen",
+    name: "Sourcing Center: China hub and warehouse in Xiamen",
     legalName: company.legalNameFull,
     url: siteUrl,
     parentOrganization: { "@id": orgId },
@@ -200,7 +200,7 @@ export function xiamenLocalBusinessNode(): JsonLdNode {
     address: postalAddress(xiamenOffice, "Fujian", "CN"),
     openingHoursSpecification: openingHours(),
     description:
-      "China hub and warehouse of Xiamen Ajmal Seven Color Trading Co Ltd — on-the-ground base for factory sourcing across China. Business license 91350200MAE8W9E67A. Huli Avenue, Huli District, Xiamen, Fujian, China.",
+      "China hub and warehouse of Xiamen Ajmal Seven Color Trading Co Ltd, on-the-ground base for factory sourcing across China. Business license 91350200MAE8W9E67A. Huli Avenue, Huli District, Xiamen, Fujian, China.",
   };
 }
 
@@ -208,7 +208,7 @@ export function alAinLocalBusinessNode(): JsonLdNode {
   return {
     "@type": ["LocalBusiness", "Warehouse"],
     "@id": alAinId,
-    name: "Sourcing Center — Dubai / Al Ain warehouse",
+    name: "Sourcing Center: Dubai / Al Ain warehouse",
     legalName: company.legalNameFull,
     url: siteUrl,
     parentOrganization: { "@id": orgId },

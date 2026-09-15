@@ -22,7 +22,7 @@ const nextSteps = [
   {
     step: "02",
     title: "We reply within 24 hours",
-    text: "WhatsApp or email — clarifying questions, then factory options or a 3PL / visit path.",
+    text: "WhatsApp or email: clarifying questions, then factory options or a 3PL / visit path.",
   },
   {
     step: "03",
@@ -54,7 +54,7 @@ export function RfqForm({ compact = false }: { compact?: boolean }) {
         className="glass-panel rounded-[1.75rem] p-8"
       >
         <p className="text-center font-display text-2xl font-semibold text-ink">
-          Got it — we&apos;re on it
+          Got it. We&apos;re on it
         </p>
         <p className="mt-2 text-center text-sm text-muted">What happens next</p>
         <ol className="mt-6 space-y-3">
@@ -174,7 +174,7 @@ export function RfqForm({ compact = false }: { compact?: boolean }) {
           <label className="glass-chip flex cursor-pointer flex-col items-center justify-center rounded-2xl border-dashed px-4 py-6 text-center transition hover:border-accent/50 sm:col-span-2">
             <Upload className="mb-2 h-5 w-5 text-accent" />
             <span className="text-sm font-medium text-ink">Upload RFQ files</span>
-            <span className="mt-1 text-xs text-muted">Images, PDF, or Excel — optional</span>
+            <span className="mt-1 text-xs text-muted">Images, PDF, or Excel (optional)</span>
             <input
               type="file"
               className="sr-only"

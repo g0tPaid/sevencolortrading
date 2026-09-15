@@ -1,6 +1,6 @@
 /**
  * Thin dated one-liners for the homepage strip and /updates.
- * Keep this short — not a newsroom. Daily China sourcing news lives at /news.
+ * Keep this short, not a newsroom. Daily China sourcing news lives at /news.
  */
 
 export type SiteUpdate = {
@@ -14,26 +14,26 @@ export const updatesIntro = {
   eyebrow: "Updates",
   title: "Notes from the desk",
   description:
-    "Short dated pointers into Knowledge, case studies, and comparison pages — not a news feed.",
+    "Short dated pointers into Knowledge, case studies, and comparison pages, not a news feed.",
 } as const;
 
 export const siteUpdates: SiteUpdate[] = [
   {
     date: "14 Sep 2026",
     iso: "2026-09-14",
-    title: "Amazon FBA private label — OEM, packaging, QC, and freight from China",
+    title: "Amazon FBA private label: OEM, packaging, QC, and freight from China",
     href: "/amazon-fba",
   },
   {
     date: "14 Sep 2026",
     iso: "2026-09-14",
-    title: "How to source from China — factory to delivery, plus inspection guide",
+    title: "How to source from China: factory to delivery, plus inspection guide",
     href: "/knowledge/how-to-source-from-china",
   },
   {
     date: "12 Sep 2026",
     iso: "2026-09-12",
-    title: "Sourcing agent vs Alibaba — when a desk beats a marketplace",
+    title: "Sourcing agent vs Alibaba: when a desk beats a marketplace",
     href: "/compare/sourcing-agent-vs-alibaba",
   },
   {
@@ -45,7 +45,7 @@ export const siteUpdates: SiteUpdate[] = [
   {
     date: "28 Aug 2026",
     iso: "2026-08-28",
-    title: "China 3PL vs DIY freight — operator warehouse or you stitch the lane",
+    title: "China 3PL vs DIY freight: operator warehouse or you stitch the lane",
     href: "/compare/china-3pl-vs-diy-freight",
   },
   {
@@ -57,7 +57,7 @@ export const siteUpdates: SiteUpdate[] = [
   {
     date: "30 Jul 2026",
     iso: "2026-07-30",
-    title: "Factory visit vs remote QC only — when to get on the floor",
+    title: "Factory visit vs remote QC only: when to get on the floor",
     href: "/compare/factory-visit-vs-remote-qc",
   },
 ];

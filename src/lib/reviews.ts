@@ -3,7 +3,7 @@
  *
  * Use first name + role/market only. Do not invent Reddit usernames or
  * permalinks. When Ajmal pastes an approved quote, set `approved: true` and
- * optionally `permalink` + `sourceLabel` — the card will then link out.
+ * optionally `permalink` + `sourceLabel`. The card will then link out.
  * Never emit AggregateRating / star schema until real rated reviews exist.
  */
 
@@ -17,7 +17,7 @@ export type Review = {
   market: string;
   date?: string;
   sourceLabel: ReviewSource;
-  /** Official permalink only — leave unset until Ajmal approves a live URL. */
+  /** Official permalink only. Leave unset until Ajmal approves a live URL. */
   permalink?: string;
   /** Flip true when the quote and optional permalink are approved to publish as attributed. */
   approved: boolean;
@@ -27,7 +27,7 @@ export const reviewsIntro = {
   eyebrow: "Reviews",
   title: "What buyers say after the factory floor",
   description:
-    "First-name notes from importers and brands who used Seven Color Trading — sourcing.center — for China factory matching, own 3PL from our Xiamen warehouse and Dubai, or a Visit China trip. Family names stay off the page.",
+    "First-name notes from importers and brands who used Seven Color Trading (sourcing.center) for China factory matching, own 3PL from our Xiamen warehouse and Dubai, or a Visit China trip. Family names stay off the page.",
   moreLine:
     "More reviews on Reddit / ask us for references. We will share approved notes and a desk intro on WhatsApp.",
 } as const;
@@ -35,13 +35,13 @@ export const reviewsIntro = {
 /**
  * Anonymized client notes grounded in real positioning (D&B, Xiamen + Dubai
  * warehouses, sourcing / 3PL / visit). Swap quote + name + optional permalink
- * here when approved copy arrives — no other file required.
+ * here when approved copy arrives. No other file required.
  */
 export const reviews: Review[] = [
   {
     id: "daniel-dtc-us",
     quote:
-      "Needed a real factory for a first SKU, not another marketplace thread. The China desk sent two maker options, a sample video, and a unit cost we could plan around — without a catalog-MOQ speech.",
+      "Needed a real factory for a first SKU, not another marketplace thread. The China desk sent two maker options, a sample video, and a unit cost we could plan around, with no catalog-MOQ speech.",
     firstName: "Daniel",
     role: "DTC founder",
     market: "United States",
@@ -52,7 +52,7 @@ export const reviews: Review[] = [
   {
     id: "lina-retail-gcc",
     quote:
-      "We already bought in China but counts, QC, and Dubai inbound lived in three inboxes. Putting stock into their own Xiamen and Al Ain warehouses — same relationship manager — cut the handoffs. Photo QC lands in one place.",
+      "We already bought in China but counts, QC, and Dubai inbound lived in three inboxes. Putting stock into their own Xiamen and Al Ain warehouses (same relationship manager) cut the handoffs. Photo QC lands in one place.",
     firstName: "Lina",
     role: "Retail buyer",
     market: "UAE",
@@ -74,7 +74,7 @@ export const reviews: Review[] = [
   {
     id: "elena-brand-eu",
     quote:
-      "Flew into Xiamen for a hosted visit — warehouse walk-through, two factories in our category, interpreter on the floor. Not a tourist tour. We locked the QC standard before we left.",
+      "Flew into Xiamen for a hosted visit: warehouse walk-through, two factories in our category, interpreter on the floor. Not a tourist tour. We locked the QC standard before we left.",
     firstName: "Elena",
     role: "Brand founder",
     market: "Europe",
