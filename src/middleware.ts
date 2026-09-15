@@ -50,6 +50,8 @@ function isProtectedApi(pathname: string, method: string): boolean {
   if (pathname === "/api/analytics/stats" && m === "GET") return true;
 
   if (pathname === "/api/factory-applications" && m === "GET") return true;
+  if (pathname === "/api/rfq" && m === "GET") return true;
+  if (pathname === "/api/visit-inquiries" && m === "GET") return true;
 
   // PATCH /api/factory-applications/:id
   if (

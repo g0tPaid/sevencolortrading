@@ -4,9 +4,9 @@ export const company = {
   byline: "by Seven Color Trading Co Ltd · China",
   legalName: "Seven Color Trading Co Ltd",
   legalNameFull: "Xiamen Ajmal Seven Color Trading Co Ltd",
-  tagline: "One Platform for Product Ideation & Sourcing from China.",
+  tagline: "China sourcing agent with own 3PL in Xiamen and Dubai.",
   description:
-    "Discover winning product ideas, validate demand, connect with verified manufacturers, manage production, and source directly from China, then fulfill from our own 3PL warehouses in Xiamen and Dubai.",
+    "China sourcing agent since 2014: verified factories, photo/video QC, USD 110/day inspection, Visit China from Xiamen, 1688 buying into our warehouse, and own 3PL in Xiamen and Dubai.",
   founded: "2014",
   emails: {
     corporate: "info@sevencolor.online",
@@ -98,10 +98,11 @@ export const categories = [
   },
 ];
 
-export const industries = [
+export const industries: Array<{ title: string; description: string; href?: string }> = [
   {
     title: "E-commerce & DTC",
-    description: "Launch SKUs fast with photo/video QC and flexible quantities.",
+    href: "/industries/ecommerce-dtc",
+    description: "Launch SKUs fast with photo/video QC, Amazon FBA prep, and flexible quantities.",
   },
   {
     title: "Retail & Distribution",
@@ -126,6 +127,12 @@ export const industries = [
 ];
 
 export const services = [
+  {
+    href: "/1688-sourcing",
+    title: "1688 Sourcing",
+    description:
+      "We pay 1688 in RMB, receive into our Xiamen warehouse, QC, then hold or export. Not a 1688 app.",
+  },
   {
     href: "/factory-verification",
     title: "Factory Verification",
@@ -330,6 +337,54 @@ export const knowledgeArticles = [
     readTime: "5 min",
     excerpt:
       "Artwork, labels, inserts, and carton marks to lock before a private-label run in China. Photo/video QC and optional PSI at USD 110 per inspector day.",
+  },
+  {
+    slug: "how-to-source-from-1688",
+    title: "How to source from 1688 without a Chinese account",
+    category: "Procurement",
+    readTime: "7 min",
+    excerpt:
+      "1688 is a domestic catalog. The Xiamen desk pays in RMB, receives into our warehouse, inspects, then exports. Not a 1688 app.",
+  },
+  {
+    slug: "china-sourcing-agent-cost",
+    title: "China sourcing agent cost: what we publish and what we quote",
+    category: "Procurement",
+    readTime: "5 min",
+    excerpt:
+      "Published inspection rate: USD 110 per inspector day. Sourcing, 3PL, and freight are quoted from the RFQ. No invented commission percentage.",
+  },
+  {
+    slug: "how-to-find-a-chinese-factory",
+    title: "How to find a Chinese factory you can actually buy from",
+    category: "Procurement",
+    readTime: "6 min",
+    excerpt:
+      "Listings are a scan. License, factory vs trader, samples from 1 unit, and verification from the Xiamen desk.",
+  },
+  {
+    slug: "factory-vs-trading-company",
+    title: "Factory vs trading company in China: what to verify",
+    category: "Verification",
+    readTime: "6 min",
+    excerpt:
+      "A trader is not automatically a red flag. A hidden trader is. License, line walk, and who issues the invoice.",
+  },
+  {
+    slug: "landed-cost-from-china",
+    title: "Landed cost from China: checklist and an adder, not a duty table",
+    category: "Logistics",
+    readTime: "6 min",
+    excerpt:
+      "Stack EXW, inland, USD 110/day inspection, freight, and your destination fees. We do not publish HS-code duty tables.",
+  },
+  {
+    slug: "how-to-choose-china-sourcing-agent",
+    title: "How to choose a China sourcing agent (without a #1 claim)",
+    category: "Company",
+    readTime: "6 min",
+    excerpt:
+      "Verify legal name, licenses, DUNS, own warehouses vs broker, on-ground inspection, and published vs quoted prices.",
   },
 ];
 

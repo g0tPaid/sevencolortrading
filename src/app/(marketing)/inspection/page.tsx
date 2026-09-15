@@ -33,7 +33,11 @@ export default function InspectionPage() {
           {company.legalName} · China desk · on the ground
         </p>
         <ServiceBadgeHero badge={inspection.eyebrow} subtitle={inspection.title} />
-        <p className="mt-4 max-w-2xl text-ink-soft sm:text-lg">{inspection.description}</p>
+        <p className="mt-4 max-w-2xl text-ink-soft sm:text-lg" data-seo-answer>
+          {inspection.description} AQL sampling is used when you specify a plan in the brief; this
+          page does not invent a default AQL. Photo/video is the report; the inspector is on the
+          factory floor or at the Xiamen warehouse.
+        </p>
         <aside className="glass-panel mt-8 max-w-xl rounded-[1.75rem] px-6 py-6 text-ink sm:px-8 sm:py-7">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">Price</p>
           <p className="mt-2 font-display text-5xl font-semibold tracking-tight text-ink sm:text-6xl">
@@ -157,6 +161,17 @@ export default function InspectionPage() {
             className="font-medium text-ink underline decoration-accent/40 underline-offset-4"
           >
             China quality inspection guide
+          </Link>
+          . Buying from a domestic listing first?{" "}
+          <Link href="/1688-sourcing" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
+            1688 sourcing
+          </Link>
+          . License and capacity before the PO:{" "}
+          <Link
+            href="/factory-verification"
+            className="font-medium text-ink underline decoration-accent/40 underline-offset-4"
+          >
+            factory verification
           </Link>
           .
         </p>

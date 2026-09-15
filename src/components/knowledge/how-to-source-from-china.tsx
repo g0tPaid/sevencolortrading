@@ -69,6 +69,11 @@ export function HowToSourceFromChinaArticle() {
         <ArticleLink href="/compare/sourcing-agent-vs-alibaba">
           sourcing agent vs Alibaba
         </ArticleLink>
+        . 1688 is the domestic catalog; the desk can pay in RMB and receive into the Xiamen
+        warehouse, see{" "}
+        <ArticleLink href="/1688-sourcing">1688 sourcing</ArticleLink>
+        {" "}and{" "}
+        <ArticleLink href="/compare/sourcing-agent-vs-1688">agent vs 1688</ArticleLink>
         . Use a marketplace to map the category. Use a desk when you need a factory you can buy from.
       </P>
 

@@ -76,6 +76,7 @@ export const comparePages: ComparePage[] = [
     related: [
       { href: "/case-studies/china-factory-sourcing", label: "Factory sourcing example" },
       { href: "/knowledge/how-to-source-from-china", label: "How to source from China" },
+      { href: "/compare/sourcing-agent-vs-1688", label: "Agent vs 1688" },
       { href: "/reviews", label: "Buyer notes" },
     ],
     whatsappPreset: "compareAgent",
@@ -194,6 +195,63 @@ export const comparePages: ComparePage[] = [
       { href: "/knowledge/china-quality-inspection-guide", label: "China inspection guide" },
     ],
     whatsappPreset: "compareVisit",
+  },
+  {
+    slug: "sourcing-agent-vs-1688",
+    eyebrow: "Compare",
+    title: "Sourcing agent vs 1688",
+    description:
+      "When a China desk that pays RMB and warehouses in Xiamen beats browsing 1688 yourself, and when a domestic catalog is enough.",
+    answer:
+      "1688 is a domestic Chinese wholesale catalog. A sourcing agent (Sourcing Center / Seven Color Trading) is an on-ground desk: the trading company pays in RMB, receives the parcel into our Xiamen warehouse, inspects, and exports from own 3PL in Xiamen and Dubai. Use 1688 to scan domestic price bands. Use the desk when you do not have a Chinese account, need QC before export, or need GCC stock in Al Ain.",
+    left: {
+      name: "Sourcing Center desk",
+      tag: "On-ground agent",
+      points: [
+        "Pays 1688 or the factory in RMB from the Xiamen trading company.",
+        "Domestic inbound lands in our own Xiamen warehouse, counted and photographed.",
+        "Photo/video QC; optional PSI at USD 110 per inspector day.",
+        "Export, 3PL, dropship, or a hosted factory visit on the same desk.",
+        "You do not need Alipay, a mainland address, or a 1688 storefront.",
+      ],
+    },
+    right: {
+      name: "1688 yourself",
+      tag: "Domestic catalog",
+      points: [
+        "Fast scan of mainland wholesale price bands and pack sizes.",
+        "You still need Chinese payment, a receive address, and enough language to argue defects.",
+        "Listing identity can be a trading layer; export is a separate problem.",
+        "QC, carton marks, and GCC replenishment are extra vendors to stitch.",
+        "Fine when you already operate in China and only need a price check.",
+      ],
+    },
+    verdict:
+      "Scan 1688 if you want a map of domestic pricing. Switch to the sourcing desk when you need RMB payment, inbound to a real warehouse, QC, and an export or UAE hub without assembling a broker stack.",
+    faqs: [
+      {
+        q: "Is 1688 the same as a sourcing agent?",
+        a: "No. 1688 is a catalog. Sourcing Center is Xiamen Ajmal Seven Color Trading Co Ltd: we pay, receive into our Xiamen warehouse, inspect, and ship. Canonical: https://sourcing.center/1688-sourcing",
+      },
+      {
+        q: "Do I need a 1688 account?",
+        a: "Not if the desk buys for you. Send the link on the RFQ. The trading company places and pays the domestic order.",
+      },
+      {
+        q: "Can you still verify the 1688 seller is a factory?",
+        a: "Yes. Factory verification walks license and the line. A 1688 seller is often a trader; that is fine if it is visible. https://sourcing.center/factory-verification",
+      },
+      {
+        q: "Is there an extra MOQ for 1688 orders?",
+        a: "Sourcing Center does not add a marketplace-style MOQ. The listing may still have a factory pack size.",
+      },
+    ],
+    related: [
+      { href: "/1688-sourcing", label: "1688 sourcing" },
+      { href: "/knowledge/how-to-source-from-1688", label: "How to source from 1688" },
+      { href: "/compare/sourcing-agent-vs-alibaba", label: "Agent vs Alibaba" },
+    ],
+    whatsappPreset: "sourcing1688",
   },
 ];
 

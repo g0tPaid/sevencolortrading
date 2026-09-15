@@ -347,6 +347,10 @@ export const homepageAggregateFaqs = [
     q: "How do Chinese factories register as vendors?",
     a: "Apply at https://sourcing.center/factories/register (工厂入驻). Applications are reviewed; it is not a public marketplace listing.",
   },
+  {
+    q: "Can Sourcing Center buy from 1688 for me?",
+    a: "Yes. The Xiamen desk pays in RMB, receives into our own warehouse, QC, then hold or export. Not a 1688 app. Canonical page: https://sourcing.center/1688-sourcing",
+  },
 ] as const;
 
 export const fulfillment = {

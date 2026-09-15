@@ -13,7 +13,7 @@ export default function PrivateLabelPage() {
       <PageHero
         eyebrow="Private label"
         title="Your brand on proven manufacturing lines"
-        description="From packaging artwork to carton marks, we coordinate private label programs with factories that can actually scale."
+        description="From packaging artwork to carton marks, we coordinate private label programs with factories that can actually scale. Photo/video QC before mass release. Amazon inbound has its own page."
       />
       <Container className="grid gap-4 py-16 md:grid-cols-3">
         {["Brand packaging", "Label & insert control", "Retail-ready cartons"].map((t) => (
@@ -32,6 +32,17 @@ export default function PrivateLabelPage() {
           covers OEM, inspection, carton marks, and freight. Develop the product first on{" "}
           <Link href="/oem-odm" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
             OEM / ODM
+          </Link>
+          . Packing checklist:{" "}
+          <Link
+            href="/knowledge/private-label-packaging"
+            className="font-medium text-ink underline decoration-accent/40 underline-offset-4"
+          >
+            what to approve before mass production
+          </Link>
+          . Inspection at USD 110 per inspector day:{" "}
+          <Link href="/inspection" className="font-medium text-ink underline decoration-accent/40 underline-offset-4">
+            /inspection
           </Link>
           .
         </p>

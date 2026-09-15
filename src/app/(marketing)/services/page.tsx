@@ -13,8 +13,8 @@ export default function ServicesPage() {
     <>
       <PageHero
         eyebrow="Services"
-        title="A complete China sourcing company"
-        description="Every capability your procurement team needs between RFQ and delivery: verification, QC, private label, OEM/ODM, Amazon FBA prep, and logistics."
+        title="China sourcing services: QC, OEM, 3PL, 1688 buying"
+        description="Every capability between RFQ and delivery: verification, USD 110/day inspection, private label, OEM/ODM, Amazon FBA prep, 1688 buying, and own-warehouse logistics."
       />
       <Container className="grid gap-4 py-16 md:grid-cols-2">
         {services.map((s) => (

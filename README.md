@@ -99,4 +99,16 @@ If a notify call fails, the API still returns `{ ok: true }` and logs `[factory-
 
 Factory international-presence inquiries from `/factory-growth` are stored in the same applications file with `sourcePath: "/factory-growth"` and use the same notify channels. They are not vendor registrations.
 
+## Buyer RFQ and Visit China forms
+
+The contact RFQ (`/contact`, homepage hero on the v1 layout) and Visit China form (`/visit`) **persist**. Fake client-only success states are gone.
+
+- `POST /api/rfq` — public. `multipart/form-data` (preferred) or JSON. Required: `name`, `whatsapp` (or `phone`), `description` (min 8 chars). Optional: `email`, `quantity`, `budget`, `sourcePath`, files (`files`, max 4, 6MB, images/PDF/Excel/CSV). Honeypot: `website_url`.
+- `POST /api/visit-inquiries` — public JSON. Required: `name`, `email`, `phone`, `startDate`.
+- `GET` on both routes is admin-session only (same cookie as `/dashboard`).
+
+Records: `/data/inquiries.json` (same `DATA_DIR` / `ANALYTICS_DATA_DIR` pattern; fallback `/tmp/sourcing-analytics`). Optional RFQ uploads: `/data/rfq-uploads/{id}/`. If a file write fails, the text inquiry still saves.
+
+Ops notify reuses `FACTORY_NOTIFY_WEBHOOK` / `FACTORY_NOTIFY_EMAIL` / `RESEND_API_KEY`. Best-effort; never fails the public form. Logs `[inquiries-notify]`.
+
 

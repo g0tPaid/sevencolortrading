@@ -17,8 +17,8 @@ export default function OemOdmPage() {
       <JsonLd data={offerNode("oem-odm")} />
       <PageHero
         eyebrow="OEM / ODM"
-        title="Develop products without losing control"
-        description="Concept support, supplier matching, tooling coordination, and production management with IP-aware workflows."
+        title="OEM/ODM in China: NDA first, then tooling"
+        description="Concept support, supplier matching, tooling coordination, and production management with IP-aware workflows. The brief stays closed until the NDA is signed."
       />
       <Container className="py-16">
         <p className="max-w-2xl text-sm leading-relaxed text-muted" data-seo-answer>

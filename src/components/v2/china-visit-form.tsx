@@ -7,13 +7,51 @@ import {
   chinaVisitDurations,
   chinaVisitFocus,
 } from "@/lib/v2-content";
+import { whatsappHref, whatsappPresets } from "@/lib/whatsapp";
 
 export function ChinaVisitForm() {
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSent(true);
+    setError(null);
+    const form = new FormData(e.currentTarget);
+    const payload = {
+      name: String(form.get("name") || ""),
+      company: String(form.get("company") || ""),
+      email: String(form.get("email") || ""),
+      phone: String(form.get("phone") || ""),
+      startDate: String(form.get("startDate") || ""),
+      duration: String(form.get("duration") || ""),
+      travelers: String(form.get("travelers") || ""),
+      focus: String(form.get("focus") || ""),
+      notes: String(form.get("notes") || ""),
+      website_url: String(form.get("website_url") || ""),
+      sourcePath: "/visit",
+    };
+
+    setSubmitting(true);
+    try {
+      const response = await fetch("/api/visit-inquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = (await response.json().catch(() => null)) as
+        | { ok?: boolean; id?: string; error?: string }
+        | null;
+      if (!response.ok || !data?.ok || !data.id) {
+        setError(data?.error || "Could not send the visit request. Try again or use WhatsApp.");
+        return;
+      }
+      setSent(true);
+    } catch {
+      setError("Network error. Try again or continue on WhatsApp.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   if (sent) {
@@ -27,6 +65,12 @@ export function ChinaVisitForm() {
         <p className="mt-3 text-sm text-muted">
           The China desk will confirm factories, hotel, and pickup within 24 hours.
         </p>
+        <a
+          href={whatsappHref(whatsappPresets.factoryVisit)}
+          className="mt-5 inline-flex text-sm font-medium text-ink underline decoration-accent/40 underline-offset-4"
+        >
+          Continue on WhatsApp
+        </a>
       </motion.div>
     );
   }
@@ -34,7 +78,7 @@ export function ChinaVisitForm() {
   return (
     <form
       onSubmit={onSubmit}
-      className="glass-panel rounded-[1.75rem] p-5 sm:p-7"
+      className="relative glass-panel rounded-[1.75rem] p-5 sm:p-7"
       aria-label="Schedule a China factory visit"
     >
       <div className="mb-5 flex items-center gap-2">
@@ -50,6 +94,7 @@ export function ChinaVisitForm() {
           <input
             required
             name="name"
+            autoComplete="name"
             className="glass-input w-full rounded-2xl px-4 py-3 text-ink outline-none"
           />
         </label>
@@ -57,6 +102,7 @@ export function ChinaVisitForm() {
           <span className="mb-1.5 block text-muted">Company</span>
           <input
             name="company"
+            autoComplete="organization"
             className="glass-input w-full rounded-2xl px-4 py-3 text-ink outline-none"
           />
         </label>
@@ -66,6 +112,7 @@ export function ChinaVisitForm() {
             required
             type="email"
             name="email"
+            autoComplete="email"
             className="glass-input w-full rounded-2xl px-4 py-3 text-ink outline-none"
           />
         </label>
@@ -74,6 +121,8 @@ export function ChinaVisitForm() {
           <input
             required
             name="phone"
+            inputMode="tel"
+            autoComplete="tel"
             placeholder="+971 … or +86 …"
             className="glass-input w-full rounded-2xl px-4 py-3 text-ink outline-none placeholder:text-muted/70"
           />
@@ -134,12 +183,32 @@ export function ChinaVisitForm() {
           />
         </label>
       </div>
+      <input
+        name="website_url"
+        tabIndex={-1}
+        autoComplete="off"
+        defaultValue=""
+        className="absolute left-[-9999px] h-0 w-0 overflow-hidden"
+        aria-hidden
+      />
+      {error ? (
+        <p className="mt-4 text-sm text-accent" role="alert">
+          {error}{" "}
+          <a
+            href={whatsappHref(whatsappPresets.factoryVisit)}
+            className="font-medium underline decoration-accent/40 underline-offset-4"
+          >
+            WhatsApp the desk
+          </a>
+        </p>
+      ) : null}
       <button
         type="submit"
-        className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90"
+        disabled={submitting}
+        className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90 disabled:opacity-60"
       >
         <Send className="h-4 w-4" aria-hidden />
-        Request China visit
+        {submitting ? "Sending…" : "Request China visit"}
       </button>
       <p className="mt-3 text-center text-[11px] text-muted">
         Hosted in China · based in Xiamen · reply in 24h · not a brokered tourist tour

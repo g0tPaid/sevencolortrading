@@ -31,19 +31,47 @@ const nextSteps = [
   },
 ];
 
-export function RfqForm({ compact = false }: { compact?: boolean }) {
-  const [files, setFiles] = useState<string[]>([]);
+export function RfqForm({ compact = false, sourcePath = "/contact" }: { compact?: boolean; sourcePath?: string }) {
+  const [files, setFiles] = useState<File[]>([]);
   const [sent, setSent] = useState(false);
   const [more, setMore] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   function onFiles(list: FileList | null) {
     if (!list) return;
-    setFiles(Array.from(list).map((f) => f.name));
+    setFiles(Array.from(list).slice(0, 4));
   }
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSent(true);
+    setError(null);
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    for (const file of files) {
+      data.append("files", file);
+    }
+    data.set("sourcePath", sourcePath);
+
+    setSubmitting(true);
+    try {
+      const response = await fetch("/api/rfq", {
+        method: "POST",
+        body: data,
+      });
+      const payload = (await response.json().catch(() => null)) as
+        | { ok?: boolean; id?: string; error?: string }
+        | null;
+      if (!response.ok || !payload?.ok || !payload.id) {
+        setError(payload?.error || "Could not send the RFQ. Try again or use WhatsApp.");
+        return;
+      }
+      setSent(true);
+    } catch {
+      setError("Network error. Try again or continue on WhatsApp.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   if (sent) {
@@ -78,7 +106,7 @@ export function RfqForm({ compact = false }: { compact?: boolean }) {
   return (
     <form
       onSubmit={onSubmit}
-      className={cn("glass-panel rounded-[1.75rem]", compact ? "p-5" : "p-6 sm:p-8")}
+      className={cn("relative glass-panel rounded-[1.75rem]", compact ? "p-5" : "p-6 sm:p-8")}
       aria-label="Sourcing request form"
     >
       <div className="mb-5 flex items-center justify-between gap-3">
@@ -109,7 +137,8 @@ export function RfqForm({ compact = false }: { compact?: boolean }) {
             required
             name="description"
             rows={compact ? 3 : 4}
-            placeholder="Product idea, specs, quantity if you know it, target market…"
+            minLength={8}
+            placeholder="Product idea, specs, quantity if you know it, target market, 1688 or Alibaba link…"
             className="glass-input w-full resize-y rounded-2xl px-4 py-3 text-ink outline-none placeholder:text-muted/70"
           />
         </label>
@@ -119,6 +148,7 @@ export function RfqForm({ compact = false }: { compact?: boolean }) {
             <input
               required
               name="name"
+              autoComplete="name"
               className="glass-input w-full rounded-2xl px-4 py-3 text-ink outline-none"
             />
           </label>
@@ -128,12 +158,22 @@ export function RfqForm({ compact = false }: { compact?: boolean }) {
               required
               name="whatsapp"
               inputMode="tel"
+              autoComplete="tel"
               placeholder="+86 / +971 / +1…"
               className="glass-input w-full rounded-2xl px-4 py-3 text-ink outline-none placeholder:text-muted/70"
             />
           </label>
         </div>
       </div>
+
+      <input
+        name="website_url"
+        tabIndex={-1}
+        autoComplete="off"
+        defaultValue=""
+        className="absolute left-[-9999px] h-0 w-0 overflow-hidden"
+        aria-hidden
+      />
 
       <button
         type="button"
@@ -152,6 +192,7 @@ export function RfqForm({ compact = false }: { compact?: boolean }) {
             <input
               type="email"
               name="email"
+              autoComplete="email"
               className="glass-input w-full rounded-2xl px-4 py-3 text-ink outline-none"
             />
           </label>
@@ -174,7 +215,7 @@ export function RfqForm({ compact = false }: { compact?: boolean }) {
           <label className="glass-chip flex cursor-pointer flex-col items-center justify-center rounded-2xl border-dashed px-4 py-6 text-center transition hover:border-accent/50 sm:col-span-2">
             <Upload className="mb-2 h-5 w-5 text-accent" />
             <span className="text-sm font-medium text-ink">Upload RFQ files</span>
-            <span className="mt-1 text-xs text-muted">Images, PDF, or Excel (optional)</span>
+            <span className="mt-1 text-xs text-muted">Images, PDF, or Excel (optional, max 4 files / 6MB each)</span>
             <input
               type="file"
               className="sr-only"
@@ -185,20 +226,30 @@ export function RfqForm({ compact = false }: { compact?: boolean }) {
           </label>
           {files.length > 0 ? (
             <ul className="space-y-1 text-xs text-muted sm:col-span-2">
-              {files.map((name) => (
-                <li key={name}>Attached: {name}</li>
+              {files.map((file) => (
+                <li key={`${file.name}-${file.size}`}>Attached: {file.name}</li>
               ))}
             </ul>
           ) : null}
         </div>
       ) : null}
 
+      {error ? (
+        <p className="mt-4 text-sm text-accent" role="alert">
+          {error}{" "}
+          <a href={whatsappHref(whatsappPresets.rfq)} className="font-medium underline decoration-accent/40 underline-offset-4">
+            WhatsApp the desk
+          </a>
+        </p>
+      ) : null}
+
       <button
         type="submit"
-        className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-medium text-paper transition hover:opacity-90 dark:bg-accent dark:text-paper"
+        disabled={submitting}
+        className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-medium text-paper transition hover:opacity-90 disabled:opacity-60 dark:bg-accent dark:text-paper"
       >
         <Send className="h-4 w-4" />
-        Get my quote
+        {submitting ? "Sending…" : "Get my quote"}
       </button>
       <p className="mt-3 text-center text-[11px] text-muted">
         Three fields to start · Reply in 24h · China HQ & Dubai branch
