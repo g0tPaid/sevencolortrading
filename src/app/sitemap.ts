@@ -20,7 +20,7 @@ const routes: Array<{ path: string; priority: number; changeFrequency: MetadataR
   { path: "/contact", priority: 0.8, changeFrequency: "monthly" },
   { path: "/industries", priority: 0.6, changeFrequency: "monthly" },
   { path: "/how-it-works", priority: 0.6, changeFrequency: "monthly" },
-  { path: "/factory-verification", priority: 0.6, changeFrequency: "monthly" },
+  { path: "/factory-verification", priority: 0.86, changeFrequency: "weekly" },
   { path: "/1688-sourcing", priority: 0.9, changeFrequency: "weekly" },
   { path: "/sourcing-for/uae", priority: 0.82, changeFrequency: "monthly" },
   { path: "/industries/ecommerce-dtc", priority: 0.7, changeFrequency: "monthly" },
