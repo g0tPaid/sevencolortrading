@@ -41,6 +41,49 @@ Railway / production env vars:
 
 In development, unset credentials fall back to `admin` / `admin`.
 
+## Daily China sourcing news
+
+Public hub: `/news` (index) and `/news/[slug]` (bilingual EN | 中文). `/updates` stays as dated desk notes.
+
+Posts are merged from a static seed (`src/lib/news.ts`) plus a Railway volume JSON file (`/data/news-posts.json`, same `DATA_DIR` / `ANALYTICS_DATA_DIR` pattern as analytics and factory applications). Volume rows override seed by slug.
+
+**Publish without a deploy** (preferred for the daily agent):
+
+```bash
+curl -sS -X POST https://sourcing.center/api/news \
+  -H "Content-Type: application/json" \
+  -H "x-news-publish-secret: $NEWS_PUBLISH_SECRET" \
+  -d '{
+    "slug": "2026-09-16-example-sourced-brief",
+    "date": "2026-09-16",
+    "titleEn": "...",
+    "titleZh": "...",
+    "summaryEn": "...",
+    "summaryZh": "...",
+    "takeawayEn": "...",
+    "takeawayZh": "...",
+    "sourceName": "Primary outlet name",
+    "sourceUrl": "https://example.com/original-story",
+    "tags": ["logistics", "tariffs"],
+    "bodyEn": ["Paragraph one.", "Paragraph two."],
+    "bodyZh": ["第一段。", "第二段。"]
+  }'
+```
+
+Auth for `POST /api/news`:
+
+- `NEWS_PUBLISH_SECRET` via `x-news-publish-secret` or `Authorization: Bearer …` (daily agent)
+- or an existing admin session cookie (same as `/dashboard`)
+
+`GET /api/news` is public (`{ posts }`). `GET /api/news?slug=…` returns one post.
+
+Do not publish unsourced tariff numbers or invented policy claims. Seed content is a how-the-desk-works note only.
+
+Railway / production env:
+
+- `NEWS_PUBLISH_SECRET` (recommended for the daily agent)
+- `DATA_DIR` or `ANALYTICS_DATA_DIR` (optional; defaults to `/data`)
+
 ## Factory application alerts
 
 When a factory submits `/factories/register`, the application is **always saved**. Ops notify is best-effort and must not fail the public form.

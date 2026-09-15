@@ -19,6 +19,16 @@ export default function UpdatesPage() {
           {updatesIntro.title}
         </h1>
         <p className="mt-4 max-w-2xl text-muted sm:text-lg">{updatesIntro.description}</p>
+        <p className="mt-4 text-sm text-muted">
+          Daily bilingual China sourcing news (cited briefs for importers) lives on{" "}
+          <Link
+            href="/news"
+            className="font-medium text-ink underline decoration-accent/40 underline-offset-4"
+          >
+            /news
+          </Link>
+          .
+        </p>
         <ol className="mt-10 space-y-3">
           {siteUpdates.map((item) => (
             <li key={item.href}>

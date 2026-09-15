@@ -129,6 +129,12 @@ export const pages = {
       "Dated notes from the Sourcing Center China desk into knowledge guides, comparison pages, and case studies on China sourcing, 3PL, and factory visits.",
     path: "/updates",
   }),
+  news: routeMetadata({
+    title: "China Sourcing News — Manufacturing, Tariffs, Logistics",
+    description:
+      "Bilingual China sourcing news for importers: factories, supply chain, tariffs, logistics, and policy. Cited briefs from the Xiamen desk. English and 中文.",
+    path: "/news",
+  }),
   factoriesRegister: routeMetadata({
     title: "China Factory Vendor Registration (工厂入驻) for Buyers",
     description:

@@ -1,6 +1,6 @@
 /**
  * Thin dated one-liners for the homepage strip and /updates.
- * Keep this short — not a newsroom. No top-level News nav item.
+ * Keep this short — not a newsroom. Daily China sourcing news lives at /news.
  */
 
 export type SiteUpdate = {
