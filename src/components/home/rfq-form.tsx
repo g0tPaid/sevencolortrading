@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown, FileSpreadsheet, ImageIcon, Paperclip, Send, Upload } from "lucide-react";
 import { ButtonLink } from "@/components/ui/primitives";
+import { trackGaEvent } from "@/lib/ga";
 import { cn } from "@/lib/utils";
 import { whatsappHref, whatsappPresets } from "@/lib/whatsapp";
 
@@ -66,6 +67,7 @@ export function RfqForm({ compact = false, sourcePath = "/contact" }: { compact?
         setError(payload?.error || "Could not send the RFQ. Try again or use WhatsApp.");
         return;
       }
+      trackGaEvent("generate_lead", { method: "rfq", source_path: sourcePath });
       setSent(true);
     } catch {
       setError("Network error. Try again or continue on WhatsApp.");

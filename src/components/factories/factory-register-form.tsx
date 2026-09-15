@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Check, Factory, Send, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { trackGaEvent } from "@/lib/ga";
 import { FactoryGrowthPill } from "@/components/factories/factory-growth-pill";
 
 const SUGGESTED_CATEGORIES = [
@@ -188,6 +189,7 @@ export function FactoryRegisterForm() {
         setError(data?.error || "Could not submit. Please try again. / 提交失败，请重试。");
         return;
       }
+      trackGaEvent("generate_lead", { method: "factory_application", source_path: "/factories/register" });
       setSubmittedId(data.id);
     } catch {
       setError("Network error. Please try again. / 网络错误，请重试。");

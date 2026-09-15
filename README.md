@@ -41,6 +41,24 @@ Railway / production env vars:
 
 In development, unset credentials fall back to `admin` / `admin`.
 
+## Google Analytics 4
+
+The first-party `/dashboard` visitor counter stays. GA4 loads for the sourcing.center web stream `G-7QEW0MNP6C`.
+
+Railway / production env (optional):
+
+- `GA_MEASUREMENT_ID` — override the default Measurement ID. `NEXT_PUBLIC_GA_MEASUREMENT_ID` also works.
+
+Realtime check: https://analytics.google.com → Reports → Realtime.
+
+Tracked:
+
+- `page_view` on each App Router navigation
+- `generate_lead` after a saved RFQ, Visit China request, factory application, or factory-growth inquiry
+- `contact` when the WhatsApp float is clicked
+
+No names, emails, or phone numbers are sent to Google.
+
 ## Daily China sourcing news
 
 Public hub: `/news` (index) and `/news/[slug]` (bilingual EN | 中文). `/updates` stays as dated desk notes.

@@ -12,6 +12,7 @@ import {
 } from "@/lib/factory-growth";
 import { useFactoryGrowthUi } from "./locale-context";
 import { LanguageSwitcher } from "./language-switcher";
+import { trackGaEvent } from "@/lib/ga";
 
 const inputClass =
   "glass-input w-full rounded-2xl px-4 py-3 text-ink outline-none placeholder:text-muted/70";
@@ -122,6 +123,7 @@ export function GrowthInquiryForm() {
         setError(data?.error || t(formFields.fail));
         return;
       }
+      trackGaEvent("generate_lead", { method: "factory_growth", source_path: "/factory-growth" });
       setSubmittedId(data.id);
     } catch {
       setError(t(formFields.network));

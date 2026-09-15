@@ -7,6 +7,7 @@ import {
   chinaVisitDurations,
   chinaVisitFocus,
 } from "@/lib/v2-content";
+import { trackGaEvent } from "@/lib/ga";
 import { whatsappHref, whatsappPresets } from "@/lib/whatsapp";
 
 export function ChinaVisitForm() {
@@ -46,6 +47,7 @@ export function ChinaVisitForm() {
         setError(data?.error || "Could not send the visit request. Try again or use WhatsApp.");
         return;
       }
+      trackGaEvent("generate_lead", { method: "visit", source_path: "/visit" });
       setSent(true);
     } catch {
       setError("Network error. Try again or continue on WhatsApp.");
