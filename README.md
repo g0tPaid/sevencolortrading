@@ -43,13 +43,13 @@ In development, unset credentials fall back to `admin` / `admin`.
 
 ## Google Analytics 4
 
-The first-party `/dashboard` visitor counter stays. GA4 is separate and loads only when a measurement ID is set.
+The first-party `/dashboard` visitor counter stays. GA4 loads for the sourcing.center web stream `G-7QEW0MNP6C`.
 
-Railway / production env:
+Railway / production env (optional):
 
-- `GA_MEASUREMENT_ID` — GA4 ID (`G-XXXXXXXXXX`). Read at runtime via `/api/ga`, so a Railway variable + restart is enough even on prerendered pages. `NEXT_PUBLIC_GA_MEASUREMENT_ID` also works.
+- `GA_MEASUREMENT_ID` — override the default Measurement ID. `NEXT_PUBLIC_GA_MEASUREMENT_ID` also works.
 
-Do not commit the ID. Create the property at https://analytics.google.com (Data stream → Web → `https://sourcing.center`), then paste the Measurement ID into Railway Variables.
+Realtime check: https://analytics.google.com → Reports → Realtime.
 
 Tracked:
 
