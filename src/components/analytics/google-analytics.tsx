@@ -6,15 +6,18 @@ import { parseGaMeasurementId } from "@/lib/ga";
 
 function loadGtag(id: string) {
   if (typeof window === "undefined") return;
-  if (document.getElementById("ga4-src")) return;
 
   window.dataLayer = window.dataLayer || [];
-  window.gtag = function gtag() {
-    // eslint-disable-next-line prefer-rest-params
-    window.dataLayer?.push(arguments);
-  };
-  window.gtag("js", new Date());
-  window.gtag("config", id, { send_page_view: false, anonymize_ip: true });
+  if (typeof window.gtag !== "function") {
+    window.gtag = function gtag() {
+      // eslint-disable-next-line prefer-rest-params
+      window.dataLayer?.push(arguments);
+    };
+    window.gtag("js", new Date());
+    window.gtag("config", id, { send_page_view: false, anonymize_ip: true });
+  }
+
+  if (document.getElementById("ga4-src")) return;
 
   const script = document.createElement("script");
   script.id = "ga4-src";
@@ -28,7 +31,8 @@ function GaPageviews({ measurementId }: { measurementId: string }) {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    if (typeof window === "undefined" || typeof window.gtag !== "function") return;
+    loadGtag(measurementId);
+    if (typeof window.gtag !== "function") return;
     const search = searchParams?.toString();
     const pagePath = search ? `${pathname}?${search}` : pathname || "/";
     window.gtag("event", "page_view", {
@@ -65,10 +69,6 @@ export function GoogleAnalytics({ measurementId }: { measurementId?: string | nu
       cancelled = true;
     };
   }, [measurementId]);
-
-  useEffect(() => {
-    if (id) loadGtag(id);
-  }, [id]);
 
   if (!id) return null;
 

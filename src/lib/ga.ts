@@ -2,16 +2,6 @@
 
 const GA_ID = /^G-[A-Z0-9]{6,}$/i;
 
-export function parseGaMeasurementId(value: unknown): string | null {
-  if (typeof value !== "string") return null;
-  const id = value.trim();
-  return GA_ID.test(id) ? id : null;
-}
-
-/** Google Analytics 4 measurement IDs look like G-XXXXXXXXXX. */
-
-const GA_ID = /^G-[A-Z0-9]{6,}$/i;
-
 /** sourcing.center GA4 web stream. Override with GA_MEASUREMENT_ID if needed. */
 export const DEFAULT_GA_MEASUREMENT_ID = "G-7QEW0MNP6C";
 
