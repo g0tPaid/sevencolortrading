@@ -308,7 +308,7 @@ export function HowToChooseChinaSourcingAgentArticle() {
         <Bullet>On-the-ground inspection vs a remote-only JPEG product. Published rate: USD 110 / day.</Bullet>
         <Bullet>Hosted factory visit vs a tourist tour. Ours is based out of Xiamen.</Bullet>
         <Bullet>Published prices vs invented commission. We publish inspection only; the rest is quoted.</Bullet>
-        <Bullet>Reviews with stars in schema vs anonymized notes. We do not attach AggregateRating.</Bullet>
+        <Bullet>Reviews with stars in schema vs a live reference. We do not attach AggregateRating.</Bullet>
       </ul>
       <P>
         Compare{" "}

@@ -1,10 +1,10 @@
 /**
  * Public reviews for /reviews.
  *
- * Use first name + role/market only. Do not invent Reddit usernames or
- * permalinks. When Ajmal pastes an approved quote, set `approved: true` and
- * optionally `permalink` + `sourceLabel`. The card will then link out.
- * Never emit AggregateRating / star schema until real rated reviews exist.
+ * Only `approved: true` quotes ship on the page (and in the JS bundle via the
+ * published list). Do not invent Reddit usernames, permalinks, or star ratings.
+ * When a real attributed quote is approved, add it here with `approved: true`
+ * and optionally `permalink` + `sourceLabel`.
  */
 
 export type ReviewSource = "Client" | "Reddit" | "LinkedIn" | "Email";
@@ -17,69 +17,24 @@ export type Review = {
   market: string;
   date?: string;
   sourceLabel: ReviewSource;
-  /** Official permalink only. Leave unset until Ajmal approves a live URL. */
+  /** Official permalink only. Leave unset until a live URL is approved. */
   permalink?: string;
-  /** Flip true when the quote and optional permalink are approved to publish as attributed. */
+  /** Flip true only for a quote the desk has approved to publish. */
   approved: boolean;
 };
 
 export const reviewsIntro = {
-  eyebrow: "Reviews",
-  title: "What buyers say after the factory floor",
+  eyebrow: "References",
+  title: "Ask for a live reference, not a review farm",
   description:
-    "First-name notes from importers and brands who used Seven Color Trading (sourcing.center) for China factory matching, own 3PL from our Xiamen warehouse and Dubai, or a Visit China trip. Family names stay off the page.",
+    "This page does not publish star ratings, Trustpilot widgets, or anonymous quotes. Licenses and DUNS are on the about and FAQ pages. For a named client intro, WhatsApp the desk.",
   moreLine:
-    "More reviews on Reddit / ask us for references. We will share approved notes and a desk intro on WhatsApp.",
+    "We will share an approved reference on WhatsApp when we have one that matches your market. Until then, verify the China and UAE licenses yourself.",
 } as const;
 
-/**
- * Anonymized client notes grounded in real positioning (D&B, Xiamen + Dubai
- * warehouses, sourcing / 3PL / visit). Swap quote + name + optional permalink
- * here when approved copy arrives. No other file required.
- */
-export const reviews: Review[] = [
-  {
-    id: "daniel-dtc-us",
-    quote:
-      "Needed a real factory for a first SKU, not another marketplace thread. The China desk sent two maker options, a sample video, and a unit cost we could plan around, with no catalog-MOQ speech.",
-    firstName: "Daniel",
-    role: "DTC founder",
-    market: "United States",
-    date: "2026",
-    sourceLabel: "Client",
-    approved: false,
-  },
-  {
-    id: "lina-retail-gcc",
-    quote:
-      "We already bought in China but counts, QC, and Dubai inbound lived in three inboxes. Putting stock into their own Xiamen and Al Ain warehouses (same relationship manager) cut the handoffs. Photo QC lands in one place.",
-    firstName: "Lina",
-    role: "Retail buyer",
-    market: "UAE",
-    date: "2026",
-    sourceLabel: "Client",
-    approved: false,
-  },
-  {
-    id: "omar-importer-gcc",
-    quote:
-      "Asked for pictures before anything left the factory. They sent a photo/video pack on the inbound lot, flagged carton issues, and held the ship until we signed off. D&B-registered desk, not a broker chain.",
-    firstName: "Omar",
-    role: "Importer",
-    market: "Saudi Arabia",
-    date: "2025",
-    sourceLabel: "Client",
-    approved: false,
-  },
-  {
-    id: "elena-brand-eu",
-    quote:
-      "Flew into Xiamen for a hosted visit: warehouse walk-through, two factories in our category, interpreter on the floor. Not a tourist tour. We locked the QC standard before we left.",
-    firstName: "Elena",
-    role: "Brand founder",
-    market: "Europe",
-    date: "2025",
-    sourceLabel: "Client",
-    approved: false,
-  },
-];
+/** Only approved rows are rendered. Keep this empty rather than shipping placeholders. */
+export const reviews: Review[] = [];
+
+export function publishedReviews(): Review[] {
+  return reviews.filter((review) => review.approved);
+}

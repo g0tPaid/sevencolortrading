@@ -112,9 +112,9 @@ export const pages = {
     path: "/private-label",
   }),
   reviews: routeMetadata({
-    title: "Buyer Notes on China Sourcing, 3PL, and Factory Visits",
+    title: "References, Not Star Ratings",
     description:
-      "Anonymized buyer notes on sourcing.center, China factory sourcing, own 3PL, Visit China. Ask the desk for references. No star ratings used.",
+      "Sourcing Center does not publish star ratings or anonymous quotes. Verify licenses on the about page, then WhatsApp the desk for a live reference.",
     path: "/reviews",
   }),
   caseStudies: routeMetadata({

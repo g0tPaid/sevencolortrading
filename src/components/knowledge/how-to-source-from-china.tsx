@@ -189,8 +189,8 @@ export function HowToSourceFromChinaArticle() {
       <P>
         What this desk will not do: list every factory in China on a public storefront, claim a live
         Shopify app that is not published, publish a general price list for sourcing or freight, or
-        attach star ratings to the company in structured data. Buyer notes live on the reviews page
-        as anonymized first-name comments; ask for references on WhatsApp. Case studies are labeled
+        attach star ratings to the company in structured data. The reviews page does not host
+        anonymous quotes; ask for a live reference on WhatsApp. Case studies are labeled
         example engagements with conservative ranges.
       </P>
       <P>

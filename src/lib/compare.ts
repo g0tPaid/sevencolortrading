@@ -77,7 +77,7 @@ export const comparePages: ComparePage[] = [
       { href: "/case-studies/china-factory-sourcing", label: "Factory sourcing example" },
       { href: "/knowledge/how-to-source-from-china", label: "How to source from China" },
       { href: "/compare/sourcing-agent-vs-1688", label: "Agent vs 1688" },
-      { href: "/reviews", label: "Buyer notes" },
+      { href: "/reviews", label: "References" },
     ],
     whatsappPreset: "compareAgent",
   },
