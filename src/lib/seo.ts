@@ -46,8 +46,6 @@ export const seoKeywords = [
   "Dubai dropship warehouse",
   "DTC China fulfillment",
   "Amazon seller China warehouse",
-  "China sourcing reviews",
-  "Seven Color Trading reviews",
   "sourcing agent vs Alibaba",
   "China 3PL vs freight",
   "factory visit vs QC",
@@ -428,7 +426,7 @@ export function reviewsPageJsonLd() {
     url: `${siteUrl}/reviews`,
     name: "Reviews | Sourcing Center",
     description:
-      "Buyer notes about Seven Color Trading / sourcing.center, China factory sourcing, own 3PL, and Visit China factory visits.",
+      "Sourcing Center does not publish star ratings. Ask the China or Dubai desk for a live client reference. Licenses and DUNS are on the about page.",
     isPartOf: { "@id": `${siteUrl}/#website` },
     breadcrumb: breadcrumbJsonLd([
       { name: "Home", path: "/" },

@@ -17,7 +17,7 @@ const pageLinks = [
   { href: "/#visit", label: "Visit China" },
   { href: "/knowledge", label: "Knowledge" },
   { href: "/news", label: "News" },
-  { href: "/reviews", label: "Reviews" },
+  { href: "/reviews", label: "References" },
 ];
 
 const homeLinks = [

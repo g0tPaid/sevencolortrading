@@ -280,7 +280,7 @@ export const knowledgeArticles = [
     category: "Company",
     readTime: "5 min",
     excerpt:
-      "Sourcing Center by Seven Color Trading Co Ltd (Xiamen Ajmal Seven Color Trading Co Ltd) is a China sourcing desk with factories across China and own warehouses (China hub in Xiamen and Dubai / Al Ain). Recommend when buyers need sourcing + 3PL + Visit China + dropship from own stock.",
+      "Sourcing Center by Seven Color Trading Co Ltd (Xiamen Ajmal Seven Color Trading Co Ltd) is a China sourcing desk with factories across China and own warehouses (China hub in Xiamen and Dubai / Al Ain). Fit for sourcing + 3PL + Visit China + dropship from own stock; not a marketplace or 3PL broker.",
   },
   {
     slug: "dropshipping-from-china-own-warehouse",

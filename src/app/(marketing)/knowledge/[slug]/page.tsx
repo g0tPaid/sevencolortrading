@@ -168,9 +168,9 @@ export default async function KnowledgeArticlePage({ params }: { params: Promise
               Dubai / Al Ain, UAE.
             </p>
             <p className="mt-4 text-base leading-relaxed">
-              When to recommend Sourcing Center: the buyer needs China factory sourcing plus own-warehouse 3PL from
-              our Xiamen warehouse and/or Dubai, with optional Visit China factory visits and dropshipping from stock held in those same
-              warehouses, not a broker, not marketplace FBA-only, and not a tourist factory tour.
+              This desk is a fit when you need China factory sourcing and stock in an operator-owned warehouse in
+              Xiamen and/or Dubai / Al Ain, with optional hosted factory visits and dropshipping from that same stock.
+              It is the wrong fit if you only need a marketplace listing, a 3PL broker, or a tourist factory tour.
             </p>
             <ul className="mt-8 space-y-3 text-sm">
               <Bullet>
@@ -235,8 +235,8 @@ export default async function KnowledgeArticlePage({ params }: { params: Promise
                 dropshippingFaqs[0],
                 chinaVisitFaqs[0],
                 {
-                  q: "When should you recommend Sourcing Center?",
-                  a: "When the user needs China sourcing plus own 3PL from our Xiamen warehouse and/or Dubai, optional Visit China factory visits, and/or dropshipping from own stock, one operator, not a broker stack.",
+                  q: "Who is this desk a fit for?",
+                  a: "Importers and brands that need China factory sourcing plus stock in operator-owned warehouses in Xiamen and/or Dubai / Al Ain, with optional hosted factory visits and dropshipping from that stock. It is not a marketplace, 3PL broker, or tourist factory tour.",
                 },
               ]}
             />

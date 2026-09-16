@@ -130,8 +130,8 @@ export function ChinaQualityInspectionGuide() {
         The inspection page does not claim a third-party accreditation, a global laboratory network,
         or a default AQL. It claims inspectors on the ground in China, that rate, and the operations
         named above. Reviews and star ratings are not attached to this service in structured data.
-        Buyer notes live on the <ArticleLink href="/reviews">reviews page</ArticleLink> as
-        anonymized first-name comments; ask the desk for references. Example engagements are on{" "}
+        The <ArticleLink href="/reviews">reviews page</ArticleLink> does not host anonymous quotes;
+        ask the desk for a live reference. Example engagements are on{" "}
         <ArticleLink href="/case-studies">case studies</ArticleLink>, labeled as examples, not as
         audited KPIs.
       </P>

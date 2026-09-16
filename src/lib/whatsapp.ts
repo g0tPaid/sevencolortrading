@@ -9,7 +9,7 @@ export const whatsappPresets = {
   home: "Hi Seven Color, I came from sourcing.center and want help sourcing from China.",
   rfq: "Hi Seven Color, I want to send an RFQ / product brief via Sourcing Center.",
   reviews:
-    "Hi Seven Color, I saw the reviews on sourcing.center and would like references or to start sourcing.",
+    "Hi Seven Color, I would like a live client reference before sourcing, then I can send an RFQ.",
   caseStudies:
     "Hi Seven Color, I read a sourcing.center case study and would like to discuss a similar program.",
   factorySourcing:

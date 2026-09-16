@@ -15,7 +15,7 @@ const primaryLinks = [
   { href: "/industries", label: "Industries" },
   { href: "/case-studies", label: "Case studies" },
   { href: "/knowledge", label: "Knowledge" },
-  { href: "/reviews", label: "Reviews" },
+  { href: "/reviews", label: "References" },
 ];
 
 export function FloatingNav() {

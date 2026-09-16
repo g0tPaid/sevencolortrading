@@ -61,7 +61,7 @@ export function SiteFooter() {
                 ["Knowledge", "/knowledge"],
                 ["FAQ", "/faq"],
                 ["Compare", "/compare"],
-                ["Reviews", "/reviews"],
+                ["References", "/reviews"],
                 ["Updates", "/updates"],
                 ["News", "/news"],
                 ["1688 sourcing", "/1688-sourcing"],
