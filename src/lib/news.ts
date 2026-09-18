@@ -106,10 +106,66 @@ export const newsIndexFaqs: NewsFaq[] = [
 ];
 
 /**
- * Seed is a how-this-works desk note only. Daily stories are appended via
- * POST /api/news to the Railway volume (news-posts.json), not invented here.
+ * Seed holds the desk note plus fallback briefs when POST /api/news (volume) is
+ * unavailable. Do not invent tariff or policy facts; cite a public source URL.
  */
 export const seedNewsPosts: NewsPost[] = [
+  {
+    slug: "2026-09-18-maersk-suspends-tpx-transpacific-q4",
+    date: "2026-09-18",
+    kind: "brief",
+    titleEn: "Maersk suspends TPX extra loader for the rest of Q4 after 29 Sep",
+    titleZh: "马士基黄金周前停跨太加班航线TPX，9月29日后暂停至四季度末",
+    summaryEn:
+      "The Loadstar (17 Sep 2026) reports Maersk will suspend its standalone transpacific TPX extra-loader after the 4,200 teu Maersk Boston sails from Vung Tau on 29 Sep. TPX then stays down for the rest of Q4 2026. MSC separately said it will blank its Asia-US East Coast Emerald sailing in week 41 because of an expected Golden Week demand dip.",
+    summaryZh:
+      "The Loadstar（2026年9月17日）报道，马士基将在9月29日4200 TEU的Maersk Boston从头顿（Vung Tau）开出后，暂停独立跨太平洋加班航线TPX，并维持至2026年四季度结束。MSC另称，因预期黄金周前后需求回落，将抽掉第41周亚洲-美东Emerald航次。",
+    takeawayEn:
+      "Do not assume leftover TPX space after 29 Sep. Recheck westbound Gemini strings, and treat week 41 US East Coast bookings as at risk of a blank. Freight Right, cited in the same report, says stretch ocean lead time from about one week to two or three weeks while China holidays compress gate-in.",
+    takeawayZh:
+      "不要默认9月29日后还有TPX舱位。请核对西向Gemini航线，并把第41周美东订舱当作可能被抽班。同一报道援引货代Freight Right：中国长假压缩进港窗口，海运订舱最好从约一周提前到两到三周。",
+    sourceName: "The Loadstar",
+    sourceUrl: "https://theloadstar.com/maersk-cuts-transpacific-capacity-as-golden-week-slowdown-looms/",
+    tags: ["logistics", "transpacific", "golden-week", "shipping"],
+    bodyEn: [
+      "The Loadstar (17 Sep 2026) says Maersk told customers the last TPX sailing this year is Maersk Boston (about 4,200 teu) from Vung Tau on 29 September. After that voyage, TPX remains suspended for the rest of Q4 2026. Maersk said any 2027 seasonal restart would be announced later.",
+      "Xeneta's eeSea liner database, cited by The Loadstar, lists TPX as seven ships averaging about 4,400 teu on a Busan-Long Beach-Vung Tau rotation, originally expected to run into late November. Linerlytica figures in the same piece put Maersk's weekly transpacific offering at 32,200 teu; dropping TPX cuts that by more than 10%, leaving Gemini Cooperation services as the remaining Maersk capacity on the trade.",
+      "MSC this week said it will blank the Asia-US East Coast Emerald sailing in week 41 because of the expected slowdown during and after Golden Week. US west coast forwarder Freight Right, also quoted, said China holidays are creating a last push before factory and logistics closures, with more blanks, rollovers, and shifting ETDs. It recommended booking two to three weeks out even if cargo is not yet ready.",
+    ],
+    bodyZh: [
+      "The Loadstar（2026年9月17日）称，马士基通知客户：今年TPX最后一班是9月29日从头顿开出的约4200 TEU的Maersk Boston。此后该加班航线暂停至2026年四季度结束。马士基表示，2027年是否恢复季节性加班将另行通知。",
+      "同一报道援引Xeneta的eeSea船期库：TPX配置7艘、平均约4400 TEU，挂港釜山-长滩-头顿，原计划跑到11月下旬。Linerlytica数据称马士基跨太周运力约32200 TEU，停TPX后下降逾10%，剩余运力主要在Gemini合作航线上。",
+      "MSC本周表示，因黄金周期间及节后需求回落，将抽掉第41周亚洲-美东Emerald航次。美国西岸货代Freight Right称，工厂和物流即将停摆，出现最后一波出货，抽班、甩柜和ETD变动还会增加，即使货未备齐也建议提前两到三周锁舱。",
+    ],
+  },
+  {
+    slug: "2026-09-18-trump-xi-washington-summit-trade-agenda",
+    date: "2026-09-18",
+    kind: "brief",
+    titleEn: "Trump-Xi 24 Sep Washington agenda: tariff truce, Boeing, rare earths",
+    titleZh: "特朗普与习近平9月24日华盛顿议程：关税休战、波音与稀土",
+    summaryEn:
+      "Reuters (17 Sep 2026) says President Trump will host Xi Jinping in Washington on 24 Sep, Xi's first White House visit in a decade and their second meeting this year. Markets will watch whether last October's tariff truce, set to expire 10 Nov, is extended, plus any progress on a mutual tariff cut covering about $30 billion of goods, Boeing purchases, and rare-earth licence flow.",
+    summaryZh:
+      "路透社（2026年9月17日）称，特朗普将于9月24日在华盛顿接待习近平。这是习十年首次白宫访问，也是两人今年第二次会面。市场关注去年10月宣布、将于11月10日到期的关税休战是否延长，以及约300亿美元商品对等降税、波音采购和稀土许可是否有进展。",
+    takeawayEn:
+      "Do not reprice a PO on rumours before 24 Sep. Treat the 10 Nov truce expiry as a calendar risk, and keep dual-path docs ready if rare-earth or high-tech licence timing moves. The desk will only quote duty changes that a primary source has published.",
+    takeawayZh:
+      "9月24日前不要按传闻改报价。把11月10日关税休战到期当作日程风险；若稀土或高科技许可时间变化，准备两套单证路径。采购台只引用一手来源已公布的税率变化，不编造关税数字。",
+    sourceName: "Reuters",
+    sourceUrl: "https://www.reuters.com/world/china/what-will-trump-xi-discuss-washington-next-week-2026-09-17/",
+    tags: ["tariffs", "us-china", "rare-earths", "procurement"],
+    bodyEn: [
+      "Reuters (17 Sep 2026) reports Trump will welcome Xi on 24 September in Washington, following Trump's May trip to Beijing. Xi arrives as China is on track for a second straight year of a $1 trillion trade surplus, Reuters says. USTR Jamieson Greer said this month the countries will make some announcements on agriculture and non-tariff barriers, and traders will watch a previously agreed mutual tariff reduction covering about $30 billion in goods.",
+      "The same report says markets will watch for an extension of the tariff truce announced after the October 2025 Trump-Xi meeting in South Korea, currently set to expire on 10 November. That pause followed tit-for-tat tariffs that, Reuters writes, topped 100%. China said after the May summit it would buy 200 more Boeing jets, which Boeing called an initial tranche. Washington wants Beijing to ease rare earth and critical mineral shipments; Beijing wants a further delay of a US rule that would bar thousands of Chinese firms from advanced US technology.",
+      "Treasury Secretary Scott Bessent is due to meet Vice Premier He Lifeng this weekend, with Iran-related financial ties also on the leaders' agenda. Reuters notes AI talks and fentanyl precursor flows as further files. This brief does not treat any of those as settled policy.",
+    ],
+    bodyZh: [
+      "路透社（2026年9月17日）报道，特朗普将于9月24日在华盛顿接待习近平，此前特朗普5月访华。路透称，习到访时中国有望连续第二年录得约1万亿美元贸易顺差。美国贸易代表格里尔本月表示，双方将就农业和非关税壁垒作一些宣布；市场还在看此前商定的约300亿美元商品对等降税。",
+      "同一报道称，市场关注2025年10月韩国峰会后宣布、现定于11月10日到期的关税休战是否延长。路透写道，休战前双方曾把报复性关税推到超过100%。中方在5月峰会后表示将再购200架波音飞机，波音称之为“首批”。华盛顿希望中方畅通稀土和关键矿产；北京希望进一步推迟限制数千家中国企业获取美国先进技术的规则。",
+      "美国财长贝森特本周末将与何立峰会面，领导人议程还包括与伊朗相关的金融联系。路透亦提到人工智能对话和芬太尼前体。本简报不把上述议题写成已敲定的政策。",
+    ],
+  },
   {
     slug: "how-this-news-desk-works",
     date: "2026-09-15",
