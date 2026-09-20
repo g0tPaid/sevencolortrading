@@ -35,7 +35,7 @@ export default function AmazonFbaPage() {
         <ServiceBadgeHero badge={amazonFba.eyebrow} subtitle={amazonFba.title} />
         <p className="mt-4 max-w-2xl text-ink-soft sm:text-lg">{amazonFba.description}</p>
         <p className="mt-6 max-w-2xl text-sm text-ink-soft">
-          Legal entity {company.legalNameFull}. Founded {company.founded}. DUNS{" "}
+          Legal entity {company.legalNameFull}. {company.history} DUNS{" "}
           {company.credentials.dunsNumber}. On-ground China capability, sourcing, OEM, packaging, QC at
           USD 110 per inspector day, carton-mark coordination, and freight, not Amazon partnership, not
           Seller Central account management, and no published Amazon FBA package price.

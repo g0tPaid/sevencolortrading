@@ -25,8 +25,8 @@ export default function OemOdmPage() {
           {serviceCopy["oem-odm"].description}
         </p>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted">
-          Legal entity {company.legalNameFull}, DUNS {company.credentials.dunsNumber}, since{" "}
-          {company.founded}. Warehouses in Xiamen and Dubai / Al Ain.
+          Legal entity {company.legalNameFull}, DUNS {company.credentials.dunsNumber}.{" "}
+          {company.history} Warehouses in Xiamen and Dubai / Al Ain.
         </p>
         <div className="mt-8 grid gap-4 md:grid-cols-4">
           {["Brief", "Prototype", "Tooling", "Mass production"].map((s, i) => (

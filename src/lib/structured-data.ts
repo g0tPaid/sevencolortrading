@@ -26,7 +26,7 @@ export const serviceCopy = {
     name: "China factory sourcing (no MOQ)",
     serviceType: "Product sourcing",
     description:
-      "China factory sourcing with no required MOQ, start from 1 unit. Photo and video QC before goods ship. China desk of Xiamen Ajmal Seven Color Trading Co Ltd since 2014, with own warehouses: China hub in Xiamen and Dubai / Al Ain.",
+      "China factory sourcing with no required MOQ, start from 1 unit. Photo and video QC before goods ship. China desk of Xiamen Ajmal Seven Color Trading Co Ltd. Sourcing.center was established in 2024 and is backed by more than 10 years of China sourcing and manufacturing experience dating back to 2014, with own warehouses: China hub in Xiamen and Dubai / Al Ain.",
   },
   "oem-odm": {
     path: "/oem-odm",
@@ -128,14 +128,18 @@ export function organizationNode(): JsonLdNode {
     duns: company.credentials.dunsNumber,
     email: [company.emails.sme, company.emails.corporate],
     telephone: ["+86 180 5926 2730", "+971 58 906 1969"],
-    description:
-      "China sourcing desk of Xiamen Ajmal Seven Color Trading Co Ltd. Source from factories across China. Own 3PL warehouses: China hub in Xiamen and Dubai / Al Ain.",
+    description: `${company.history} China sourcing desk of ${company.legalNameFull}. Source from factories across China. Own 3PL warehouses: China hub in Xiamen and Dubai / Al Ain.`,
     brand: { "@type": "Brand", name: company.brand },
     identifier: [
       {
         "@type": "PropertyValue",
         name: "DUNS",
         value: company.credentials.dunsNumber,
+      },
+      {
+        "@type": "PropertyValue",
+        name: "China sourcing and manufacturing experience",
+        value: `more than 10 years, dating back to ${company.experienceSince}`,
       },
       {
         "@type": "PropertyValue",

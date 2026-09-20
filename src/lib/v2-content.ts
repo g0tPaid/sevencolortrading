@@ -576,7 +576,7 @@ export const amazonFba = {
   eyebrow: "FBA",
   title: "Private-label products in China, prepped for Amazon FBA",
   description:
-    "Sourcing Center helps brands private-label in China and prepare goods for Amazon FBA: factory OEM, branding and packaging, inspection before ship, FBA-ready carton marks, and freight to Amazon or to our 3PL hubs in Xiamen and Dubai. On the ground in China since 2014, not an Amazon partner and not a Seller Central agency.",
+    "Sourcing Center helps brands private-label in China and prepare goods for Amazon FBA: factory OEM, branding and packaging, inspection before ship, FBA-ready carton marks, and freight to Amazon or to our 3PL hubs in Xiamen and Dubai. Sourcing.center was established in 2024 and is backed by more than 10 years of China sourcing and manufacturing experience dating back to 2014. Not an Amazon partner and not a Seller Central agency.",
 } as const;
 
 export const amazonFbaSteps = [
@@ -718,5 +718,5 @@ export const platformStats = [
   { value: "10,000+", label: "Factories" },
   { value: "150+", label: "Industries" },
   { value: "40+", label: "Countries" },
-  { value: "Since 2014", label: "On the ground in China" },
+  { value: "Est. 2024", label: "Experience dating back to 2014" },
 ] as const;

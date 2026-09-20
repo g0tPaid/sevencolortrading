@@ -24,8 +24,10 @@ export function HowToSourceFromChinaArticle() {
     <>
       <P>
         Sourcing from China is a sequence, not a catalog click. Xiamen Ajmal Seven Color Trading Co
-        Ltd (brand: Sourcing Center, sourcing.center) has run that sequence from China since 2014,
-        on the ground, with our China hub in Xiamen and a second warehouse in Dubai / Al Ain. DUNS
+        Ltd (brand: Sourcing Center, sourcing.center) runs that sequence from China.
+        Sourcing.center was established in 2024 and is backed by more than 10 years of China sourcing
+        and manufacturing experience dating back to 2014, on the ground, with our China hub in Xiamen
+        and a second warehouse in Dubai / Al Ain. DUNS
         509419282. This guide is the path buyers actually walk: define the product, find factories,
         sample, negotiate, inspect, ship, and receive. There is no required MOQ (you can start from
         1 unit) and inspection, when you want a formal lot check, is USD 110 per inspector day.
@@ -262,7 +264,9 @@ export function HowToSourceFromChinaArticle() {
       </div>
 
       <P>
-        Legal entity: Xiamen Ajmal Seven Color Trading Co Ltd. Founded 2014. DUNS 509419282. Email
+        Legal entity: Xiamen Ajmal Seven Color Trading Co Ltd. Sourcing.center was established in
+        2024 and is backed by more than 10 years of China sourcing and manufacturing experience
+        dating back to 2014. DUNS 509419282. Email
         info@sevencolortrading.com. China +86 180 5926 2730. UAE +971 58 906 1969. Hours:
         Monday–Sunday, 8:30 AM–7:00 PM (GST / CST).
       </P>

@@ -6,19 +6,19 @@ export const pages = {
   home: routeMetadata({
     title: "China Sourcing Agent: Visit China, Own 3PL, 1688 Buying",
     description:
-      "China sourcing agent with factories, 1688 buying into our Xiamen warehouse, Visit China, own 3PL in Xiamen and Dubai. No MOQ. Inspection USD 110/day since 2014.",
+      "China sourcing agent established 2024, backed by 10+ years of sourcing and manufacturing experience dating back to 2014. Visit China, own 3PL, no MOQ, inspection USD 110/day.",
     path: "/",
   }),
   contact: routeMetadata({
     title: "China Factory Sourcing: No MOQ and Photo/Video QC",
     description:
-      "China factory sourcing with no MOQ, start from 1 unit. Photo/video QC. Legal entity Xiamen Ajmal Seven Color Trading Co Ltd since 2014. DUNS 509419282.",
+      "China factory sourcing with no MOQ, start from 1 unit. Photo/video QC. Legal entity Xiamen Ajmal Seven Color Trading Co Ltd. Sourcing.center established 2024. DUNS 509419282.",
     path: "/contact",
   }),
   oemOdm: routeMetadata({
     title: "China OEM/ODM and New Product Development (NDA-First)",
     description:
-      "OEM/ODM and new product development under NDA first. Concept, tooling, sampling, and mass production from the China desk. Founded 2014. DUNS 509419282.",
+      "OEM/ODM and new product development under NDA first. Concept, tooling, sampling, and mass production from the China desk. Sourcing.center established 2024. DUNS 509419282.",
     path: "/oem-odm",
   }),
   amazonFba: routeMetadata({
@@ -36,7 +36,7 @@ export const pages = {
   threePl: routeMetadata({
     title: "China 3PL: Own Warehouses in Xiamen and Dubai / Al Ain",
     description:
-      "Own China 3PL from our Xiamen warehouse and Dubai / Al Ain hub, receive, store, pick, pack, and ship. Operator-owned, not a 3PL broker. Since 2014.",
+      "Own China 3PL from our Xiamen warehouse and Dubai / Al Ain hub, receive, store, pick, pack, and ship. Operator-owned, not a 3PL broker. Sourcing.center established 2024.",
     path: "/3pl",
   }),
   dropshipping: routeMetadata({
@@ -54,7 +54,7 @@ export const pages = {
   visit: routeMetadata({
     title: "Visit China Factories: Hosted Trip Based in Xiamen",
     description:
-      "Visit China factories from our Xiamen hub: airport pickup, verified lines, warehouse and QC, interpreter. Not a tourist tour. On the ground since 2014.",
+      "Visit China factories from our Xiamen hub: airport pickup, verified lines, warehouse and QC, interpreter. Not a tourist tour. Sourcing.center established 2024; experience dating back to 2014.",
     path: "/visit",
   }),
   faq: routeMetadata({
@@ -64,9 +64,9 @@ export const pages = {
     path: "/faq",
   }),
   about: routeMetadata({
-    title: "About Sourcing Center: China Sourcing Desk Since 2014",
+    title: "About Sourcing Center: Established 2024",
     description:
-      "Xiamen Ajmal Seven Color Trading Co Ltd has sourced from China since 2014. DUNS 509419282. China hub warehouse in Xiamen and Dubai / Al Ain. Licenses listed.",
+      "Sourcing.center was established in 2024 and is backed by more than 10 years of China sourcing and manufacturing experience dating back to 2014. DUNS 509419282. Licenses listed.",
     path: "/about",
   }),
   services: routeMetadata({
@@ -84,13 +84,13 @@ export const pages = {
   compare: routeMetadata({
     title: "Compare China Sourcing Agent, 3PL, and Factory Visits",
     description:
-      "Sourcing agent vs Alibaba, China 3PL vs DIY freight, factory visit vs remote QC. Straight answers from the China desk, operating since 2014.",
+      "Sourcing agent vs Alibaba, China 3PL vs DIY freight, factory visit vs remote QC. Straight answers from the China desk. Sourcing.center established 2024.",
     path: "/compare",
   }),
   howItWorks: routeMetadata({
     title: "How China Factory Sourcing Works: RFQ to Delivery",
     description:
-      "Four-step China sourcing: share requirements, source verified factories, photo/video QC, then ship. No MOQ. Own 3PL from Xiamen warehouse and Dubai since 2014.",
+      "Four-step China sourcing: share requirements, source verified factories, photo/video QC, then ship. No MOQ. Own 3PL from Xiamen warehouse and Dubai. Established 2024.",
     path: "/how-it-works",
   }),
   industries: routeMetadata({
@@ -102,7 +102,7 @@ export const pages = {
   factoryVerification: routeMetadata({
     title: "China Factory Verification: License and Capacity Audits",
     description:
-      "On-ground factory audits in China: license, production lines, capacity, and quality systems before you fund a PO. China desk operating since 2014.",
+      "On-ground factory audits in China: license, production lines, capacity, and quality systems before you fund a PO. Sourcing.center established 2024.",
     path: "/factory-verification",
   }),
   privateLabel: routeMetadata({
@@ -155,7 +155,7 @@ export const pages = {
   sourcingForUae: routeMetadata({
     title: "China Sourcing for the UAE: Own Dubai / Al Ain Warehouse",
     description:
-      "China factory desk plus operator-owned UAE warehouse in Al Ain. Inspect in China, stage GCC stock in Dubai / Al Ain. License 143609. Since 2014.",
+      "China factory desk plus operator-owned UAE warehouse in Al Ain. Inspect in China, stage GCC stock in Dubai / Al Ain. License 143609. Sourcing.center established 2024.",
     path: "/sourcing-for/uae",
   }),
   industriesEcommerceDtc: routeMetadata({
@@ -185,7 +185,7 @@ export const knowledgeMeta: Record<string, { title: string; description: string 
   "china-sourcing-company-xiamen-dubai-3pl": {
     title: "China Sourcing Company with Own 3PL in China and UAE",
     description:
-      "Sourcing Center by Xiamen Ajmal Seven Color Trading Co Ltd. Founded 2014. DUNS 509419282. China hub in Xiamen and Dubai warehouse. Sourcing plus 3PL desk.",
+      "Sourcing Center by Xiamen Ajmal Seven Color Trading Co Ltd. Established 2024, experience dating back to 2014. DUNS 509419282. China hub in Xiamen and Dubai warehouse.",
   },
   "dropshipping-from-china-own-warehouse": {
     title: "Dropshipping from China: Own Warehouse vs a Broker",
@@ -258,7 +258,7 @@ export const compareMeta: Record<string, { title: string; description: string }>
   "sourcing-agent-vs-alibaba": {
     title: "Sourcing Agent vs Alibaba: When a China Desk Wins",
     description:
-      "Alibaba is a catalog. Sourcing Center is an on-ground China desk: verified factories, no MOQ, photo/video QC, own 3PL from Xiamen and Dubai, visits since 2014.",
+      "Alibaba is a catalog. Sourcing Center is an on-ground China desk: verified factories, no MOQ, photo/video QC, own 3PL from Xiamen and Dubai. Established 2024.",
   },
   "china-3pl-vs-diy-freight": {
     title: "China 3PL vs DIY Freight: Warehouse or You Stitch It",
