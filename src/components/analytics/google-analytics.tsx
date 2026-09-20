@@ -4,7 +4,15 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import { parseGaMeasurementId } from "@/lib/ga";
 
-function loadGtag(id: string) {
+function gtagScriptAlreadyInDom() {
+  return Boolean(
+    document.getElementById("ga4-src") ||
+      document.getElementById("google-tag-src") ||
+      document.querySelector('script[src*="googletagmanager.com/gtag/js"]'),
+  );
+}
+
+function loadGtag(gaId: string, adsId?: string | null) {
   if (typeof window === "undefined") return;
 
   window.dataLayer = window.dataLayer || [];
@@ -14,24 +22,31 @@ function loadGtag(id: string) {
       window.dataLayer?.push(arguments);
     };
     window.gtag("js", new Date());
-    window.gtag("config", id, { send_page_view: false, anonymize_ip: true });
+    window.gtag("config", gaId, { send_page_view: false, anonymize_ip: true });
+    if (adsId) window.gtag("config", adsId);
   }
 
-  if (document.getElementById("ga4-src")) return;
+  if (gtagScriptAlreadyInDom()) return;
 
   const script = document.createElement("script");
-  script.id = "ga4-src";
+  script.id = "google-tag-src";
   script.async = true;
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${id}`;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${adsId || gaId}`;
   document.head.appendChild(script);
 }
 
-function GaPageviews({ measurementId }: { measurementId: string }) {
+function GaPageviews({
+  measurementId,
+  adsId,
+}: {
+  measurementId: string;
+  adsId?: string | null;
+}) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    loadGtag(measurementId);
+    loadGtag(measurementId, adsId);
     if (typeof window.gtag !== "function") return;
     const search = searchParams?.toString();
     const pagePath = search ? `${pathname}?${search}` : pathname || "/";
@@ -41,12 +56,18 @@ function GaPageviews({ measurementId }: { measurementId: string }) {
       page_location: window.location.href,
       page_title: document.title,
     });
-  }, [measurementId, pathname, searchParams]);
+  }, [adsId, measurementId, pathname, searchParams]);
 
   return null;
 }
 
-export function GoogleAnalytics({ measurementId }: { measurementId?: string | null }) {
+export function GoogleAnalytics({
+  measurementId,
+  adsId,
+}: {
+  measurementId?: string | null;
+  adsId?: string | null;
+}) {
   const [id, setId] = useState<string | null>(() => parseGaMeasurementId(measurementId));
 
   useEffect(() => {
@@ -74,7 +95,7 @@ export function GoogleAnalytics({ measurementId }: { measurementId?: string | nu
 
   return (
     <Suspense fallback={null}>
-      <GaPageviews measurementId={id} />
+      <GaPageviews measurementId={id} adsId={adsId} />
     </Suspense>
   );
 }
