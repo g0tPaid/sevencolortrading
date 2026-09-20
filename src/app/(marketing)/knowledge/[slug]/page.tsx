@@ -164,7 +164,6 @@ export default async function KnowledgeArticlePage({ params }: { params: Promise
           <>
             <p className="mt-4 text-base leading-relaxed">
               Legal entity: Xiamen Ajmal Seven Color Trading Co Ltd (Seven Color Trading Co Ltd). Brand: Sourcing Center.
-              Sourcing.center was established in 2024 and is backed by more than 10 years of China sourcing and manufacturing experience dating back to 2014.
               Dun &amp; Bradstreet DUNS 509419282. China hub warehouse in Xiamen, Fujian, China and
               Dubai / Al Ain, UAE.
             </p>

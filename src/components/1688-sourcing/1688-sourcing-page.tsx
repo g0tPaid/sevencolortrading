@@ -68,8 +68,7 @@ export function Sourcing1688Page() {
         <ProofChips className="justify-start" />
         <p className="mt-8 max-w-3xl text-base leading-relaxed text-muted" data-seo-answer>
           Send a 1688 link, a Taobao-style wholesale SKU, or a photo. The Xiamen desk of Xiamen Ajmal
-          Seven Color Trading Co Ltd (Sourcing.center established 2024; 10+ years of China sourcing
-          and manufacturing experience dating back to 2014; DUNS 509419282) pays in RMB, takes the domestic
+          Seven Color Trading Co Ltd (DUNS 509419282) pays in RMB, takes the domestic
           parcel into our warehouse, and only then talks export. That is how importers use 1688
           without a Chinese account. It is not a public storefront of every 1688 listing.
         </p>

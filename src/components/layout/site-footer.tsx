@@ -16,7 +16,7 @@ export function SiteFooter() {
               {company.tagline}
             </p>
             <p className="mt-2 text-xs text-paper/55">
-              {company.legalNameFull} · established {company.founded}
+              {company.legalNameFull}
             </p>
           </div>
           <div>

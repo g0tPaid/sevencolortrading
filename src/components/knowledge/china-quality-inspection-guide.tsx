@@ -31,9 +31,7 @@ export function ChinaQualityInspectionGuide() {
         third-party inspection accreditation.
       </P>
       <P>
-        Sourcing.center was established in 2024 and is backed by more than 10 years of China sourcing
-        and manufacturing experience dating back to 2014. DUNS 509419282. Warehouses in Xiamen, Fujian
-        and Dubai / Al Ain. Book a job
+        DUNS 509419282. Warehouses in Xiamen, Fujian and Dubai / Al Ain. Book a job
         from the{" "}
         <ArticleLink href="/inspection">inspection service page</ArticleLink>. Pair a first factory
         with a{" "}
@@ -160,9 +158,7 @@ export function ChinaQualityInspectionGuide() {
         Inspection sits next to the hosted visit, not instead of it. Fly when you need capacity,
         tooling, or a first handshake. Book inspection when you need a lot-level gate. Use 3PL when
         the lot should not leave China or the UAE the same week it passed. The operator is one legal
-        entity: Xiamen Ajmal Seven Color Trading Co Ltd. Sourcing.center was established in 2024 and is
-        backed by more than 10 years of China sourcing and manufacturing experience dating back to
-        2014. DUNS 509419282, warehouses in
+        entity: Xiamen Ajmal Seven Color Trading Co Ltd. DUNS 509419282, warehouses in
         Xiamen and Dubai / Al Ain. How to run the full path is in{" "}
         <ArticleLink href="/knowledge/how-to-source-from-china">
           how to source from China

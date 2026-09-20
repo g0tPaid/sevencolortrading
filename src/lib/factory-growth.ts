@@ -493,8 +493,8 @@ export const whyCards: Array<{ title: Bilingual; text: Bilingual }> = [
   {
     title: { en: "Xiamen desk, not a distant agency", zh: "厦门团队，不是远程空壳公司" },
     text: {
-      en: "Sourcing.center was established in 2024 and is backed by more than 10 years of China sourcing and manufacturing experience dating back to 2014. Presence work is coordinated from the same city as sourcing.",
-      zh: "Sourcing.center 创立于2024年，背后是自2014年以来逾十年的中国采购与制造经验。形象服务和采购，由同一座城市的团队来做。",
+      en: "Presence work is coordinated from the same city as sourcing.",
+      zh: "形象服务和采购，由同一座城市的团队来做。",
     },
   },
   {

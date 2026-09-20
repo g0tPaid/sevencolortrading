@@ -66,7 +66,7 @@ export const seoKeywords = [
 ];
 
 export const defaultDescription =
-  "Sourcing.center was established in 2024, backed by 10+ years of China sourcing and manufacturing experience dating back to 2014. Visit China, own 3PL, no MOQ, inspection USD 110/day.";
+  "China sourcing desk with factories across China. Visit China, own 3PL from our Xiamen warehouse and Dubai hub. No MOQ, QC, inspection USD 110/day.";
 
 export function absoluteUrl(path = "") {
   if (!path) return siteUrl;
@@ -84,23 +84,10 @@ export function organizationJsonLd() {
         legalName: company.legalNameFull,
         alternateName: [company.legalName, "Seven Color Trading", "sourcing.center"],
         url: siteUrl,
-        foundingDate: company.founded,
         duns: company.credentials.dunsNumber,
         email: company.emails.corporate,
         telephone: company.phones,
         description: defaultDescription,
-        identifier: [
-          {
-            "@type": "PropertyValue",
-            name: "DUNS",
-            value: company.credentials.dunsNumber,
-          },
-          {
-            "@type": "PropertyValue",
-            name: "China sourcing and manufacturing experience",
-            value: `more than 10 years, dating back to ${company.experienceSince}`,
-          },
-        ],
         brand: { "@type": "Brand", name: company.brand },
         address: company.offices.map((o) => ({
           "@type": "PostalAddress",

@@ -40,7 +40,6 @@ export default function AboutPage() {
           <p className="mt-1 font-mono text-sm text-muted">DUNS {company.credentials.dunsNumber}</p>
           <p className="mt-2 text-sm text-muted">{company.credentials.retailNote}</p>
           <p className="mt-2 text-sm text-muted">{company.credentials.shelfNote}</p>
-          <p className="mt-4 text-sm text-muted">{company.history}</p>
           <p className="mt-4 text-sm text-muted">{company.hours}</p>
         </div>
       </Container>

@@ -36,8 +36,7 @@ export default function LogisticsPage() {
           {serviceCopy.logistics.description}
         </p>
         <p className="mt-3 text-sm text-muted">
-          Legal entity {company.legalNameFull}. DUNS {company.credentials.dunsNumber}.{" "}
-          {company.history}
+          Legal entity {company.legalNameFull}. DUNS {company.credentials.dunsNumber}.
         </p>
         <p className="mt-3 text-sm">
           <Link href="/3pl" className="font-medium text-accent underline-offset-4 hover:underline">

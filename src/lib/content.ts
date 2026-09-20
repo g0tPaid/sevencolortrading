@@ -6,11 +6,7 @@ export const company = {
   legalNameFull: "Xiamen Ajmal Seven Color Trading Co Ltd",
   tagline: "China sourcing agent with own 3PL in Xiamen and Dubai.",
   description:
-    "Sourcing.center was established in 2024 and is backed by more than 10 years of China sourcing and manufacturing experience dating back to 2014. Verified factories, photo/video QC, USD 110/day inspection, Visit China from Xiamen, 1688 buying into our warehouse, and own 3PL in Xiamen and Dubai.",
-  founded: "2024",
-  experienceSince: "2014",
-  history:
-    "Sourcing.center was established in 2024 and is backed by more than 10 years of China sourcing and manufacturing experience dating back to 2014.",
+    "China sourcing agent: verified factories, photo/video QC, USD 110/day inspection, Visit China from Xiamen, 1688 buying into our warehouse, and own 3PL in Xiamen and Dubai.",
   emails: {
     corporate: "info@sevencolor.online",
     sme: "info@sevencolortrading.com",

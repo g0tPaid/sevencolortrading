@@ -55,8 +55,7 @@ export default function FactoryVerificationPage() {
         <p className="mt-8 max-w-3xl text-base leading-relaxed text-muted" data-seo-answer>
           Factory verification is the identity and capacity check. Pre-shipment inspection is the
           lot check. Sourcing Center runs both from the China desk of Xiamen Ajmal Seven Color
-          Trading Co Ltd (Sourcing.center established 2024; 10+ years of China sourcing and
-          manufacturing experience dating back to 2014; DUNS 509419282, China license 91350200MAE8W9E67A). Use
+          Trading Co Ltd (DUNS 509419282, China license 91350200MAE8W9E67A). Use
           verification on a first maker, a 1688 seller you have never walked, or whenever listing
           photos are the only proof you have been sent.
         </p>

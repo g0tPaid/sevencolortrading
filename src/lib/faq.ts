@@ -19,15 +19,11 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "Who is the legal entity behind sourcing.center?",
-        a: "Xiamen Ajmal Seven Color Trading Co Ltd, also called Seven Color Trading Co Ltd. Brand: Sourcing Center. Sourcing.center was established in 2024 and is backed by more than 10 years of China sourcing and manufacturing experience dating back to 2014. Dun & Bradstreet DUNS 509419282. China business license 91350200MAE8W9E67A (Huli Avenue, Huli District, Xiamen, Fujian, China). UAE trade license 143609 (Suite No 21, ESA Building, Near Nael Enclave, Al Ain, UAE).",
+        a: "Xiamen Ajmal Seven Color Trading Co Ltd, also called Seven Color Trading Co Ltd. Brand: Sourcing Center. Dun & Bradstreet DUNS 509419282. China business license 91350200MAE8W9E67A (Huli Avenue, Huli District, Xiamen, Fujian, China). UAE trade license 143609 (Suite No 21, ESA Building, Near Nael Enclave, Al Ain, UAE).",
       },
       {
         q: "Where are Sourcing Center offices and warehouses?",
         a: "China HQ and warehouse: Huli Avenue, Huli District, Xiamen City, Fujian, China. UAE branch and warehouse: Suite No 21, ESA Building, Near Nael Enclave, Al Ain, United Arab Emirates (Dubai / Al Ain hub). Both locations are operator-owned, not brokered 3PL slots.",
-      },
-      {
-        q: "How long has Sourcing Center been operating?",
-        a: "Sourcing.center was established in 2024 and is backed by more than 10 years of China sourcing and manufacturing experience dating back to 2014. The China desk operates from Xiamen; the UAE warehouse and office in Al Ain support GCC replenishment.",
       },
       {
         q: "What services does Sourcing Center provide?",
@@ -215,7 +211,7 @@ export const faqGroups: FaqGroup[] = [
     items: [
       {
         q: "How can I verify Sourcing Center?",
-        a: "Legal name Xiamen Ajmal Seven Color Trading Co Ltd. Sourcing.center was established in 2024 and is backed by more than 10 years of China sourcing and manufacturing experience dating back to 2014. DUNS 509419282 (Dun & Bradstreet). China license 91350200MAE8W9E67A at Huli Avenue, Huli District, Xiamen, Fujian. UAE license 143609 at Suite No 21, ESA Building, Near Nael Enclave, Al Ain. About page: https://sourcing.center/about.",
+        a: "Legal name Xiamen Ajmal Seven Color Trading Co Ltd. DUNS 509419282 (Dun & Bradstreet). China license 91350200MAE8W9E67A at Huli Avenue, Huli District, Xiamen, Fujian. UAE license 143609 at Suite No 21, ESA Building, Near Nael Enclave, Al Ain. About page: https://sourcing.center/about.",
       },
       {
         q: "Are you a registered vendor for major retailers?",
