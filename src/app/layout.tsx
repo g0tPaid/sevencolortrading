@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Fraunces, Inter, Playfair_Display } from "next/font/google";
-import Script from "next/script";
 import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import { JsonLd } from "@/components/seo/json-ld";
 import { ThemeProvider } from "@/components/layout/theme-provider";
@@ -99,10 +98,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <JsonLd data={siteWideGraph()} />
         {gtagSrc ? (
           <>
-            <Script src={gtagSrc} strategy="beforeInteractive" />
-            <Script id="google-tag-init" strategy="beforeInteractive">
-              {googleTagBootstrapScript(gaId, adsId)}
-            </Script>
+            {/* Google's Ads crawler looks for this exact gtag.js URL in HTML, not a Next.js script queue. */}
+            <script async src={gtagSrc} />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: googleTagBootstrapScript(gaId, adsId),
+              }}
+            />
           </>
         ) : null}
       </head>
