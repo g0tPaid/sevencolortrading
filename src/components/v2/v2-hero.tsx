@@ -111,7 +111,10 @@ export function V2Hero() {
         >
           One <AnimatedHeadlineWord>China</AnimatedHeadlineWord>
           {" "}
-          sourcing agent: factories, own 3PL, Visit China
+          sourcing agent:
+          <span className="mt-2 block text-[50%] font-semibold leading-[1.2]">
+            factories, own 3PL, Visit China
+          </span>
         </motion.h1>
 
         <motion.p
