@@ -241,7 +241,7 @@ export const serviceCommonQuestions: Record<
   "oem-odm": [
     faqGroups[1].items[2],
     faqGroups[1].items[3],
-    faqGroups[0].items[4],
+    faqGroups[0].items[3],
     faqGroups[6].items[0],
   ],
   "amazon-fba": [
