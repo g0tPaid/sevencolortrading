@@ -41,21 +41,29 @@ Railway / production env vars:
 
 In development, unset credentials fall back to `admin` / `admin`.
 
-## Google Analytics 4
+## Google Analytics 4 and Google Ads
 
-The first-party `/dashboard` visitor counter stays. GA4 loads for the sourcing.center web stream `G-7QEW0MNP6C`.
+The first-party `/dashboard` visitor counter stays. One Google tag (gtag.js) loads in `<head>` on every page with:
+
+- GA4 web stream `G-7QEW0MNP6C`
+- Google Ads tag `AW-18461569757`
 
 Railway / production env (optional):
 
 - `GA_MEASUREMENT_ID` — override the default Measurement ID. `NEXT_PUBLIC_GA_MEASUREMENT_ID` also works.
+- `GOOGLE_ADS_ID` — override the default Ads ID. `NEXT_PUBLIC_GOOGLE_ADS_ID` also works.
 
 Realtime check: https://analytics.google.com → Reports → Realtime.
 
+Google Ads check: Google Ads → Tools → Google tag / Tag Assistant. The Ads crawler looks for `AW-18461569757` in page HTML.
+
 Tracked:
 
-- `page_view` on each App Router navigation
+- `page_view` on each App Router navigation (GA4)
 - `generate_lead` after a saved RFQ, Visit China request, factory application, or factory-growth inquiry
 - `contact` when the WhatsApp float is clicked
+
+Conversion actions in Google Ads still need a conversion label (`AW-18461569757/xxxxx`) from the Ads UI. Until that label exists, this repo only installs the sitewide tag. Link the GA4 property to the Ads account to import `generate_lead` and `contact` without a second snippet.
 
 No names, emails, or phone numbers are sent to Google.
 

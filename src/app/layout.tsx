@@ -3,7 +3,12 @@ import { Fraunces, Inter, Playfair_Display } from "next/font/google";
 import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import { JsonLd } from "@/components/seo/json-ld";
 import { ThemeProvider } from "@/components/layout/theme-provider";
-import { gaMeasurementIdFromEnv } from "@/lib/ga";
+import {
+  gaMeasurementIdFromEnv,
+  googleAdsIdFromEnv,
+  googleTagBootstrapScript,
+  googleTagLoaderSrc,
+} from "@/lib/ga";
 import { defaultDescription, siteUrl, seoKeywords } from "@/lib/seo";
 import { siteWideGraph } from "@/lib/structured-data";
 import "./globals.css";
@@ -84,16 +89,29 @@ export const viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const gaId = gaMeasurementIdFromEnv();
+  const adsId = googleAdsIdFromEnv();
+  const gtagSrc = googleTagLoaderSrc(gaId, adsId);
 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <JsonLd data={siteWideGraph()} />
+        {gtagSrc ? (
+          <>
+            {/* Google's Ads crawler looks for this exact gtag.js URL in HTML, not a Next.js script queue. */}
+            <script async src={gtagSrc} />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: googleTagBootstrapScript(gaId, adsId),
+              }}
+            />
+          </>
+        ) : null}
       </head>
       <body
         className={`${playfair.variable} ${fraunces.variable} ${inter.variable} font-sans antialiased`}
       >
-        <GoogleAnalytics measurementId={gaId} />
+        <GoogleAnalytics measurementId={gaId} adsId={adsId} />
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
