@@ -8,8 +8,12 @@ import {
   shouldShowFactoryZh,
 } from "@/lib/geo-detect";
 
-const WWW_HOST = "www.sourcing.center";
-const APEX_ORIGIN = "https://sourcing.center";
+const CANONICAL_ORIGIN = "https://sourcing.center";
+const LEGACY_HOSTS = new Set([
+  "www.sourcing.center",
+  "sevencolor.online",
+  "www.sevencolor.online",
+]);
 
 /** Public hostname from the proxy/client. Never use nextUrl.hostname (often the internal bind). */
 function requestHostname(request: NextRequest): string {
@@ -18,12 +22,12 @@ function requestHostname(request: NextRequest): string {
   return raw.split(":")[0]?.toLowerCase() ?? "";
 }
 
-/** 301 www → apex, same path + query. Skips localhost, Railway internals, and the apex host. */
-function wwwToApexRedirect(request: NextRequest): NextResponse | null {
-  if (requestHostname(request) !== WWW_HOST) return null;
+/** 301 legacy hosts → apex, same path + query. Skips localhost, Railway internals, and the apex host. */
+function hostToCanonicalRedirect(request: NextRequest): NextResponse | null {
+  if (!LEGACY_HOSTS.has(requestHostname(request))) return null;
   const dest = new URL(
     `${request.nextUrl.pathname}${request.nextUrl.search}`,
-    APEX_ORIGIN,
+    CANONICAL_ORIGIN,
   );
   return NextResponse.redirect(dest, 301);
 }
@@ -89,7 +93,7 @@ function applyFactoryGeoHint(request: NextRequest, response: NextResponse) {
 }
 
 export async function middleware(request: NextRequest) {
-  const hostRedirect = wwwToApexRedirect(request);
+  const hostRedirect = hostToCanonicalRedirect(request);
   if (hostRedirect) return hostRedirect;
 
   const { pathname } = request.nextUrl;
