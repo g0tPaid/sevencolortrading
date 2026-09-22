@@ -77,6 +77,8 @@ Railway / production env (required for the pixel to load — there is no default
 
 Until that variable is set, the snippet is omitted so a placeholder ID cannot leak into production HTML.
 
+Set the variable **before** the Railway deploy so `next build` bakes `rdt('init')` into page HTML (same as the Google tags). If the ID is only available at runtime, `/api/ga` still loads the pixel in the browser.
+
 Check: Reddit Ads → Events Manager, plus the Reddit Pixel Helper Chrome extension on https://sourcing.center.
 
 No emails, phone numbers, or other match keys are sent to Reddit.
