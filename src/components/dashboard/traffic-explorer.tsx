@@ -73,17 +73,17 @@ function BarChart({
   }
 
   return (
-    <div className="flex h-40 items-end gap-1 overflow-x-auto rounded-2xl border border-line bg-paper px-3 py-3">
+    <div className="flex h-40 items-end gap-px rounded-2xl border border-line bg-paper px-3 py-3 sm:gap-0.5">
       {items.map((item) => {
         const height = Math.max(item.value > 0 ? 6 : 2, Math.round((item.value / max) * 112));
         return (
-          <div key={item.key} className="flex min-w-[18px] flex-1 flex-col items-center justify-end gap-1">
+          <div key={item.key} className="flex min-w-0 flex-1 flex-col items-center justify-end gap-1">
             <div
-              className="w-full max-w-7 rounded-t bg-accent/80"
+              className="w-full rounded-t bg-accent/80"
               style={{ height }}
               title={item.title ?? `${item.label}: ${formatCount(item.value)}`}
             />
-            <span className="max-w-full truncate text-[10px] text-muted">{item.label}</span>
+            <span className="max-w-full truncate text-[9px] leading-none text-muted">{item.label}</span>
           </div>
         );
       })}

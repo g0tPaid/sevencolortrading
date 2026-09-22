@@ -59,9 +59,15 @@ export function VisitorWorldMap({ countries }: { countries: CountryStat[] }) {
                 cx={row.x}
                 cy={row.y}
                 r={row.r}
-                className="fill-accent stroke-paper"
+                className="pointer-events-none fill-accent stroke-paper"
                 strokeWidth={1.5}
                 style={{ opacity: row.opacity }}
+              />
+              <circle
+                cx={row.x}
+                cy={row.y}
+                r={Math.max(row.r + 12, 18)}
+                className="fill-transparent"
                 onMouseEnter={() => setHover(row.code)}
                 onMouseLeave={() => setHover((current) => (current === row.code ? null : current))}
                 onFocus={() => setHover(row.code)}
@@ -69,7 +75,11 @@ export function VisitorWorldMap({ countries }: { countries: CountryStat[] }) {
                 tabIndex={0}
                 role="img"
                 aria-label={`${countryLabel(row.code)}: ${formatCount(row.visits)} visits`}
-              />
+              >
+                <title>
+                  {countryLabel(row.code)}: {formatCount(row.visits)} visits · {formatCount(row.pageviews)} views
+                </title>
+              </circle>
             </g>
           ))}
         </svg>
