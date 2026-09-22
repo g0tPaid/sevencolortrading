@@ -12,12 +12,11 @@ function loadRedditPixel(pixelId: string) {
   if (typeof window === "undefined") return;
 
   if (typeof window.rdt !== "function") {
-    const p = function redditPixel() {
-      // eslint-disable-next-line prefer-rest-params
-      if (p.sendEvent) p.sendEvent.apply(p, arguments as unknown as []);
-      else p.callQueue?.push(arguments);
-    };
-    p.callQueue = [] as unknown[];
+    const p = function redditPixel(...args: unknown[]) {
+      if (p.sendEvent) p.sendEvent(...args);
+      else p.callQueue?.push(args);
+    } as NonNullable<Window["rdt"]>;
+    p.callQueue = [];
     window.rdt = p;
     window.rdt("init", pixelId);
     window.rdt("track", "PageVisit");
