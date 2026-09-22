@@ -1,17 +1,21 @@
 /** Reddit Ads pixel IDs look like a2_ followed by letters/numbers. */
 const REDDIT_PIXEL_ID_PATTERN = /^a2_[A-Za-z0-9]+$/;
 
+/** sourcing.center Reddit Ads pixel (Events Manager). Override with REDDIT_PIXEL_ID if needed. */
+export const DEFAULT_REDDIT_PIXEL_ID = "a2_joua2nutyseb";
+
 export function parseRedditPixelId(value: unknown): string | null {
   if (typeof value !== "string") return null;
   const id = value.trim();
   return REDDIT_PIXEL_ID_PATTERN.test(id) ? id : null;
 }
 
-/** Runtime env (Railway). No default — do not invent a pixel ID. */
+/** Runtime env (Railway) overrides the default pixel. */
 export function redditPixelIdFromEnv(): string | null {
   return (
     parseRedditPixelId(process.env.REDDIT_PIXEL_ID) ??
-    parseRedditPixelId(process.env.NEXT_PUBLIC_REDDIT_PIXEL_ID)
+    parseRedditPixelId(process.env.NEXT_PUBLIC_REDDIT_PIXEL_ID) ??
+    parseRedditPixelId(DEFAULT_REDDIT_PIXEL_ID)
   );
 }
 

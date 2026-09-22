@@ -69,17 +69,13 @@ No names, emails, or phone numbers are sent to Google.
 
 ## Reddit Pixel
 
-Official Reddit Ads pixel in `<head>` on every page (`rdt('init')` + `PageVisit`). App Router navigations fire another `PageVisit` after the first paint so the head snippet is not double-counted.
+Official Reddit Ads pixel in `<head>` on every page (`rdt('init')` + `PageVisit`) with pixel ID `a2_joua2nutyseb`. App Router navigations fire another `PageVisit` after the first paint so the head snippet is not double-counted.
 
-Railway / production env (required for the pixel to load — there is no default ID in the repo):
+Railway / production env (optional):
 
-- `REDDIT_PIXEL_ID` — Events Manager pixel ID, looks like `a2_…`. `NEXT_PUBLIC_REDDIT_PIXEL_ID` also works.
+- `REDDIT_PIXEL_ID` — override the default pixel ID. `NEXT_PUBLIC_REDDIT_PIXEL_ID` also works.
 
-Until that variable is set, the snippet is omitted so a placeholder ID cannot leak into production HTML.
-
-Set the variable **before** the Railway deploy so `next build` bakes `rdt('init')` into page HTML (same as the Google tags). If the ID is only available at runtime, `/api/ga` still loads the pixel in the browser.
-
-Check: Reddit Ads → Events Manager, plus the Reddit Pixel Helper Chrome extension on https://sourcing.center.
+Check: Reddit Ads → Events Manager, plus the Reddit Pixel Helper Chrome extension on https://sourcing.center. The checker looks for `a2_joua2nutyseb` in page HTML.
 
 No emails, phone numbers, or other match keys are sent to Reddit.
 
