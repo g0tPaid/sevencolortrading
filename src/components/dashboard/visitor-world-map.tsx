@@ -77,7 +77,7 @@ export function VisitorWorldMap({ countries }: { countries: CountryStat[] }) {
                 aria-label={`${countryLabel(row.code)}: ${formatCount(row.visits)} visits`}
               >
                 <title>
-                  {countryLabel(row.code)}: {formatCount(row.visits)} visits · {formatCount(row.pageviews)} views
+                  {`${countryLabel(row.code)}: ${formatCount(row.visits)} visits · ${formatCount(row.pageviews)} views`}
                 </title>
               </circle>
             </g>
