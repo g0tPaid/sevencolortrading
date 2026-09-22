@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { gaMeasurementIdFromEnv, googleAdsIdFromEnv } from "@/lib/ga";
+import { redditPixelIdFromEnv } from "@/lib/reddit-pixel";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -8,8 +9,9 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   const id = gaMeasurementIdFromEnv();
   const adsId = googleAdsIdFromEnv();
+  const redditId = redditPixelIdFromEnv();
   return NextResponse.json(
-    { id, adsId },
+    { id, adsId, redditId },
     {
       headers: {
         "Cache-Control": "public, max-age=60, stale-while-revalidate=300",

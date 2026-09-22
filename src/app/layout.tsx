@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Fraunces, Inter, Playfair_Display } from "next/font/google";
 import { GoogleAnalytics } from "@/components/analytics/google-analytics";
+import { RedditPixel } from "@/components/analytics/reddit-pixel";
 import { JsonLd } from "@/components/seo/json-ld";
 import { ThemeProvider } from "@/components/layout/theme-provider";
 import {
@@ -9,6 +10,7 @@ import {
   googleTagBootstrapScript,
   googleTagLoaderSrc,
 } from "@/lib/ga";
+import { redditPixelBootstrapScript, redditPixelIdFromEnv } from "@/lib/reddit-pixel";
 import { defaultDescription, siteUrl, seoKeywords } from "@/lib/seo";
 import { siteWideGraph } from "@/lib/structured-data";
 import "./globals.css";
@@ -91,6 +93,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const gaId = gaMeasurementIdFromEnv();
   const adsId = googleAdsIdFromEnv();
   const gtagSrc = googleTagLoaderSrc(gaId, adsId);
+  const redditPixelId = redditPixelIdFromEnv();
+  const redditPixelScript = redditPixelId ? redditPixelBootstrapScript(redditPixelId) : "";
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -107,11 +111,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             />
           </>
         ) : null}
+        {redditPixelScript ? (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: redditPixelScript,
+            }}
+          />
+        ) : null}
       </head>
       <body
         className={`${playfair.variable} ${fraunces.variable} ${inter.variable} font-sans antialiased`}
       >
         <GoogleAnalytics measurementId={gaId} adsId={adsId} />
+        <RedditPixel pixelId={redditPixelId} />
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

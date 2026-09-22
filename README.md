@@ -67,6 +67,20 @@ Conversion actions in Google Ads still need a conversion label (`AW-18461569757/
 
 No names, emails, or phone numbers are sent to Google.
 
+## Reddit Pixel
+
+Official Reddit Ads pixel in `<head>` on every page (`rdt('init')` + `PageVisit`). App Router navigations fire another `PageVisit` after the first paint so the head snippet is not double-counted.
+
+Railway / production env (required for the pixel to load — there is no default ID in the repo):
+
+- `REDDIT_PIXEL_ID` — Events Manager pixel ID, looks like `a2_…`. `NEXT_PUBLIC_REDDIT_PIXEL_ID` also works.
+
+Until that variable is set, the snippet is omitted so a placeholder ID cannot leak into production HTML.
+
+Check: Reddit Ads → Events Manager, plus the Reddit Pixel Helper Chrome extension on https://sourcing.center.
+
+No emails, phone numbers, or other match keys are sent to Reddit.
+
 ## Daily China sourcing news
 
 Public hub: `/news` (index) and `/news/[slug]` (bilingual EN | 中文). `/updates` stays as dated desk notes.
