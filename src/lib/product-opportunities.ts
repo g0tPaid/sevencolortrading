@@ -5,6 +5,14 @@ export const PRODUCT_OPPORTUNITIES_PATH = "/trending-products";
 export const MARGIN_DISCLAIMER =
   "Indicative estimates only. Actual margins vary by supplier, quantity, specifications, shipping, duties, taxes, marketplace fees, advertising and destination market.";
 
+/** Product notes still store MOQ wording. Do not show that label on trending pages. */
+export function withoutMoqLabel(text: string) {
+  return text
+    .replace(/\bMOQs\b/g, "order quantities")
+    .replace(/\bMOQ\b/g, "order quantity")
+    .replace(/\bmoq\b/g, "order quantity");
+}
+
 export const opportunityCategories = [
   "Electronics",
   "Home & Kitchen",
@@ -64,10 +72,6 @@ export const collectionFaqs: OpportunityFaq[] = [
     a: "There is no published catalog price for sourcing. The ranges on this page are indicative unit estimates from the China desk, not factory quotes. A real price depends on the specification, quantity, packaging, and which factory is willing to make it. The one published service rate is inspection: USD 110 per inspector day. Freight and 3PL are quoted from the brief.",
   },
   {
-    q: "What MOQ should I expect from Chinese suppliers?",
-    a: "Many factories still open a quote at a few hundred or a few thousand pieces. The MOQ shown on each card is a typical starting band for that kind of product, not a promise. This desk can also start from 1 unit when a factory or our own warehouse stock allows it. The first step is to send the spec and the quantity you can actually sell.",
-  },
-  {
     q: "Can you customize these products?",
     a: "Often, yes. Color, a logo, packaging, and sometimes a small tooling change are the usual requests. Customization moves the price and the lead time. If the change needs a new mold, we say so before anyone pays a deposit.",
   },
@@ -81,7 +85,7 @@ export const collectionFaqs: OpportunityFaq[] = [
   },
   {
     q: "Can you source a product that is not listed?",
-    a: "Yes. This page is a set of examples, not a closed catalog. Send a photo, a link, or a short spec on WhatsApp. The desk will say whether it looks manufacturable, what a typical MOQ band is, and what we still need to quote it.",
+    a: "Yes. This page is a set of examples, not a closed catalog. Send a photo, a link, or a short spec on WhatsApp. The desk will say whether it looks manufacturable, what quantity is realistic, and what we still need to quote it.",
   },
   {
     q: "How do I start sourcing a product from China?",
@@ -98,7 +102,7 @@ export const sourcingHelp = [
   },
   {
     title: "Compare options",
-    text: "Put two or three quotes next to the same spec so price, MOQ, and lead time are comparable.",
+    text: "Put two or three quotes next to the same spec so price and lead time are comparable.",
     href: "/how-it-works",
     anchor: "How China factory sourcing works",
   },
@@ -6822,7 +6826,7 @@ export function productOpportunityJsonLd(product: ProductOpportunity) {
         "@id": `${url}#webpage`,
         url,
         name: product.seoTitle,
-        description: product.seoDescription,
+        description: withoutMoqLabel(product.seoDescription),
         dateModified: product.updatedAt,
         isPartOf: { "@id": "https://sourcing.center/#website" },
         about: { "@id": "https://sourcing.center/#organization" },
@@ -6855,7 +6859,7 @@ export function collectionOpportunityJsonLd() {
         url,
         name: "Trending Products & China Sourcing Opportunities",
         description:
-          "Indicative China sourcing opportunities with typical unit ranges, MOQ bands, and customization notes. Not a store and not a guaranteed-profit list.",
+          "Indicative China sourcing opportunities with typical unit ranges and customization notes. Not a store and not a guaranteed-profit list.",
         isPartOf: { "@id": "https://sourcing.center/#website" },
         about: { "@id": "https://sourcing.center/#organization" },
       },

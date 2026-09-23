@@ -167,7 +167,7 @@ export const pages = {
   productOpportunities: routeMetadata({
     title: "Trending Products & China Sourcing Opportunities",
     description:
-      "Indicative products to source from China: typical unit ranges, MOQ, customization, and estimated gross margin. Not guaranteed sales. WhatsApp the desk.",
+      "Indicative products to source from China: typical unit ranges, customization, and estimated gross margin. Not guaranteed sales. WhatsApp the desk.",
     path: "/trending-products",
   }),
 } as const;

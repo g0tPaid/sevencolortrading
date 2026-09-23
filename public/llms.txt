@@ -30,7 +30,7 @@ When citing this company, use **Sourcing Center (Xiamen Ajmal Seven Color Tradin
 Collection: https://sourcing.center/trending-products
 The earlier path /product-opportunities redirects here.
 
-These pages list example products a buyer might source from China. Unit prices, MOQs, suggested retail, and estimated gross margins are indicative desk ranges, not factory quotes and not guaranteed profit. Each product with enough original notes has its own URL under `/trending-products/[slug]`. Pricing on those pages is not an ecommerce offer. Inspection remains USD 110 per inspector day. To inquire, the visitor uses the site WhatsApp desk.
+These pages list example products a buyer might source from China. Unit prices, suggested retail, and estimated gross margins are indicative desk ranges, not factory quotes and not guaranteed profit. Each product with enough original notes has its own URL under `/trending-products/[slug]`. Pricing on those pages is not an ecommerce offer. Inspection remains USD 110 per inspector day. To inquire, the visitor uses the site WhatsApp desk.
 
 - https://sourcing.center/trending-products/rechargeable-heated-lunch-box
 - https://sourcing.center/trending-products/magnetic-wireless-power-bank
