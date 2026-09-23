@@ -173,7 +173,7 @@ export default async function ProductOpportunityPage({
             </h2>
             <ul className="mt-4 space-y-3">
               {product.whyInteresting.map((item) => (
-                <li key={item} className="glass-card rounded-2xl px-4 py-3 text-sm leading-relaxed text-ink">
+                <li key={withoutMoqLabel(item)} className="glass-card rounded-2xl px-4 py-3 text-sm leading-relaxed text-ink">
                   {withoutMoqLabel(item)}
                 </li>
               ))}
@@ -224,7 +224,7 @@ export default async function ProductOpportunityPage({
             </h2>
             <ol className="mt-4 space-y-3">
               {product.sourcingNotes.map((note, index) => (
-                <li key={note} className="glass-card rounded-2xl px-4 py-3 text-sm leading-relaxed text-ink">
+                <li key={withoutMoqLabel(note)} className="glass-card rounded-2xl px-4 py-3 text-sm leading-relaxed text-ink">
                   <span className="font-medium">Note {index + 1}. </span>
                   {withoutMoqLabel(note)}
                 </li>
@@ -270,7 +270,7 @@ export default async function ProductOpportunityPage({
             </h2>
             <div className="mt-4 grid gap-4">
               {product.faq.map((item) => (
-                <details key={item.q} className="glass-card rounded-[1.5rem] p-5">
+                <details key={withoutMoqLabel(item.q)} className="glass-card rounded-[1.5rem] p-5">
                   <summary className="cursor-pointer font-medium text-ink">{withoutMoqLabel(item.q)}</summary>
                   <p className="mt-3 text-sm leading-relaxed text-muted">{withoutMoqLabel(item.a)}</p>
                 </details>
