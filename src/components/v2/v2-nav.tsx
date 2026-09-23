@@ -14,6 +14,7 @@ const pageLinks = [
   { href: "/amazon-fba", label: "Amazon FBA" },
   { href: "/factories/register", label: "Factories" },
   { href: "/dropshipping", label: "Dropship" },
+  { href: "/trending-products", label: "Trending Products" },
   { href: "/#visit", label: "Visit China" },
   { href: "/knowledge", label: "Knowledge" },
   { href: "/news", label: "News" },
