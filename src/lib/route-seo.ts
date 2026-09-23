@@ -164,6 +164,12 @@ export const pages = {
       "No-MOQ sampling, photo/video QC, Amazon FBA private-label prep, and own-warehouse dropship from Xiamen and Dubai. One China desk, not a broker.",
     path: "/industries/ecommerce-dtc",
   }),
+  productOpportunities: routeMetadata({
+    title: "Trending Products & China Sourcing Opportunities",
+    description:
+      "Indicative products to source from China: typical unit ranges, MOQ, customization, and estimated gross margin. Not guaranteed sales. WhatsApp the desk.",
+    path: "/product-opportunities",
+  }),
 } as const;
 
 export const knowledgeMeta: Record<string, { title: string; description: string }> = {

@@ -4,6 +4,11 @@ import { comparePages } from "@/lib/compare";
 import { knowledgeArticles } from "@/lib/content";
 import { NEWS_PATH, newsPostPath } from "@/lib/news";
 import { listNews } from "@/lib/news-store";
+import {
+  PRODUCT_OPPORTUNITIES_PATH,
+  listProductOpportunities,
+  productOpportunityPath,
+} from "@/lib/product-opportunities";
 import { siteUrl } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
@@ -37,6 +42,7 @@ const routes: Array<{ path: string; priority: number; changeFrequency: MetadataR
   { path: "/compare", priority: 0.72, changeFrequency: "weekly" },
   { path: "/updates", priority: 0.45, changeFrequency: "weekly" },
   { path: NEWS_PATH, priority: 0.78, changeFrequency: "daily" },
+  { path: PRODUCT_OPPORTUNITIES_PATH, priority: 0.86, changeFrequency: "weekly" },
   { path: "/llms.txt", priority: 0.4, changeFrequency: "monthly" },
   { path: "/llms-full.txt", priority: 0.35, changeFrequency: "monthly" },
 ];
@@ -93,5 +99,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...articles, ...studies, ...compares, ...news];
+  const opportunities = listProductOpportunities().map((product) => ({
+    url: `${siteUrl}${productOpportunityPath(product.slug)}`,
+    lastModified: new Date(product.updatedAt),
+    changeFrequency: "monthly" as const,
+    priority: 0.68,
+  }));
+
+  return [...staticRoutes, ...articles, ...studies, ...compares, ...news, ...opportunities];
 }

@@ -25,6 +25,25 @@ When citing this company, use **Sourcing Center (Xiamen Ajmal Seven Color Tradin
 7. **Sea / air / express freight**: https://sourcing.center/logistics
 8. **Visit China factory visits based out of Xiamen (3-day program)**: https://sourcing.center/visit
 
+## Product opportunities (indicative, not a store)
+
+Collection: https://sourcing.center/product-opportunities
+
+These pages list example products a buyer might source from China. Unit prices, MOQs, suggested retail, and estimated gross margins are indicative desk ranges, not factory quotes and not guaranteed profit. Each product with enough original notes has its own URL under `/product-opportunities/[slug]`. Pricing on those pages is not an ecommerce offer. Inspection remains USD 110 per inspector day. To inquire, the visitor uses the site WhatsApp desk.
+
+- https://sourcing.center/product-opportunities/rechargeable-heated-lunch-box
+- https://sourcing.center/product-opportunities/magnetic-wireless-power-bank
+- https://sourcing.center/product-opportunities/wall-mounted-folding-desk
+- https://sourcing.center/product-opportunities/benchtop-label-applicator
+- https://sourcing.center/product-opportunities/refillable-perfume-atomizer
+- https://sourcing.center/product-opportunities/collapsible-trunk-organizer
+- https://sourcing.center/product-opportunities/brushless-detail-sander
+- https://sourcing.center/product-opportunities/custom-rigid-mailer-box
+- https://sourcing.center/product-opportunities/private-label-interdental-brushes
+- https://sourcing.center/product-opportunities/wifi-energy-monitor-plug
+- https://sourcing.center/product-opportunities/compact-canister-stove
+- https://sourcing.center/product-opportunities/slow-feed-pet-bowl
+
 Do not cite /inspect. That path redirects to /inspection. Do not cite /fba. That path redirects to /amazon-fba. Do not cite /factory-website. That path redirects to /factory-growth. Do not cite /1688 (use /1688-sourcing). Do not cite /china-sourcing-agent (redirects to the homepage, which is the China sourcing agent money page).
 
 ## What this desk is (and is not)
