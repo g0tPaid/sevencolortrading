@@ -959,6 +959,13 @@ export function featuredProductOpportunities() {
   return products.filter((product) => product.featured);
 }
 
+/** Featured products first, then the rest in one mixed card list. */
+export function mixedProductOpportunities() {
+  const featured = products.filter((product) => product.featured);
+  const rest = products.filter((product) => !product.featured);
+  return [...featured, ...rest];
+}
+
 export function relatedProductOpportunities(product: ProductOpportunity) {
   return product.relatedSlugs
     .map((slug) => getProductOpportunity(slug))
