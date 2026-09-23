@@ -52,6 +52,12 @@ const nextConfig: NextConfig = {
       { source: "/factory-website", destination: "/factory-growth", permanent: true },
       { source: "/1688", destination: "/1688-sourcing", permanent: true },
       { source: "/china-sourcing-agent", destination: "/", permanent: true },
+      { source: "/product-opportunities", destination: "/trending-products", permanent: true },
+      {
+        source: "/product-opportunities/:slug",
+        destination: "/trending-products/:slug",
+        permanent: true,
+      },
     ];
   },
 };

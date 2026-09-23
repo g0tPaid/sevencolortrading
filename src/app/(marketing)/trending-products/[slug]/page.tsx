@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProductOpportunityCard } from "@/components/product-opportunities/product-card";
-import { ProductMark } from "@/components/product-opportunities/product-mark";
 import { SourceProductLink } from "@/components/product-opportunities/source-product-link";
 import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -14,6 +14,7 @@ import {
   formatUsdRange,
   getProductOpportunity,
   listProductOpportunities,
+  productImageSrc,
   productOpportunityJsonLd,
   productOpportunityPath,
   productWhatsAppMessage,
@@ -44,11 +45,11 @@ export async function generateMetadata({
     keywords: product.seoKeywords,
     openGraph: {
       ...meta.openGraph,
-      images: [{ url: absoluteUrl("/sourcing-center-logo.svg"), alt: product.imageAlt }],
+      images: [{ url: absoluteUrl(productImageSrc(product.slug)), alt: product.imageAlt }],
     },
     twitter: {
       ...meta.twitter,
-      images: [absoluteUrl("/sourcing-center-logo.svg")],
+      images: [absoluteUrl(productImageSrc(product.slug))],
     },
   };
 }
@@ -92,7 +93,20 @@ export default async function ProductOpportunityPage({
           </nav>
 
           <header className="mt-6 grid gap-8 lg:grid-cols-[minmax(0,280px)_1fr] lg:items-start">
-            <ProductMark category={product.category} name={product.name} alt={product.imageAlt} />
+            <figure>
+              <Image
+                src={productImageSrc(product.slug)}
+                alt={product.imageAlt}
+                width={800}
+                height={800}
+                priority
+                sizes="(max-width: 1024px) 100vw, 280px"
+                className="aspect-square h-auto w-full rounded-2xl object-cover"
+              />
+              <figcaption className="mt-2 text-xs leading-relaxed text-muted">
+                Reference photo. The factory sample can differ by color, material, and specification.
+              </figcaption>
+            </figure>
             <div>
               <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted">
                 {product.category}
@@ -269,7 +283,7 @@ export default async function ProductOpportunityPage({
             <h2 id="related-heading" className="font-display text-2xl font-semibold text-ink">
               Related sourcing notes
             </h2>
-            <div className="mt-5 grid gap-5 md:grid-cols-3">
+            <div className="mt-4 grid grid-cols-2 gap-2.5 sm:gap-4 lg:grid-cols-3">
               {related.map((item) => (
                 <ProductOpportunityCard
                   key={item.slug}

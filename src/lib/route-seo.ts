@@ -168,7 +168,7 @@ export const pages = {
     title: "Trending Products & China Sourcing Opportunities",
     description:
       "Indicative products to source from China: typical unit ranges, MOQ, customization, and estimated gross margin. Not guaranteed sales. WhatsApp the desk.",
-    path: "/product-opportunities",
+    path: "/trending-products",
   }),
 } as const;
 

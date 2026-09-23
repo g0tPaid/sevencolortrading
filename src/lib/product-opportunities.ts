@@ -1,6 +1,6 @@
 import { absoluteUrl } from "@/lib/seo";
 
-export const PRODUCT_OPPORTUNITIES_PATH = "/product-opportunities";
+export const PRODUCT_OPPORTUNITIES_PATH = "/trending-products";
 
 export const MARGIN_DISCLAIMER =
   "Indicative estimates only. Actual margins vary by supplier, quantity, specifications, shipping, duties, taxes, marketplace fees, advertising and destination market.";
@@ -151,7 +151,7 @@ const products: ProductOpportunity[] = [
       "Heated lunch boxes sit in a familiar home and kitchen lane: people who want a hot meal without a microwave. The interesting sourcing question is not the outer shell. It is the heater, the battery or car plug, food-contact plastic, and whether the lid actually seals. Factories in Guangdong and Zhejiang already make electric lunch boxes for export, so a buyer is usually choosing a platform and then changing color, a logo, and the plug standard. A typical first conversation covers wattage, whether the unit is cordless or 12V only, and which food-contact material the factory can document. Retail positioning is usually a gift or a commuter accessory, not a kitchen appliance with a long warranty story. The desk treats the price band below as an indicative ex-works range before freight, certification, and packaging.",
     category: "Home & Kitchen",
     subcategory: "Electric food containers",
-    imageAlt: "Illustrated rechargeable heated lunch box with a sealed lid and inner tray",
+    imageAlt: "Reference photo of a rechargeable heated lunch box with a sealed lid and inner tray",
     sourcingPriceMin: 7,
     sourcingPriceMax: 13,
     currency: "USD",
@@ -217,7 +217,7 @@ const products: ProductOpportunity[] = [
       "Magnetic power banks are a crowded electronics lane, which is exactly why the sourcing work matters. The outer shape is easy to copy. Capacity, the magnet ring, wireless charge speed, and the cell supplier are what change the quote. A buyer who only sends a photo will get a wide price range. A buyer who states mAh, whether the unit must pass a named market's battery rules, and the retail box size will get a usable comparison. Factories in Shenzhen commonly offer this as a private-label platform: your color, your logo, their cell and coil. That is a reasonable first order if you accept the platform's limits. A fully custom circuit is a later step. Prices below are indicative and do not include freight, certification, or marketplace fees.",
     category: "Electronics",
     subcategory: "Mobile power",
-    imageAlt: "Illustrated compact magnetic wireless power bank",
+    imageAlt: "Reference photo of a compact magnetic wireless power bank",
     sourcingPriceMin: 8,
     sourcingPriceMax: 16,
     currency: "USD",
@@ -283,7 +283,7 @@ const products: ProductOpportunity[] = [
       "Folding wall desks are a furniture opportunity when the buyer cares about small apartments, not a full office line. The product is mostly a board, a bracket, and hardware. Sourcing risk sits in the bracket, the wall fixings, and how flat the top stays after a few hundred open-and-close cycles. Export factories that already make wall tables can change the laminate, the size, and a brand on the bracket. They should not be asked to invent a new hinge on the first order. A useful brief states the open width, the closed depth, the maximum load you will print on the box, and whether the hardware pack includes anchors. The price band is indicative for a simple laminate top, not for solid wood or a motorized lift.",
     category: "Furniture",
     subcategory: "Compact work surfaces",
-    imageAlt: "Illustrated wall-mounted folding desk in the open position",
+    imageAlt: "Reference photo of a wall-mounted folding desk in the open position",
     sourcingPriceMin: 18,
     sourcingPriceMax: 36,
     currency: "USD",
@@ -349,7 +349,7 @@ const products: ProductOpportunity[] = [
       "A benchtop label applicator is a machinery buy for a brand that has outgrown hand labeling and is not ready for a full automatic line. Chinese factories build these as semi-automatic machines: an operator loads the bottle, the machine rolls on one label. The quote moves with bottle diameter, label width, and whether you need a date coder. This is not a gadget. You need a manual, spare parts, and a clear voltage. A useful first order is the factory's existing frame in your color, with a bottle range written down. Inventing a new sensor layout is a development project. The price below is an indicative machine price for a simple round-bottle applicator, before shipping, installation, or a coder.",
     category: "Machinery",
     subcategory: "Packing equipment",
-    imageAlt: "Illustrated benchtop machine applying a label to a round bottle",
+    imageAlt: "Reference photo of a benchtop machine applying a label to a round bottle",
     sourcingPriceMin: 280,
     sourcingPriceMax: 650,
     currency: "USD",
@@ -415,7 +415,7 @@ const products: ProductOpportunity[] = [
       "Refillable atomizers are a beauty-adjacent product: the buyer is selling the bottle, not the scent. That matters in sourcing. You are buying glass or aluminum, a pump, and a valve, then deciding how much of that stack can carry a brand. The leak point is the valve, not the engraving. Factories that already make 5 ml travel sprays can change the color, the cap, and a laser logo. A new pump geometry is tooling. A serious brief names the fill volume, the material, and whether the unit must survive a cabin-pressure conversation you are willing to test. The price band is indicative for a common 5 ml aluminum or glass atomizer before a custom mold, fragrance, or retail display.",
     category: "Beauty",
     subcategory: "Travel bottles",
-    imageAlt: "Illustrated pocket perfume atomizer with a cap",
+    imageAlt: "Reference photo of a pocket perfume atomizer with a cap",
     sourcingPriceMin: 1.4,
     sourcingPriceMax: 3.2,
     currency: "USD",
@@ -481,7 +481,7 @@ const products: ProductOpportunity[] = [
       "Trunk organizers are a straightforward automotive accessory: fabric, board, and webbing. The sourcing difference between a floppy bag and a product people keep is the board stiffness and the stitch at the handle. Factories that sew car storage already have this pattern. A buyer usually changes color, an embroidered logo, and the carton. Waterproof coatings and a harder board move the price. This is a good brief to write tightly: external size, number of compartments, and whether the base is removable. The range below is an indicative sewn organizer with board sides, not a molded plastic cargo box and not a product with electronics.",
     category: "Automotive",
     subcategory: "Trunk storage",
-    imageAlt: "Illustrated collapsible car trunk organizer with side handles",
+    imageAlt: "Reference photo of a collapsible car trunk organizer with side handles",
     sourcingPriceMin: 4,
     sourcingPriceMax: 9,
     currency: "USD",
@@ -547,7 +547,7 @@ const products: ProductOpportunity[] = [
       "Detail sanders are a tools buy where the platform already exists: a small triangular pad, a brushless or brushed motor, and a battery shared with a wider tool line. Private label here usually means your color and your carton on the factory's motor, not a new gearbox. The quote changes with battery inclusion, pad size, and whether the charger is in the box. A buyer who wants a one-off motor should expect tooling and a longer test. A buyer who accepts the platform can sample dust extraction, vibration, and pad life. The band below is indicative for the tool body, and it moves a lot if a battery and charger are included. Certification for the destination market is not included.",
     category: "Tools",
     subcategory: "Cordless sanding",
-    imageAlt: "Illustrated cordless detail sander with a triangular pad",
+    imageAlt: "Reference photo of a cordless detail sander with a triangular pad",
     sourcingPriceMin: 16,
     sourcingPriceMax: 34,
     currency: "USD",
@@ -613,7 +613,7 @@ const products: ProductOpportunity[] = [
       "Packaging is its own sourcing job. A rigid mailer is board, wrap, a magnet or a tuck, and print. The opportunity is real for brands that already know the product size and want the box to survive a courier. It is a poor first project if the product dimensions are still changing. Chinese packaging plants quote from a dieline: length, width, height, board grade, and the print method. A digital-print short run and a litho run of several thousand are different prices. The band below is an indicative small rigid mailer in a common size, one or two print colors or a simple full-color wrap, before inserts, foam, and freight. Send the product, not only a mood board.",
     category: "Packaging",
     subcategory: "Retail mailers",
-    imageAlt: "Illustrated rigid mailer box with a printed lid",
+    imageAlt: "Reference photo of a rigid mailer box with a printed lid",
     sourcingPriceMin: 0.6,
     sourcingPriceMax: 1.8,
     currency: "USD",
@@ -679,7 +679,7 @@ const products: ProductOpportunity[] = [
       "Interdental brushes are a dental consumable with a clear factory pattern: a wire core, a filament, a handle, and a cap. The sourcing work is hygiene, size range, and the pack, not a new invention. Buyers usually want a case of three to eight sizes, a brand on the handle or the lid, and a carton that states the sizes honestly. Factories that already export this item can do that. What they should document is the filament, the wire, and the sizes in millimeters. This page does not claim a medical registration. If your market treats the item as a device, that paperwork is your responsibility and it is not inside the unit price. The band is an indicative private-label set before freight and any registration.",
     category: "Dental",
     subcategory: "Interdental cleaning",
-    imageAlt: "Illustrated set of interdental brushes in a small travel case",
+    imageAlt: "Reference photo of a set of interdental brushes in a small travel case",
     sourcingPriceMin: 0.35,
     sourcingPriceMax: 0.9,
     currency: "USD",
@@ -745,7 +745,7 @@ const products: ProductOpportunity[] = [
       "A Wi-Fi energy plug is a smart-home product with a boring, important core: the relay, the metering chip, and the firmware update path. The shell is easy. The sourcing risk is the plug standard for the destination country, the app, and what the factory will still support in a year. Many Shenzhen platforms already offer this as a white-label unit: your logo, their app or a named app, their PCB. That can be a sensible first order if you accept the app you are given. Building your own app is a software project, not a packaging change. The price band is indicative for a common plug platform before freight, certification, and any app work. Name the country. A EU plug and a US plug are not the same tool.",
     category: "Smart Products",
     subcategory: "Home energy",
-    imageAlt: "Illustrated Wi-Fi smart plug with a small status light",
+    imageAlt: "Reference photo of a Wi-Fi smart plug with a small status light",
     sourcingPriceMin: 6,
     sourcingPriceMax: 12,
     currency: "USD",
@@ -811,7 +811,7 @@ const products: ProductOpportunity[] = [
       "A compact canister stove is an outdoor product with a safety story. The interesting factories already make screw-on burners and can change the color, a logo, and the stuff sack. They should be able to say which canister thread they support and what the pot support holds. A buyer who wants a new valve is asking for a different project. A buyer who wants a trail stove in their color is asking for a platform. Pack copy must not promise a wind performance the sample does not have. The band below is indicative for a simple screw-on stove without the canister, a piezo that may or may not be included, and before freight. Fuel canisters are a separate regulated item and are not part of this note.",
     category: "Outdoor",
     subcategory: "Camp cooking",
-    imageAlt: "Illustrated compact screw-on camping stove",
+    imageAlt: "Reference photo of a compact screw-on camping stove",
     sourcingPriceMin: 5,
     sourcingPriceMax: 11,
     currency: "USD",
@@ -877,7 +877,7 @@ const products: ProductOpportunity[] = [
       "Slow-feed bowls are a pet product with a simple mold story and a materials story. The maze, the ridges, or a slight raise is what makes it different from a plain bowl. Factories that mold pet bowls can change color and add a pad-printed logo. A new maze is a mold, so the first order should decide whether you are buying an existing cavity or cutting a new one. Food-contact material should be named, not implied by the word 'BPA-free' alone. Size should be in milliliters or a diameter, because 'medium dog' is not a spec. The band is indicative for an existing mold in one or two colors, before a new tool, a retail carton, and freight.",
     category: "Pet Products",
     subcategory: "Feeding",
-    imageAlt: "Illustrated slow-feed pet bowl with a maze pattern",
+    imageAlt: "Reference photo of a slow-feed pet bowl with a maze pattern",
     sourcingPriceMin: 1.2,
     sourcingPriceMax: 3,
     currency: "USD",
@@ -943,6 +943,10 @@ export function productOpportunityPath(slug: string) {
   return `${PRODUCT_OPPORTUNITIES_PATH}/${slug}`;
 }
 
+export function productImageSrc(slug: string) {
+  return `/trending-products/${slug}.webp`;
+}
+
 export function listProductOpportunities() {
   return products;
 }
@@ -989,7 +993,7 @@ export function productWhatsAppMessage(name: string) {
 }
 
 export const expertWhatsAppMessage =
-  "Hi Sourcing.center! I would like to talk to a China sourcing expert about a product on sourcing.center/product-opportunities.";
+  "Hi Sourcing.center! I would like to talk to a China sourcing expert about a product on sourcing.center/trending-products.";
 
 export function productOpportunityJsonLd(product: ProductOpportunity) {
   const path = productOpportunityPath(product.slug);
