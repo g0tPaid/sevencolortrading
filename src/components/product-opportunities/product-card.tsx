@@ -53,10 +53,6 @@ export function ProductOpportunityCard({
             </dd>
           </div>
           <div className="flex justify-between gap-1">
-            <dt className="text-muted">MOQ</dt>
-            <dd className="text-right font-medium text-ink">{product.moq.toLocaleString("en-US")}</dd>
-          </div>
-          <div className="flex justify-between gap-1">
             <dt className="text-muted">Retail</dt>
             <dd className="text-right font-medium text-ink">
               {formatUsdRange(product.retailPriceMin, product.retailPriceMax)}

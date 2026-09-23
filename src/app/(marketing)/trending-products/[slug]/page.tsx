@@ -20,6 +20,7 @@ import {
   productWhatsAppMessage,
   relatedProductOpportunities,
   sourcingHelp,
+  withoutMoqLabel,
 } from "@/lib/product-opportunities";
 
 export function generateStaticParams() {
@@ -36,13 +37,13 @@ export async function generateMetadata({
   if (!product) return { title: "Product opportunity" };
   const meta = routeMetadata({
     title: product.seoTitle,
-    description: product.seoDescription,
+    description: withoutMoqLabel(product.seoDescription),
     path: productOpportunityPath(product.slug),
     type: "article",
   });
   return {
     ...meta,
-    keywords: product.seoKeywords,
+    keywords: product.seoKeywords.map(withoutMoqLabel),
     openGraph: {
       ...meta.openGraph,
       images: [{ url: absoluteUrl(productImageSrc(product.slug)), alt: product.imageAlt }],
@@ -115,7 +116,7 @@ export default async function ProductOpportunityPage({
               <h1 className="mt-2 font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
                 {product.title}
               </h1>
-              <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted">{product.shortDescription}</p>
+              <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted">{withoutMoqLabel(product.shortDescription)}</p>
               <p className="mt-3 text-sm text-muted">Last updated: {product.updatedLabel}</p>
               <div className="mt-5">
                 <SourceProductLink
@@ -137,7 +138,7 @@ export default async function ProductOpportunityPage({
             <h2 id="about-heading" className="font-display text-2xl font-semibold text-ink">
               What this product is
             </h2>
-            <p className="mt-4 max-w-3xl text-base leading-relaxed text-muted">{product.description}</p>
+            <p className="mt-4 max-w-3xl text-base leading-relaxed text-muted">{withoutMoqLabel(product.description)}</p>
           </section>
 
           <section className="mt-10" aria-labelledby="numbers-heading">
@@ -151,7 +152,6 @@ export default async function ProductOpportunityPage({
             <dl className="mt-4 grid gap-3 sm:grid-cols-2">
               {[
                 ["Indicative China sourcing price", formatUsdRange(product.sourcingPriceMin, product.sourcingPriceMax)],
-                ["Typical MOQ", `${product.moq.toLocaleString("en-US")} pcs`],
                 ["Suggested retail range", formatUsdRange(product.retailPriceMin, product.retailPriceMax)],
                 [
                   "Estimated gross margin",
@@ -164,8 +164,7 @@ export default async function ProductOpportunityPage({
                 </div>
               ))}
             </dl>
-            <p className="mt-3 text-sm text-muted">{product.moqNote}</p>
-            <p className="mt-2 text-xs leading-relaxed text-muted">{MARGIN_DISCLAIMER}</p>
+            <p className="mt-3 text-xs leading-relaxed text-muted">{MARGIN_DISCLAIMER}</p>
           </section>
 
           <section className="mt-10" aria-labelledby="why-heading">
@@ -174,8 +173,8 @@ export default async function ProductOpportunityPage({
             </h2>
             <ul className="mt-4 space-y-3">
               {product.whyInteresting.map((item) => (
-                <li key={item} className="glass-card rounded-2xl px-4 py-3 text-sm leading-relaxed text-ink">
-                  {item}
+                <li key={withoutMoqLabel(item)} className="glass-card rounded-2xl px-4 py-3 text-sm leading-relaxed text-ink">
+                  {withoutMoqLabel(item)}
                 </li>
               ))}
             </ul>
@@ -188,8 +187,8 @@ export default async function ProductOpportunityPage({
             <dl className="mt-4 divide-y divide-black/5 rounded-[1.5rem] border border-black/5 dark:divide-white/10 dark:border-white/10">
               {product.specifications.map((spec) => (
                 <div key={spec.label} className="grid gap-1 px-4 py-3 sm:grid-cols-[180px_1fr]">
-                  <dt className="text-sm font-medium text-ink">{spec.label}</dt>
-                  <dd className="text-sm leading-relaxed text-muted">{spec.value}</dd>
+                  <dt className="text-sm font-medium text-ink">{withoutMoqLabel(spec.label)}</dt>
+                  <dd className="text-sm leading-relaxed text-muted">{withoutMoqLabel(spec.value)}</dd>
                 </div>
               ))}
             </dl>
@@ -199,7 +198,7 @@ export default async function ProductOpportunityPage({
             <h2 id="custom-heading" className="font-display text-2xl font-semibold text-ink">
               Customization and private label
             </h2>
-            <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted">{product.customizationNote}</p>
+            <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted">{withoutMoqLabel(product.customizationNote)}</p>
             <p className="mt-3 text-sm text-muted">
               {product.customization
                 ? "Some customization is realistic on this kind of product."
@@ -225,9 +224,9 @@ export default async function ProductOpportunityPage({
             </h2>
             <ol className="mt-4 space-y-3">
               {product.sourcingNotes.map((note, index) => (
-                <li key={note} className="glass-card rounded-2xl px-4 py-3 text-sm leading-relaxed text-ink">
+                <li key={withoutMoqLabel(note)} className="glass-card rounded-2xl px-4 py-3 text-sm leading-relaxed text-ink">
                   <span className="font-medium">Note {index + 1}. </span>
-                  {note}
+                  {withoutMoqLabel(note)}
                 </li>
               ))}
             </ol>
@@ -271,9 +270,9 @@ export default async function ProductOpportunityPage({
             </h2>
             <div className="mt-4 grid gap-4">
               {product.faq.map((item) => (
-                <details key={item.q} className="glass-card rounded-[1.5rem] p-5">
-                  <summary className="cursor-pointer font-medium text-ink">{item.q}</summary>
-                  <p className="mt-3 text-sm leading-relaxed text-muted">{item.a}</p>
+                <details key={withoutMoqLabel(item.q)} className="glass-card rounded-[1.5rem] p-5">
+                  <summary className="cursor-pointer font-medium text-ink">{withoutMoqLabel(item.q)}</summary>
+                  <p className="mt-3 text-sm leading-relaxed text-muted">{withoutMoqLabel(item.a)}</p>
                 </details>
               ))}
             </div>
