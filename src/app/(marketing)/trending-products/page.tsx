@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ProductOpportunityCard } from "@/components/product-opportunities/product-card";
-import { ProductMark } from "@/components/product-opportunities/product-mark";
 import { SourceProductLink } from "@/components/product-opportunities/source-product-link";
 import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -16,6 +16,7 @@ import {
   collectionOpportunityJsonLd,
   expertWhatsAppMessage,
   featuredProductOpportunities,
+  productImageSrc,
   productsByCategory,
   sourcingHelp,
 } from "@/lib/product-opportunities";
@@ -36,14 +37,14 @@ export const metadata: Metadata = {
     ...pages.productOpportunities.openGraph,
     images: [
       {
-        url: absoluteUrl("/sourcing-center-logo.svg"),
-        alt: "Sourcing Center",
+        url: absoluteUrl(productImageSrc("rechargeable-heated-lunch-box")),
+        alt: "Reference photo of a rechargeable heated lunch box",
       },
     ],
   },
   twitter: {
     ...pages.productOpportunities.twitter,
-    images: [absoluteUrl("/sourcing-center-logo.svg")],
+    images: [absoluteUrl(productImageSrc("rechargeable-heated-lunch-box"))],
   },
 };
 
@@ -150,13 +151,15 @@ export default function ProductOpportunitiesPage() {
               A short list the desk can talk through this month. Prices are indicative ex-works
               style ranges, not a checkout and not a guaranteed margin.
             </p>
-            <div className="mt-6 grid gap-5 md:grid-cols-2">
-              {featured.map((product) => (
+            <p className="mt-2 max-w-2xl text-xs leading-relaxed text-muted">{MARGIN_DISCLAIMER}</p>
+            <div className="mt-4 grid grid-cols-2 gap-2.5 sm:gap-4 lg:grid-cols-4">
+              {featured.map((product, index) => (
                 <ProductOpportunityCard
                   key={product.slug}
                   product={product}
                   sourcePage={PRODUCT_OPPORTUNITIES_PATH}
                   buttonLocation="featured"
+                  priority={index < 2}
                 />
               ))}
             </div>
@@ -177,7 +180,7 @@ export default function ProductOpportunitiesPage() {
               >
                 {group.category}
               </h2>
-              <div className="mt-5 grid gap-5 md:grid-cols-2">
+              <div className="mt-4 grid grid-cols-2 gap-2.5 sm:gap-4 lg:grid-cols-4">
                 {group.products.map((product) => (
                   <ProductOpportunityCard
                     key={product.slug}
@@ -272,10 +275,13 @@ export default function ProductOpportunitiesPage() {
           <Container>
             <div className="glass-panel rounded-[2rem] px-6 py-10 sm:px-10">
               <div className="grid gap-6 md:grid-cols-[180px_1fr] md:items-center">
-                <ProductMark
-                  category="Electronics"
-                  name="Sourcing"
-                  alt="Sourcing Center mark used beside the WhatsApp call to action"
+                <Image
+                  src={productImageSrc("rechargeable-heated-lunch-box")}
+                  alt="Reference photo of a rechargeable heated lunch box"
+                  width={800}
+                  height={800}
+                  sizes="180px"
+                  className="hidden aspect-square w-full rounded-2xl object-cover md:block"
                 />
                 <div>
                   <h2 id="final-cta-heading" className="font-display text-3xl font-semibold text-ink">

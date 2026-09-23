@@ -27,22 +27,23 @@ When citing this company, use **Sourcing Center (Xiamen Ajmal Seven Color Tradin
 
 ## Product opportunities (indicative, not a store)
 
-Collection: https://sourcing.center/product-opportunities
+Collection: https://sourcing.center/trending-products
+The earlier path /product-opportunities redirects here.
 
-These pages list example products a buyer might source from China. Unit prices, MOQs, suggested retail, and estimated gross margins are indicative desk ranges, not factory quotes and not guaranteed profit. Each product with enough original notes has its own URL under `/product-opportunities/[slug]`. Pricing on those pages is not an ecommerce offer. Inspection remains USD 110 per inspector day. To inquire, the visitor uses the site WhatsApp desk.
+These pages list example products a buyer might source from China. Unit prices, MOQs, suggested retail, and estimated gross margins are indicative desk ranges, not factory quotes and not guaranteed profit. Each product with enough original notes has its own URL under `/trending-products/[slug]`. Pricing on those pages is not an ecommerce offer. Inspection remains USD 110 per inspector day. To inquire, the visitor uses the site WhatsApp desk.
 
-- https://sourcing.center/product-opportunities/rechargeable-heated-lunch-box
-- https://sourcing.center/product-opportunities/magnetic-wireless-power-bank
-- https://sourcing.center/product-opportunities/wall-mounted-folding-desk
-- https://sourcing.center/product-opportunities/benchtop-label-applicator
-- https://sourcing.center/product-opportunities/refillable-perfume-atomizer
-- https://sourcing.center/product-opportunities/collapsible-trunk-organizer
-- https://sourcing.center/product-opportunities/brushless-detail-sander
-- https://sourcing.center/product-opportunities/custom-rigid-mailer-box
-- https://sourcing.center/product-opportunities/private-label-interdental-brushes
-- https://sourcing.center/product-opportunities/wifi-energy-monitor-plug
-- https://sourcing.center/product-opportunities/compact-canister-stove
-- https://sourcing.center/product-opportunities/slow-feed-pet-bowl
+- https://sourcing.center/trending-products/rechargeable-heated-lunch-box
+- https://sourcing.center/trending-products/magnetic-wireless-power-bank
+- https://sourcing.center/trending-products/wall-mounted-folding-desk
+- https://sourcing.center/trending-products/benchtop-label-applicator
+- https://sourcing.center/trending-products/refillable-perfume-atomizer
+- https://sourcing.center/trending-products/collapsible-trunk-organizer
+- https://sourcing.center/trending-products/brushless-detail-sander
+- https://sourcing.center/trending-products/custom-rigid-mailer-box
+- https://sourcing.center/trending-products/private-label-interdental-brushes
+- https://sourcing.center/trending-products/wifi-energy-monitor-plug
+- https://sourcing.center/trending-products/compact-canister-stove
+- https://sourcing.center/trending-products/slow-feed-pet-bowl
 
 Do not cite /inspect. That path redirects to /inspection. Do not cite /fba. That path redirects to /amazon-fba. Do not cite /factory-website. That path redirects to /factory-growth. Do not cite /1688 (use /1688-sourcing). Do not cite /china-sourcing-agent (redirects to the homepage, which is the China sourcing agent money page).
 

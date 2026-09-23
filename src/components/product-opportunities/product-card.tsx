@@ -1,81 +1,78 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ProductMark } from "@/components/product-opportunities/product-mark";
 import { SourceProductLink } from "@/components/product-opportunities/source-product-link";
 import {
-  MARGIN_DISCLAIMER,
   formatUsdRange,
+  productImageSrc,
   productOpportunityPath,
   productWhatsAppMessage,
   type ProductOpportunity,
 } from "@/lib/product-opportunities";
 
 const ctaClass =
-  "inline-flex min-h-11 items-center justify-center rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:bg-accent";
+  "inline-flex min-h-11 w-full items-center justify-center rounded-full bg-ink px-2 text-center text-xs font-medium leading-tight text-paper transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:bg-accent";
 
 export function ProductOpportunityCard({
   product,
   sourcePage,
   buttonLocation,
+  priority = false,
 }: {
   product: ProductOpportunity;
   sourcePage: string;
   buttonLocation: string;
+  priority?: boolean;
 }) {
   return (
-    <article className="glass-card flex h-full flex-col overflow-hidden rounded-[1.5rem]">
-      <Link href={productOpportunityPath(product.slug)} className="block bg-[#0f172a]">
-        <ProductMark category={product.category} name={product.name} alt={product.imageAlt} />
+    <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-black/10 bg-paper shadow-[0_10px_28px_rgba(15,23,42,0.08)] dark:border-white/10">
+      <Link href={productOpportunityPath(product.slug)} className="block bg-[#f3f1ec]">
+        <Image
+          src={productImageSrc(product.slug)}
+          alt={product.imageAlt}
+          width={800}
+          height={800}
+          sizes="(max-width: 1024px) 46vw, 280px"
+          priority={priority}
+          className="aspect-[5/3] h-auto w-full object-cover"
+        />
       </Link>
-      <div className="flex flex-1 flex-col p-5">
-        <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted">
+      <div className="flex flex-1 flex-col p-2 sm:p-3">
+        <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted">
           {product.category}
         </p>
-        <h3 className="mt-2 font-display text-xl font-semibold tracking-tight text-ink">
+        <h3 className="mt-0.5 line-clamp-2 font-display text-[13px] font-semibold leading-tight tracking-tight text-ink">
           <Link href={productOpportunityPath(product.slug)} className="hover:text-accent">
             {product.name}
           </Link>
         </h3>
-        <p className="mt-2 text-sm leading-relaxed text-muted">{product.shortDescription}</p>
-        {product.whyInteresting[0] ? (
-          <p className="mt-3 text-sm leading-relaxed text-ink">
-            <span className="font-medium">Why it&apos;s interesting. </span>
-            {product.whyInteresting[0]}
-          </p>
-        ) : null}
-        <dl className="mt-4 space-y-2 text-sm">
-          <div className="flex justify-between gap-3">
-            <dt className="text-muted">China sourcing</dt>
+        <dl className="mt-1.5 space-y-0.5 text-[11px] leading-tight">
+          <div className="flex justify-between gap-1">
+            <dt className="text-muted">Sourcing</dt>
             <dd className="text-right font-medium text-ink">
               {formatUsdRange(product.sourcingPriceMin, product.sourcingPriceMax)}
             </dd>
           </div>
-          <div className="flex justify-between gap-3">
+          <div className="flex justify-between gap-1">
             <dt className="text-muted">MOQ</dt>
-            <dd className="text-right font-medium text-ink">{product.moq.toLocaleString("en-US")} pcs</dd>
+            <dd className="text-right font-medium text-ink">{product.moq.toLocaleString("en-US")}</dd>
           </div>
-          <div className="flex justify-between gap-3">
-            <dt className="text-muted">Suggested retail</dt>
+          <div className="flex justify-between gap-1">
+            <dt className="text-muted">Retail</dt>
             <dd className="text-right font-medium text-ink">
               {formatUsdRange(product.retailPriceMin, product.retailPriceMax)}
             </dd>
           </div>
-          <div className="flex justify-between gap-3">
-            <dt className="text-muted">Estimated gross margin</dt>
+          <div className="flex justify-between gap-1">
+            <dt className="text-muted">Est. margin</dt>
             <dd className="text-right font-medium text-ink">
-              {product.estimatedMarginMin}% to {product.estimatedMarginMax}%
+              {product.estimatedMarginMin}%–{product.estimatedMarginMax}%
             </dd>
           </div>
         </dl>
-        <p className="mt-3 text-xs leading-relaxed text-muted">{MARGIN_DISCLAIMER}</p>
-        <p className="mt-3 text-xs text-muted">
-          Customization: {product.customization ? "available on many platforms" : "limited"}
-          {product.privateLabel ? " · Private label possible" : ""}
-        </p>
-        <p className="mt-1 text-xs text-muted">Last updated: {product.updatedLabel}</p>
-        <div className="mt-4 flex flex-col gap-2 sm:flex-row">
+        <div className="mt-2">
           <SourceProductLink
             hrefMessage={productWhatsAppMessage(product.name)}
-            className={`${ctaClass} w-full sm:w-auto`}
+            className={ctaClass}
             productName={product.name}
             productSlug={product.slug}
             category={product.category}
@@ -84,12 +81,6 @@ export function ProductOpportunityCard({
           >
             Source This Product
           </SourceProductLink>
-          <Link
-            href={productOpportunityPath(product.slug)}
-            className="inline-flex min-h-11 items-center justify-center rounded-full px-4 text-sm font-medium text-ink underline-offset-4 hover:underline"
-          >
-            Sourcing notes
-          </Link>
         </div>
       </div>
     </article>

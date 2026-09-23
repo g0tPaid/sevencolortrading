@@ -59,7 +59,7 @@ export function SiteFooter() {
                 ["How it works", "/how-it-works"],
                 ["Case studies", "/case-studies"],
                 ["Knowledge", "/knowledge"],
-                ["Product opportunities", "/product-opportunities"],
+                ["Trending products", "/trending-products"],
                 ["FAQ", "/faq"],
                 ["Compare", "/compare"],
                 ["References", "/reviews"],
