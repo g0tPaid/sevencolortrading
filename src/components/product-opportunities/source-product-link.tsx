@@ -31,17 +31,18 @@ export function SourceProductLink({
       target="_blank"
       rel="noopener noreferrer"
       className={className}
-      onClick={() =>
-        trackGaEvent("contact", {
+      onClick={() => {
+        const params: Record<string, string> = {
           method: "whatsapp",
-          product_name: productName,
-          product_slug: productSlug,
           page: sourcePage,
-          category,
           button_location: buttonLocation,
           source_page: sourcePage,
-        })
-      }
+        };
+        if (productName) params.product_name = productName;
+        if (productSlug) params.product_slug = productSlug;
+        if (category) params.category = category;
+        trackGaEvent("contact", params);
+      }}
     >
       {children}
     </a>

@@ -75,7 +75,7 @@ export function ProductOpportunityCard({
         <div className="mt-4 flex flex-col gap-2 sm:flex-row">
           <SourceProductLink
             hrefMessage={productWhatsAppMessage(product.name)}
-            className={ctaClass}
+            className={`${ctaClass} w-full sm:w-auto`}
             productName={product.name}
             productSlug={product.slug}
             category={product.category}
