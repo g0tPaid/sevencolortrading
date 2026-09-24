@@ -1,0 +1,48 @@
+Keyword,Search intent,Topic,Commercial value 0-10,Estimated demand,Competition,Current ranking,Target URL,Existing URL,Content gap,Priority score,Country,Language,Conversion potential
+china sourcing agent,transactional,core,10,high,high,DATA REQUIRED (not page 1 in 2026-09-15 SERP sample),/ or /china-sourcing-agent,partial — homepage title only,H1 and body do not match query,43,global,en,high
+china sourcing company,transactional,core,10,high,high,DATA REQUIRED,/ + /about + /knowledge/china-sourcing-company-xiamen-dubai-3pl,partial,entity/commercial depth,42,global,en,high
+china factory sourcing,transactional,core,9,medium-high,medium,DATA REQUIRED,/contact,partial — title good H1 weak,H1 alignment,41,global,en,high
+china sourcing services,transactional,core,8,medium,medium,DATA REQUIRED,/services,yes mid,depth and proof,38,global,en,medium
+china procurement company,transactional,core,8,medium,medium,DATA REQUIRED,/contact or /procurement,no dedicated,only if corporate procurement confirmed,36,global,en,high
+china supplier sourcing,transactional,suppliers,8,medium,medium,DATA REQUIRED,/factory-verification,thin,expand verification money page,40,global,en,high
+china manufacturer sourcing,transactional,manufacturing,8,medium,medium,DATA REQUIRED,/oem-odm,partial,OEM vs ODM split later,36,global,en,high
+best china sourcing agent,commercial investigation,core,9,high,high,DATA REQUIRED — not in roundups sampled,/knowledge/how-to-choose-china-sourcing-agent,no,criteria page not we-are-number-one,39,global,en,high
+china sourcing agent vs alibaba,commercial investigation,platforms,9,high,medium,DATA REQUIRED,/compare/sourcing-agent-vs-alibaba,yes,add 1688 and fees,43,global,en,high
+china sourcing agent vs 1688,commercial investigation,platforms,9,high,medium,n/a — no URL,/compare/sourcing-agent-vs-1688,no,new compare,45,global,en,high
+china sourcing company reviews,commercial investigation,core,7,medium,high,DATA REQUIRED,/reviews,yes but unapproved first-name notes,approved quotes only,30,global,en,medium
+china sourcing agent cost,commercial investigation,core,9,medium-high,medium,n/a,/knowledge/china-sourcing-agent-cost,no,REQUIRES fee model confirmation,41,global,en,high
+how to source products from china,informational,sourcing,8,high,high,DATA REQUIRED,/knowledge/how-to-source-from-china,yes,SERP upgrade tables 1688 landed cost,44,global,en,medium-high
+how to find a chinese factory,informational,factories,8,high,high,DATA REQUIRED,/knowledge/how-to-find-a-chinese-factory,no,new guide link verification,41,global,en,high
+how to verify a chinese supplier,informational,factories,9,medium-high,medium,DATA REQUIRED,/factory-verification,thin,expand,46,global,en,high
+how to buy from 1688,informational,platforms,7,high,high,n/a,/knowledge/how-to-source-from-1688,no,cluster after 1688 confirmation,40,global,en,medium
+1688 sourcing agent,transactional,platforms,10,high,high,n/a,/1688-sourcing,no,REQUIRES desk confirmation RMB/1688,47,global,en,high
+alibaba sourcing agent,transactional,platforms,8,medium-high,high,DATA REQUIRED,/compare/sourcing-agent-vs-alibaba,partial,service framing,38,global,en,high
+china MOQ,informational,sourcing,6,medium,medium,DATA REQUIRED,/faq + /contact,partial,no-moq explainer,34,global,en,medium
+no moq china manufacturers,commercial investigation,core,8,medium,medium,DATA REQUIRED,/contact,claim exists,dedicated explainer,40,global,en,high
+china quality inspection,transactional,quality,9,high,high,DATA REQUIRED,/inspection,yes,definition snippet AQL table,44,global,en,high
+china quality inspection service,transactional,quality,9,high,high,DATA REQUIRED,/inspection,yes,compete as desk-tied not SGS,42,global,en,high
+pre-shipment inspection china,transactional,quality,8,medium-high,high,DATA REQUIRED,/inspection,partial,PSI section,40,global,en,high
+AQL inspection china,informational,quality,7,medium,high,DATA REQUIRED,/knowledge/china-quality-inspection-guide,yes,AQL table,36,global,en,medium
+supplier audit china,transactional,quality,8,medium,medium,DATA REQUIRED,/factory-verification,thin,same money page,40,global,en,high
+china factory inspection,transactional,quality,8,medium,medium,DATA REQUIRED,/inspection,yes,keep,38,global,en,high
+china 3pl,transactional,logistics,8,medium,medium,DATA REQUIRED,/3pl,yes,own-warehouse differentiation,42,global-gcc,en,high
+china warehouse,transactional,logistics,7,medium,medium,DATA REQUIRED,/3pl,yes,keep,36,global,en,medium
+china fulfillment,transactional,logistics,7,medium,medium,DATA REQUIRED,/3pl + /dropshipping,yes,keep,35,global,en,medium
+china freight,transactional,logistics,6,medium,high,DATA REQUIRED,/logistics,yes,not vs Maersk,30,global,en,medium
+amazon fba sourcing from china,transactional,fba,9,high,high,DATA REQUIRED,/amazon-fba,yes,add China to FBA logistics,42,us,en,high
+oem manufacturing china,transactional,oem,8,high,high,DATA REQUIRED,/oem-odm,partial,split later,38,global,en,high
+odm manufacturing china,transactional,oem,7,medium,medium,DATA REQUIRED,/oem-odm,partial,split later,34,global,en,high
+product development china,transactional,oem,8,medium,medium,DATA REQUIRED,/oem-odm,yes NDA-first,keep,37,global,en,high
+private label china,transactional,oem,7,medium-high,high,DATA REQUIRED,/private-label,thin,expand not new URL,34,global,en,medium
+factory vs trading company,informational,factories,7,medium,medium,n/a,/knowledge/factory-vs-trading-company,no,new,35,global,en,medium
+how to calculate landed cost from china,informational,logistics,8,medium-high,medium,n/a,/knowledge/landed-cost-from-china,no,checklist or calculator,33,global,en,medium-high
+china sourcing agent usa,regional,regional,8,medium,medium,n/a,/sourcing-for/usa,no,only if unique customs/FBA content,32,us,en,high
+china sourcing agent uae,regional,regional,9,medium,low-medium,n/a,/sourcing-for/uae,no,Dubai warehouse is real differentiator,41,ae,en,high
+china sourcing agent saudi arabia,regional,regional,8,medium,low-medium,n/a,/sourcing-for/saudi-arabia,no,use thin incoterms-for-gcc as seed,38,sa,en,high
+china sourcing agent uk,regional,regional,7,medium,medium,n/a,/sourcing-for/uk,no,do not clone usa,28,uk,en,medium
+china sourcing agent europe,regional,regional,7,medium,medium,n/a,/sourcing-for/europe,no,do not clone,28,eu,en,medium
+electronics sourcing china,transactional,industry,7,medium,high,n/a,/industries/electronics,no — industries index only,REQUIRES capability confirmation,31,global,en,medium
+furniture sourcing china,transactional,industry,6,medium,medium,n/a,/industries/furniture,no,hospitality GCC may be stronger,30,gcc,en,medium
+how to write an rfq china,informational,sourcing,6,low-medium,low,DATA REQUIRED,/knowledge/how-to-write-an-rfq,thin stub,expand or merge,32,global,en,medium
+visit china factories,transactional,visit,7,medium,low-medium,DATA REQUIRED,/visit,yes,keep hosted-trip differentiation,36,global,en,medium
+dropshipping from china warehouse,transactional,logistics,7,medium,medium,DATA REQUIRED,/dropshipping,yes,keep own-warehouse vs broker,35,global,en,medium
