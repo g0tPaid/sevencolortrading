@@ -146,6 +146,11 @@ export function organizationNode(): JsonLdNode {
         name: "UAE Trade License",
         value: "143609",
       },
+      {
+        "@type": "PropertyValue",
+        name: "UAE Trade License (awaiting renewal)",
+        value: "1493012",
+      },
     ],
     address: [
       postalAddress(xiamenOffice, "Fujian", "CN"),
@@ -215,7 +220,7 @@ export function alAinLocalBusinessNode(): JsonLdNode {
     address: postalAddress(alAinOffice, "Abu Dhabi", "AE"),
     openingHoursSpecification: openingHours(),
     description:
-      "UAE branch and warehouse of Xiamen Ajmal Seven Color Trading Co Ltd. Trade license 143609. Suite No 21, ESA Building, Near Nael Enclave, Al Ain, United Arab Emirates. GCC 3PL and dropship hub.",
+      "UAE branch and warehouse of Xiamen Ajmal Seven Color Trading Co Ltd. Trade license 143609 · 1493012 (awaiting renewal). Suite No 21, ESA Building, Near Nael Enclave, Al Ain, United Arab Emirates. GCC 3PL and dropship hub.",
   };
 }
 

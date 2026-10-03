@@ -6,7 +6,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { ProofChips } from "@/components/trust/proof-chips";
 import { PageHero } from "@/components/shared/page-shell";
 import { ButtonLink, Container } from "@/components/ui/primitives";
-import { company } from "@/lib/content";
+import { company, formatOfficeLicense } from "@/lib/content";
 import { serviceCommonQuestions } from "@/lib/faq";
 import { pages } from "@/lib/route-seo";
 import { offerNode, serviceCopy } from "@/lib/structured-data";
@@ -50,7 +50,7 @@ export default function ContactPage() {
             <div key={o.city} className="glass-card rounded-[1.5rem] p-6">
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">{o.city}</p>
               <p className="mt-3 text-sm leading-relaxed text-muted">{o.address}</p>
-              <p className="mt-2 font-mono text-xs text-muted">License {o.license}</p>
+              <p className="mt-2 font-mono text-xs text-muted">License {formatOfficeLicense(o)}</p>
             </div>
           ))}
           <div className="glass-card rounded-[1.5rem] p-6">
@@ -59,8 +59,9 @@ export default function ContactPage() {
             <p className="mt-1 font-mono text-sm text-muted">DUNS {company.credentials.dunsNumber}</p>
             <ul className="mt-3 space-y-1 text-sm text-muted">
               {company.credentials.licenses.map((lic) => (
-                <li key={lic.number}>
+                <li key={`${lic.region}-${lic.number}`}>
                   {lic.region}: {lic.kind} {lic.number}
+                  {lic.note ? ` (${lic.note})` : ""}
                 </li>
               ))}
             </ul>

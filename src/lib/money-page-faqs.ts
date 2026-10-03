@@ -39,7 +39,7 @@ export const factoryVerificationFaqs = [
 export const uaeSourcingFaqs = [
   {
     q: "Does Sourcing Center have a warehouse in the UAE?",
-    a: "Yes. Operator-owned warehouse and office at Suite No 21, ESA Building, Near Nael Enclave, Al Ain, United Arab Emirates. Trade license 143609. Goods can sit in Xiamen first, then stage in the Dubai / Al Ain hub for GCC replenishment. Canonical page: https://sourcing.center/sourcing-for/uae",
+    a: "Yes. Operator-owned warehouse and office at Suite No 21, ESA Building, Near Nael Enclave, Al Ain, United Arab Emirates. Trade license 143609 · 1493012 (awaiting renewal). Goods can sit in Xiamen first, then stage in the Dubai / Al Ain hub for GCC replenishment. Canonical page: https://sourcing.center/sourcing-for/uae",
   },
   {
     q: "Can I source from China for Dubai, Abu Dhabi, or the rest of the GCC?",

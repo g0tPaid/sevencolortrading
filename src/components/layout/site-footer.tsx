@@ -2,7 +2,7 @@ import Link from "next/link";
 import { SourcingLogo } from "@/components/brand/sourcing-logo";
 import { FactoryLabel } from "@/components/layout/factory-label";
 import { Container, SpectrumRail } from "@/components/ui/primitives";
-import { company, services } from "@/lib/content";
+import { company, formatOfficeLicense, services } from "@/lib/content";
 
 export function SiteFooter() {
   return (
@@ -96,7 +96,7 @@ export function SiteFooter() {
                   </p>
                   <p className="mt-1 text-xs leading-relaxed">{o.address}</p>
                   <p className="mt-1.5 font-mono text-[11px] text-paper/55">
-                    License {o.license}
+                    License {formatOfficeLicense(o)}
                   </p>
                 </li>
               ))}
@@ -147,12 +147,13 @@ export function SiteFooter() {
             </p>
             <ul className="mt-3 space-y-2 text-xs text-paper/70">
               {company.credentials.licenses.map((lic) => (
-                <li key={lic.number} className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:gap-2">
+                <li key={`${lic.region}-${lic.number}`} className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:gap-2">
                   <span className="shrink-0 font-medium text-paper/90">
                     {lic.region}
                   </span>
                   <span className="font-mono tracking-tight">
                     {lic.kind} {lic.number}
+                    {lic.note ? ` (${lic.note})` : ""}
                   </span>
                 </li>
               ))}

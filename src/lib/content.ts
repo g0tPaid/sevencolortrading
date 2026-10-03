@@ -1,3 +1,13 @@
+export function formatOfficeLicense(office: {
+  license: string;
+  extraLicense?: string;
+  extraLicenseNote?: string;
+}) {
+  if (!office.extraLicense) return office.license;
+  const note = office.extraLicenseNote ? ` (${office.extraLicenseNote})` : "";
+  return `${office.license} · ${office.extraLicense}${note}`;
+}
+
 export const company = {
   name: "Sourcing Center",
   brand: "Sourcing Center",
@@ -21,6 +31,8 @@ export const company = {
       address:
         "Suite No 21, ESA Building, Near Nael Enclave, Al Ain, United Arab Emirates",
       license: "143609",
+      extraLicense: "1493012",
+      extraLicenseNote: "awaiting renewal",
     },
     {
       city: "Xiamen",
@@ -60,6 +72,12 @@ export const company = {
     licenses: [
       { region: "China (Xiamen)", number: "91350200MAE8W9E67A", kind: "Business License" },
       { region: "UAE (Dubai / Al Ain)", number: "143609", kind: "Trade License" },
+      {
+        region: "UAE (Dubai / Al Ain)",
+        number: "1493012",
+        kind: "Trade License",
+        note: "awaiting renewal",
+      },
     ],
   },
 };

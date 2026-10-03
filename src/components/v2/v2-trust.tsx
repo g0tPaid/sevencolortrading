@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/primitives";
-import { company } from "@/lib/content";
+import { company, formatOfficeLicense } from "@/lib/content";
 import { platformStats } from "@/lib/v2-content";
 
 export function V2Trust() {
@@ -48,7 +48,7 @@ export function V2Trust() {
                 {o.city}, {o.country}
               </p>
               <p className="mt-2 text-sm leading-relaxed text-muted">{o.address}</p>
-              <p className="mt-3 font-mono text-xs text-muted">License {o.license}</p>
+              <p className="mt-3 font-mono text-xs text-muted">License {formatOfficeLicense(o)}</p>
             </div>
           ))}
         </div>
@@ -92,11 +92,12 @@ export function V2Trust() {
               </p>
               <ul className="mt-4 space-y-1.5 text-xs text-muted">
                 {company.credentials.licenses.map((lic) => (
-                  <li key={lic.number}>
+                  <li key={`${lic.region}-${lic.number}`}>
                     <span className="font-medium text-ink">{lic.region}</span>
                     {" · "}
                     <span className="font-mono">
                       {lic.kind} {lic.number}
+                      {lic.note ? ` (${lic.note})` : ""}
                     </span>
                   </li>
                 ))}
