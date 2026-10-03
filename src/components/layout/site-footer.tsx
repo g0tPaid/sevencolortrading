@@ -161,7 +161,7 @@ export function SiteFooter() {
           </div>
           <div className="flex flex-col gap-2 text-xs text-paper/50 sm:flex-row sm:items-center sm:justify-between">
             <p>
-              © {new Date().getFullYear()} {company.legalName}
+              © {new Date().getFullYear()} {company.legalName} 420
             </p>
             <p>{company.emails.corporate}</p>
           </div>
