@@ -1,11 +1,8 @@
 export function formatOfficeLicense(office: {
   license: string;
-  extraLicense?: string;
-  extraLicenseNote?: string;
+  licenseNote?: string;
 }) {
-  if (!office.extraLicense) return office.license;
-  const note = office.extraLicenseNote ? ` (${office.extraLicenseNote})` : "";
-  return `${office.license} · ${office.extraLicense}${note}`;
+  return office.licenseNote ? `${office.license} (${office.licenseNote})` : office.license;
 }
 
 export const company = {
@@ -30,9 +27,8 @@ export const company = {
       role: "Regional hub",
       address:
         "Suite No 21, ESA Building, Near Nael Enclave, Al Ain, United Arab Emirates",
-      license: "143609",
-      extraLicense: "1493012",
-      extraLicenseNote: "awaiting renewal",
+      license: "1493012",
+      licenseNote: "awaiting renewal",
     },
     {
       city: "Xiamen",
@@ -71,7 +67,6 @@ export const company = {
       "If you've walked the aisles at big stores like Walmart, you've almost certainly seen products we helped source from China.",
     licenses: [
       { region: "China (Xiamen)", number: "91350200MAE8W9E67A", kind: "Business License" },
-      { region: "UAE (Dubai / Al Ain)", number: "143609", kind: "Trade License" },
       {
         region: "UAE (Dubai / Al Ain)",
         number: "1493012",
