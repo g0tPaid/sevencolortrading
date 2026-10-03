@@ -96,7 +96,7 @@ export function HowToSourceFromChinaArticle() {
       <H2>4. Negotiate</H2>
       <P>
         Unit cost, tooling, lead time, payment terms, and Incoterms belong in writing. The
-        relationship manager in China or Dubai / Al Ain (UAE license 143609 · 1493012 (awaiting renewal), Suite No 21, ESA
+        relationship manager in China or Dubai / Al Ain (UAE license 1493012 (awaiting renewal), Suite No 21, ESA
         Building, Near Nael Enclave, Al Ain) quotes against the spec you approved, not against a
         listing screenshot. Registered vendor pathways for Walmart, Target, and Costco matter when
         the channel needs retailer-ready packing, they are not a claim that every SKU is already on
@@ -166,7 +166,7 @@ export function HowToSourceFromChinaArticle() {
         This page does not publish deposit percentages or bank details, those are deal terms.
         What the desk does publish, and what you should verify before you wire anyone: legal name
         Xiamen Ajmal Seven Color Trading Co Ltd, DUNS 509419282, China license 91350200MAE8W9E67A,
-        UAE license 143609 · 1493012 (awaiting renewal), and the two warehouse addresses on{" "}
+        UAE license 1493012 (awaiting renewal), and the two warehouse addresses on{" "}
         <ArticleLink href="/about">the about page</ArticleLink>. Photo/video QC and the option to
         hold the ship are operational safeguards; they are not a substitute for written terms.
       </P>

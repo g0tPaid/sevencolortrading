@@ -106,7 +106,7 @@ export function IncotermsForGccArticle() {
         Incoterms name where risk moves, not a freight price. For China → GCC, the useful question
         is whether stock will sit in Sourcing Center’s Xiamen warehouse, the Dubai / Al Ain hub, or
         load straight to your forwarder. Operator: Xiamen Ajmal Seven Color Trading Co Ltd. UAE
-        license 143609 · 1493012 (awaiting renewal). We do not publish a duty table for every HS code.
+        license 1493012 (awaiting renewal). We do not publish a duty table for every HS code.
       </P>
       <H2>Terms that actually come up</H2>
       <ul className="mt-6 space-y-3 text-sm">
@@ -303,7 +303,7 @@ export function HowToChooseChinaSourcingAgentArticle() {
       </P>
       <H2>Checks that matter</H2>
       <ul className="mt-6 space-y-3 text-sm">
-        <Bullet>Legal entity you will wire: Xiamen Ajmal Seven Color Trading Co Ltd, DUNS 509419282, China license 91350200MAE8W9E67A, UAE license 143609 · 1493012 (awaiting renewal).</Bullet>
+        <Bullet>Legal entity you will wire: Xiamen Ajmal Seven Color Trading Co Ltd, DUNS 509419282, China license 91350200MAE8W9E67A, UAE license 1493012 (awaiting renewal).</Bullet>
         <Bullet>Own warehouses vs a brokered 3PL introduction. We operate Xiamen and Dubai / Al Ain.</Bullet>
         <Bullet>On-the-ground inspection vs a remote-only JPEG product. Published rate: USD 110 / day.</Bullet>
         <Bullet>Hosted factory visit vs a tourist tour. Ours is based out of Xiamen.</Bullet>

@@ -155,7 +155,7 @@ export const pages = {
   sourcingForUae: routeMetadata({
     title: "China Sourcing for the UAE: Own Dubai / Al Ain Warehouse",
     description:
-      "China factory desk plus operator-owned UAE warehouse in Al Ain. Inspect in China, stage GCC stock in Dubai / Al Ain. License 143609 · 1493012 (awaiting renewal).",
+      "China factory desk plus operator-owned UAE warehouse in Al Ain. Inspect in China, stage GCC stock in Dubai / Al Ain. License 1493012 (awaiting renewal).",
     path: "/sourcing-for/uae",
   }),
   industriesEcommerceDtc: routeMetadata({

@@ -38,7 +38,7 @@ export default function SourcingForUaePage() {
         <p className="mt-8 max-w-3xl text-base leading-relaxed text-muted" data-seo-answer>
           Sourcing Center is the China desk of {company.legalNameFull}, with HQ and warehouse in
           Xiamen and a licensed UAE branch warehouse in Al Ain (Dubai / Al Ain hub).           UAE trade
-          license {uae ? formatOfficeLicense(uae) : "143609 · 1493012 (awaiting renewal)"}. Buyers in Dubai, Abu Dhabi, Sharjah, and the wider GCC
+          license {uae ? formatOfficeLicense(uae) : "1493012 (awaiting renewal)"}. Buyers in Dubai, Abu Dhabi, Sharjah, and the wider GCC
           use this path when they need China factories and a warehouse that is already in the
           Emirates, on the same relationship manager.
         </p>
