@@ -6,7 +6,7 @@ import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
 import { CtaBand, PageHero } from "@/components/shared/page-shell";
 import { ProofChips } from "@/components/trust/proof-chips";
 import { Container } from "@/components/ui/primitives";
-import { company } from "@/lib/content";
+import { company, formatOfficeLicense } from "@/lib/content";
 import { uaeSourcingFaqs } from "@/lib/money-page-faqs";
 import { pages } from "@/lib/route-seo";
 import { faqPageJsonLd } from "@/lib/seo";
@@ -37,8 +37,8 @@ export default function SourcingForUaePage() {
         <ProofChips className="justify-start" />
         <p className="mt-8 max-w-3xl text-base leading-relaxed text-muted" data-seo-answer>
           Sourcing Center is the China desk of {company.legalNameFull}, with HQ and warehouse in
-          Xiamen and a licensed UAE branch warehouse in Al Ain (Dubai / Al Ain hub). UAE trade
-          license {uae?.license ?? "143609"}. Buyers in Dubai, Abu Dhabi, Sharjah, and the wider GCC
+          Xiamen and a licensed UAE branch warehouse in Al Ain (Dubai / Al Ain hub).           UAE trade
+          license {uae ? formatOfficeLicense(uae) : "143609 · 1493012 (awaiting renewal)"}. Buyers in Dubai, Abu Dhabi, Sharjah, and the wider GCC
           use this path when they need China factories and a warehouse that is already in the
           Emirates, on the same relationship manager.
         </p>

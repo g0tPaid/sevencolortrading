@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero, CtaBand } from "@/components/shared/page-shell";
 import { Container } from "@/components/ui/primitives";
-import { company } from "@/lib/content";
+import { company, formatOfficeLicense } from "@/lib/content";
 import { pages } from "@/lib/route-seo";
 
 export const metadata: Metadata = pages.about;
@@ -32,7 +32,7 @@ export default function AboutPage() {
               <li key={o.city}>
                 <p className="font-semibold text-ink">{o.city} · {o.role}</p>
                 <p className="mt-1 text-sm text-muted leading-relaxed">{o.address}</p>
-                <p className="mt-1 font-mono text-xs text-muted">License {o.license}</p>
+                <p className="mt-1 font-mono text-xs text-muted">License {formatOfficeLicense(o)}</p>
               </li>
             ))}
           </ul>
