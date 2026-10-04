@@ -62,8 +62,9 @@ Tracked:
 - `page_view` on each App Router navigation (GA4)
 - `generate_lead` after a saved RFQ, Visit China request, factory application, or factory-growth inquiry
 - `contact` when the WhatsApp float is clicked
+- Google Ads conversion `AW-18461569757/h3raCKacu5AdEN3llONE` ("WhatsApp click") on every click of a WhatsApp link (`wa.me`, `api.whatsapp.com`, or `whatsapp://`), including links added later. The click is not delayed. The GA4 `contact` event still fires where it already did.
 
-Conversion actions in Google Ads still need a conversion label (`AW-18461569757/xxxxx`) from the Ads UI. Until that label exists, this repo only installs the sitewide tag. Link the GA4 property to the Ads account to import `generate_lead` and `contact` without a second snippet.
+The sitewide tag is installed. WhatsApp clicks send that conversion label. Link the GA4 property to the Ads account to import `generate_lead` and `contact` without a second snippet.
 
 No names, emails, or phone numbers are sent to Google.
 
