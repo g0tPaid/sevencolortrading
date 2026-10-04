@@ -2,7 +2,7 @@
 
 import { usePathname, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
-import { parseGaMeasurementId } from "@/lib/ga";
+import { installWhatsAppAdsConversionListener, parseGaMeasurementId } from "@/lib/ga";
 
 function gtagScriptAlreadyInDom() {
   return Boolean(
@@ -69,6 +69,8 @@ export function GoogleAnalytics({
   adsId?: string | null;
 }) {
   const [id, setId] = useState<string | null>(() => parseGaMeasurementId(measurementId));
+
+  useEffect(() => installWhatsAppAdsConversionListener(), []);
 
   useEffect(() => {
     const fromProp = parseGaMeasurementId(measurementId);
