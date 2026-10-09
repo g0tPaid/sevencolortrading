@@ -7,7 +7,7 @@ import { SampleNote } from "@/components/trust/sample-note";
 import { TrustCta } from "@/components/trust/trust-cta";
 import { Container } from "@/components/ui/primitives";
 import { caseStudies, getCaseStudy } from "@/lib/case-studies";
-import { caseStudyPageJsonLd, routeMetadata } from "@/lib/seo";
+import { caseStudyPageJsonLd, missingPageMetadata, routeMetadata } from "@/lib/seo";
 import { whatsappPresets } from "@/lib/whatsapp";
 
 export function generateStaticParams() {
@@ -21,7 +21,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const study = getCaseStudy(slug);
-  if (!study) return { title: "Case study" };
+  if (!study) return missingPageMetadata("Case study");
   const titles: Record<string, string> = {
     "china-factory-sourcing": "China Factory Sourcing Case: First SKU Path in China",
     "xiamen-dubai-3pl": "China and Dubai 3PL Case Study on One Operator Desk",

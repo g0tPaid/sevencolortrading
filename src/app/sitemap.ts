@@ -9,13 +9,17 @@ import {
   listProductOpportunities,
   productOpportunityPath,
 } from "@/lib/product-opportunities";
-import { siteUrl } from "@/lib/seo";
+import { absoluteUrl } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-const routes: Array<{ path: string; priority: number; changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] }> = [
-  { path: "", priority: 1, changeFrequency: "weekly" },
+const routes: Array<{
+  path: string;
+  priority: number;
+  changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
+}> = [
+  { path: "/", priority: 1, changeFrequency: "weekly" },
   { path: "/visit", priority: 0.92, changeFrequency: "weekly" },
   { path: "/3pl", priority: 0.95, changeFrequency: "weekly" },
   { path: "/dropshipping", priority: 0.93, changeFrequency: "weekly" },
@@ -23,6 +27,8 @@ const routes: Array<{ path: string; priority: number; changeFrequency: MetadataR
   { path: "/about", priority: 0.8, changeFrequency: "monthly" },
   { path: "/services", priority: 0.8, changeFrequency: "monthly" },
   { path: "/contact", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/privacy", priority: 0.3, changeFrequency: "yearly" },
+  { path: "/terms", priority: 0.3, changeFrequency: "yearly" },
   { path: "/industries", priority: 0.6, changeFrequency: "monthly" },
   { path: "/how-it-works", priority: 0.6, changeFrequency: "monthly" },
   { path: "/factory-verification", priority: 0.86, changeFrequency: "weekly" },
@@ -43,15 +49,12 @@ const routes: Array<{ path: string; priority: number; changeFrequency: MetadataR
   { path: "/updates", priority: 0.45, changeFrequency: "weekly" },
   { path: NEWS_PATH, priority: 0.78, changeFrequency: "daily" },
   { path: PRODUCT_OPPORTUNITIES_PATH, priority: 0.86, changeFrequency: "weekly" },
-  { path: "/llms.txt", priority: 0.4, changeFrequency: "monthly" },
-  { path: "/llms-full.txt", priority: 0.35, changeFrequency: "monthly" },
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await listNews();
   const staticRoutes = routes.map((route) => ({
-    url: `${siteUrl}${route.path}`,
-    lastModified: new Date(),
+    url: absoluteUrl(route.path),
     changeFrequency: route.changeFrequency,
     priority: route.priority,
   }));
@@ -72,35 +75,32 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
 
   const articles = knowledgeArticles.map((article) => ({
-    url: `${siteUrl}/knowledge/${article.slug}`,
-    lastModified: new Date(),
+    url: absoluteUrl(`/knowledge/${article.slug}`),
     changeFrequency: "monthly" as const,
     priority: citeable.has(article.slug) ? 0.75 : 0.55,
   }));
 
   const studies = caseStudies.map((study) => ({
-    url: `${siteUrl}/case-studies/${study.slug}`,
-    lastModified: new Date(),
+    url: absoluteUrl(`/case-studies/${study.slug}`),
     changeFrequency: "monthly" as const,
     priority: 0.65,
   }));
 
   const compares = comparePages.map((page) => ({
-    url: `${siteUrl}/compare/${page.slug}`,
-    lastModified: new Date(),
+    url: absoluteUrl(`/compare/${page.slug}`),
     changeFrequency: "monthly" as const,
     priority: 0.74,
   }));
 
   const news = posts.map((post) => ({
-    url: `${siteUrl}${newsPostPath(post.slug)}`,
+    url: absoluteUrl(newsPostPath(post.slug)),
     lastModified: new Date(post.updatedAt ?? post.date),
     changeFrequency: "weekly" as const,
     priority: 0.7,
   }));
 
   const opportunities = listProductOpportunities().map((product) => ({
-    url: `${siteUrl}${productOpportunityPath(product.slug)}`,
+    url: absoluteUrl(productOpportunityPath(product.slug)),
     lastModified: new Date(product.updatedAt),
     changeFrequency: "monthly" as const,
     priority: 0.68,

@@ -25,10 +25,8 @@ function requestHostname(request: NextRequest): string {
 /** 301 legacy hosts → apex, same path + query. Skips localhost, Railway internals, and the apex host. */
 function hostToCanonicalRedirect(request: NextRequest): NextResponse | null {
   if (!LEGACY_HOSTS.has(requestHostname(request))) return null;
-  const dest = new URL(
-    `${request.nextUrl.pathname}${request.nextUrl.search}`,
-    CANONICAL_ORIGIN,
-  );
+  const pathname = request.nextUrl.pathname.replace(/\/+$/, "") || "/";
+  const dest = `${CANONICAL_ORIGIN}${pathname === "/" ? "" : pathname}${request.nextUrl.search}`;
   return NextResponse.redirect(dest, 301);
 }
 
@@ -92,9 +90,21 @@ function applyFactoryGeoHint(request: NextRequest, response: NextResponse) {
   }
 }
 
+function stripTrailingSlash(request: NextRequest): NextResponse | null {
+  const { pathname } = request.nextUrl;
+  if (pathname.length <= 1 || !pathname.endsWith("/")) return null;
+  if (pathname.includes(".")) return null;
+  const url = request.nextUrl.clone();
+  url.pathname = pathname.replace(/\/+$/, "") || "/";
+  return NextResponse.redirect(url, 308);
+}
+
 export async function middleware(request: NextRequest) {
   const hostRedirect = hostToCanonicalRedirect(request);
   if (hostRedirect) return hostRedirect;
+
+  const slashRedirect = stripTrailingSlash(request);
+  if (slashRedirect) return slashRedirect;
 
   const { pathname } = request.nextUrl;
   const method = request.method;

@@ -68,9 +68,21 @@ export const seoKeywords = [
 export const defaultDescription =
   "China sourcing desk with factories across China. Visit China, own 3PL from our Xiamen warehouse and Dubai hub. No MOQ, QC, inspection USD 110/day.";
 
+/** Indexable URL: apex host, no trailing slash (home is `https://sourcing.center`). */
 export function absoluteUrl(path = "") {
-  if (!path) return siteUrl;
-  return path.startsWith("http") ? path : `${siteUrl}${path.startsWith("/") ? path : `/${path}`}`;
+  if (path.startsWith("http://") || path.startsWith("https://")) {
+    return path.replace(/\/+$/, "") || path;
+  }
+  const trimmed = path.trim();
+  if (!trimmed || trimmed === "/") return siteUrl;
+  const pathname = `/${trimmed.replace(/^\/+/, "")}`.replace(/\/+$/, "");
+  return `${siteUrl}${pathname}`;
+}
+
+export const noindexRobots = { index: false, follow: false } as const;
+
+export function missingPageMetadata(title: string): Metadata {
+  return { title, robots: noindexRobots };
 }
 
 export function organizationJsonLd() {

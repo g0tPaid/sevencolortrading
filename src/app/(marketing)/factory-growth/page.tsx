@@ -30,13 +30,6 @@ export const metadata: Metadata = {
   other: {
     "og:locale:alternate": "en_US",
   },
-  alternates: {
-    ...pages.factoryGrowth.alternates,
-    languages: {
-      en: "https://sourcing.center/factory-growth",
-      "zh-CN": "https://sourcing.center/factory-growth",
-    },
-  },
 };
 
 export default function FactoryGrowthRoute() {

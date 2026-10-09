@@ -3,13 +3,15 @@ import path from "path";
 
 const nextConfig: NextConfig = {
   outputFileTracingRoot: path.join(__dirname),
+  trailingSlash: false,
+  skipTrailingSlashRedirect: false,
   async redirects() {
     return [
       // Host consolidation: www → apex (covers public files middleware matcher skips).
       {
         source: "/",
         has: [{ type: "host", value: "www.sourcing.center" }],
-        destination: "https://sourcing.center/",
+        destination: "https://sourcing.center",
         statusCode: 301,
       },
       {
@@ -21,7 +23,7 @@ const nextConfig: NextConfig = {
       {
         source: "/",
         has: [{ type: "host", value: "sevencolor.online" }],
-        destination: "https://sourcing.center/",
+        destination: "https://sourcing.center",
         statusCode: 301,
       },
       {
@@ -33,7 +35,7 @@ const nextConfig: NextConfig = {
       {
         source: "/",
         has: [{ type: "host", value: "www.sevencolor.online" }],
-        destination: "https://sourcing.center/",
+        destination: "https://sourcing.center",
         statusCode: 301,
       },
       {
@@ -58,6 +60,29 @@ const nextConfig: NextConfig = {
         destination: "/trending-products/:slug",
         permanent: true,
       },
+      { source: "/blog", destination: "/knowledge", permanent: true },
+      { source: "/blog/:slug", destination: "/knowledge/:slug", permanent: true },
+      { source: "/home", destination: "/", permanent: true },
+      { source: "/index.html", destination: "/", permanent: true },
+      { source: "/products", destination: "/trending-products", permanent: true },
+      { source: "/opportunities", destination: "/trending-products", permanent: true },
+      { source: "/contact-us", destination: "/contact", permanent: true },
+      { source: "/about-us", destination: "/about", permanent: true },
+      { source: "/faqs", destination: "/faq", permanent: true },
+      { source: "/warehouse", destination: "/3pl", permanent: true },
+      { source: "/warehousing", destination: "/3pl", permanent: true },
+      { source: "/fulfillment", destination: "/3pl", permanent: true },
+      { source: "/sourcing", destination: "/", permanent: true },
+      { source: "/uae", destination: "/sourcing-for/uae", permanent: true },
+      { source: "/gcc", destination: "/sourcing-for/uae", permanent: true },
+      { source: "/dubai", destination: "/sourcing-for/uae", permanent: true },
+      { source: "/quality", destination: "/inspection", permanent: true },
+      { source: "/quality-control", destination: "/inspection", permanent: true },
+      { source: "/factory-visit", destination: "/visit", permanent: true },
+      { source: "/factories", destination: "/factories/register", permanent: true },
+      { source: "/oem", destination: "/oem-odm", permanent: true },
+      { source: "/odm", destination: "/oem-odm", permanent: true },
+      { source: "/amazon", destination: "/amazon-fba", permanent: true },
     ];
   },
 };

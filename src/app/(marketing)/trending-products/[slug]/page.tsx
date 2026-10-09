@@ -7,7 +7,7 @@ import { SourceProductLink } from "@/components/product-opportunities/source-pro
 import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Container } from "@/components/ui/primitives";
-import { absoluteUrl, routeMetadata } from "@/lib/seo";
+import { absoluteUrl, missingPageMetadata, routeMetadata } from "@/lib/seo";
 import {
   MARGIN_DISCLAIMER,
   PRODUCT_OPPORTUNITIES_PATH,
@@ -34,7 +34,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const product = getProductOpportunity(slug);
-  if (!product) return { title: "Product opportunity" };
+  if (!product) return missingPageMetadata("Product");
   const meta = routeMetadata({
     title: product.seoTitle,
     description: withoutMoqLabel(product.seoDescription),
