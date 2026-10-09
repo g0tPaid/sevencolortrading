@@ -7,7 +7,7 @@ import { CtaBand } from "@/components/shared/page-shell";
 import { ProofChips } from "@/components/trust/proof-chips";
 import { Container } from "@/components/ui/primitives";
 import { comparePages, getComparePage } from "@/lib/compare";
-import { comparePageFaqJsonLd, routeMetadata } from "@/lib/seo";
+import { comparePageFaqJsonLd, missingPageMetadata, routeMetadata } from "@/lib/seo";
 import { compareMeta } from "@/lib/route-seo";
 import { breadcrumbGraph } from "@/lib/structured-data";
 import { whatsappPresets } from "@/lib/whatsapp";
@@ -23,7 +23,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const page = getComparePage(slug);
-  if (!page) return { title: "Compare" };
+  if (!page) return missingPageMetadata("Compare");
   const meta = compareMeta[slug];
   return routeMetadata({
     title: meta?.title ?? page.title,

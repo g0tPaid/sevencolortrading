@@ -9,7 +9,7 @@ import {
   newsPostPath,
 } from "@/lib/news";
 import { getNewsPost, listNews } from "@/lib/news-store";
-import { absoluteUrl, routeMetadata } from "@/lib/seo";
+import { absoluteUrl, missingPageMetadata, routeMetadata } from "@/lib/seo";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -21,7 +21,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const post = await getNewsPost(slug);
-  if (!post) return { title: "News" };
+  if (!post) return missingPageMetadata("News");
   const path = newsPostPath(post.slug);
   const title = newsPostMetadataTitle(post);
   const description = newsPostMetadataDescription(post);
@@ -45,11 +45,7 @@ export async function generateMetadata({
       modifiedTime: post.updatedAt ?? post.date,
     },
     alternates: {
-      canonical: `https://sourcing.center${path}`,
-      languages: {
-        en: `https://sourcing.center${path}`,
-        "zh-CN": `https://sourcing.center${path}`,
-      },
+      canonical: absoluteUrl(path),
     },
     other: {
       "og:locale:alternate": "zh_CN",

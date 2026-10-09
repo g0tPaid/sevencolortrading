@@ -170,6 +170,18 @@ export const pages = {
       "Indicative products to source from China: typical unit ranges, customization, and estimated gross margin. Not guaranteed sales. WhatsApp the desk.",
     path: "/trending-products",
   }),
+  privacy: routeMetadata({
+    title: "Privacy: How Sourcing Center Handles Inquiries",
+    description:
+      "How Xiamen Ajmal Seven Color Trading Co Ltd uses contact, RFQ, and WhatsApp details on sourcing.center. DUNS 509419282. China and UAE desks.",
+    path: "/privacy",
+  }),
+  terms: routeMetadata({
+    title: "Terms of Use for sourcing.center",
+    description:
+      "Terms for using sourcing.center, RFQs, and indicative product pages from Xiamen Ajmal Seven Color Trading Co Ltd. Quotes are not invoices.",
+    path: "/terms",
+  }),
 } as const;
 
 export const knowledgeMeta: Record<string, { title: string; description: string }> = {

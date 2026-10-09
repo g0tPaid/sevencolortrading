@@ -21,7 +21,7 @@ import { PageHero, CtaBand } from "@/components/shared/page-shell";
 import { Container } from "@/components/ui/primitives";
 import { knowledgeArticles } from "@/lib/content";
 import { knowledgeMeta } from "@/lib/route-seo";
-import { routeMetadata } from "@/lib/seo";
+import { missingPageMetadata, routeMetadata } from "@/lib/seo";
 import { breadcrumbGraph } from "@/lib/structured-data";
 import {
   chinaVisitFaqs,
@@ -40,7 +40,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const article = knowledgeArticles.find((a) => a.slug === slug);
-  if (!article) return { title: "Article" };
+  if (!article) return missingPageMetadata("Article");
   const meta = knowledgeMeta[slug];
   return routeMetadata({
     title: meta?.title ?? article.title,
