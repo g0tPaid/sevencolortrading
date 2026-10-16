@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BrandStatement } from "@/components/home/brand-statement";
 import { UpdatesStrip } from "@/components/home/updates-strip";
 import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
 import { V2ChinaVisit } from "@/components/v2/v2-china-visit";
@@ -52,6 +53,7 @@ export default function HomePage() {
         </p>
       </Container>
       <V2Cta />
+      <BrandStatement />
     </>
   );
 }
