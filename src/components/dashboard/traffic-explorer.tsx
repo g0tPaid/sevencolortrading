@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState, useTransition } from "react";
-import { CalendarDays, Clock3, Globe2 } from "lucide-react";
+import { CalendarDays, Clock3, Globe2, TrendingUp } from "lucide-react";
 import { VisitorWorldMap } from "@/components/dashboard/visitor-world-map";
 import { countryLabel, flagEmoji } from "@/lib/analytics-geo";
 import type { AnalyticsStats, DayStat } from "@/lib/analytics-store";
@@ -87,6 +87,239 @@ function BarChart({
           </div>
         );
       })}
+    </div>
+  );
+}
+
+type GrowthMetric = "uniques" | "pageviews";
+type GrowthMode = "daily" | "cumulative";
+
+function GrowthChart({ days }: { days: DayStat[] }) {
+  const [metric, setMetric] = useState<GrowthMetric>("uniques");
+  const [mode, setMode] = useState<GrowthMode>("cumulative");
+  const [hover, setHover] = useState<number | null>(null);
+
+  const series = useMemo(() => {
+    let running = 0;
+    return days.map((day) => {
+      const daily = metric === "uniques" ? day.uniques : day.pageviews;
+      running += daily;
+      return {
+        date: day.date,
+        label: formatDayLabel(day.date),
+        daily,
+        value: mode === "cumulative" ? running : daily,
+      };
+    });
+  }, [days, metric, mode]);
+
+  const max = Math.max(0, ...series.map((row) => row.value));
+  const unit = metric === "uniques" ? "unique visitors" : "pageviews";
+  const last = series[series.length - 1]?.value ?? 0;
+  const firstDaily = series.find((row) => row.daily > 0)?.daily ?? 0;
+  const lastDaily = series[series.length - 1]?.daily ?? 0;
+  const dailyDelta = lastDaily - firstDaily;
+  const dailyPct = firstDaily > 0 ? Math.round((dailyDelta / firstDaily) * 100) : lastDaily > 0 ? 100 : 0;
+  const mid = Math.floor(series.length / 2);
+  const firstHalf = series.slice(0, mid).reduce((sum, row) => sum + row.daily, 0);
+  const secondHalf = series.slice(mid).reduce((sum, row) => sum + row.daily, 0);
+  const halfPct = firstHalf > 0 ? Math.round(((secondHalf - firstHalf) / firstHalf) * 100) : secondHalf > 0 ? 100 : 0;
+  const halfDelta = secondHalf - firstHalf;
+  const showHalf = mode === "cumulative" && series.length >= 4;
+  const showDailyChange = mode === "daily" && series.length > 1;
+  const active = hover !== null ? series[hover] : null;
+
+  const width = 1000;
+  const height = 280;
+  const padL = 8;
+  const padR = 8;
+  const padT = 16;
+  const padB = 28;
+  const innerW = width - padL - padR;
+  const innerH = height - padT - padB;
+  const xAt = (index: number) =>
+    padL + (series.length <= 1 ? innerW / 2 : (index / (series.length - 1)) * innerW);
+  const yAt = (value: number) => padT + innerH - (max > 0 ? (value / max) * innerH : 0);
+
+  const line = series
+    .map((row, index) => `${index === 0 ? "M" : "L"} ${xAt(index).toFixed(1)} ${yAt(row.value).toFixed(1)}`)
+    .join(" ");
+  const area =
+    series.length === 0
+      ? ""
+      : `${line} L ${xAt(series.length - 1).toFixed(1)} ${yAt(0).toFixed(1)} L ${xAt(0).toFixed(1)} ${yAt(0).toFixed(1)} Z`;
+
+  function nearestIndex(clientX: number, rect: DOMRect) {
+    if (series.length === 0) return 0;
+    const x = ((clientX - rect.left) / Math.max(1, rect.width)) * width;
+    let best = 0;
+    let bestDist = Infinity;
+    for (let i = 0; i < series.length; i += 1) {
+      const dist = Math.abs(xAt(i) - x);
+      if (dist < bestDist) {
+        bestDist = dist;
+        best = i;
+      }
+    }
+    return best;
+  }
+
+  const labelIndexes =
+    series.length <= 6
+      ? series.map((_, i) => i)
+      : [0, Math.round((series.length - 1) / 2), series.length - 1];
+
+  return (
+    <div>
+      <div className="mb-3 flex flex-wrap items-center gap-2">
+        <div className="flex items-center gap-2">
+          <TrendingUp className="h-4 w-4 text-accent" aria-hidden />
+          <h3 className="text-sm font-semibold text-ink">Visitor growth</h3>
+        </div>
+        <div className="ml-auto flex flex-wrap items-center gap-2">
+          {(
+            [
+              ["uniques", "Visitors"],
+              ["pageviews", "Pageviews"],
+            ] as const
+          ).map(([id, label]) => (
+            <button
+              key={id}
+              type="button"
+              onClick={() => setMetric(id)}
+              className={cn(
+                "rounded-full border px-3 py-1.5 text-xs transition",
+                metric === id
+                  ? "border-accent bg-accent-soft text-accent"
+                  : "border-line text-muted hover:border-accent/40 hover:text-ink",
+              )}
+            >
+              {label}
+            </button>
+          ))}
+          {(
+            [
+              ["daily", "Daily"],
+              ["cumulative", "Cumulative"],
+            ] as const
+          ).map(([id, label]) => (
+            <button
+              key={id}
+              type="button"
+              onClick={() => setMode(id)}
+              className={cn(
+                "rounded-full border px-3 py-1.5 text-xs transition",
+                mode === id
+                  ? "border-accent bg-accent-soft text-accent"
+                  : "border-line text-muted hover:border-accent/40 hover:text-ink",
+              )}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {series.length === 0 || max === 0 ? (
+        <p className="rounded-2xl border border-line bg-paper px-4 py-6 text-sm text-muted">
+          No visitor growth in this range yet.
+        </p>
+      ) : (
+        <div className="rounded-2xl border border-line bg-paper p-4">
+          <p className="text-sm text-ink">
+            <span className="font-medium">{formatCount(last)}</span>
+            <span className="text-muted">
+              {mode === "cumulative" ? ` ${unit} in this range` : ` ${unit} on the last day`}
+            </span>
+            {showHalf ? (
+              <>
+                <span className="text-muted"> · later half </span>
+                <span className="font-medium">
+                  {halfDelta >= 0 ? "+" : ""}
+                  {formatCount(halfDelta)}
+                  {` (${halfPct >= 0 ? "+" : ""}${halfPct}%)`}
+                </span>
+                <span className="text-muted"> vs first half</span>
+              </>
+            ) : null}
+            {showDailyChange ? (
+              <>
+                <span className="text-muted"> · </span>
+                <span className="font-medium">
+                  {dailyDelta >= 0 ? "+" : ""}
+                  {formatCount(dailyDelta)}
+                  {firstDaily > 0 ? ` (${dailyPct >= 0 ? "+" : ""}${dailyPct}%)` : ""}
+                </span>
+                <span className="text-muted"> vs first day with traffic</span>
+              </>
+            ) : null}
+          </p>
+          {active ? (
+            <p className="mt-1 text-xs text-muted">
+              {active.date}: {formatCount(active.value)} {mode === "cumulative" ? `cumulative ${unit}` : unit}
+              {mode === "cumulative" ? ` · ${formatCount(active.daily)} that day` : ""}
+            </p>
+          ) : (
+            <p className="mt-1 text-xs text-muted">Hover the line to see a day.</p>
+          )}
+
+          <svg
+            viewBox={`0 0 ${width} ${height}`}
+            className="mt-3 h-56 w-full"
+            role="img"
+            aria-label={`${mode === "cumulative" ? "Cumulative" : "Daily"} ${unit} over the selected range`}
+            onMouseLeave={() => setHover(null)}
+            onMouseMove={(event) => {
+              const rect = event.currentTarget.getBoundingClientRect();
+              setHover(nearestIndex(event.clientX, rect));
+            }}
+          >
+            <line
+              x1={padL}
+              x2={width - padR}
+              y1={yAt(0)}
+              y2={yAt(0)}
+              className="stroke-line"
+              strokeWidth="1"
+            />
+            <path d={area} className="fill-accent/15" />
+            <path d={line} className="stroke-accent" fill="none" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round" />
+            {series.map((row, index) => (
+              <circle
+                key={row.date}
+                cx={xAt(index)}
+                cy={yAt(row.value)}
+                r={hover === index ? 6 : series.length <= 14 ? 3.5 : 0}
+                className="fill-accent stroke-paper"
+                strokeWidth="2"
+              />
+            ))}
+            {active ? (
+              <line
+                x1={xAt(hover ?? 0)}
+                x2={xAt(hover ?? 0)}
+                y1={padT}
+                y2={yAt(0)}
+                className="stroke-accent/40"
+                strokeWidth="1"
+                strokeDasharray="4 4"
+              />
+            ) : null}
+            {labelIndexes.map((index) => (
+              <text
+                key={series[index].date}
+                x={xAt(index)}
+                y={height - 8}
+                textAnchor={index === 0 ? "start" : index === series.length - 1 ? "end" : "middle"}
+                className="fill-muted"
+                fontSize="14"
+              >
+                {series[index].label}
+              </text>
+            ))}
+          </svg>
+        </div>
+      )}
     </div>
   );
 }
@@ -332,6 +565,8 @@ export function TrafficExplorer({ initial }: { initial: AnalyticsStats }) {
           </div>
         </div>
       </div>
+
+      <GrowthChart days={stats.days} />
 
       <div className="grid gap-6 lg:grid-cols-2">
         <div>
