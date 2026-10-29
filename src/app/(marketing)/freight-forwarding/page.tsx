@@ -88,7 +88,7 @@ export default function FreightForwardingPage() {
             id="freight-place"
             className="max-w-3xl font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl"
           >
-            Where it sits
+            Freight Forwarding
           </h1>
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
             {[
