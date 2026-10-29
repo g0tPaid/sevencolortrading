@@ -5,7 +5,6 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
 import { ProofChips } from "@/components/trust/proof-chips";
 import { ButtonLink, Container } from "@/components/ui/primitives";
-import { company } from "@/lib/content";
 import { pages } from "@/lib/route-seo";
 import { siteUrl } from "@/lib/seo";
 import { breadcrumbGraph } from "@/lib/structured-data";
@@ -85,33 +84,13 @@ export default function FreightForwardingPage() {
       />
       <WhatsAppPrefill message={whatsappMessage} />
       <Container className="pb-16 pt-28 sm:pt-32">
-        <p className="section-kicker">{company.legalName} · China desk</p>
-        <h1 className="mt-3 max-w-3xl font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
-          Freight forwarding in the sourcing flow
-        </h1>
-        <p className="mt-4 max-w-2xl text-muted sm:text-lg" data-seo-answer>
-          Freight forwarding is the move after sourcing: sea, air, or rail from the factory or our
-          Xiamen warehouse to the destination you name. It is not storage. Storage, pick, and pack
-          are 3PL.
-        </p>
-        <div className="mt-6">
-          <ButtonLink href={whatsappHref(whatsappMessage)}>Talk to us on WhatsApp</ButtonLink>
-        </div>
-        <p className="mt-4 max-w-2xl text-sm text-muted">
-          Legal entity {company.legalNameFull}. The rate is quoted from the brief. We do not publish
-          a freight price list on this page.
-        </p>
-        <ProofChips className="mt-6 justify-start" />
-
-        <FreightForwardingArt />
-
-        <section className="mt-14" aria-labelledby="freight-place">
-          <h2
+        <section aria-labelledby="freight-place">
+          <h1
             id="freight-place"
-            className="font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl"
+            className="max-w-3xl font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl"
           >
             Where it sits
-          </h2>
+          </h1>
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
             {[
               ["Source", "Factory, sample, and purchase order. Freight is not the first conversation."],
@@ -127,6 +106,7 @@ export default function FreightForwardingPage() {
               </article>
             ))}
           </div>
+          <FreightForwardingArt />
         </section>
 
         <section className="mt-16" aria-labelledby="freight-modes">

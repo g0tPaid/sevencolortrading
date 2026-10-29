@@ -11,7 +11,7 @@ const stroke = {
 /** Lucide warehouse / plane / train-front / ship / map-pin paths, one scene. */
 export function FreightForwardingArt() {
   return (
-    <figure className="mx-auto mt-12 w-full max-w-3xl">
+    <figure className="mx-auto mt-8 w-full max-w-3xl sm:mt-10">
       <div className="glass-panel relative overflow-hidden rounded-[2rem] px-4 py-8 sm:px-8 sm:py-10">
         <div className="pointer-events-none absolute inset-0 grid-fade opacity-70" aria-hidden />
         <div className="relative">
