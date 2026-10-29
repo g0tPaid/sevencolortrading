@@ -51,6 +51,12 @@ export const pages = {
       "Sea, air, and express freight from China after inbound to our Xiamen warehouse or Dubai / Al Ain hub. Customs on the same desk as sourcing and 3PL.",
     path: "/logistics",
   }),
+  freightForwarding: routeMetadata({
+    title: "China Freight Forwarding: Sea, Air, and Rail Lanes",
+    description:
+      "Freight forwarding in a China sourcing order: sea, air, and rail after inspection or the Xiamen warehouse. Book a lane to ship, or hold stock in 3PL.",
+    path: "/freight-forwarding",
+  }),
   visit: routeMetadata({
     title: "Visit China Factories: Hosted Trip Based in Xiamen",
     description:
