@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { FreightForwardingArt } from "@/components/v2/freight-forwarding-art";
 import { JsonLd } from "@/components/seo/json-ld";
 import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
 import { ProofChips } from "@/components/trust/proof-chips";
@@ -106,7 +105,6 @@ export default function FreightForwardingPage() {
               </article>
             ))}
           </div>
-          <FreightForwardingArt />
         </section>
 
         <section className="mt-16" aria-labelledby="freight-modes">
