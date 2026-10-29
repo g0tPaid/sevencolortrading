@@ -41,6 +41,8 @@ export const whatsappPresets = {
     "Hi Seven Color, I have a 1688 link / domestic SKU and want the Xiamen desk to buy, QC, and export via sourcing.center/1688-sourcing.",
   uae:
     "Hi Seven Color, I want China sourcing with stock staged in the Dubai / Al Ain warehouse for the UAE / GCC.",
+  freightForwarding:
+    "Hi Seven Color, I'm on the freight forwarding page at sourcing.center and want help moving goods by sea, air, or rail.",
 } as const;
 
 export type WhatsAppPreset = keyof typeof whatsappPresets;

@@ -72,6 +72,7 @@ export function SiteFooter() {
                 ["Inspection", "/inspection"],
                 ["Amazon FBA", "/amazon-fba"],
                 ["3PL", "/3pl"],
+                ["Freight forwarding", "/freight-forwarding"],
                 ["Factories", "/factories/register"],
                 ["Factory growth", "/factory-growth"],
                 ["Dropshipping", "/dropshipping"],
