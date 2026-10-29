@@ -1,0 +1,60 @@
+# Chinese company — field map (license + owner email)
+
+Source: China business license (EN + ZH) received 2026-09-14. Passport of legal representative received — **not recorded here, not in git**.
+
+## Type these on portals
+
+| Portal field | Value |
+| --- | --- |
+| Legal name | XIAMEN AJMAL SEVEN COLOR TRADING CO., LTD |
+| Legal name (Chinese) | 厦门安杰七彩贸易有限公司 |
+| Trading name | Sourcing Center / sourcing.center |
+| Entity type | Limited liability company (WFOE / foreign natural person wholly owned) |
+| Country | China |
+| City / province | Xiamen, Fujian |
+| Registered address | Room 208 (Area B), No. 10-2, Yuehua Road, Xiamen Area of China (Fujian) Pilot Free Trade Zone |
+| Unified Social Credit Code / license | 91350200MAE8W9E67A |
+| Date of incorporation | 6 January 2025 |
+| Registered capital | RMB 10,000 |
+| Registration authority | Xiamen Municipal Administration for Market Supervision |
+| Legal representative | AJMAL ABDUL JABBAR AHAMED |
+| DUNS | 509419282 |
+| Website | https://sourcing.center |
+| Company email | info@sevencolortrading.com |
+| Phone / mobile (OTP) | +86 180 5926 2730 |
+| Average annual turnover (USD) | Owner range **100,000–200,000**. If the field needs one number, type **150000**. |
+| Number of employees | **0–10** (owner 2026-09-14). If the portal uses bands, pick 0–10 / 1–10. |
+| Bank (international / USD) | Bank of China, Xiamen. Account name: 厦门安杰七彩贸易有限公司 / XIAMEN AJMAL SEVEN COLOR TRADING CO., LTD. Beneficiary: BANK OF CHINA XIAMEN BRANCH. Address: NO.40 HUBIN NORTH ROAD, XIAMEN, FUJIAN, CHINA. Overseas SWIFT: BKCHCNBJ73A. USD + RMB account numbers are in gitignored `vault/bank-accounts.md` (public repo — never commit numbers). |
+| Bank (RMB) | Same bank. Domestic/FX SWIFT: BKCHCNBJ720. Prefer USD for overseas portals. |
+
+## Standing owner orders (2026-09-14)
+
+- **Tick all** supplier policies / codes of conduct / anti-bribery / safety acknowledgements on portals.
+- Still **stop** for: portal or tender **fees**, submitting tenders/quotes, **passport/ID upload**, inventing ISO.
+
+## Do not type (UNKNOWN or do not invent)
+
+| Field | Rule |
+| --- | --- |
+| Postal code | UNKNOWN on most portals. **Marriott required one — 361000 used** (common Xiamen code). Confirm or correct. |
+| Business scope (itemized English list) | License says refer to Xiamen registration / publicity system — do not invent NACE/UNSPSC lines beyond published site categories |
+| Employees | Use **0–10**. Do not pick a larger band. |
+| Bank account numbers | Type from `vault/bank-accounts.md` only — never put the digits in git |
+| ISO / insurance | Not documented — No / blank |
+| Year established | Use **2025-01-06**, not website “2014” |
+| Registered address | Use **Yuehua Road FTZ**, not website “Huli Avenue” |
+| Passport number / home address / family | On file locally only — upload only after owner approves **that** portal |
+
+## Categories (published site only)
+
+Sourcing / import-export, furniture & hospitality FF&E, electronics, fashion/textiles, construction materials, private label / OEM / ODM, inspection (USD 110 / inspector day), warehousing in Xiamen (Dubai warehouse = operating location, not this registrant).
+
+## First-wave as this Chinese company
+
+1. Emirates epic — https://epic.emirates.com/ — **submitted, pending activation**; username `ajmal.sevencolor` (`emirates-epic.md`)  
+2. Etimad foreign account — https://login.etimad.sa/Account/Login?culture=en — **WAF-blocked from cloud IP** (`etimad.md`)  
+3. NEOM — https://www.neom.com/en-us/our-business/suppliers — **account form filled, CAPTCHA not submitted** (`neom.md`)  
+4. Emaar — official Oracle form — **OTP sent to info@; waiting on code** (`emaar.md`)  
+5. Marriott interest — **email 6-digit pending** (`marriott.md`)  
+
+**HOLD:** UAE MoF Foreign Supplier (branch question). DEWA / eSupply later (local docs / possible fees).

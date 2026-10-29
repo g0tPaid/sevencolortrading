@@ -1,0 +1,219 @@
+# Session log
+
+## 2026-09-14 — Session 1 (startup)
+
+**Done**
+
+- Inspected repo: marketing site only. **No licenses, bank letters, IDs, or capability PDFs uploaded.**
+- Built company profile from published `src/lib/content.ts` / site facts only.
+- Built empty document index and missing-information list.
+- Wrote approved short/standard/long/category descriptions (no invented ISO/clients/revenue).
+- Researched **50** organizations; scored; stored in `database.json`.
+- Identified official portals for: Emirates epic, Dubai eSupply, UAE MoF DPP, Emaar, Aldar, DEWA, Etimad, NEOM, Aramco, ADNOC, Marriott, Hilton, Walmart supplier apply, SAM.gov.
+- Marked first-wave stop gates. **Zero registrations submitted.**
+- Drafted Etihad email — not sent.
+
+**Waiting on owner**
+
+- Upload license scans + VAT/TRN status + authorized person + UAE PASS holder.
+- Confirm first legal entity for GCC portals (UAE vs China vs both).
+- Authorize first-wave registrations and any T&Cs.
+
+**Not done**
+
+- Portal logins
+- RFQ extraction
+- Payment of any tender document fees
+
+**Next session**
+
+1. Ingest any documents the owner attaches into the vault index.
+2. If licenses present: prepare (not submit) Emirates + eSupply + DEWA field maps.
+3. Finish official URLs for Jumeirah, Dubai Holding, MAF procurement, Rotana, Landmark, Qatar Airways.
+4. Do not repeat the first-50 research unless a URL changed.
+
+## 2026-09-14 — Session 2 (entity lock)
+
+**Owner:** register as **Chinese company**.
+
+**Done**
+
+- Locked registrant: Xiamen Ajmal Seven Color Trading Co Ltd / license 91350200MAE8W9E67A.
+- Wrote `registering-entity.md` and `china-company-field-map.md`.
+- Rechecked MoF: Foreign Supplier = outside UAE **and no local branch**. Published Al Ain office + license 143609 → **MoF on HOLD** until owner says whether 143609 is a branch or a separate company.
+- First-wave as China company (no submission): Emirates epic, Etimad, NEOM, Emaar, Marriott.
+- DEWA / eSupply: possible fees or local-chamber docs — later, not forced.
+
+**Still not done:** no portal accounts, no uploads, no emails.
+
+**Need from owner (session 2):** China license scan, tax cert if separate, legal-rep passport, portal admin name, answer on 143609 vs Chinese company.
+
+## 2026-09-14 — Session 3 (documents + email)
+
+**Received**
+
+- China business license EN + ZH (indexed; vault gitignored).
+- Legal representative passport (vault only; **not committed**; name matches license).
+- Portal email: **info@sevencolortrading.com**
+
+**License facts now used on forms**
+
+- XIAMEN AJMAL SEVEN COLOR TRADING CO., LTD / 厦门安杰七彩贸易有限公司
+- USCC 91350200MAE8W9E67A
+- Room 208 (Area B), No. 10-2, Yuehua Road, Fujian FTZ Xiamen
+- Incorporated 6 January 2025; capital RMB 10,000
+- Legal representative AJMAL ABDUL JABBAR AHAMED
+
+**Do not use on legal forms:** website “founded 2014”; website “Huli Avenue”.
+
+**Still not done:** no portal account created; no passport uploaded to any buyer.
+
+**Need:** mobile for OTP; approve Emirates epic T&Cs when we open that portal; 143609 branch vs separate company (MoF only).
+
+## 2026-09-14 — Session 4 (mobile)
+
+**Owner:** portal mobile **+86 180 5926 2730**.
+
+Still no portal account. Next: owner says **yes** to open Emirates epic (stop at terms).
+
+## 2026-09-14 — Session 5 (Emirates epic started)
+
+**Portal:** https://epic.emirates.com/ (domain verified).
+
+**Filled (Chinese company, verified fields):**
+- Organisation: XIAMEN AJMAL SEVEN COLOR TRADING CO., LTD
+- Address: Room 208 (Area B), No. 10-2, Yuehua Road, FTZ Xiamen
+- Country: China · City: Xiamen
+- License: 91350200MAE8W9E67A
+- Email: info@sevencolortrading.com
+- Phone: +86 180 5926 2730
+- Website: https://sourcing.center
+- User: AJMAL ABDUL JABBAR AHAMED
+- Username created on portal: ajmal.sevencolor
+- Time zone on form: **wrongly set to CDT/CST (Mexico)** — correct to Asia/Shanghai or Asia/Dubai before submit
+- Postal code: left blank
+
+**STOPPED — owner approval required (legal):**
+Emirates requires “I Agree” on:
+1. Anti Bribery & Corruption Policy
+2. Safety Policy
+3. Supplier Code of Conduct
+
+No OTP, no password prompt, no bank fields, no fee, no passport upload yet.
+
+**Do not tick I Agree until owner reviews the three policies.**
+
+## 2026-09-14 — Session 6 (Emirates legal gate)
+
+**Owner:** yes — start Emirates epic, stop at terms.
+
+**Done**
+
+- Confirmed still on epic Compliance / Additional Documents.
+- Extracted the three required policy PDFs (summaries in `emirates-epic.md`).
+- Left all three “I Agree” boxes **unchecked**.
+- Registration Data now locked until credentials; timezone cannot be corrected until login.
+
+**Waiting on owner**
+
+- Approve or reject ticking Anti-Bribery, Safety, and Supplier Code of Conduct.
+- After yes: continue Basic Profile + categories. Still do not invent employees/turnover; still do not upload passport or bank; still do not pay fees.
+
+**Not started yet:** Etimad, NEOM, Emaar, Marriott.
+
+## 2026-09-14 — Session 7 (owner: yes on policies + turnover + bank)
+
+**Owner**
+
+- Tick the three Emirates policies and continue.
+- Next time: tick all similar supplier policies.
+- Annual turnover: USD 100,000–200,000 (use 150000 if one number).
+- Bank of China Xiamen (USD + RMB). Numbers stored in gitignored vault only (public repo).
+
+**This session continues Emirates:** tick I Agree, Basic Profile (turnover 150000; employees still blank), categories, bank USD if reached. Do not upload passport. Do not invent headcount.
+
+## 2026-09-14 — Session 7 result
+
+**Done on epic**
+
+- Ticked all three I Agree boxes.
+- Uploaded China license EN. Year 2025. Turnover 150000. Capabilities + Sourcing Center trading name. VAT/SME/CAGE = No.
+- Categories: 1300011 General Corporate Procurement; 2300011 Construction; 2300015 Furniture.
+- License expiry typed as 31/12/2099 (no expiry on license face).
+- No bank page. No passport upload. No fee.
+
+**Stopped:** Number of Employees is a mandatory dropdown: `0-10` / `10-50` / `50-250` / `Above 250`. Left blank.
+
+**Need from owner:** which employee band. Also check info@sevencolortrading.com for epic username/password (portal asks for a password we never set in-session).
+
+## 2026-09-14 — Session 8 (employees + password)
+
+**Owner:** employees **0–10**. Password received — stored in gitignored vault only (public repo).
+
+Continue Emirates: select 0–10, save Basic Profile, complete confirmation. Fix timezone to Asia/Shanghai if Registration Data unlocks. Do not upload passport. Do not pay fees.
+
+## 2026-09-14 — Session 8 result
+
+**Emirates epic registration phase complete.**
+
+- Employees set to **0–10**. Basic Profile all mandatory complete.
+- Portal: “The Registration phase of your Account has been Completed. The Activation of your account will be evaluated and communicated to you via email.”
+- Timezone still locked (Mexico CDT/CST) until after activation.
+- Password stored in gitignored vault only.
+- Watch info@sevencolortrading.com for activation.
+
+**Next:** Etimad foreign / no-CR account. Then NEOM, Emaar, Marriott.
+
+## 2026-09-14 — Session 9 (Etimad)
+
+**Owner:** yes — start Etimad with the same field map.
+
+Official URL: https://login.etimad.sa/Account/Login?culture=en — “New Account for No CR entities of the type foreign supplier”.
+
+Tick all T&Cs. Employees 0–10. Turnover 150000. USD bank if asked. Stop for fees, passport upload, tenders. OTP to +86 180 5926 2730 may block until owner reads the SMS.
+
+## 2026-09-14 — Session 9 result
+
+**Etimad not created.** Official foreign / no-CR link is `login.etimad.sa/Suppliers/CreateInstitution`. The Saudi WAF rejects that URL from this cloud datacenter (“requested URL was rejected”; call 19990). No fields submitted. No uploads. No fee.
+
+Owner must open the same link from a normal home/office browser, or say **yes** to start NEOM next.
+
+## 2026-09-14 — Session 10 (NEOM, Emaar, Marriott)
+
+**Owner:** ok try others (skip Etimad WAF).
+
+Same field map. Tick all T&Cs. Employees 0–10. Turnover 150000. USD bank if asked. No passport. No fees. Start each portal from the buyer’s own domain.
+
+## 2026-09-14 — Session 10 result
+
+**NEOM / GEP:** Apply online from neom.com. Username `ajmal.sevencolor`. T&Cs ticked. **Not submitted** — reCAPTCHA failed in cloud browser. Password in vault.
+
+**Emaar:** Official video completed. Continue Registration → `emhm-dev3.fa.em2.oraclecloud.com`. **Stopped** (host name contains dev). No data sent.
+
+**Marriott SupplierOne:** Form filled from official help article link. T&Cs ticked. Verify Email clicked. **Need 6-digit code** from info@sevencolortrading.com. Postal **361000** used because the field was required.
+
+No passport. No fees. Etimad still WAF-blocked. Emirates still pending activation.
+
+## 2026-09-14 — Session 11 (owner: just do it)
+
+Proceeded on official Emaar Oracle link. Sent access code to info@sevencolortrading.com (15 min). Marriott verify clicked again. DEWA stopped: UAE license only. Aldar public register loops to procurement page. NEOM still CAPTCHA.
+
+**Need from owner (only things I cannot do):**
+1. Emaar one-time code in info@sevencolortrading.com (or say expired → resend)
+2. Marriott 6-digit code in the same inbox
+3. NEOM: complete GEP reCAPTCHA in a normal browser (username ajmal.sevencolor)
+4. Any SMS OTP on +86 180 5926 2730
+5. Emirates activation email if it arrived
+6. Etimad: open New Account for foreign/no-CR from a home/office browser (cloud IP is blocked)
+
+## 2026-09-14 — Session 12 (resend codes)
+
+Owner: resend access codes, they will paste them.
+
+Emaar: new access code sent to info@sevencolortrading.com, expires 15 minutes. Tab open.
+Marriott: form filled, VERIFY YOUR EMAIL clicked again. Same inbox.
+
+## 2026-09-14 — Session 13
+
+Owner sent Emaar code `a4Xz4PrJ`. Portal rejected it (expired or superseded). New access code sent to info@sevencolortrading.com, 15 min, tab open. Wait for the **newest** Emaar email.
+
