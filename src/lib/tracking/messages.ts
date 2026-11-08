@@ -8,6 +8,7 @@ export const MSG = {
   stillRunning: "The check is still running. Search again in a moment.",
   selectCarrier: "This number matches more than one carrier. Choose one to continue.",
   checkingCarriers: "Checking the carriers this number could belong to.",
+  partialReady: "A result is in. Still checking other possible carriers.",
   noHistory: "No supported carrier returned a history for this number. Search again later.",
   severalHistories: "More than one carrier returned a history for this number.",
   timedOutSearch: "The carrier checks ran out of time before a history was confirmed. Search again later.",

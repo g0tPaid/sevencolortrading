@@ -263,6 +263,8 @@ export async function publicLookup(trackingNumber: string, rateKey: string, now 
   }
 
   if (!carrierId) {
+    const open = findCache(norm, null);
+    if (open && jobOpen(open.id)) return pendingWithProgress(norm, open);
     const several = historiesResponse(norm, now);
     if (several) return several;
   }
@@ -272,11 +274,8 @@ export async function publicLookup(trackingNumber: string, rateKey: string, now 
     touchInterest(cached.id, now);
     return response(cached, cached.outcome, cached.message);
   }
-  if (cached?.outcome === "ambiguous" && jobOpen(cached.id)) {
-    return response(cached, "pending", MSG.checkingCarriers);
-  }
-  if (cached && cached.outcome === "pending" && jobOpen(cached.id)) {
-    return response(cached, "pending", MSG.checking);
+  if (cached && jobOpen(cached.id) && (cached.outcome === "ambiguous" || cached.outcome === "pending")) {
+    return pendingWithProgress(norm, cached);
   }
 
   const settings = getSettings();
@@ -307,7 +306,48 @@ export async function publicLookup(trackingNumber: string, rateKey: string, now 
     if (done) return response(done, done.outcome === "pending" ? "pending" : done.outcome, done.message);
   }
   const current = getCache(row.id) ?? row;
+  if (jobOpen(current.id)) return pendingWithProgress(norm, current);
   return response(current, "pending", current.message ?? MSG.checking);
+}
+
+function pendingWithProgress(number: string, open: CacheRow) {
+  const ready = listCache(number).filter((row) => row.outcome === "ready" && row.carrierId);
+  const message = ready.length > 0 ? MSG.partialReady : MSG.checkingCarriers;
+  if (ready.length > 1) {
+    return {
+      status: 200,
+      body: {
+        ok: true as const,
+        state: "pending" as const,
+        found: true,
+        message,
+        shipment: null,
+        shipments: ready.map(view),
+        candidates: [] as Array<{ id: string; name: string }>,
+      },
+    };
+  }
+  if (ready.length === 1) {
+    return {
+      status: 200,
+      body: {
+        ok: true as const,
+        state: "pending" as const,
+        found: true,
+        message,
+        shipment: view(ready[0]!),
+        candidates: [] as Array<{ id: string; name: string }>,
+      },
+    };
+  }
+  return response(open, "pending", message);
+}
+
+/** Starts one public job immediately. The 60s scheduler tick remains the backup. */
+export function startPublicWork(client?: ScraperClient): void {
+  void runPublicPump({ client: client ?? liveScraperClient(), ignoreAdminBacklog: false }).catch(() => {
+    console.error("[tracking] public dispatch failed");
+  });
 }
 
 function pickCached(number: string, now: Date): CacheRow | null {
@@ -580,6 +620,8 @@ async function fanoutCandidates(row: CacheRow, candidates: string[], client: Scr
       try {
         const body = await client.track({ number: row.trackingNumber, carrier, budgetMs: remaining });
         if (isGenuine(body, carrier, row.trackingNumber)) {
+          const stored = ensureCarrierRow(row.trackingNumber, carrier, now);
+          applyBody({ ...stored, carrierId: carrier }, body, now);
           matches.push({ carrier, body });
           attempts.push({ carrier, outcome: "ready" });
         } else {
@@ -604,10 +646,6 @@ async function fanoutCandidates(row: CacheRow, candidates: string[], client: Scr
     errorKind: `attempts:${attempts.length}`,
     now,
   });
-  for (const match of matches) {
-    const stored = ensureCarrierRow(row.trackingNumber, match.carrier, now);
-    applyBody({ ...stored, carrierId: match.carrier }, match.body, now);
-  }
   if (matches.length > 0) {
     getDb().prepare("DELETE FROM public_track_cache WHERE id = ?").run(row.id);
     return;

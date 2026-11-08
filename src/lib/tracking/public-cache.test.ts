@@ -6,8 +6,7 @@ import test from "node:test";
 import { closeTrackingDatabase, useTrackingDatabase } from "@/lib/tracking/db";
 import { FIXTURE_IN_TRANSIT, FIXTURE_TRACKING_NUMBER } from "@/lib/tracking/fixtures";
 import { MSG } from "@/lib/tracking/messages";
-import { publicLookup } from "@/lib/tracking/public-cache";
-import { runPublicPump } from "@/lib/tracking/public-cache";
+import { publicLookup, runPublicPump, startPublicWork } from "@/lib/tracking/public-cache";
 import type { ScraperClient } from "@/lib/tracking/scraper-client";
 import { createShipmentRecord } from "@/lib/tracking/service";
 import { getSettings, saveSettings, searchShipments } from "@/lib/tracking/store";
@@ -329,6 +328,53 @@ test("a short fanout budget does not call every candidate", async () => {
   } finally {
     delete process.env.TRACKING_PUBLIC_FANOUT_MS;
   }
+});
+
+test("enqueue returns before scraper work, and a verified history is visible before slower candidates finish", async () => {
+  const { scraper, trackCalls } = client();
+  scraper.detect = async () => ({
+    trackingNumber: "123456789018",
+    carrier: "zto",
+    confidence: "low",
+    candidates: ["zto", "sto"],
+    source: "number",
+  });
+  scraper.track = async (input) => {
+    trackCalls.push(input);
+    if (input.carrier === "zto") {
+      await new Promise((resolve) => setTimeout(resolve, 40));
+      return history("zto", "Fixture scan — early ZTO history. Not a live carrier response.");
+    }
+    await new Promise((resolve) => setTimeout(resolve, 350));
+    throw new ScraperError("not_found", 404);
+  };
+  const queuedAt = Date.now();
+  const queued = await publicLookup("123456789018", "198.51.100.50", NOW, { client: scraper });
+  const enqueueMs = Date.now() - queuedAt;
+  assert.ok(enqueueMs < 80, `enqueue took ${enqueueMs}ms`);
+  assert.equal(queued.body.state, "pending");
+  assert.equal(queued.body.shipment, null);
+  assert.equal(trackCalls.length, 0);
+
+  startPublicWork(scraper);
+  const started = Date.now();
+  let early: Awaited<ReturnType<typeof publicLookup>> | null = null;
+  while (Date.now() - started < 250) {
+    const current = await publicLookup("123456789018", "198.51.100.51", NOW, { client: scraper });
+    if (current.body.shipment?.events.length) {
+      early = current;
+      break;
+    }
+    await new Promise((resolve) => setTimeout(resolve, 15));
+  }
+  assert.ok(early, "no early history");
+  assert.equal(early?.body.state, "pending");
+  assert.ok(Date.now() - started < 250);
+  assert.equal(early?.body.message, MSG.partialReady);
+  await new Promise((resolve) => setTimeout(resolve, 450));
+  const finished = await publicLookup("123456789018", "198.51.100.52", NOW, { client: scraper });
+  assert.equal(finished.body.state, "ready");
+  assert.equal(trackCalls.length, 2);
 });
 
 test("a down scraper tells the public cache the service is unconfigured", async () => {
