@@ -90,6 +90,12 @@ export type TrackingSettings = {
   perCarrierConcurrency: number;
   perCarrierGapMs: number;
   publicRefreshCooldownMinutes: number;
+  publicDailyCap: number;
+  publicFreshHours: number;
+  publicInterestHours: number;
+  publicMaxRows: number;
+  publicConcurrency: number;
+  publicOutstandingCap: number;
   updatedAt: string;
 };
 

@@ -293,8 +293,8 @@ test("admin routes reject anonymous and cross-origin mutations", async () => {
   assert.equal(allowed.status, 201);
 });
 
-test("public lookup is cached, sanitized, and does not call the scraper", async () => {
-  createShipmentRecord(
+test("public lookup does not return admin customer records", async () => {
+  const admin = createShipmentRecord(
     {
       trackingNumber: FIXTURE_TRACKING_NUMBER,
       carrierId: "ups",
@@ -307,28 +307,14 @@ test("public lookup is cached, sanitized, and does not call the scraper", async 
     },
     NOW,
   );
-  const original = globalThis.fetch;
-  globalThis.fetch = async () => {
-    throw new Error("scraper called");
-  };
-  try {
-    const result = publicLookup(FIXTURE_TRACKING_NUMBER, "203.0.113.5", NOW);
-    assert.equal(result.status, 200);
-    assert.equal(result.body.found, true);
-    const encoded = JSON.stringify(result.body);
-    for (const secret of ["Hidden Customer", "CUST-SECRET", "ORD-SECRET", "secret note", "78701", "9088"]) {
-      assert.equal(encoded.includes(secret), false, secret);
-    }
-    const shipment = result.body.shipment as Record<string, unknown>;
-    for (const key of ["id", "notes", "customerName", "customerRef", "orderNumber", "postcode", "phoneLast4", "logs"]) {
-      assert.equal(Object.hasOwn(shipment, key), false, key);
-    }
-    const missing = publicLookup("NOMATCH123456", "203.0.113.5", NOW);
-    assert.equal(missing.body.found, false);
-    assert.equal(missing.body.message, MSG.notRegistered);
-  } finally {
-    globalThis.fetch = original;
+  const result = await publicLookup(FIXTURE_TRACKING_NUMBER, "203.0.113.9", NOW);
+  const encoded = JSON.stringify(result.body);
+  for (const secret of ["Hidden Customer", "CUST-SECRET", "ORD-SECRET", "secret note", "78701", "9088"]) {
+    assert.equal(encoded.includes(secret), false, secret);
   }
+  assert.equal(result.body.found, false);
+  assert.notEqual(result.body.message, MSG.notRegistered);
+  assert.equal(getShipment(admin.id)?.customerName, "Hidden Customer");
 });
 
 test("csv import validates rows and export escapes formulas", () => {

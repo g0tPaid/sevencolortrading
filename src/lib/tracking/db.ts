@@ -34,6 +34,13 @@ export function applyMigrations(db: DatabaseSync): void {
      SET applied_at = ?
      WHERE id = '001_init' AND applied_at = '1970-01-01T00:00:00.000Z'`,
   ).run(new Date().toISOString());
+  const applied = db.prepare("SELECT id FROM schema_migrations WHERE id = '002_public_cache'").get();
+  if (!applied) {
+    db.exec(migrationSql("002_public_cache.sql"));
+    db.prepare("INSERT INTO schema_migrations (id, applied_at) VALUES ('002_public_cache', ?)").run(
+      new Date().toISOString(),
+    );
+  }
 }
 
 export function openDatabase(file = defaultTrackingDbPath()): DatabaseSync {

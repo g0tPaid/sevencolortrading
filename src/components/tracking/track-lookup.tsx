@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { countryLabel } from "@/lib/analytics-geo";
 
 type PublicEvent = {
@@ -32,10 +32,12 @@ type PublicShipment = {
 
 type LookupResponse = {
   ok?: boolean;
+  state?: string;
   found?: boolean;
   error?: string;
   message?: string | null;
   refresh?: string;
+  candidates?: Array<{ id: string; name: string }>;
   shipment?: PublicShipment;
 };
 
@@ -99,14 +101,16 @@ export function TrackLookup() {
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<LookupResponse | null>(null);
 
-  async function lookup(trackingNumber: string) {
-    setPending(true);
-    setError(null);
+  async function lookup(trackingNumber: string, carrierId?: string, silent = false) {
+    if (!silent) {
+      setPending(true);
+      setError(null);
+    }
     try {
       const response = await fetch("/api/track", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ trackingNumber }),
+        body: JSON.stringify({ trackingNumber, carrierId }),
       });
       const data = (await response.json()) as LookupResponse;
       if (!response.ok || data.ok === false) {
@@ -119,7 +123,7 @@ export function TrackLookup() {
       setResult(null);
       setError("Tracking could not be loaded. Try again.");
     } finally {
-      setPending(false);
+      if (!silent) setPending(false);
     }
   }
 
@@ -127,6 +131,29 @@ export function TrackLookup() {
     event.preventDefault();
     await lookup(number);
   }
+
+  const pollKey = result?.state === "pending" ? result.shipment?.trackingNumber ?? number : "";
+  useEffect(() => {
+    if (!pollKey) return;
+    let attempts = 0;
+    const timer = setInterval(() => {
+      attempts += 1;
+      if (attempts > 15) {
+        setResult((current) =>
+          current?.state === "pending"
+            ? { ...current, message: "The check is still running. Search again in a moment." }
+            : current,
+        );
+        clearInterval(timer);
+        return;
+      }
+      const carrierId = result?.shipment?.carrier.id ?? undefined;
+      void lookup(number, carrierId, true);
+    }, 2000);
+    return () => clearInterval(timer);
+    // Poll only while this search is pending. `lookup` closes over the current number.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pollKey]);
 
   async function onRefresh() {
     if (!result?.shipment || refreshing) return;
@@ -197,9 +224,33 @@ export function TrackLookup() {
         </p>
       ) : null}
 
-      {result && !result.found ? (
-        <p data-testid="track-empty" className="mt-4 rounded-2xl border border-line bg-paper-elevated px-4 py-3 text-sm text-ink">
-          {result.message || "No shipment is registered for this tracking number."}
+      {result?.state === "pending" && !pending ? (
+        <p role="status" className="mt-3 text-sm text-muted">
+          {result.message || "Checking this number with the carrier."}
+        </p>
+      ) : null}
+
+      {result?.state === "ambiguous" ? (
+        <div className="mt-4">
+          <p className="text-sm text-ink">{result.message}</p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {(result.candidates ?? result.shipment?.carrier.candidates ?? []).map((candidate) => (
+              <button
+                key={candidate.id}
+                type="button"
+                onClick={() => void lookup(number, candidate.id)}
+                className="rounded-full border border-line px-3 py-1.5 text-sm text-ink"
+              >
+                {candidate.name}
+              </button>
+            ))}
+          </div>
+        </div>
+      ) : null}
+
+      {result && !result.found && result.state !== "pending" && result.state !== "ambiguous" ? (
+        <p data-testid="track-empty" role="status" className="mt-4 text-sm text-ink">
+          {result.message}
         </p>
       ) : null}
 

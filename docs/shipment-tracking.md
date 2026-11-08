@@ -52,7 +52,7 @@ Hard limits, all still true:
 
 - Railway MCP was not authenticated, so replica count, RAM, and plan were not read.
 - `railway.toml` does not set memory or replicas.
-- A second scraper service is not created by this change. The Dockerfile and compose file are the private worker definition. Until that service exists and `TRACKING_SCRAPER_BASE_URL` points at it, refreshes record `The tracking service is not reachable` and keep the stored events.
+- The private scraper is a separate service. This follow-up does not change `services/tracking-scraper/Dockerfile`. Public and admin checks call `TRACKING_SCRAPER_BASE_URL`. If that service is down, the stored result says the tracking service is not reachable and no events are invented.
 - Horizontal web replicas do not share a Railway volume. Run the scheduler on one instance (`TRACKING_SCHEDULER=0` on the others) or the sqlite file will split. Claims are rows in that file, so they only dedupe processes that share the file.
 - Node must be `>=22.13.0` because the database uses `node:sqlite`. The scraper image uses Node 26. The web app does not import the scraper package.
 
@@ -72,6 +72,9 @@ Created:
 - `src/lib/tracking/` (database, scheduler, scraper client, CSV, fixtures, tests)
 - `src/lib/tracking/migrations/001_init.sql`
 - `src/lib/tracking/migrations/001_down.sql`
+- `src/lib/tracking/migrations/002_public_cache.sql`
+- `src/lib/tracking/migrations/002_down.sql`
+- `src/lib/tracking/public-cache.ts`
 - `src/app/(marketing)/track/page.tsx`
 - `src/components/tracking/track-lookup.tsx`
 - `src/app/(dashboard)/dashboard/shipments/page.tsx`
@@ -190,9 +193,15 @@ Found:
 }
 ```
 
-Not registered: `{ "ok": true, "found": false, "message": "No shipment is registered for this tracking number." }`
+Public lookup does not require an admin shipment. `POST /api/track` accepts any tracking number of 4–40 letters and digits. A fresh public-cache hit returns the stored carrier result and does not call the scraper. A cold or stale number is queued once, coalesced across processes, and the page polls until the worker stores a result. `state` is `pending`, `ready`, `ambiguous`, `unsupported`, `unavailable`, `timeout`, `not_found`, `rejected`, `empty`, or `throttled`. `found` is true only for `ready`. An empty carrier reply is `empty`, not a successful blank timeline. Ambiguous numbers return carrier choices and are not tracked until one is selected.
 
-`POST /api/track/refresh` with the same body queues one refresh for a registered number and still returns the stored shipment. `refresh` is `queued`, `already_queued`, `not_due`, or `stopped`.
+The public cache is `public_track_cache` / `public_track_events`. It has no customer, order, or note columns. The same tracking number can exist on an admin shipment without that private data appearing in the public response.
+
+Supported carriers are the allowlist in this document. A number that matches none of them returns an unsupported result. This is not a lookup for every carrier worldwide.
+
+Cold public lookups share a daily cap (`public_daily_cap`, default 2000, bounds 100–20000). Per-address requests are limited, outstanding public jobs are capped, and public work waits while the admin desk has more due shipments than its concurrency setting. Public rows refresh only while someone has looked them up recently (`public_interest_hours`, default 48) and then stop. Delivered public rows are not polled forever.
+
+`POST /api/track/refresh` repeats that same public lookup. It does not require a registered admin shipment.
 
 Admin routes use the existing `sc_admin_session` cookie. Middleware and the handler both require it. Mutations also require `Origin` or `Referer` host to match `X-Forwarded-Host` or `Host`.
 

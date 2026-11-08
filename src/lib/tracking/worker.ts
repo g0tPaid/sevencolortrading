@@ -1,9 +1,11 @@
 import { hostname } from "os";
 import { MSG } from "@/lib/tracking/messages";
+import { enqueueStalePublic, failQueuedPublicAsUnavailable, runPublicPump } from "@/lib/tracking/public-cache";
 import { processShipment } from "@/lib/tracking/refresh";
 import { liveScraperClient, type ScraperClient } from "@/lib/tracking/scraper-client";
 import {
   claimQueued,
+  countAdminDue,
   enqueueDue,
   getSettings,
   postponeDue,
@@ -29,7 +31,7 @@ export async function runSchedulerTick(opts?: {
   now?: Date;
   workerId?: string;
   checkHealth?: boolean;
-}): Promise<{ claimed: number; postponed: boolean }> {
+}): Promise<{ claimed: number; postponed: boolean; publicClaimed: number }> {
   const now = opts?.now ?? new Date();
   const client = opts?.client ?? liveScraperClient();
   const settings = getSettings();
@@ -37,6 +39,7 @@ export async function runSchedulerTick(opts?: {
     const healthy = await client.health();
     if (!healthy) {
       postponeDue(now, 15 * 60 * 1000, MSG.unavailable);
+      failQueuedPublicAsUnavailable(now);
       writeProviderLog({
         shipmentId: null,
         carrierId: null,
@@ -46,7 +49,7 @@ export async function runSchedulerTick(opts?: {
         errorKind: "unavailable",
         now,
       });
-      return { claimed: 0, postponed: true };
+      return { claimed: 0, postponed: true, publicClaimed: 0 };
     }
   }
   enqueueDue(now);
@@ -60,7 +63,12 @@ export async function runSchedulerTick(opts?: {
   for (const id of ids) {
     await processShipment(id, { client, now });
   }
-  return { claimed: ids.length, postponed: false };
+  let publicClaimed = 0;
+  if (countAdminDue(now) <= settings.globalConcurrency) {
+    enqueueStalePublic(now);
+    publicClaimed = await runPublicPump({ client, now, ignoreAdminBacklog: true });
+  }
+  return { claimed: ids.length, postponed: false, publicClaimed };
 }
 
 export function startTrackingScheduler(opts?: { keepAlive?: boolean }): void {

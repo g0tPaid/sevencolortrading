@@ -107,6 +107,12 @@ export function getSettings(): TrackingSettings {
     perCarrierConcurrency: num(row.per_carrier_concurrency),
     perCarrierGapMs: num(row.per_carrier_gap_ms),
     publicRefreshCooldownMinutes: num(row.public_refresh_cooldown_minutes),
+    publicDailyCap: num(row.public_daily_cap) || 2000,
+    publicFreshHours: num(row.public_fresh_hours) || 6,
+    publicInterestHours: num(row.public_interest_hours) || 48,
+    publicMaxRows: num(row.public_max_rows) || 2000,
+    publicConcurrency: num(row.public_concurrency) || 1,
+    publicOutstandingCap: num(row.public_outstanding_cap) || 20,
     updatedAt: text(row.updated_at) ?? "",
   };
 }
@@ -124,6 +130,12 @@ export function saveSettings(settings: TrackingSettings, now: Date): TrackingSet
         per_carrier_concurrency = ?,
         per_carrier_gap_ms = ?,
         public_refresh_cooldown_minutes = ?,
+        public_daily_cap = ?,
+        public_fresh_hours = ?,
+        public_interest_hours = ?,
+        public_max_rows = ?,
+        public_concurrency = ?,
+        public_outstanding_cap = ?,
         updated_at = ?
       WHERE id = 1`,
     )
@@ -137,6 +149,12 @@ export function saveSettings(settings: TrackingSettings, now: Date): TrackingSet
       settings.perCarrierConcurrency,
       settings.perCarrierGapMs,
       settings.publicRefreshCooldownMinutes,
+      settings.publicDailyCap,
+      settings.publicFreshHours,
+      settings.publicInterestHours,
+      settings.publicMaxRows,
+      settings.publicConcurrency,
+      settings.publicOutstandingCap,
       now.toISOString(),
     );
   return getSettings();
@@ -152,6 +170,12 @@ const SETTING_BOUNDS: Record<keyof Omit<TrackingSettings, "updatedAt">, [number,
   perCarrierConcurrency: [1, 2],
   perCarrierGapMs: [500, 60_000],
   publicRefreshCooldownMinutes: [5, 60],
+  publicDailyCap: [100, 20_000],
+  publicFreshHours: [1, 24],
+  publicInterestHours: [1, 168],
+  publicMaxRows: [100, 20_000],
+  publicConcurrency: [1, 2],
+  publicOutstandingCap: [5, 100],
 };
 
 export function validateSettings(input: Record<string, unknown>): TrackingSettings {
@@ -527,4 +551,15 @@ export function setCarrierLease(carrierId: string, untilIso: string): void {
 
 export function countOpenQueue(): number {
   return num(getDb().prepare("SELECT COUNT(*) AS n FROM tracking_refresh_queue").get()?.n);
+}
+
+export function countAdminDue(now: Date): number {
+  return num(
+    getDb()
+      .prepare(
+        `SELECT COUNT(*) AS n FROM shipments
+         WHERE refresh_stopped = 0 AND next_check_at IS NOT NULL AND next_check_at <= ?`,
+      )
+      .get(now.toISOString())?.n,
+  );
 }
