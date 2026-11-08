@@ -3,7 +3,10 @@ import { countryLabel, countryMapPoint } from "@/lib/analytics-geo";
 export type RouteArc = {
   d: string;
   from: { x: number; y: number };
+  control: { x: number; y: number };
   to: { x: number; y: number };
+  /** Nose points left when the destination sits west of the origin on this map. */
+  facesLeft: boolean;
   originLabel: string;
   destinationLabel: string;
 };
@@ -18,13 +21,24 @@ export function routeArc(origin: string | null | undefined, destination: string 
   const to = countryMapPoint(destination);
   if (!from || !to) return null;
   const lift = Math.min(110, Math.max(36, Math.hypot(to.x - from.x, to.y - from.y) * 0.28));
-  const cx = (from.x + to.x) / 2;
-  const cy = Math.max(28, Math.min(from.y, to.y) - lift);
+  const control = {
+    x: (from.x + to.x) / 2,
+    y: Math.max(28, Math.min(from.y, to.y) - lift),
+  };
   return {
-    d: `M ${from.x.toFixed(1)} ${from.y.toFixed(1)} Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${to.x.toFixed(1)} ${to.y.toFixed(1)}`,
+    d: `M ${from.x.toFixed(1)} ${from.y.toFixed(1)} Q ${control.x.toFixed(1)} ${control.y.toFixed(1)} ${to.x.toFixed(1)} ${to.y.toFixed(1)}`,
     from,
+    control,
     to,
+    facesLeft: to.x < from.x,
     originLabel: countryLabel(origin),
     destinationLabel: countryLabel(destination),
   };
+}
+
+/** Horizontal travel of the curve. Negative means the nose should point left, still upright. */
+export function routeTangentX(arc: RouteArc, t: number): number {
+  const clamped = Math.min(1, Math.max(0, t));
+  const { from, control, to } = arc;
+  return 2 * (1 - clamped) * (control.x - from.x) + 2 * clamped * (to.x - control.x);
 }
