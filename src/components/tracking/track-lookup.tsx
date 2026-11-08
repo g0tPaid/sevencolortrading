@@ -38,7 +38,8 @@ type LookupResponse = {
   message?: string | null;
   refresh?: string;
   candidates?: Array<{ id: string; name: string }>;
-  shipment?: PublicShipment;
+  shipment?: PublicShipment | null;
+  shipments?: PublicShipment[];
 };
 
 function flagFor(code: string | null): string | null {
@@ -178,13 +179,13 @@ export function TrackLookup() {
     }
   }
 
-  const shipment = result?.found ? result.shipment : null;
-  const events = [...(shipment?.events ?? [])].sort((a, b) => {
-    const left = a.time ? Date.parse(a.time) : Number.NaN;
-    const right = b.time ? Date.parse(b.time) : Number.NaN;
-    if (Number.isFinite(left) && Number.isFinite(right) && left !== right) return right - left;
-    return 0;
-  });
+  const shipment = result?.state === "ready" ? result.shipment : null;
+  const cards =
+    result?.state === "multiple" && result.shipments?.length
+      ? result.shipments
+      : shipment
+        ? [shipment]
+        : [];
 
   return (
     <div className="mx-auto max-w-xl">
@@ -230,31 +231,39 @@ export function TrackLookup() {
         </p>
       ) : null}
 
-      {result?.state === "ambiguous" ? (
-        <div className="mt-4">
-          <p className="text-sm text-ink">{result.message}</p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {(result.candidates ?? result.shipment?.carrier.candidates ?? []).map((candidate) => (
-              <button
-                key={candidate.id}
-                type="button"
-                onClick={() => void lookup(number, candidate.id)}
-                className="rounded-full border border-line px-3 py-1.5 text-sm text-ink"
-              >
-                {candidate.name}
-              </button>
-            ))}
-          </div>
-        </div>
-      ) : null}
-
-      {result && !result.found && result.state !== "pending" && result.state !== "ambiguous" ? (
+      {result && !result.found && result.state !== "pending" ? (
         <p data-testid="track-empty" role="status" className="mt-4 text-sm text-ink">
           {result.message}
         </p>
       ) : null}
 
-      {shipment ? (
+      {result?.state === "multiple" ? (
+        <p className="mt-4 text-sm text-ink">{result.message}</p>
+      ) : null}
+
+      {cards.map((card) => (
+        <ResultCard key={`${card.trackingNumber}-${card.carrier.id ?? card.carrier.name}`} shipment={card} onRefresh={onRefresh} refreshing={refreshing} />
+      ))}
+    </div>
+  );
+}
+
+function ResultCard({
+  shipment,
+  onRefresh,
+  refreshing,
+}: {
+  shipment: PublicShipment;
+  onRefresh: () => void;
+  refreshing: boolean;
+}) {
+  const events = [...shipment.events].sort((a, b) => {
+    const left = a.time ? Date.parse(a.time) : Number.NaN;
+    const right = b.time ? Date.parse(b.time) : Number.NaN;
+    if (Number.isFinite(left) && Number.isFinite(right) && left !== right) return right - left;
+    return 0;
+  });
+  return (
         <section className="mt-6 space-y-4" data-testid="track-result">
           <div className="rounded-[1.75rem] border border-line bg-paper-elevated p-5 sm:p-6">
             <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">Status</p>
@@ -312,7 +321,5 @@ export function TrackLookup() {
             )}
           </div>
         </section>
-      ) : null}
-    </div>
   );
 }

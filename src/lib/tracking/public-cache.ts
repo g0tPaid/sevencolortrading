@@ -8,7 +8,7 @@ import { MSG } from "@/lib/tracking/messages";
 import type { PublicShipment } from "@/lib/tracking/public-view";
 import { liveScraperClient, scraperField, type ScraperClient } from "@/lib/tracking/scraper-client";
 import { eventDescription, eventTime, interpretDetection, mapStage, shipmentStatusFromResult } from "@/lib/tracking/status";
-import { consumeRateLimit, countAdminDue, getSettings } from "@/lib/tracking/store";
+import { consumeRateLimit, countAdminDue, getSettings, writeProviderLog } from "@/lib/tracking/store";
 import {
   ScraperError,
   TrackingInputError,
@@ -55,6 +55,9 @@ type CacheRow = {
 const IP_LIMIT = 60;
 const IP_WINDOW_MS = 10 * 60 * 1000;
 const DAY_MS = 24 * 60 * 60 * 1000;
+/** Upstream `/v1/track` without a carrier settles one winner. We still ask each plausible adapter, capped, so a second real history is not dropped. */
+const MAX_CANDIDATES = 4;
+const FANOUT_CONCURRENCY = 2;
 
 function text(value: SqlValue | undefined): string | null {
   return typeof value === "string" ? value : null;
@@ -260,32 +263,17 @@ export async function publicLookup(trackingNumber: string, rateKey: string, now 
   }
 
   if (!carrierId) {
-    const readyRows = listCache(norm).filter((row) => fresh(row, now) && row.outcome === "ready");
-    if (readyRows.length > 1) {
-      const candidates = readyRows
-        .map((row) => {
-          const name = carrierName(row.carrierId);
-          return row.carrierId && name ? { id: row.carrierId, name } : null;
-        })
-        .filter((item): item is { id: string; name: string } => item !== null);
-      return {
-        status: 200,
-        body: {
-          ok: true as const,
-          state: "ambiguous" as const,
-          found: false,
-          message: MSG.selectCarrier,
-          shipment: null,
-          candidates,
-        },
-      };
-    }
+    const several = historiesResponse(norm, now);
+    if (several) return several;
   }
 
   const cached = carrierId ? findCache(norm, carrierId) : pickCached(norm, now);
-  if (cached && fresh(cached, now) && cached.outcome !== "pending") {
+  if (cached && fresh(cached, now) && cached.outcome !== "pending" && cached.outcome !== "ambiguous") {
     touchInterest(cached.id, now);
     return response(cached, cached.outcome, cached.message);
+  }
+  if (cached?.outcome === "ambiguous" && jobOpen(cached.id)) {
+    return response(cached, "pending", MSG.checkingCarriers);
   }
   if (cached && cached.outcome === "pending" && jobOpen(cached.id)) {
     return response(cached, "pending", MSG.checking);
@@ -299,7 +287,8 @@ export async function publicLookup(trackingNumber: string, rateKey: string, now 
   if (num(getDb().prepare("SELECT COUNT(*) AS n FROM public_track_cache").get()?.n) >= settings.publicMaxRows) {
     return { status: 429, body: { ok: false as const, error: MSG.cacheFull } };
   }
-  if (!consumeRateLimit("public-cold", settings.publicDailyCap, DAY_MS, now)) {
+  const upgradingAmbiguity = cached?.outcome === "ambiguous";
+  if (!upgradingAmbiguity && !consumeRateLimit("public-cold", settings.publicDailyCap, DAY_MS, now)) {
     return { status: 429, body: { ok: false as const, error: MSG.dailyLimit } };
   }
 
@@ -310,6 +299,10 @@ export async function publicLookup(trackingNumber: string, rateKey: string, now 
   }
   if (opts?.processNow) {
     await processPublicJobAsync(row.id, opts.client ?? liveScraperClient(), now);
+    const several = historiesResponse(norm, now);
+    if (several) return several;
+    const ready = listCache(norm).filter((item) => item.outcome === "ready" && item.carrierId);
+    if (ready.length === 1) return response(ready[0]!, "ready", ready[0]!.message);
     const done = getCache(row.id);
     if (done) return response(done, done.outcome === "pending" ? "pending" : done.outcome, done.message);
   }
@@ -511,6 +504,127 @@ function applyBody(row: CacheRow, body: TrackBody, now: Date): void {
   });
 }
 
+function historiesResponse(number: string, now: Date) {
+  const rows = listCache(number).filter((row) => fresh(row, now) && row.outcome === "ready" && row.carrierId);
+  if (rows.length < 2) return null;
+  return {
+    status: 200,
+    body: {
+      ok: true as const,
+      state: "multiple" as const,
+      found: true,
+      message: MSG.severalHistories,
+      shipment: null,
+      shipments: rows.map(view),
+      candidates: [] as Array<{ id: string; name: string }>,
+    },
+  };
+}
+
+function echoedTrackingNumber(body: TrackBody): string | null {
+  const bag = body as unknown as Record<string, unknown>;
+  const result = (body.result ?? {}) as unknown as Record<string, unknown>;
+  for (const value of [bag.trackingNumber, bag.tracking_number, bag.number, result.trackingNumber, result.tracking_number, result.number]) {
+    if (typeof value === "string" && value.trim()) return value;
+  }
+  return null;
+}
+
+function isGenuine(body: TrackBody, askedCarrier: string, number: string): boolean {
+  if (body.carrier !== askedCarrier || !isTrackableCarrier(body.carrier)) return false;
+  const echoed = echoedTrackingNumber(body);
+  if (echoed) {
+    try {
+      if (normalizeTrackingNumber(echoed) !== number) return false;
+    } catch {
+      return false;
+    }
+  }
+  return (body.result?.events ?? []).some((event) => eventDescription(event).length > 0);
+}
+
+function ensureCarrierRow(number: string, carrierId: string, now: Date): CacheRow {
+  const existing = findCache(number, carrierId);
+  if (existing) return existing;
+  const id = randomUUID();
+  const iso = now.toISOString();
+  getDb()
+    .prepare(
+      `INSERT INTO public_track_cache (
+        id, tracking_number, carrier_id, carrier_resolution, carrier_candidates, status, outcome, message,
+        interest_until, refresh_stopped, consecutive_failures, created_at, updated_at
+      ) VALUES (?, ?, ?, 'pattern', '[]', 'Unknown', 'pending', NULL, ?, 0, 0, ?, ?)`,
+    )
+    .run(id, number, carrierId, hoursFrom(now, getSettings().publicInterestHours), iso, iso);
+  return getCache(id)!;
+}
+
+async function fanoutCandidates(row: CacheRow, candidates: string[], client: ScraperClient, now: Date): Promise<void> {
+  const list = [...new Set(candidates.filter((id) => isTrackableCarrier(id)))].slice(0, MAX_CANDIDATES);
+  const configured = Number(process.env.TRACKING_PUBLIC_FANOUT_MS ?? "20000");
+  const budget = Number.isFinite(configured) ? Math.min(25_000, Math.max(1000, configured)) : 20_000;
+  const deadline = Date.now() + budget;
+  const started = Date.now();
+  const attempts: Array<{ carrier: string; outcome: string }> = [];
+  const matches: Array<{ carrier: string; body: TrackBody }> = [];
+  let cursor = 0;
+
+  async function worker() {
+    for (;;) {
+      if (deadline - Date.now() < 3000) return;
+      const index = cursor;
+      if (index >= list.length) return;
+      cursor += 1;
+      const carrier = list[index]!;
+      const remaining = Math.max(1000, Math.min(12_000, deadline - Date.now()));
+      try {
+        const body = await client.track({ number: row.trackingNumber, carrier, budgetMs: remaining });
+        if (isGenuine(body, carrier, row.trackingNumber)) {
+          matches.push({ carrier, body });
+          attempts.push({ carrier, outcome: "ready" });
+        } else {
+          attempts.push({ carrier, outcome: "empty" });
+        }
+      } catch (error) {
+        attempts.push({ carrier, outcome: error instanceof ScraperError ? error.kind : "unavailable" });
+      }
+    }
+  }
+
+  await Promise.all(Array.from({ length: Math.min(FANOUT_CONCURRENCY, list.length) }, () => worker()));
+  for (let index = cursor; index < list.length; index += 1) {
+    attempts.push({ carrier: list[index]!, outcome: "timeout" });
+  }
+  writeProviderLog({
+    shipmentId: null,
+    carrierId: null,
+    outcome: "fanout",
+    httpStatus: null,
+    durationMs: Date.now() - started,
+    errorKind: `attempts:${attempts.length}`,
+    now,
+  });
+  for (const match of matches) {
+    const stored = ensureCarrierRow(row.trackingNumber, match.carrier, now);
+    applyBody({ ...stored, carrierId: match.carrier }, match.body, now);
+  }
+  if (matches.length > 0) {
+    getDb().prepare("DELETE FROM public_track_cache WHERE id = ?").run(row.id);
+    return;
+  }
+  const timedOut = attempts.length > 0 && attempts.every((item) => item.outcome === "timeout" || item.outcome === "budget" || item.outcome === "transport");
+  saveOutcome(row.id, now, {
+    outcome: timedOut ? "timeout" : "not_found",
+    message: timedOut ? MSG.timedOutSearch : MSG.noHistory,
+    attempt_log: JSON.stringify(attempts),
+    carrier_candidates: JSON.stringify(list),
+    carrier_resolution: "unresolved",
+    fetched_at: now.toISOString(),
+    fresh_until: hoursFrom(now, timedOut ? 0.25 : 1),
+    refresh_stopped: 0,
+  });
+}
+
 export async function processPublicJobAsync(cacheId: string, client: ScraperClient, now: Date): Promise<void> {
   const initial = getCache(cacheId);
   if (!initial) {
@@ -534,13 +648,7 @@ export async function processPublicJobAsync(cacheId: string, client: ScraperClie
       const decision = interpretDetection(detected);
       saveOutcome(initial.id, now, { carrier_candidates: JSON.stringify(decision.candidates) });
       if (decision.kind === "ambiguous") {
-        saveOutcome(initial.id, now, {
-          outcome: "ambiguous",
-          carrier_resolution: "ambiguous",
-          message: MSG.selectCarrier,
-          fetched_at: now.toISOString(),
-          fresh_until: hoursFrom(now, 24),
-        });
+        await fanoutCandidates(initial, decision.candidates, client, now);
         return;
       }
       if (decision.kind !== "unique") {
