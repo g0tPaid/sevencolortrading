@@ -1,3 +1,4 @@
+import { extractGivenName } from "@/lib/tracking/greeting";
 import { MSG } from "@/lib/tracking/messages";
 import { consumeRateLimit, writeProviderLog } from "@/lib/tracking/store";
 import { normalizeTrackingNumber } from "@/lib/tracking/validate";
@@ -11,7 +12,7 @@ import { normalizeTrackingNumber } from "@/lib/tracking/validate";
  */
 export const FORWARDER_SOURCE_URL = "http://43.138.192.64:8082/trackIndex.htm";
 export const FORWARDER_CARRIER_ID = "hualei-forwarder";
-export const FORWARDER_PROVIDER_VERSION = 2;
+export const FORWARDER_PROVIDER_VERSION = 3;
 export const FORWARDER_REQUEST_LIMIT = 20;
 export const FORWARDER_WINDOW_MS = 10 * 60 * 1000;
 
@@ -33,6 +34,7 @@ export type ForwarderDocument =
       pieces: string | null;
       destination: string | null;
       status: string;
+      givenName: string | null;
       events: ForwarderEvent[];
     }
   | { kind: "not_found" }
@@ -180,11 +182,13 @@ function parseBlock(block: string, number: string): ForwarderDocument {
   const values = valueUl?.map((item) => item.text) ?? [];
   const fields = new Map<string, string>();
   const blocked = new Set<string>();
+  let givenName: string | null = null;
   for (let index = 0; index < Math.min(labels.length, values.length); index += 1) {
     const label = labels[index] ?? "";
     const value = values[index] ?? "";
     if (!label) continue;
     if (DROPPED_LABELS.has(label)) {
+      if (label === "收件人") givenName = extractGivenName(value);
       if (value) blocked.add(value);
       continue;
     }
@@ -231,6 +235,7 @@ function parseBlock(block: string, number: string): ForwarderDocument {
     pieces,
     destination,
     status,
+    givenName,
     events,
   };
 }

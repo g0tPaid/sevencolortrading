@@ -55,6 +55,13 @@ export function applyMigrations(db: DatabaseSync): void {
       new Date().toISOString(),
     );
   }
+  const greeting = db.prepare("SELECT id FROM schema_migrations WHERE id = '005_greeting_name'").get();
+  if (!greeting) {
+    db.exec(migrationSql("005_greeting_name.sql"));
+    db.prepare("INSERT INTO schema_migrations (id, applied_at) VALUES ('005_greeting_name', ?)").run(
+      new Date().toISOString(),
+    );
+  }
 }
 
 export function openDatabase(file = defaultTrackingDbPath()): DatabaseSync {
