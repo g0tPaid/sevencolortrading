@@ -41,6 +41,13 @@ export function applyMigrations(db: DatabaseSync): void {
       new Date().toISOString(),
     );
   }
+  const attempts = db.prepare("SELECT id FROM schema_migrations WHERE id = '003_attempt_log'").get();
+  if (!attempts) {
+    db.exec(migrationSql("003_attempt_log.sql"));
+    db.prepare("INSERT INTO schema_migrations (id, applied_at) VALUES ('003_attempt_log', ?)").run(
+      new Date().toISOString(),
+    );
+  }
 }
 
 export function openDatabase(file = defaultTrackingDbPath()): DatabaseSync {
