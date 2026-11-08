@@ -94,8 +94,9 @@ export function TrackPromo() {
               <span className="text-[#E31C23]">.center</span>
             </span>
           </p>
-          <p className="mt-3 max-w-[16ch] font-display text-[2rem] font-semibold leading-[0.98] tracking-tight text-ink sm:max-w-none sm:text-[2.45rem]">
+          <p className="track-promo-headline mt-3 max-w-[16ch] font-display text-[2rem] font-semibold leading-[0.98] tracking-tight text-ink sm:max-w-none sm:text-[2.45rem]">
             {PROMO_HEADLINE}
+            <span className="track-promo-rule" aria-hidden />
           </p>
           <p className="mt-2 text-[15px] text-ink-soft">
             {PROMO_BRIDGE}
@@ -184,6 +185,20 @@ function promoCss(): string {
       filter: drop-shadow(0 10px 12px rgba(29, 29, 31, 0.16));
     }
     .track-promo-plane-art { display: block; width: 132px; height: auto; }
+    .track-promo-rule {
+      display: block;
+      width: 4.75rem;
+      height: 3px;
+      margin-top: 0.7rem;
+      border-radius: 999px;
+      background: var(--accent);
+      transform-origin: left center;
+      animation: track-promo-rule 680ms cubic-bezier(0.16, 1, 0.3, 1) 180ms both;
+    }
+    @keyframes track-promo-rule {
+      from { transform: scaleX(0); }
+      to { transform: none; }
+    }
     @keyframes track-promo-enter {
       from { opacity: 0; transform: translateY(12px) scale(0.985); }
       to { opacity: 1; transform: none; }
@@ -217,7 +232,9 @@ function promoCss(): string {
       .track-promo-pop,
       .track-promo-spark,
       .track-promo-streak,
-      .track-promo-plane { animation: none; }
+      .track-promo-plane,
+      .track-promo-rule { animation: none; }
+      .track-promo-rule { transform: none; }
       .track-promo-pop,
       .track-promo-spark,
       .track-promo-streak { opacity: 1; }
