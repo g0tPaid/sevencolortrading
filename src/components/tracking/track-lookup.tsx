@@ -126,20 +126,16 @@ function Gloss({
   );
 }
 
-function RouteCraft({ kind }: { kind: "plane" | "truck" }) {
+function BrandedPlane() {
   return (
-    <g aria-hidden>
-      {kind === "plane" ? (
-        <path d="M-20 2h16l6-8h10l4 6v4h-12l-8 6h-16z" className="fill-paper stroke-ink" strokeWidth="1.6" />
-      ) : (
-        <>
-          <path d="M-22 -2h16l5 6h12v6h-33z" className="fill-paper stroke-ink" strokeWidth="1.6" />
-          <circle cx="-12" cy="6" r="2.4" className="fill-ink" />
-          <circle cx="6" cy="6" r="2.4" className="fill-ink" />
-        </>
-      )}
-      <image href="/seven-color-mark-clear.png" x={kind === "plane" ? -6 : -16} y={-8} width="14" height="14" />
-    </g>
+    <image
+      href="/tracking/sourcing-center-plane.png"
+      width="170"
+      height="90"
+      x="-85"
+      y="-45"
+      data-testid="track-plane"
+    />
   );
 }
 
@@ -174,19 +170,14 @@ function RouteMap({
         <text x={arc.to.x} y={Math.max(28, arc.to.y - 16)} textAnchor="middle" className="fill-ink" fontSize="22">
           {arc.destinationLabel}
         </text>
-        {phase !== "delivered" ? (
-          <g transform={`translate(${arc.from.x} ${arc.from.y + 28})`}>
-            <RouteCraft kind="truck" />
-          </g>
-        ) : null}
         {fly ? (
           <g className="track-plane-fly">
             <animateMotion dur="9s" repeatCount="indefinite" rotate="auto" path={arc.d} />
-            <RouteCraft kind="plane" />
+            <BrandedPlane />
           </g>
         ) : null}
         <g className={fly ? "track-plane-still" : undefined} transform={`translate(${parked.x} ${parked.y})`}>
-          <RouteCraft kind="plane" />
+          <BrandedPlane />
         </g>
       </svg>
     </figure>
