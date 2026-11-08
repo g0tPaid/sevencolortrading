@@ -1,0 +1,23 @@
+# Local/private scraper. The published port is loopback only.
+# Do not change 127.0.0.1 to 0.0.0.0 on a reachable host.
+# On Railway, omit this ports mapping, attach no public domain, and use the
+# private service hostname as TRACKING_SCRAPER_BASE_URL.
+services:
+  tracking-scraper:
+    build:
+      context: .
+    image: sourcing-tracking-scraper:0.1025.0-main.5567
+    environment:
+      HOST: 0.0.0.0
+      PORT: "8080"
+      SCRAPER_TOKEN: ${TRACKING_SCRAPER_TOKEN:-}
+      SCRAPER_PROVIDERS: ""
+      SCRAPER_DEMO_PAGE: "false"
+      SCRAPER_RATE_LIMIT: "30"
+      SCRAPER_MAX_CONCURRENT: "2"
+      SCRAPER_CACHE_MS: "600000"
+      SCRAPER_FAILURE_CACHE_MS: "60000"
+      SCRAPER_TRUSTED_PROXIES: "0"
+    ports:
+      - "127.0.0.1:8080:8080"
+    restart: unless-stopped

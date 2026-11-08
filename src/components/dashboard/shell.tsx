@@ -7,6 +7,7 @@ import {
   Factory,
   LayoutDashboard,
   LogOut,
+  Package,
   PackageSearch,
 } from "lucide-react";
 import { SourcingLogo } from "@/components/brand/sourcing-logo";
@@ -16,6 +17,7 @@ import { cn } from "@/lib/utils";
 const links = [
   { href: "/dashboard", label: "Page views", icon: LayoutDashboard },
   { href: "/dashboard/factory-applications", label: "Factory applications", icon: Factory },
+  { href: "/dashboard/shipments", label: "Shipments", icon: Package },
 ];
 
 export function DashboardShell({ children }: { children: React.ReactNode }) {

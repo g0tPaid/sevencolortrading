@@ -150,4 +150,23 @@ Records: `/data/inquiries.json` (same `DATA_DIR` / `ANALYTICS_DATA_DIR` pattern;
 
 Ops notify reuses `FACTORY_NOTIFY_WEBHOOK` / `FACTORY_NOTIFY_EMAIL` / `RESEND_API_KEY`. Best-effort; never fails the public form. Logs `[inquiries-notify]`.
 
+## Shipment tracking
+
+Public lookup: `/track`. Admin desk: `/dashboard/shipments` (the existing `/admin/:path*` redirect also opens it at `/admin/shipments`).
+
+Cached carrier checks run on a scheduler inside the Next.js server. They call a private [universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper) process. There is no paid tracking API. Full setup, migrations, routes, carrier evidence, and limits: `docs/shipment-tracking.md`.
+
+Node 22.13 or newer is required (`node:sqlite`). Tracking env names (no secrets in git):
+
+- `TRACKING_DB_PATH`
+- `TRACKING_SCRAPER_BASE_URL`
+- `TRACKING_SCRAPER_TOKEN`
+- `TRACKING_SCHEDULER`
+- `TRACKING_TICK_MS`
+- `TRACKING_BUDGET_MS`
+- `TRACKING_WORKER_ID`
+- `TRACKING_TRUSTED_PROXY_HOPS`
+
+`DATA_DIR` / `ANALYTICS_DATA_DIR` still select the data directory when `TRACKING_DB_PATH` is unset.
+
 
