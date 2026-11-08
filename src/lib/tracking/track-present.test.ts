@@ -5,6 +5,7 @@ import {
   PROMO_COPY,
   PROMO_HOLD_MS,
   PROMO_HREF,
+  promoMotionFitsHold,
   searchPresentation,
   shouldBringTimelineIntoView,
   timelineNeedsScroll,
@@ -23,6 +24,8 @@ test("a valid search holds the real result for three seconds behind the house li
   assert.equal(ready.promo, PROMO_COPY);
   assert.equal(ready.href, PROMO_HREF);
   assert.equal(ready.promo.includes("?"), false);
+  assert.equal(promoMotionFitsHold(), true);
+  assert.equal(promoMotionFitsHold(undefined, 2000), false);
 });
 
 test("invalid input does not start the promo", () => {
@@ -67,7 +70,14 @@ test("the route illustration keeps its honesty label and does not print Natural 
   assert.equal(page.includes("Natural Earth"), false);
   assert.equal(page.includes(">Route illustration<"), true);
   assert.equal(page.includes(PROMO_COPY), false);
-  assert.equal(page.includes("PROMO_COPY"), true);
+  const promo = readFileSync(new URL("../../components/tracking/track-promo.tsx", import.meta.url), "utf8");
+  assert.equal(promo.includes("PROMO_COPY"), true);
+  assert.equal(promo.includes("progressbar"), false);
+  assert.equal(promo.includes("aria-valuenow"), false);
+  assert.match(promo, /prefers-reduced-motion:\s*reduce/);
+  assert.match(promo, /sourcing-center-plane\.png/);
+  assert.equal(promo.includes("scaleX(-1)"), false);
+  assert.equal(promo.includes("rotate("), false);
   assert.equal(page.includes("scroll-mt-32"), true);
   assert.equal(page.includes("/tracking/sourcing-center-plane.png"), true);
   const land = readFileSync(new URL("../../components/home/world-land-path.ts", import.meta.url), "utf8");
