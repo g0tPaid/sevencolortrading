@@ -1,15 +1,14 @@
 import { requireAdmin, json, sameOrigin } from "@/lib/tracking/http";
+import { publicLookup as lookupPublicCache, type PublicLookupOptions } from "@/lib/tracking/public-cache";
 import { carrierName, CARRIERS, UNSUPPORTED_CARRIER_ID } from "@/lib/tracking/carriers";
 import { csvRecords, toCsv } from "@/lib/tracking/csv";
 import { MSG } from "@/lib/tracking/messages";
-import { toPublicShipment, type PublicShipment } from "@/lib/tracking/public-view";
 import { parseShipmentInput } from "@/lib/tracking/validate";
 import {
   consumeRateLimit,
   deleteShipment,
   enqueueRefresh,
   findByTracking,
-  listByTracking,
   getSettings,
   getShipment,
   insertShipment,
@@ -184,90 +183,17 @@ export function writeSettings(body: Record<string, unknown>, now = new Date()): 
   return saveSettings(validateSettings(raw), now);
 }
 
-export function publicLookup(trackingNumber: string, rateKey: string, now = new Date()): {
-  status: number;
-  body: { ok: boolean; found?: boolean; error?: string; shipment?: PublicShipment; message?: string | null };
-} {
-  if (!consumeRateLimit(`lookup:${rateKey}`, 30, 10 * 60 * 1000, now)) {
-    return { status: 429, body: { ok: false, error: MSG.tooMany } };
-  }
-  let norm: string;
-  try {
-    norm = normalizeTrackingNumber(trackingNumber);
-  } catch (error) {
-    const message = error instanceof TrackingInputError ? error.message : MSG.generic;
-    return { status: 400, body: { ok: false, error: message } };
-  }
-  const matches = listByTracking(norm);
-  if (matches.length === 0) return { status: 200, body: { ok: true, found: false, message: MSG.notRegistered } };
-  if (matches.length > 1) {
-    return {
-      status: 200,
-      body: {
-        ok: true,
-        found: true,
-        message: MSG.ambiguous,
-        shipment: {
-          trackingNumber: norm,
-          carrier: {
-            id: null,
-            name: null,
-            resolution: "ambiguous",
-            candidates: matches
-              .map((item) => {
-                const name = carrierName(item.carrierId);
-                return item.carrierId && name ? { id: item.carrierId, name } : null;
-              })
-              .filter((item): item is { id: string; name: string } => item !== null),
-          },
-          status: "Unknown",
-          statusDetail: null,
-          origin: null,
-          destination: null,
-          originCountryCode: null,
-          destinationCountryCode: null,
-          eta: null,
-          lastUpdated: null,
-          events: [],
-          message: MSG.ambiguous,
-        },
-      },
-    };
-  }
-  const shipment = matches[0]!;
-  return {
-    status: 200,
-    body: { ok: true, found: true, shipment: toPublicShipment(shipment, listEvents(shipment.id)) },
-  };
+export async function publicLookup(
+  trackingNumber: string,
+  rateKey: string,
+  now = new Date(),
+  opts?: PublicLookupOptions,
+) {
+  return lookupPublicCache(trackingNumber, rateKey, now, opts);
 }
 
-export function publicRefresh(trackingNumber: string, rateKey: string, now = new Date()) {
-  if (!consumeRateLimit(`refresh:${rateKey}`, 10, 60 * 60 * 1000, now)) {
-    return { status: 429, body: { ok: false, error: MSG.tooMany } };
-  }
-  let norm: string;
-  try {
-    norm = normalizeTrackingNumber(trackingNumber);
-  } catch (error) {
-    const message = error instanceof TrackingInputError ? error.message : MSG.generic;
-    return { status: 400, body: { ok: false, error: message } };
-  }
-  const matches = listByTracking(norm);
-  if (matches.length > 1) {
-    return { status: 200, body: { ok: true, found: true, refresh: "stopped", message: MSG.ambiguous } };
-  }
-  const shipment = matches[0];
-  if (!shipment) return { status: 200, body: { ok: true, found: false, message: MSG.notRegistered } };
-  const queued = queueIfDue(shipment, "public", now, getSettings().publicRefreshCooldownMinutes);
-  return {
-    status: 200,
-    body: {
-      ok: true,
-      found: true,
-      refresh: queued,
-      shipment: toPublicShipment(getShipment(shipment.id) ?? shipment, listEvents(shipment.id)),
-    },
-  };
+export async function publicRefresh(trackingNumber: string, rateKey: string, now = new Date(), opts?: PublicLookupOptions) {
+  return lookupPublicCache(trackingNumber, rateKey, now, opts);
 }
 
 function queueIfDue(shipment: Shipment, requestedBy: string, now: Date, cooldownMinutes: number): QueueResult | "not_due" {

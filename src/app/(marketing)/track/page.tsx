@@ -6,7 +6,7 @@ import { routeMetadata } from "@/lib/seo";
 export const metadata: Metadata = routeMetadata({
   title: "Track a Sourcing Center Shipment",
   description:
-    "Track a shipment registered with Sourcing Center. See status, carrier wording, origin, destination, and the timeline from the last scheduled check.",
+    "Search a tracking number. Supported carriers can return status and events. Not every carrier worldwide is covered, and unsupported numbers are reported as such.",
   path: "/track",
 });
 

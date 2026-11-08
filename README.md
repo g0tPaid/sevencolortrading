@@ -152,7 +152,7 @@ Ops notify reuses `FACTORY_NOTIFY_WEBHOOK` / `FACTORY_NOTIFY_EMAIL` / `RESEND_AP
 
 ## Shipment tracking
 
-Public lookup: `/track`. Admin desk: `/dashboard/shipments` (the existing `/admin/:path*` redirect also opens it at `/admin/shipments`).
+Public lookup: `/track`. Anyone can search a tracking number. Results come from the supported-carrier list when a check succeeds, not from an admin registration and not from every carrier worldwide. Admin desk: `/dashboard/shipments` (the existing `/admin/:path*` redirect also opens it at `/admin/shipments`).
 
 Cached carrier checks run on a scheduler inside the Next.js server. They call a private [universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper) process. There is no paid tracking API. Full setup, migrations, routes, carrier evidence, and limits: `docs/shipment-tracking.md`.
 
