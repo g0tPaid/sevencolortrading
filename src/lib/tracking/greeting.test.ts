@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { recipientDisplayName, shipmentPhase, trackingGreeting } from "@/lib/tracking/greeting";
 import { parseForwarderHtml } from "@/lib/tracking/forwarder-source";
-import { routeArc, routeTangentX } from "@/lib/tracking/route-map";
+import { pointOnRoute, routeArc, routeTangentX } from "@/lib/tracking/route-map";
 
 const NUMBER = "384423693978";
 
@@ -71,6 +71,13 @@ test("a route illustration needs two known countries and does not invent a stop"
   for (const t of [0, 0.25, 0.5, 0.75, 1]) {
     assert.ok(arc && routeTangentX(arc, t) < 0, `tangent at ${t}`);
   }
+  const start = arc && pointOnRoute(arc, 0);
+  const middle = arc && pointOnRoute(arc, 0.5);
+  const end = arc && pointOnRoute(arc, 1);
+  assert.ok(start && middle && end);
+  assert.ok(Math.abs(start.x - arc.from.x) < 0.2);
+  assert.ok(Math.abs(end.x - arc.to.x) < 0.2);
+  assert.ok(middle.x < start.x && middle.x > end.x);
   assert.equal(routeArc("US", "CN")?.facesLeft, false);
   assert.equal(routeArc("CN", null), null);
   assert.equal(routeArc("CN", "CN"), null);

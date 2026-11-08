@@ -36,6 +36,16 @@ export function routeArc(origin: string | null | undefined, destination: string 
   };
 }
 
+export function pointOnRoute(arc: RouteArc, t: number): { x: number; y: number } {
+  const clamped = Math.min(1, Math.max(0, t));
+  const u = 1 - clamped;
+  const { from, control, to } = arc;
+  return {
+    x: u * u * from.x + 2 * u * clamped * control.x + clamped * clamped * to.x,
+    y: u * u * from.y + 2 * u * clamped * control.y + clamped * clamped * to.y,
+  };
+}
+
 /** Horizontal travel of the curve. Negative means the nose should point left, still upright. */
 export function routeTangentX(arc: RouteArc, t: number): number {
   const clamped = Math.min(1, Math.max(0, t));
