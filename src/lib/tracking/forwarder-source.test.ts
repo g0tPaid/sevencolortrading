@@ -128,7 +128,7 @@ test("parses five source events without recipient data or a timezone", () => {
   assert.equal(parsed.reference, "REF123456");
   assert.equal(parsed.pieces, "1");
   assert.equal(parsed.destination, "US");
-  assert.equal(parsed.givenName, "Pat");
+  assert.equal(parsed.displayName, "Pat Example");
   assert.equal(parsed.events.length, 5);
   assert.deepEqual(
     parsed.events.map((event) => event.time),
@@ -139,7 +139,7 @@ test("parses five source events without recipient data or a timezone", () => {
   assert.equal(parsed.events[1]?.description, "货物离开操作中心");
   assert.equal(parsed.events[3]?.description, "货物电子信息已经收到");
   const encoded = JSON.stringify(parsed);
-  for (const secret of ["Pat Example", "12 Secret Road", "13800138000", "person@example.com", "美国联邦-小货价", "<"]) {
+  for (const secret of ["12 Secret Road", "13800138000", "person@example.com", "美国联邦-小货价", "<"]) {
     assert.equal(encoded.includes(secret), false, secret);
   }
   assert.equal(encoded.includes("Z"), false);
@@ -185,7 +185,7 @@ test("decodes a gb18030 page from the declared charset", () => {
   if (parsed.kind !== "ready") return;
   assert.equal(parsed.events[0]?.description, "到达收货点");
   assert.equal(parsed.events[0]?.time, "2026-11-03 14:01:16");
-  assert.equal(JSON.stringify(parsed).includes("Pat Example"), false);
+  assert.equal(parsed.displayName, "Pat Example");
 });
 
 test("a forwarder history is preferred and a stale carrier miss is not returned", async () => {
@@ -225,10 +225,10 @@ test("a forwarder history is preferred and a stale carrier miss is not returned"
   assert.equal(result.shipment?.eta, null);
   assert.equal(result.shipment?.origin, "China");
   assert.equal(result.shipment?.originCountryCode, "CN");
-  assert.equal(result.shipment?.greeting, "Pat, your shipment is on its way to you. Cheers!");
+  assert.equal(result.shipment?.greeting, "Pat Example, your shipment is on its way to you. Cheers!");
   const stored = JSON.stringify(getDb().prepare("SELECT * FROM public_track_cache").all());
-  assert.equal(stored.includes("Example"), false);
-  assert.equal(stored.includes("Pat Example"), false);
+  assert.equal(stored.includes("12 Secret Road"), false);
+  assert.equal(stored.includes("13800138000"), false);
   assert.equal(result.shipment?.timeNote, MSG.forwarderTimeNote);
   assert.equal(result.shipment?.events.some((event) => event.time?.endsWith("Z")), false);
   assert.equal(trackCalls.length, 0);
@@ -247,7 +247,7 @@ test("a forwarder history is preferred and a stale carrier miss is not returned"
   const encoded = JSON.stringify(again);
   assert.equal(encoded.includes("Hidden Customer"), false);
   assert.equal(encoded.includes("secret note"), false);
-  assert.equal(encoded.includes("Pat Example"), false);
+  assert.equal(again.shipment?.greeting, "Pat Example, your shipment is on its way to you. Cheers!");
 });
 
 test("an empty forwarder waybill falls through to the carrier, and parallel lookups share one read", async () => {

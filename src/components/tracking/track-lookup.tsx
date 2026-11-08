@@ -2,8 +2,10 @@
 
 import { FormEvent, useEffect, useState } from "react";
 import { countryLabel } from "@/lib/analytics-geo";
-import { SevenColorMark } from "@/components/brand/seven-color-mark";
+import { WORLD_LAND_PATH } from "@/components/home/world-land-path";
+import { shipmentPhase, type ShipmentPhase } from "@/lib/tracking/greeting";
 import { newestFirst } from "@/lib/tracking/public-view";
+import { routeArc } from "@/lib/tracking/route-map";
 import { glossTrackingText, hasChinese } from "@/lib/tracking/zh-en";
 
 type PublicEvent = {
@@ -124,37 +126,70 @@ function Gloss({
   );
 }
 
-function MarkedCraft({ kind }: { kind: "plane" | "truck" }) {
-  const plane = kind === "plane";
+function RouteCraft({ kind }: { kind: "plane" | "truck" }) {
   return (
-    <span className={`track-craft track-craft-${kind} relative inline-block h-12 w-20 text-ink`}>
-      <svg viewBox="0 0 80 48" className="h-full w-full" fill="none" aria-hidden>
-        {plane ? (
-          <>
-            <path d="M6 28h34l10-8h16l6 6v4H58L46 36H18L6 28z" stroke="currentColor" strokeWidth="1.6" />
-            <path d="M28 28V18M40 27l8 9" stroke="currentColor" strokeWidth="1.6" />
-          </>
-        ) : (
-          <>
-            <path d="M8 30V20h28l8 8h20v8H8z" stroke="currentColor" strokeWidth="1.6" />
-            <circle cx="22" cy="36" r="4" stroke="currentColor" strokeWidth="1.6" />
-            <circle cx="58" cy="36" r="4" stroke="currentColor" strokeWidth="1.6" />
-          </>
-        )}
-      </svg>
-      <span className={plane ? "absolute left-7 top-3" : "absolute left-3 top-2"}>
-        <SevenColorMark size={16} title="" />
-      </span>
-    </span>
+    <g aria-hidden>
+      {kind === "plane" ? (
+        <path d="M-20 2h16l6-8h10l4 6v4h-12l-8 6h-16z" className="fill-paper stroke-ink" strokeWidth="1.6" />
+      ) : (
+        <>
+          <path d="M-22 -2h16l5 6h12v6h-33z" className="fill-paper stroke-ink" strokeWidth="1.6" />
+          <circle cx="-12" cy="6" r="2.4" className="fill-ink" />
+          <circle cx="6" cy="6" r="2.4" className="fill-ink" />
+        </>
+      )}
+      <image href="/seven-color-mark-clear.png" x={kind === "plane" ? -6 : -16} y={-8} width="14" height="14" />
+    </g>
   );
 }
 
-function RouteIllustration() {
+function RouteMap({
+  origin,
+  destination,
+  phase,
+}: {
+  origin: string;
+  destination: string;
+  phase: ShipmentPhase;
+}) {
+  const arc = routeArc(origin, destination);
+  if (!arc) return null;
+  const parked = phase === "delivered" ? arc.to : arc.from;
+  const fly = phase === "in_transit";
   return (
-    <div className="flex items-center gap-3" aria-hidden>
-      <MarkedCraft kind="plane" />
-      <MarkedCraft kind="truck" />
-    </div>
+    <figure className="mt-4" data-testid="track-route" data-route-motion={fly ? "fly" : "still"}>
+      <figcaption className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
+        Route illustration
+        <span className="ml-2 font-normal normal-case tracking-normal">Natural Earth</span>
+      </figcaption>
+      <svg viewBox="0 0 1000 500" className="mt-2 h-auto w-full" role="img" aria-label={`Route illustration from ${arc.originLabel} to ${arc.destinationLabel}`}>
+        <rect width="1000" height="500" className="fill-canvas" />
+        <path d={WORLD_LAND_PATH} className="fill-ink/15" />
+        <path d={arc.d} fill="none" className="stroke-accent" strokeWidth="4" strokeLinecap="round" />
+        <circle cx={arc.from.x} cy={arc.from.y} r="7" className="fill-ink" />
+        <circle cx={arc.to.x} cy={arc.to.y} r="7" className="fill-accent" />
+        <text x={arc.from.x} y={Math.max(28, arc.from.y - 16)} textAnchor="middle" className="fill-ink" fontSize="22">
+          {arc.originLabel}
+        </text>
+        <text x={arc.to.x} y={Math.max(28, arc.to.y - 16)} textAnchor="middle" className="fill-ink" fontSize="22">
+          {arc.destinationLabel}
+        </text>
+        {phase !== "delivered" ? (
+          <g transform={`translate(${arc.from.x} ${arc.from.y + 28})`}>
+            <RouteCraft kind="truck" />
+          </g>
+        ) : null}
+        {fly ? (
+          <g className="track-plane-fly">
+            <animateMotion dur="9s" repeatCount="indefinite" rotate="auto" path={arc.d} />
+            <RouteCraft kind="plane" />
+          </g>
+        ) : null}
+        <g className={fly ? "track-plane-still" : undefined} transform={`translate(${parked.x} ${parked.y})`}>
+          <RouteCraft kind="plane" />
+        </g>
+      </svg>
+    </figure>
   );
 }
 
@@ -375,9 +410,13 @@ function ResultCard({
                 {shipment.eta}
               </p>
             ) : null}
-            <div className="mt-4">
-              <RouteIllustration />
-            </div>
+            {shipment.originCountryCode && shipment.destinationCountryCode ? (
+              <RouteMap
+                origin={shipment.originCountryCode}
+                destination={shipment.destinationCountryCode}
+                phase={shipmentPhase(shipment.status)}
+              />
+            ) : null}
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2">
@@ -422,14 +461,11 @@ function ResultCard({
             </button>
           </div>
           <style>{`
-            .track-craft { animation: track-craft-drift 4.8s ease-in-out infinite; }
-            .track-craft-truck { animation-delay: -1.6s; }
-            @keyframes track-craft-drift {
-              0%, 100% { transform: translateY(0); }
-              50% { transform: translateY(-3px); }
-            }
             @media (prefers-reduced-motion: reduce) {
-              .track-craft { animation: none; }
+              .track-plane-fly { display: none; }
+            }
+            @media (prefers-reduced-motion: no-preference) {
+              .track-plane-still { display: none; }
             }
           `}</style>
         </section>

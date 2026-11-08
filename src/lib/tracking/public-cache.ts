@@ -353,7 +353,7 @@ function rememberForwarderReady(number: string, now: Date, parsed: Extract<Forwa
     message: MSG.forwarderHistory,
     reference_code: parsed.reference,
     package_count: parsed.pieces,
-    greeting_name: parsed.givenName,
+    greeting_name: parsed.displayName,
     provider_version: FORWARDER_PROVIDER_VERSION,
     fetched_at: now.toISOString(),
     fresh_until: hoursFrom(now, 2),
