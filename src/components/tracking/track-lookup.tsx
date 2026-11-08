@@ -287,6 +287,9 @@ export function TrackLookup() {
 
   return (
     <div className="mx-auto max-w-xl">
+      <h1 data-testid="track-heading" className="mb-5 font-display text-3xl font-semibold tracking-tight text-ink sm:mb-6 sm:text-5xl">
+        Track Global Parcels
+      </h1>
       <form onSubmit={onSubmit} className="flex flex-col gap-3 sm:flex-row">
         <label htmlFor="tracking-number" className="sr-only">
           Tracking number
