@@ -197,6 +197,8 @@ Public lookup does not require an admin shipment. `POST /api/track` accepts any 
 
 The public cache is `public_track_cache` / `public_track_events`. It has no customer, order, or note columns. The same tracking number can exist on an admin shipment without that private data appearing in the public response.
 
+Before the carrier check, a public search reads one fixed forwarder page: `POST http://43.138.192.64:8082/trackIndex.htm` with form field `documentCode`. That is the action printed on the page. The same port over HTTPS fails TLS, and the server does not follow redirects or change protocol. The page is 华磊物流通 software for that forwarder, not a worldwide carrier list. A history from that page is shown in the existing result card and the carrier list is not asked. An explicit empty waybill falls through to the carrier check. A timeout, unreadable page, or verification challenge is reported and is not stored as “no shipment.” Recipient, phone, address, cookies, and page scripts are not returned. Event times are copied as printed, including times that have no timezone. The forwarder source allows 20 requests per 10 minutes for the whole site, one retry on timeout, a 2 hour cache for a history, and 30 minutes for an empty waybill. A cached carrier miss from before this source is ignored for that number until the forwarder page has been asked. Admin shipment rows are not deleted.
+
 Supported carriers are the allowlist in this document. A number that matches none of them returns an unsupported result. This is not a lookup for every carrier worldwide.
 
 Cold public lookups share a daily cap (`public_daily_cap`, default 2000, bounds 100–20000). Per-address requests are limited, outstanding public jobs are capped, and public work waits while the admin desk has more due shipments than its concurrency setting. Public rows refresh only while someone has looked them up recently (`public_interest_hours`, default 48) and then stop. Delivered public rows are not polled forever.
@@ -218,7 +220,7 @@ Admin routes use the existing `sc_admin_session` cookie. Middleware and the hand
 | GET | `/api/admin/shipments/export` | CSV download |
 | POST | `/api/admin/shipments/import` | `{ "csv": "..." }` or `text/csv` |
 
-There is no customer or order table. `customerRef`, `customerName`, and `orderNumber` are text on the shipment. Several shipments can share an order number. Status, ETA, and events are written only from a carrier payload or left unknown. Delivered and returned shipments stop. An admin change of tracking number or carrier clears a terminal status back to Unknown and queues a new check. It does not invent a delivered event.
+There is no customer or order table. `customerRef`, `customerName`, and `orderNumber` are text on the shipment. Several shipments can share an order number. Status, ETA, and events are written only from a carrier payload or the forwarder page above, or left unknown. Delivered and returned shipments stop. An admin change of tracking number or carrier clears a terminal status back to Unknown and queues a new check. It does not invent a delivered event.
 
 Carrier resolution values: `unresolved`, `ambiguous`, `pattern`, `confirmed`, `manual`, `unsupported`. `pattern` means one high-confidence candidate from `/v1/detect`. `confirmed` means `/v1/track` returned that same carrier. A low-confidence or multi-candidate detect is stored as ambiguous and is not tracked until a carrier is selected. The carrier field on a low-confidence detect is ignored.
 
