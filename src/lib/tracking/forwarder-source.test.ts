@@ -128,6 +128,7 @@ test("parses five source events without recipient data or a timezone", () => {
   assert.equal(parsed.reference, "REF123456");
   assert.equal(parsed.pieces, "1");
   assert.equal(parsed.destination, "US");
+  assert.equal(parsed.givenName, "Pat");
   assert.equal(parsed.events.length, 5);
   assert.deepEqual(
     parsed.events.map((event) => event.time),
@@ -224,6 +225,10 @@ test("a forwarder history is preferred and a stale carrier miss is not returned"
   assert.equal(result.shipment?.eta, null);
   assert.equal(result.shipment?.origin, "China");
   assert.equal(result.shipment?.originCountryCode, "CN");
+  assert.equal(result.shipment?.greeting, "Pat, your shipment is on its way to you. Cheers!");
+  const stored = JSON.stringify(getDb().prepare("SELECT * FROM public_track_cache").all());
+  assert.equal(stored.includes("Example"), false);
+  assert.equal(stored.includes("Pat Example"), false);
   assert.equal(result.shipment?.timeNote, MSG.forwarderTimeNote);
   assert.equal(result.shipment?.events.some((event) => event.time?.endsWith("Z")), false);
   assert.equal(trackCalls.length, 0);

@@ -31,6 +31,7 @@ export type PublicShipment = {
   reference: string | null;
   pieces: string | null;
   timeNote: string | null;
+  greeting: string | null;
 };
 
 /** Newest source time first. Comparison uses the printed text, so a timezone is not applied. */
@@ -85,5 +86,6 @@ export function toPublicShipment(shipment: Shipment, events: ShipmentEvent[]): P
     reference: null,
     pieces: null,
     timeNote: null,
+    greeting: null,
   };
 }

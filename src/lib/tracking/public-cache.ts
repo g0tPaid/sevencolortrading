@@ -4,6 +4,7 @@ import { COUNTRY_CENTROIDS } from "@/lib/analytics-geo";
 import { carrierName, isTrackableCarrier } from "@/lib/tracking/carriers";
 import { getDb, withImmediate } from "@/lib/tracking/db";
 import { eventFingerprint } from "@/lib/tracking/fingerprint";
+import { trackingGreeting } from "@/lib/tracking/greeting";
 import { MSG } from "@/lib/tracking/messages";
 import type { PublicShipment } from "@/lib/tracking/public-view";
 import {
@@ -60,6 +61,7 @@ type CacheRow = {
   providerVersion: number | null;
   referenceCode: string | null;
   packageCount: string | null;
+  greetingName: string | null;
 };
 
 const IP_LIMIT = 60;
@@ -113,6 +115,7 @@ function mapRow(row: Record<string, SqlValue>): CacheRow {
     providerVersion: row.provider_version == null ? null : num(row.provider_version),
     referenceCode: text(row.reference_code),
     packageCount: text(row.package_count),
+    greetingName: text(row.greeting_name),
   };
 }
 
@@ -164,6 +167,7 @@ function view(row: CacheRow): PublicShipment {
     reference: row.referenceCode,
     pieces: row.packageCount,
     timeNote: forwarder ? MSG.forwarderTimeNote : null,
+    greeting: forwarder ? trackingGreeting(row.status, row.greetingName) : null,
   };
 }
 
@@ -324,6 +328,7 @@ function rememberForwarder(
     status_detail: null,
     reference_code: null,
     package_count: null,
+    greeting_name: null,
     provider_version: FORWARDER_PROVIDER_VERSION,
     fetched_at: now.toISOString(),
     fresh_until: hoursFrom(now, fields.hours),
@@ -348,6 +353,7 @@ function rememberForwarderReady(number: string, now: Date, parsed: Extract<Forwa
     message: MSG.forwarderHistory,
     reference_code: parsed.reference,
     package_count: parsed.pieces,
+    greeting_name: parsed.givenName,
     provider_version: FORWARDER_PROVIDER_VERSION,
     fetched_at: now.toISOString(),
     fresh_until: hoursFrom(now, 2),

@@ -34,6 +34,7 @@ type PublicShipment = {
   reference?: string | null;
   pieces?: string | null;
   timeNote?: string | null;
+  greeting?: string | null;
 };
 
 type LookupResponse = {
@@ -353,7 +354,12 @@ function ResultCard({
   return (
         <section className="mt-6 space-y-4" data-testid="track-result">
           <div className="rounded-[1.75rem] border border-line bg-paper-elevated p-5 sm:p-6">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">Status</p>
+            {shipment.greeting ? (
+              <p data-testid="track-greeting" className="text-lg font-medium leading-snug text-ink">
+                {shipment.greeting}
+              </p>
+            ) : null}
+            <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">Status</p>
             <div className="mt-2">
               <Gloss text={shipment.status} prominent testId="track-status" />
             </div>
