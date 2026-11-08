@@ -222,6 +222,8 @@ test("a forwarder history is preferred and a stale carrier miss is not returned"
   assert.equal(result.shipment?.status, "转运中11/8号航班/");
   assert.equal(result.shipment?.events.length, 5);
   assert.equal(result.shipment?.eta, null);
+  assert.equal(result.shipment?.origin, "China");
+  assert.equal(result.shipment?.originCountryCode, "CN");
   assert.equal(result.shipment?.timeNote, MSG.forwarderTimeNote);
   assert.equal(result.shipment?.events.some((event) => event.time?.endsWith("Z")), false);
   assert.equal(trackCalls.length, 0);
