@@ -440,7 +440,6 @@ function ResultCard({
                 ))}
               </ol>
             )}
-            {shipment.message ? <p className="mt-5 text-xs leading-relaxed text-muted">{shipment.message}</p> : null}
             <button
               type="button"
               data-testid="track-refresh"
