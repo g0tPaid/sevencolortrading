@@ -1,11 +1,21 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState, type Ref } from "react";
 import { countryLabel } from "@/lib/analytics-geo";
 import { WORLD_LAND_PATH } from "@/components/home/world-land-path";
 import { shipmentPhase, type ShipmentPhase } from "@/lib/tracking/greeting";
 import { newestFirst } from "@/lib/tracking/public-view";
 import { pointOnRoute, routeArc } from "@/lib/tracking/route-map";
+import {
+  PROMO_COPY,
+  PROMO_HOST,
+  PROMO_HREF,
+  PROMO_LEAD,
+  searchPresentation,
+  shouldBringTimelineIntoView,
+  timelineNeedsScroll,
+  timelineScrollBehavior,
+} from "@/lib/tracking/track-present";
 import { glossTrackingText, hasChinese } from "@/lib/tracking/zh-en";
 
 type PublicEvent = {
@@ -202,13 +212,12 @@ function RouteMap({
   const point = pointOnRoute(arc, progress);
   return (
     <figure
-      className="mt-5 overflow-hidden rounded-[1.5rem] border border-line bg-paper shadow-[0_16px_40px_-28px_rgba(16,16,16,0.55)]"
+      className="overflow-hidden rounded-[1.5rem] border border-line bg-paper shadow-[0_16px_40px_-28px_rgba(16,16,16,0.55)]"
       data-testid="track-route"
       data-route-motion={fly ? "fly" : "still"}
     >
-      <figcaption className="flex items-baseline justify-between gap-3 px-4 pb-2 pt-3.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted sm:px-5">
+      <figcaption className="px-4 pb-2 pt-3.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted sm:px-5">
         <span>Route illustration</span>
-        <span className="font-normal normal-case tracking-normal">Natural Earth</span>
       </figcaption>
       <div className="mx-3 mb-3 overflow-hidden rounded-2xl border border-line/80 bg-[#f4f1ec] sm:mx-4">
         <svg viewBox="0 0 1000 500" className="block h-auto w-full" role="img" aria-label={`Route illustration from ${arc.originLabel} to ${arc.destinationLabel}`}>
@@ -262,8 +271,30 @@ export function TrackLookup() {
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<LookupResponse | null>(null);
+  const [searchId, setSearchId] = useState(0);
+  const [holdId, setHoldId] = useState<number | null>(null);
+  const [announcement, setAnnouncement] = useState("");
+  const activeSearch = useRef(0);
+  const inFlight = useRef(false);
+  const submittedNumber = useRef("");
+  const holdTimer = useRef<number | null>(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const broughtFor = useRef<number | null>(null);
 
-  async function lookup(trackingNumber: string, carrierId?: string, silent = false) {
+  useEffect(() => {
+    return () => {
+      if (holdTimer.current != null) window.clearTimeout(holdTimer.current);
+    };
+  }, []);
+
+  function clearHold() {
+    if (holdTimer.current != null) {
+      window.clearTimeout(holdTimer.current);
+      holdTimer.current = null;
+    }
+  }
+
+  async function lookup(trackingNumber: string, carrierId: string | undefined, silent: boolean, requestId: number) {
     if (!silent) {
       setPending(true);
       setError(null);
@@ -275,33 +306,67 @@ export function TrackLookup() {
         body: JSON.stringify({ trackingNumber, carrierId }),
       });
       const data = (await response.json()) as LookupResponse;
+      if (activeSearch.current !== requestId) return;
       if (!response.ok || data.ok === false) {
         setResult(null);
         setError(data.error || "Tracking could not be loaded. Try again.");
         return;
       }
+      setError(null);
       setResult(data);
     } catch {
+      if (activeSearch.current !== requestId) return;
       setResult(null);
       setError("Tracking could not be loaded. Try again.");
     } finally {
-      if (!silent) setPending(false);
+      if (!silent && activeSearch.current === requestId) {
+        inFlight.current = false;
+        setPending(false);
+      }
     }
   }
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault();
-    if (pending || (result?.state === "pending" && !pollExhausted)) return;
+    if (inFlight.current) return;
+    const presentation = searchPresentation(number);
+    const requestId = activeSearch.current + 1;
+    activeSearch.current = requestId;
+    setSearchId(requestId);
+    setAnnouncement("");
     setPollExhausted(false);
-    await lookup(number);
+    clearHold();
+    if (presentation.kind === "invalid") {
+      setHoldId(null);
+      setResult(null);
+      setPending(false);
+      setError(presentation.message);
+      return;
+    }
+    submittedNumber.current = presentation.number;
+    inFlight.current = true;
+    setResult(null);
+    setError(null);
+    setHoldId(requestId);
+    holdTimer.current = window.setTimeout(() => {
+      holdTimer.current = null;
+      if (activeSearch.current !== requestId) return;
+      setHoldId((current) => (current === requestId ? null : current));
+    }, presentation.holdMs);
+    await lookup(presentation.number, undefined, false, requestId);
   }
 
-  const pollKey = result?.state === "pending" ? result.shipment?.trackingNumber ?? number : "";
+  const pollKey = result?.state === "pending" ? String(searchId) : "";
   useEffect(() => {
     if (!pollKey) return;
+    const requestId = Number(pollKey);
     let attempts = 0;
     const timer = setInterval(() => {
       attempts += 1;
+      if (activeSearch.current !== requestId) {
+        clearInterval(timer);
+        return;
+      }
       if (attempts > 15) {
         setPollExhausted(true);
         setResult((current) =>
@@ -313,10 +378,10 @@ export function TrackLookup() {
         return;
       }
       const carrierId = result?.shipment?.carrier.id ?? undefined;
-      void lookup(number, carrierId, true);
+      void lookup(submittedNumber.current, carrierId, true, requestId);
     }, 2000);
     return () => clearInterval(timer);
-    // Poll only while this search is pending. `lookup` closes over the current number.
+    // Poll only while this search is pending. The submitted number lives in a ref.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pollKey]);
 
@@ -343,7 +408,8 @@ export function TrackLookup() {
     }
   }
 
-  const showProgress = !pollExhausted && (pending || result?.state === "pending");
+  const holding = holdId !== null;
+  const showProgress = !holding && !pollExhausted && (pending || result?.state === "pending");
   const progressLabel =
     result?.shipment || result?.shipments?.length
       ? "A result is in. Still checking other possible carriers."
@@ -355,12 +421,39 @@ export function TrackLookup() {
       : shipment
         ? [shipment]
         : [];
+  const visibleCards = holding ? [] : cards;
+
+  useEffect(() => {
+    const node = timelineRef.current;
+    if (
+      !shouldBringTimelineIntoView({
+        holding,
+        hasTimeline: node != null,
+        searchId,
+        broughtForSearchId: broughtFor.current,
+      }) ||
+      !node
+    ) {
+      return;
+    }
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const top = node.getBoundingClientRect().top;
+    if (timelineNeedsScroll(top, window.innerHeight)) {
+      node.scrollIntoView({ behavior: timelineScrollBehavior(reduce), block: "start" });
+    }
+    if (document.activeElement?.id !== "tracking-number") node.focus({ preventScroll: true });
+    broughtFor.current = searchId;
+    setAnnouncement("Tracking timeline");
+  }, [holding, searchId, visibleCards.length]);
 
   return (
     <div className="mx-auto max-w-xl">
       <h1 data-testid="track-heading" className="mb-5 font-display text-3xl font-semibold tracking-tight text-ink sm:mb-6 sm:text-5xl">
         Track Global Parcels
       </h1>
+      <p className="sr-only" aria-live="polite" data-testid="track-live">
+        {announcement}
+      </p>
       <form onSubmit={onSubmit} className="flex flex-col gap-3 sm:flex-row">
         <label htmlFor="tracking-number" className="sr-only">
           Tracking number
@@ -378,33 +471,52 @@ export function TrackLookup() {
         <button
           type="submit"
           data-testid="track-submit"
-          disabled={showProgress}
-          aria-busy={showProgress}
+          disabled={pending}
+          aria-busy={pending || holding}
           className="rounded-2xl bg-ink px-5 py-3 text-sm font-medium text-paper disabled:opacity-60"
         >
           Search
         </button>
       </form>
+      {holding ? (
+        <p
+          data-testid="track-promo"
+          data-promo={PROMO_COPY}
+          role="status"
+          className="mt-4 rounded-2xl border border-line bg-paper px-4 py-2.5 text-sm leading-snug text-ink"
+        >
+          {PROMO_LEAD}
+          <a href={PROMO_HREF} className="font-medium underline decoration-accent/40 underline-offset-2">
+            {PROMO_HOST}
+          </a>
+        </p>
+      ) : null}
       {showProgress ? <TrackingProgress label={progressLabel} /> : null}
 
-      {error ? (
+      {!holding && error ? (
         <p role="alert" className="mt-4 rounded-2xl border border-line bg-paper-elevated px-4 py-3 text-sm text-ink">
           {error}
         </p>
       ) : null}
 
-      {result && !result.found && result.state !== "pending" ? (
+      {!holding && result && !result.found && result.state !== "pending" ? (
         <p data-testid="track-empty" role="status" className="mt-4 text-sm text-ink">
           {result.message}
         </p>
       ) : null}
 
-      {result?.state === "multiple" ? (
+      {!holding && result?.state === "multiple" ? (
         <p className="mt-4 text-sm text-ink">{result.message}</p>
       ) : null}
 
-      {cards.map((card) => (
-        <ResultCard key={`${card.trackingNumber}-${card.carrier.id ?? card.carrier.name}`} shipment={card} onRefresh={onRefresh} refreshing={refreshing || showProgress} />
+      {visibleCards.map((card, index) => (
+        <ResultCard
+          key={`${card.trackingNumber}-${card.carrier.id ?? card.carrier.name}`}
+          shipment={card}
+          onRefresh={onRefresh}
+          refreshing={refreshing || showProgress}
+          timelineRef={index === 0 ? timelineRef : undefined}
+        />
       ))}
     </div>
   );
@@ -414,87 +526,100 @@ function ResultCard({
   shipment,
   onRefresh,
   refreshing,
+  timelineRef,
 }: {
   shipment: PublicShipment;
   onRefresh: () => void;
   refreshing: boolean;
+  timelineRef?: Ref<HTMLDivElement>;
 }) {
   const events = newestFirst(shipment.events);
   const forwarder = shipment.carrier.resolution === "forwarder";
+  const headingId = timelineRef ? "track-timeline-heading" : undefined;
   return (
-        <section className="mt-6 space-y-4" data-testid="track-result">
-          <div className="rounded-[1.75rem] border border-line bg-paper-elevated p-5 sm:p-6">
-            {shipment.greeting ? (
-              <p data-testid="track-greeting" className="text-lg font-medium leading-snug text-ink">
-                {shipment.greeting}
-              </p>
-            ) : null}
-            <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">Status</p>
-            <div className="mt-2">
-              <Gloss text={shipment.status} prominent testId="track-status" />
-            </div>
-            {shipment.statusDetail && shipment.statusDetail !== shipment.status ? (
-              <div className="mt-3">
-                <Gloss text={shipment.statusDetail} />
-              </div>
-            ) : null}
-            {!forwarder && shipment.carrier.name ? <p className="mt-4 text-sm text-ink">{carrierCopy(shipment)}</p> : null}
-            {shipment.eta ? (
-              <p className="mt-3 text-sm text-ink">
-                <span className="text-muted">ETA </span>
-                {shipment.eta}
-              </p>
-            ) : null}
-            {shipment.originCountryCode && shipment.destinationCountryCode ? (
-              <RouteMap
-                origin={shipment.originCountryCode}
-                destination={shipment.destinationCountryCode}
-                phase={shipmentPhase(shipment.status)}
-              />
-            ) : null}
+    <section className="mt-6 space-y-4" data-testid="track-result">
+      <div className="rounded-[1.75rem] border border-line bg-paper-elevated p-5 sm:p-6">
+        {shipment.greeting ? (
+          <p data-testid="track-greeting" className="text-lg font-medium leading-snug text-ink">
+            {shipment.greeting}
+          </p>
+        ) : null}
+        <p className={`${shipment.greeting ? "mt-4" : ""} text-[11px] font-semibold uppercase tracking-[0.16em] text-muted`}>Status</p>
+        <div className="mt-2">
+          <Gloss text={shipment.status} prominent testId="track-status" />
+        </div>
+        {shipment.statusDetail && shipment.statusDetail !== shipment.status ? (
+          <div className="mt-3">
+            <Gloss text={shipment.statusDetail} />
           </div>
+        ) : null}
+        {!forwarder && shipment.carrier.name ? <p className="mt-4 text-sm text-ink">{carrierCopy(shipment)}</p> : null}
+        {shipment.eta ? (
+          <p className="mt-3 text-sm text-ink">
+            <span className="text-muted">ETA </span>
+            {shipment.eta}
+          </p>
+        ) : null}
+      </div>
 
-          <div className="grid gap-3 sm:grid-cols-2">
-            <Place label="Origin" text={shipment.origin} code={shipment.originCountryCode} />
-            <Place label="Destination" text={shipment.destination} code={shipment.destinationCountryCode} />
-          </div>
+      <div
+        ref={timelineRef}
+        tabIndex={timelineRef ? -1 : undefined}
+        id={timelineRef ? "track-timeline" : undefined}
+        data-testid="track-timeline"
+        aria-labelledby={headingId}
+        className="scroll-mt-32 rounded-[1.75rem] border border-line bg-paper-elevated p-5 outline-none focus-visible:ring-2 focus-visible:ring-accent sm:p-6"
+      >
+        <h3 id={headingId} className="font-display text-xl font-semibold text-ink">
+          Timeline
+        </h3>
+        {shipment.timeNote ? <p className="mt-2 text-xs text-muted">{shipment.timeNote}</p> : null}
+        {events.length === 0 ? (
+          <p className="mt-3 text-sm text-muted">No carrier events are stored.</p>
+        ) : (
+          <ol className="mt-4 space-y-5">
+            {events.map((event, index) => (
+              <li key={`${event.time ?? "t"}-${index}`} data-testid="track-event" className="border-l-2 border-line pl-4">
+                <Gloss text={event.description || event.status} />
+                {event.description && event.status && event.description !== event.status ? (
+                  <div className="mt-2">
+                    <Gloss text={event.status} />
+                  </div>
+                ) : null}
+                <p className="mt-1 text-xs text-muted">{event.time || "Time not supplied"}</p>
+                {event.location ? (
+                  <div className="mt-1">
+                    <Gloss text={event.location} />
+                  </div>
+                ) : null}
+              </li>
+            ))}
+          </ol>
+        )}
+        <button
+          type="button"
+          data-testid="track-refresh"
+          onClick={onRefresh}
+          disabled={refreshing}
+          className="mt-4 rounded-full border border-line px-4 py-2 text-sm text-ink disabled:opacity-60"
+        >
+          {refreshing ? "Queuing refresh…" : "Refresh"}
+        </button>
+      </div>
 
-          <div className="rounded-[1.75rem] border border-line bg-paper-elevated p-5 sm:p-6">
-            <h3 className="font-display text-xl font-semibold text-ink">Timeline</h3>
-            {shipment.timeNote ? <p className="mt-2 text-xs text-muted">{shipment.timeNote}</p> : null}
-            {events.length === 0 ? (
-              <p className="mt-3 text-sm text-muted">No carrier events are stored.</p>
-            ) : (
-              <ol className="mt-4 space-y-5">
-                {events.map((event, index) => (
-                  <li key={`${event.time ?? "t"}-${index}`} data-testid="track-event" className="border-l-2 border-line pl-4">
-                    <Gloss text={event.description || event.status} />
-                    {event.description && event.status && event.description !== event.status ? (
-                      <div className="mt-2">
-                        <Gloss text={event.status} />
-                      </div>
-                    ) : null}
-                    <p className="mt-1 text-xs text-muted">{event.time || "Time not supplied"}</p>
-                    {event.location ? (
-                      <div className="mt-1">
-                        <Gloss text={event.location} />
-                      </div>
-                    ) : null}
-                  </li>
-                ))}
-              </ol>
-            )}
-            <button
-              type="button"
-              data-testid="track-refresh"
-              onClick={onRefresh}
-              disabled={refreshing}
-              className="mt-4 rounded-full border border-line px-4 py-2 text-sm text-ink disabled:opacity-60"
-            >
-              {refreshing ? "Queuing refresh…" : "Refresh"}
-            </button>
-          </div>
-        </section>
+      <div className="grid gap-3 sm:grid-cols-2">
+        <Place label="Origin" text={shipment.origin} code={shipment.originCountryCode} />
+        <Place label="Destination" text={shipment.destination} code={shipment.destinationCountryCode} />
+      </div>
+
+      {shipment.originCountryCode && shipment.destinationCountryCode ? (
+        <RouteMap
+          origin={shipment.originCountryCode}
+          destination={shipment.destinationCountryCode}
+          phase={shipmentPhase(shipment.status)}
+        />
+      ) : null}
+    </section>
   );
 }
 
