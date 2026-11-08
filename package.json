@@ -8,7 +8,7 @@
     "start": "next start --hostname 0.0.0.0",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "test:tracking": "node --import tsx --test --test-concurrency=1 src/lib/tracking/tracking.test.ts src/lib/tracking/public-cache.test.ts src/lib/tracking/forwarder-source.test.ts src/lib/tracking/zh-en.test.ts src/lib/tracking/greeting.test.ts",
+    "test:tracking": "node --import tsx --test --test-concurrency=1 src/lib/tracking/tracking.test.ts src/lib/tracking/public-cache.test.ts src/lib/tracking/forwarder-source.test.ts src/lib/tracking/zh-en.test.ts src/lib/tracking/greeting.test.ts src/lib/tracking/track-present.test.ts",
     "tracking:worker": "node --import tsx scripts/tracking-worker.ts"
   },
   "dependencies": {
