@@ -2,7 +2,9 @@
 
 import { FormEvent, useEffect, useState } from "react";
 import { countryLabel } from "@/lib/analytics-geo";
+import { SevenColorMark } from "@/components/brand/seven-color-mark";
 import { newestFirst } from "@/lib/tracking/public-view";
+import { glossTrackingText, hasChinese } from "@/lib/tracking/zh-en";
 
 type PublicEvent = {
   time: string | null;
@@ -75,6 +77,86 @@ function carrierCopy(shipment: PublicShipment): string {
   return "Carrier not determined yet.";
 }
 
+function Gloss({
+  text,
+  prominent = false,
+  testId,
+}: {
+  text: string;
+  prominent?: boolean;
+  testId?: string;
+}) {
+  const gloss = glossTrackingText(text);
+  if (!hasChinese(text) || gloss.state === "plain") {
+    const className = prominent ? "font-display text-3xl font-bold text-ink" : "text-sm font-medium text-ink";
+    return prominent ? (
+      <h2 className={className} data-testid={testId}>
+        {text}
+      </h2>
+    ) : (
+      <p className={className} data-testid={testId}>
+        {text}
+      </p>
+    );
+  }
+  return (
+    <div>
+      <p className="text-sm text-ink" data-testid={prominent ? "track-status-zh" : undefined}>
+        {text}
+      </p>
+      {gloss.state === "translated" ? (
+        prominent ? (
+          <h2 className="mt-1 font-display text-3xl font-bold leading-tight text-ink" data-testid={testId ?? "track-translation"}>
+            {gloss.english}
+          </h2>
+        ) : (
+          <p className="mt-0.5 text-sm font-semibold text-ink" data-testid={testId ?? "track-translation"}>
+            {gloss.english}
+          </p>
+        )
+      ) : (
+        <p className="mt-0.5 text-xs text-muted" data-testid="track-translation-unavailable">
+          English translation unavailable
+        </p>
+      )}
+    </div>
+  );
+}
+
+function MarkedCraft({ kind }: { kind: "plane" | "truck" }) {
+  const plane = kind === "plane";
+  return (
+    <span className={`track-craft track-craft-${kind} relative inline-block h-12 w-20 text-ink`}>
+      <svg viewBox="0 0 80 48" className="h-full w-full" fill="none" aria-hidden>
+        {plane ? (
+          <>
+            <path d="M6 28h34l10-8h16l6 6v4H58L46 36H18L6 28z" stroke="currentColor" strokeWidth="1.6" />
+            <path d="M28 28V18M40 27l8 9" stroke="currentColor" strokeWidth="1.6" />
+          </>
+        ) : (
+          <>
+            <path d="M8 30V20h28l8 8h20v8H8z" stroke="currentColor" strokeWidth="1.6" />
+            <circle cx="22" cy="36" r="4" stroke="currentColor" strokeWidth="1.6" />
+            <circle cx="58" cy="36" r="4" stroke="currentColor" strokeWidth="1.6" />
+          </>
+        )}
+      </svg>
+      <span className={plane ? "absolute left-7 top-3" : "absolute left-3 top-2"}>
+        <SevenColorMark size={16} title="" />
+      </span>
+    </span>
+  );
+}
+
+function RouteIllustration() {
+  return (
+    <div className="flex items-center gap-3" aria-hidden>
+      <MarkedCraft kind="plane" />
+      <MarkedCraft kind="truck" />
+    </div>
+  );
+}
+
 function Place({
   label,
   text,
@@ -90,14 +172,14 @@ function Place({
   return (
     <div className="rounded-2xl border border-line bg-paper px-4 py-3">
       <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">{label}</p>
-      <p className="mt-1 text-sm text-ink">
+      <div className="mt-1 flex items-start gap-1.5">
         {flag ? (
-          <span className="mr-1.5" aria-hidden>
+          <span className="mt-0.5" aria-hidden>
             {flag}
           </span>
         ) : null}
-        {value || "Not supplied"}
-      </p>
+        {value ? <Gloss text={value} /> : <p className="text-sm text-ink">Not supplied</p>}
+      </div>
     </div>
   );
 }
@@ -264,49 +346,29 @@ function ResultCard({
   refreshing: boolean;
 }) {
   const events = newestFirst(shipment.events);
+  const forwarder = shipment.carrier.resolution === "forwarder";
   return (
         <section className="mt-6 space-y-4" data-testid="track-result">
           <div className="rounded-[1.75rem] border border-line bg-paper-elevated p-5 sm:p-6">
             <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">Status</p>
-            <h2 data-testid="track-status" className="mt-2 font-display text-3xl font-semibold text-ink">
-              {shipment.status}
-            </h2>
-            {shipment.statusDetail ? (
-              <p className="mt-2 text-sm leading-relaxed text-ink-soft">{shipment.statusDetail}</p>
+            <div className="mt-2">
+              <Gloss text={shipment.status} prominent testId="track-status" />
+            </div>
+            {shipment.statusDetail && shipment.statusDetail !== shipment.status ? (
+              <div className="mt-3">
+                <Gloss text={shipment.statusDetail} />
+              </div>
             ) : null}
-            <p className="mt-4 text-sm text-ink">{carrierCopy(shipment)}</p>
-            <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
-              <div>
-                <dt className="text-muted">Last updated</dt>
-                <dd className="mt-1 text-ink">{shipment.lastUpdated || "Not yet"}</dd>
-              </div>
-              <div>
-                <dt className="text-muted">Carrier ETA</dt>
-                <dd className="mt-1 text-ink">{shipment.eta || "No carrier ETA"}</dd>
-              </div>
-              {shipment.reference ? (
-                <div>
-                  <dt className="text-muted">Reference</dt>
-                  <dd className="mt-1 text-ink">{shipment.reference}</dd>
-                </div>
-              ) : null}
-              {shipment.pieces ? (
-                <div>
-                  <dt className="text-muted">Pieces</dt>
-                  <dd className="mt-1 text-ink">{shipment.pieces}</dd>
-                </div>
-              ) : null}
-            </dl>
-            {shipment.message ? <p className="mt-4 text-sm text-muted">{shipment.message}</p> : null}
-            <button
-              type="button"
-              data-testid="track-refresh"
-              onClick={onRefresh}
-              disabled={refreshing}
-              className="mt-5 rounded-full border border-line px-4 py-2 text-sm text-ink disabled:opacity-60"
-            >
-              {refreshing ? "Queuing refresh…" : "Refresh"}
-            </button>
+            {!forwarder && shipment.carrier.name ? <p className="mt-4 text-sm text-ink">{carrierCopy(shipment)}</p> : null}
+            {shipment.eta ? (
+              <p className="mt-3 text-sm text-ink">
+                <span className="text-muted">ETA </span>
+                {shipment.eta}
+              </p>
+            ) : null}
+            <div className="mt-4">
+              <RouteIllustration />
+            </div>
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2">
@@ -320,22 +382,47 @@ function ResultCard({
             {events.length === 0 ? (
               <p className="mt-3 text-sm text-muted">No carrier events are stored.</p>
             ) : (
-              <ol className="mt-4 space-y-4">
+              <ol className="mt-4 space-y-5">
                 {events.map((event, index) => (
                   <li key={`${event.time ?? "t"}-${index}`} data-testid="track-event" className="border-l-2 border-line pl-4">
-                    <p className="text-sm font-medium text-ink">{event.status}</p>
-                    {event.description && event.description !== event.status ? (
-                      <p className="mt-1 text-sm leading-relaxed text-ink-soft">{event.description}</p>
+                    <Gloss text={event.description || event.status} />
+                    {event.description && event.status && event.description !== event.status ? (
+                      <div className="mt-2">
+                        <Gloss text={event.status} />
+                      </div>
                     ) : null}
-                    <p className="mt-1 text-xs text-muted">
-                      {event.time || "Time not supplied"}
-                      {event.location ? ` · ${event.location}` : ""}
-                    </p>
+                    <p className="mt-1 text-xs text-muted">{event.time || "Time not supplied"}</p>
+                    {event.location ? (
+                      <div className="mt-1">
+                        <Gloss text={event.location} />
+                      </div>
+                    ) : null}
                   </li>
                 ))}
               </ol>
             )}
+            {shipment.message ? <p className="mt-5 text-xs leading-relaxed text-muted">{shipment.message}</p> : null}
+            <button
+              type="button"
+              data-testid="track-refresh"
+              onClick={onRefresh}
+              disabled={refreshing}
+              className="mt-4 rounded-full border border-line px-4 py-2 text-sm text-ink disabled:opacity-60"
+            >
+              {refreshing ? "Queuing refresh…" : "Refresh"}
+            </button>
           </div>
+          <style>{`
+            .track-craft { animation: track-craft-drift 4.8s ease-in-out infinite; }
+            .track-craft-truck { animation-delay: -1.6s; }
+            @keyframes track-craft-drift {
+              0%, 100% { transform: translateY(0); }
+              50% { transform: translateY(-3px); }
+            }
+            @media (prefers-reduced-motion: reduce) {
+              .track-craft { animation: none; }
+            }
+          `}</style>
         </section>
   );
 }
