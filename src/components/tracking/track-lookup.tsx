@@ -160,35 +160,36 @@ export function TrackLookup() {
   });
 
   return (
-    <div className="mx-auto max-w-3xl">
-      <form onSubmit={onSubmit} className="glass-card rounded-[1.75rem] p-4 sm:p-6">
-        <label htmlFor="tracking-number" className="text-sm font-medium text-ink">
+    <div className="mx-auto max-w-xl">
+      <form onSubmit={onSubmit} className="flex flex-col gap-3 sm:flex-row">
+        <label htmlFor="tracking-number" className="sr-only">
           Tracking number
         </label>
-        <div className="mt-3 flex flex-col gap-3 sm:flex-row">
-          <input
-            id="tracking-number"
-            data-testid="track-number"
-            value={number}
-            onChange={(event) => setNumber(event.target.value)}
-            autoComplete="off"
-            spellCheck={false}
-            placeholder="Letters and digits"
-            className="min-w-0 flex-1 rounded-2xl border border-line bg-paper px-4 py-3 text-base text-ink outline-none focus:border-accent"
-          />
-          <button
-            type="submit"
-            data-testid="track-submit"
-            disabled={pending}
-            className="rounded-2xl bg-ink px-5 py-3 text-sm font-medium text-paper disabled:opacity-60"
-          >
-            {pending ? "Checking stored tracking…" : "Track Shipment"}
-          </button>
-        </div>
-        <p className="mt-3 text-xs leading-relaxed text-muted">
-          This shows a shipment the sourcing desk has registered. It does not contact the carrier when you open the page.
-        </p>
+        <input
+          id="tracking-number"
+          data-testid="track-number"
+          value={number}
+          onChange={(event) => setNumber(event.target.value)}
+          autoComplete="off"
+          spellCheck={false}
+          placeholder="Tracking number"
+          className="min-w-0 flex-1 rounded-2xl border border-line bg-paper px-4 py-3 text-base text-ink outline-none focus:border-accent"
+        />
+        <button
+          type="submit"
+          data-testid="track-submit"
+          disabled={pending}
+          aria-busy={pending}
+          className="rounded-2xl bg-ink px-5 py-3 text-sm font-medium text-paper disabled:opacity-60"
+        >
+          Search
+        </button>
       </form>
+      {pending ? (
+        <p role="status" className="mt-3 text-sm text-muted">
+          Searching…
+        </p>
+      ) : null}
 
       {error ? (
         <p role="alert" className="mt-4 rounded-2xl border border-line bg-paper-elevated px-4 py-3 text-sm text-ink">
