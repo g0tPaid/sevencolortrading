@@ -2,6 +2,7 @@
 
 import { FormEvent, useEffect, useState } from "react";
 import { countryLabel } from "@/lib/analytics-geo";
+import { newestFirst } from "@/lib/tracking/public-view";
 
 type PublicEvent = {
   time: string | null;
@@ -28,6 +29,9 @@ type PublicShipment = {
   lastUpdated: string | null;
   events: PublicEvent[];
   message: string | null;
+  reference?: string | null;
+  pieces?: string | null;
+  timeNote?: string | null;
 };
 
 type LookupResponse = {
@@ -60,6 +64,9 @@ function carrierCopy(shipment: PublicShipment): string {
   }
   if (shipment.carrier.resolution === "unsupported") {
     return "This carrier is not supported by shipment tracking yet.";
+  }
+  if (shipment.carrier.resolution === "forwarder") {
+    return "Forwarder tracking page.";
   }
   if (shipment.carrier.resolution === "manual" && shipment.carrier.name) {
     return `Carrier selected by the desk: ${shipment.carrier.name}.`;
@@ -256,12 +263,7 @@ function ResultCard({
   onRefresh: () => void;
   refreshing: boolean;
 }) {
-  const events = [...shipment.events].sort((a, b) => {
-    const left = a.time ? Date.parse(a.time) : Number.NaN;
-    const right = b.time ? Date.parse(b.time) : Number.NaN;
-    if (Number.isFinite(left) && Number.isFinite(right) && left !== right) return right - left;
-    return 0;
-  });
+  const events = newestFirst(shipment.events);
   return (
         <section className="mt-6 space-y-4" data-testid="track-result">
           <div className="rounded-[1.75rem] border border-line bg-paper-elevated p-5 sm:p-6">
@@ -282,6 +284,18 @@ function ResultCard({
                 <dt className="text-muted">Carrier ETA</dt>
                 <dd className="mt-1 text-ink">{shipment.eta || "No carrier ETA"}</dd>
               </div>
+              {shipment.reference ? (
+                <div>
+                  <dt className="text-muted">Reference</dt>
+                  <dd className="mt-1 text-ink">{shipment.reference}</dd>
+                </div>
+              ) : null}
+              {shipment.pieces ? (
+                <div>
+                  <dt className="text-muted">Pieces</dt>
+                  <dd className="mt-1 text-ink">{shipment.pieces}</dd>
+                </div>
+              ) : null}
             </dl>
             {shipment.message ? <p className="mt-4 text-sm text-muted">{shipment.message}</p> : null}
             <button
@@ -302,14 +316,17 @@ function ResultCard({
 
           <div className="rounded-[1.75rem] border border-line bg-paper-elevated p-5 sm:p-6">
             <h3 className="font-display text-xl font-semibold text-ink">Timeline</h3>
+            {shipment.timeNote ? <p className="mt-2 text-xs text-muted">{shipment.timeNote}</p> : null}
             {events.length === 0 ? (
               <p className="mt-3 text-sm text-muted">No carrier events are stored.</p>
             ) : (
               <ol className="mt-4 space-y-4">
                 {events.map((event, index) => (
-                  <li key={`${event.time ?? "t"}-${index}`} className="border-l-2 border-line pl-4">
+                  <li key={`${event.time ?? "t"}-${index}`} data-testid="track-event" className="border-l-2 border-line pl-4">
                     <p className="text-sm font-medium text-ink">{event.status}</p>
-                    <p className="mt-1 text-sm leading-relaxed text-ink-soft">{event.description}</p>
+                    {event.description && event.description !== event.status ? (
+                      <p className="mt-1 text-sm leading-relaxed text-ink-soft">{event.description}</p>
+                    ) : null}
                     <p className="mt-1 text-xs text-muted">
                       {event.time || "Time not supplied"}
                       {event.location ? ` · ${event.location}` : ""}

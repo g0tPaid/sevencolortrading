@@ -10,6 +10,13 @@ export const MSG = {
   checkingCarriers: "Checking the carriers this number could belong to.",
   partialReady: "A result is in. Still checking other possible carriers.",
   noHistory: "No supported carrier returned a history for this number. Search again later.",
+  forwarderHistory:
+    "This history comes from one forwarder's tracking page (华磊物流通 software). It covers shipments that page tracks. Event times are copied as printed and have no timezone.",
+  forwarderTimeout: "The forwarder tracking page did not respond in time. Nothing was invented.",
+  forwarderChallenge: "The forwarder tracking page asked for a check this site does not bypass.",
+  forwarderUnusable: "The forwarder tracking page did not return a readable tracking result. Nothing was invented.",
+  forwarderThrottled: "The forwarder tracking page is pausing requests. Search again in a moment.",
+  forwarderTimeNote: "Source time, timezone unspecified.",
   severalHistories: "More than one carrier returned a history for this number.",
   timedOutSearch: "The carrier checks ran out of time before a history was confirmed. Search again later.",
   notSupportedNumber: "This number did not match a supported carrier. Tracking covers a fixed carrier list, not every carrier worldwide.",

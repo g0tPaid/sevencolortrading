@@ -48,6 +48,13 @@ export function applyMigrations(db: DatabaseSync): void {
       new Date().toISOString(),
     );
   }
+  const forwarder = db.prepare("SELECT id FROM schema_migrations WHERE id = '004_forwarder_source'").get();
+  if (!forwarder) {
+    db.exec(migrationSql("004_forwarder_source.sql"));
+    db.prepare("INSERT INTO schema_migrations (id, applied_at) VALUES ('004_forwarder_source', ?)").run(
+      new Date().toISOString(),
+    );
+  }
 }
 
 export function openDatabase(file = defaultTrackingDbPath()): DatabaseSync {

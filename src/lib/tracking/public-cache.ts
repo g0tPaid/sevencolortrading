@@ -6,6 +6,13 @@ import { getDb, withImmediate } from "@/lib/tracking/db";
 import { eventFingerprint } from "@/lib/tracking/fingerprint";
 import { MSG } from "@/lib/tracking/messages";
 import type { PublicShipment } from "@/lib/tracking/public-view";
+import {
+  FORWARDER_CARRIER_ID,
+  FORWARDER_PROVIDER_VERSION,
+  fetchForwarderDocument,
+  forwarderMessage,
+  type ForwarderDocument,
+} from "@/lib/tracking/forwarder-source";
 import { liveScraperClient, scraperField, type ScraperClient } from "@/lib/tracking/scraper-client";
 import { eventDescription, eventTime, interpretDetection, mapStage, shipmentStatusFromResult } from "@/lib/tracking/status";
 import { consumeRateLimit, countAdminDue, getSettings, writeProviderLog } from "@/lib/tracking/store";
@@ -50,6 +57,9 @@ type CacheRow = {
   interestUntil: string | null;
   refreshStopped: boolean;
   consecutiveFailures: number;
+  providerVersion: number | null;
+  referenceCode: string | null;
+  packageCount: string | null;
 };
 
 const IP_LIMIT = 60;
@@ -100,6 +110,9 @@ function mapRow(row: Record<string, SqlValue>): CacheRow {
     interestUntil: text(row.interest_until),
     refreshStopped: num(row.refresh_stopped) === 1,
     consecutiveFailures: num(row.consecutive_failures),
+    providerVersion: row.provider_version == null ? null : num(row.provider_version),
+    referenceCode: text(row.reference_code),
+    packageCount: text(row.package_count),
   };
 }
 
@@ -109,12 +122,15 @@ function knownCountry(code: string | null): string | null {
 }
 
 function view(row: CacheRow): PublicShipment {
-  const candidates = row.carrierCandidates
-    .map((id) => {
-      const name = carrierName(id);
-      return name ? { id, name } : null;
-    })
-    .filter((item): item is { id: string; name: string } => item !== null);
+  const forwarder = row.carrierResolution === "forwarder";
+  const candidates = forwarder
+    ? []
+    : row.carrierCandidates
+        .map((id) => {
+          const name = carrierName(id);
+          return name ? { id, name } : null;
+        })
+        .filter((item): item is { id: string; name: string } => item !== null);
   const events = getDb()
     .prepare(
       `SELECT occurred_at, status, description, location FROM public_track_events
@@ -130,8 +146,8 @@ function view(row: CacheRow): PublicShipment {
   return {
     trackingNumber: row.trackingNumber,
     carrier: {
-      id: row.carrierResolution === "ambiguous" ? null : row.carrierId,
-      name: row.carrierResolution === "ambiguous" ? null : carrierName(row.carrierId),
+      id: forwarder || row.carrierResolution === "ambiguous" ? null : row.carrierId,
+      name: forwarder ? "Forwarder tracking page" : row.carrierResolution === "ambiguous" ? null : carrierName(row.carrierId),
       resolution: row.carrierResolution,
       candidates,
     },
@@ -145,6 +161,9 @@ function view(row: CacheRow): PublicShipment {
     lastUpdated: row.fetchedAt,
     events,
     message: row.message,
+    reference: row.referenceCode,
+    pieces: row.packageCount,
+    timeNote: forwarder ? MSG.forwarderTimeNote : null,
   };
 }
 
@@ -232,11 +251,146 @@ function response(row: CacheRow, state: PublicState, message: string | null, sta
   };
 }
 
+export type ForwarderSource = (number: string, now: Date) => Promise<ForwarderDocument>;
+
 export type PublicLookupOptions = {
   carrierId?: string | null;
   client?: ScraperClient;
   processNow?: boolean;
+  forwarder?: ForwarderSource;
 };
+
+const forwarderFlights = new Map<string, Promise<ForwarderDocument>>();
+
+function ensureForwarderRow(number: string, now: Date): CacheRow {
+  const existing = findCache(number, FORWARDER_CARRIER_ID);
+  if (existing) return existing;
+  const id = randomUUID();
+  const iso = now.toISOString();
+  getDb()
+    .prepare(
+      `INSERT INTO public_track_cache (
+        id, tracking_number, carrier_id, carrier_resolution, carrier_candidates, status, outcome, message,
+        interest_until, refresh_stopped, consecutive_failures, created_at, updated_at, provider_version
+      ) VALUES (?, ?, ?, 'forwarder', '[]', 'Unknown', 'pending', NULL, ?, 0, 0, ?, ?, ?)`,
+    )
+    .run(id, number, FORWARDER_CARRIER_ID, hoursFrom(now, getSettings().publicInterestHours), iso, iso, FORWARDER_PROVIDER_VERSION);
+  return getCache(id)!;
+}
+
+function storeForwarderEvents(cacheId: string, events: ForwarderDocument & { kind: "ready" }, now: Date): void {
+  getDb().prepare("DELETE FROM public_track_events WHERE cache_id = ?").run(cacheId);
+  events.events.forEach((event, index) => {
+    const description = clip(event.description, 1000);
+    const location = event.location ? clip(event.location, 300) : null;
+    getDb()
+      .prepare(
+        `INSERT INTO public_track_events (
+          id, cache_id, fingerprint, occurred_at, status, description, location, stage, tie_order, created_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, 'forwarder', ?, ?)`,
+      )
+      .run(
+        randomUUID(),
+        cacheId,
+        eventFingerprint({
+          time: event.time,
+          stage: "forwarder",
+          description,
+          location: location ?? "",
+          tie: String(index),
+        }),
+        event.time,
+        clip(description, 300),
+        description,
+        location,
+        index,
+        now.toISOString(),
+      );
+  });
+}
+
+function rememberForwarder(
+  number: string,
+  now: Date,
+  fields: { outcome: PublicState; message: string | null; hours: number },
+): CacheRow {
+  const row = ensureForwarderRow(number, now);
+  getDb().prepare("DELETE FROM public_track_events WHERE cache_id = ?").run(row.id);
+  saveOutcome(row.id, now, {
+    outcome: fields.outcome,
+    message: fields.message,
+    carrier_resolution: "forwarder",
+    status: "Unknown",
+    status_detail: null,
+    reference_code: null,
+    package_count: null,
+    provider_version: FORWARDER_PROVIDER_VERSION,
+    fetched_at: now.toISOString(),
+    fresh_until: hoursFrom(now, fields.hours),
+    refresh_stopped: 0,
+  });
+  return getCache(row.id) ?? row;
+}
+
+function rememberForwarderReady(number: string, now: Date, parsed: Extract<ForwarderDocument, { kind: "ready" }>): CacheRow {
+  const row = ensureForwarderRow(number, now);
+  storeForwarderEvents(row.id, parsed, now);
+  saveOutcome(row.id, now, {
+    outcome: "ready",
+    carrier_resolution: "forwarder",
+    status: clip(parsed.status, 300),
+    status_detail: null,
+    origin: null,
+    destination: parsed.destination,
+    origin_country: null,
+    destination_country: country(parsed.destination),
+    eta: null,
+    message: MSG.forwarderHistory,
+    reference_code: parsed.reference,
+    package_count: parsed.pieces,
+    provider_version: FORWARDER_PROVIDER_VERSION,
+    fetched_at: now.toISOString(),
+    fresh_until: hoursFrom(now, 2),
+    refresh_stopped: 0,
+    consecutive_failures: 0,
+  });
+  return getCache(row.id) ?? row;
+}
+
+async function consultForwarder(number: string, now: Date, source: ForwarderSource) {
+  const cached = findCache(number, FORWARDER_CARRIER_ID);
+  if (cached && fresh(cached, now) && cached.providerVersion === FORWARDER_PROVIDER_VERSION) {
+    if (cached.outcome === "not_found") return null;
+    const state: PublicState =
+      cached.outcome === "ready" || cached.outcome === "timeout" || cached.outcome === "throttled" ? cached.outcome : "unavailable";
+    return response(cached, state, cached.message);
+  }
+  let flight = forwarderFlights.get(number);
+  if (!flight) {
+    flight = source(number, now)
+      .catch(() => ({ kind: "parser_failure" as const }))
+      .finally(() => {
+        forwarderFlights.delete(number);
+      });
+    forwarderFlights.set(number, flight);
+  }
+  const parsed = await flight;
+  if (parsed.kind === "not_found") {
+    rememberForwarder(number, now, { outcome: "not_found", message: null, hours: 0.5 });
+    return null;
+  }
+  if (parsed.kind === "ready") {
+    const row = rememberForwarderReady(number, now, parsed);
+    return response(row, "ready", row.message);
+  }
+  const outcome: PublicState = parsed.kind === "timeout" ? "timeout" : parsed.kind === "throttled" ? "throttled" : "unavailable";
+  const row = rememberForwarder(number, now, {
+    outcome,
+    message: forwarderMessage(parsed.kind),
+    hours: parsed.kind === "challenge" ? 0.5 : 1 / 6,
+  });
+  return response(row, outcome === "unavailable" ? "unavailable" : outcome, row.message);
+}
 
 export async function publicLookup(trackingNumber: string, rateKey: string, now = new Date(), opts?: PublicLookupOptions) {
   if (!consumeRateLimit(`public-ip:${rateKey}`, IP_LIMIT, IP_WINDOW_MS, now)) {
@@ -260,6 +414,12 @@ export async function publicLookup(trackingNumber: string, rateKey: string, now 
     if (!carrierId || !isTrackableCarrier(carrierId)) {
       return { status: 400, body: { ok: false as const, error: "Choose a supported carrier." } };
     }
+  }
+
+  const source = opts?.forwarder ?? (process.env.TRACKING_FORWARDER === "0" ? null : fetchForwarderDocument);
+  if (!carrierId && source) {
+    const forwarderHit = await consultForwarder(norm, now, source);
+    if (forwarderHit) return forwarderHit;
   }
 
   if (!carrierId) {
@@ -351,7 +511,7 @@ export function startPublicWork(client?: ScraperClient): void {
 }
 
 function pickCached(number: string, now: Date): CacheRow | null {
-  const rows = listCache(number);
+  const rows = listCache(number).filter((row) => row.carrierId !== FORWARDER_CARRIER_ID);
   const freshReady = rows.filter((row) => fresh(row, now) && row.outcome === "ready");
   if (freshReady.length === 1) return freshReady[0]!;
   const freshOther = rows.filter((row) => fresh(row, now) && row.outcome !== "pending" && row.outcome !== "ready");
@@ -545,7 +705,9 @@ function applyBody(row: CacheRow, body: TrackBody, now: Date): void {
 }
 
 function historiesResponse(number: string, now: Date) {
-  const rows = listCache(number).filter((row) => fresh(row, now) && row.outcome === "ready" && row.carrierId);
+  const rows = listCache(number).filter(
+    (row) => fresh(row, now) && row.outcome === "ready" && row.carrierId && row.carrierId !== FORWARDER_CARRIER_ID,
+  );
   if (rows.length < 2) return null;
   return {
     status: 200,

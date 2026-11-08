@@ -36,6 +36,7 @@ function client(trackBody: TrackBody = FIXTURE_IN_TRANSIT) {
 
 test.beforeEach(() => {
   process.env.TRACKING_SCHEDULER = "0";
+  process.env.TRACKING_FORWARDER = "0";
   const dir = mkdtempSync(path.join(tmpdir(), "public-track-"));
   useTrackingDatabase(path.join(dir, "shipments.sqlite"));
 });

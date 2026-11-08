@@ -28,7 +28,23 @@ export type PublicShipment = {
   lastUpdated: string | null;
   events: PublicEvent[];
   message: string | null;
+  reference: string | null;
+  pieces: string | null;
+  timeNote: string | null;
 };
+
+/** Newest source time first. Comparison uses the printed text, so a timezone is not applied. */
+export function newestFirst<T extends { time: string | null }>(events: T[]): T[] {
+  return events
+    .map((event, index) => ({ event, index }))
+    .sort((left, right) => {
+      const a = left.event.time ?? "";
+      const b = right.event.time ?? "";
+      if (a !== b) return a < b ? 1 : -1;
+      return left.index - right.index;
+    })
+    .map((item) => item.event);
+}
 
 function knownCountry(code: string | null): string | null {
   if (!code || !COUNTRY_CENTROIDS[code]) return null;
@@ -66,5 +82,8 @@ export function toPublicShipment(shipment: Shipment, events: ShipmentEvent[]): P
       location: event.location,
     })),
     message: shipment.lastError ?? (events.length === 0 ? MSG.storedPending : null),
+    reference: null,
+    pieces: null,
+    timeNote: null,
   };
 }
