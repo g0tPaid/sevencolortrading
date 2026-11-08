@@ -79,6 +79,8 @@ test("the route illustration keeps its honesty label and does not print Natural 
   assert.equal(promo.includes("scaleX(-1)"), false);
   assert.equal(promo.includes("rotate("), false);
   assert.equal(page.includes("scroll-mt-32"), true);
+  assert.equal(page.includes("Track Global Parcels"), true);
+  assert.match(page, /color:\s*#d60000/);
   assert.equal(page.includes("/tracking/sourcing-center-plane.png"), true);
   const land = readFileSync(new URL("../../components/home/world-land-path.ts", import.meta.url), "utf8");
   assert.match(land, /Natural Earth 110m/);
