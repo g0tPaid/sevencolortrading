@@ -14,7 +14,9 @@ The site serves the files written to public/downloads/. Runtime does not need th
 
 from __future__ import annotations
 
+import re
 import sys
+import tempfile
 import zipfile
 from pathlib import Path
 from xml.sax.saxutils import escape as xml_escape
@@ -24,6 +26,14 @@ SOURCE = ROOT / "documents" / "nda" / "mutual-nda.md"
 OUT_DIR = ROOT / "public" / "downloads"
 PDF_NAME = "sourcing-center-mutual-nda-template.pdf"
 DOCX_NAME = "sourcing-center-mutual-nda-template.docx"
+MARK_PATH = ROOT / "public" / "seven-color-mark-clear.png"
+WORD_PATH = ROOT / "public" / "sourcing-center-logo.png"
+
+# Site accent used by the sourcing.center wordmark. Not a new color.
+BRAND = (227, 28, 35)
+INK = (22, 22, 22)
+MUTED = (82, 82, 84)
+HAIRLINE = (214, 214, 214)
 
 FONT_DIRS = [
     Path("/usr/share/fonts/truetype/liberation"),
@@ -146,7 +156,51 @@ def load() -> dict:
     return parse_source(SOURCE.read_text(encoding="utf-8"))
 
 
-def build_pdf(doc: dict, destination: Path) -> None:
+def crop_to_ink(image):
+    """Trim empty canvas so the existing artwork can be placed at its true ratio."""
+    from PIL import ImageChops
+
+    rgba = image.convert("RGBA")
+    alpha = rgba.getchannel("A").point(lambda value: 255 if value > 16 else 0)
+    ink = rgba.convert("RGB").convert("L").point(lambda value: 255 if value < 250 else 0)
+    bbox = ImageChops.multiply(alpha, ink).getbbox()
+    if not bbox:
+        raise SystemExit("Logo asset has no visible pixels.")
+    return rgba.crop(bbox)
+
+
+def prepare_logos(directory: Path) -> dict:
+    """Crop the official mark and wordmark. Do not redraw or recolor them."""
+    try:
+        from PIL import Image
+    except ImportError as exc:
+        raise SystemExit("Pillow is required to place the logo. Install fpdf2, which includes it.") from exc
+
+    if not MARK_PATH.is_file() or not WORD_PATH.is_file():
+        raise SystemExit("Official logo files are missing from public/.")
+
+    mark = crop_to_ink(Image.open(MARK_PATH).convert("RGBA"))
+    word = crop_to_ink(Image.open(WORD_PATH).convert("RGBA"))
+    # Pad the wordmark canvas to the mark height so the two images share a baseline.
+    word_height = max(1, int(round(mark.height * 0.46)))
+    word_width = max(1, int(round(word.width * (word_height / word.height))))
+    scaled = word.resize((word_width, word_height), Image.Resampling.LANCZOS)
+    word_canvas = Image.new("RGBA", (word_width, mark.height), (255, 255, 255, 0))
+    word_canvas.paste(scaled, (0, (mark.height - word_height) // 2), scaled)
+
+    mark_file = directory / "mark.png"
+    word_file = directory / "wordmark.png"
+    mark.save(mark_file)
+    word_canvas.save(word_file)
+    return {
+        "mark": mark_file,
+        "word": word_file,
+        "mark_ratio": mark.width / mark.height,
+        "word_ratio": word_canvas.width / word_canvas.height,
+    }
+
+
+def build_pdf(doc: dict, destination: Path, logos: dict) -> None:
     from fpdf import FPDF
 
     regular = find_font("LiberationSerif-Regular.ttf")
@@ -160,41 +214,51 @@ def build_pdf(doc: dict, destination: Path) -> None:
         def header(self) -> None:
             if self.page_no() == 1:
                 return
-            # header() runs before body text. Restore the top margin afterwards
-            # so a spilled paragraph cannot draw through the running header.
+            # add_page() sets y to the top margin, then calls header().
+            # Draw the running brand above that margin and put y back.
+            mark_h = 5.4
+            mark_w = mark_h * logos["mark_ratio"]
+            self.image(str(logos["mark"]), x=self.l_margin, y=8.2, h=mark_h)
             self.set_font("Sans", "", 8)
-            self.set_text_color(70, 70, 70)
-            usable = self.w - self.l_margin - self.r_margin
-            self.set_xy(self.l_margin, 8)
-            self.cell(usable - 42, 4, doc["title"], align="L")
-            self.cell(42, 4, "Unsigned template", align="R")
-            self.set_draw_color(190, 190, 190)
+            self.set_text_color(*MUTED)
+            text_x = self.l_margin + mark_w + 2.4
+            self.set_xy(text_x, 8.6)
+            self.cell(self.w - self.r_margin - text_x - 36, 4.6, doc["title"], align="L")
+            self.set_xy(self.l_margin, 8.6)
+            self.cell(self.w - self.l_margin - self.r_margin, 4.6, "Unsigned template", align="R")
+            self.set_draw_color(*HAIRLINE)
             self.set_line_width(0.2)
-            self.line(self.l_margin, 14.5, self.w - self.r_margin, 14.5)
-            self.set_text_color(20, 20, 20)
+            self.line(self.l_margin, 15.6, self.w - self.r_margin, 15.6)
+            self.set_draw_color(*BRAND)
+            self.set_line_width(0.45)
+            self.line(self.l_margin, 15.6, self.l_margin + 16, 15.6)
+            self.set_text_color(*INK)
             self.set_y(self.t_margin)
 
         def footer(self) -> None:
-            self.set_draw_color(190, 190, 190)
+            self.set_draw_color(*HAIRLINE)
             self.set_line_width(0.2)
-            self.line(self.l_margin, self.h - 16, self.w - self.r_margin, self.h - 16)
-            self.set_y(-14.5)
+            self.line(self.l_margin, self.h - 18, self.w - self.r_margin, self.h - 18)
+            self.set_draw_color(*BRAND)
+            self.set_line_width(0.45)
+            self.line(self.l_margin, self.h - 18, self.l_margin + 16, self.h - 18)
+            self.set_y(-16.2)
             self.set_font("Sans", "", 7.5)
-            self.set_text_color(55, 55, 55)
-            self.cell(0, 3.6, doc["caveat"], align="C", new_x="LMARGIN", new_y="NEXT")
+            self.set_text_color(*MUTED)
+            self.cell(0, 3.8, doc["caveat"], align="C", new_x="LMARGIN", new_y="NEXT")
             self.set_x(self.l_margin)
             self.cell(
                 0,
-                3.6,
-                f"{doc['title']}  ·  Unsigned  ·  Page {self.page_no()} of {{nb}}",
+                3.8,
+                f"Unsigned template  ·  Page {self.page_no()} of {{nb}}",
                 align="C",
             )
-            self.set_text_color(20, 20, 20)
+            self.set_text_color(*INK)
 
     pdf = Form(format="A4", unit="mm")
     pdf.alias_nb_pages()
-    pdf.set_auto_page_break(auto=True, margin=22)
-    pdf.set_margins(18, 22, 18)
+    pdf.set_auto_page_break(auto=True, margin=26)
+    pdf.set_margins(22, 20, 22)
     pdf.set_title(doc["title"])
     pdf.set_author("Sourcing Center")
     pdf.set_subject("Unsigned generic mutual non-disclosure agreement template")
@@ -210,127 +274,177 @@ def build_pdf(doc: dict, destination: Path) -> None:
     ):
         pdf.add_font(name, style, str(path))
     pdf.add_page()
+    usable = pdf.w - pdf.l_margin - pdf.r_margin
+    label_width = 72.0
+    body_leading = 5.55
+
+    def remaining() -> float:
+        return pdf.h - 26 - pdf.get_y()
 
     def ensure(space: float) -> None:
-        if pdf.get_y() > pdf.h - 22 - space:
+        if remaining() < space:
             pdf.add_page()
 
-    pdf.set_font("Sans", "B", 8.5)
-    pdf.set_text_color(120, 20, 20)
-    pdf.cell(0, 4.5, doc["kicker"], align="L", new_x="LMARGIN", new_y="NEXT")
-    pdf.ln(1.5)
-    pdf.set_text_color(15, 15, 15)
-    pdf.set_font("Serif", "B", 18)
-    pdf.multi_cell(0, 8, doc["title"], align="L", new_x="LMARGIN", new_y="NEXT")
-    pdf.ln(1)
-    pdf.set_font("Serif", "I", 11)
-    pdf.set_text_color(40, 40, 40)
-    pdf.multi_cell(0, 5.2, doc["subtitle"], align="L", new_x="LMARGIN", new_y="NEXT")
-    pdf.ln(2.5)
-    pdf.set_fill_color(245, 245, 245)
-    pdf.set_draw_color(30, 30, 30)
-    pdf.set_text_color(15, 15, 15)
-    pdf.set_font("Serif", "B", 10.5)
-    pdf.multi_cell(
-        0,
-        5,
-        doc["caveat"],
-        align="C",
-        fill=True,
-        border=1,
-        padding=2.4,
-        new_x="LMARGIN",
-        new_y="NEXT",
-    )
-    pdf.ln(3)
+    mark_h = 13.2
+    mark_w = mark_h * logos["mark_ratio"]
+    word_h = mark_h
+    word_w = word_h * logos["word_ratio"]
+    logo_y = pdf.get_y()
+    pdf.image(str(logos["mark"]), x=pdf.l_margin, y=logo_y, h=mark_h)
+    pdf.image(str(logos["word"]), x=pdf.l_margin + mark_w + 3.0, y=logo_y, h=word_h)
+    pdf.set_font("Sans", "B", 8)
+    pdf.set_text_color(*BRAND)
+    pdf.set_xy(pdf.l_margin, logo_y + 4.2)
+    pdf.cell(usable, 4.5, doc["kicker"], align="R")
+    rule_y = logo_y + mark_h + 3.2
+    pdf.set_draw_color(*HAIRLINE)
+    pdf.set_line_width(0.25)
+    pdf.line(pdf.l_margin, rule_y, pdf.w - pdf.r_margin, rule_y)
+    pdf.set_draw_color(*BRAND)
+    pdf.set_line_width(0.7)
+    pdf.line(pdf.l_margin, rule_y, pdf.l_margin + 28, rule_y)
+    pdf.set_y(rule_y + 5.5)
 
-    def paragraph(text: str, *, size: float = 10.5, style: str = "", gap: float = 1.8) -> None:
-        pdf.set_text_color(20, 20, 20)
-        pdf.set_font("Serif", style, size)
-        pdf.multi_cell(0, 5.05, text, align="J", new_x="LMARGIN", new_y="NEXT")
+    pdf.set_text_color(*INK)
+    pdf.set_font("Serif", "B", 18)
+    pdf.multi_cell(0, 8.2, doc["title"], align="L", new_x="LMARGIN", new_y="NEXT")
+    pdf.ln(1.2)
+    pdf.set_font("Serif", "I", 11)
+    pdf.set_text_color(*MUTED)
+    pdf.multi_cell(0, 5.4, doc["subtitle"], align="L", new_x="LMARGIN", new_y="NEXT")
+    pdf.ln(3.2)
+
+    pdf.set_font("Serif", "", 10.5)
+    caveat_h = pdf.multi_cell(usable - 8, 5.2, doc["caveat"], dry_run=True, output="HEIGHT")
+    box_h = caveat_h + 5.2
+    box_y = pdf.get_y()
+    pdf.set_fill_color(247, 247, 247)
+    pdf.rect(pdf.l_margin, box_y, usable, box_h, style="F")
+    pdf.set_fill_color(*BRAND)
+    pdf.rect(pdf.l_margin, box_y, 1.15, box_h, style="F")
+    pdf.set_xy(pdf.l_margin + 4.2, box_y + 2.5)
+    pdf.set_text_color(*INK)
+    pdf.multi_cell(usable - 8, 5.2, doc["caveat"], align="L", new_x="LMARGIN", new_y="NEXT")
+    pdf.set_y(box_y + box_h + 5)
+
+    def paragraph(text: str, *, gap: float = 2.15) -> None:
+        pdf.set_text_color(*INK)
+        pdf.set_font("Serif", "", 11)
+        height = pdf.multi_cell(0, body_leading, text, dry_run=True, output="HEIGHT")
+        if remaining() < 22 and height > remaining():
+            pdf.add_page()
+        pdf.multi_cell(0, body_leading, text, align="J", new_x="LMARGIN", new_y="NEXT")
         pdf.ln(gap)
 
     def field(label: str) -> None:
         ensure(12)
-        pdf.set_text_color(20, 20, 20)
-        pdf.set_font("Serif", "", 10.5)
         y = pdf.get_y()
+        pdf.set_text_color(*INK)
+        pdf.set_font("Serif", "", 11)
         pdf.set_xy(pdf.l_margin, y)
-        pdf.cell(pdf.get_string_width(label) + 2, 6, label, new_x="END", new_y="TOP")
-        x_start = pdf.get_x()
-        x_end = pdf.w - pdf.r_margin
-        pdf.set_draw_color(25, 25, 25)
-        pdf.set_line_width(0.25)
-        if x_end - x_start > 24:
-            pdf.line(x_start, y + 5.1, x_end, y + 5.1)
-        pdf.set_xy(pdf.l_margin, y + 8)
+        pdf.cell(label_width, 6, label, new_x="RIGHT", new_y="TOP")
+        pdf.set_draw_color(35, 35, 35)
+        pdf.set_line_width(0.3)
+        pdf.line(pdf.l_margin + label_width, y + 5.5, pdf.w - pdf.r_margin, y + 5.5)
+        pdf.set_xy(pdf.l_margin, y + 9.2)
 
     def signature(party: str) -> None:
-        ensure(52)
-        pdf.ln(1.5)
-        pdf.set_font("Serif", "B", 12)
-        pdf.set_text_color(15, 15, 15)
-        pdf.cell(0, 6, party, new_x="LMARGIN", new_y="NEXT")
-        pdf.ln(0.5)
-        for label in (
+        labels = (
             "Legal name",
             "Authorized representative (print name)",
             "Signature",
             "Title",
             "Date",
-        ):
-            field(label)
-        pdf.ln(1)
+        )
+        ensure(16 + len(labels) * 13)
+        pdf.ln(2)
+        pdf.set_font("Serif", "B", 13)
+        pdf.set_text_color(*INK)
+        pdf.cell(0, 6.5, party, new_x="LMARGIN", new_y="NEXT")
+        name_w = pdf.get_string_width(party)
+        y = pdf.get_y() + 0.4
+        pdf.set_draw_color(*BRAND)
+        pdf.set_line_width(0.45)
+        pdf.line(pdf.l_margin, y, pdf.l_margin + name_w + 0.6, y)
+        pdf.set_y(y + 3.2)
+        for label in labels:
+            pdf.set_font("Sans", "", 8)
+            pdf.set_text_color(*MUTED)
+            pdf.cell(0, 4, label, new_x="LMARGIN", new_y="NEXT")
+            line_y = pdf.get_y() + 6.4
+            pdf.set_draw_color(32, 32, 32)
+            pdf.set_line_width(0.35)
+            pdf.line(pdf.l_margin, line_y, pdf.w - pdf.r_margin, line_y)
+            pdf.set_y(line_y + 3.4)
+        pdf.ln(1.5)
 
     def choices() -> None:
-        ensure(18)
-        pdf.ln(1.2)
-        pdf.set_font("Serif", "", 10.5)
-        pdf.set_text_color(20, 20, 20)
-        y = pdf.get_y() + 0.4
+        ensure(16)
+        pdf.ln(1.4)
+        pdf.set_font("Serif", "", 11)
+        pdf.set_text_color(*INK)
+        y = pdf.get_y() + 0.5
         x = pdf.l_margin
-        pdf.set_draw_color(20, 20, 20)
-        pdf.set_line_width(0.3)
-        pdf.rect(x, y, 3.5, 3.5)
-        pdf.set_xy(x + 5, pdf.get_y())
-        pdf.cell(34, 5, "exclusive", new_x="END", new_y="TOP")
-        x2 = pdf.get_x() + 8
-        pdf.rect(x2, y, 3.5, 3.5)
-        pdf.set_xy(x2 + 5, pdf.get_y())
-        pdf.cell(50, 5, "non-exclusive", new_x="LMARGIN", new_y="NEXT")
-        pdf.set_font("Serif", "I", 9.5)
-        pdf.set_text_color(45, 45, 45)
+        pdf.set_draw_color(32, 32, 32)
+        pdf.set_line_width(0.35)
+        pdf.rect(x, y, 3.6, 3.6)
+        pdf.set_xy(x + 5.2, pdf.get_y())
+        pdf.cell(36, 5.2, "exclusive", new_x="END", new_y="TOP")
+        x2 = pdf.get_x() + 6
+        pdf.rect(x2, y, 3.6, 3.6)
+        pdf.set_xy(x2 + 5.2, pdf.get_y())
+        pdf.cell(48, 5.2, "non-exclusive", new_x="LMARGIN", new_y="NEXT")
+        pdf.ln(0.8)
+        pdf.set_font("Serif", "I", 10)
+        pdf.set_text_color(*MUTED)
         pdf.multi_cell(
             0,
-            4.6,
+            5,
             "The Parties mark one box. An empty box is not a selection.",
             new_x="LMARGIN",
             new_y="NEXT",
         )
-        pdf.ln(1.6)
+        pdf.ln(1.8)
+
+    def heading(text: str) -> None:
+        # Keep both signature blocks on one page instead of splitting them.
+        if text.startswith("16.") and pdf.get_y() > pdf.t_margin + 12:
+            pdf.add_page()
+        ensure(30)
+        pdf.ln(2.6)
+        match = re.match(r"^(\d+\.)\s+(.*)$", text)
+        pdf.set_font("Serif", "B", 12.5)
+        if match:
+            pdf.set_text_color(*BRAND)
+            number = match.group(1)
+            pdf.cell(pdf.get_string_width(number) + 1.8, 6.6, number, new_x="END", new_y="TOP")
+            pdf.set_text_color(*INK)
+            pdf.multi_cell(0, 6.6, match.group(2), new_x="LMARGIN", new_y="NEXT")
+        else:
+            pdf.set_text_color(*INK)
+            pdf.multi_cell(0, 6.6, text, new_x="LMARGIN", new_y="NEXT")
+        y = pdf.get_y() + 0.8
+        pdf.set_draw_color(*HAIRLINE)
+        pdf.set_line_width(0.2)
+        pdf.line(pdf.l_margin, y, pdf.w - pdf.r_margin, y)
+        pdf.set_y(y + 2.4)
 
     for block in doc["blocks"]:
         kind = block["type"]
         if kind == "h":
-            ensure(24)
-            pdf.ln(1.4)
-            pdf.set_text_color(15, 15, 15)
-            pdf.set_font("Serif", "B", 12.5)
-            pdf.multi_cell(0, 6, block["text"], new_x="LMARGIN", new_y="NEXT")
-            pdf.ln(1)
+            heading(block["text"])
         elif kind == "p":
-            style = ""
             text = block["text"]
-            if text.startswith("(") and len(text) > 3 and text[1].isalpha() and text[2] == ")":
-                paragraph(text, gap=1.2)
-            elif text == doc["caveat"]:
+            if text == doc["caveat"]:
+                pdf.ln(2)
+                pdf.set_font("Serif", "B", 11)
+                pdf.set_text_color(*INK)
+                pdf.multi_cell(0, 5.4, text, align="C", new_x="LMARGIN", new_y="NEXT")
                 pdf.ln(1)
-                pdf.set_font("Serif", "B", 10.5)
-                pdf.set_text_color(15, 15, 15)
-                pdf.multi_cell(0, 5, text, align="C", new_x="LMARGIN", new_y="NEXT")
-                pdf.ln(1)
+            elif text.startswith("(") and len(text) > 3 and text[1].isalpha() and text[2] == ")":
+                paragraph(text, gap=1.35)
             else:
-                paragraph(text, style=style)
+                paragraph(text)
         elif kind == "field":
             field(block["text"])
         elif kind == "signature":
@@ -359,13 +473,57 @@ def w_p(inner: str, ppr: str = "") -> str:
     return f"<w:p>{ppr}<w:r>{inner}</w:r></w:p>"
 
 
-def w_text(text: str, *, bold: bool = False, italic: bool = False, size: int = 22) -> str:
+def w_text(text: str, *, bold: bool = False, italic: bool = False, size: int = 22, color: str = "") -> str:
     props = [f'<w:sz w:val="{size}"/>', f'<w:szCs w:val="{size}"/>', '<w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>']
     if bold:
         props.append("<w:b/>")
     if italic:
         props.append("<w:i/>")
+    if color:
+        props.append(f'<w:color w:val="{color}"/>')
     return f"<w:rPr>{''.join(props)}</w:rPr><w:t xml:space=\"preserve\">{xml_escape(text)}</w:t>"
+
+
+def emu(mm: float) -> int:
+    return int(round(mm * 36000))
+
+
+def inline_image(rel_id: str, name: str, width_mm: float, height_mm: float, doc_pr: int) -> str:
+    cx = emu(width_mm)
+    cy = emu(height_mm)
+    return f"""<w:r>
+      <w:drawing>
+        <wp:inline distT="0" distB="0" distL="0" distR="114300" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+          <wp:extent cx="{cx}" cy="{cy}"/>
+          <wp:effectExtent l="0" t="0" r="0" b="0"/>
+          <wp:docPr id="{doc_pr}" name="{xml_escape(name)}" descr="{xml_escape(name)}"/>
+          <wp:cNvGraphicFramePr>
+            <a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/>
+          </wp:cNvGraphicFramePr>
+          <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+            <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+              <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                <pic:nvPicPr>
+                  <pic:cNvPr id="{doc_pr}" name="{xml_escape(name)}"/>
+                  <pic:cNvPicPr/>
+                </pic:nvPicPr>
+                <pic:blipFill>
+                  <a:blip r:embed="{rel_id}"/>
+                  <a:stretch><a:fillRect/></a:stretch>
+                </pic:blipFill>
+                <pic:spPr>
+                  <a:xfrm>
+                    <a:off x="0" y="0"/>
+                    <a:ext cx="{cx}" cy="{cy}"/>
+                  </a:xfrm>
+                  <a:prstGeom prst="rect"><a:avLst/></a:prstGeom>
+                </pic:spPr>
+              </pic:pic>
+            </a:graphicData>
+          </a:graphic>
+        </wp:inline>
+      </w:drawing>
+    </w:r>"""
 
 
 def paragraph(text: str, *, style: str = "Body", bold: bool = False, italic: bool = False, size: int = 22, align: str = "") -> str:
@@ -390,8 +548,23 @@ def field_paragraph(label: str) -> str:
     </w:p>"""
 
 
+def signature_blank(label: str) -> str:
+    return (
+        f"<w:p><w:pPr><w:spacing w:before=\"140\" w:after=\"0\"/></w:pPr>"
+        f"<w:r>{w_text(label, size=18, color='555555')}</w:r></w:p>"
+        f"<w:p><w:pPr>"
+        f"<w:spacing w:before=\"60\" w:after=\"80\"/>"
+        f"<w:pBdr><w:bottom w:val=\"single\" w:sz=\"8\" w:space=\"1\" w:color=\"222222\"/></w:pBdr>"
+        f"</w:pPr><w:r>{w_text(' ', size=24)}</w:r></w:p>"
+    )
+
+
 def signature_block(party: str) -> str:
-    parts = [paragraph(party, style="Heading1", bold=True, size=24)]
+    parts = [
+        f"<w:p><w:pPr><w:spacing w:before=\"280\" w:after=\"40\"/>"
+        f"<w:pBdr><w:bottom w:val=\"single\" w:sz=\"8\" w:space=\"1\" w:color=\"E31C23\"/></w:pBdr>"
+        f"</w:pPr><w:r>{w_text(party, bold=True, size=26)}</w:r></w:p>"
+    ]
     for label in (
         "Legal name",
         "Authorized representative (print name)",
@@ -399,9 +572,19 @@ def signature_block(party: str) -> str:
         "Title",
         "Date",
     ):
-        parts.append(field_paragraph(f"{label}:"))
-    parts.append(paragraph(" ", size=20))
+        parts.append(signature_blank(label))
     return "".join(parts)
+
+
+def heading_paragraph(text: str) -> str:
+    match = re.match(r"^(\d+\.)\s+(.*)$", text)
+    if not match:
+        return paragraph(text, style="Heading1", bold=True, size=24)
+    return (
+        "<w:p><w:pPr><w:pStyle w:val=\"Heading1\"/></w:pPr>"
+        f"<w:r>{w_text(match.group(1) + ' ', bold=True, size=24, color='E31C23')}</w:r>"
+        f"<w:r>{w_text(match.group(2), bold=True, size=24)}</w:r></w:p>"
+    )
 
 
 def choices_paragraph() -> str:
@@ -411,9 +594,19 @@ def choices_paragraph() -> str:
     )
 
 
-def build_docx(doc: dict, destination: Path) -> None:
+def build_docx(doc: dict, destination: Path, logos: dict) -> None:
+    mark_h = 14.0
+    mark_w = mark_h * logos["mark_ratio"]
+    word_w = mark_h * logos["word_ratio"]
+    lockup = (
+        "<w:p><w:pPr><w:spacing w:before=\"0\" w:after=\"80\"/></w:pPr>"
+        + inline_image("rId5", "Seven Color mark", mark_w, mark_h, 1)
+        + inline_image("rId6", "sourcing.center wordmark", word_w, mark_h, 2)
+        + f"<w:r>{w_text('    ' + doc['kicker'], bold=True, size=18, color='E31C23')}</w:r>"
+        + "</w:p>"
+    )
     body: list[str] = [
-        paragraph(doc["kicker"], style="Kicker", bold=True, size=18),
+        lockup,
         paragraph(doc["title"], style="Title", bold=True, size=36),
         paragraph(doc["subtitle"], style="Subtitle", italic=True, size=22),
         f"""<w:p>
@@ -434,7 +627,7 @@ def build_docx(doc: dict, destination: Path) -> None:
     for block in doc["blocks"]:
         kind = block["type"]
         if kind == "h":
-            body.append(paragraph(block["text"], style="Heading1", bold=True, size=24))
+            body.append(heading_paragraph(block["text"]))
         elif kind == "p":
             italic = block["text"] == doc["caveat"]
             align = "center" if italic else ""
@@ -493,11 +686,15 @@ def build_docx(doc: dict, destination: Path) -> None:
   </w:style>
   <w:style w:type="paragraph" w:styleId="Kicker">
     <w:name w:val="Kicker"/>
-    <w:rPr><w:b/><w:sz w:val="18"/><w:szCs w:val="18"/><w:color w:val="7A1414"/></w:rPr>
+    <w:rPr><w:b/><w:sz w:val="18"/><w:szCs w:val="18"/><w:color w:val="E31C23"/></w:rPr>
   </w:style>
   <w:style w:type="paragraph" w:styleId="Heading1">
     <w:name w:val="heading 1"/>
-    <w:pPr><w:spacing w:before="280" w:after="80"/><w:keepNext/></w:pPr>
+    <w:pPr>
+      <w:spacing w:before="280" w:after="80"/>
+      <w:keepNext/>
+      <w:pBdr><w:bottom w:val="single" w:sz="4" w:space="1" w:color="D6D6D6"/></w:pBdr>
+    </w:pPr>
     <w:rPr><w:b/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr>
   </w:style>
 </w:styles>
@@ -506,8 +703,11 @@ def build_docx(doc: dict, destination: Path) -> None:
     header_xml = f"""<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <w:hdr xmlns:w="{W_NS}">
   <w:p>
-    <w:pPr><w:jc w:val="right"/></w:pPr>
-    <w:r>{w_text("Unsigned template", italic=True, size=16)}</w:r>
+    <w:pPr>
+      <w:jc w:val="right"/>
+      <w:pBdr><w:bottom w:val="single" w:sz="6" w:space="1" w:color="E31C23"/></w:pBdr>
+    </w:pPr>
+    <w:r>{w_text("Unsigned template", italic=True, size=16, color="555555")}</w:r>
   </w:p>
 </w:hdr>
 """
@@ -545,12 +745,15 @@ def build_docx(doc: dict, destination: Path) -> None:
   <Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/header" Target="header1.xml"/>
   <Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer" Target="footer1.xml"/>
   <Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings" Target="settings.xml"/>
+  <Relationship Id="rId5" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/seven-color-mark.png"/>
+  <Relationship Id="rId6" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/sourcing-center-wordmark.png"/>
 </Relationships>
 """
     content_types = f"""<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Types xmlns="{CT_NS}">
   <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
   <Default Extension="xml" ContentType="application/xml"/>
+  <Default Extension="png" ContentType="image/png"/>
   <Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
   <Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/>
   <Override PartName="/word/header1.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.header+xml"/>
@@ -600,6 +803,8 @@ def build_docx(doc: dict, destination: Path) -> None:
         add("word/_rels/document.xml.rels", word_rels)
         add("docProps/core.xml", core_xml)
         add("docProps/app.xml", app_xml)
+        archive.write(logos["mark"], "word/media/seven-color-mark.png")
+        archive.write(logos["word"], "word/media/sourcing-center-wordmark.png")
 
 def plain_text(doc: dict) -> str:
     chunks = [doc["title"], doc["kicker"], doc["subtitle"], doc["caveat"]]
@@ -652,10 +857,35 @@ def assert_pdf(path: Path, doc: dict) -> None:
         preview_dir = Path("/tmp/nda-preview")
         preview_dir.mkdir(parents=True, exist_ok=True)
         image.save(preview_dir / f"page-{index + 1}.png")
-    full = "\n".join(extracted)
+    raw = " ".join(" ".join(page.split()) for page in extracted)
+    body_parts: list[str] = []
+    for page_text in extracted:
+        kept: list[str] = []
+        for line in page_text.splitlines():
+            collapsed = " ".join(line.split())
+            if not collapsed or collapsed == "Unsigned template":
+                continue
+            if collapsed.startswith("Unsigned template"):
+                continue
+            if "Page " in collapsed and " of " in collapsed:
+                continue
+            kept.append(collapsed)
+        body_parts.append(" ".join(kept))
+    body_text = " ".join(body_parts)
+    normalized = " ".join(body_text.split())
+    missing_blocks = []
+    for block in doc["blocks"]:
+        if block["type"] == "choices":
+            continue
+        phrase = " ".join(block["text"].split())
+        if phrase not in normalized and phrase not in " ".join(raw.split()):
+            missing_blocks.append(phrase[:120])
+    if missing_blocks:
+        raise SystemExit("PDF dropped source text:\n- " + "\n- ".join(missing_blocks))
     for phrase in (
         doc["title"],
         doc["caveat"],
+        doc["kicker"],
         "independently developed",
         "does not transfer ownership",
         "Authorized representative (print name)",
@@ -663,10 +893,10 @@ def assert_pdf(path: Path, doc: dict) -> None:
         "Governing law",
         "non-exclusive",
     ):
-        if phrase not in full:
+        if phrase not in raw:
             raise SystemExit(f"PDF text is missing: {phrase}")
     for phrase in FORBIDDEN_SNIPPETS:
-        if phrase in full:
+        if phrase in raw:
             raise SystemExit(f"PDF text contains forbidden snippet: {phrase}")
     print(f"PDF ok: {len(pdf)} pages, {path.stat().st_size} bytes")
 
@@ -682,6 +912,8 @@ def assert_docx(path: Path, doc: dict) -> None:
             "word/styles.xml",
             "word/footer1.xml",
             "word/_rels/document.xml.rels",
+            "word/media/seven-color-mark.png",
+            "word/media/sourcing-center-wordmark.png",
         }
         missing = required - names
         if missing:
@@ -705,8 +937,10 @@ def main() -> None:
     assert_copy(doc)
     pdf_path = OUT_DIR / PDF_NAME
     docx_path = OUT_DIR / DOCX_NAME
-    build_pdf(doc, pdf_path)
-    build_docx(doc, docx_path)
+    with tempfile.TemporaryDirectory(prefix="nda-logos-") as temporary:
+        logos = prepare_logos(Path(temporary))
+        build_pdf(doc, pdf_path, logos)
+        build_docx(doc, docx_path, logos)
     assert_docx(docx_path, doc)
     try:
         assert_pdf(pdf_path, doc)
