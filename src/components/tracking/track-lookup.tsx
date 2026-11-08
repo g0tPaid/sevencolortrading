@@ -5,7 +5,7 @@ import { countryLabel } from "@/lib/analytics-geo";
 import { WORLD_LAND_PATH } from "@/components/home/world-land-path";
 import { shipmentPhase, type ShipmentPhase } from "@/lib/tracking/greeting";
 import { newestFirst } from "@/lib/tracking/public-view";
-import { routeArc } from "@/lib/tracking/route-map";
+import { pointOnRoute, routeArc } from "@/lib/tracking/route-map";
 import { glossTrackingText, hasChinese } from "@/lib/tracking/zh-en";
 
 type PublicEvent = {
@@ -141,6 +141,30 @@ function BrandedPlane({ facesLeft }: { facesLeft: boolean }) {
   );
 }
 
+function useRouteMotion(active: boolean) {
+  const [reduce, setReduce] = useState(false);
+  const [t, setT] = useState(0);
+  useEffect(() => {
+    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const apply = () => setReduce(query.matches);
+    apply();
+    query.addEventListener("change", apply);
+    return () => query.removeEventListener("change", apply);
+  }, []);
+  useEffect(() => {
+    if (!active || reduce) return;
+    let frame = 0;
+    const started = performance.now();
+    const tick = (now: number) => {
+      setT(((now - started) / 9000) % 1);
+      frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [active, reduce]);
+  return { t, animate: active && !reduce };
+}
+
 function RouteLabel({ x, y, text }: { x: number; y: number; text: string }) {
   const above = y > 56;
   return (
@@ -171,9 +195,11 @@ function RouteMap({
   phase: ShipmentPhase;
 }) {
   const arc = routeArc(origin, destination);
+  const motion = useRouteMotion(phase === "in_transit");
   if (!arc) return null;
-  const parked = phase === "delivered" ? arc.to : arc.from;
-  const fly = phase === "in_transit";
+  const fly = phase === "in_transit" && motion.animate;
+  const progress = phase === "delivered" ? 1 : fly ? motion.t : 0;
+  const point = pointOnRoute(arc, progress);
   return (
     <figure
       className="mt-5 overflow-hidden rounded-[1.5rem] border border-line bg-paper shadow-[0_16px_40px_-28px_rgba(16,16,16,0.55)]"
@@ -193,13 +219,7 @@ function RouteMap({
           <circle cx={arc.to.x} cy={arc.to.y} r="8" fill="#E31C23" />
           <RouteLabel x={arc.from.x} y={arc.from.y} text={arc.originLabel} />
           <RouteLabel x={arc.to.x} y={arc.to.y} text={arc.destinationLabel} />
-          {fly ? (
-            <g className="track-plane-fly">
-              <animateMotion dur="9s" repeatCount="indefinite" path={arc.d} />
-              <BrandedPlane facesLeft={arc.facesLeft} />
-            </g>
-          ) : null}
-          <g className={fly ? "track-plane-still" : undefined} transform={`translate(${parked.x} ${parked.y})`}>
+          <g transform={`translate(${point.x} ${point.y})`} data-plane-progress={progress.toFixed(2)}>
             <BrandedPlane facesLeft={arc.facesLeft} />
           </g>
         </svg>
@@ -474,14 +494,6 @@ function ResultCard({
               {refreshing ? "Queuing refresh…" : "Refresh"}
             </button>
           </div>
-          <style>{`
-            @media (prefers-reduced-motion: reduce) {
-              .track-plane-fly { display: none; }
-            }
-            @media (prefers-reduced-motion: no-preference) {
-              .track-plane-still { display: none; }
-            }
-          `}</style>
         </section>
   );
 }
