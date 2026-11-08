@@ -98,6 +98,7 @@ function Place({
 export function TrackLookup() {
   const [number, setNumber] = useState("");
   const [pending, setPending] = useState(false);
+  const [pollExhausted, setPollExhausted] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<LookupResponse | null>(null);
@@ -130,6 +131,8 @@ export function TrackLookup() {
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault();
+    if (pending || (result?.state === "pending" && !pollExhausted)) return;
+    setPollExhausted(false);
     await lookup(number);
   }
 
@@ -140,6 +143,7 @@ export function TrackLookup() {
     const timer = setInterval(() => {
       attempts += 1;
       if (attempts > 15) {
+        setPollExhausted(true);
         setResult((current) =>
           current?.state === "pending"
             ? { ...current, message: "The check is still running. Search again in a moment." }
@@ -179,9 +183,14 @@ export function TrackLookup() {
     }
   }
 
-  const shipment = result?.state === "ready" ? result.shipment : null;
+  const showProgress = !pollExhausted && (pending || result?.state === "pending");
+  const progressLabel =
+    result?.shipment || result?.shipments?.length
+      ? "A result is in. Still checking other possible carriers."
+      : result?.message || "Checking this number with the carrier.";
+  const shipment = result?.state === "ready" ? result.shipment : result?.state === "pending" ? result.shipment : null;
   const cards =
-    result?.state === "multiple" && result.shipments?.length
+    result?.shipments?.length
       ? result.shipments
       : shipment
         ? [shipment]
@@ -206,28 +215,18 @@ export function TrackLookup() {
         <button
           type="submit"
           data-testid="track-submit"
-          disabled={pending}
-          aria-busy={pending}
+          disabled={showProgress}
+          aria-busy={showProgress}
           className="rounded-2xl bg-ink px-5 py-3 text-sm font-medium text-paper disabled:opacity-60"
         >
           Search
         </button>
       </form>
-      {pending ? (
-        <p role="status" className="mt-3 text-sm text-muted">
-          Searching…
-        </p>
-      ) : null}
+      {showProgress ? <TrackingProgress label={progressLabel} /> : null}
 
       {error ? (
         <p role="alert" className="mt-4 rounded-2xl border border-line bg-paper-elevated px-4 py-3 text-sm text-ink">
           {error}
-        </p>
-      ) : null}
-
-      {result?.state === "pending" && !pending ? (
-        <p role="status" className="mt-3 text-sm text-muted">
-          {result.message || "Checking this number with the carrier."}
         </p>
       ) : null}
 
@@ -242,7 +241,7 @@ export function TrackLookup() {
       ) : null}
 
       {cards.map((card) => (
-        <ResultCard key={`${card.trackingNumber}-${card.carrier.id ?? card.carrier.name}`} shipment={card} onRefresh={onRefresh} refreshing={refreshing} />
+        <ResultCard key={`${card.trackingNumber}-${card.carrier.id ?? card.carrier.name}`} shipment={card} onRefresh={onRefresh} refreshing={refreshing || showProgress} />
       ))}
     </div>
   );
@@ -321,5 +320,33 @@ function ResultCard({
             )}
           </div>
         </section>
+  );
+}
+
+function TrackingProgress({ label }: { label: string }) {
+  return (
+    <div className="mt-3">
+      <div
+        role="progressbar"
+        aria-label={label}
+        data-testid="track-progress"
+        className="h-1.5 w-full overflow-hidden rounded-full bg-accent-soft"
+      >
+        <div className="track-progress-slide h-full w-1/3 rounded-full bg-accent" />
+      </div>
+      <p role="status" aria-live="polite" className="mt-2 text-sm text-muted">
+        {label}
+      </p>
+      <style>{`
+        .track-progress-slide { animation: track-progress-slide 1.1s ease-in-out infinite; }
+        @keyframes track-progress-slide {
+          0% { transform: translateX(-120%); }
+          100% { transform: translateX(320%); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .track-progress-slide { animation: none; width: 100%; }
+        }
+      `}</style>
+    </div>
   );
 }
