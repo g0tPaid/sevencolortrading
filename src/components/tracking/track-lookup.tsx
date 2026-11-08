@@ -126,16 +126,38 @@ function Gloss({
   );
 }
 
-function BrandedPlane() {
+function BrandedPlane({ facesLeft }: { facesLeft: boolean }) {
   return (
-    <image
-      href="/tracking/sourcing-center-plane.png"
-      width="170"
-      height="90"
-      x="-85"
-      y="-45"
-      data-testid="track-plane"
-    />
+    <g transform={facesLeft ? "scale(-1 1)" : undefined} data-plane-facing={facesLeft ? "left" : "right"}>
+      <image
+        href="/tracking/sourcing-center-plane.png"
+        width="170"
+        height="90"
+        x="-85"
+        y="-45"
+        data-testid="track-plane"
+      />
+    </g>
+  );
+}
+
+function RouteLabel({ x, y, text }: { x: number; y: number; text: string }) {
+  const above = y > 56;
+  return (
+    <text
+      x={x}
+      y={above ? y - 22 : y + 38}
+      textAnchor="middle"
+      fontSize="26"
+      fontWeight="600"
+      fill="#161616"
+      stroke="#f7f4ef"
+      strokeWidth="8"
+      strokeLinejoin="round"
+      paintOrder="stroke"
+    >
+      {text}
+    </text>
   );
 }
 
@@ -153,33 +175,35 @@ function RouteMap({
   const parked = phase === "delivered" ? arc.to : arc.from;
   const fly = phase === "in_transit";
   return (
-    <figure className="mt-4" data-testid="track-route" data-route-motion={fly ? "fly" : "still"}>
-      <figcaption className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
-        Route illustration
-        <span className="ml-2 font-normal normal-case tracking-normal">Natural Earth</span>
+    <figure
+      className="mt-5 overflow-hidden rounded-[1.5rem] border border-line bg-paper shadow-[0_16px_40px_-28px_rgba(16,16,16,0.55)]"
+      data-testid="track-route"
+      data-route-motion={fly ? "fly" : "still"}
+    >
+      <figcaption className="flex items-baseline justify-between gap-3 px-4 pb-2 pt-3.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted sm:px-5">
+        <span>Route illustration</span>
+        <span className="font-normal normal-case tracking-normal">Natural Earth</span>
       </figcaption>
-      <svg viewBox="0 0 1000 500" className="mt-2 h-auto w-full" role="img" aria-label={`Route illustration from ${arc.originLabel} to ${arc.destinationLabel}`}>
-        <rect width="1000" height="500" className="fill-canvas" />
-        <path d={WORLD_LAND_PATH} className="fill-ink/15" />
-        <path d={arc.d} fill="none" className="stroke-accent" strokeWidth="4" strokeLinecap="round" />
-        <circle cx={arc.from.x} cy={arc.from.y} r="7" className="fill-ink" />
-        <circle cx={arc.to.x} cy={arc.to.y} r="7" className="fill-accent" />
-        <text x={arc.from.x} y={Math.max(28, arc.from.y - 16)} textAnchor="middle" className="fill-ink" fontSize="22">
-          {arc.originLabel}
-        </text>
-        <text x={arc.to.x} y={Math.max(28, arc.to.y - 16)} textAnchor="middle" className="fill-ink" fontSize="22">
-          {arc.destinationLabel}
-        </text>
-        {fly ? (
-          <g className="track-plane-fly">
-            <animateMotion dur="9s" repeatCount="indefinite" rotate="auto" path={arc.d} />
-            <BrandedPlane />
+      <div className="mx-3 mb-3 overflow-hidden rounded-2xl border border-line/80 bg-[#f4f1ec] sm:mx-4">
+        <svg viewBox="0 0 1000 500" className="block h-auto w-full" role="img" aria-label={`Route illustration from ${arc.originLabel} to ${arc.destinationLabel}`}>
+          <rect width="1000" height="500" fill="#f7f4ef" />
+          <path d={WORLD_LAND_PATH} fill="#d9d3c8" />
+          <path d={arc.d} fill="none" stroke="#E31C23" strokeWidth="5" strokeLinecap="round" opacity="0.9" />
+          <circle cx={arc.from.x} cy={arc.from.y} r="8" fill="#161616" />
+          <circle cx={arc.to.x} cy={arc.to.y} r="8" fill="#E31C23" />
+          <RouteLabel x={arc.from.x} y={arc.from.y} text={arc.originLabel} />
+          <RouteLabel x={arc.to.x} y={arc.to.y} text={arc.destinationLabel} />
+          {fly ? (
+            <g className="track-plane-fly">
+              <animateMotion dur="9s" repeatCount="indefinite" path={arc.d} />
+              <BrandedPlane facesLeft={arc.facesLeft} />
+            </g>
+          ) : null}
+          <g className={fly ? "track-plane-still" : undefined} transform={`translate(${parked.x} ${parked.y})`}>
+            <BrandedPlane facesLeft={arc.facesLeft} />
           </g>
-        ) : null}
-        <g className={fly ? "track-plane-still" : undefined} transform={`translate(${parked.x} ${parked.y})`}>
-          <BrandedPlane />
-        </g>
-      </svg>
+        </svg>
+      </div>
     </figure>
   );
 }
