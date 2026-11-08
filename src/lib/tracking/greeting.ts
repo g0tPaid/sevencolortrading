@@ -1,34 +1,33 @@
 /**
- * A greeting may include one given name taken from the labeled recipient field.
- * The full recipient string is never kept.
+ * The greeting uses the labeled recipient display name as printed.
+ * Phones, email addresses, street addresses, and markup are dropped.
+ * The name is not split into a given name.
  */
-
-const GIVEN_NAME = /^[A-Za-z][A-Za-z'’-]{1,19}$/;
-const FAMILY_NAME = /^[A-Za-z][A-Za-z'’-]{1,29}$/;
-const ORG = /\b(?:inc|llc|ltd|co|company|corp|gmbh|logistics|express|group|store|shop|warehouse)\b/i;
-const ORG_ZH = /公司|有限|集团/;
 
 export type ShipmentPhase = "in_transit" | "delivered" | "preparing" | "unknown";
 
-/** Keep a given name only when the labeled field is one person in a simple form. */
-export function extractGivenName(raw: string): string | null {
+const MAX_NAME = 80;
+
+/** Plain-text display name from the labeled recipient field, or null when it is not a name. */
+export function recipientDisplayName(raw: string): string | null {
   const text = raw
     .replace(/<script\b[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style\b[\s\S]*?<\/style>/gi, " ")
     .replace(/<[^>]*>/g, " ")
-    .replace(/&nbsp;/gi, " ")
+    .replace(/&nbsp;|&#160;|&#xa0;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;|&apos;/gi, "'")
+    .replace(/[\u0000-\u001F\u007F]/g, "")
     .replace(/\s+/g, " ")
     .trim();
-  if (!text || text.length > 80) return null;
-  if (/[<>@]|\d|[*•·]|收件|地址|电话|手机/.test(text)) return null;
-  if (ORG.test(text) || ORG_ZH.test(text)) return null;
-  if (/[&/]|\\|\band\b/i.test(text)) return null;
-  if (/[\u3400-\u9fff]/.test(text) || text.includes(",")) return null;
-  const parts = text.split(" ");
-  if (parts.length < 1 || parts.length > 2) return null;
-  const given = parts[0] ?? "";
-  if (!GIVEN_NAME.test(given)) return null;
-  if (parts.length === 2 && !FAMILY_NAME.test(parts[1] ?? "")) return null;
-  return given;
+  if (!text || text.length > MAX_NAME) return null;
+  if (/[<>]/.test(text) || text.includes("@")) return null;
+  if (/\d{3,}/.test(text)) return null;
+  if (/[*•]/.test(text)) return null;
+  if (/\b(?:road|street|avenue|lane|blvd|drive|court|路|街|室|栋|单元)\b/i.test(text) || /号楼|号室/.test(text)) return null;
+  if (!/\p{L}/u.test(text)) return null;
+  return text;
 }
 
 export function shipmentPhase(status: string): ShipmentPhase {
@@ -43,8 +42,8 @@ export function shipmentPhase(status: string): ShipmentPhase {
 }
 
 /** Status-aware line. Unknown, pending, and errors produce no movement claim. */
-export function trackingGreeting(status: string, givenName: string | null): string | null {
-  const name = givenName && extractGivenName(givenName) === givenName ? givenName : null;
+export function trackingGreeting(status: string, displayName: string | null): string | null {
+  const name = displayName && recipientDisplayName(displayName) === displayName ? displayName : null;
   const phase = shipmentPhase(status);
   if (phase === "in_transit") {
     return name ? `${name}, your shipment is on its way to you. Cheers!` : "Your shipment is on its way to you. Cheers!";
