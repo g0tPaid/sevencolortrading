@@ -41,6 +41,26 @@ export function shipmentPhase(status: string): ShipmentPhase {
   return "unknown";
 }
 
+const GREETING_TAILS = [
+  ", your shipment is on its way to you. Cheers!",
+  ", your shipment has been delivered. Cheers!",
+  ", your shipment is being prepared. Cheers!",
+] as const;
+
+/**
+ * The display-name prefix of a greeting this app composed, or null when the
+ * line has no name. The rest includes the comma, so name + rest is the full line.
+ */
+export function greetingNameSpan(greeting: string): { name: string; rest: string } | null {
+  for (const rest of GREETING_TAILS) {
+    if (!greeting.endsWith(rest) || greeting.length <= rest.length) continue;
+    const name = greeting.slice(0, -rest.length);
+    if (recipientDisplayName(name) !== name) return null;
+    return { name, rest };
+  }
+  return null;
+}
+
 /** Status-aware line. Unknown, pending, and errors produce no movement claim. */
 export function trackingGreeting(status: string, displayName: string | null): string | null {
   const name = displayName && recipientDisplayName(displayName) === displayName ? displayName : null;

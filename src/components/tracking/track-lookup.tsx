@@ -3,7 +3,7 @@
 import { FormEvent, useEffect, useRef, useState, type Ref } from "react";
 import { countryLabel } from "@/lib/analytics-geo";
 import { WORLD_LAND_PATH } from "@/components/home/world-land-path";
-import { shipmentPhase, type ShipmentPhase } from "@/lib/tracking/greeting";
+import { greetingNameSpan, shipmentPhase, type ShipmentPhase } from "@/lib/tracking/greeting";
 import { newestFirst } from "@/lib/tracking/public-view";
 import { pointOnRoute, routeArc } from "@/lib/tracking/route-map";
 import {
@@ -445,8 +445,9 @@ export function TrackLookup() {
 
   return (
     <div className="mx-auto max-w-xl">
-      <h1 data-testid="track-heading" className="mb-5 font-display text-3xl font-semibold tracking-tight text-ink sm:mb-6 sm:text-5xl">
+      <h1 data-testid="track-heading" className="track-page-heading mb-5 font-display text-[2.4rem] font-semibold leading-[0.95] tracking-tight text-ink sm:mb-6 sm:text-[3.35rem]">
         Track Global Parcels
+        <span className="track-page-rule" aria-hidden />
       </h1>
       <p className="sr-only" aria-live="polite" data-testid="track-live">
         {announcement}
@@ -500,13 +501,51 @@ export function TrackLookup() {
           animation: track-search-spin 0.8s linear infinite;
         }
         @keyframes track-search-spin { to { transform: rotate(360deg); } }
+        .track-page-heading { animation: track-heading-in 560ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+        .track-page-rule {
+          display: block;
+          width: 4.75rem;
+          height: 3px;
+          margin-top: 0.7rem;
+          border-radius: 999px;
+          background: var(--accent);
+          transform-origin: left center;
+          animation: track-heading-rule 720ms cubic-bezier(0.16, 1, 0.3, 1) 160ms both;
+        }
+        .track-greeting-name {
+          color: var(--accent);
+          font-weight: 650;
+          background-image: linear-gradient(var(--accent), var(--accent));
+          background-repeat: no-repeat;
+          background-position: 0 100%;
+          background-size: 100% 2px;
+          -webkit-box-decoration-break: clone;
+          box-decoration-break: clone;
+          animation: track-name-line 680ms cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+        @keyframes track-heading-in {
+          from { opacity: 0; transform: translateY(8px); }
+          to { opacity: 1; transform: none; }
+        }
+        @keyframes track-heading-rule {
+          from { transform: scaleX(0); }
+          to { transform: none; }
+        }
+        @keyframes track-name-line {
+          from { background-size: 0 2px; }
+          to { background-size: 100% 2px; }
+        }
         @media (prefers-reduced-motion: reduce) {
           .track-search-btn,
           .track-search-icon,
-          .track-search-spin { animation: none; transition: none; }
+          .track-search-spin,
+          .track-page-heading,
+          .track-page-rule,
+          .track-greeting-name { animation: none; transition: none; }
           .track-search-btn:hover,
           .track-search-btn:active,
-          .track-search-btn:hover .track-search-icon { transform: none; }
+          .track-search-btn:hover .track-search-icon,
+          .track-page-rule { transform: none; }
         }
       `}</style>
       {holding ? <TrackPromo /> : null}
@@ -558,11 +597,7 @@ function ResultCard({
   return (
     <section className="mt-6 space-y-4" data-testid="track-result">
       <div className="rounded-[1.75rem] border border-line bg-paper-elevated p-5 sm:p-6">
-        {shipment.greeting ? (
-          <p data-testid="track-greeting" className="text-lg font-medium leading-snug text-ink">
-            {shipment.greeting}
-          </p>
-        ) : null}
+        {shipment.greeting ? <GreetingLine greeting={shipment.greeting} /> : null}
         <p className={`${shipment.greeting ? "mt-4" : ""} text-[11px] font-semibold uppercase tracking-[0.16em] text-muted`}>Status</p>
         <div className="mt-2">
           <Gloss text={shipment.status} prominent testId="track-status" />
@@ -639,6 +674,20 @@ function ResultCard({
         />
       ) : null}
     </section>
+  );
+}
+
+function GreetingLine({ greeting }: { greeting: string }) {
+  const parts = greetingNameSpan(greeting);
+  return (
+    <p data-testid="track-greeting" className="text-lg font-medium leading-snug text-ink">
+      {parts ? (
+        <span data-testid="track-greeting-name" className="track-greeting-name break-words">
+          {parts.name}
+        </span>
+      ) : null}
+      {parts ? parts.rest : greeting}
+    </p>
   );
 }
 

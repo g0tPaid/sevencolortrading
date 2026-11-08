@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { recipientDisplayName, shipmentPhase, trackingGreeting } from "@/lib/tracking/greeting";
+import { greetingNameSpan, recipientDisplayName, shipmentPhase, trackingGreeting } from "@/lib/tracking/greeting";
 import { parseForwarderHtml } from "@/lib/tracking/forwarder-source";
 import { pointOnRoute, routeArc, routeTangentX } from "@/lib/tracking/route-map";
 
@@ -60,6 +60,22 @@ test("greetings follow the status and never claim movement when it is unknown", 
   assert.equal(trackingGreeting("异常", "Pat Example"), null);
   assert.equal(trackingGreeting("Unknown", "Pat Example"), null);
   assert.equal(trackingGreeting("转运中", "pat@example.com"), "Your shipment is on its way to you. Cheers!");
+});
+
+test("only the composed display name is marked, including a joint name", () => {
+  const joint = trackingGreeting("转运中11/8号航班/", "Sam & Alex Example");
+  const single = trackingGreeting("已签收", "Pat Example");
+  const nameless = trackingGreeting("转运中11/8号航班/", null);
+  assert.ok(joint && single && nameless);
+  const jointParts = greetingNameSpan(joint);
+  const singleParts = greetingNameSpan(single);
+  assert.equal(jointParts?.name, "Sam & Alex Example");
+  assert.equal(jointParts && jointParts.name + jointParts.rest, joint);
+  assert.equal(singleParts?.name, "Pat Example");
+  assert.equal(singleParts && singleParts.name + singleParts.rest, single);
+  assert.equal(greetingNameSpan(nameless), null);
+  assert.equal(greetingNameSpan("Pat Example, your shipment is on its way"), null);
+  assert.equal(greetingNameSpan("pat@example.com, your shipment is on its way to you. Cheers!"), null);
 });
 
 test("a route illustration needs two known countries and does not invent a stop", () => {
