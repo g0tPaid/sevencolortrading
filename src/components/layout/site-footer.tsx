@@ -68,6 +68,7 @@ export function SiteFooter() {
                 ["1688 sourcing", "/1688-sourcing"],
                 ["UAE / GCC", "/sourcing-for/uae"],
                 ["Contact", "/contact"],
+                ["Track shipment", "/track"],
                 ["Visit China", "/visit"],
                 ["Inspection", "/inspection"],
                 ["Amazon FBA", "/amazon-fba"],

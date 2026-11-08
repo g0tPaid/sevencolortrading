@@ -21,6 +21,7 @@ const routes: Array<{ path: string; priority: number; changeFrequency: MetadataR
   { path: "/dropshipping", priority: 0.93, changeFrequency: "weekly" },
   { path: "/logistics", priority: 0.9, changeFrequency: "weekly" },
   { path: "/freight-forwarding", priority: 0.9, changeFrequency: "weekly" },
+  { path: "/track", priority: 0.55, changeFrequency: "weekly" },
   { path: "/about", priority: 0.8, changeFrequency: "monthly" },
   { path: "/services", priority: 0.8, changeFrequency: "monthly" },
   { path: "/contact", priority: 0.8, changeFrequency: "monthly" },

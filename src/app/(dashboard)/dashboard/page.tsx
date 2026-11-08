@@ -36,7 +36,9 @@ export default async function DashboardHomePage() {
     <div className="space-y-6">
       <div>
         <h1 className="font-display text-3xl font-semibold text-ink">Admin</h1>
-        <p className="mt-2 text-sm text-muted">Website pageviews and factory vendor applications.</p>
+        <p className="mt-2 text-sm text-muted">
+          Website pageviews, factory vendor applications, and shipment tracking.
+        </p>
       </div>
 
       <section className="rounded-3xl border border-line bg-paper-elevated p-6">
@@ -140,6 +142,19 @@ export default async function DashboardHomePage() {
           <p className="font-display text-3xl font-semibold text-ink">{formatCount(pendingFactories)}</p>
           <p className="mt-1 text-xs text-muted">pending</p>
           <Factory className="ml-auto mt-3 h-5 w-5 text-accent" aria-hidden />
+        </div>
+      </Link>
+
+      <Link
+        href="/dashboard/shipments"
+        className="flex items-center justify-between gap-4 rounded-3xl border border-line bg-paper-elevated p-6 transition hover:border-accent/40"
+      >
+        <div>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">Logistics</p>
+          <h2 className="mt-1 font-display text-2xl font-semibold text-ink">Shipments</h2>
+          <p className="mt-2 text-sm text-muted">
+            Tracking numbers, carrier checks, and the scheduled refresh desk. Also at /admin/shipments.
+          </p>
         </div>
       </Link>
     </div>

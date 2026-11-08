@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# shipment tracking sqlite (volume data, never commit)
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite-journal

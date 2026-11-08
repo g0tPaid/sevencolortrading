@@ -65,6 +65,10 @@ function isProtectedApi(pathname: string, method: string): boolean {
     return true;
   }
 
+  if (pathname === "/api/admin/shipments" || pathname.startsWith("/api/admin/shipments/")) {
+    return true;
+  }
+
   return false;
 }
 
