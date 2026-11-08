@@ -2,12 +2,38 @@ import { TrackingInputError } from "@/lib/tracking/types";
 import { normalizeTrackingNumber } from "@/lib/tracking/validate";
 
 /** House line shown on a valid search. Capitalization is part of the copy. */
-export const PROMO_LEAD = "Buy anything from China from ";
+export const PROMO_HEADLINE = "Buy anything from China";
+export const PROMO_BRIDGE = "from ";
+export const PROMO_LEAD = `${PROMO_HEADLINE} ${PROMO_BRIDGE}`;
 export const PROMO_HOST = "www.sourcing.center";
 export const PROMO_COPY = `${PROMO_LEAD}${PROMO_HOST}`;
 export const PROMO_HREF = "https://www.sourcing.center";
 /** Lookup starts immediately. The result stays hidden for this long. */
 export const PROMO_HOLD_MS = 3000;
+
+/**
+ * One-shot motion inside the house panel. Each piece finishes before the hold
+ * ends. Nothing here is a parcel-progress percentage.
+ */
+export const PROMO_MOTION = {
+  enterMs: 420,
+  assembleMs: 640,
+  assembleStaggerMs: 90,
+  flyMs: 2400,
+  sheenDelayMs: 1050,
+  sheenMs: 880,
+} as const;
+
+export function promoMotionFitsHold(motion = PROMO_MOTION, holdMs = PROMO_HOLD_MS): boolean {
+  const goods = 4;
+  const lastAssemble = motion.assembleMs + motion.assembleStaggerMs * (goods - 1);
+  return (
+    motion.enterMs <= holdMs &&
+    lastAssemble <= holdMs &&
+    motion.flyMs <= holdMs &&
+    motion.sheenDelayMs + motion.sheenMs <= holdMs
+  );
+}
 
 export type SearchPresentation =
   | { kind: "invalid"; message: string }

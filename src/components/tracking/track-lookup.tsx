@@ -7,15 +7,12 @@ import { shipmentPhase, type ShipmentPhase } from "@/lib/tracking/greeting";
 import { newestFirst } from "@/lib/tracking/public-view";
 import { pointOnRoute, routeArc } from "@/lib/tracking/route-map";
 import {
-  PROMO_COPY,
-  PROMO_HOST,
-  PROMO_HREF,
-  PROMO_LEAD,
   searchPresentation,
   shouldBringTimelineIntoView,
   timelineNeedsScroll,
   timelineScrollBehavior,
 } from "@/lib/tracking/track-present";
+import { TrackPromo } from "@/components/tracking/track-promo";
 import { glossTrackingText, hasChinese } from "@/lib/tracking/zh-en";
 
 type PublicEvent = {
@@ -478,19 +475,7 @@ export function TrackLookup() {
           Search
         </button>
       </form>
-      {holding ? (
-        <p
-          data-testid="track-promo"
-          data-promo={PROMO_COPY}
-          role="status"
-          className="mt-4 rounded-2xl border border-line bg-paper px-4 py-2.5 text-sm leading-snug text-ink"
-        >
-          {PROMO_LEAD}
-          <a href={PROMO_HREF} className="font-medium underline decoration-accent/40 underline-offset-2">
-            {PROMO_HOST}
-          </a>
-        </p>
-      ) : null}
+      {holding ? <TrackPromo /> : null}
       {showProgress ? <TrackingProgress label={progressLabel} /> : null}
 
       {!holding && error ? (
