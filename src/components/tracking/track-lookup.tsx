@@ -470,11 +470,45 @@ export function TrackLookup() {
           data-testid="track-submit"
           disabled={pending}
           aria-busy={pending || holding}
-          className="rounded-2xl bg-ink px-5 py-3 text-sm font-medium text-paper disabled:opacity-60"
+          className="track-search-btn inline-flex min-h-12 w-full min-w-[9.5rem] items-center justify-center gap-2 rounded-2xl bg-ink px-5 text-sm font-semibold text-paper focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
         >
-          Search
+          {pending ? <span className="track-search-spin" aria-hidden /> : <SearchMark />}
+          {pending ? "Searching" : "Search"}
         </button>
       </form>
+      <style>{`
+        .track-search-btn {
+          transition: transform 200ms cubic-bezier(0.34, 1.4, 0.64, 1), box-shadow 200ms ease;
+          box-shadow: inset 0 -3px 0 #E31C23, 0 10px 22px -16px rgba(29, 29, 31, 0.9);
+        }
+        .track-search-btn:hover:not(:disabled) {
+          transform: translateY(-2px);
+          box-shadow: inset 0 -3px 0 #E31C23, 0 16px 28px -14px rgba(227, 28, 35, 0.55);
+        }
+        .track-search-btn:active:not(:disabled) { transform: translateY(0) scale(0.98); }
+        .track-search-btn:focus-visible {
+          box-shadow: inset 0 -3px 0 #E31C23, 0 0 0 2px var(--canvas), 0 0 0 4px #E31C23;
+        }
+        .track-search-icon { transition: transform 200ms cubic-bezier(0.34, 1.5, 0.64, 1); }
+        .track-search-btn:hover:not(:disabled) .track-search-icon { transform: translate(1px, -1px) scale(1.08); }
+        .track-search-spin {
+          width: 16px;
+          height: 16px;
+          border-radius: 999px;
+          border: 2px solid rgba(255, 255, 255, 0.35);
+          border-top-color: #fff;
+          animation: track-search-spin 0.8s linear infinite;
+        }
+        @keyframes track-search-spin { to { transform: rotate(360deg); } }
+        @media (prefers-reduced-motion: reduce) {
+          .track-search-btn,
+          .track-search-icon,
+          .track-search-spin { animation: none; transition: none; }
+          .track-search-btn:hover,
+          .track-search-btn:active,
+          .track-search-btn:hover .track-search-icon { transform: none; }
+        }
+      `}</style>
       {holding ? <TrackPromo /> : null}
       {showProgress ? <TrackingProgress label={progressLabel} /> : null}
 
@@ -605,6 +639,16 @@ function ResultCard({
         />
       ) : null}
     </section>
+  );
+}
+
+function SearchMark() {
+  return (
+    <svg className="track-search-icon" width="18" height="18" viewBox="0 0 18 18" aria-hidden>
+      <circle cx="8" cy="8" r="5.1" fill="none" stroke="currentColor" strokeWidth="2" />
+      <circle cx="8" cy="8" r="1.7" fill="#E31C23" />
+      <path d="M12.1 12.2 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
   );
 }
 
