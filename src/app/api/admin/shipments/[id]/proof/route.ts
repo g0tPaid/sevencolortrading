@@ -30,6 +30,9 @@ export async function POST(request: Request, { params }: Context) {
       return json({ media: listProof(id) });
     case "publish":
     case "unpublish":
+      if (query.get("action") === "publish" && listProof(id).filter((item) => item.mime.startsWith("image/")).length < 2) {
+        return json({ error: "Upload at least two photos before sharing files on tracking." }, 400);
+      }
       setTrackingMedia(id, query.get("media") ?? "", query.get("action") === "publish");
       return json({ media: listProof(id) });
     case "upload": {
