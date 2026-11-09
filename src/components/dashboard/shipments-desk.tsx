@@ -147,8 +147,14 @@ export function ShipmentsDesk() {
         await api(`/api/admin/shipments/${editing}`, { method: "PATCH", body: JSON.stringify(payload) });
         setNotice("Shipment updated.");
       } else {
-        await api("/api/admin/shipments", { method: "POST", body: JSON.stringify(payload) });
-        setNotice("Shipment added. A refresh was queued.");
+        const created = await api("/api/admin/shipments", { method: "POST", body: JSON.stringify(payload) });
+        const shipment = created.shipment as Shipment;
+        setDetail(shipment);
+        setEditing(shipment.id);
+        setNotice("Shipment added. You can now upload pre-shipment photos and videos.");
+        requestAnimationFrame(() => document.getElementById("shipment-media")?.scrollIntoView());
+        await load({ q, carrier, status });
+        return;
       }
       setForm(emptyForm);
       setEditing(null);
@@ -339,6 +345,7 @@ export function ShipmentsDesk() {
         <h2 className="font-display text-2xl font-semibold text-ink sm:col-span-2">
           {editing ? "Edit shipment" : "Add shipment"}
         </h2>
+        {!editing && <p className="text-sm text-muted sm:col-span-2">Save the tracking number to open the photo and video upload panel for this shipment.</p>}
         {(
           [
             ["customerName", "Customer name"],
@@ -387,7 +394,7 @@ export function ShipmentsDesk() {
         </label>
         <div className="flex flex-wrap gap-2 sm:col-span-2">
           <button type="submit" className="rounded-2xl bg-ink px-4 py-2 text-sm text-paper">
-            {editing ? "Save changes" : "Add shipment"}
+            {editing ? "Save changes" : "Add shipment and open upload"}
           </button>
           {editing ? (
             <>
