@@ -3,13 +3,12 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { SevenColorMark } from "@/components/brand/seven-color-mark";
-import { SOURCING_OFFERS, sourcingOffer, type SourcingOfferId } from "@/lib/tracking/sourcing-card";
+import { SOURCING_OFFERS, type SourcingOfferId } from "@/lib/tracking/sourcing-card";
 
 /** Idle card under Search. Hidden while a lookup promo or result is on screen. */
 export function TrackSourcingCard() {
   const [selected, setSelected] = useState<SourcingOfferId>("goods");
   const buttons = useRef<Array<HTMLButtonElement | null>>([]);
-  const offer = sourcingOffer(selected);
 
   function choose(index: number) {
     const next = SOURCING_OFFERS[(index + SOURCING_OFFERS.length) % SOURCING_OFFERS.length];
@@ -45,7 +44,7 @@ export function TrackSourcingCard() {
           unoptimized
         />
       </div>
-      <div className="px-4 pb-4 pt-3 sm:px-5 sm:pb-5">
+      <div className="px-4 pb-4 pt-3 sm:px-5">
         <h2 id="track-sourcing-title" className="font-display text-[1.65rem] font-semibold leading-[1.02] tracking-tight text-ink sm:text-[1.85rem]">
           Buy anything from China
           <span className="mt-2 block h-[3px] w-16 rounded-full bg-[#d60000]" aria-hidden />
@@ -84,9 +83,6 @@ export function TrackSourcingCard() {
             );
           })}
         </div>
-        <p aria-live="polite" data-testid="track-sourcing-detail" className="mt-3 min-h-[4.5rem] text-sm leading-snug text-ink sm:min-h-14">
-          {offer.detail}
-        </p>
       </div>
       <style>{`
         .track-source-pick { transition: transform 180ms cubic-bezier(0.34, 1.4, 0.64, 1), border-color 180ms ease, background-color 180ms ease; }
