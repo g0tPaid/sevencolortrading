@@ -425,7 +425,7 @@ export function TrackLookup() {
     <div className="mx-auto max-w-xl">
       <div className="track-page-stage mb-2 rounded-[1.6rem] bg-[#fff4f0] px-4 py-3 text-center sm:mb-3 sm:px-6 sm:py-3.5">
         <h1 data-testid="track-heading" className="track-page-heading text-[2.55rem] sm:text-[3.35rem]">
-          Track Global Parcels
+          FREE GLOBAL PACKAGE TRACKER
         </h1>
       </div>
       <p className="sr-only" aria-live="polite" data-testid="track-live">
