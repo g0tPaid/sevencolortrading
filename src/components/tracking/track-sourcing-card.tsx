@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { SevenColorMark } from "@/components/brand/seven-color-mark";
 import { SOURCING_OFFERS, sourcingOffer, type SourcingOfferId } from "@/lib/tracking/sourcing-card";
@@ -88,13 +87,6 @@ export function TrackSourcingCard() {
         <p aria-live="polite" data-testid="track-sourcing-detail" className="mt-3 min-h-[4.5rem] text-sm leading-snug text-ink sm:min-h-14">
           {offer.detail}
         </p>
-        <Link
-          href={offer.href}
-          data-testid="track-sourcing-cta"
-          className="inline-flex min-h-11 items-center rounded-full bg-ink px-4 text-sm font-semibold text-paper shadow-[inset_0_-3px_0_#E31C23] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d60000] focus-visible:ring-offset-2"
-        >
-          {offer.cta}
-        </Link>
       </div>
       <style>{`
         .track-source-pick { transition: transform 180ms cubic-bezier(0.34, 1.4, 0.64, 1), border-color 180ms ease, background-color 180ms ease; }
