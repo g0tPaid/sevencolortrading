@@ -20,6 +20,15 @@ import { whatsappPresets } from "@/lib/whatsapp";
 import { NewsLanguageSwitcher } from "./language-switcher";
 import { NewsLocaleProvider, useNewsUi } from "./locale-context";
 
+const newsServiceLinks = [
+  { topics: /1688/, href: "/1688-sourcing", label: { en: "1688 buying and consolidation", zh: "1688 采购与集运" } },
+  { topics: /inspection|quality-control|factory-audit|supplier-verification/, href: "/inspection", label: { en: "On-site quality inspection in China", zh: "中国现场验货服务" } },
+  { topics: /warehouse|warehousing|fulfill|3pl/, href: "/3pl", label: { en: "Warehousing and fulfillment in China and the UAE", zh: "中国和阿联酋仓储与履约" } },
+  { topics: /shipping|freight|logistics|port|customs|tariff|rail|air-cargo/, href: "/logistics", label: { en: "Freight and customs support from China", zh: "中国出口货运与清关支持" } },
+  { topics: /manufactur|private-label|oem|odm/, href: "/oem-odm", label: { en: "Product development and manufacturing in China", zh: "中国产品开发与制造" } },
+  { topics: /sourcing|procurement|supplier/, href: "/services", label: { en: "China sourcing services", zh: "中国采购服务" } },
+];
+
 export function NewsPostView({
   post,
   related,
@@ -39,6 +48,7 @@ function NewsPostInner({ post, related }: { post: NewsPost; related: NewsPost[] 
   const kind = newsKind(post);
   const faqs = postFaqs(post);
   const paragraphs = postBody(post, lang);
+  const service = newsServiceLinks.find(({ topics }) => post.tags.some((tag) => topics.test(tag.toLowerCase())));
 
   return (
     <div lang={lang === "zh" ? "zh-CN" : "en"}>
@@ -134,6 +144,15 @@ function NewsPostInner({ post, related }: { post: NewsPost; related: NewsPost[] 
               ))}
             </div>
           </section>
+        ) : null}
+
+        {service ? (
+          <aside className="glass-card mt-10 rounded-[1.5rem] p-5 text-sm">
+            <p className="font-semibold text-ink">{lang === "zh" ? "相关服务" : "Related service"}</p>
+            <Link href={service.href} className="mt-2 inline-block text-accent underline-offset-4 hover:underline">
+              {t(service.label)}
+            </Link>
+          </aside>
         ) : null}
 
         {related.length > 0 ? (
