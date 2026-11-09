@@ -12,6 +12,14 @@ test("the idle track link is the site address, with no category choices", () => 
   assert.match(card, /\{TRACK_HOME_LABEL\}/);
   assert.match(card, /href=\{TRACK_HOME_HREF\}/);
   assert.match(card, /\{TRACK_AD_LINE\}/);
+  const headline = card.indexOf("{TRACK_AD_LINE}");
+  const banner = card.indexOf("/tracking/sourcing-center-ad-banner.webp");
+  const link = card.indexOf("{TRACK_HOME_LABEL}");
+  assert.equal(headline < banner && banner < link, true);
+  assert.equal(card.includes("sourcing-center-plane.png"), false);
+  assert.equal(card.includes("object-fit"), false);
+  assert.match(card, /width=\{1774\}/);
+  assert.match(card, /height=\{887\}/);
   assert.equal(card.includes("1688 goods"), false);
   assert.equal(card.includes("Private label"), false);
   assert.equal(card.includes(">Home<"), false);

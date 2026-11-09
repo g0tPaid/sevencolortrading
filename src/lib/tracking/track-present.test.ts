@@ -85,7 +85,8 @@ test("the route illustration keeps its honesty label and does not print Natural 
   assert.equal(page.includes("track-cozy-cloud"), false);
   assert.equal(page.includes("track-cozy-plane"), false);
   const card = readFileSync(new URL("../../components/tracking/track-sourcing-card.tsx", import.meta.url), "utf8");
-  assert.equal(card.includes("/tracking/sourcing-center-plane.png"), true);
+  assert.equal(card.includes("/tracking/sourcing-center-ad-banner.webp"), true);
+  assert.equal(card.includes("/tracking/sourcing-center-plane.png"), false);
   assert.match(card, /\{TRACK_HOME_LABEL\}/);
   assert.match(card, /href=\{TRACK_HOME_HREF\}/);
   const land = readFileSync(new URL("../../components/home/world-land-path.ts", import.meta.url), "utf8");
