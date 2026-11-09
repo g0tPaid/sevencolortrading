@@ -50,10 +50,12 @@ export function DropshipProofControls({ shipmentId }: { shipmentId: string }) {
     }
   }
 
+  const enoughPhotos = media.filter((item) => item.mime.startsWith("image/")).length >= 2;
+
   return (
     <section className="mt-6 rounded-xl border border-ink/10 p-4">
       <h3 className="font-semibold">Dropshipper order link</h3>
-      <p className="mt-1 text-sm text-muted">Upload up to eight photos or MP4 clips, up to 16 MB each.</p>
+      <p className="mt-1 text-sm text-muted">Upload at least two photos before sharing files on tracking. Videos are optional. Up to eight files, 16 MB each.</p>
       <label className="mt-3 block text-sm">
         Add pre-shipment photo or video
         <input className="mt-1 block max-w-full" type="file" accept="image/jpeg,image/png,image/webp,video/mp4" disabled={busy}
@@ -67,7 +69,7 @@ export function DropshipProofControls({ shipmentId }: { shipmentId: string }) {
         {media.map((item, index) => (
           <li key={item.id} className="flex gap-3 text-sm">
             {item.mime.startsWith("video/") ? "Video" : "Photo"} {index + 1}
-            <button type="button" className="underline" disabled={busy} onClick={() => void update(item.published ? "unpublish" : "publish", undefined, item.id)}>
+            <button type="button" className="underline" disabled={busy || (!item.published && !enoughPhotos)} onClick={() => void update(item.published ? "unpublish" : "publish", undefined, item.id)}>
               {item.published ? "Hide from tracking" : "Show on tracking"}
             </button>
             <button type="button" className="underline" disabled={busy} onClick={() => void update("remove", undefined, item.id)}>Remove</button>
