@@ -57,6 +57,7 @@ type LookupResponse = {
   candidates?: Array<{ id: string; name: string }>;
   shipment?: PublicShipment | null;
   shipments?: PublicShipment[];
+  media?: { id: string; mime: string }[];
 };
 
 function flagFor(code: string | null): string | null {
@@ -616,6 +617,26 @@ export function TrackLookup() {
           timelineRef={index === 0 ? timelineRef : undefined}
         />
       ))}
+      {result?.media?.length ? (
+        <section className="glass-card mt-6 rounded-3xl p-5" aria-labelledby="tracking-proof">
+          <h2 id="tracking-proof" className="font-display text-xl font-semibold text-ink">Pre-shipment photos and videos</h2>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            {result.media.map((item, index) => {
+              const src = "/api/track/media/" + item.id;
+              return item.mime.startsWith("video/") ? (
+                <video key={item.id} src={src} controls preload="metadata" aria-label={"Pre-shipment video " + (index + 1)}
+                  className="aspect-video w-full rounded-xl bg-black object-contain" />
+              ) : (
+                <a key={item.id} href={src} target="_blank" rel="noreferrer">
+                  {/* eslint-disable-next-line @next/next/no-img-element -- Serve revocable media directly. */}
+                  <img src={src} loading="lazy" alt={"Pre-shipment photo " + (index + 1)}
+                    className="aspect-video w-full rounded-xl bg-canvas object-contain" />
+                </a>
+              );
+            })}
+          </div>
+        </section>
+      ) : null}
     </div>
   );
 }

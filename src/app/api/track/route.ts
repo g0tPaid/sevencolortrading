@@ -1,3 +1,4 @@
+import { trackingMedia } from "@/lib/tracking/tracking-media";
 import { errorResponse, json, readJson, clientKey } from "@/lib/tracking/http";
 import { startPublicWork } from "@/lib/tracking/public-cache";
 import { publicLookup } from "@/lib/tracking/service";
@@ -14,7 +15,8 @@ export async function POST(request: Request) {
     if (result.status === 200 && "state" in result.body && result.body.state === "pending") {
       startPublicWork();
     }
-    return json(result.body, result.status);
+    if (result.status !== 200) return json(result.body, result.status);
+    return json({ ...result.body, media: trackingMedia(trackingNumber, carrierId) }, result.status);
   } catch (error) {
     return errorResponse(error);
   }

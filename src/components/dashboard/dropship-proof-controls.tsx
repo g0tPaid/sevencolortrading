@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-type Media = { id: string; mime: string };
+type Media = { id: string; mime: string; published: number };
 
 export function DropshipProofControls({ shipmentId }: { shipmentId: string }) {
   const endpoint = "/api/admin/shipments/" + encodeURIComponent(shipmentId) + "/proof";
@@ -25,6 +25,7 @@ export function DropshipProofControls({ shipmentId }: { shipmentId: string }) {
   }, [endpoint]);
 
   async function update(action: string, file?: File, mediaId?: string) {
+    if (action === "publish" && !window.confirm("Anyone with the tracking number can view this file. Confirm it contains no addresses, shipping labels, or personal details.")) return;
     setBusy(true);
     setMessage("");
     try {
@@ -66,6 +67,9 @@ export function DropshipProofControls({ shipmentId }: { shipmentId: string }) {
         {media.map((item, index) => (
           <li key={item.id} className="flex gap-3 text-sm">
             {item.mime.startsWith("video/") ? "Video" : "Photo"} {index + 1}
+            <button type="button" className="underline" disabled={busy} onClick={() => void update(item.published ? "unpublish" : "publish", undefined, item.id)}>
+              {item.published ? "Hide from tracking" : "Show on tracking"}
+            </button>
             <button type="button" className="underline" disabled={busy} onClick={() => void update("remove", undefined, item.id)}>Remove</button>
           </li>
         ))}
