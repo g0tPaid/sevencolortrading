@@ -19,6 +19,17 @@ test("a valid search starts a lookup with no promotional hold", () => {
   assert.equal(page.includes("setHoldId"), false);
   assert.equal(page.includes("Buy anything from China"), false);
   assert.match(page, /Checking this number with the carrier/);
+  assert.equal(page.includes("TrackCarrierStrip"), true);
+  const carriers = readFileSync(new URL("../../lib/tracking/carrier-logos.ts", import.meta.url), "utf8");
+  assert.equal(carriers.includes('name: "FedEx"'), true);
+  assert.equal(carriers.includes('name: "UPS"'), true);
+  assert.equal(carriers.includes('name: "Cainiao"'), true);
+  assert.match(carriers, /Not a list of carriers this page supports/);
+  const strip = readFileSync(new URL("../../components/tracking/track-carrier-strip.tsx", import.meta.url), "utf8");
+  assert.match(strip, /from \{ transform: translateX\(-50%\)/);
+  assert.match(strip, /to \{ transform: translateX\(0\)/);
+  assert.match(strip, /prefers-reduced-motion:\s*reduce/);
+  assert.equal(strip.includes("Pause"), false);
 });
 
 test("invalid input does not start a lookup", () => {
