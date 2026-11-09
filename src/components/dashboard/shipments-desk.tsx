@@ -94,6 +94,8 @@ export function ShipmentsDesk() {
   const [editing, setEditing] = useState<string | null>(null);
   const [detail, setDetail] = useState<Shipment | null>(null);
   const [settings, setSettings] = useState<Settings | null>(null);
+  const [photos, setPhotos] = useState<File[]>([]);
+  const [saving, setSaving] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
 
   const load = useCallback(async (query: { q: string; carrier: string; status: string }) => {
@@ -129,6 +131,13 @@ export function ShipmentsDesk() {
 
   async function onSave(event: FormEvent) {
     event.preventDefault();
+    if (saving) return;
+    if (!editing && photos.length < 2) {
+      setError("Select at least two photos before adding the shipment.");
+      return;
+    }
+    setSaving(true);
+    setError(null);
     setNotice(null);
     const payload = {
       customerName: form.customerName,
@@ -149,9 +158,24 @@ export function ShipmentsDesk() {
       } else {
         const created = await api("/api/admin/shipments", { method: "POST", body: JSON.stringify(payload) });
         const shipment = created.shipment as Shipment;
+        let failed = 0;
+        for (const photo of photos) {
+          try {
+            const response = await fetch("/api/admin/shipments/" + encodeURIComponent(shipment.id) + "/proof?action=upload", {
+              method: "POST",
+              body: photo,
+            });
+            if (!response.ok) failed += 1;
+          } catch {
+            failed += 1;
+          }
+        }
+        setPhotos([]);
         setDetail(shipment);
         setEditing(shipment.id);
-        setNotice("Shipment added. You can now upload pre-shipment photos and videos.");
+        setNotice(failed
+          ? "Shipment added. " + failed + " photo(s) could not be uploaded. Add them in the panel below."
+          : "Shipment added and photos uploaded. Use Show on tracking to share them.");
         requestAnimationFrame(() => document.getElementById("shipment-media")?.scrollIntoView());
         await load({ q, carrier, status });
         return;
@@ -161,6 +185,8 @@ export function ShipmentsDesk() {
       await load({ q, carrier, status });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Shipment was not saved.");
+    } finally {
+      setSaving(false);
     }
   }
 
@@ -345,7 +371,6 @@ export function ShipmentsDesk() {
         <h2 className="font-display text-2xl font-semibold text-ink sm:col-span-2">
           {editing ? "Edit shipment" : "Add shipment"}
         </h2>
-        {!editing && <p className="text-sm text-muted sm:col-span-2">Save the tracking number to open the photo and video upload panel for this shipment.</p>}
         {(
           [
             ["customerName", "Customer name"],
@@ -392,9 +417,34 @@ export function ShipmentsDesk() {
             className={fieldClass}
           />
         </label>
+        {!editing && (
+          <div className="rounded-2xl border border-line p-4 sm:col-span-2">
+            <p className="text-sm font-semibold text-ink">Pre-shipment pictures</p>
+            <p className="mt-1 text-sm text-muted">Select 2 to 8 photos. JPEG, PNG, or WebP, up to 16 MB each.</p>
+            <label className="mt-3 inline-flex cursor-pointer rounded-xl border border-line px-4 py-2 text-sm font-semibold text-ink focus-within:ring-2 focus-within:ring-accent">
+              Upload pictures
+              <input type="file" multiple accept="image/jpeg,image/png,image/webp" className="sr-only" disabled={saving}
+                onChange={(event) => {
+                  const files = Array.from(event.currentTarget.files ?? []);
+                  event.currentTarget.value = "";
+                  if (!files.length) return;
+                  if (photos.length + files.length > 8 || files.some((file) =>
+                    !["image/jpeg", "image/png", "image/webp"].includes(file.type) || !file.size || file.size > 16 * 1024 * 1024
+                  )) {
+                    setError("Select up to eight JPEG, PNG, or WebP photos, 16 MB each.");
+                    return;
+                  }
+                  setError(null);
+                  setPhotos((selected) => [...selected, ...files]);
+                }} />
+            </label>
+            <p role="status" className="mt-2 text-sm text-muted">{photos.length} photo(s) selected</p>
+            {photos.length > 0 && <button type="button" disabled={saving} className="mt-2 text-sm underline" onClick={() => setPhotos([])}>Clear selection</button>}
+          </div>
+        )}
         <div className="flex flex-wrap gap-2 sm:col-span-2">
-          <button type="submit" className="rounded-2xl bg-ink px-4 py-2 text-sm text-paper">
-            {editing ? "Save changes" : "Add shipment and open upload"}
+          <button type="submit" disabled={saving || (!editing && photos.length < 2)} className="rounded-2xl bg-ink px-4 py-2 text-sm text-paper disabled:opacity-50">
+            {saving ? "Saving…" : editing ? "Save changes" : "Add shipment"}
           </button>
           {editing ? (
             <>
