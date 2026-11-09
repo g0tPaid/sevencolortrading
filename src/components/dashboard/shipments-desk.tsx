@@ -158,12 +158,13 @@ export function ShipmentsDesk() {
     }
   }
 
-  async function openRow(id: string) {
+  async function openRow(id: string, showMedia = false) {
     setError(null);
     try {
       const data = await api(`/api/admin/shipments/${id}`, { headers: {} });
       const shipment = data.shipment as Shipment;
       setDetail(shipment);
+      if (showMedia) requestAnimationFrame(() => document.getElementById("shipment-media")?.scrollIntoView());
       setEditing(id);
       setForm({
         customerName: shipment.customerName ?? "",
@@ -310,6 +311,9 @@ export function ShipmentsDesk() {
                     <button type="button" onClick={() => void openRow(row.id)} className="font-medium text-ink underline-offset-2 hover:underline">
                       {row.trackingNumber}
                     </button>
+                    <button type="button" onClick={() => void openRow(row.id, true)} className="mt-1 block text-xs font-semibold text-accent underline underline-offset-2">
+                      Upload photos / video
+                    </button>
                   </td>
                   <td className="px-4 py-3 text-ink">{row.customerName || "—"}</td>
                   <td className="px-4 py-3 text-ink">{row.orderNumber || "—"}</td>
@@ -322,6 +326,14 @@ export function ShipmentsDesk() {
         ) : null}
         <p className="px-4 py-3 text-xs text-muted">{total} shipment{total === 1 ? "" : "s"}</p>
       </div>
+
+      {detail ? (
+        <section id="shipment-media" className="scroll-mt-24 rounded-3xl border border-line bg-paper-elevated p-4">
+          <h2 className="font-display text-2xl font-semibold text-ink">Pre-shipment photos and videos</h2>
+          <p className="mt-1 text-sm text-muted">Tracking number {detail.trackingNumber}</p>
+          <DropshipProofControls key={detail.id} shipmentId={detail.id} />
+        </section>
+      ) : null}
 
       <form onSubmit={onSave} className="grid gap-3 rounded-3xl border border-line bg-paper-elevated p-4 sm:grid-cols-2">
         <h2 className="font-display text-2xl font-semibold text-ink sm:col-span-2">
@@ -405,7 +417,6 @@ export function ShipmentsDesk() {
         <section className="rounded-3xl border border-line bg-paper-elevated p-4">
           <h2 className="font-display text-2xl font-semibold text-ink">History</h2>
           <p className="mt-2 text-xs text-muted">Internal id {detail.id}</p>
-          <DropshipProofControls key={detail.id} shipmentId={detail.id} />
           <dl className="mt-3 grid gap-2 text-sm sm:grid-cols-2">
             <div>
               <dt className="text-muted">Created</dt>
