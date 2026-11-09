@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter, Playfair_Display } from "next/font/google";
+import localFont from "next/font/local";
 import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import { RedditPixel } from "@/components/analytics/reddit-pixel";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -15,25 +15,31 @@ import { defaultDescription, siteUrl, seoKeywords } from "@/lib/seo";
 import { siteWideGraph } from "@/lib/structured-data";
 import "./globals.css";
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
+const playfair = localFont({
+  src: "../fonts/playfair-display-latin.woff2",
+  weight: "500 700",
+  style: "normal",
   variable: "--font-playfair",
   display: "swap",
+  adjustFontFallback: "Times New Roman",
 });
 
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  axes: ["SOFT", "opsz", "WONK"],
+const fraunces = localFont({
+  src: "../fonts/fraunces-latin.woff2",
+  weight: "100 900",
+  style: "normal",
   variable: "--font-fraunces",
   display: "swap",
+  adjustFontFallback: "Times New Roman",
 });
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+const inter = localFont({
+  src: "../fonts/inter-latin.woff2",
+  weight: "400 700",
+  style: "normal",
   variable: "--font-inter",
   display: "swap",
+  adjustFontFallback: "Arial",
 });
 
 export const metadata: Metadata = {
