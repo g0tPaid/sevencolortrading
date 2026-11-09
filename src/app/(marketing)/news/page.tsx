@@ -15,13 +15,6 @@ export const metadata: Metadata = {
     locale: "en_US",
     alternateLocale: ["zh_CN"],
   },
-  alternates: {
-    ...pages.news.alternates,
-    languages: {
-      en: "https://sourcing.center/news",
-      "zh-CN": "https://sourcing.center/news",
-    },
-  },
   other: {
     "og:locale:alternate": "zh_CN",
   },
