@@ -477,7 +477,7 @@ export function TrackLookup() {
             data-testid="track-submit"
             disabled={pending}
             aria-busy={pending || holding}
-            className="track-search-btn relative z-[1] inline-flex min-h-12 w-full min-w-[9.5rem] items-center justify-center gap-2 rounded-2xl bg-ink px-5 text-sm font-semibold text-paper focus-visible:outline-none disabled:cursor-not-allowed sm:w-auto"
+            className="track-search-btn relative z-[1] inline-flex min-h-12 w-full min-w-[9.5rem] items-center justify-center gap-2 rounded-2xl px-5 text-sm font-semibold focus-visible:outline-none disabled:cursor-not-allowed sm:w-auto"
           >
             {pending ? <span className="track-search-spin" aria-hidden /> : <SearchMark />}
             {pending ? "Searching" : "Search"}
@@ -507,14 +507,14 @@ export function TrackLookup() {
           pointer-events: none;
           background: conic-gradient(
             from var(--track-angle),
-            #ff5ea8 0deg,
-            #ff9a3c 52deg,
-            #ffe14d 104deg,
-            #7dff6b 156deg,
-            #3ee0ff 208deg,
-            #6d8bff 260deg,
-            #c86bff 312deg,
-            #ff5ea8 360deg
+            #f6c9df 0deg,
+            #f8dcc4 52deg,
+            #f7efc8 104deg,
+            #d9f3d4 156deg,
+            #d2f1f8 208deg,
+            #d9e2fa 260deg,
+            #ead6f8 312deg,
+            #f6c9df 360deg
           );
           animation: track-edge-run 8s linear infinite;
         }
@@ -534,14 +534,16 @@ export function TrackLookup() {
           inset: -8px;
           z-index: 0;
           border-radius: 1.4rem;
-          filter: blur(6px);
-          opacity: 0.95;
+          filter: blur(7px);
+          opacity: 0.42;
         }
         .track-number-input:focus {
           box-shadow: 0 0 0 2px var(--canvas), 0 0 0 4px #d60000;
         }
         .track-search-btn {
-          box-shadow: inset 0 -3px 0 #E31C23;
+          background: #ff9a9a;
+          color: #1d1d1f;
+          box-shadow: inset 0 -3px 0 #e07070;
           transition: transform 200ms cubic-bezier(0.34, 1.4, 0.64, 1);
         }
         .track-search-shell:hover:not(:has(:disabled)) { transform: translateY(-2px); }
@@ -556,8 +558,8 @@ export function TrackLookup() {
           width: 16px;
           height: 16px;
           border-radius: 999px;
-          border: 2px solid rgba(255, 255, 255, 0.35);
-          border-top-color: #fff;
+          border: 2px solid rgba(29, 29, 31, 0.28);
+          border-top-color: #1d1d1f;
           animation: track-search-spin 0.8s linear infinite;
         }
         @keyframes track-search-spin { to { transform: rotate(360deg); } }
