@@ -9,6 +9,9 @@ import { MSG } from "@/lib/tracking/messages";
 import type { PublicShipment } from "@/lib/tracking/public-view";
 import {
   FORWARDER_CARRIER_ID,
+  VNLIN_CARRIER_ID,
+  fetchVnlinDocument,
+  isVnlinCandidate,
   FORWARDER_PROVIDER_VERSION,
   fetchForwarderDocument,
   forwarderMessage,
@@ -150,7 +153,7 @@ function view(row: CacheRow): PublicShipment {
     trackingNumber: row.trackingNumber,
     carrier: {
       id: forwarder || row.carrierResolution === "ambiguous" ? null : row.carrierId,
-      name: forwarder ? "Forwarder tracking page" : row.carrierResolution === "ambiguous" ? null : carrierName(row.carrierId),
+      name: forwarder ? (row.carrierId === VNLIN_CARRIER_ID ? "VNLIN" : "Forwarder tracking page") : row.carrierResolution === "ambiguous" ? null : carrierName(row.carrierId),
       resolution: row.carrierResolution,
       candidates,
     },
@@ -266,8 +269,8 @@ export type PublicLookupOptions = {
 
 const forwarderFlights = new Map<string, Promise<ForwarderDocument>>();
 
-function ensureForwarderRow(number: string, now: Date): CacheRow {
-  const existing = findCache(number, FORWARDER_CARRIER_ID);
+function ensureForwarderRow(number: string, now: Date, sourceId: string): CacheRow {
+  const existing = findCache(number, sourceId);
   if (existing) return existing;
   const id = randomUUID();
   const iso = now.toISOString();
@@ -278,7 +281,7 @@ function ensureForwarderRow(number: string, now: Date): CacheRow {
         interest_until, refresh_stopped, consecutive_failures, created_at, updated_at, provider_version
       ) VALUES (?, ?, ?, 'forwarder', '[]', 'Unknown', 'pending', NULL, ?, 0, 0, ?, ?, ?)`,
     )
-    .run(id, number, FORWARDER_CARRIER_ID, hoursFrom(now, getSettings().publicInterestHours), iso, iso, FORWARDER_PROVIDER_VERSION);
+    .run(id, number, sourceId, hoursFrom(now, getSettings().publicInterestHours), iso, iso, FORWARDER_PROVIDER_VERSION);
   return getCache(id)!;
 }
 
@@ -317,8 +320,9 @@ function rememberForwarder(
   number: string,
   now: Date,
   fields: { outcome: PublicState; message: string | null; hours: number },
+  sourceId: string,
 ): CacheRow {
-  const row = ensureForwarderRow(number, now);
+  const row = ensureForwarderRow(number, now, sourceId);
   getDb().prepare("DELETE FROM public_track_events WHERE cache_id = ?").run(row.id);
   saveOutcome(row.id, now, {
     outcome: fields.outcome,
@@ -337,8 +341,8 @@ function rememberForwarder(
   return getCache(row.id) ?? row;
 }
 
-function rememberForwarderReady(number: string, now: Date, parsed: Extract<ForwarderDocument, { kind: "ready" }>): CacheRow {
-  const row = ensureForwarderRow(number, now);
+function rememberForwarderReady(number: string, now: Date, parsed: Extract<ForwarderDocument, { kind: "ready" }>, sourceId: string): CacheRow {
+  const row = ensureForwarderRow(number, now, sourceId);
   storeForwarderEvents(row.id, parsed, now);
   saveOutcome(row.id, now, {
     outcome: "ready",
@@ -363,27 +367,28 @@ function rememberForwarderReady(number: string, now: Date, parsed: Extract<Forwa
   return getCache(row.id) ?? row;
 }
 
-async function consultForwarder(number: string, now: Date, source: ForwarderSource) {
-  const cached = findCache(number, FORWARDER_CARRIER_ID);
+async function consultForwarder(number: string, now: Date, source: ForwarderSource, sourceId = FORWARDER_CARRIER_ID) {
+  const cached = findCache(number, sourceId);
   if (cached && fresh(cached, now) && cached.providerVersion === FORWARDER_PROVIDER_VERSION) {
     return cached.outcome === "ready" ? response(cached, "ready", cached.message) : null;
   }
-  let flight = forwarderFlights.get(number);
+  const flightKey = sourceId + ':' + number;
+  let flight = forwarderFlights.get(flightKey);
   if (!flight) {
     flight = source(number, now)
       .catch(() => ({ kind: "parser_failure" as const }))
       .finally(() => {
-        forwarderFlights.delete(number);
+        forwarderFlights.delete(flightKey);
       });
-    forwarderFlights.set(number, flight);
+    forwarderFlights.set(flightKey, flight);
   }
   const parsed = await flight;
   if (parsed.kind === "not_found") {
-    rememberForwarder(number, now, { outcome: "not_found", message: null, hours: 0.5 });
+    rememberForwarder(number, now, { outcome: "not_found", message: null, hours: 0.5 }, sourceId);
     return null;
   }
   if (parsed.kind === "ready") {
-    const row = rememberForwarderReady(number, now, parsed);
+    const row = rememberForwarderReady(number, now, parsed, sourceId);
     return response(row, "ready", row.message);
   }
   const outcome: PublicState = parsed.kind === "timeout" ? "timeout" : parsed.kind === "throttled" ? "throttled" : "unavailable";
@@ -391,7 +396,7 @@ async function consultForwarder(number: string, now: Date, source: ForwarderSour
     outcome,
     message: forwarderMessage(parsed.kind),
     hours: parsed.kind === "challenge" ? 0.5 : 1 / 6,
-  });
+  }, sourceId);
   return null;
 }
 
@@ -420,6 +425,10 @@ export async function publicLookup(trackingNumber: string, rateKey: string, now 
   }
 
   const source = opts?.forwarder ?? (process.env.TRACKING_FORWARDER === "0" ? null : fetchForwarderDocument);
+  if (!carrierId && !opts?.forwarder && source && isVnlinCandidate(norm)) {
+    const vnlinHit = await consultForwarder(norm, now, fetchVnlinDocument, VNLIN_CARRIER_ID);
+    if (vnlinHit) return vnlinHit;
+  }
   if (!carrierId && source) {
     const forwarderHit = await consultForwarder(norm, now, source);
     if (forwarderHit) return forwarderHit;
@@ -514,7 +523,7 @@ export function startPublicWork(client?: ScraperClient): void {
 }
 
 function pickCached(number: string, now: Date): CacheRow | null {
-  const rows = listCache(number).filter((row) => row.carrierId !== FORWARDER_CARRIER_ID);
+  const rows = listCache(number).filter((row) => row.carrierResolution !== "forwarder");
   const freshReady = rows.filter((row) => fresh(row, now) && row.outcome === "ready");
   if (freshReady.length === 1) return freshReady[0]!;
   const freshOther = rows.filter((row) => fresh(row, now) && row.outcome !== "pending" && row.outcome !== "ready");
@@ -709,7 +718,7 @@ function applyBody(row: CacheRow, body: TrackBody, now: Date): void {
 
 function historiesResponse(number: string, now: Date) {
   const rows = listCache(number).filter(
-    (row) => fresh(row, now) && row.outcome === "ready" && row.carrierId && row.carrierId !== FORWARDER_CARRIER_ID,
+    (row) => fresh(row, now) && row.outcome === "ready" && row.carrierId && row.carrierResolution !== "forwarder",
   );
   if (rows.length < 2) return null;
   return {

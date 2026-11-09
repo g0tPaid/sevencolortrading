@@ -324,3 +324,62 @@ export function forwarderMessage(kind: Exclude<ForwarderDocument["kind"], "ready
   if (kind === "throttled") return MSG.forwarderThrottled;
   return MSG.forwarderUnusable;
 }
+
+
+export const VNLIN_CARRIER_ID = "vnlin";
+
+export function isVnlinCandidate(number: string): boolean {
+  return /^CAA\d{8}$/.test(number);
+}
+
+export function parseVnlinHtml(html: string, number: string): ForwarderDocument {
+  if (!isVnlinCandidate(number)) return { kind: "not_found" };
+  const tables = [...html.matchAll(/<table\b[^>]*\bid=["']result([A-Z0-9]+)["'][^>]*>([\s\S]*?)<\/table>/gi)];
+  const table = tables.find((entry) => entry[1]?.toUpperCase() === number)?.[2];
+  if (!table) {
+    if (challengePage(html)) return { kind: "challenge" };
+    return /haven.t found the information you want yet/i.test(html) ? { kind: "not_found" } : { kind: "parser_failure" };
+  }
+  const events: ForwarderEvent[] = [];
+  for (const row of table.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/gi)) {
+    const cells = [...(row[1] ?? "").matchAll(/<td\b[^>]*>([\s\S]*?)<\/td>/gi)]
+      .map((cell) => visibleText((cell[1] ?? "").replace(/<span\b[^>]*>[\s\S]*?<\/span>/gi, "")));
+    if (!cells.length) continue;
+    if (cells.length !== 5) return { kind: "parser_failure" };
+    const dateText = cells[1]?.replace(/^(?:DATA|Date)\s*/i, "") ?? "";
+    const clock = cells[4]?.replace(/^Time\s*/i, "") ?? "";
+    const date = /^(?:[A-Za-z]+,\s*)?([A-Za-z]{3})\s+(\d{1,2}),\s*(\d{4})$/.exec(dateText);
+    const month = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"].indexOf(date?.[1]?.toLowerCase() ?? "");
+    const day = Number(date?.[2]);
+    const year = Number(date?.[3]);
+    const checked = new Date(Date.UTC(year, month, day));
+    const description = scrub(cells[2]?.replace(/^Remarks\s*/i, "") ?? "", new Set(), number);
+    const location = scrub(cells[3]?.replace(/^Location\s*/i, "") ?? "", new Set(), number);
+    if (!date || month < 0 || checked.getUTCDate() !== day || !/^(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d$/.test(clock) || !description) continue;
+    events.push({ time: checked.toISOString().slice(0, 10) + " " + clock, description, location });
+  }
+  events.sort((a, b) => b.time.localeCompare(a.time));
+  if (!events.length) return { kind: "parser_failure" };
+  return { kind: "ready", reference: null, pieces: null, destination: null, status: events[0]!.description, displayName: null, events };
+}
+
+export async function fetchVnlinDocument(number: string, now: Date): Promise<ForwarderDocument> {
+  if (!isVnlinCandidate(number)) return { kind: "not_found" };
+  if (!consumeRateLimit("forwarder-vnlin", FORWARDER_REQUEST_LIMIT, FORWARDER_WINDOW_MS, now)) return { kind: "throttled" };
+  try {
+    const response = await fetch("https://www.vnlin.com/trackIndex.html", {
+      method: "POST",
+      redirect: "error",
+      cache: "no-store",
+      body: new URLSearchParams({ documentCode: number }),
+      signal: AbortSignal.timeout(TIMEOUT_MS),
+    });
+    if (response.status === 429) return { kind: "throttled" };
+    if (response.status === 401 || response.status === 403) return { kind: "challenge" };
+    if (!response.ok || !/text\/html/i.test(response.headers.get("content-type") ?? "")) return { kind: "parser_failure" };
+    const bytes = await readBounded(response);
+    return bytes ? parseVnlinHtml(new TextDecoder(charsetLabel(response.headers.get("content-type") ?? "", bytes)).decode(bytes), number) : { kind: "parser_failure" };
+  } catch (error) {
+    return error instanceof Error && /TimeoutError|AbortError/.test(error.name) ? { kind: "timeout" } : { kind: "parser_failure" };
+  }
+}
