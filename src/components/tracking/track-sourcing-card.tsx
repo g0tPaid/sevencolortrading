@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { TrackFlagBanner } from "@/components/tracking/track-flag-banner";
 import { TRACK_HOME_HREF, TRACK_HOME_LABEL } from "@/lib/tracking/sourcing-card";
 
 const BANNER_ALT =
@@ -7,6 +8,7 @@ const BANNER_ALT =
 /** Idle ad under Search. Hidden while a lookup promo or result is on screen. */
 export function TrackSourcingCard() {
   return (
+    <>
     <section data-testid="track-sourcing-card" aria-label="Sourcing" className="mt-4 rounded-[1.75rem] border border-line bg-paper px-3 pb-3 pt-3 shadow-[0_18px_40px_-28px_rgba(227,28,35,0.4)] sm:px-4 sm:pb-4">
       <Image
         src="/tracking/sourcing-center-ad-banner.webp"
@@ -47,5 +49,7 @@ export function TrackSourcingCard() {
         }
       `}</style>
     </section>
+    <TrackFlagBanner />
+    </>
   );
 }

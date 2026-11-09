@@ -14,7 +14,7 @@ export default function TrackPage() {
   return (
     <>
       <div aria-hidden className="pointer-events-none fixed inset-x-0 top-0 z-40 h-32 bg-canvas sm:h-36" />
-      <Container className="pb-20 pt-28 sm:pt-32">
+      <Container className="pb-36 pt-28 sm:pb-28 sm:pt-32">
         <TrackLookup />
       </Container>
     </>

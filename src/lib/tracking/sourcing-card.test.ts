@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
+import { TRACK_BLESSING } from "@/lib/tracking/flag-banner";
 import { TRACK_HOME_HREF, TRACK_HOME_LABEL } from "@/lib/tracking/sourcing-card";
 
 test("the idle track ad keeps the banner and homepage link, without the source buttons", () => {
@@ -19,6 +20,13 @@ test("the idle track ad keeps the banner and homepage link, without the source b
   assert.equal(card.includes("object-fit"), false);
   assert.match(card, /width=\{1774\}/);
   assert.match(card, /height=\{887\}/);
+  assert.equal(TRACK_BLESSING, "God bless China for making life affordable for normal people.");
+  const flags = readFileSync(new URL("../../components/tracking/track-flag-banner.tsx", import.meta.url), "utf8");
+  assert.equal(flags.includes("TRACK_BLESSING"), true);
+  assert.equal(flags.includes(">China<"), true);
+  assert.match(flags, /from \{ transform: translateX\(-50%\)/);
+  assert.match(flags, /to \{ transform: translateX\(0\)/);
+  assert.match(flags, /prefers-reduced-motion:\s*reduce/);
   assert.equal(page.includes("1688 goods"), false);
   assert.equal(page.includes("track-cozy-cloud"), false);
   assert.equal(page.includes("track-cozy-gift"), false);
