@@ -9,7 +9,7 @@ const BANNER_ALT =
 export function TrackSourcingCard() {
   return (
     <>
-    <section data-testid="track-sourcing-card" aria-label="Sourcing" className="mt-4 rounded-[1.75rem] border border-line bg-paper px-3 pb-3 pt-3 shadow-[0_18px_40px_-28px_rgba(227,28,35,0.4)] sm:px-4 sm:pb-4">
+    <section data-testid="track-sourcing-card" aria-label="Sourcing" className="mt-3 rounded-[1.75rem] border border-line bg-paper px-3 pb-3 pt-3 shadow-[0_18px_40px_-28px_rgba(227,28,35,0.4)] sm:px-4 sm:pb-4">
       <Image
         src="/tracking/sourcing-center-ad-banner.webp"
         alt={BANNER_ALT}
