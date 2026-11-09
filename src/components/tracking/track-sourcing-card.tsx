@@ -43,7 +43,11 @@ export function TrackSourcingCard() {
                 height={source.logoHeight}
                 unoptimized
                 className={`track-buy-logo track-buy-logo-${source.id}`}
-                style={{ height: source.id === "xianyu" ? "2.7rem" : "1.9rem", width: "auto" }}
+                style={{
+                  height: source.id === "xianyu" ? "2.15rem" : "1.9rem",
+                  width: "auto",
+                  maxWidth: "4rem",
+                }}
               />
             ) : (
               <FactoryMark />
@@ -61,15 +65,19 @@ export function TrackSourcingCard() {
         .track-home-link:active,
         .track-buy:active { transform: translateY(0) scale(0.98); }
         .track-buy {
+          position: relative;
           display: flex;
-          min-height: 3.25rem;
+          min-height: 3.6rem;
           align-items: center;
-          gap: 0.7rem;
+          justify-content: center;
           border-radius: 1rem;
-          padding: 0.4rem 0.85rem;
-          font-size: 0.95rem;
+          padding: 0.55rem 4.4rem;
+          text-align: center;
+          font-family: var(--font-fraunces), var(--font-playfair), "Times New Roman", Georgia, serif;
+          font-size: 1.2rem;
           font-weight: 650;
-          line-height: 1.15;
+          letter-spacing: -0.03em;
+          line-height: 1.05;
           color: #1d1d1f;
           text-decoration: none;
         }
@@ -77,9 +85,18 @@ export function TrackSourcingCard() {
         .track-buy-1688 { background: #ff4000; }
         .track-buy-xianyu { background: #ffe60f; }
         .track-buy-factories { background: #fff7f4; border: 1px solid rgba(29, 29, 31, 0.12); }
-        .track-buy-logo { height: 1.85rem; width: auto; }
-        .track-buy-logo-1688 { height: 1.85rem; width: 1.85rem; }
-        .track-buy-mark { height: 1.85rem; width: 1.85rem; flex: none; }
+        .track-buy-logo,
+        .track-buy-mark {
+          position: absolute;
+          left: 1.05rem;
+          top: 50%;
+          height: 1.9rem;
+          width: auto;
+          transform: translateY(-50%);
+        }
+        .track-buy-logo-1688,
+        .track-buy-mark { width: 1.9rem; }
+        .track-buy-logo-xianyu { height: 2.35rem; width: auto; }
         @media (prefers-reduced-motion: reduce) {
           .track-home-link,
           .track-buy { animation: none; transition: none; }
