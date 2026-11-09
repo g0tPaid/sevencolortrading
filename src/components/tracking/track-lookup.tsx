@@ -479,7 +479,7 @@ export function TrackLookup() {
             aria-busy={pending || holding}
             className="track-search-btn relative z-[1] inline-flex w-full items-center justify-center gap-2 rounded-2xl px-3 focus-visible:outline-none disabled:cursor-not-allowed sm:w-auto sm:px-5"
           >
-            {pending ? <span className="track-search-spin" aria-hidden /> : <SearchMark />}
+            {pending ? <span className="track-search-spin" aria-hidden /> : null}
             <span className="track-search-word">{pending ? "Searching" : "Search"}</span>
           </button>
         </span>
@@ -544,24 +544,23 @@ export function TrackLookup() {
           background: #e10600;
           color: #fff;
           font-family: var(--font-fraunces), var(--font-playfair), "Times New Roman", Georgia, serif;
-          font-size: clamp(2.85rem, 16vw, 3.35rem);
+          min-height: 3.25rem;
+          font-size: clamp(1.42rem, 8vw, 1.68rem);
           font-weight: 750;
-          letter-spacing: -0.05em;
-          line-height: 0.8;
-          padding-block: 0.55rem;
+          letter-spacing: -0.04em;
+          line-height: 1;
+          padding-block: 0.7rem;
           box-shadow: inset 0 -4px 0 #9d0400;
           transition: transform 200ms cubic-bezier(0.34, 1.4, 0.64, 1);
         }
         .track-search-word { display: block; }
-        .track-search-btn[aria-busy="true"] { font-size: clamp(1.55rem, 7.5vw, 2rem); }
+        .track-search-btn[aria-busy="true"] { font-size: clamp(1.05rem, 4.5vw, 1.25rem); }
         .track-search-shell:hover:not(:has(:disabled)) { transform: translateY(-2px); }
         .track-search-shell:active:not(:has(:disabled)) { transform: translateY(0) scale(0.98); }
         .track-search-btn:focus-visible {
           box-shadow: inset 0 -3px 0 #E31C23, 0 0 0 2px var(--canvas), 0 0 0 4px #d60000;
         }
         .track-search-btn:disabled { opacity: 0.7; }
-        .track-search-icon { transition: transform 200ms cubic-bezier(0.34, 1.5, 0.64, 1); }
-        .track-search-btn:hover:not(:disabled) .track-search-icon { transform: translate(1px, -1px) scale(1.08); }
         .track-search-spin {
           width: 16px;
           height: 16px;
@@ -623,14 +622,12 @@ export function TrackLookup() {
           .track-number-shell::after,
           .track-search-shell::before,
           .track-search-shell::after,
-          .track-search-icon,
           .track-search-spin,
           .track-page-heading,
           .track-page-heading::after,
           .track-greeting-name { animation: none; transition: none; }
           .track-search-shell:hover,
           .track-search-shell:active,
-          .track-search-btn:hover .track-search-icon,
           .track-page-heading,
           .track-page-heading::after { transform: none; }
         }
@@ -775,16 +772,6 @@ function GreetingLine({ greeting }: { greeting: string }) {
       ) : null}
       {parts ? parts.rest : greeting}
     </p>
-  );
-}
-
-function SearchMark() {
-  return (
-    <svg className="track-search-icon" width="18" height="18" viewBox="0 0 18 18" aria-hidden>
-      <circle cx="8" cy="8" r="5.1" fill="none" stroke="currentColor" strokeWidth="2" />
-      <circle cx="8" cy="8" r="1.7" fill="#E31C23" />
-      <path d="M12.1 12.2 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-    </svg>
   );
 }
 
