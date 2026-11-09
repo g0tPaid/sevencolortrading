@@ -1,6 +1,6 @@
 import { adminGuard } from "@/lib/tracking/service";
 import { getShipment } from "@/lib/tracking/store";
-import { addProof, issueDropshipLink, listProof, MAX_PROOF_BYTES, removeProof, revokeDropshipLink } from "@/lib/tracking/dropship-proof";
+import { addProof, issueDropshipLink, listProof, MAX_PROOF_BYTES, removeProof, revokeDropshipLink, setTrackingMedia } from "@/lib/tracking/dropship-proof";
 import { json } from "@/lib/tracking/http";
 
 type Context = { params: Promise<{ id: string }> };
@@ -27,6 +27,10 @@ export async function POST(request: Request, { params }: Context) {
       return json({ ok: true });
     case "remove":
       removeProof(id, query.get("media") ?? "");
+      return json({ media: listProof(id) });
+    case "publish":
+    case "unpublish":
+      setTrackingMedia(id, query.get("media") ?? "", query.get("action") === "publish");
       return json({ media: listProof(id) });
     case "upload": {
       const reader = request.body?.getReader();

@@ -17,6 +17,9 @@ function db() {
       mime TEXT NOT NULL,
       bytes BLOB NOT NULL
     );
+    CREATE TABLE IF NOT EXISTS dropship_tracking_media (
+      media_id TEXT PRIMARY KEY REFERENCES dropship_proof(id) ON DELETE CASCADE
+    );
     CREATE INDEX IF NOT EXISTS dropship_proof_shipment ON dropship_proof(shipment_id);
   `);
   return connection;
@@ -40,8 +43,8 @@ export function dropshipShipmentId(token: string) {
 }
 
 export function listProof(shipmentId: string) {
-  return db().prepare("SELECT id, mime FROM dropship_proof WHERE shipment_id = ? ORDER BY rowid")
-    .all(shipmentId) as { id: string; mime: string }[];
+  return db().prepare("SELECT id, mime, EXISTS(SELECT 1 FROM dropship_tracking_media WHERE media_id = id) AS published FROM dropship_proof WHERE shipment_id = ? ORDER BY rowid")
+    .all(shipmentId) as { id: string; mime: string; published: number }[];
 }
 
 export function readProof(shipmentId: string, id: string) {
@@ -67,4 +70,21 @@ export function addProof(shipmentId: string, bytes: Buffer) {
     connection.prepare("INSERT INTO dropship_proof VALUES (?, ?, ?, ?)").run(randomUUID(), shipmentId, mime, bytes);
     return true;
   });
+}
+
+export function setTrackingMedia(shipmentId: string, id: string, publish: boolean) {
+  const connection = db();
+  if (publish) {
+    connection.prepare(`INSERT OR IGNORE INTO dropship_tracking_media
+      SELECT id FROM dropship_proof WHERE shipment_id = ? AND id = ?`).run(shipmentId, id);
+  } else {
+    connection.prepare(`DELETE FROM dropship_tracking_media WHERE media_id IN
+      (SELECT id FROM dropship_proof WHERE shipment_id = ? AND id = ?)`).run(shipmentId, id);
+  }
+}
+
+export function readTrackingMedia(id: string) {
+  return db().prepare(`SELECT mime, bytes FROM dropship_proof
+    JOIN dropship_tracking_media ON media_id = id WHERE id = ?`).get(id) as
+    { mime: string; bytes: Uint8Array } | undefined;
 }
