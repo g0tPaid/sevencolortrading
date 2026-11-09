@@ -14,6 +14,7 @@ import {
   timelineScrollBehavior,
 } from "@/lib/tracking/track-present";
 import { TrackPromo } from "@/components/tracking/track-promo";
+import { TrackSourcingCard } from "@/components/tracking/track-sourcing-card";
 import { glossTrackingText, hasChinese } from "@/lib/tracking/zh-en";
 
 type PublicEvent = {
@@ -420,6 +421,7 @@ export function TrackLookup() {
         ? [shipment]
         : [];
   const visibleCards = holding ? [] : cards;
+  const showSourcingCard = !holding && !error && !result && visibleCards.length === 0;
 
   useEffect(() => {
     const node = timelineRef.current;
@@ -481,7 +483,7 @@ export function TrackLookup() {
           autoComplete="off"
           spellCheck={false}
           placeholder="Tracking number"
-          className="min-w-0 flex-1 rounded-2xl border border-line bg-paper px-4 py-3 text-base text-ink outline-none focus:border-accent"
+          className="track-number-input min-w-0 flex-1 rounded-2xl border border-[#d60000]/50 bg-paper px-4 py-3 text-base text-ink outline-none"
         />
         <button
           type="submit"
@@ -494,18 +496,31 @@ export function TrackLookup() {
           {pending ? "Searching" : "Search"}
         </button>
       </form>
+      {showSourcingCard ? <TrackSourcingCard /> : null}
       <style>{`
+        .track-number-input {
+          box-shadow: 0 0 0 1px rgba(214, 0, 0, 0.28), 0 0 14px rgba(214, 0, 0, 0.22);
+          animation: track-field-glow 2.8s ease-in-out infinite;
+        }
+        .track-number-input:focus {
+          border-color: #d60000;
+          animation: none;
+          box-shadow: 0 0 0 2px var(--canvas), 0 0 0 4px #d60000, 0 0 18px rgba(214, 0, 0, 0.4);
+        }
         .track-search-btn {
           transition: transform 200ms cubic-bezier(0.34, 1.4, 0.64, 1), box-shadow 200ms ease;
-          box-shadow: inset 0 -3px 0 #E31C23, 0 10px 22px -16px rgba(29, 29, 31, 0.9);
+          box-shadow: inset 0 -3px 0 #E31C23, 0 0 0 1px rgba(214, 0, 0, 0.35), 0 0 16px rgba(214, 0, 0, 0.32);
+          animation: track-btn-glow 2.8s ease-in-out infinite;
         }
         .track-search-btn:hover:not(:disabled) {
           transform: translateY(-2px);
-          box-shadow: inset 0 -3px 0 #E31C23, 0 16px 28px -14px rgba(227, 28, 35, 0.55);
+          animation: none;
+          box-shadow: inset 0 -3px 0 #E31C23, 0 0 0 1px rgba(214, 0, 0, 0.5), 0 0 22px rgba(214, 0, 0, 0.45);
         }
         .track-search-btn:active:not(:disabled) { transform: translateY(0) scale(0.98); }
         .track-search-btn:focus-visible {
-          box-shadow: inset 0 -3px 0 #E31C23, 0 0 0 2px var(--canvas), 0 0 0 4px #E31C23;
+          animation: none;
+          box-shadow: inset 0 -3px 0 #E31C23, 0 0 0 2px var(--canvas), 0 0 0 4px #d60000, 0 0 16px rgba(214, 0, 0, 0.35);
         }
         .track-search-icon { transition: transform 200ms cubic-bezier(0.34, 1.5, 0.64, 1); }
         .track-search-btn:hover:not(:disabled) .track-search-icon { transform: translate(1px, -1px) scale(1.08); }
@@ -518,6 +533,14 @@ export function TrackLookup() {
           animation: track-search-spin 0.8s linear infinite;
         }
         @keyframes track-search-spin { to { transform: rotate(360deg); } }
+        @keyframes track-field-glow {
+          0%, 100% { box-shadow: 0 0 0 1px rgba(214, 0, 0, 0.28), 0 0 12px rgba(214, 0, 0, 0.2); }
+          50% { box-shadow: 0 0 0 1px rgba(214, 0, 0, 0.48), 0 0 20px rgba(214, 0, 0, 0.36); }
+        }
+        @keyframes track-btn-glow {
+          0%, 100% { box-shadow: inset 0 -3px 0 #E31C23, 0 0 0 1px rgba(214, 0, 0, 0.3), 0 0 12px rgba(214, 0, 0, 0.24); }
+          50% { box-shadow: inset 0 -3px 0 #E31C23, 0 0 0 1px rgba(214, 0, 0, 0.5), 0 0 20px rgba(214, 0, 0, 0.4); }
+        }
         .track-page-heading {
           color: #d60000;
           animation: track-heading-in 640ms cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -567,6 +590,7 @@ export function TrackLookup() {
           to { background-size: 100% 2px; }
         }
         @media (prefers-reduced-motion: reduce) {
+          .track-number-input,
           .track-search-btn,
           .track-search-icon,
           .track-search-spin,
