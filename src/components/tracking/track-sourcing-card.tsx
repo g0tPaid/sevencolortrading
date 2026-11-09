@@ -23,7 +23,7 @@ export function TrackSourcingCard() {
       <a
         href={TRACK_HOME_HREF}
         data-testid="track-home-link"
-        className="track-home-link mt-3 inline-flex min-h-12 w-full items-center justify-center rounded-2xl border border-[#d60000]/40 bg-[#fff4f0] px-5 text-base font-semibold tracking-[-0.02em] text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d60000] focus-visible:ring-offset-2"
+        className="track-home-link mt-3 inline-flex min-h-[3.15rem] w-full items-center justify-center rounded-2xl px-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d60000] focus-visible:ring-offset-2"
       >
         {TRACK_HOME_LABEL}
       </a>
@@ -52,7 +52,7 @@ export function TrackSourcingCard() {
             ) : (
               <FactoryMark />
             )}
-            <span>{source.label}</span>
+            <span className="track-buy-label">{source.label}</span>
           </Link>
         ))}
       </div>
@@ -78,13 +78,28 @@ export function TrackSourcingCard() {
           font-weight: 650;
           letter-spacing: -0.03em;
           line-height: 1.05;
-          color: #1d1d1f;
+          color: #fff;
           text-decoration: none;
+        }
+        .track-home-link {
+          background: #d60000;
+          color: #fff;
+          font-family: var(--font-fraunces), var(--font-playfair), "Times New Roman", Georgia, serif;
+          font-size: 1.2rem;
+          font-weight: 650;
+          letter-spacing: -0.03em;
+          box-shadow: inset 0 -3px 0 #8d0000;
         }
         .track-buy:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--canvas), 0 0 0 4px #1d1d1f; }
         .track-buy-1688 { background: #ff4000; }
+        .track-buy-1688 .track-buy-label { text-shadow: 0 1px 1px rgba(0, 0, 0, 0.45); }
         .track-buy-xianyu { background: #ffe60f; }
-        .track-buy-factories { background: #fff7f4; border: 1px solid rgba(29, 29, 31, 0.12); }
+        .track-buy-xianyu .track-buy-label {
+          border-radius: 0.6rem;
+          background: #1d1d1f;
+          padding: 0.2rem 0.7rem;
+        }
+        .track-buy-factories { background: #2a1816; }
         .track-buy-logo,
         .track-buy-mark {
           position: absolute;
@@ -113,11 +128,11 @@ export function TrackSourcingCard() {
 function FactoryMark() {
   return (
     <svg className="track-buy-mark" viewBox="0 0 32 32" aria-hidden>
-      <path d="M4 27h24" stroke="#1d1d1f" strokeWidth="1.8" strokeLinecap="round" />
-      <path d="M6 27V16h9v11" fill="#fff" stroke="#1d1d1f" strokeWidth="1.7" strokeLinejoin="round" />
-      <path d="M15 27V14l9 3v10" fill="#fff" stroke="#1d1d1f" strokeWidth="1.7" strokeLinejoin="round" />
-      <path d="M6 16l2.2-3.2L10.4 16l2.2-3.2L14.8 16" fill="none" stroke="#1d1d1f" strokeWidth="1.6" strokeLinejoin="round" />
-      <path d="M23 14V8h3v8" fill="#fff" stroke="#1d1d1f" strokeWidth="1.6" strokeLinejoin="round" />
+      <path d="M4 27h24" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M6 27V16h9v11" fill="none" stroke="#fff" strokeWidth="1.7" strokeLinejoin="round" />
+      <path d="M15 27V14l9 3v10" fill="none" stroke="#fff" strokeWidth="1.7" strokeLinejoin="round" />
+      <path d="M6 16l2.2-3.2L10.4 16l2.2-3.2L14.8 16" fill="none" stroke="#fff" strokeWidth="1.6" strokeLinejoin="round" />
+      <path d="M23 14V8h3v8" fill="none" stroke="#fff" strokeWidth="1.6" strokeLinejoin="round" />
       <path d="M23.2 8c.4-2.2 3.2-2.2 3.6 0" fill="none" stroke="#d60000" strokeWidth="1.5" strokeLinecap="round" />
       <path d="M8.2 20.2h2.4v2.4H8.2zm5.6 0h2.4v2.4h-2.4z" fill="#d60000" />
     </svg>
