@@ -475,53 +475,95 @@ export function TrackLookup() {
         <label htmlFor="tracking-number" className="sr-only">
           Tracking number
         </label>
-        <input
-          id="tracking-number"
-          data-testid="track-number"
-          value={number}
-          onChange={(event) => setNumber(event.target.value)}
-          autoComplete="off"
-          spellCheck={false}
-          placeholder="Tracking number"
-          className="track-number-input min-w-0 flex-1 rounded-2xl border border-[#d60000]/50 bg-paper px-4 py-3 text-base text-ink outline-none"
-        />
-        <button
-          type="submit"
-          data-testid="track-submit"
-          disabled={pending}
-          aria-busy={pending || holding}
-          className="track-search-btn inline-flex min-h-12 w-full min-w-[9.5rem] items-center justify-center gap-2 rounded-2xl bg-ink px-5 text-sm font-semibold text-paper focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
-        >
-          {pending ? <span className="track-search-spin" aria-hidden /> : <SearchMark />}
-          {pending ? "Searching" : "Search"}
-        </button>
+        <span className="track-number-shell min-w-0 flex-1" data-testid="track-number-shell">
+          <input
+            id="tracking-number"
+            data-testid="track-number"
+            value={number}
+            onChange={(event) => setNumber(event.target.value)}
+            autoComplete="off"
+            spellCheck={false}
+            placeholder="Tracking number"
+            className="track-number-input relative z-[1] w-full rounded-2xl border border-transparent bg-paper px-4 py-3 text-base text-ink outline-none"
+          />
+        </span>
+        <span className="track-search-shell w-full sm:w-auto" data-testid="track-search-shell">
+          <button
+            type="submit"
+            data-testid="track-submit"
+            disabled={pending}
+            aria-busy={pending || holding}
+            className="track-search-btn relative z-[1] inline-flex min-h-12 w-full min-w-[9.5rem] items-center justify-center gap-2 rounded-2xl bg-ink px-5 text-sm font-semibold text-paper focus-visible:outline-none disabled:cursor-not-allowed sm:w-auto"
+          >
+            {pending ? <span className="track-search-spin" aria-hidden /> : <SearchMark />}
+            {pending ? "Searching" : "Search"}
+          </button>
+        </span>
       </form>
       {showSourcingCard ? <TrackSourcingCard /> : null}
       <style>{`
-        .track-number-input {
-          box-shadow: 0 0 0 1px rgba(214, 0, 0, 0.28), 0 0 14px rgba(214, 0, 0, 0.22);
-          animation: track-field-glow 2.8s ease-in-out infinite;
+        @property --track-angle {
+          syntax: "<angle>";
+          inherits: false;
+          initial-value: 0deg;
+        }
+        .track-number-shell,
+        .track-search-shell {
+          position: relative;
+          display: flex;
+          isolation: isolate;
+          border-radius: 1rem;
+        }
+        .track-number-shell::before,
+        .track-search-shell::before,
+        .track-number-shell::after,
+        .track-search-shell::after {
+          content: "";
+          position: absolute;
+          pointer-events: none;
+          background: conic-gradient(
+            from var(--track-angle),
+            rgba(214, 0, 0, 0.55) 0deg,
+            rgba(214, 0, 0, 0.55) 236deg,
+            #ff6a62 286deg,
+            #fff 320deg,
+            #ff1f1f 346deg,
+            rgba(214, 0, 0, 0.55) 360deg
+          );
+          animation: track-edge-run 2.8s linear infinite;
+        }
+        .track-number-shell::before,
+        .track-search-shell::before {
+          inset: -3px;
+          z-index: 2;
+          border-radius: 1.2rem;
+          padding: 3px;
+          -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask-composite: exclude;
+        }
+        .track-number-shell::after,
+        .track-search-shell::after {
+          inset: -8px;
+          z-index: 0;
+          border-radius: 1.4rem;
+          filter: blur(6px);
+          opacity: 0.95;
         }
         .track-number-input:focus {
-          border-color: #d60000;
-          animation: none;
-          box-shadow: 0 0 0 2px var(--canvas), 0 0 0 4px #d60000, 0 0 18px rgba(214, 0, 0, 0.4);
+          box-shadow: 0 0 0 2px var(--canvas), 0 0 0 4px #d60000;
         }
         .track-search-btn {
-          transition: transform 200ms cubic-bezier(0.34, 1.4, 0.64, 1), box-shadow 200ms ease;
-          box-shadow: inset 0 -3px 0 #E31C23, 0 0 0 1px rgba(214, 0, 0, 0.35), 0 0 16px rgba(214, 0, 0, 0.32);
-          animation: track-btn-glow 2.8s ease-in-out infinite;
+          box-shadow: inset 0 -3px 0 #E31C23;
+          transition: transform 200ms cubic-bezier(0.34, 1.4, 0.64, 1);
         }
-        .track-search-btn:hover:not(:disabled) {
-          transform: translateY(-2px);
-          animation: none;
-          box-shadow: inset 0 -3px 0 #E31C23, 0 0 0 1px rgba(214, 0, 0, 0.5), 0 0 22px rgba(214, 0, 0, 0.45);
-        }
-        .track-search-btn:active:not(:disabled) { transform: translateY(0) scale(0.98); }
+        .track-search-shell:hover:not(:has(:disabled)) { transform: translateY(-2px); }
+        .track-search-shell:active:not(:has(:disabled)) { transform: translateY(0) scale(0.98); }
         .track-search-btn:focus-visible {
-          animation: none;
-          box-shadow: inset 0 -3px 0 #E31C23, 0 0 0 2px var(--canvas), 0 0 0 4px #d60000, 0 0 16px rgba(214, 0, 0, 0.35);
+          box-shadow: inset 0 -3px 0 #E31C23, 0 0 0 2px var(--canvas), 0 0 0 4px #d60000;
         }
+        .track-search-btn:disabled { opacity: 0.7; }
         .track-search-icon { transition: transform 200ms cubic-bezier(0.34, 1.5, 0.64, 1); }
         .track-search-btn:hover:not(:disabled) .track-search-icon { transform: translate(1px, -1px) scale(1.08); }
         .track-search-spin {
@@ -533,14 +575,7 @@ export function TrackLookup() {
           animation: track-search-spin 0.8s linear infinite;
         }
         @keyframes track-search-spin { to { transform: rotate(360deg); } }
-        @keyframes track-field-glow {
-          0%, 100% { box-shadow: 0 0 0 1px rgba(214, 0, 0, 0.28), 0 0 12px rgba(214, 0, 0, 0.2); }
-          50% { box-shadow: 0 0 0 1px rgba(214, 0, 0, 0.48), 0 0 20px rgba(214, 0, 0, 0.36); }
-        }
-        @keyframes track-btn-glow {
-          0%, 100% { box-shadow: inset 0 -3px 0 #E31C23, 0 0 0 1px rgba(214, 0, 0, 0.3), 0 0 12px rgba(214, 0, 0, 0.24); }
-          50% { box-shadow: inset 0 -3px 0 #E31C23, 0 0 0 1px rgba(214, 0, 0, 0.5), 0 0 20px rgba(214, 0, 0, 0.4); }
-        }
+        @keyframes track-edge-run { to { --track-angle: 360deg; } }
         .track-page-heading {
           color: #d60000;
           animation: track-heading-in 640ms cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -590,8 +625,10 @@ export function TrackLookup() {
           to { background-size: 100% 2px; }
         }
         @media (prefers-reduced-motion: reduce) {
-          .track-number-input,
-          .track-search-btn,
+          .track-number-shell::before,
+          .track-number-shell::after,
+          .track-search-shell::before,
+          .track-search-shell::after,
           .track-search-icon,
           .track-search-spin,
           .track-page-heading,
@@ -600,8 +637,17 @@ export function TrackLookup() {
           .track-cozy-spark,
           .track-cozy-plane,
           .track-greeting-name { animation: none; transition: none; }
-          .track-search-btn:hover,
-          .track-search-btn:active,
+          .track-number-shell::before,
+          .track-search-shell::before {
+            background: rgba(214, 0, 0, 0.72);
+          }
+          .track-number-shell::after,
+          .track-search-shell::after {
+            background: rgba(214, 0, 0, 0.45);
+            opacity: 1;
+          }
+          .track-search-shell:hover,
+          .track-search-shell:active,
           .track-search-btn:hover .track-search-icon,
           .track-page-heading,
           .track-cozy-plane { transform: none; }
