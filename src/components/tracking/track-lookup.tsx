@@ -523,14 +523,16 @@ export function TrackLookup() {
           pointer-events: none;
           background: conic-gradient(
             from var(--track-angle),
-            rgba(214, 0, 0, 0.55) 0deg,
-            rgba(214, 0, 0, 0.55) 236deg,
-            #ff6a62 286deg,
-            #fff 320deg,
-            #ff1f1f 346deg,
-            rgba(214, 0, 0, 0.55) 360deg
+            #ff5ea8 0deg,
+            #ff9a3c 52deg,
+            #ffe14d 104deg,
+            #7dff6b 156deg,
+            #3ee0ff 208deg,
+            #6d8bff 260deg,
+            #c86bff 312deg,
+            #ff5ea8 360deg
           );
-          animation: track-edge-run 2.8s linear infinite;
+          animation: track-edge-run 8s linear infinite;
         }
         .track-number-shell::before,
         .track-search-shell::before {
@@ -637,15 +639,6 @@ export function TrackLookup() {
           .track-cozy-spark,
           .track-cozy-plane,
           .track-greeting-name { animation: none; transition: none; }
-          .track-number-shell::before,
-          .track-search-shell::before {
-            background: rgba(214, 0, 0, 0.72);
-          }
-          .track-number-shell::after,
-          .track-search-shell::after {
-            background: rgba(214, 0, 0, 0.45);
-            opacity: 1;
-          }
           .track-search-shell:hover,
           .track-search-shell:active,
           .track-search-btn:hover .track-search-icon,
