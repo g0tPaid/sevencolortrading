@@ -13,7 +13,7 @@ export const metadata: Metadata = routeMetadata({
 export default function TrackPage() {
   return (
     <>
-      <div aria-hidden className="pointer-events-none fixed inset-x-0 top-0 z-40 h-[4.75rem] bg-canvas sm:h-[5.25rem]" />
+      <div aria-hidden className="pointer-events-none fixed inset-x-0 top-0 z-40 h-32 bg-canvas sm:h-36" />
       <Container className="pb-20 pt-28 sm:pt-32">
         <TrackLookup />
       </Container>

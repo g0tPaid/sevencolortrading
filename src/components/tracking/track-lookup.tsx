@@ -607,8 +607,8 @@ export function TrackLookup() {
           animation: track-name-line 680ms cubic-bezier(0.16, 1, 0.3, 1) both;
         }
         @keyframes track-heading-in {
-          from { transform: translateY(8px); }
-          to { transform: none; }
+          from { opacity: 0; }
+          to { opacity: 1; }
         }
         @keyframes track-heading-rule {
           from { transform: scaleX(0.2); }
