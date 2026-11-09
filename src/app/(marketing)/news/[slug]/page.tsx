@@ -44,13 +44,6 @@ export async function generateMetadata({
       publishedTime: post.date,
       modifiedTime: post.updatedAt ?? post.date,
     },
-    alternates: {
-      canonical: `https://sourcing.center${path}`,
-      languages: {
-        en: `https://sourcing.center${path}`,
-        "zh-CN": `https://sourcing.center${path}`,
-      },
-    },
     other: {
       "og:locale:alternate": "zh_CN",
     },
