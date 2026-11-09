@@ -1,5 +1,7 @@
 "use client";
 
+import { DropshipProofControls } from "@/components/dashboard/dropship-proof-controls";
+
 import { FormEvent, useCallback, useEffect, useState } from "react";
 
 type Carrier = { id: string; name: string };
@@ -403,6 +405,7 @@ export function ShipmentsDesk() {
         <section className="rounded-3xl border border-line bg-paper-elevated p-4">
           <h2 className="font-display text-2xl font-semibold text-ink">History</h2>
           <p className="mt-2 text-xs text-muted">Internal id {detail.id}</p>
+          <DropshipProofControls key={detail.id} shipmentId={detail.id} />
           <dl className="mt-3 grid gap-2 text-sm sm:grid-cols-2">
             <div>
               <dt className="text-muted">Created</dt>
