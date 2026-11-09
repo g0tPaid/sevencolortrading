@@ -14,6 +14,7 @@ import {
   timelineScrollBehavior,
 } from "@/lib/tracking/track-present";
 import { TrackPromo } from "@/components/tracking/track-promo";
+import { TrackSourcingCard } from "@/components/tracking/track-sourcing-card";
 import { glossTrackingText, hasChinese } from "@/lib/tracking/zh-en";
 
 type PublicEvent = {
@@ -420,6 +421,7 @@ export function TrackLookup() {
         ? [shipment]
         : [];
   const visibleCards = holding ? [] : cards;
+  const showSourcingCard = !holding && !error && !result && visibleCards.length === 0;
 
   useEffect(() => {
     const node = timelineRef.current;
@@ -494,6 +496,7 @@ export function TrackLookup() {
           {pending ? "Searching" : "Search"}
         </button>
       </form>
+      {showSourcingCard ? <TrackSourcingCard /> : null}
       <style>{`
         .track-search-btn {
           transition: transform 200ms cubic-bezier(0.34, 1.4, 0.64, 1), box-shadow 200ms ease;
