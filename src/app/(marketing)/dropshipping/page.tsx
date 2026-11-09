@@ -37,6 +37,11 @@ export default function DropshippingPage() {
           {dropshippingBenefits.map((h) => `${h.city}, ${h.country}`).join(" and ")}.
         </p>
 
+        <p className="mt-6 text-sm text-muted">
+          Have an order? Open the private link from your warehouse team for photos and videos, or{" "}
+          <Link href="/track" className="font-semibold text-ink underline">track by shipment number</Link>.
+        </p>
+
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {dropshippingSteps.map((step) => (
             <article key={step.title} className="glass-card rounded-[1.5rem] p-6">
