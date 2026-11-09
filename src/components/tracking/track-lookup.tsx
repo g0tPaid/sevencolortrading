@@ -12,6 +12,7 @@ import {
   timelineNeedsScroll,
   timelineScrollBehavior,
 } from "@/lib/tracking/track-present";
+import { TrackCarrierStrip } from "@/components/tracking/track-carrier-strip";
 import { TrackSourcingCard } from "@/components/tracking/track-sourcing-card";
 import { glossTrackingText, hasChinese } from "@/lib/tracking/zh-en";
 
@@ -421,7 +422,7 @@ export function TrackLookup() {
 
   return (
     <div className="mx-auto max-w-xl">
-      <div className="track-page-stage mb-3 rounded-[1.6rem] bg-[#fff4f0] px-4 py-3 text-center sm:mb-4 sm:px-6 sm:py-3.5">
+      <div className="track-page-stage mb-2 rounded-[1.6rem] bg-[#fff4f0] px-4 py-3 text-center sm:mb-3 sm:px-6 sm:py-3.5">
         <h1 data-testid="track-heading" className="track-page-heading text-[2.55rem] sm:text-[3.35rem]">
           Track Global Parcels
         </h1>
@@ -429,6 +430,7 @@ export function TrackLookup() {
       <p className="sr-only" aria-live="polite" data-testid="track-live">
         {announcement}
       </p>
+      <TrackCarrierStrip />
       <form onSubmit={onSubmit} className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
         <label htmlFor="tracking-number" className="sr-only">
           Tracking number
