@@ -455,7 +455,7 @@ export function TrackLookup() {
       <p className="sr-only" aria-live="polite" data-testid="track-live">
         {announcement}
       </p>
-      <form onSubmit={onSubmit} className="flex flex-col gap-3 sm:flex-row">
+      <form onSubmit={onSubmit} className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
         <label htmlFor="tracking-number" className="sr-only">
           Tracking number
         </label>
@@ -468,7 +468,7 @@ export function TrackLookup() {
             autoComplete="off"
             spellCheck={false}
             placeholder="Tracking number"
-            className="track-number-input relative z-[1] w-full rounded-2xl border border-transparent bg-paper px-4 py-3 text-base text-ink outline-none"
+            className="track-number-input relative z-[1] h-full w-full rounded-2xl border border-transparent bg-paper px-4 py-3 text-base text-ink outline-none"
           />
         </span>
         <span className="track-search-shell w-full sm:w-auto" data-testid="track-search-shell">
@@ -477,10 +477,10 @@ export function TrackLookup() {
             data-testid="track-submit"
             disabled={pending}
             aria-busy={pending || holding}
-            className="track-search-btn relative z-[1] inline-flex min-h-12 w-full min-w-[9.5rem] items-center justify-center gap-2 rounded-2xl px-5 text-sm font-semibold focus-visible:outline-none disabled:cursor-not-allowed sm:w-auto"
+            className="track-search-btn relative z-[1] inline-flex w-full items-center justify-center gap-2 rounded-2xl px-3 focus-visible:outline-none disabled:cursor-not-allowed sm:w-auto sm:px-5"
           >
             {pending ? <span className="track-search-spin" aria-hidden /> : <SearchMark />}
-            {pending ? "Searching" : "Search"}
+            <span className="track-search-word">{pending ? "Searching" : "Search"}</span>
           </button>
         </span>
       </form>
@@ -507,16 +507,16 @@ export function TrackLookup() {
           pointer-events: none;
           background: conic-gradient(
             from var(--track-angle),
-            #f6c9df 0deg,
-            #f8dcc4 52deg,
-            #f7efc8 104deg,
-            #d9f3d4 156deg,
-            #d2f1f8 208deg,
-            #d9e2fa 260deg,
-            #ead6f8 312deg,
-            #f6c9df 360deg
+            #f08cba 0deg,
+            #f5b27a 52deg,
+            #f0d56a 104deg,
+            #8fd48a 156deg,
+            #7ecfec 208deg,
+            #9aafef 260deg,
+            #d7a6ee 312deg,
+            #f08cba 360deg
           );
-          animation: track-edge-run 8s linear infinite;
+          animation: track-edge-run 6s linear infinite;
         }
         .track-number-shell::before,
         .track-search-shell::before {
@@ -535,17 +535,25 @@ export function TrackLookup() {
           z-index: 0;
           border-radius: 1.4rem;
           filter: blur(7px);
-          opacity: 0.42;
+          opacity: 0.72;
         }
         .track-number-input:focus {
           box-shadow: 0 0 0 2px var(--canvas), 0 0 0 4px #d60000;
         }
         .track-search-btn {
-          background: #ff9a9a;
-          color: #1d1d1f;
-          box-shadow: inset 0 -3px 0 #e07070;
+          background: #e10600;
+          color: #fff;
+          font-family: var(--font-fraunces), var(--font-playfair), "Times New Roman", Georgia, serif;
+          font-size: clamp(2.85rem, 16vw, 3.35rem);
+          font-weight: 750;
+          letter-spacing: -0.05em;
+          line-height: 0.8;
+          padding-block: 0.55rem;
+          box-shadow: inset 0 -4px 0 #9d0400;
           transition: transform 200ms cubic-bezier(0.34, 1.4, 0.64, 1);
         }
+        .track-search-word { display: block; }
+        .track-search-btn[aria-busy="true"] { font-size: clamp(1.55rem, 7.5vw, 2rem); }
         .track-search-shell:hover:not(:has(:disabled)) { transform: translateY(-2px); }
         .track-search-shell:active:not(:has(:disabled)) { transform: translateY(0) scale(0.98); }
         .track-search-btn:focus-visible {
@@ -558,8 +566,8 @@ export function TrackLookup() {
           width: 16px;
           height: 16px;
           border-radius: 999px;
-          border: 2px solid rgba(29, 29, 31, 0.28);
-          border-top-color: #1d1d1f;
+          border: 2px solid rgba(255, 255, 255, 0.45);
+          border-top-color: #fff;
           animation: track-search-spin 0.8s linear infinite;
         }
         @keyframes track-search-spin { to { transform: rotate(360deg); } }
