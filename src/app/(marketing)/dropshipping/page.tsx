@@ -39,7 +39,7 @@ export default function DropshippingPage() {
 
         <p className="mt-6 text-sm text-muted">
           Have an order? Open the private link from your warehouse team for photos and videos, or{" "}
-          <Link href="/track" className="font-semibold text-ink underline">track by shipment number</Link>.
+          <Link href="/track" className="font-semibold text-ink underline">track your package by shipment number</Link>.
         </p>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">

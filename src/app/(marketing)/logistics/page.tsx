@@ -97,6 +97,12 @@ export default function LogisticsPage() {
           ))}
         </div>
         <CommonQuestions items={serviceCommonQuestions.logistics} />
+        <p className="mt-6 text-sm text-muted">
+          Already have a tracking number?{" "}
+          <Link href="/track" className="font-medium text-accent underline-offset-4 hover:underline">
+            Track your package
+          </Link>.
+        </p>
       </Container>
       <CtaBand />
     </>
