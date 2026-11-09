@@ -12,7 +12,6 @@ import {
   timelineNeedsScroll,
   timelineScrollBehavior,
 } from "@/lib/tracking/track-present";
-import { TrackPromo } from "@/components/tracking/track-promo";
 import { TrackSourcingCard } from "@/components/tracking/track-sourcing-card";
 import { glossTrackingText, hasChinese } from "@/lib/tracking/zh-en";
 
@@ -270,27 +269,12 @@ export function TrackLookup() {
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<LookupResponse | null>(null);
   const [searchId, setSearchId] = useState(0);
-  const [holdId, setHoldId] = useState<number | null>(null);
   const [announcement, setAnnouncement] = useState("");
   const activeSearch = useRef(0);
   const inFlight = useRef(false);
   const submittedNumber = useRef("");
-  const holdTimer = useRef<number | null>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
   const broughtFor = useRef<number | null>(null);
-
-  useEffect(() => {
-    return () => {
-      if (holdTimer.current != null) window.clearTimeout(holdTimer.current);
-    };
-  }, []);
-
-  function clearHold() {
-    if (holdTimer.current != null) {
-      window.clearTimeout(holdTimer.current);
-      holdTimer.current = null;
-    }
-  }
 
   async function lookup(trackingNumber: string, carrierId: string | undefined, silent: boolean, requestId: number) {
     if (!silent) {
@@ -333,9 +317,7 @@ export function TrackLookup() {
     setSearchId(requestId);
     setAnnouncement("");
     setPollExhausted(false);
-    clearHold();
     if (presentation.kind === "invalid") {
-      setHoldId(null);
       setResult(null);
       setPending(false);
       setError(presentation.message);
@@ -345,12 +327,7 @@ export function TrackLookup() {
     inFlight.current = true;
     setResult(null);
     setError(null);
-    setHoldId(requestId);
-    holdTimer.current = window.setTimeout(() => {
-      holdTimer.current = null;
-      if (activeSearch.current !== requestId) return;
-      setHoldId((current) => (current === requestId ? null : current));
-    }, presentation.holdMs);
+    setPending(true);
     await lookup(presentation.number, undefined, false, requestId);
   }
 
@@ -406,8 +383,7 @@ export function TrackLookup() {
     }
   }
 
-  const holding = holdId !== null;
-  const showProgress = !holding && !pollExhausted && (pending || result?.state === "pending");
+  const showProgress = !pollExhausted && (pending || result?.state === "pending");
   const progressLabel =
     result?.shipment || result?.shipments?.length
       ? "A result is in. Still checking other possible carriers."
@@ -419,14 +395,12 @@ export function TrackLookup() {
       : shipment
         ? [shipment]
         : [];
-  const visibleCards = holding ? [] : cards;
-  const showSourcingCard = !holding && !error && !result && visibleCards.length === 0;
+  const showSourcingCard = !pending && !error && !result && cards.length === 0;
 
   useEffect(() => {
     const node = timelineRef.current;
     if (
       !shouldBringTimelineIntoView({
-        holding,
         hasTimeline: node != null,
         searchId,
         broughtForSearchId: broughtFor.current,
@@ -443,7 +417,7 @@ export function TrackLookup() {
     if (document.activeElement?.id !== "tracking-number") node.focus({ preventScroll: true });
     broughtFor.current = searchId;
     setAnnouncement("Tracking timeline");
-  }, [holding, searchId, visibleCards.length]);
+  }, [searchId, cards.length]);
 
   return (
     <div className="mx-auto max-w-xl">
@@ -476,7 +450,7 @@ export function TrackLookup() {
             type="submit"
             data-testid="track-submit"
             disabled={pending}
-            aria-busy={pending || holding}
+            aria-busy={pending}
             className="track-search-btn relative z-[1] inline-flex w-full items-center justify-center gap-2 rounded-2xl px-3 focus-visible:outline-none disabled:cursor-not-allowed sm:w-auto sm:px-5"
           >
             {pending ? <span className="track-search-spin" aria-hidden /> : null}
@@ -613,26 +587,25 @@ export function TrackLookup() {
           .track-page-heading { transform: none; }
         }
       `}</style>
-      {holding ? <TrackPromo /> : null}
       {showProgress ? <TrackingProgress label={progressLabel} /> : null}
 
-      {!holding && error ? (
+      {error ? (
         <p role="alert" className="mt-4 rounded-2xl border border-line bg-paper-elevated px-4 py-3 text-sm text-ink">
           {error}
         </p>
       ) : null}
 
-      {!holding && result && !result.found && result.state !== "pending" ? (
+      {result && !result.found && result.state !== "pending" ? (
         <p data-testid="track-empty" role="status" className="mt-4 text-sm text-ink">
           {result.message}
         </p>
       ) : null}
 
-      {!holding && result?.state === "multiple" ? (
+      {result?.state === "multiple" ? (
         <p className="mt-4 text-sm text-ink">{result.message}</p>
       ) : null}
 
-      {visibleCards.map((card, index) => (
+      {cards.map((card, index) => (
         <ResultCard
           key={`${card.trackingNumber}-${card.carrier.id ?? card.carrier.name}`}
           shipment={card}

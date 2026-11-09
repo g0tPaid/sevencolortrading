@@ -2,33 +2,26 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 import {
-  PROMO_COPY,
-  PROMO_HOLD_MS,
-  PROMO_HREF,
-  promoMotionFitsHold,
   searchPresentation,
   shouldBringTimelineIntoView,
   timelineNeedsScroll,
   timelineScrollBehavior,
 } from "@/lib/tracking/track-present";
 
-test("a valid search holds the real result for three seconds behind the house line", () => {
-  assert.equal(PROMO_COPY, "Buy anything from China from www.sourcing.center");
-  assert.equal(PROMO_HREF, "https://www.sourcing.center");
-  assert.equal(PROMO_HOLD_MS, 3000);
+test("a valid search starts a lookup with no promotional hold", () => {
   const ready = searchPresentation(" 384423693978 ");
   assert.equal(ready.kind, "search");
   if (ready.kind !== "search") return;
   assert.equal(ready.number, "384423693978");
-  assert.equal(ready.holdMs, 3000);
-  assert.equal(ready.promo, PROMO_COPY);
-  assert.equal(ready.href, PROMO_HREF);
-  assert.equal(ready.promo.includes("?"), false);
-  assert.equal(promoMotionFitsHold(), true);
-  assert.equal(promoMotionFitsHold(undefined, 2000), false);
+  assert.equal("holdMs" in ready, false);
+  const page = readFileSync(new URL("../../components/tracking/track-lookup.tsx", import.meta.url), "utf8");
+  assert.equal(page.includes("TrackPromo"), false);
+  assert.equal(page.includes("setHoldId"), false);
+  assert.equal(page.includes("Buy anything from China"), false);
+  assert.match(page, /Checking this number with the carrier/);
 });
 
-test("invalid input does not start the promo", () => {
+test("invalid input does not start a lookup", () => {
   for (const input of ["", "   ", "12", "!!!", "hello", "buy anything"]) {
     const presentation = searchPresentation(input);
     assert.equal(presentation.kind, "invalid", input);
@@ -37,25 +30,21 @@ test("invalid input does not start the promo", () => {
   }
 });
 
-test("the timeline is brought in once after the hold, including a later search", () => {
+test("the timeline is brought in once per search, including a later search", () => {
   assert.equal(
-    shouldBringTimelineIntoView({ holding: true, hasTimeline: true, searchId: 1, broughtForSearchId: null }),
+    shouldBringTimelineIntoView({ hasTimeline: false, searchId: 1, broughtForSearchId: null }),
     false,
   );
   assert.equal(
-    shouldBringTimelineIntoView({ holding: false, hasTimeline: false, searchId: 1, broughtForSearchId: null }),
-    false,
-  );
-  assert.equal(
-    shouldBringTimelineIntoView({ holding: false, hasTimeline: true, searchId: 1, broughtForSearchId: null }),
+    shouldBringTimelineIntoView({ hasTimeline: true, searchId: 1, broughtForSearchId: null }),
     true,
   );
   assert.equal(
-    shouldBringTimelineIntoView({ holding: false, hasTimeline: true, searchId: 1, broughtForSearchId: 1 }),
+    shouldBringTimelineIntoView({ hasTimeline: true, searchId: 1, broughtForSearchId: 1 }),
     false,
   );
   assert.equal(
-    shouldBringTimelineIntoView({ holding: false, hasTimeline: true, searchId: 2, broughtForSearchId: 1 }),
+    shouldBringTimelineIntoView({ hasTimeline: true, searchId: 2, broughtForSearchId: 1 }),
     true,
   );
   assert.equal(timelineScrollBehavior(false), "smooth");
@@ -69,15 +58,7 @@ test("the route illustration keeps its honesty label and does not print Natural 
   const page = readFileSync(new URL("../../components/tracking/track-lookup.tsx", import.meta.url), "utf8");
   assert.equal(page.includes("Natural Earth"), false);
   assert.equal(page.includes(">Route illustration<"), true);
-  assert.equal(page.includes(PROMO_COPY), false);
-  const promo = readFileSync(new URL("../../components/tracking/track-promo.tsx", import.meta.url), "utf8");
-  assert.equal(promo.includes("PROMO_COPY"), true);
-  assert.equal(promo.includes("progressbar"), false);
-  assert.equal(promo.includes("aria-valuenow"), false);
-  assert.match(promo, /prefers-reduced-motion:\s*reduce/);
-  assert.match(promo, /sourcing-center-plane\.png/);
-  assert.equal(promo.includes("scaleX(-1)"), false);
-  assert.equal(promo.includes("rotate("), false);
+  assert.equal(page.includes("TrackPromo"), false);
   assert.equal(page.includes("scroll-mt-32"), true);
   assert.equal(page.includes("Track Global Parcels"), true);
   assert.equal(page.includes("track-heading-rule"), false);
