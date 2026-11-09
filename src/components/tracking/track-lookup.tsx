@@ -1,7 +1,6 @@
 "use client";
 
 import { FormEvent, useEffect, useRef, useState, type Ref } from "react";
-import Image from "next/image";
 import { countryLabel } from "@/lib/analytics-geo";
 import { WORLD_LAND_PATH } from "@/components/home/world-land-path";
 import { greetingNameSpan, shipmentPhase, type ShipmentPhase } from "@/lib/tracking/greeting";
@@ -448,23 +447,8 @@ export function TrackLookup() {
 
   return (
     <div className="mx-auto max-w-xl">
-      <div className="track-page-stage relative mb-5 overflow-hidden rounded-[1.4rem] bg-[#fff4f0] px-3 pb-2.5 pt-14 sm:mb-6 sm:px-4">
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-14" aria-hidden>
-          <svg className="track-cozy-cloud absolute left-2 top-1.5 h-9 w-16" viewBox="0 0 86 40" fill="none">
-            <path d="M8 26c0-8 7-14 15-11 3-8 14-10 19-3 7-4 16 1 15 8 8 1 11 10 4 14-9 5-44 5-53-8z" fill="#fff" stroke="#1d1d1f" strokeWidth="2.2" strokeLinejoin="round" />
-          </svg>
-          <svg className="track-cozy-gift absolute left-[4.6rem] top-3 h-8 w-9" viewBox="0 0 44 36" fill="none">
-            <rect x="4" y="12" width="32" height="18" rx="5" fill="#fff" stroke="#1d1d1f" strokeWidth="2.2" />
-            <rect x="2" y="7" width="36" height="8" rx="3.5" fill="#fff" stroke="#1d1d1f" strokeWidth="2.2" />
-            <rect x="17" y="7" width="6" height="23" rx="1.5" fill="#d60000" />
-            <rect x="2" y="16" width="36" height="4.5" fill="#d60000" />
-          </svg>
-          <svg className="track-cozy-spark absolute right-[5.6rem] top-2 h-3.5 w-3.5" viewBox="0 0 16 16">
-            <path d="M8 1.2 9.2 6.2 14.2 7.4 9.2 8.6 8 13.6 6.8 8.6 1.8 7.4 6.8 6.2z" fill="#d60000" />
-          </svg>
-          <Image src="/tracking/sourcing-center-plane.png" alt="" width={92} height={48} className="track-cozy-plane" unoptimized />
-        </div>
-        <h1 data-testid="track-heading" className="track-page-heading relative z-[1] font-display text-[2.35rem] font-semibold leading-[0.95] tracking-tight sm:text-[3.15rem]">
+      <div className="track-page-stage mb-5 rounded-[1.6rem] bg-[#fff4f0] px-4 py-5 text-center sm:mb-6 sm:px-6 sm:py-6">
+        <h1 data-testid="track-heading" className="track-page-heading text-[2.55rem] sm:text-[3.35rem]">
           Track Global Parcels
         </h1>
       </div>
@@ -579,22 +563,28 @@ export function TrackLookup() {
         @keyframes track-search-spin { to { transform: rotate(360deg); } }
         @keyframes track-edge-run { to { --track-angle: 360deg; } }
         .track-page-heading {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
           color: #d60000;
-          animation: track-heading-in 640ms cubic-bezier(0.16, 1, 0.3, 1) both;
+          font-family: var(--font-fraunces), var(--font-playfair), "Times New Roman", Georgia, serif;
+          font-weight: 650;
+          font-variation-settings: "SOFT" 55, "opsz" 120, "WONK" 1;
+          letter-spacing: -0.045em;
+          line-height: 0.9;
+          text-wrap: balance;
+          animation: track-heading-in 720ms cubic-bezier(0.16, 1, 0.3, 1) both;
         }
-        .track-cozy-plane {
-          position: absolute;
-          top: 2px;
-          right: 8px;
-          width: 74px;
-          height: auto;
-          animation: track-cozy-plane 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
-          filter: drop-shadow(0 6px 8px rgba(29, 29, 31, 0.12));
+        .track-page-heading::after {
+          content: "";
+          width: 5.25rem;
+          height: 5px;
+          margin-top: 0.7rem;
+          border-radius: 999px;
+          background: linear-gradient(90deg, #ffb4b4, #d60000 42%, #ff8a8a);
+          transform-origin: center;
+          animation: track-heading-rule 680ms cubic-bezier(0.16, 1, 0.3, 1) both;
         }
-        .track-cozy-cloud { animation: track-cozy-drift 1s ease both; }
-        .track-cozy-gift,
-        .track-cozy-spark { transform-origin: center; animation: track-cozy-pop 700ms cubic-bezier(0.34, 1.3, 0.64, 1) both; }
-        .track-cozy-spark { animation-delay: 220ms; }
         .track-greeting-name {
           color: var(--accent);
           font-weight: 650;
@@ -610,17 +600,9 @@ export function TrackLookup() {
           from { transform: translateY(8px); }
           to { transform: none; }
         }
-        @keyframes track-cozy-drift {
-          from { transform: translateX(-8px); }
-          to { transform: none; }
-        }
-        @keyframes track-cozy-pop {
-          0% { opacity: 0; transform: translateY(8px) scale(0.82, 0.7); }
-          100% { opacity: 1; transform: none; }
-        }
-        @keyframes track-cozy-plane {
-          from { transform: translate(16px, 6px); }
-          to { transform: none; }
+        @keyframes track-heading-rule {
+          from { transform: scaleX(0.2); }
+          to { transform: scaleX(1); }
         }
         @keyframes track-name-line {
           from { background-size: 0 2px; }
@@ -634,16 +616,13 @@ export function TrackLookup() {
           .track-search-icon,
           .track-search-spin,
           .track-page-heading,
-          .track-cozy-cloud,
-          .track-cozy-gift,
-          .track-cozy-spark,
-          .track-cozy-plane,
+          .track-page-heading::after,
           .track-greeting-name { animation: none; transition: none; }
           .track-search-shell:hover,
           .track-search-shell:active,
           .track-search-btn:hover .track-search-icon,
           .track-page-heading,
-          .track-cozy-plane { transform: none; }
+          .track-page-heading::after { transform: none; }
         }
       `}</style>
       {holding ? <TrackPromo /> : null}

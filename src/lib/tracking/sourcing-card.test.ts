@@ -1,21 +1,23 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import test from "node:test";
-import { SOURCING_OFFERS, sourcingOffer } from "@/lib/tracking/sourcing-card";
+import { TRACK_AD_LINE, TRACK_HOME_HREF, TRACK_HOME_LABEL } from "@/lib/tracking/sourcing-card";
 
-test("sourcing card offers are labels only, with no description or call to action", () => {
-  assert.equal(SOURCING_OFFERS.length, 3);
-  const ids = new Set(SOURCING_OFFERS.map((offer) => offer.id));
-  assert.equal(ids.size, 3);
-  const serialized = JSON.stringify(SOURCING_OFFERS);
-  assert.equal(serialized.includes("We pay 1688 in RMB, receive into our Xiamen warehouse, then QC and export."), false);
-  assert.equal(/detail|description|warehouse|furniture|OEM|ODM|Xiamen/i.test(serialized), false);
-  for (const offer of SOURCING_OFFERS) {
-    assert.equal("detail" in offer, false);
-    assert.equal("description" in offer, false);
-    assert.equal("href" in offer, false);
-    assert.equal("cta" in offer, false);
-    assert.equal(offer.label.length > 0, true);
-  }
-  assert.equal(sourcingOffer("home").label, "Home");
-  assert.equal(sourcingOffer("missing").id, "goods");
+test("the idle track link is the site address, with no category choices", () => {
+  assert.equal(TRACK_HOME_LABEL, "www.sourcing.center");
+  assert.equal(TRACK_HOME_HREF, "https://sourcing.center");
+  assert.equal(TRACK_AD_LINE, "Buy anything from China");
+  const card = readFileSync(new URL("../../components/tracking/track-sourcing-card.tsx", import.meta.url), "utf8");
+  const page = readFileSync(new URL("../../components/tracking/track-lookup.tsx", import.meta.url), "utf8");
+  assert.match(card, /\{TRACK_HOME_LABEL\}/);
+  assert.match(card, /href=\{TRACK_HOME_HREF\}/);
+  assert.match(card, /\{TRACK_AD_LINE\}/);
+  assert.equal(card.includes("1688 goods"), false);
+  assert.equal(card.includes("Private label"), false);
+  assert.equal(card.includes(">Home<"), false);
+  assert.equal(card.includes("scaleX(-1)"), false);
+  assert.equal(card.includes("rotate("), false);
+  assert.equal(page.includes("1688 goods"), false);
+  assert.equal(page.includes("track-cozy-cloud"), false);
+  assert.equal(page.includes("track-cozy-gift"), false);
 });
