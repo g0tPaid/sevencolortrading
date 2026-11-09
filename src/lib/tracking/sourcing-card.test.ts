@@ -27,6 +27,7 @@ test("the idle track ad keeps the banner and homepage link, without the source b
   assert.match(flags, /from \{ transform: translateX\(-50%\)/);
   assert.match(flags, /to \{ transform: translateX\(0\)/);
   assert.match(flags, /prefers-reduced-motion:\s*reduce/);
+  assert.equal(flags.includes("Pause flags"), false);
   assert.equal(page.includes("1688 goods"), false);
   assert.equal(page.includes("track-cozy-cloud"), false);
   assert.equal(page.includes("track-cozy-gift"), false);

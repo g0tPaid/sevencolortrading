@@ -447,7 +447,7 @@ export function TrackLookup() {
 
   return (
     <div className="mx-auto max-w-xl">
-      <div className="track-page-stage mb-5 rounded-[1.6rem] bg-[#fff4f0] px-4 py-5 text-center sm:mb-6 sm:px-6 sm:py-6">
+      <div className="track-page-stage mb-3 rounded-[1.6rem] bg-[#fff4f0] px-4 py-3 text-center sm:mb-4 sm:px-6 sm:py-3.5">
         <h1 data-testid="track-heading" className="track-page-heading text-[2.55rem] sm:text-[3.35rem]">
           Track Global Parcels
         </h1>
@@ -572,27 +572,14 @@ export function TrackLookup() {
         @keyframes track-search-spin { to { transform: rotate(360deg); } }
         @keyframes track-edge-run { to { --track-angle: 360deg; } }
         .track-page-heading {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
           color: #d60000;
           font-family: var(--font-fraunces), var(--font-playfair), "Times New Roman", Georgia, serif;
           font-weight: 650;
           font-variation-settings: "SOFT" 55, "opsz" 120, "WONK" 1;
           letter-spacing: -0.045em;
-          line-height: 0.9;
+          line-height: 0.95;
           text-wrap: balance;
           animation: track-heading-in 720ms cubic-bezier(0.16, 1, 0.3, 1) both;
-        }
-        .track-page-heading::after {
-          content: "";
-          width: 5.25rem;
-          height: 5px;
-          margin-top: 0.7rem;
-          border-radius: 999px;
-          background: linear-gradient(90deg, #ffb4b4, #d60000 42%, #ff8a8a);
-          transform-origin: center;
-          animation: track-heading-rule 680ms cubic-bezier(0.16, 1, 0.3, 1) both;
         }
         .track-greeting-name {
           color: var(--accent);
@@ -609,10 +596,6 @@ export function TrackLookup() {
           from { opacity: 0; }
           to { opacity: 1; }
         }
-        @keyframes track-heading-rule {
-          from { transform: scaleX(0.2); }
-          to { transform: scaleX(1); }
-        }
         @keyframes track-name-line {
           from { background-size: 0 2px; }
           to { background-size: 100% 2px; }
@@ -624,12 +607,10 @@ export function TrackLookup() {
           .track-search-shell::after,
           .track-search-spin,
           .track-page-heading,
-          .track-page-heading::after,
           .track-greeting-name { animation: none; transition: none; }
           .track-search-shell:hover,
           .track-search-shell:active,
-          .track-page-heading,
-          .track-page-heading::after { transform: none; }
+          .track-page-heading { transform: none; }
         }
       `}</style>
       {holding ? <TrackPromo /> : null}
