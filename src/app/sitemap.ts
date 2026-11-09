@@ -45,8 +45,6 @@ const routes: Array<{ path: string; priority: number; changeFrequency: MetadataR
   { path: "/updates", priority: 0.45, changeFrequency: "weekly" },
   { path: NEWS_PATH, priority: 0.78, changeFrequency: "daily" },
   { path: PRODUCT_OPPORTUNITIES_PATH, priority: 0.86, changeFrequency: "weekly" },
-  { path: "/llms.txt", priority: 0.4, changeFrequency: "monthly" },
-  { path: "/llms-full.txt", priority: 0.35, changeFrequency: "monthly" },
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

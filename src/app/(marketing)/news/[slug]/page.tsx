@@ -65,7 +65,13 @@ export default async function NewsPostPage({
   const { slug } = await params;
   const post = await getNewsPost(slug);
   if (!post) notFound();
-  const related = (await listNews()).filter((item) => item.slug !== post.slug).slice(0, 4);
+  const topics = new Set(post.tags.map((tag) => tag.toLowerCase()));
+  const related = (await listNews())
+    .filter((item) => item.slug !== post.slug)
+    .map((item) => ({ item, overlap: item.tags.filter((tag) => topics.has(tag.toLowerCase())).length }))
+    .sort((a, b) => b.overlap - a.overlap)
+    .slice(0, 4)
+    .map(({ item }) => item);
 
   return (
     <>

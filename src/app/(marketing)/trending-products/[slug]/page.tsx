@@ -299,6 +299,22 @@ export default async function ProductOpportunityPage({
             </p>
           </section>
 
+          <section className="mt-10" aria-labelledby="product-service-heading">
+            <h2 id="product-service-heading" className="font-display text-2xl font-semibold text-ink">
+              Services for sourcing this product
+            </h2>
+            <ul className="mt-3 space-y-2 text-sm text-muted">
+              <li><Link href="/inspection" className="font-medium text-accent underline-offset-4 hover:underline">Arrange pre-shipment inspection</Link> to check the approved specifications before dispatch.</li>
+              {product.privateLabel && (
+                <li><Link href="/private-label" className="font-medium text-accent underline-offset-4 hover:underline">Explore private-label sourcing</Link> for branding and packaging.</li>
+              )}
+              {product.customization && (
+                <li><Link href="/oem-odm" className="font-medium text-accent underline-offset-4 hover:underline">Explore OEM and ODM support</Link> for changes to materials, dimensions, or features.</li>
+              )}
+              <li><Link href="/3pl" className="font-medium text-accent underline-offset-4 hover:underline">See warehouse and fulfillment options</Link> for stock held in China or the UAE.</li>
+            </ul>
+          </section>
+
           <section className="mt-12 glass-panel rounded-[2rem] px-6 py-8" aria-labelledby="cta-heading">
             <h2 id="cta-heading" className="font-display text-2xl font-semibold text-ink">
               Ask the China desk about {product.name}

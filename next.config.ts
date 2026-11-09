@@ -5,6 +5,8 @@ const nextConfig: NextConfig = {
   outputFileTracingRoot: path.join(__dirname),
   async redirects() {
     return [
+      { source: "/private-label-china", destination: "https://sourcing.center/private-label", statusCode: 301 },
+      { source: "/knowledge/how-to-source-from-china-no-moq", destination: "https://sourcing.center/knowledge/how-to-source-from-china", statusCode: 301 },
       // Host consolidation: www → apex (covers public files middleware matcher skips).
       {
         source: "/",
