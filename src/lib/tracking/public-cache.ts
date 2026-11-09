@@ -366,10 +366,7 @@ function rememberForwarderReady(number: string, now: Date, parsed: Extract<Forwa
 async function consultForwarder(number: string, now: Date, source: ForwarderSource) {
   const cached = findCache(number, FORWARDER_CARRIER_ID);
   if (cached && fresh(cached, now) && cached.providerVersion === FORWARDER_PROVIDER_VERSION) {
-    if (cached.outcome === "not_found") return null;
-    const state: PublicState =
-      cached.outcome === "ready" || cached.outcome === "timeout" || cached.outcome === "throttled" ? cached.outcome : "unavailable";
-    return response(cached, state, cached.message);
+    return cached.outcome === "ready" ? response(cached, "ready", cached.message) : null;
   }
   let flight = forwarderFlights.get(number);
   if (!flight) {
@@ -390,12 +387,12 @@ async function consultForwarder(number: string, now: Date, source: ForwarderSour
     return response(row, "ready", row.message);
   }
   const outcome: PublicState = parsed.kind === "timeout" ? "timeout" : parsed.kind === "throttled" ? "throttled" : "unavailable";
-  const row = rememberForwarder(number, now, {
+  rememberForwarder(number, now, {
     outcome,
     message: forwarderMessage(parsed.kind),
     hours: parsed.kind === "challenge" ? 0.5 : 1 / 6,
   });
-  return response(row, outcome === "unavailable" ? "unavailable" : outcome, row.message);
+  return null;
 }
 
 export async function publicLookup(trackingNumber: string, rateKey: string, now = new Date(), opts?: PublicLookupOptions) {

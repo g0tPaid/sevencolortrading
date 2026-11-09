@@ -286,40 +286,18 @@ test("an empty forwarder waybill falls through to the carrier, and parallel look
   assert.equal(reads, 1);
 });
 
-test("timeout and parser failure are not stored as a carrier miss", async () => {
+test("forwarder errors fall through to carrier tracking", async () => {
   const { client, trackCalls } = scraper();
-  const timed = shipped(
-    await publicLookup(NUMBER, "198.51.100.44", NOW, {
+  for (const [index, kind] of (["timeout", "parser_failure", "challenge"] as const).entries()) {
+    const result = shipped(await publicLookup("TESTUPS" + (index + 100), "198.51.100.44", NOW, {
       client,
       processNow: true,
-      forwarder: async () => ({ kind: "timeout" }),
-    }),
-  );
-  assert.equal(timed.state, "timeout");
-  assert.equal(timed.message, MSG.forwarderTimeout);
-  assert.equal(trackCalls.length, 0);
-
-  const broken = shipped(
-    await publicLookup("ZZNORESULT1", "198.51.100.45", new Date(NOW.getTime() + 1000), {
-      client,
-      processNow: true,
-      forwarder: async () => ({ kind: "parser_failure" }),
-    }),
-  );
-  assert.equal(broken.state, "unavailable");
-  assert.equal(broken.message, MSG.forwarderUnusable);
-  assert.notEqual(broken.message, MSG.noHistory);
-  assert.equal(trackCalls.length, 0);
-
-  const challenged = shipped(
-    await publicLookup("ZZNORESULT2", "198.51.100.46", new Date(NOW.getTime() + 2000), {
-      client,
-      processNow: true,
-      forwarder: async () => ({ kind: "challenge" }),
-    }),
-  );
-  assert.equal(challenged.message, MSG.forwarderChallenge);
-  assert.equal(trackCalls.length, 0);
+      forwarder: async () => ({ kind }),
+    }));
+    assert.equal(result.state, "ready");
+    assert.equal(result.shipment?.carrier.name, "UPS");
+  }
+  assert.equal(trackCalls.length, 3);
 });
 
 test("the forwarder request limit is shared and finite", () => {
