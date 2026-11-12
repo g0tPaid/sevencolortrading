@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { MAX_PROOF_BYTES, MAX_PROOF_FILES, PHOTO_TYPES, ShipmentPhotoDropZone } from "@/components/dashboard/shipment-photo-drop-zone";
 
 type Media = { id: string; mime: string; published: number };
 
@@ -24,14 +25,14 @@ export function DropshipProofControls({ shipmentId }: { shipmentId: string }) {
     return () => controller.abort();
   }, [endpoint]);
 
-  async function update(action: string, file?: File, mediaId?: string) {
+  async function update(action: string, mediaId?: string) {
     if (action === "publish" && !window.confirm("Anyone with the tracking number can view this file. Confirm it contains no addresses, shipping labels, or personal details.")) return;
     setBusy(true);
     setMessage("");
     try {
       const query = new URLSearchParams({ action });
       if (mediaId) query.set("media", mediaId);
-      const response = await fetch(endpoint + "?" + query, { method: "POST", body: file });
+      const response = await fetch(endpoint + "?" + query, { method: "POST" });
       const result = await response.json();
       if (!response.ok) throw new Error(result.error || "Could not update shipment.");
       if (result.media) setMedia(result.media);
@@ -50,6 +51,35 @@ export function DropshipProofControls({ shipmentId }: { shipmentId: string }) {
     }
   }
 
+  async function upload(files: File[], allowVideo = false) {
+    if (busy || !files.length) return;
+    if (media.length + files.length > MAX_PROOF_FILES || files.some((file) =>
+      !(PHOTO_TYPES.includes(file.type) || (allowVideo && file.type === "video/mp4")) ||
+      !file.size || file.size > MAX_PROOF_BYTES
+    )) {
+      setMessage(`Use JPEG, PNG, WebP${allowVideo ? ", or MP4" : ""}. Up to eight files per shipment, 16 MB each.`);
+      return;
+    }
+    setBusy(true);
+    setMessage("");
+    let uploaded = 0;
+    try {
+      for (const file of files) {
+        const response = await fetch(endpoint + "?action=upload", { method: "POST", body: file });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || "Could not upload file.");
+        setMedia(result.media);
+        uploaded += 1;
+      }
+      setMessage(`Uploaded ${uploaded} file(s).`);
+    } catch (error) {
+      const reason = error instanceof Error ? error.message : "Could not upload file.";
+      setMessage(uploaded ? `Uploaded ${uploaded} of ${files.length} files. ${reason}` : reason);
+    } finally {
+      setBusy(false);
+    }
+  }
+
   const enoughPhotos = media.filter((item) => item.mime.startsWith("image/")).length >= 2;
 
   return (
@@ -62,14 +92,15 @@ export function DropshipProofControls({ shipmentId }: { shipmentId: string }) {
           onChange={(event) => {
             const file = event.currentTarget.files?.[0];
             event.currentTarget.value = "";
-            if (file) void update("upload", file);
+            if (file) void upload([file], true);
           }} />
       </label>
+      <ShipmentPhotoDropZone disabled={busy} onPhotos={(files) => void upload(files)} />
       <ul className="mt-2 space-y-2">
         {media.map((item, index) => (
           <li key={item.id} className="flex gap-3 text-sm">
             {item.mime.startsWith("video/") ? "Video" : "Photo"} {index + 1}
-            <button type="button" className="underline" disabled={busy || (!item.published && !enoughPhotos)} onClick={() => void update(item.published ? "unpublish" : "publish", undefined, item.id)}>
+            <button type="button" className="underline" disabled={busy || (!item.published && !enoughPhotos)} onClick={() => void update(item.published ? "unpublish" : "publish", item.id)}>
               {item.published ? "Hide from tracking" : "Show on tracking"}
             </button>
             <button type="button" className="underline" disabled={busy} onClick={() => void update("remove", undefined, item.id)}>Remove</button>
