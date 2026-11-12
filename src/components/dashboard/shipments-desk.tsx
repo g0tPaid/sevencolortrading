@@ -1,5 +1,6 @@
 "use client";
 
+import { MAX_PROOF_BYTES, MAX_PROOF_FILES, PHOTO_TYPES, ShipmentPhotoDropZone } from "@/components/dashboard/shipment-photo-drop-zone";
 import { DropshipProofControls } from "@/components/dashboard/dropship-proof-controls";
 
 import { FormEvent, useCallback, useEffect, useState } from "react";
@@ -241,6 +242,18 @@ export function ShipmentsDesk() {
     }
   }
 
+  function addPhotos(files: File[]) {
+    if (saving || !files.length) return;
+    if (photos.length + files.length > MAX_PROOF_FILES || files.some((file) =>
+      !PHOTO_TYPES.includes(file.type) || !file.size || file.size > MAX_PROOF_BYTES
+    )) {
+      setError("Select up to eight JPEG, PNG, or WebP photos, 16 MB each.");
+      return;
+    }
+    setError(null);
+    setPhotos((selected) => [...selected, ...files]);
+  }
+
   async function onImport(file: File) {
     const csv = await file.text();
     try {
@@ -427,17 +440,10 @@ export function ShipmentsDesk() {
                 onChange={(event) => {
                   const files = Array.from(event.currentTarget.files ?? []);
                   event.currentTarget.value = "";
-                  if (!files.length) return;
-                  if (photos.length + files.length > 8 || files.some((file) =>
-                    !["image/jpeg", "image/png", "image/webp"].includes(file.type) || !file.size || file.size > 16 * 1024 * 1024
-                  )) {
-                    setError("Select up to eight JPEG, PNG, or WebP photos, 16 MB each.");
-                    return;
-                  }
-                  setError(null);
-                  setPhotos((selected) => [...selected, ...files]);
+                  addPhotos(files);
                 }} />
             </label>
+            <ShipmentPhotoDropZone disabled={saving} onPhotos={addPhotos} />
             <p role="status" className="mt-2 text-sm text-muted">{photos.length} photo(s) selected</p>
             {photos.length > 0 && <button type="button" disabled={saving} className="mt-2 text-sm underline" onClick={() => setPhotos([])}>Clear selection</button>}
           </div>
