@@ -103,7 +103,7 @@ export function DropshipProofControls({ shipmentId }: { shipmentId: string }) {
             <button type="button" className="underline" disabled={busy || (!item.published && !enoughPhotos)} onClick={() => void update(item.published ? "unpublish" : "publish", item.id)}>
               {item.published ? "Hide from tracking" : "Show on tracking"}
             </button>
-            <button type="button" className="underline" disabled={busy} onClick={() => void update("remove", undefined, item.id)}>Remove</button>
+            <button type="button" className="underline" disabled={busy} onClick={() => void update("remove", item.id)}>Remove</button>
           </li>
         ))}
       </ul>
