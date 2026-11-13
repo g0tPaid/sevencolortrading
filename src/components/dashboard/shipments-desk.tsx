@@ -74,6 +74,7 @@ const emptyForm = {
 
 async function api(path: string, init?: RequestInit) {
   const response = await fetch(path, {
+    signal: AbortSignal.timeout(30_000),
     ...init,
     headers: { "content-type": "application/json", ...(init?.headers ?? {}) },
   });
@@ -96,7 +97,8 @@ export function ShipmentsDesk() {
   const [detail, setDetail] = useState<Shipment | null>(null);
   const [settings, setSettings] = useState<Settings | null>(null);
   const [photos, setPhotos] = useState<File[]>([]);
-  const [saving, setSaving] = useState(false);
+  const [saveProgress, setSaveProgress] = useState<{ done: number; total: number } | null>(null);
+  const saving = saveProgress !== null;
   const [saveError, setSaveError] = useState<string | null>(null);
   const [saveNotice, setSaveNotice] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
@@ -151,7 +153,7 @@ export function ShipmentsDesk() {
       setSaveError("Select at least two photos before adding the shipment.");
       return;
     }
-    setSaving(true);
+    setSaveProgress({ done: 0, total: editing ? 1 : photos.length + 1 });
     setError(null);
     setNotice(null);
     const payload = {
@@ -171,36 +173,52 @@ export function ShipmentsDesk() {
         const data = await api(`/api/admin/shipments/${editing}`, { method: "PATCH", body: JSON.stringify(payload) });
         const shipment = data.shipment as Shipment;
         setDetail(shipment);
+        setSaveProgress({ done: 1, total: 1 });
         setSaveNotice("Shipment updated.");
         await showSavedShipment(shipment);
       } else {
         const created = await api("/api/admin/shipments", { method: "POST", body: JSON.stringify(payload) });
         const shipment = created.shipment as Shipment;
-        let failed = 0;
+        const uploadErrors: string[] = [];
+        let done = 1;
+        setSaveProgress({ done, total: photos.length + 1 });
         for (const photo of photos) {
           try {
             const response = await fetch("/api/admin/shipments/" + encodeURIComponent(shipment.id) + "/proof?action=upload", {
               method: "POST",
               body: photo,
+              signal: AbortSignal.timeout(60_000),
             });
-            if (!response.ok) failed += 1;
-          } catch {
-            failed += 1;
+            if (!response.ok) {
+              const result = await response.json().catch(() => null);
+              throw new Error(result?.error || `Upload failed (HTTP ${response.status}).`);
+            }
+          } catch (error) {
+            const reason = error instanceof Error && error.name === "TimeoutError"
+              ? "Upload timed out."
+              : error instanceof Error ? error.message : "Upload failed.";
+            uploadErrors.push(`${photo.name}: ${reason}`);
+          } finally {
+            done += 1;
+            setSaveProgress({ done, total: photos.length + 1 });
           }
         }
         setPhotos([]);
         setDetail(shipment);
         setEditing(shipment.id);
-        setNotice(failed
-          ? "Shipment added. " + failed + " photo(s) could not be uploaded. Add them in the panel below."
-          : "Shipment added and photos uploaded. Photos are visible on tracking.");
-        requestAnimationFrame(() => document.getElementById("shipment-media")?.scrollIntoView());
+        if (uploadErrors.length) {
+          setSaveError("Tracking details were saved. Check the photo panel above before retrying these uploads. " + uploadErrors.join(" "));
+        } else {
+          setSaveNotice("Shipment added and photos uploaded.");
+        }
         await showSavedShipment(shipment);
       }
     } catch (err) {
-      setSaveError(err instanceof Error ? err.message : "Shipment was not saved.");
+      setSaveError(err instanceof Error && err.name === "TimeoutError"
+        ? "The save request timed out. Check the shipment list before retrying."
+        : err instanceof Error ? err.message : "Shipment was not saved.");
     } finally {
-      setSaving(false);
+      setSaveProgress(null);
     }
   }
 
@@ -464,7 +482,7 @@ export function ShipmentsDesk() {
           </div>
         )}
         <div className="flex flex-wrap gap-2 sm:col-span-2">
-          <button type="submit" disabled={saving || (!editing && photos.length < 2)} className="rounded-2xl bg-ink px-4 py-2 text-sm text-paper disabled:opacity-50">
+          <button type="submit" disabled={saving} className="rounded-2xl bg-ink px-4 py-2 text-sm text-paper disabled:opacity-50">
             {saving ? "Saving…" : editing ? "Save changes" : "Add shipment"}
           </button>
           {editing ? (
@@ -491,7 +509,18 @@ export function ShipmentsDesk() {
             </>
           ) : null}
         </div>
-        {saveError && <p role="alert" className="text-sm text-ink sm:col-span-2">{saveError}</p>}
+        {saveProgress && (
+          <div className="space-y-1 text-sm sm:col-span-2">
+            <p role="status" id="shipment-save-progress">
+              {saveProgress.done === 0 ? "Saving tracking details…" : saveProgress.done < saveProgress.total
+                ? `Uploading photo ${saveProgress.done} of ${saveProgress.total - 1}…`
+                : "Refreshing the shipment list…"}
+            </p>
+            <progress aria-labelledby="shipment-save-progress" className="w-full accent-accent"
+              value={saveProgress.done || undefined} max={saveProgress.total} />
+          </div>
+        )}
+        {saveError && <p role="alert" className="rounded-xl border border-red-500 p-3 text-sm text-ink sm:col-span-2">{saveError}</p>}
         {saveNotice && <p role="status" className="text-sm text-ink sm:col-span-2">{saveNotice} <a href="#shipment-list" className="underline">View shipment list</a></p>}
       </form>
 
