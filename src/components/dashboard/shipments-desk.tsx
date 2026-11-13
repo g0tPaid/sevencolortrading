@@ -21,6 +21,7 @@ type Shipment = {
   statusDetail: string | null;
   origin: string | null;
   destination: string | null;
+  destinationCountry: string | null;
   postcode: string | null;
   phoneLast4: string | null;
   eta: string | null;
@@ -44,6 +45,14 @@ type Settings = {
   perCarrierGapMs: number;
   publicRefreshCooldownMinutes: number;
 };
+
+const countryNames = new Intl.DisplayNames(["en"], { type: "region", fallback: "none" });
+
+function destinationCountry(shipment: Shipment) {
+  const code = shipment.destinationCountry?.toUpperCase();
+  return (code && /^[A-Z]{2}$/.test(code) ? countryNames.of(code) : shipment.destinationCountry)
+    || shipment.destination || "—";
+}
 
 const STATUSES = [
   "Information Received",
@@ -227,7 +236,7 @@ export function ShipmentsDesk() {
     }
   }
 
-  async function openRow(id: string, showMedia = false) {
+  async function openRow(id: string, section = "shipment-editor") {
     setError(null);
     setSaveError(null);
     setSaveNotice(null);
@@ -235,7 +244,7 @@ export function ShipmentsDesk() {
       const data = await api(`/api/admin/shipments/${id}`, { headers: {} });
       const shipment = data.shipment as Shipment;
       setDetail(shipment);
-      requestAnimationFrame(() => document.getElementById(showMedia ? "shipment-media" : "shipment-editor")?.scrollIntoView());
+      requestAnimationFrame(() => document.getElementById(section)?.scrollIntoView());
       setEditing(id);
       setForm({
         customerName: shipment.customerName ?? "",
@@ -384,7 +393,7 @@ export function ShipmentsDesk() {
                 <th className="px-4 py-3">Customer</th>
                 <th className="px-4 py-3">Order</th>
                 <th className="px-4 py-3">Carrier</th>
-                <th className="px-4 py-3">Status</th>
+                <th className="px-4 py-3">Country</th>
                 <th scope="col" className="px-4 py-3"><span className="sr-only">Actions</span></th>
               </tr>
             </thead>
@@ -395,14 +404,17 @@ export function ShipmentsDesk() {
                     <button type="button" onClick={() => void openRow(row.id)} className="font-medium text-ink underline-offset-2 hover:underline">
                       {row.trackingNumber || "Tracking pending"}
                     </button>
-                    <button type="button" onClick={() => void openRow(row.id, true)} className="mt-1 block text-xs font-semibold text-accent underline underline-offset-2">
+                    <button type="button" onClick={() => void openRow(row.id, "shipment-media")} className="mt-1 block text-xs font-semibold text-accent underline underline-offset-2">
                       Upload photos / video
+                    </button>
+                    <button type="button" onClick={() => void openRow(row.id, "shipment-media-files")} className="mt-1 block text-xs font-semibold text-accent underline underline-offset-2">
+                      View photos / video
                     </button>
                   </td>
                   <td className="px-4 py-3 text-ink">{row.customerName || "—"}</td>
                   <td className="px-4 py-3 text-ink">{row.orderNumber || "—"}</td>
                   <td className="px-4 py-3 text-ink">{row.carrierName || row.carrierResolution}</td>
-                  <td className="px-4 py-3 text-ink">{row.status}</td>
+                  <td className="px-4 py-3 text-ink">{destinationCountry(row)}</td>
                   <td className="px-4 py-3 text-right">
                     <button type="button" onClick={() => void openRow(row.id)}
                       className="rounded-lg border border-line px-3 py-1.5 font-medium text-ink hover:bg-paper">

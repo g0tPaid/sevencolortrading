@@ -1,6 +1,7 @@
 import { adminGuard } from "@/lib/tracking/service";
 import { getShipment } from "@/lib/tracking/store";
-import { addProof, issueDropshipLink, listProof, MAX_PROOF_BYTES, removeProof, revokeDropshipLink } from "@/lib/tracking/dropship-proof";
+import { addProof, issueDropshipLink, listProof, MAX_PROOF_BYTES, readProof, removeProof, revokeDropshipLink } from "@/lib/tracking/dropship-proof";
+import { proofMediaResponse } from "@/lib/tracking/media-response";
 import { json } from "@/lib/tracking/http";
 
 type Context = { params: Promise<{ id: string }> };
@@ -10,6 +11,8 @@ export async function GET(request: Request, { params }: Context) {
   if (!auth.ok) return auth.response;
   const { id } = await params;
   if (!getShipment(id)) return json({ error: "Shipment not found" }, 404);
+  const media = new URL(request.url).searchParams.get("media");
+  if (media) return proofMediaResponse(request, readProof(id, media));
   return json({ media: listProof(id) });
 }
 

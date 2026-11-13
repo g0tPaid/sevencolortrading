@@ -7,7 +7,7 @@ type Media = { id: string; mime: string };
 
 export function DropshipProofControls({ shipmentId }: { shipmentId: string }) {
   const endpoint = "/api/admin/shipments/" + encodeURIComponent(shipmentId) + "/proof";
-  const [media, setMedia] = useState<Media[]>([]);
+  const [media, setMedia] = useState<Media[] | null>(null);
   const [link, setLink] = useState("");
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
@@ -52,7 +52,7 @@ export function DropshipProofControls({ shipmentId }: { shipmentId: string }) {
 
   async function upload(files: File[], allowVideo = false) {
     if (busy || !files.length) return;
-    if (media.length + files.length > MAX_PROOF_FILES || files.some((file) =>
+    if ((media?.length ?? 0) + files.length > MAX_PROOF_FILES || files.some((file) =>
       !(PHOTO_TYPES.includes(file.type) || (allowVideo && file.type === "video/mp4")) ||
       !file.size || file.size > MAX_PROOF_BYTES
     )) {
@@ -93,14 +93,20 @@ export function DropshipProofControls({ shipmentId }: { shipmentId: string }) {
           }} />
       </label>
       <ShipmentPhotoDropZone disabled={busy} onPhotos={(files) => void upload(files)} />
-      <ul className="mt-2 space-y-2">
-        {media.map((item, index) => (
+      <div id="shipment-media-files" className="mt-4 scroll-mt-24">
+        <h4 className="text-sm font-semibold">Uploaded photos and videos</h4>
+        {media?.length === 0 && <p className="mt-1 text-sm text-muted">No photos or videos uploaded yet.</p>}
+        <ul className="mt-2 space-y-2">
+        {media?.map((item, index) => (
           <li key={item.id} className="flex gap-3 text-sm">
-            {item.mime.startsWith("video/") ? "Video" : "Photo"} {index + 1}
+            <a href={endpoint + "?media=" + encodeURIComponent(item.id)} target="_blank" rel="noopener noreferrer" className="underline">
+              View {item.mime.startsWith("video/") ? "video" : "photo"} {index + 1}
+            </a>
             <button type="button" className="underline" disabled={busy} onClick={() => void update("remove", item.id)}>Remove</button>
           </li>
         ))}
-      </ul>
+        </ul>
+      </div>
       <div className="mt-4 flex flex-wrap gap-4 text-sm">
         <button type="button" className="font-semibold underline" disabled={busy} onClick={() => void update("issue")}>Generate new private link</button>
         <button type="button" className="underline" disabled={busy} onClick={() => void update("revoke")}>Disable link</button>
