@@ -6,6 +6,7 @@ import test from "node:test";
 import { POST as createShipmentRoute } from "@/app/api/admin/shipments/route";
 import { ADMIN_SESSION_COOKIE, createSessionToken } from "@/lib/admin-auth";
 import { closeTrackingDatabase, getDb, openDatabase, useTrackingDatabase } from "@/lib/tracking/db";
+import { addProof, listProof, readTrackingMedia, removeProof } from "@/lib/tracking/dropship-proof";
 import { FIXTURE_DELIVERED, FIXTURE_IN_TRANSIT, FIXTURE_TRACKING_NUMBER, FIXTURE_WITH_ETA } from "@/lib/tracking/fixtures";
 import { MSG } from "@/lib/tracking/messages";
 import { processShipment } from "@/lib/tracking/refresh";
@@ -27,6 +28,7 @@ import {
   getShipment,
   listEvents,
 } from "@/lib/tracking/store";
+import { trackingMedia } from "@/lib/tracking/tracking-media";
 import { ScraperError, type TrackBody } from "@/lib/tracking/types";
 import { normalizeTrackingNumber } from "@/lib/tracking/validate";
 import { runSchedulerTick } from "@/lib/tracking/worker";
@@ -110,6 +112,35 @@ test("registration stores a shipment and queues one refresh", () => {
   );
   assert.equal(second.orderNumber, "ORD-1");
   assert.notEqual(second.id, shipment.id);
+});
+
+test("new proof uploads appear automatically after two photos while older private files stay private", () => {
+  const shipment = createShipmentRecord(
+    { trackingNumber: "FIXTUREUPS123456789", carrierId: "ups" },
+    NOW,
+  );
+  const jpeg = Buffer.from([255, 216, 255]);
+  const mp4 = Buffer.from([0, 0, 0, 0, 102, 116, 121, 112]);
+  assert.equal(addProof(shipment.id, mp4), true);
+  const [olderFile] = listProof(shipment.id);
+  getDb().prepare("DELETE FROM dropship_tracking_media WHERE media_id = ?").run(olderFile.id);
+
+  assert.equal(addProof(shipment.id, jpeg), true);
+  assert.equal(addProof(shipment.id, mp4), true);
+  const [, firstPhoto, video] = listProof(shipment.id);
+  assert.deepEqual(trackingMedia(shipment.trackingNumber, "ups"), []);
+  assert.equal(readTrackingMedia(video.id), undefined);
+
+  assert.equal(addProof(shipment.id, jpeg), true);
+  const secondPhoto = listProof(shipment.id)[3];
+  assert.deepEqual(trackingMedia(shipment.trackingNumber, "ups").map(({ id }) => id),
+    [firstPhoto.id, video.id, secondPhoto.id]);
+  assert.equal(readTrackingMedia(video.id)?.mime, "video/mp4");
+  assert.equal(readTrackingMedia(olderFile.id), undefined);
+
+  removeProof(shipment.id, secondPhoto.id);
+  assert.deepEqual(trackingMedia(shipment.trackingNumber, "ups"), []);
+  assert.equal(readTrackingMedia(video.id), undefined);
 });
 
 test("low-confidence detection stays ambiguous and does not track", async () => {

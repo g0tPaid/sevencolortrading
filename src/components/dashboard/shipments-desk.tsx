@@ -176,7 +176,7 @@ export function ShipmentsDesk() {
         setEditing(shipment.id);
         setNotice(failed
           ? "Shipment added. " + failed + " photo(s) could not be uploaded. Add them in the panel below."
-          : "Shipment added and photos uploaded. Use Show on tracking to share them.");
+          : "Shipment added and photos uploaded. Photos are visible on tracking.");
         requestAnimationFrame(() => document.getElementById("shipment-media")?.scrollIntoView());
         await load({ q, carrier, status });
         return;
@@ -433,7 +433,7 @@ export function ShipmentsDesk() {
         {!editing && (
           <div className="rounded-2xl border border-line p-4 sm:col-span-2">
             <p className="text-sm font-semibold text-ink">Pre-shipment pictures</p>
-            <p className="mt-1 text-sm text-muted">Select 2 to 8 photos. JPEG, PNG, or WebP, up to 16 MB each.</p>
+            <p className="mt-1 text-sm text-muted">Select 2 to 8 JPEG, PNG, or WebP photos, up to 16 MB each. Anyone with the tracking number can see these photos. Keep addresses, shipping labels, and personal details out of uploads.</p>
             <label className="mt-3 inline-flex cursor-pointer rounded-xl border border-line px-4 py-2 text-sm font-semibold text-ink focus-within:ring-2 focus-within:ring-accent">
               Upload pictures
               <input type="file" multiple accept="image/jpeg,image/png,image/webp" className="sr-only" disabled={saving}

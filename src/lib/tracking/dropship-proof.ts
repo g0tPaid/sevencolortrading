@@ -67,20 +67,11 @@ export function addProof(shipmentId: string, bytes: Buffer) {
   return withImmediate((connection) => {
     const count = connection.prepare("SELECT COUNT(*) AS total FROM dropship_proof WHERE shipment_id = ?").get(shipmentId);
     if (Number(count?.total) >= 8) return false;
-    connection.prepare("INSERT INTO dropship_proof VALUES (?, ?, ?, ?)").run(randomUUID(), shipmentId, mime, bytes);
+    const id = randomUUID();
+    connection.prepare("INSERT INTO dropship_proof VALUES (?, ?, ?, ?)").run(id, shipmentId, mime, bytes);
+    connection.prepare("INSERT INTO dropship_tracking_media (media_id) VALUES (?)").run(id);
     return true;
   });
-}
-
-export function setTrackingMedia(shipmentId: string, id: string, publish: boolean) {
-  const connection = db();
-  if (publish) {
-    connection.prepare(`INSERT OR IGNORE INTO dropship_tracking_media
-      SELECT id FROM dropship_proof WHERE shipment_id = ? AND id = ?`).run(shipmentId, id);
-  } else {
-    connection.prepare(`DELETE FROM dropship_tracking_media WHERE media_id IN
-      (SELECT id FROM dropship_proof WHERE shipment_id = ? AND id = ?)`).run(shipmentId, id);
-  }
 }
 
 export function readTrackingMedia(id: string) {
