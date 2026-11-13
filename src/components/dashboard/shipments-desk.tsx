@@ -516,7 +516,7 @@ export function ShipmentsDesk() {
                 <span className="font-medium">{event.status}</span> — {event.description}
                 <span className="block text-xs text-muted">
                   {event.occurredAt || "Time not supplied"}
-                  {event.location ? ` Â· ${event.location}` : ""}
+                  {event.location ? ` · ${event.location}` : ""}
                 </span>
               </li>
             ))}
@@ -525,9 +525,9 @@ export function ShipmentsDesk() {
           <ul className="mt-2 space-y-1 text-xs text-muted">
             {(detail.logs ?? []).map((log, index) => (
               <li key={`${log.createdAt}-${index}`}>
-                {log.createdAt} Â· {log.outcome}
-                {log.httpStatus ? ` Â· HTTP ${log.httpStatus}` : ""}
-                {log.durationMs != null ? ` Â· ${log.durationMs} ms` : ""}
+                {log.createdAt} · {log.outcome}
+                {log.httpStatus ? ` · HTTP ${log.httpStatus}` : ""}
+                {log.durationMs != null ? ` · ${log.durationMs} ms` : ""}
               </li>
             ))}
           </ul>
