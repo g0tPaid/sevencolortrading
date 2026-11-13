@@ -236,7 +236,7 @@ export function insertShipment(input: NewShipment, now: Date): Shipment {
         input.customerName,
         input.orderNumber,
         input.trackingNumber,
-        input.trackingNumber,
+        input.trackingNumber || `pending:${id}`,
         input.carrierId,
         input.carrierResolution,
         input.origin,

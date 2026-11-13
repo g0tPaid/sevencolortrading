@@ -103,6 +103,10 @@ export function ShipmentsDesk() {
   const [saveNotice, setSaveNotice] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
 
+  useEffect(() => {
+    if (saveError) document.getElementById("shipment-save-error")?.scrollIntoView({ block: "nearest" });
+  }, [saveError]);
+
   const load = useCallback(async (query: { q: string; carrier: string; status: string }, savedShipment?: Shipment) => {
     setLoading(true);
     setError(null);
@@ -209,7 +213,8 @@ export function ShipmentsDesk() {
         if (uploadErrors.length) {
           setSaveError("Tracking details were saved. Check the photo panel above before retrying these uploads. " + uploadErrors.join(" "));
         } else {
-          setSaveNotice("Shipment added and photos uploaded.");
+          setSaveNotice(shipment.trackingNumber ? "Shipment added and photos uploaded."
+            : "Shipment and photos saved. Add the tracking number when it arrives.");
         }
         await showSavedShipment(shipment);
       }
@@ -387,7 +392,7 @@ export function ShipmentsDesk() {
                 <tr key={row.id} className="border-t border-line">
                   <td className="px-4 py-3">
                     <button type="button" onClick={() => void openRow(row.id)} className="font-medium text-ink underline-offset-2 hover:underline">
-                      {row.trackingNumber}
+                      {row.trackingNumber || "Tracking pending"}
                     </button>
                     <button type="button" onClick={() => void openRow(row.id, true)} className="mt-1 block text-xs font-semibold text-accent underline underline-offset-2">
                       Upload photos / video
@@ -408,7 +413,7 @@ export function ShipmentsDesk() {
       {detail ? (
         <section id="shipment-media" className="scroll-mt-24 rounded-3xl border border-line bg-paper-elevated p-4">
           <h2 className="font-display text-2xl font-semibold text-ink">Pre-shipment photos and videos</h2>
-          <p className="mt-1 text-sm text-muted">Tracking number {detail.trackingNumber}</p>
+          <p className="mt-1 text-sm text-muted">{detail.trackingNumber ? `Tracking number ${detail.trackingNumber}` : "Tracking pending"}</p>
           <DropshipProofControls key={detail.id} shipmentId={detail.id} />
         </section>
       ) : null}
@@ -432,6 +437,7 @@ export function ShipmentsDesk() {
           <label key={key} className="text-sm text-ink">
             {label}
             <input
+              placeholder={key === "trackingNumber" ? "Leave blank if pending" : undefined}
               value={form[key]}
               onChange={(event) => setForm({ ...form, [key]: event.target.value })}
               className={fieldClass}
@@ -520,7 +526,7 @@ export function ShipmentsDesk() {
               value={saveProgress.done || undefined} max={saveProgress.total} />
           </div>
         )}
-        {saveError && <p role="alert" className="rounded-xl border border-red-500 p-3 text-sm text-ink sm:col-span-2">{saveError}</p>}
+        {saveError && <p id="shipment-save-error" role="alert" className="rounded-xl border border-red-500 p-3 text-sm text-ink sm:col-span-2">{saveError}</p>}
         {saveNotice && <p role="status" className="text-sm text-ink sm:col-span-2">{saveNotice} <a href="#shipment-list" className="underline">View shipment list</a></p>}
       </form>
 

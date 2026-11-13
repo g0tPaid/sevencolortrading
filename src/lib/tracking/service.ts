@@ -56,13 +56,21 @@ export function adminShipment(id: string) {
   };
 }
 
+function trackingIsPending(value: unknown): boolean {
+  return typeof value === "string" && /^(?:waiting for it|pending)?$/i.test(value.trim());
+}
+
 export function createShipmentRecord(body: Record<string, unknown>, now = new Date()): Shipment {
-  const input = parseShipmentInput(body);
+  const raw = body.trackingNumber ?? body.tracking_number;
+  const input = trackingIsPending(raw) || raw == null
+    ? parseShipmentInput({ ...body, trackingNumber: "" }, { trackingRequired: false })
+    : parseShipmentInput(body);
   return insertFromInput(input, now);
 }
 
 function insertFromInput(input: ShipmentInput, now: Date): Shipment {
   const unsupported = input.carrierId === UNSUPPORTED_CARRIER_ID;
+  const paused = unsupported || !input.trackingNumber;
   const shipment = insertShipment(
     {
       trackingNumber: input.trackingNumber,
@@ -78,12 +86,12 @@ function insertFromInput(input: ShipmentInput, now: Date): Shipment {
       notes: input.notes ?? null,
       status: "Unknown",
       lastError: unsupported ? MSG.unsupported : null,
-      refreshStopped: unsupported,
-      nextCheckAt: unsupported ? null : now.toISOString(),
+      refreshStopped: paused,
+      nextCheckAt: paused ? null : now.toISOString(),
     },
     now,
   );
-  if (!unsupported) enqueueRefresh(shipment.id, "create", now);
+  if (!paused) enqueueRefresh(shipment.id, "create", now);
   return shipment;
 }
 
@@ -109,9 +117,11 @@ export function updateShipmentRecord(id: string, body: Record<string, unknown>, 
   if ("trackingNumber" in body || "tracking_number" in body) {
     const raw = body.trackingNumber ?? body.tracking_number;
     if (typeof raw !== "string") throw new TrackingInputError("Enter a tracking number of 4–40 letters and digits.");
-    tracking = normalizeTrackingNumber(raw);
-    fields.tracking_number = tracking;
-    fields.tracking_number_norm = tracking;
+    if (existing.trackingNumber || !trackingIsPending(raw)) {
+      tracking = normalizeTrackingNumber(raw);
+      fields.tracking_number = tracking;
+      fields.tracking_number_norm = tracking;
+    }
   }
 
   let carrier = existing.carrierId;
@@ -125,8 +135,9 @@ export function updateShipmentRecord(id: string, body: Record<string, unknown>, 
     const unsupported = carrier === UNSUPPORTED_CARRIER_ID;
     fields.carrier_resolution = unsupported ? "unsupported" : carrier ? "manual" : "unresolved";
     fields.carrier_candidates = "[]";
-    fields.refresh_stopped = unsupported ? 1 : 0;
-    fields.next_check_at = unsupported ? null : now.toISOString();
+    const paused = unsupported || !tracking;
+    fields.refresh_stopped = paused ? 1 : 0;
+    fields.next_check_at = paused ? null : now.toISOString();
     fields.consecutive_failures = 0;
     fields.last_error = unsupported ? MSG.unsupported : null;
     if (existing.status === "Delivered" || existing.status === "Returned to Sender") {
@@ -145,7 +156,7 @@ export function updateShipmentRecord(id: string, body: Record<string, unknown>, 
     }
     throw error;
   }
-  if (identityChanged && carrier !== UNSUPPORTED_CARRIER_ID) enqueueRefresh(id, "edit", now);
+  if (identityChanged && tracking && carrier !== UNSUPPORTED_CARRIER_ID) enqueueRefresh(id, "edit", now);
   return getShipment(id);
 }
 

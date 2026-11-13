@@ -77,6 +77,7 @@ export function addProof(shipmentId: string, bytes: Buffer) {
 export function readTrackingMedia(id: string) {
   return db().prepare(`SELECT mime, bytes FROM dropship_proof
     JOIN dropship_tracking_media ON media_id = id WHERE id = ?
+    AND EXISTS (SELECT 1 FROM shipments WHERE shipments.id = dropship_proof.shipment_id AND tracking_number <> '')
     AND (SELECT COUNT(*) FROM dropship_proof AS photo
       WHERE photo.shipment_id = dropship_proof.shipment_id AND photo.mime LIKE 'image/%') >= 2`).get(id) as
     { mime: string; bytes: Uint8Array } | undefined;
