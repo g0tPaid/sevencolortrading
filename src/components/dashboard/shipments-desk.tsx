@@ -101,7 +101,7 @@ export function ShipmentsDesk() {
   const [saveNotice, setSaveNotice] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
 
-  const load = useCallback(async (query: { q: string; carrier: string; status: string }) => {
+  const load = useCallback(async (query: { q: string; carrier: string; status: string }, savedShipment?: Shipment) => {
     setLoading(true);
     setError(null);
     try {
@@ -109,8 +109,10 @@ export function ShipmentsDesk() {
       if (query.q) params.set("q", query.q);
       if (query.carrier) params.set("carrier", query.carrier);
       if (query.status) params.set("status", query.status);
-      const data = await api(`/api/admin/shipments?${params.toString()}`, { headers: {} });
-      setRows((data.shipments as Shipment[]) ?? []);
+      const data = await api(`/api/admin/shipments?${params.toString()}`, { cache: "no-store" });
+      const shipments = (data.shipments as Shipment[]) ?? [];
+      const savedRow = shipments.find((shipment) => shipment.id === savedShipment?.id) ?? savedShipment;
+      setRows(savedRow ? [savedRow, ...shipments.filter((shipment) => shipment.id !== savedRow.id)] : shipments);
       setTotal(Number(data.total ?? 0));
       setCarriers((data.carriers as Carrier[]) ?? []);
     } catch (err) {
@@ -130,6 +132,14 @@ export function ShipmentsDesk() {
   function onSearch(event: FormEvent) {
     event.preventDefault();
     void load({ q, carrier, status });
+  }
+
+  async function showSavedShipment(shipment: Shipment) {
+    setQ("");
+    setCarrier("");
+    setStatus("");
+    setRows((current) => [shipment, ...current.filter((row) => row.id !== shipment.id)]);
+    await load({ q: "", carrier: "", status: "" }, shipment);
   }
 
   async function onSave(event: FormEvent) {
@@ -159,8 +169,10 @@ export function ShipmentsDesk() {
     try {
       if (editing) {
         const data = await api(`/api/admin/shipments/${editing}`, { method: "PATCH", body: JSON.stringify(payload) });
-        setDetail(data.shipment as Shipment);
+        const shipment = data.shipment as Shipment;
+        setDetail(shipment);
         setSaveNotice("Shipment updated.");
+        await showSavedShipment(shipment);
       } else {
         const created = await api("/api/admin/shipments", { method: "POST", body: JSON.stringify(payload) });
         const shipment = created.shipment as Shipment;
@@ -183,10 +195,8 @@ export function ShipmentsDesk() {
           ? "Shipment added. " + failed + " photo(s) could not be uploaded. Add them in the panel below."
           : "Shipment added and photos uploaded. Photos are visible on tracking.");
         requestAnimationFrame(() => document.getElementById("shipment-media")?.scrollIntoView());
-        await load({ q, carrier, status });
-        return;
+        await showSavedShipment(shipment);
       }
-      await load({ q, carrier, status });
     } catch (err) {
       setSaveError(err instanceof Error ? err.message : "Shipment was not saved.");
     } finally {
@@ -340,7 +350,7 @@ export function ShipmentsDesk() {
         </button>
       </form>
 
-      <div className="overflow-x-auto rounded-3xl border border-line bg-paper-elevated">
+      <div id="shipment-list" className="scroll-mt-24 overflow-x-auto rounded-3xl border border-line bg-paper-elevated">
         {loading ? <p className="p-4 text-sm text-muted">Loading shipments…</p> : null}
         {!loading && rows.length === 0 ? <p className="p-4 text-sm text-muted">No shipments match.</p> : null}
         {rows.length > 0 ? (
@@ -482,7 +492,7 @@ export function ShipmentsDesk() {
           ) : null}
         </div>
         {saveError && <p role="alert" className="text-sm text-ink sm:col-span-2">{saveError}</p>}
-        {saveNotice && <p role="status" className="text-sm text-ink sm:col-span-2">{saveNotice}</p>}
+        {saveNotice && <p role="status" className="text-sm text-ink sm:col-span-2">{saveNotice} <a href="#shipment-list" className="underline">View shipment list</a></p>}
       </form>
 
       {detail ? (
