@@ -97,6 +97,8 @@ export function ShipmentsDesk() {
   const [settings, setSettings] = useState<Settings | null>(null);
   const [photos, setPhotos] = useState<File[]>([]);
   const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
+  const [saveNotice, setSaveNotice] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
 
   const load = useCallback(async (query: { q: string; carrier: string; status: string }) => {
@@ -133,8 +135,10 @@ export function ShipmentsDesk() {
   async function onSave(event: FormEvent) {
     event.preventDefault();
     if (saving) return;
+    setSaveError(null);
+    setSaveNotice(null);
     if (!editing && photos.length < 2) {
-      setError("Select at least two photos before adding the shipment.");
+      setSaveError("Select at least two photos before adding the shipment.");
       return;
     }
     setSaving(true);
@@ -154,8 +158,9 @@ export function ShipmentsDesk() {
     };
     try {
       if (editing) {
-        await api(`/api/admin/shipments/${editing}`, { method: "PATCH", body: JSON.stringify(payload) });
-        setNotice("Shipment updated.");
+        const data = await api(`/api/admin/shipments/${editing}`, { method: "PATCH", body: JSON.stringify(payload) });
+        setDetail(data.shipment as Shipment);
+        setSaveNotice("Shipment updated.");
       } else {
         const created = await api("/api/admin/shipments", { method: "POST", body: JSON.stringify(payload) });
         const shipment = created.shipment as Shipment;
@@ -181,11 +186,9 @@ export function ShipmentsDesk() {
         await load({ q, carrier, status });
         return;
       }
-      setForm(emptyForm);
-      setEditing(null);
       await load({ q, carrier, status });
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Shipment was not saved.");
+      setSaveError(err instanceof Error ? err.message : "Shipment was not saved.");
     } finally {
       setSaving(false);
     }
@@ -193,11 +196,13 @@ export function ShipmentsDesk() {
 
   async function openRow(id: string, showMedia = false) {
     setError(null);
+    setSaveError(null);
+    setSaveNotice(null);
     try {
       const data = await api(`/api/admin/shipments/${id}`, { headers: {} });
       const shipment = data.shipment as Shipment;
       setDetail(shipment);
-      if (showMedia) requestAnimationFrame(() => document.getElementById("shipment-media")?.scrollIntoView());
+      requestAnimationFrame(() => document.getElementById(showMedia ? "shipment-media" : "shipment-editor")?.scrollIntoView());
       setEditing(id);
       setForm({
         customerName: shipment.customerName ?? "",
@@ -380,7 +385,7 @@ export function ShipmentsDesk() {
         </section>
       ) : null}
 
-      <form onSubmit={onSave} className="grid gap-3 rounded-3xl border border-line bg-paper-elevated p-4 sm:grid-cols-2">
+      <form id="shipment-editor" onSubmit={onSave} className="scroll-mt-24 grid gap-3 rounded-3xl border border-line bg-paper-elevated p-4 sm:grid-cols-2">
         <h2 className="font-display text-2xl font-semibold text-ink sm:col-span-2">
           {editing ? "Edit shipment" : "Add shipment"}
         </h2>
@@ -466,6 +471,8 @@ export function ShipmentsDesk() {
                   setEditing(null);
                   setDetail(null);
                   setForm(emptyForm);
+                  setSaveError(null);
+                  setSaveNotice(null);
                 }}
                 className="rounded-2xl border border-line px-4 py-2 text-sm"
               >
@@ -474,6 +481,8 @@ export function ShipmentsDesk() {
             </>
           ) : null}
         </div>
+        {saveError && <p role="alert" className="text-sm text-ink sm:col-span-2">{saveError}</p>}
+        {saveNotice && <p role="status" className="text-sm text-ink sm:col-span-2">{saveNotice}</p>}
       </form>
 
       {detail ? (
@@ -507,7 +516,7 @@ export function ShipmentsDesk() {
                 <span className="font-medium">{event.status}</span> — {event.description}
                 <span className="block text-xs text-muted">
                   {event.occurredAt || "Time not supplied"}
-                  {event.location ? ` · ${event.location}` : ""}
+                  {event.location ? ` Â· ${event.location}` : ""}
                 </span>
               </li>
             ))}
@@ -516,9 +525,9 @@ export function ShipmentsDesk() {
           <ul className="mt-2 space-y-1 text-xs text-muted">
             {(detail.logs ?? []).map((log, index) => (
               <li key={`${log.createdAt}-${index}`}>
-                {log.createdAt} · {log.outcome}
-                {log.httpStatus ? ` · HTTP ${log.httpStatus}` : ""}
-                {log.durationMs != null ? ` · ${log.durationMs} ms` : ""}
+                {log.createdAt} Â· {log.outcome}
+                {log.httpStatus ? ` Â· HTTP ${log.httpStatus}` : ""}
+                {log.durationMs != null ? ` Â· ${log.durationMs} ms` : ""}
               </li>
             ))}
           </ul>
