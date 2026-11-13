@@ -385,6 +385,7 @@ export function ShipmentsDesk() {
                 <th className="px-4 py-3">Order</th>
                 <th className="px-4 py-3">Carrier</th>
                 <th className="px-4 py-3">Status</th>
+                <th scope="col" className="px-4 py-3"><span className="sr-only">Actions</span></th>
               </tr>
             </thead>
             <tbody>
@@ -402,6 +403,12 @@ export function ShipmentsDesk() {
                   <td className="px-4 py-3 text-ink">{row.orderNumber || "—"}</td>
                   <td className="px-4 py-3 text-ink">{row.carrierName || row.carrierResolution}</td>
                   <td className="px-4 py-3 text-ink">{row.status}</td>
+                  <td className="px-4 py-3 text-right">
+                    <button type="button" onClick={() => void openRow(row.id)}
+                      className="rounded-lg border border-line px-3 py-1.5 font-medium text-ink hover:bg-paper">
+                      Edit
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
