@@ -62,6 +62,29 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async headers() {
+    const attachment = (filename: string, type: string) => [
+      { key: "Content-Type", value: type },
+      { key: "Content-Disposition", value: `attachment; filename="${filename}"` },
+      { key: "X-Content-Type-Options", value: "nosniff" },
+    ];
+    return [
+      {
+        source: "/downloads/sourcing-center-mutual-nda-template.pdf",
+        headers: attachment(
+          "sourcing-center-mutual-nda-template.pdf",
+          "application/pdf",
+        ),
+      },
+      {
+        source: "/downloads/sourcing-center-mutual-nda-template.docx",
+        headers: attachment(
+          "sourcing-center-mutual-nda-template.docx",
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        ),
+      },
+    ];
+  },
 };
 
 export default nextConfig;

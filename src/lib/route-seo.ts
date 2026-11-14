@@ -15,6 +15,12 @@ export const pages = {
       "China factory sourcing with no MOQ, start from 1 unit. Photo/video QC. Legal entity Xiamen Ajmal Seven Color Trading Co Ltd. DUNS 509419282.",
     path: "/contact",
   }),
+  downloads: routeMetadata({
+    title: "Download a Mutual NDA Template for Sourcing Discussions",
+    description:
+      "Download a generic mutual NDA for early customer and supplier sourcing discussions. Unsigned PDF and DOCX. Review with legal counsel before signing.",
+    path: "/downloads",
+  }),
   oemOdm: routeMetadata({
     title: "China OEM/ODM and New Product Development (NDA-First)",
     description:
