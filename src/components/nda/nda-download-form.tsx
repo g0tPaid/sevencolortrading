@@ -35,7 +35,7 @@ function generatePdf(customer:{name:string;company:string;phone:string}){
  text("PARTY A - SOURCING CENTER",11,true);text("Xiamen Ajmal Seven Color Trading Co Ltd",9.5);text("Representative: AJMAL ABDUL JABBAR AHAMED",9.5);text("Managing Director",9.5);
  y-=20;text("Authorized signature / company stamp: _________________________",9);text("Date: _________________________",9);
  y-=18;text("PARTY B - CUSTOMER",11,true);text("Name: "+customer.name,9.5);if(customer.company)text("Company: "+customer.company,9.5);text("Phone: "+customer.phone,9.5);text("Customer signature: _________________________",9);text("Date: _________________________",9);
- y-=20;for(const line of wrap("This document is a draft for review. The customer's signature is required. The company's actual signed and stamped original must be attached or executed separately.",95))text(line,8);
+ y-=20;for(const line of wrap("This document is a draft for review. The customer signature is required. The company signed and stamped original must be attached or executed separately.",95))text(line,8);
  pages.push(lines);
  const objects:string[]=["<< /Type /Catalog /Pages 2 0 R >>","","<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>","<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>"];
  const pageIds:number[]=[];pages.forEach((p,i)=>{const pid=objects.length+1;pageIds.push(pid);const content=p.join("\n")+"\n";objects.push(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents ${pid+1} 0 R >>`);objects.push(`<< /Length ${content.length} >>\nstream\n${content}endstream`);});
@@ -54,6 +54,6 @@ export function NdaDownloadForm(){
  <label className="grid gap-2 text-sm font-semibold text-ink">Phone number *<input required type="tel" maxLength={40} value={phone} onChange={e=>setPhone(e.target.value)} className="rounded-xl border border-ink/20 bg-white p-3 text-ink" placeholder="+971 ..."/></label>
  <div className="flex items-end"><button type="submit" className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3.5 text-sm font-bold text-white hover:opacity-90"><Download className="h-5 w-5"/> Generate & download NDA (PDF)</button></div>
  </form>
- <p className="mt-4 text-xs leading-relaxed text-muted">Your information is used locally in your browser to create the downloadable PDF. The NDA retains its original PRC governing-law and Xiamen jurisdiction provisions. It is not signed on your behalf; obtain both parties' signatures before relying on it as an executed agreement.</p>
+ <p className="mt-4 text-xs leading-relaxed text-muted">Your information is used locally in your browser to create the downloadable PDF. The NDA retains its original PRC governing-law and Xiamen jurisdiction provisions. It is not signed on your behalf; obtain signatures from both parties before relying on it as an executed agreement.</p>
  </section>;
 }
