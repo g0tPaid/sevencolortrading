@@ -11,13 +11,23 @@ function makePdf(data: Application): Blob {
   const text = (x: number, y: number, size: number, value: string, color = "0.12 0.14 0.18") => {
     commands.push(`${color} rg BT /F1 ${size} Tf 1 0 0 1 ${x} ${y} Tm (${enc(value)}) Tj ET`);
   };
-  commands.push("0.96 0.97 0.98 rg 0 725 595 117 re f");
-  commands.push("0.87 0.09 0.21 rg 42 762 m 71 762 l 68 753 l 54 753 l 45 718 l 35 718 l 49 753 l 39 753 l h f");
-  text(86, 766, 21, "sourcing.center");
-  text(86, 746, 9, "by Seven Color Trading Co Ltd");
-  text(42, 677, 20, "DROPSHIPPING PARTNER APPLICATION");
-  text(42, 650, 10, "Application details submitted for review by Sourcing Center");
-  commands.push("0.84 0.86 0.89 RG 42 628 m 553 628 l S");
+  commands.push("q 0.7071 0.7071 -0.7071 0.7071 112 280 cm");
+  text(0, 0, 55, "CONFIDENTIAL", "0.91 0.92 0.94");
+  commands.push("Q");
+  commands.push("0.89 0.10 0.27 rg 0 825 595 17 re f");
+  commands.push("0.96 0.97 0.98 rg 0 719 595 106 re f");
+  // Seven Color symbol traced from the actual sourcing.center site icon.
+  commands.push("q 0.60 0 0 -0.60 41 803 cm 0.88 0.11 0.28 rg");
+  commands.push("8 10 m 80 10 l 76 21 l 36 21 l 18 98 l 4 98 l 24 21 l 64 21 l 66 10 l 8 10 l h f");
+  commands.push("66 21 m 44 98 l 57 98 l 79 21 l h f");
+  commands.push("18 98 m 27 91 l 34 100 l 25 107 l h f Q");
+  text(112, 777, 23, "sourcing.center");
+  text(112, 757, 9, "BY SEVEN COLOR TRADING CO LTD", "0.38 0.42 0.48");
+  text(438, 778, 9, "PRIVATE DOCUMENT", "0.88 0.11 0.28");
+  text(42, 689, 21, "DROPSHIPPING PARTNER APPLICATION");
+  text(42, 665, 10, "PARTNER ONBOARDING  /  FOR REVIEW ONLY", "0.40 0.44 0.50");
+  text(42, 643, 9, "Prepared: " + new Date().toISOString().slice(0,10) + "  |  Status: Pending review", "0.40 0.44 0.50");
+  commands.push("0.89 0.90 0.93 RG 42 628 m 553 628 l S");
   const fields: [string,string][] = [["Applicant name",data.name],["Email address",data.email],["Store platform",data.storeType],["Mobile number",data.mobile]];
   fields.forEach(([label,value],i) => {
     const y=594-i*77;
@@ -25,16 +35,20 @@ function makePdf(data: Application): Blob {
     text(42,y-27,15,value.slice(0,65));
     commands.push(`0.9 0.91 0.93 RG 42 ${y-42} m 553 ${y-42} l S`);
   });
-  text(42,267,11,"Application purpose");
-  text(42,245,10,"Request to join the Sourcing Center dropshipping fulfillment program.");
-  text(42,223,10,"Our team will review the details and contact the applicant.");
-  commands.push("0.88 0.10 0.22 RG 1.8 w 445 110 108 108 re S");
-  text(458,171,9,"SOURCING");
-  text(464,156,9,"CENTER");
-  text(462,135,7,"APPLICATION");
-  text(42,144,10,"Company: Xiamen Ajmal Seven Color Trading Co Ltd");
-  text(42,125,9,"This is an application summary, not an executed agreement.");
-  text(42,65,9,"sourcing.center  |  info@sevencolortrading.com");
+  commands.push("0.95 0.96 0.98 rg 42 269 511 31 re f");
+  text(53, 279, 11, "APPLICATION INSTRUCTIONS");
+  text(53, 250, 9, "1. Review your name, email, store type and mobile number.");
+  text(53, 232, 9, "2. Click Submit application on the website to send your details.");
+  text(53, 214, 9, "3. Our team reviews the request and contacts you for next steps.");
+  text(53, 196, 9, "4. Submission does not mean automatic partner approval.");
+  commands.push("0.96 0.97 0.98 rg 42 113 511 62 re f");
+  text(53, 155, 10, "PRIVACY AND DATA HANDLING");
+  text(53, 137, 8.5, "We store submitted details in our application records for review and follow-up.");
+  text(53, 123, 8.5, "Authorized administrators can access them. Contact us for privacy requests.");
+  text(42, 91, 9, "Xiamen Ajmal Seven Color Trading Co Ltd");
+  text(42, 75, 9, "info@sevencolortrading.com  |  sourcing.center");
+  text(42, 45, 8, "CONFIDENTIAL - For the applicant and authorized Sourcing Center personnel only.");
+  text(519, 45, 8, "1 / 1");
   const stream=commands.join("\n");
   const objects=[
     "<< /Type /Catalog /Pages 2 0 R >>",
@@ -93,7 +107,7 @@ export function DropshippingApplication() {
             <label className="grid gap-1.5 text-sm font-semibold">Store type<select required value={["Shopify","WooCommerce","Other"].includes(data.storeType)?data.storeType:"Other"} onChange={e=>update("storeType",e.target.value)} className="rounded-xl border border-slate-300 p-3 font-normal"><option>Shopify</option><option>WooCommerce</option><option>Other</option></select></label>
             {data.storeType==="Other"&&<label className="grid gap-1.5 text-sm font-semibold">Specify store type<input required maxLength={100} value={data.storeType==="Other"?"":data.storeType} onChange={e=>update("storeType",e.target.value)} className="rounded-xl border border-slate-300 p-3 font-normal" placeholder="Amazon, Etsy, custom store..."/></label>}
             <label className="grid gap-1.5 text-sm font-semibold">Mobile number<input required type="tel" maxLength={40} autoComplete="tel" value={data.mobile} onChange={e=>update("mobile",e.target.value)} className="rounded-xl border border-slate-300 p-3 font-normal" placeholder="+971 50 123 4567"/></label>
-            <p className="text-xs text-slate-500">Your details will be sent to Sourcing Center for application review.</p>
+            <p className="text-xs text-slate-500">We store submitted details for application review and follow-up. Authorized administrators can access them.</p>
             <button type="submit" className="rounded-full bg-red-600 px-6 py-3 font-semibold text-white">Generate & review PDF</button>
           </form>}
           {step==="review"&&<div>
