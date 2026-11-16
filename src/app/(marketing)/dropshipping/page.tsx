@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, ArrowDown, CheckCircle2, ClipboardCheck, Mail, PackageCheck, ShoppingCart, Truck, LockKeyhole } from "lucide-react";
+import { DropshippingApplication } from "@/components/dropshipping/application";
 import { JsonLd } from "@/components/seo/json-ld";
 import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
 import { CtaBand } from "@/components/shared/page-shell";
@@ -98,6 +99,8 @@ export default function DropshippingPage() {
             </div>
           </div>
         </section>
+
+        <DropshippingApplication />
 
         <section className="mt-12" aria-labelledby="dropship-overview">
           <h2 id="dropship-overview" className="font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">{dropshipping.title}</h2>
