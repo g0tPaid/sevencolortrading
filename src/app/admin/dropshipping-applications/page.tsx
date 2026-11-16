@@ -11,7 +11,7 @@ type Application={id:string;name:string;email:string;storeType:string;mobile:str
 export default async function DropshippingApplicationsAdmin(){
   const cookieHeader=(await cookies()).toString();
   const session=await getSessionFromCookies(cookieHeader);
-  if(!session)redirect("/admin/login");
+  if(!session)redirect("/admin");
   const file=path.join(process.env.RAILWAY_VOLUME_MOUNT_PATH||"/tmp","dropshipping-applications.jsonl");
   let applications:Application[]=[];
   try{applications=(await readFile(file,"utf8")).split("\n").filter(Boolean).map(line=>JSON.parse(line) as Application).reverse();}
