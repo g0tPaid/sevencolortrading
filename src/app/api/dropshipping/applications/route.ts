@@ -3,6 +3,7 @@ import { appendFile, mkdir, readFile } from "node:fs/promises";
 import { randomUUID } from "node:crypto";
 import path from "node:path";
 import { requireAdminSession } from "@/lib/admin-auth";
+import { siteUrl } from "@/lib/seo";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -14,7 +15,10 @@ const headers = { "Cache-Control": "no-store" };
 
 export async function POST(request: Request) {
   const origin = request.headers.get("origin");
-  if (origin && origin !== new URL(request.url).origin) return NextResponse.json({ok:false,error:"Forbidden"},{status:403,headers});
+  // Railway can expose an internal HTTP origin in request.url after TLS termination.
+  if (origin && origin !== siteUrl && origin !== new URL(request.url).origin) {
+    return NextResponse.json({ ok: false, error: "Open the application on sourcing.center and try again." }, { status: 403, headers });
+  }
   const length = Number(request.headers.get("content-length")||0);
   if(length>1050000)return NextResponse.json({ok:false,error:"Request too large"},{status:413,headers});
   let body: Record<string,unknown>;
