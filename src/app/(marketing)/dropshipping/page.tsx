@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight, ArrowDown, CheckCircle2, ClipboardCheck, Mail, PackageCheck, ShoppingCart, Truck, LockKeyhole } from "lucide-react";
 import { JsonLd } from "@/components/seo/json-ld";
 import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
-import { CtaBand, ServiceBadgeHero } from "@/components/shared/page-shell";
+import { CtaBand } from "@/components/shared/page-shell";
 import { Container } from "@/components/ui/primitives";
 import { company } from "@/lib/content";
 import { dropshippingFaqJsonLd, dropshippingPageJsonLd } from "@/lib/seo";
@@ -29,18 +29,7 @@ export default function DropshippingPage() {
         <p className="section-kicker">
           Seven Color Trading Co Ltd · own warehouses · not a broker
         </p>
-        <ServiceBadgeHero badge={dropshipping.eyebrow} subtitle={dropshipping.title} />
-        <p className="mt-4 max-w-2xl text-muted sm:text-lg">{dropshipping.description}</p>
-        <p className="mt-4 max-w-2xl text-sm text-muted">
-          Legal entity {company.legalNameFull}. DUNS {company.credentials.dunsNumber}. Dropship
-          fulfillment from{" "}
-          {dropshippingBenefits.map((h) => `${h.city}, ${h.country}`).join(" and ")}.
-        </p>
-
-        <p className="mt-6 text-sm text-muted">
-          Have an order? Open the private link from your warehouse team for photos and videos, or{" "}
-          <Link href="/track" className="font-semibold text-ink underline">track your package by shipment number</Link>.
-        </p>
+        <h1 className="mt-3 font-display text-[4.25rem] font-semibold leading-[0.95] tracking-tight text-accent sm:text-[7rem] lg:text-[8.5rem]">{dropshipping.eyebrow}</h1>
 
         <section className="mt-12" aria-labelledby="dropship-process">
           <div className="mb-6">
@@ -108,6 +97,22 @@ export default function DropshippingPage() {
               <a className="mt-5 inline-flex rounded-full bg-accent px-5 py-3 text-sm font-semibold text-white" href={"mailto:?cc=info%40sevencolortrading.com&subject=CustomerNumber%20%2B%20%23OrderNumber&body=Hello%2C%0A%0APlease%20process%20this%20dropshipping%20order.%0A%0AProduct%20description%3A%0AProduct%20link%3A%0AColor%3A%0ASize%20%2F%20variant%3A%0AQuantity%3A%0A%0ACustomer%20name%3A%0APhone%3A%0AFull%20delivery%20address%3A%0ACity%3A%0ACountry%3A%0APostal%20code%3A%0A%0ASpecial%20instructions%3A%0A%0AThank%20you."}>Open email template</a>
             </div>
           </div>
+        </section>
+
+        <section className="mt-12" aria-labelledby="dropship-overview">
+          <h2 id="dropship-overview" className="font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">{dropshipping.title}</h2>
+        <p className="mt-4 max-w-2xl text-muted sm:text-lg">{dropshipping.description}</p>
+        <p className="mt-4 max-w-2xl text-sm text-muted">
+          Legal entity {company.legalNameFull}. DUNS {company.credentials.dunsNumber}. Dropship
+          fulfillment from{" "}
+          {dropshippingBenefits.map((h) => `${h.city}, ${h.country}`).join(" and ")}.
+        </p>
+
+        <p className="mt-6 text-sm text-muted">
+          Have an order? Open the private link from your warehouse team for photos and videos, or{" "}
+          <Link href="/track" className="font-semibold text-ink underline">track your package by shipment number</Link>.
+        </p>
+
         </section>
 
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
