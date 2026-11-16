@@ -33,18 +33,51 @@ export default function DropshippingPage() {
         </p>
         <h1 className="mt-3 font-display text-[4.25rem] font-semibold leading-[0.95] tracking-tight text-accent sm:text-[7rem] lg:text-[8.5rem]">{dropshipping.eyebrow}</h1>
 
-        <section className="relative mt-8 overflow-hidden rounded-[2rem] bg-ink p-6 text-white shadow-2xl sm:p-10 lg:p-12" aria-labelledby="partner-hero">
-          <div className="pointer-events-none absolute -right-24 -top-28 h-80 w-80 rounded-full bg-accent/30 blur-3xl" />
-          <div className="relative grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
-            <div>
-              <p className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-red-200"><Sparkles className="h-4 w-4" /> Grow with Sourcing Center</p>
-              <h2 id="partner-hero" className="mt-5 max-w-2xl font-display text-3xl font-extrabold leading-tight tracking-tight sm:text-5xl">Become a <span className="text-red-300">Dropshipping Partner</span></h2>
-              <p className="mt-5 max-w-xl text-base leading-8 text-white/75">Focus on growing your store. Let our team support product sourcing, order handling, warehouse coordination and shipment updates.</p>
-              <a href="#dropship-application-title" className="mt-7 inline-flex w-full min-h-14 items-center justify-center gap-3 rounded-xl bg-accent px-7 py-4 text-base font-extrabold text-white shadow-lg transition hover:brightness-110 sm:w-auto">Apply to become a partner <ArrowRight className="h-5 w-5" /></a>
-              <p className="mt-3 text-xs text-white/60">Go straight to the partner application below</p>
+        <section
+          className="relative isolate mt-8 overflow-hidden rounded-[2rem] border border-white/90 bg-white/85 p-5 text-slate-900 shadow-[0_18px_55px_-25px_rgba(15,23,42,0.28),0_0_0_1px_rgba(148,163,184,0.18)] backdrop-blur-xl sm:p-8 lg:p-12"
+          aria-labelledby="partner-hero"
+        >
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,rgba(251,113,133,0.20),transparent_62%),radial-gradient(ellipse_at_bottom_left,rgba(186,209,242,0.30),transparent_64%)]"
+          />
+          <div className="grid gap-7 lg:grid-cols-[1.25fr_0.75fr] lg:items-center lg:gap-12">
+            <div className="min-w-0">
+              <p className="inline-flex items-center gap-2 rounded-full border border-red-100 bg-white/70 px-3 py-2 text-xs font-bold uppercase tracking-[0.1em] text-red-800 sm:px-4">
+                <Sparkles className="h-4 w-4 shrink-0" aria-hidden="true" />
+                Grow with Sourcing Center
+              </p>
+              <h2 id="partner-hero" className="mt-5 max-w-2xl text-balance font-display text-3xl font-extrabold leading-tight tracking-tight sm:text-5xl">
+                Become a <span className="text-red-800">Dropshipping Partner</span>
+              </h2>
+              <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-700">
+                Focus on growing your store. Let our team support product sourcing, order handling, warehouse coordination and shipment updates.
+              </p>
+              <a
+                href="#dropship-application-title"
+                className="mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-red-700 px-4 py-3 text-center text-base font-bold text-white shadow-sm shadow-red-900/20 transition-colors hover:bg-red-800 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-800 sm:w-auto sm:px-6"
+              >
+                Apply to become a partner
+                <ArrowRight className="h-5 w-5 shrink-0" aria-hidden="true" />
+              </a>
+              <p className="mt-3 text-xs text-slate-600">Go straight to the partner application below</p>
             </div>
-            <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-              {[{icon:Store,title:"Build your business",body:"Spend more time on your customers"},{icon:ShieldCheck,title:"Sourcing support",body:"Coordinate purchasing and quality checks"},{icon:Truck,title:"Fulfillment updates",body:"Track orders and shipment progress"}].map(item=><div key={item.title} className="flex items-start gap-4 rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm"><div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/15"><item.icon className="h-5 w-5 text-red-300" /></div><div><h3 className="font-semibold text-white">{item.title}</h3><p className="mt-1 text-sm text-white/65">{item.body}</p></div></div>)}
+            <div className="grid gap-3 md:grid-cols-3 lg:grid-cols-1">
+              {[
+                { icon: Store, title: "Build your business", body: "Spend more time on your customers" },
+                { icon: ShieldCheck, title: "Sourcing support", body: "Coordinate purchasing and quality checks" },
+                { icon: Truck, title: "Fulfillment updates", body: "Track orders and shipment progress" },
+              ].map((item) => (
+                <div key={item.title} className="flex items-start gap-3 rounded-2xl border border-white/90 bg-white/65 p-4 shadow-sm shadow-slate-900/5 backdrop-blur-sm">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-red-100 bg-red-50">
+                    <item.icon className="h-5 w-5 text-red-800" aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-slate-900">{item.title}</h3>
+                    <p className="mt-1 text-sm leading-relaxed text-slate-700">{item.body}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
