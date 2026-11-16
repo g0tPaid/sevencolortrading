@@ -1,27 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { InternationalPhoneField, formatInternationalPhone } from "@/components/ui/international-phone-field";
+import { writeCompanyLogo } from "@/lib/pdf-company-logo";
 import { ArrowRight, CheckCircle2, Download, FileText, X } from "lucide-react";
 
 type Application = { name: string; email: string; storeType: string; mobile: string; website: string; websiteNotReady: boolean; productLink: string; productImage: string; productImageName: string };
 const empty: Application = { name: "", email: "", storeType: "Shopify", mobile: "", website: "", websiteNotReady: false, productLink: "", productImage: "", productImageName: "" };
 const enc = (s: string) => s.replace(/[^\x20-\x7e]/g, "?").replace(/\\/g, "\\\\").replace(/\(/g, "\\(").replace(/\)/g, "\\)");
-async function makePdf(data: Application): Promise<Blob> {
-  let logoBytes: Uint8Array | null = null;
-  try {
-    const svg = await fetch("/icon.svg").then(response => { if(!response.ok) throw Error("Logo unavailable"); return response.blob(); });
-    const image = new Image();
-    const url = URL.createObjectURL(svg);
-    try {
-      await new Promise<void>((resolve, reject) => { image.onload = () => resolve(); image.onerror = () => reject(Error("Invalid logo")); image.src = url; });
-      const canvas = document.createElement("canvas"); canvas.width = 240; canvas.height = 240;
-      const context = canvas.getContext("2d"); if (!context) throw Error("Canvas unavailable");
-      context.fillStyle = "#ffffff"; context.fillRect(0,0,240,240); context.drawImage(image,0,0,240,240);
-      const base64 = canvas.toDataURL("image/jpeg",0.92).split(",")[1];
-      const binary = atob(base64); logoBytes = Uint8Array.from(binary, character => character.charCodeAt(0));
-    } finally { URL.revokeObjectURL(url); }
-  } catch (error) { console.warn("Unable to embed website logo", error); }
-
+function makePdf(data: Application): Blob {
   const commands: string[] = [];
   const text = (x: number, y: number, size: number, value: string, color = "0.12 0.14 0.18") => {
     commands.push(`${color} rg BT /F1 ${size} Tf 1 0 0 1 ${x} ${y} Tm (${enc(value)}) Tj ET`);
@@ -31,10 +18,7 @@ async function makePdf(data: Application): Promise<Blob> {
   commands.push("Q");
   commands.push("0.89 0.10 0.27 rg 0 825 595 17 re f");
   commands.push("0.96 0.97 0.98 rg 0 719 595 106 re f");
-  // Draw the exact SVG from the website, rather than a hand-traced approximation.
-  if (logoBytes) commands.push("q 54 0 0 54 42 750 cm /Logo Do Q");
-  text(112, 777, 23, "sourcing.center");
-  text(112, 757, 9, "BY SEVEN COLOR TRADING CO LTD", "0.38 0.42 0.48");
+  commands.push("q 194 0 0 47.4 42 749 cm /Logo Do Q");
   text(438, 778, 9, "PRIVATE DOCUMENT", "0.88 0.11 0.28");
   text(42, 689, 19, "DROPSHIPPING PARTNER APPLICATION");
   text(42, 665, 10, "PARTNER ONBOARDING  /  FOR REVIEW ONLY", "0.40 0.44 0.50");
@@ -79,20 +63,17 @@ async function makePdf(data: Application): Promise<Blob> {
   const offsets = [0];
   add("%PDF-1.4\n");
   objects.forEach((object, index) => { offsets.push(total); add(String(index + 1) + " 0 obj\n" + object + "\nendobj\n"); });
-  offsets.push(total);
-  add("6 0 obj\n");
-  if (logoBytes) {
-    add("<< /Type /XObject /Subtype /Image /Width 240 /Height 240 /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length " + logoBytes.length + " >>\nstream\n");
-    add(logoBytes);
-    add("\nendstream\n");
-  } else {
-    add("<< /Type /XObject /Subtype /Form /BBox [0 0 1 1] /Length 0 >>\nstream\nendstream\n");
-  }
-  add("endobj\n");
+  writeCompanyLogo((id, base64, width, height, imageSettings) => {
+    const bytes = Uint8Array.from(atob(base64), (character) => character.charCodeAt(0));
+    offsets.push(total);
+    add(`${id} 0 obj\n<< /Type /XObject /Subtype /Image /Width ${width} /Height ${height} ${imageSettings} /BitsPerComponent 8 /Length ${bytes.length} >>\nstream\n`);
+    add(bytes);
+    add("\nendstream\nendobj\n");
+  }, 6, 7);
   const start = total;
-  add("xref\n0 7\n0000000000 65535 f \n");
+  add("xref\n0 8\n0000000000 65535 f \n");
   offsets.slice(1).forEach(offset => add(String(offset).padStart(10, "0") + " 00000 n \n"));
-  add("trailer\n<< /Size 7 /Root 1 0 R >>\nstartxref\n" + start + "\n%%EOF");
+  add("trailer\n<< /Size 8 /Root 1 0 R >>\nstartxref\n" + start + "\n%%EOF");
   const output = new Uint8Array(total);
   let cursor = 0;
   pieces.forEach(piece => { output.set(piece,cursor); cursor += piece.length; });
@@ -104,22 +85,27 @@ export function DropshippingApplication() {
   const [step,setStep]=useState<"form"|"review"|"done">("form");
   const [data,setData]=useState<Application>(empty);
   const [pdfUrl,setPdfUrl]=useState("");
+  const [region, setRegion] = useState("");
+  const [phoneError, setPhoneError] = useState("");
   const [busy,setBusy]=useState(false);
   const [error,setError]=useState("");
   const [ref,setRef]=useState("");
   useEffect(()=>()=>{if(pdfUrl)URL.revokeObjectURL(pdfUrl);},[pdfUrl]);
   const update=(key:keyof Application,value:string)=>setData(v=>({...v,[key]:value}));
-  const preview=async()=>{
+  const mobile = formatInternationalPhone(data.mobile, region);
+  const preview=()=>{
     setError("");
     if(!data.name.trim()||!/^\S+@\S+\.\S+$/.test(data.email)||!data.mobile.trim()||!data.storeType.trim()){setError("Please complete all fields with a valid email.");return;}
-    if(pdfUrl)URL.revokeObjectURL(pdfUrl);
-    const url=URL.createObjectURL(await makePdf(data));
+    if (!mobile.ok) { setPhoneError(mobile.error); return; }
+    setPhoneError("");
+    const url = URL.createObjectURL(makePdf({ ...data, mobile: mobile.number }));
     setPdfUrl(url);setStep("review");
   };
   const submit=async()=>{
+    if (!mobile.ok) { setPhoneError(mobile.error); setStep("form"); return; }
     setBusy(true);setError("");
     try{
-      const res=await fetch("/api/dropshipping/applications",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
+      const res=await fetch("/api/dropshipping/applications",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({ ...data, mobile: mobile.number })});
       const json=await res.json();
       if(!res.ok||!json.ok)throw new Error(json.error||"Submission failed.");
       setRef(json.reference);setStep("done");
@@ -139,7 +125,14 @@ export function DropshippingApplication() {
             <label className="grid gap-1.5 text-sm font-semibold">Email<input required type="email" maxLength={180} autoComplete="email" value={data.email} onChange={e=>update("email",e.target.value)} className="rounded-xl border border-slate-300 p-3 font-normal" placeholder="name@example.com"/></label>
             <label className="grid gap-1.5 text-sm font-semibold">Store type<select required value={["Shopify","WooCommerce","Other"].includes(data.storeType)?data.storeType:"Other"} onChange={e=>update("storeType",e.target.value)} className="rounded-xl border border-slate-300 p-3 font-normal"><option>Shopify</option><option>WooCommerce</option><option>Other</option></select></label>
             {data.storeType==="Other"&&<label className="grid gap-1.5 text-sm font-semibold">Specify store type<input required maxLength={100} value={data.storeType==="Other"?"":data.storeType} onChange={e=>update("storeType",e.target.value)} className="rounded-xl border border-slate-300 p-3 font-normal" placeholder="Amazon, Etsy, custom store..."/></label>}
-            <label className="grid gap-1.5 text-sm font-semibold">Mobile number<input required type="tel" maxLength={40} autoComplete="tel" value={data.mobile} onChange={e=>update("mobile",e.target.value)} className="rounded-xl border border-slate-300 p-3 font-normal" placeholder="+971 50 123 4567"/></label>
+            <InternationalPhoneField
+              label="Mobile number"
+              region={region}
+              phone={data.mobile}
+              error={phoneError}
+              onRegionChange={(value) => { setRegion(value); setPhoneError(""); }}
+              onPhoneChange={(value) => { update("mobile", value); setPhoneError(""); }}
+            />
             <fieldset className="grid gap-3 rounded-xl border border-slate-200 p-4">
               <legend className="px-1 text-sm font-bold">Your store website</legend>
               <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={data.websiteNotReady} onChange={e=>setData(v=>({...v,websiteNotReady:e.target.checked,website:e.target.checked?"":v.website}))} className="h-4 w-4 accent-red-600"/> My website is not ready yet</label>
