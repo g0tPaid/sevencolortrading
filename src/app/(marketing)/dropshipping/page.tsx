@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, ArrowDown, CheckCircle2, ClipboardCheck, Mail, PackageCheck, ShoppingCart, Truck, LockKeyhole } from "lucide-react";
+import { ArrowRight, CheckCircle2, Mail } from "lucide-react";
+import { DropshippingRoadmap } from "@/components/dropshipping/roadmap";
 import { DropshippingApplication } from "@/components/dropshipping/application";
 import { JsonLd } from "@/components/seo/json-ld";
 import { WhatsAppPrefill } from "@/components/layout/whatsapp-prefill";
@@ -38,29 +39,7 @@ export default function DropshippingPage() {
             <h2 id="dropship-process" className="font-display text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">How It Works</h2>
             <p className="mt-3 max-w-3xl text-base font-medium leading-relaxed text-muted">We handle purchasing, receiving and quality checks. You get shipment tracking and a private link to inspect your order updates.</p>
           </div>
-          <ol className="grid gap-9 md:grid-cols-5 md:gap-5">
-            {[
-              { title: "We place your order", detail: "Our purchasing team orders the exact products you requested.", Icon: ShoppingCart, label: "PURCHASE" },
-              { title: "Received at our hub", detail: "Your items arrive at our own receiving office or warehouse.", Icon: PackageCheck, label: "RECEIVING" },
-              { title: "Inspected with care", detail: "We check product details and condition before dispatch.", Icon: ClipboardCheck, label: "QUALITY CONTROL" },
-              { title: "Tracking activated", detail: "We issue a tracking number so you can follow your shipment.", Icon: Truck, label: "DISPATCH" },
-              { title: "Your private updates", detail: "Access available QC photos, videos and shipping updates securely.", Icon: LockKeyhole, label: "ALL SET" },
-            ].map(({ title, detail, Icon, label }, index) => (
-              <li key={title} className={`group relative isolate flex min-h-[225px] flex-col overflow-visible rounded-[1.6rem] border-2 p-5 shadow-sm transition-all duration-500 motion-safe:hover:-translate-y-2 hover:shadow-xl ${index === 4 ? "border-emerald-400 bg-gradient-to-br from-emerald-50 via-white to-green-100 shadow-emerald-100 dark:from-emerald-950/50 dark:via-emerald-950/20 dark:to-emerald-900/30" : "border-ink/10 bg-gradient-to-br from-white/90 to-slate-50/70 hover:border-accent/50 dark:from-slate-900/80 dark:to-slate-800/60"}`}>
-                <div className="flex items-start justify-between gap-2">
-                  <span className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl shadow-sm transition-transform duration-500 motion-safe:group-hover:scale-110 motion-safe:group-hover:-rotate-6 ${index === 4 ? "bg-emerald-600 text-white" : "bg-accent text-white"}`}><Icon className="h-7 w-7" aria-hidden="true" /></span>
-                  <span className={`rounded-full px-2.5 py-1 text-[10px] font-black tracking-[0.12em] ${index === 4 ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200" : "bg-ink/5 text-muted"}`}>{String(index + 1).padStart(2, "0")}</span>
-                </div>
-                <p className={`mt-5 text-[10px] font-black uppercase tracking-[0.16em] ${index === 4 ? "text-emerald-700 dark:text-emerald-300" : "text-accent"}`}>{label}</p>
-                <h3 className={`mt-1 font-display text-lg font-extrabold leading-snug tracking-tight sm:text-xl ${index === 4 ? "text-emerald-900 dark:text-emerald-200" : "text-ink"}`}>{title}</h3>
-                <p className="mt-3 text-sm font-medium leading-relaxed text-muted">{detail}</p>
-                {index === 4 && <div className="mt-4 inline-flex items-center gap-2 text-sm font-extrabold text-emerald-700 dark:text-emerald-300"><CheckCircle2 className="h-5 w-5" aria-hidden="true" /> Ready to track</div>}
-                {index < 4 && <div aria-hidden="true" className="pointer-events-none absolute -bottom-[30px] left-1/2 z-20 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full border-4 border-background bg-accent text-white shadow-lg shadow-red-500/20 motion-safe:animate-pulse md:-right-[31px] md:bottom-auto md:left-auto md:top-1/2 md:translate-x-0 md:-translate-y-1/2">
-                  <ArrowDown className="h-5 w-5 stroke-[3] md:hidden" /><ArrowRight className="hidden h-5 w-5 stroke-[3] md:block" />
-                </div>}
-              </li>
-            ))}
-          </ol>
+          <DropshippingRoadmap />
           <div className="mt-7 rounded-2xl border border-green-300 bg-green-50 p-5 text-center dark:bg-green-950/30">
             <div className="flex items-center justify-center gap-2 text-green-700 dark:text-green-300"><CheckCircle2 className="h-6 w-6" aria-hidden="true" /><span className="font-semibold">Shipment ready to follow</span><CheckCircle2 className="h-6 w-6" aria-hidden="true" /></div>
             <p className="mt-2 text-sm text-muted">Use your tracking number to check the latest shipment status.</p>
