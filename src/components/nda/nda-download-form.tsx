@@ -140,7 +140,7 @@ export function NdaDownloadForm(){
    const fullDigits = international ? digits : (country?.code ?? "") + local;
    if (!/^\+?[\d\s().-]+$/.test(entered) || !/^[1-9]\d{3,14}$/.test(fullDigits) || (!international && local.length < 4)) {
      setPhoneError("Enter a complete phone number, including its area code if applicable.");
-     event.currentTarget.querySelector("input[type=tel]")?.focus();
+     event.currentTarget.querySelector<HTMLInputElement>("input[type=tel]")?.focus();
      return;
    }
 
