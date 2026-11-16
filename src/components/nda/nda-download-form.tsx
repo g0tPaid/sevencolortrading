@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Download, FileText } from "lucide-react";
+import { officialSealBase64 } from "./official-seal";
 
 const clauses: [string,string][] = [
 ["1. PURPOSE","The parties wish to discuss or work together on product sourcing, supplier identification, product development, manufacturing, OEM/ODM, packaging, quality control, logistics, purchasing and related commercial activities (the Purpose). Either party may disclose confidential information to the other."],
@@ -30,17 +31,33 @@ function generatePdf(customer:{name:string;company:string;phone:string}){
  text("PARTY B: "+customer.name,10,true);if(customer.company)text("Company: "+customer.company,10);text("Phone: "+customer.phone,10);
  const date=new Date().toISOString().slice(0,10);text("Effective Date: "+date,10);y-=14;
  for(const [title,body] of clauses){const wrapped=wrap(body,95);const height=29+wrapped.length*14;if(y-height<88)newPage();text(title,11,true);for(const row of wrapped)text(row,9.5);y-=12;}
- if(y<340)newPage();
+ if(y<450)newPage();
  text("PARTY DETAILS AND SIGNATURES",13,true);y-=9;
  text("PARTY A - SOURCING CENTER",11,true);text("Xiamen Ajmal Seven Color Trading Co Ltd",9.5);text("Representative: AJMAL ABDUL JABBAR AHAMED",9.5);text("Managing Director",9.5);
- y-=20;text("Authorized signature / company stamp: _________________________",9);text("Date: _________________________",9);
+ y-=12;
+ lines.push(`q 300 0 0 144 48 ${y-144} cm /Seal Do Q`);y-=152;
+ text("Date: _________________________",9);
  y-=18;text("PARTY B - CUSTOMER",11,true);text("Name: "+customer.name,9.5);if(customer.company)text("Company: "+customer.company,9.5);text("Phone: "+customer.phone,9.5);text("Customer signature: _________________________",9);text("Date: _________________________",9);
- y-=20;for(const line of wrap("This document is a draft for review. The customer signature is required. The company signed and stamped original must be attached or executed separately.",95))text(line,8);
+ y-=20;for(const line of wrap("This document is a draft for review. The customer signature is required. The company signature and stamps are reproduced from the supplied artwork; customer must sign separately.",95))text(line,8);
  pages.push(lines);
+ const imageBinary=atob(officialSealBase64);
+ const imageBytes=Uint8Array.from(imageBinary,ch=>ch.charCodeAt(0));
  const objects:string[]=["<< /Type /Catalog /Pages 2 0 R >>","","<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>","<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>"];
- const pageIds:number[]=[];pages.forEach((p,i)=>{const pid=objects.length+1;pageIds.push(pid);const content=p.join("\n")+"\n";objects.push(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents ${pid+1} 0 R >>`);objects.push(`<< /Length ${content.length} >>\nstream\n${content}endstream`);});
+ const pageIds:number[]=[];pages.forEach((p)=>{const pid=objects.length+1;pageIds.push(pid);const content=p.join("\n")+"\n";objects.push(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> /XObject << /Seal IMAGE_OBJECT_ID 0 R >> >> /Contents ${pid+1} 0 R >>`);objects.push(`<< /Length ${content.length} >>\nstream\n${content}endstream`);});
  objects[1]=`<< /Type /Pages /Kids [${pageIds.map(id=>id+" 0 R").join(" ")}] /Count ${pages.length} >>`;
- let pdf="%PDF-1.4\n";const offsets=[0];objects.forEach((obj,i)=>{offsets.push(pdf.length);pdf+=`${i+1} 0 obj\n${obj}\nendobj\n`;});const start=pdf.length;pdf+=`xref\n0 ${objects.length+1}\n0000000000 65535 f \n`;offsets.slice(1).forEach(n=>pdf+=`${String(n).padStart(10,"0")} 00000 n \n`);pdf+=`trailer\n<< /Size ${objects.length+1} /Root 1 0 R >>\nstartxref\n${start}\n%%EOF`;return new Blob([pdf],{type:"application/pdf"});
+ const imageId=objects.length+1;
+ const encoder=new TextEncoder();const chunks:Uint8Array[]=[];let total=0;
+ const add=(v:string|Uint8Array)=>{const b=typeof v==="string"?encoder.encode(v):v;chunks.push(b);total+=b.length;};
+ const offsets=[0];add("%PDF-1.4\n");
+ objects.forEach((obj,i)=>{offsets.push(total);add(`${i+1} 0 obj\n${obj.replace("IMAGE_OBJECT_ID",String(imageId))}\nendobj\n`);});
+ offsets.push(total);
+ add(`${imageId} 0 obj\n<< /Type /XObject /Subtype /Image /Width 360 /Height 173 /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${imageBytes.length} >>\nstream\n`);
+ add(imageBytes);add("\nendstream\nendobj\n");
+ const start=total;add(`xref\n0 ${imageId+1}\n0000000000 65535 f \n`);
+ offsets.slice(1).forEach(n=>add(`${String(n).padStart(10,"0")} 00000 n \n`));
+ add(`trailer\n<< /Size ${imageId+1} /Root 1 0 R >>\nstartxref\n${start}\n%%EOF`);
+ const out=new Uint8Array(total);let cursor=0;chunks.forEach(c=>{out.set(c,cursor);cursor+=c.length;});
+ return new Blob([out],{type:"application/pdf"});
 }
 export function NdaDownloadForm(){
  const [name,setName]=useState("");const [company,setCompany]=useState("");const [phone,setPhone]=useState("");
