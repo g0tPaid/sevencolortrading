@@ -14,7 +14,6 @@ import {
   dropshipping,
   dropshippingBenefits,
   dropshippingFaqs,
-  dropshippingSteps,
 } from "@/lib/v2-content";
 
 export const metadata: Metadata = pages.dropshipping;
@@ -42,6 +41,39 @@ export default function DropshippingPage() {
           Have an order? Open the private link from your warehouse team for photos and videos, or{" "}
           <Link href="/track" className="font-semibold text-ink underline">track your package by shipment number</Link>.
         </p>
+
+        <section className="mt-12" aria-labelledby="dropship-process">
+          <div className="mb-6">
+            <p className="section-kicker">Dropshipping guide</p>
+            <h2 id="dropship-process" className="font-display text-2xl font-semibold text-ink sm:text-3xl">How It Works</h2>
+            <p className="mt-2 max-w-2xl text-sm text-muted">We handle purchasing, receiving and quality checks. You get shipment tracking and a private link to inspect your order updates.</p>
+          </div>
+          <ol className="grid gap-6 md:grid-cols-5">
+            {[
+              { title: "We order", detail: "We purchase your requested products from the supplier.", Icon: ShoppingCart },
+              { title: "Office receives", detail: "Products arrive at our receiving office or warehouse.", Icon: PackageCheck },
+              { title: "Quality check", detail: "We check product details and condition before dispatch.", Icon: ClipboardCheck },
+              { title: "Tracking issued", detail: "We provide your shipment tracking number.", Icon: Truck },
+              { title: "Private shipment link", detail: "View available QC photos, videos and shipment status privately.", Icon: LockKeyhole },
+            ].map(({ title, detail, Icon }, index) => (
+              <li key={title} className={`relative rounded-[1.5rem] border p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${index === 4 ? "border-green-400 bg-green-50 shadow-[0_0_0_2px_rgba(34,197,94,0.08)] dark:bg-green-950/30" : "glass-card border-ink/10"}`}>
+                <div className="flex items-center justify-between">
+                  <span className={`flex h-11 w-11 items-center justify-center rounded-2xl ${index === 4 ? "bg-green-600 text-white" : "bg-accent/10 text-accent"}`}><Icon className="h-6 w-6" aria-hidden="true" /></span>
+                  <span className="text-xs font-bold text-muted">0{index + 1}</span>
+                </div>
+                <h3 className={`mt-5 font-display text-lg font-semibold ${index === 4 ? "text-green-800 dark:text-green-300" : "text-ink"}`}>{title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{detail}</p>
+                {index === 4 && <div className="mt-4 flex items-center gap-2 text-sm font-semibold text-green-700 dark:text-green-300"><CheckCircle2 className="h-5 w-5" aria-hidden="true" /> Ready to track <CheckCircle2 className="h-5 w-5" aria-hidden="true" /></div>}
+                {index < 4 && <div aria-hidden="true" className="absolute -bottom-6 left-1/2 z-10 -translate-x-1/2 text-accent motion-safe:animate-bounce md:-right-4 md:bottom-auto md:left-auto md:top-1/2 md:translate-x-0 md:-translate-y-1/2"><ArrowDown className="h-6 w-6 md:hidden" /><ArrowRight className="hidden h-6 w-6 md:block" /></div>}
+              </li>
+            ))}
+          </ol>
+          <div className="mt-7 rounded-2xl border border-green-300 bg-green-50 p-5 text-center dark:bg-green-950/30">
+            <div className="flex items-center justify-center gap-2 text-green-700 dark:text-green-300"><CheckCircle2 className="h-6 w-6" aria-hidden="true" /><span className="font-semibold">Shipment ready to follow</span><CheckCircle2 className="h-6 w-6" aria-hidden="true" /></div>
+            <p className="mt-2 text-sm text-muted">Use your tracking number to check the latest shipment status.</p>
+            <Link href="/track" className="mt-3 inline-flex items-center gap-2 rounded-full bg-green-600 px-5 py-3 text-sm font-semibold text-white hover:bg-green-700">sourcing.center/track <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
+          </div>
+        </section>
 
         <section className="mt-12 glass-card rounded-[1.5rem] p-6 sm:p-8" aria-labelledby="dropship-email">
           <div className="flex items-center gap-3">
@@ -78,14 +110,6 @@ export default function DropshippingPage() {
           </div>
         </section>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {dropshippingSteps.map((step) => (
-            <article key={step.title} className="glass-card rounded-[1.5rem] p-6">
-              <h3 className="font-display text-xl font-semibold text-ink">{step.title}</h3>
-              <p className="mt-2 text-sm text-muted">{step.text}</p>
-            </article>
-          ))}
-        </div>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           {dropshippingBenefits.map((hub) => (
             <article key={hub.city} className="glass-card rounded-[1.5rem] p-6">
@@ -139,38 +163,7 @@ export default function DropshippingPage() {
           </Link>
           .
         </p>
-        <section className="mt-12" aria-labelledby="dropship-process">
-          <div className="mb-6">
-            <p className="section-kicker">DROPSHIPPING GUIDE</p>
-            <h2 id="dropship-process" className="font-display text-2xl font-semibold text-ink sm:text-3xl">How It Works</h2>
-            <p className="mt-2 max-w-2xl text-sm text-muted">We handle purchasing, receiving and quality checks. You get shipment tracking and a private link to inspect your order updates.</p>
-          </div>
-          <ol className="grid gap-6 md:grid-cols-5">
-            {[
-              { title: "We order", detail: "We purchase your requested products from the supplier.", Icon: ShoppingCart },
-              { title: "Office receives", detail: "Products arrive at our receiving office or warehouse.", Icon: PackageCheck },
-              { title: "Quality check", detail: "We check product details and condition before dispatch.", Icon: ClipboardCheck },
-              { title: "Tracking issued", detail: "We provide your shipment tracking number.", Icon: Truck },
-              { title: "Private shipment link", detail: "View available QC photos, videos and shipment status privately.", Icon: LockKeyhole },
-            ].map(({ title, detail, Icon }, index) => (
-              <li key={title} className={`relative rounded-[1.5rem] border p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${index === 4 ? "border-green-400 bg-green-50 shadow-[0_0_0_2px_rgba(34,197,94,0.08)] dark:bg-green-950/30" : "glass-card border-ink/10"}`}>
-                <div className="flex items-center justify-between">
-                  <span className={`flex h-11 w-11 items-center justify-center rounded-2xl ${index === 4 ? "bg-green-600 text-white" : "bg-accent/10 text-accent"}`}><Icon className="h-6 w-6" aria-hidden="true" /></span>
-                  <span className="text-xs font-bold text-muted">0{index + 1}</span>
-                </div>
-                <h3 className={`mt-5 font-display text-lg font-semibold ${index === 4 ? "text-green-800 dark:text-green-300" : "text-ink"}`}>{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{detail}</p>
-                {index === 4 && <div className="mt-4 flex items-center gap-2 text-sm font-semibold text-green-700 dark:text-green-300"><CheckCircle2 className="h-5 w-5" aria-hidden="true" /> Ready to track <CheckCircle2 className="h-5 w-5" aria-hidden="true" /></div>}
-                {index < 4 && <div aria-hidden="true" className="absolute -bottom-6 left-1/2 z-10 -translate-x-1/2 text-accent motion-safe:animate-bounce md:-right-4 md:bottom-auto md:left-auto md:top-1/2 md:translate-x-0 md:-translate-y-1/2"><ArrowDown className="h-6 w-6 md:hidden" /><ArrowRight className="hidden h-6 w-6 md:block" /></div>}
-              </li>
-            ))}
-          </ol>
-          <div className="mt-7 rounded-2xl border border-green-300 bg-green-50 p-5 text-center dark:bg-green-950/30">
-            <div className="flex items-center justify-center gap-2 text-green-700 dark:text-green-300"><CheckCircle2 className="h-6 w-6" aria-hidden="true" /><span className="font-semibold">Shipment ready to follow</span><CheckCircle2 className="h-6 w-6" aria-hidden="true" /></div>
-            <p className="mt-2 text-sm text-muted">Use your tracking number to check the latest shipment status.</p>
-            <Link href="/track" className="mt-3 inline-flex items-center gap-2 rounded-full bg-green-600 px-5 py-3 text-sm font-semibold text-white hover:bg-green-700">sourcing.center/track <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
-          </div>
-        </section>
+
 
 
       </Container>
