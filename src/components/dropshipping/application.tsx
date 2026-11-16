@@ -6,7 +6,22 @@ import { ArrowRight, CheckCircle2, Download, FileText, X } from "lucide-react";
 type Application = { name: string; email: string; storeType: string; mobile: string; website: string; websiteNotReady: boolean; productLink: string; productImage: string; productImageName: string };
 const empty: Application = { name: "", email: "", storeType: "Shopify", mobile: "", website: "", websiteNotReady: false, productLink: "", productImage: "", productImageName: "" };
 const enc = (s: string) => s.replace(/[^\x20-\x7e]/g, "?").replace(/\\/g, "\\\\").replace(/\(/g, "\\(").replace(/\)/g, "\\)");
-function makePdf(data: Application): Blob {
+async function makePdf(data: Application): Promise<Blob> {
+  let logoBytes: Uint8Array | null = null;
+  try {
+    const svg = await fetch("/icon.svg").then(response => { if(!response.ok) throw Error("Logo unavailable"); return response.blob(); });
+    const image = new Image();
+    const url = URL.createObjectURL(svg);
+    try {
+      await new Promise<void>((resolve, reject) => { image.onload = () => resolve(); image.onerror = () => reject(Error("Invalid logo")); image.src = url; });
+      const canvas = document.createElement("canvas"); canvas.width = 240; canvas.height = 240;
+      const context = canvas.getContext("2d"); if (!context) throw Error("Canvas unavailable");
+      context.fillStyle = "#ffffff"; context.fillRect(0,0,240,240); context.drawImage(image,0,0,240,240);
+      const base64 = canvas.toDataURL("image/jpeg",0.92).split(",")[1];
+      const binary = atob(base64); logoBytes = Uint8Array.from(binary, character => character.charCodeAt(0));
+    } finally { URL.revokeObjectURL(url); }
+  } catch (error) { console.warn("Unable to embed website logo", error); }
+
   const commands: string[] = [];
   const text = (x: number, y: number, size: number, value: string, color = "0.12 0.14 0.18") => {
     commands.push(`${color} rg BT /F1 ${size} Tf 1 0 0 1 ${x} ${y} Tm (${enc(value)}) Tj ET`);
@@ -16,11 +31,8 @@ function makePdf(data: Application): Blob {
   commands.push("Q");
   commands.push("0.89 0.10 0.27 rg 0 825 595 17 re f");
   commands.push("0.96 0.97 0.98 rg 0 719 595 106 re f");
-  // Seven Color symbol traced from the actual sourcing.center site icon.
-  commands.push("q 0.58 0 0 -0.58 42 809 cm 0.88 0.11 0.28 rg");
-  commands.push("8 10 m 80 10 l 76 21 l 36 21 l 18 98 l 4 98 l 24 21 l 64 21 l 66 10 l 8 10 l h f");
-  commands.push("66 21 m 44 98 l 57 98 l 79 21 l h f");
-  commands.push("18 98 m 27 91 l 34 100 l 25 107 l h f Q");
+  // Draw the exact SVG from the website, rather than a hand-traced approximation.
+  if (logoBytes) commands.push("q 54 0 0 54 42 750 cm /Logo Do Q");
   text(112, 777, 23, "sourcing.center");
   text(112, 757, 9, "BY SEVEN COLOR TRADING CO LTD", "0.38 0.42 0.48");
   text(438, 778, 9, "PRIVATE DOCUMENT", "0.88 0.11 0.28");
@@ -56,17 +68,35 @@ function makePdf(data: Application): Blob {
   const objects=[
     "<< /Type /Catalog /Pages 2 0 R >>",
     "<< /Type /Pages /Kids [3 0 R] /Count 1 >>",
-    "<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>",
+    "<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R >> /XObject << /Logo 6 0 R >> >> /Contents 5 0 R >>",
     "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>",
     `<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`,
   ];
-  let pdf="%PDF-1.4\n";const offsets=[0];
-  objects.forEach((o,i)=>{offsets.push(pdf.length);pdf+=`${i+1} 0 obj\n${o}\nendobj\n`;});
-  const start=pdf.length;
-  pdf+=`xref\n0 ${objects.length+1}\n0000000000 65535 f \n`;
-  offsets.slice(1).forEach(n=>pdf+=`${String(n).padStart(10,"0")} 00000 n \n`);
-  pdf+=`trailer\n<< /Size ${objects.length+1} /Root 1 0 R >>\nstartxref\n${start}\n%%EOF`;
-  return new Blob([pdf],{type:"application/pdf"});
+  const encoder = new TextEncoder();
+  const pieces: Uint8Array[] = [];
+  let total = 0;
+  const add = (chunk: string | Uint8Array) => { const bytes = typeof chunk === "string" ? encoder.encode(chunk) : chunk; pieces.push(bytes); total += bytes.length; };
+  const offsets = [0];
+  add("%PDF-1.4\n");
+  objects.forEach((object, index) => { offsets.push(total); add(String(index + 1) + " 0 obj\n" + object + "\nendobj\n"); });
+  offsets.push(total);
+  add("6 0 obj\n");
+  if (logoBytes) {
+    add("<< /Type /XObject /Subtype /Image /Width 240 /Height 240 /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length " + logoBytes.length + " >>\nstream\n");
+    add(logoBytes);
+    add("\nendstream\n");
+  } else {
+    add("<< /Type /XObject /Subtype /Form /BBox [0 0 1 1] /Length 0 >>\nstream\nendstream\n");
+  }
+  add("endobj\n");
+  const start = total;
+  add("xref\n0 7\n0000000000 65535 f \n");
+  offsets.slice(1).forEach(offset => add(String(offset).padStart(10, "0") + " 00000 n \n"));
+  add("trailer\n<< /Size 7 /Root 1 0 R >>\nstartxref\n" + start + "\n%%EOF");
+  const output = new Uint8Array(total);
+  let cursor = 0;
+  pieces.forEach(piece => { output.set(piece,cursor); cursor += piece.length; });
+  return new Blob([output], {type:"application/pdf"});
 }
 
 export function DropshippingApplication() {
@@ -79,11 +109,11 @@ export function DropshippingApplication() {
   const [ref,setRef]=useState("");
   useEffect(()=>()=>{if(pdfUrl)URL.revokeObjectURL(pdfUrl);},[pdfUrl]);
   const update=(key:keyof Application,value:string)=>setData(v=>({...v,[key]:value}));
-  const preview=()=>{
+  const preview=async()=>{
     setError("");
     if(!data.name.trim()||!/^\S+@\S+\.\S+$/.test(data.email)||!data.mobile.trim()||!data.storeType.trim()){setError("Please complete all fields with a valid email.");return;}
     if(pdfUrl)URL.revokeObjectURL(pdfUrl);
-    const url=URL.createObjectURL(makePdf(data));
+    const url=URL.createObjectURL(await makePdf(data));
     setPdfUrl(url);setStep("review");
   };
   const submit=async()=>{
