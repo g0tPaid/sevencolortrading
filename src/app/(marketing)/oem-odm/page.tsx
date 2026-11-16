@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { NdaDownloadForm } from "@/components/nda/nda-download-form";
 import { CommonQuestions } from "@/components/seo/common-questions";
 import { JsonLd } from "@/components/seo/json-ld";
 import { PageHero, CtaBand } from "@/components/shared/page-shell";
@@ -54,6 +55,7 @@ export default function OemOdmPage() {
           </Link>
           .
         </p>
+        <NdaDownloadForm />
         <CommonQuestions items={serviceCommonQuestions["oem-odm"]} />
       </Container>
       <CtaBand />
