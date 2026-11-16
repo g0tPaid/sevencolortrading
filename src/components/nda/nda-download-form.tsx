@@ -22,13 +22,13 @@ const clauses: [string,string][] = [
 
 function escapePdf(s:string){return s.normalize("NFKD").replace(/[^\x20-\x7E]/g,"?").replace(/\\/g,"\\\\").replace(/\(/g,"\\(").replace(/\)/g,"\\)");}
 function wrap(text:string,max=90){const words=text.split(/\s+/);const lines:string[]=[];let line="";for(const w of words){if((line+" "+w).length>max){if(line)lines.push(line);line=w;}else line=line?line+" "+w:w;}if(line)lines.push(line);return lines;}
-function generatePdf(customer:{name:string;company:string;phone:string}){
+function generatePdf(customer:{name:string;company:string;phone:string;address:string}){
  const pages:string[][]=[];let lines:string[]=[];let y=780;
  const text=(value:string,size=10,bold=false,x=48,color="0.12 0.16 0.23")=>{lines.push(`${color} rg BT /${bold?"F2":"F1"} ${size} Tf 1 0 0 1 ${x} ${y} Tm (${escapePdf(value)}) Tj ET`);y-=size+6;};
  const newPage=()=>{if(lines.length)pages.push(lines);lines=[];y=780;lines.push("0.89 0.07 0.20 rg 0 826 595 16 re f");text("SOURCING CENTER  |  CONFIDENTIAL LEGAL DOCUMENT",9,true,48,"0.55 0.12 0.21");y-=10;};
  newPage();text("MUTUAL NON-DISCLOSURE",23,true);text("AGREEMENT",23,true);y-=13;
  text("PARTY A: Xiamen Ajmal Seven Color Trading Co Ltd",10,true);text("Trading as Sourcing Center / sourcing.center",10);
- text("PARTY B: "+customer.name,10,true);if(customer.company)text("Company: "+customer.company,10);text("Phone: "+customer.phone,10);
+ text("PARTY B: "+customer.name,10,true);if(customer.company)text("Company: "+customer.company,10);text("Phone: "+customer.phone,10);for(const row of wrap("Address: "+customer.address,85))text(row,10);
  const date=new Date().toISOString().slice(0,10);text("Effective Date: "+date,10);y-=14;
  for(const [title,body] of clauses){const wrapped=wrap(body,95);const height=29+wrapped.length*14;if(y-height<88)newPage();text(title,11,true);for(const row of wrapped)text(row,9.5);y-=12;}
  if(y<450)newPage();
@@ -37,7 +37,7 @@ function generatePdf(customer:{name:string;company:string;phone:string}){
  y-=12;
  lines.push(`q 300 0 0 144 48 ${y-144} cm /Seal Do Q`);y-=152;
  text("Date: _________________________",9);
- y-=18;text("PARTY B - CUSTOMER",11,true);text("Name: "+customer.name,9.5);if(customer.company)text("Company: "+customer.company,9.5);text("Phone: "+customer.phone,9.5);text("Customer signature: _________________________",9);text("Date: _________________________",9);
+ y-=18;text("PARTY B - CUSTOMER",11,true);text("Name: "+customer.name,9.5);if(customer.company)text("Company: "+customer.company,9.5);text("Phone: "+customer.phone,9.5);for(const row of wrap("Address: "+customer.address,85))text(row,9.5);text("Customer signature: _________________________",9);text("Date: _________________________",9);
  y-=20;for(const line of wrap("This document is a draft for review. The customer signature is required. The company signature and stamps are reproduced from the supplied artwork; customer must sign separately.",95))text(line,8);
  pages.push(lines);
  const imageBinary=atob(officialSealBase64);
@@ -60,8 +60,8 @@ function generatePdf(customer:{name:string;company:string;phone:string}){
  return new Blob([out],{type:"application/pdf"});
 }
 export function NdaDownloadForm(){
- const [name,setName]=useState("");const [company,setCompany]=useState("");const [phone,setPhone]=useState("");
- const download=(e:React.FormEvent)=>{e.preventDefault();const url=URL.createObjectURL(generatePdf({name,company,phone}));const a=document.createElement("a");a.href=url;a.download="Sourcing-Center-NDA-"+name.trim().replace(/[^a-z0-9]+/gi,"-")+".pdf";a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);};
+ const [name,setName]=useState("");const [company,setCompany]=useState("");const [phone,setPhone]=useState("");const [address,setAddress]=useState("");
+ const download=(e:React.FormEvent)=>{e.preventDefault();const url=URL.createObjectURL(generatePdf({name,company,phone,address}));const a=document.createElement("a");a.href=url;a.download="Sourcing-Center-NDA-"+name.trim().replace(/[^a-z0-9]+/gi,"-")+".pdf";a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);};
  return <section id="nda" className="mt-12 rounded-3xl border border-ink/10 bg-white/90 p-6 shadow-lg sm:p-9">
  <div className="flex items-center gap-3"><FileText className="h-8 w-8 text-accent"/><div><p className="text-xs font-bold uppercase tracking-widest text-accent">Confidentiality first</p><h2 className="font-display text-2xl font-extrabold text-ink sm:text-3xl">Download your NDA</h2></div></div>
  <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted">Complete your details to generate a personalized mutual non-disclosure agreement covering sourcing, product development, OEM/ODM and supplier discussions. Review and sign the agreement before sharing confidential materials.</p>
@@ -69,6 +69,7 @@ export function NdaDownloadForm(){
  <label className="grid gap-2 text-sm font-semibold text-ink">Full name *<input required maxLength={100} value={name} onChange={e=>setName(e.target.value)} className="rounded-xl border border-ink/20 bg-white p-3 text-ink" placeholder="Your full name"/></label>
  <label className="grid gap-2 text-sm font-semibold text-ink">Company name (optional)<input maxLength={120} value={company} onChange={e=>setCompany(e.target.value)} className="rounded-xl border border-ink/20 bg-white p-3 text-ink" placeholder="Company or trading name"/></label>
  <label className="grid gap-2 text-sm font-semibold text-ink">Phone number *<input required type="tel" maxLength={40} value={phone} onChange={e=>setPhone(e.target.value)} className="rounded-xl border border-ink/20 bg-white p-3 text-ink" placeholder="+971 ..."/></label>
+ <label className="grid gap-2 text-sm font-semibold text-ink sm:col-span-2">Full address *<textarea required maxLength={500} rows={3} value={address} onChange={e=>setAddress(e.target.value)} className="rounded-xl border border-ink/20 bg-white p-3 text-ink" placeholder="Street address, city, state/province, postal code, country"/></label>
  <div className="flex items-end"><button type="submit" className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3.5 text-sm font-bold text-white hover:opacity-90"><Download className="h-5 w-5"/> Generate & download NDA (PDF)</button></div>
  </form>
  <p className="mt-4 text-xs leading-relaxed text-muted">Your information is used locally in your browser to create the downloadable PDF. The NDA retains its original PRC governing-law and Xiamen jurisdiction provisions. It is not signed on your behalf; obtain signatures from both parties before relying on it as an executed agreement.</p>
