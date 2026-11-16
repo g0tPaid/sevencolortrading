@@ -40,7 +40,7 @@ export const pages = {
     path: "/3pl",
   }),
   dropshipping: routeMetadata({
-    title: "Dropshipping from China: Own Xiamen and Dubai Hubs",
+    title: "China Warehouse Dropshipping & Fulfillment",
     description:
       "Dropship single units from own warehouses: China hub in Xiamen and Dubai / Al Ain. Photo/video QC for DTC and marketplace sellers. Not a dropship broker.",
     path: "/dropshipping",

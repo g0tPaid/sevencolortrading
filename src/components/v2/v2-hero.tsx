@@ -37,8 +37,8 @@ const shortcuts = [
   {
     href: "#3pl",
     icon: Warehouse,
-    kicker: "3PL · China & UAE",
-    text: "Own warehouses in Xiamen and Dubai",
+    kicker: "3PL",
+    text: "China Warehouse",
   },
   {
     href: "#dropshipping",
