@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { ArrowRight, CheckCircle2, Download, FileText, X } from "lucide-react";
 
-type Application = { name: string; email: string; storeType: string; mobile: string };
-const empty: Application = { name: "", email: "", storeType: "Shopify", mobile: "" };
+type Application = { name: string; email: string; storeType: string; mobile: string; website: string; websiteNotReady: boolean; productLink: string; productImage: string; productImageName: string };
+const empty: Application = { name: "", email: "", storeType: "Shopify", mobile: "", website: "", websiteNotReady: false, productLink: "", productImage: "", productImageName: "" };
 const enc = (s: string) => s.replace(/[^\x20-\x7e]/g, "?").replace(/\\/g, "\\\\").replace(/\(/g, "\\(").replace(/\)/g, "\\)");
 function makePdf(data: Application): Blob {
   const commands: string[] = [];
@@ -17,24 +17,27 @@ function makePdf(data: Application): Blob {
   commands.push("0.89 0.10 0.27 rg 0 825 595 17 re f");
   commands.push("0.96 0.97 0.98 rg 0 719 595 106 re f");
   // Seven Color symbol traced from the actual sourcing.center site icon.
-  commands.push("q 0.60 0 0 -0.60 41 803 cm 0.88 0.11 0.28 rg");
+  commands.push("q 0.58 0 0 -0.58 42 809 cm 0.88 0.11 0.28 rg");
   commands.push("8 10 m 80 10 l 76 21 l 36 21 l 18 98 l 4 98 l 24 21 l 64 21 l 66 10 l 8 10 l h f");
   commands.push("66 21 m 44 98 l 57 98 l 79 21 l h f");
   commands.push("18 98 m 27 91 l 34 100 l 25 107 l h f Q");
   text(112, 777, 23, "sourcing.center");
   text(112, 757, 9, "BY SEVEN COLOR TRADING CO LTD", "0.38 0.42 0.48");
   text(438, 778, 9, "PRIVATE DOCUMENT", "0.88 0.11 0.28");
-  text(42, 689, 21, "DROPSHIPPING PARTNER APPLICATION");
+  text(42, 689, 19, "DROPSHIPPING PARTNER APPLICATION");
   text(42, 665, 10, "PARTNER ONBOARDING  /  FOR REVIEW ONLY", "0.40 0.44 0.50");
   text(42, 643, 9, "Prepared: " + new Date().toISOString().slice(0,10) + "  |  Status: Pending review", "0.40 0.44 0.50");
   commands.push("0.89 0.90 0.93 RG 42 628 m 553 628 l S");
   const fields: [string,string][] = [["Applicant name",data.name],["Email address",data.email],["Store platform",data.storeType],["Mobile number",data.mobile]];
   fields.forEach(([label,value],i) => {
-    const y=594-i*77;
+    const y=594-i*63;
     text(42,y,10,label.toUpperCase(),"0.44 0.47 0.52");
     text(42,y-27,15,value.slice(0,65));
     commands.push(`0.9 0.91 0.93 RG 42 ${y-42} m 553 ${y-42} l S`);
   });
+  text(42, 318, 9, "STORE WEBSITE: " + (data.websiteNotReady ? "Not ready yet" : (data.website || "Not provided")).slice(0, 74));
+  text(42, 303, 9, "PRODUCT LINK: " + (data.productLink || "Not provided").slice(0, 75));
+  text(42, 288, 9, "PRODUCT IMAGE: " + (data.productImageName || "Not attached").slice(0, 74));
   commands.push("0.95 0.96 0.98 rg 42 269 511 31 re f");
   text(53, 279, 11, "APPLICATION INSTRUCTIONS");
   text(53, 250, 9, "1. Review your name, email, store type and mobile number.");
@@ -86,7 +89,7 @@ export function DropshippingApplication() {
   const submit=async()=>{
     setBusy(true);setError("");
     try{
-      const res=await fetch("/api/dropshipping/applications",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({...data,website:""})});
+      const res=await fetch("/api/dropshipping/applications",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
       const json=await res.json();
       if(!res.ok||!json.ok)throw new Error(json.error||"Submission failed.");
       setRef(json.reference);setStep("done");
@@ -107,6 +110,18 @@ export function DropshippingApplication() {
             <label className="grid gap-1.5 text-sm font-semibold">Store type<select required value={["Shopify","WooCommerce","Other"].includes(data.storeType)?data.storeType:"Other"} onChange={e=>update("storeType",e.target.value)} className="rounded-xl border border-slate-300 p-3 font-normal"><option>Shopify</option><option>WooCommerce</option><option>Other</option></select></label>
             {data.storeType==="Other"&&<label className="grid gap-1.5 text-sm font-semibold">Specify store type<input required maxLength={100} value={data.storeType==="Other"?"":data.storeType} onChange={e=>update("storeType",e.target.value)} className="rounded-xl border border-slate-300 p-3 font-normal" placeholder="Amazon, Etsy, custom store..."/></label>}
             <label className="grid gap-1.5 text-sm font-semibold">Mobile number<input required type="tel" maxLength={40} autoComplete="tel" value={data.mobile} onChange={e=>update("mobile",e.target.value)} className="rounded-xl border border-slate-300 p-3 font-normal" placeholder="+971 50 123 4567"/></label>
+            <fieldset className="grid gap-3 rounded-xl border border-slate-200 p-4">
+              <legend className="px-1 text-sm font-bold">Your store website</legend>
+              <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={data.websiteNotReady} onChange={e=>setData(v=>({...v,websiteNotReady:e.target.checked,website:e.target.checked?"":v.website}))} className="h-4 w-4 accent-red-600"/> My website is not ready yet</label>
+              {!data.websiteNotReady&&<label className="grid gap-1.5 text-sm font-semibold">Website link (optional)<input type="url" maxLength={300} value={data.website} onChange={e=>update("website",e.target.value)} className="rounded-xl border border-slate-300 p-3 font-normal" placeholder="https://yourstore.com"/></label>}
+            </fieldset>
+            <fieldset className="grid gap-3 rounded-xl border border-slate-200 p-4">
+              <legend className="px-1 text-sm font-bold">Products you want to source (optional)</legend>
+              <label className="grid gap-1.5 text-sm font-semibold">Product link<input type="url" maxLength={500} value={data.productLink} onChange={e=>update("productLink",e.target.value)} className="rounded-xl border border-slate-300 p-3 font-normal" placeholder="Alibaba, AliExpress, Temu, 1688 or other"/></label>
+              <label className="grid gap-1.5 text-sm font-semibold">Or upload a product image<input type="file" accept="image/jpeg,image/png,image/webp" className="w-full rounded-xl border border-dashed border-slate-300 p-3 text-sm font-normal" onChange={async e=>{const file=e.target.files?.[0];if(!file)return;if(file.size>700000){setError("Product image must be under 700 KB.");e.target.value="";return;}const reader=new FileReader();reader.onload=()=>{setData(v=>({...v,productImage:String(reader.result||""),productImageName:file.name.slice(0,100)}));setError("");};reader.readAsDataURL(file);}}/></label>
+              {data.productImageName&&<p className="text-xs text-green-700">Attached: {data.productImageName} <button type="button" className="underline" onClick={()=>setData(v=>({...v,productImage:"",productImageName:""}))}>Remove</button></p>}
+              <p className="text-xs text-slate-500">Both fields are optional. Uploads are kept with your application for review.</p>
+            </fieldset>
             <p className="text-xs text-slate-500">We store submitted details for application review and follow-up. Authorized administrators can access them.</p>
             <button type="submit" className="rounded-full bg-red-600 px-6 py-3 font-semibold text-white">Generate & review PDF</button>
           </form>}
