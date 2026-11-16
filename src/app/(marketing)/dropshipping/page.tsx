@@ -35,26 +35,29 @@ export default function DropshippingPage() {
         <section className="mt-12" aria-labelledby="dropship-process">
           <div className="mb-6">
             <p className="section-kicker">Dropshipping guide</p>
-            <h2 id="dropship-process" className="font-display text-2xl font-semibold text-ink sm:text-3xl">How It Works</h2>
-            <p className="mt-2 max-w-2xl text-sm text-muted">We handle purchasing, receiving and quality checks. You get shipment tracking and a private link to inspect your order updates.</p>
+            <h2 id="dropship-process" className="font-display text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">How It Works</h2>
+            <p className="mt-3 max-w-3xl text-base font-medium leading-relaxed text-muted">We handle purchasing, receiving and quality checks. You get shipment tracking and a private link to inspect your order updates.</p>
           </div>
-          <ol className="grid gap-6 md:grid-cols-5">
+          <ol className="grid gap-9 md:grid-cols-5 md:gap-5">
             {[
-              { title: "We order", detail: "We purchase your requested products from the supplier.", Icon: ShoppingCart },
-              { title: "Office receives", detail: "Products arrive at our receiving office or warehouse.", Icon: PackageCheck },
-              { title: "Quality check", detail: "We check product details and condition before dispatch.", Icon: ClipboardCheck },
-              { title: "Tracking issued", detail: "We provide your shipment tracking number.", Icon: Truck },
-              { title: "Private shipment link", detail: "View available QC photos, videos and shipment status privately.", Icon: LockKeyhole },
-            ].map(({ title, detail, Icon }, index) => (
-              <li key={title} className={`relative rounded-[1.5rem] border p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${index === 4 ? "border-green-400 bg-green-50 shadow-[0_0_0_2px_rgba(34,197,94,0.08)] dark:bg-green-950/30" : "glass-card border-ink/10"}`}>
-                <div className="flex items-center justify-between">
-                  <span className={`flex h-11 w-11 items-center justify-center rounded-2xl ${index === 4 ? "bg-green-600 text-white" : "bg-accent/10 text-accent"}`}><Icon className="h-6 w-6" aria-hidden="true" /></span>
-                  <span className="text-xs font-bold text-muted">0{index + 1}</span>
+              { title: "We place your order", detail: "Our purchasing team orders the exact products you requested.", Icon: ShoppingCart, label: "PURCHASE" },
+              { title: "Received at our hub", detail: "Your items arrive at our own receiving office or warehouse.", Icon: PackageCheck, label: "RECEIVING" },
+              { title: "Inspected with care", detail: "We check product details and condition before dispatch.", Icon: ClipboardCheck, label: "QUALITY CONTROL" },
+              { title: "Tracking activated", detail: "We issue a tracking number so you can follow your shipment.", Icon: Truck, label: "DISPATCH" },
+              { title: "Your private updates", detail: "Access available QC photos, videos and shipping updates securely.", Icon: LockKeyhole, label: "ALL SET" },
+            ].map(({ title, detail, Icon, label }, index) => (
+              <li key={title} className={`group relative isolate flex min-h-[225px] flex-col overflow-visible rounded-[1.6rem] border-2 p-5 shadow-sm transition-all duration-500 motion-safe:hover:-translate-y-2 hover:shadow-xl ${index === 4 ? "border-emerald-400 bg-gradient-to-br from-emerald-50 via-white to-green-100 shadow-emerald-100 dark:from-emerald-950/50 dark:via-emerald-950/20 dark:to-emerald-900/30" : "border-ink/10 bg-gradient-to-br from-white/90 to-slate-50/70 hover:border-accent/50 dark:from-slate-900/80 dark:to-slate-800/60"}`}>
+                <div className="flex items-start justify-between gap-2">
+                  <span className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl shadow-sm transition-transform duration-500 motion-safe:group-hover:scale-110 motion-safe:group-hover:-rotate-6 ${index === 4 ? "bg-emerald-600 text-white" : "bg-accent text-white"}`}><Icon className="h-7 w-7" aria-hidden="true" /></span>
+                  <span className={`rounded-full px-2.5 py-1 text-[10px] font-black tracking-[0.12em] ${index === 4 ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200" : "bg-ink/5 text-muted"}`}>{String(index + 1).padStart(2, "0")}</span>
                 </div>
-                <h3 className={`mt-5 font-display text-lg font-semibold ${index === 4 ? "text-green-800 dark:text-green-300" : "text-ink"}`}>{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{detail}</p>
-                {index === 4 && <div className="mt-4 flex items-center gap-2 text-sm font-semibold text-green-700 dark:text-green-300"><CheckCircle2 className="h-5 w-5" aria-hidden="true" /> Ready to track <CheckCircle2 className="h-5 w-5" aria-hidden="true" /></div>}
-                {index < 4 && <div aria-hidden="true" className="absolute -bottom-6 left-1/2 z-10 -translate-x-1/2 text-accent motion-safe:animate-bounce md:-right-4 md:bottom-auto md:left-auto md:top-1/2 md:translate-x-0 md:-translate-y-1/2"><ArrowDown className="h-6 w-6 md:hidden" /><ArrowRight className="hidden h-6 w-6 md:block" /></div>}
+                <p className={`mt-5 text-[10px] font-black uppercase tracking-[0.16em] ${index === 4 ? "text-emerald-700 dark:text-emerald-300" : "text-accent"}`}>{label}</p>
+                <h3 className={`mt-1 font-display text-lg font-extrabold leading-snug tracking-tight sm:text-xl ${index === 4 ? "text-emerald-900 dark:text-emerald-200" : "text-ink"}`}>{title}</h3>
+                <p className="mt-3 text-sm font-medium leading-relaxed text-muted">{detail}</p>
+                {index === 4 && <div className="mt-4 inline-flex items-center gap-2 text-sm font-extrabold text-emerald-700 dark:text-emerald-300"><CheckCircle2 className="h-5 w-5" aria-hidden="true" /> Ready to track</div>}
+                {index < 4 && <div aria-hidden="true" className="pointer-events-none absolute -bottom-[30px] left-1/2 z-20 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full border-4 border-background bg-accent text-white shadow-lg shadow-red-500/20 motion-safe:animate-pulse md:-right-[31px] md:bottom-auto md:left-auto md:top-1/2 md:translate-x-0 md:-translate-y-1/2">
+                  <ArrowDown className="h-5 w-5 stroke-[3] md:hidden" /><ArrowRight className="hidden h-5 w-5 stroke-[3] md:block" />
+                </div>}
               </li>
             ))}
           </ol>
