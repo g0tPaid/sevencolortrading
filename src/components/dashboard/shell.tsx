@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import {
+  ExternalLink,
   Factory,
   LayoutDashboard,
   LogOut,
@@ -90,6 +91,15 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
                 </Link>
               );
             })}
+            <a
+              href="https://soloflow.practicalthings.store/dashboard"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex shrink-0 items-center gap-2 rounded-2xl px-3 py-2.5 text-sm text-muted transition hover:bg-paper hover:text-ink"
+            >
+              <ExternalLink className="h-4 w-4" aria-hidden="true" />
+              SoloFlow
+            </a>
           </nav>
           <div className="mt-4 hidden rounded-2xl border border-line bg-paper p-3 lg:block">
             <PackageSearch className="h-4 w-4 text-accent" />
