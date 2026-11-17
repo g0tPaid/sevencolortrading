@@ -15,6 +15,7 @@ const staffContactFields = {
 type StaffContact = Record<keyof typeof staffContactFields, string>;
 type Shipment = {
   staffContact?: StaffContact | null;
+  dropshipperName?: string | null;
   id: string;
   customerRef: string | null;
   customerName: string | null;
@@ -400,6 +401,7 @@ export function ShipmentsDesk() {
               <tr>
                 <th className="px-4 py-3">Tracking</th>
                 <th className="px-4 py-3">Customer</th>
+                <th scope="col" className="px-4 py-3">Dropshipper</th>
                 <th className="px-4 py-3">Order</th>
                 <th className="px-4 py-3">Carrier</th>
                 <th className="px-4 py-3">Country</th>
@@ -421,6 +423,9 @@ export function ShipmentsDesk() {
                     </button>
                   </td>
                   <td className="px-4 py-3 text-ink">{row.customerName || "—"}</td>
+                  <td className="px-4 py-3">
+                    {row.dropshipperName ? <span className="font-semibold text-emerald-700 dark:text-emerald-400">{row.dropshipperName}</span> : <span className="text-muted">—</span>}
+                  </td>
                   <td className="px-4 py-3 text-ink">{row.orderNumber || "—"}</td>
                   <td className="px-4 py-3 text-ink">{row.carrierName || row.carrierResolution}</td>
                   <td className="px-4 py-3 text-ink">{destinationCountry(row)}</td>

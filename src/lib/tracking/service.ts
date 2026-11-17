@@ -1,3 +1,4 @@
+import { getStaffPartnerLabels } from "@/lib/tracking/soloflow-staff-partners";
 import { requireAdmin, json, sameOrigin } from "@/lib/tracking/http";
 import { publicLookup as lookupPublicCache, type PublicLookupOptions } from "@/lib/tracking/public-cache";
 import { carrierName, CARRIERS, UNSUPPORTED_CARRIER_ID } from "@/lib/tracking/carriers";
@@ -174,12 +175,14 @@ export function listShipments(url: URL) {
     limit: Number(url.searchParams.get("limit") ?? "50"),
     offset: Number(url.searchParams.get("offset") ?? "0"),
   });
+  const label = getStaffPartnerLabels();
   return {
     ok: true,
     total: result.total,
     carriers: CARRIERS,
     shipments: result.shipments.map((shipment) => ({
       ...shipment,
+      dropshipperName: label(shipment.customerRef),
       carrierName: carrierName(shipment.carrierId),
     })),
   };
