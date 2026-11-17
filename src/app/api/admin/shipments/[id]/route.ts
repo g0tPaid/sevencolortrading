@@ -1,3 +1,4 @@
+import { editStaffContact, staffContact } from "@/lib/tracking/soloflow-staff-orders";
 import { errorResponse, json, readJson } from "@/lib/tracking/http";
 import { adminGuard, adminShipment, removeShipment, updateShipmentRecord } from "@/lib/tracking/service";
 
@@ -10,7 +11,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
   const { id } = await params;
   const shipment = adminShipment(id);
   if (!shipment) return json({ ok: false, error: "Not found" }, 404);
-  return json({ ok: true, shipment });
+  return json({ ok: true, shipment: { ...shipment, staffContact: staffContact(id) } });
 }
 
 export async function PATCH(request: Request, { params }: { params: Promise<{ id: string }> }) {
@@ -21,7 +22,8 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
     const body = await readJson(request, 100_000);
     const shipment = updateShipmentRecord(id, body);
     if (!shipment) return json({ ok: false, error: "Not found" }, 404);
-    return json({ ok: true, shipment: adminShipment(shipment.id) });
+    if (body.staffContact) editStaffContact(id, body.staffContact);
+    return json({ ok: true, shipment: { ...adminShipment(shipment.id), staffContact: staffContact(id) } });
   } catch (error) {
     return errorResponse(error);
   }

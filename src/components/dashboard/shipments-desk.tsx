@@ -8,7 +8,13 @@ import { FormEvent, useCallback, useEffect, useState } from "react";
 type Carrier = { id: string; name: string };
 type EventRow = { occurredAt: string | null; status: string; description: string; location: string | null };
 type LogRow = { createdAt: string; outcome: string; httpStatus: number | null; durationMs: number | null; errorKind: string | null };
+const staffContactFields = {
+  phone: "Recipient phone", address: "Street address", addressLine2: "Apartment or suite",
+  city: "City", region: "State or province", postcode: "Postal code", country: "Country",
+};
+type StaffContact = Record<keyof typeof staffContactFields, string>;
 type Shipment = {
+  staffContact?: StaffContact | null;
   id: string;
   customerRef: string | null;
   customerName: string | null;
@@ -79,6 +85,7 @@ const emptyForm = {
   postcode: "",
   phoneLast4: "",
   notes: "",
+  staffContact: null as StaffContact | null,
 };
 
 async function api(path: string, init?: RequestInit) {
@@ -180,6 +187,7 @@ export function ShipmentsDesk() {
       postcode: form.postcode,
       phoneLast4: form.phoneLast4,
       notes: form.notes,
+      ...(form.staffContact ? { staffContact: form.staffContact } : {}),
     };
     try {
       if (editing) {
@@ -257,6 +265,7 @@ export function ShipmentsDesk() {
         postcode: shipment.postcode ?? "",
         phoneLast4: shipment.phoneLast4 ?? "",
         notes: shipment.notes ?? "",
+        staffContact: shipment.staffContact ?? null,
       });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Shipment could not be opened.");
@@ -479,6 +488,20 @@ export function ShipmentsDesk() {
             ))}
           </select>
         </label>
+        {form.staffContact ? (
+          <fieldset className="grid gap-3 rounded-xl border border-line p-4 sm:grid-cols-2">
+            <legend className="px-1 text-sm font-semibold">SoloFlow delivery details</legend>
+            {(Object.keys(staffContactFields) as (keyof StaffContact)[]).map((key) => (
+              <label key={key} className="grid gap-1 text-sm">
+                {staffContactFields[key]}
+                <input className="rounded-xl border border-line bg-paper px-3 py-2 text-sm"
+                  value={form.staffContact?.[key] ?? ""}
+                  onChange={(event) => setForm((current) => current.staffContact
+                    ? { ...current, staffContact: { ...current.staffContact, [key]: event.target.value } } : current)} />
+              </label>
+            ))}
+          </fieldset>
+        ) : null}
         <label className="text-sm text-ink sm:col-span-2">
           Internal notes
           <textarea
