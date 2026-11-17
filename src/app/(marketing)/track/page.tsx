@@ -15,7 +15,33 @@ export default function TrackPage() {
     <>
       <div aria-hidden className="pointer-events-none fixed inset-x-0 top-0 z-40 h-20 bg-canvas sm:h-[6.5rem]" />
       <Container className="pb-36 pt-20 sm:pb-28 sm:pt-[6.5rem]">
-        <TrackLookup />
+        <div className="relative isolate">
+          <TrackLookup />
+          <svg
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 z-20 h-full w-full select-none text-ink"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <pattern id="shipment-watermark" width="340" height="180" patternUnits="userSpaceOnUse">
+                <text
+                  x="170"
+                  y="90"
+                  textAnchor="middle"
+                  transform="rotate(-30 170 90)"
+                  fill="currentColor"
+                  fillOpacity="0.10"
+                  fontFamily="Arial, Helvetica, sans-serif"
+                  fontSize="20"
+                  fontWeight="600"
+                >
+                  www.sourcing.center
+                </text>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#shipment-watermark)" />
+          </svg>
+        </div>
         <section aria-labelledby="how-to-track" className="glass-card mx-auto mt-12 max-w-3xl rounded-3xl p-6 sm:p-8">
           <h2 id="how-to-track" className="font-display text-2xl font-semibold text-ink">How to track a package</h2>
           <ol className="mt-4 list-decimal space-y-2 pl-5 text-sm leading-relaxed text-muted">
