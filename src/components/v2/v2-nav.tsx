@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 
 const pageLinks = [
   { href: "/3pl", label: "3PL", highlight: true },
+  { href: "/1688", label: "1688", highlight: true },
   { href: "/inspection", label: "Inspection" },
   { href: "/amazon-fba", label: "Amazon FBA" },
   { href: "/factories/register", label: "Factories" },
@@ -143,3 +144,4 @@ export function V2Nav() {
     </header>
   );
 }
+

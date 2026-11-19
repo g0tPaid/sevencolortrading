@@ -29,6 +29,7 @@ const routes: Array<{ path: string; priority: number; changeFrequency: MetadataR
   { path: "/how-it-works", priority: 0.6, changeFrequency: "monthly" },
   { path: "/factory-verification", priority: 0.86, changeFrequency: "weekly" },
   { path: "/1688-sourcing", priority: 0.9, changeFrequency: "weekly" },
+  { path: "/1688", priority: 0.9, changeFrequency: "weekly" },
   { path: "/sourcing-for/uae", priority: 0.82, changeFrequency: "monthly" },
   { path: "/industries/ecommerce-dtc", priority: 0.7, changeFrequency: "monthly" },
   { path: "/factories/register", priority: 0.65, changeFrequency: "monthly" },
@@ -108,3 +109,4 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [...staticRoutes, ...articles, ...studies, ...compares, ...news, ...opportunities];
 }
+

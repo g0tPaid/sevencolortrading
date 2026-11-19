@@ -66,6 +66,7 @@ export function Sourcing1688Page() {
       />
       <Container className="py-16">
         <ProofChips className="justify-start" />
+        <Link href="/1688" className="mt-6 inline-flex rounded-full bg-ink px-5 py-3 text-sm font-semibold text-white">Explore the 1688 marketplace →</Link>
         <p className="mt-8 max-w-3xl text-base leading-relaxed text-muted" data-seo-answer>
           Send a 1688 link, a Taobao-style wholesale SKU, or a photo. The Xiamen desk of Xiamen Ajmal
           Seven Color Trading Co Ltd (DUNS 509419282) pays in RMB, takes the domestic
@@ -155,3 +156,4 @@ export function Sourcing1688Page() {
     </>
   );
 }
+

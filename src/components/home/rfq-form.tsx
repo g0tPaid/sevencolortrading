@@ -32,7 +32,7 @@ const nextSteps = [
   },
 ];
 
-export function RfqForm({ compact = false, sourcePath = "/contact" }: { compact?: boolean; sourcePath?: string }) {
+export function RfqForm({ compact = false, sourcePath = "/contact", defaultDescription }: { compact?: boolean; sourcePath?: string; defaultDescription?: string }) {
   const [files, setFiles] = useState<File[]>([]);
   const [sent, setSent] = useState(false);
   const [more, setMore] = useState(false);
@@ -138,6 +138,7 @@ export function RfqForm({ compact = false, sourcePath = "/contact" }: { compact?
           <textarea
             required
             name="description"
+            defaultValue={defaultDescription}
             rows={compact ? 3 : 4}
             minLength={8}
             placeholder="Product idea, specs, quantity if you know it, target market, 1688 or Alibaba link…"
@@ -259,3 +260,4 @@ export function RfqForm({ compact = false, sourcePath = "/contact" }: { compact?
     </form>
   );
 }
+

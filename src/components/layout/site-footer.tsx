@@ -65,6 +65,7 @@ export function SiteFooter() {
                 ["References", "/reviews"],
                 ["Updates", "/updates"],
                 ["News", "/news"],
+                ["1688 marketplace", "/1688"],
                 ["1688 sourcing", "/1688-sourcing"],
                 ["UAE / GCC", "/sourcing-for/uae"],
                 ["Contact", "/contact"],
@@ -173,3 +174,4 @@ export function SiteFooter() {
     </footer>
   );
 }
+
