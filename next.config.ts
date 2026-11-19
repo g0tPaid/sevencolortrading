@@ -52,7 +52,6 @@ const nextConfig: NextConfig = {
       { source: "/dropship", destination: "/dropshipping", permanent: true },
       { source: "/fba", destination: "/amazon-fba", permanent: true },
       { source: "/factory-website", destination: "/factory-growth", permanent: true },
-      { source: "/1688", destination: "/1688-sourcing", permanent: true },
       { source: "/china-sourcing-agent", destination: "/", permanent: true },
       { source: "/product-opportunities", destination: "/trending-products", permanent: true },
       {
