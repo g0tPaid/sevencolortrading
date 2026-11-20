@@ -25,6 +25,7 @@ const routes: Array<{ path: string; priority: number; changeFrequency: MetadataR
   { path: "/about", priority: 0.8, changeFrequency: "monthly" },
   { path: "/services", priority: 0.8, changeFrequency: "monthly" },
   { path: "/contact", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/downloads", priority: 0.5, changeFrequency: "monthly" },
   { path: "/industries", priority: 0.6, changeFrequency: "monthly" },
   { path: "/how-it-works", priority: 0.6, changeFrequency: "monthly" },
   { path: "/factory-verification", priority: 0.86, changeFrequency: "weekly" },
