@@ -21,7 +21,7 @@ export function ShopifyConnectionCode() {
     <h2 className="font-semibold text-ink">Connect a dropshipper</h2>
     <p className="mt-1 text-sm text-muted">Verify the customer reference and Shopify domain before issuing a one-time code. Share it privately; it expires in 15 minutes.</p>
     <form onSubmit={submit} className="mt-4 flex flex-wrap gap-3 items-end">
-      <label className="text-sm">Customer number<input name="customerNumber" required placeholder="DS-XXXXXXXX" className="block mt-1 rounded-xl border border-line bg-paper p-2" /></label>
+      <label className="text-sm">Dropshipper ID<input name="customerNumber" required placeholder="A-3848" maxLength={17} className="block mt-1 rounded-xl border border-line bg-paper p-2" /></label>
       <label className="text-sm">Shopify domain<input name="shop" required placeholder="store.myshopify.com" className="block mt-1 rounded-xl border border-line bg-paper p-2" /></label>
       <button type="submit" disabled={busy} className="rounded-xl bg-accent px-4 py-2 text-white text-sm font-semibold">{busy ? 'Generating...' : 'Generate connection code'}</button>
     </form>
@@ -29,4 +29,3 @@ export function ShopifyConnectionCode() {
     {code && <div className="mt-3"><p className="text-sm">One-time code (15 minutes)</p><code className="block break-all select-all rounded-lg bg-paper p-2 mt-1">{code}</code></div>}
   </div>;
 }
-
