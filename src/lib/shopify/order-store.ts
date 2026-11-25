@@ -35,6 +35,10 @@ CREATE TABLE IF NOT EXISTS sc_webhook_events (
   shop TEXT NOT NULL REFERENCES sc_stores(shop), event_id TEXT NOT NULL,
   topic TEXT NOT NULL, received_at TEXT NOT NULL, PRIMARY KEY (shop,event_id)
 );
+CREATE TABLE IF NOT EXISTS sc_privacy_requests (
+  shop TEXT NOT NULL, request_id TEXT NOT NULL, order_ids TEXT NOT NULL,
+  received_at TEXT NOT NULL, PRIMARY KEY (shop,request_id)
+);
 CREATE TABLE IF NOT EXISTS sc_order_audit (
   id INTEGER PRIMARY KEY, shop TEXT NOT NULL, order_id TEXT NOT NULL,
   from_stage TEXT, to_stage TEXT NOT NULL, actor TEXT NOT NULL, changed_at TEXT NOT NULL,
@@ -177,6 +181,10 @@ export class ShopifyOrderStore {
     return this.transaction(() => {
       const remove = this.db.prepare('DELETE FROM sc_orders WHERE shop=? AND shopify_id=?');
       for (const id of new Set(orderIds)) remove.run(shop,id);
+      const redacted = new Set(orderIds);
+      const pending = this.db.prepare('SELECT request_id, order_ids FROM sc_privacy_requests WHERE shop=?').all(shop);
+      const update = this.db.prepare('UPDATE sc_privacy_requests SET order_ids=? WHERE shop=? AND request_id=?');
+      for (const row of pending) update.run(JSON.stringify((JSON.parse(String(row.order_ids)) as string[]).filter(id => !redacted.has(id))), shop, String(row.request_id));
     });
   }
   redactShop(shop: string) {
@@ -186,9 +194,17 @@ export class ShopifyOrderStore {
       this.db.prepare('DELETE FROM sc_connection_codes WHERE shop=?').run(shop);
       this.db.prepare('DELETE FROM sc_orders WHERE shop=?').run(shop);
       this.db.prepare('DELETE FROM sc_webhook_events WHERE shop=?').run(shop);
+      this.db.prepare('DELETE FROM sc_privacy_requests WHERE shop=?').run(shop);
       this.db.prepare('DELETE FROM sc_stores WHERE shop=?').run(shop);
       if (store) this.db.prepare('DELETE FROM sc_merchants WHERE id=? AND NOT EXISTS (SELECT 1 FROM sc_stores WHERE merchant_id=?) AND NOT EXISTS (SELECT 1 FROM sc_connection_codes WHERE merchant_id=?)').run(String(store.merchant_id),String(store.merchant_id),String(store.merchant_id));
     });
   }
+  queueDataRequest(shop: string, requestId: string, orderIds: string[]) {
+    validShop(shop); required(requestId, 100);
+    if (!Array.isArray(orderIds) || orderIds.length > 10000 || orderIds.some(id => !/^gid:\/\/shopify\/Order\/\d+$/.test(id))) throw new Error('Invalid order identifiers');
+    this.db.prepare('INSERT INTO sc_privacy_requests VALUES (?,?,?,?) ON CONFLICT DO NOTHING').run(shop, requestId, JSON.stringify([...new Set(orderIds)]), new Date().toISOString());
+  }
+  staffPrivacyRequests() {
+    return this.db.prepare('SELECT * FROM sc_privacy_requests ORDER BY received_at ASC LIMIT 200').all();
+  }
 }
-
