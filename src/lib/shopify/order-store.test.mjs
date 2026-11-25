@@ -61,3 +61,27 @@ test('invalid item rolls back both order and event, permitting a retry', () => {
   } finally { s.close(); }
 });
 
+test('staff-issued connection code is shop-bound, customer-bound, and single-use', () => {
+  const s = new ShopifyOrderStore(':memory:');
+  try {
+    const { code } = s.issueConnectionCode(a, 'DS-12345678', 'Customer A');
+    assert.equal(s.redeemConnectionCode(b, 'DS-12345678', code), false);
+    assert.equal(s.redeemConnectionCode(a, 'DS-87654321', code), false);
+    assert.equal(s.redeemConnectionCode(a, 'DS-12345678', code), true);
+    assert.equal(s.redeemConnectionCode(a, 'DS-12345678', code), false);
+    s.ingest(a, 'event', 'orders/create', order);
+    assert.equal(s.merchantOrders('DS-12345678').length, 1);
+    assert.throws(() => s.issueConnectionCode(a, 'DS-87654321', 'Customer B'), /already linked/);
+  } finally { s.close(); }
+});
+
+test('generating a new code invalidates the previous code', () => {
+  const s = new ShopifyOrderStore(':memory:');
+  try {
+    const old = s.issueConnectionCode(a, 'DS-12345678', 'Customer A');
+    const fresh = s.issueConnectionCode(a, 'DS-12345678', 'Customer A');
+    assert.equal(s.redeemConnectionCode(a, 'DS-12345678', old.code), false);
+    assert.equal(s.redeemConnectionCode(a, 'DS-12345678', fresh.code), true);
+  } finally { s.close(); }
+});
+
