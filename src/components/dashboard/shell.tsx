@@ -19,6 +19,7 @@ const links = [
   { href: "/dashboard", label: "Page views", icon: LayoutDashboard },
   { href: "/dashboard/factory-applications", label: "Factory applications", icon: Factory },
   { href: "/dashboard/shipments", label: "Shipments", icon: Package },
+  { href: "/dashboard/shopify-orders", label: "Shopify orders", icon: Package },
 ];
 
 export function DashboardShell({ children }: { children: React.ReactNode }) {
