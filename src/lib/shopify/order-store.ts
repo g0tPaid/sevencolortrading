@@ -1,6 +1,7 @@
 import { DatabaseSync } from 'node:sqlite';
 import { mkdirSync } from 'node:fs';
 import { dirname, isAbsolute } from 'node:path';
+import { createHash, randomBytes } from 'node:crypto';
 
 // Keep Shopify records separate from the legacy shipment database and marketing JSON files.
 // Production remains disabled until the storage path and Shopify app are provisioned.
@@ -12,6 +13,11 @@ CREATE TABLE IF NOT EXISTS sc_stores (
   shop TEXT PRIMARY KEY, merchant_id TEXT NOT NULL REFERENCES sc_merchants(id),
   installed_at TEXT NOT NULL, uninstalled_at TEXT
 );
+CREATE TABLE IF NOT EXISTS sc_connection_codes (
+  digest TEXT PRIMARY KEY, shop TEXT NOT NULL, merchant_id TEXT NOT NULL,
+  display_name TEXT NOT NULL, expires_at INTEGER NOT NULL, redeemed_at INTEGER
+);
+CREATE INDEX IF NOT EXISTS sc_connection_codes_shop ON sc_connection_codes(shop, merchant_id);
 CREATE TABLE IF NOT EXISTS sc_orders (
   shop TEXT NOT NULL REFERENCES sc_stores(shop), shopify_id TEXT NOT NULL,
   number TEXT NOT NULL, retail_payment TEXT NOT NULL, currency TEXT NOT NULL,
@@ -71,14 +77,43 @@ export class ShopifyOrderStore {
     catch (e) { this.db.exec('ROLLBACK'); throw e; }
   }
   // Invoke only after authenticated Shopify installation and explicit staff-approved linking.
-  linkStore(shop: string, merchantId: string, name: string) {
-    validShop(shop); required(merchantId); required(name);
-    return this.transaction(() => {
+  private linkStoreInTransaction(shop: string, merchantId: string, name: string) {
       const existing = this.db.prepare('SELECT merchant_id FROM sc_stores WHERE shop = ?').get(shop);
       if (existing && existing.merchant_id !== merchantId) throw new Error('Store already linked');
       const now = new Date().toISOString();
       this.db.prepare('INSERT INTO sc_merchants VALUES (?, ?, ?) ON CONFLICT(id) DO NOTHING').run(merchantId,name,now);
       this.db.prepare('INSERT INTO sc_stores VALUES (?, ?, ?, NULL) ON CONFLICT(shop) DO UPDATE SET uninstalled_at=NULL').run(shop,merchantId,now);
+  }
+  linkStore(shop: string, merchantId: string, name: string) {
+    validShop(shop); required(merchantId); required(name);
+    return this.transaction(() => this.linkStoreInTransaction(shop, merchantId, name));
+  }
+  // Staff must verify the customer number against an approved application before issuing a code.
+  // The code is random, stored only as a digest, tied to the shop and valid for 15 minutes.
+  issueConnectionCode(shop: string, merchantId: string, name: string) {
+    validShop(shop); required(merchantId); required(name);
+    const code = randomBytes(24).toString('base64url');
+    const digest = createHash('sha256').update(code).digest('hex');
+    const expiresAt = Date.now() + 15 * 60 * 1000;
+    this.transaction(() => {
+      const existing = this.db.prepare('SELECT merchant_id FROM sc_stores WHERE shop=?').get(shop);
+      if (existing && existing.merchant_id !== merchantId) throw new Error('Store already linked');
+      this.db.prepare('DELETE FROM sc_connection_codes WHERE shop=? AND merchant_id=?').run(shop, merchantId);
+      this.db.prepare('INSERT INTO sc_connection_codes VALUES (?,?,?,?,?,NULL)').run(digest, shop, merchantId, name, expiresAt);
+    });
+    return { code, expiresAt };
+  }
+  // shop must be obtained from a verified Shopify admin session, not a browser field.
+  redeemConnectionCode(shop: string, merchantId: string, code: string) {
+    validShop(shop); required(merchantId);
+    if (!/^[A-Za-z0-9_-]{32}$/.test(code)) return false;
+    const digest = createHash('sha256').update(code).digest('hex');
+    return this.transaction(() => {
+      const entry = this.db.prepare('SELECT display_name FROM sc_connection_codes WHERE digest=? AND shop=? AND merchant_id=? AND redeemed_at IS NULL AND expires_at>?').get(digest, shop, merchantId, Date.now());
+      if (!entry) return false;
+      this.linkStoreInTransaction(shop, merchantId, String(entry.display_name));
+      this.db.prepare('UPDATE sc_connection_codes SET redeemed_at=? WHERE digest=?').run(Date.now(), digest);
+      return true;
     });
   }
   // Caller must authenticate the delivery via the official Shopify adapter before invoking this method.
