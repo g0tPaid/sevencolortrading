@@ -103,3 +103,18 @@ test('privacy redaction is shop-scoped and repeatable', () => {
   } finally { s.close(); }
 });
 
+test('privacy requests are durable, deduplicated and redacted by shop', () => {
+  const s = new ShopifyOrderStore(':memory:');
+  try {
+    s.queueDataRequest(a,'123',[order.id]);
+    s.queueDataRequest(a,'123',[order.id]);
+    s.queueDataRequest(b,'123',[order.id]);
+    assert.equal(s.staffPrivacyRequests().length, 2);
+    s.redactOrders(a,[order.id]);
+    assert.equal(s.staffPrivacyRequests().find(r=>r.shop===a).order_ids, '[]');
+    assert.equal(s.staffPrivacyRequests().find(r=>r.shop===b).order_ids, JSON.stringify([order.id]));
+    s.redactShop(a);
+    assert.equal(s.staffPrivacyRequests().length, 1);
+    assert.equal(s.staffPrivacyRequests()[0].shop,b);
+  } finally { s.close(); }
+});
