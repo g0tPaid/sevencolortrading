@@ -16,7 +16,7 @@ export async function action({ request }: ActionFunctionArgs) {
   const form = await request.formData();
   const customerNumber = String(form.get('customerNumber') || '').trim().toUpperCase();
   const code = String(form.get('code') || '').trim();
-  if (!/^DS-[0-9A-F]{8}$/.test(customerNumber) || !/^[A-Za-z0-9_-]{32}$/.test(code)) return { error: 'Enter a valid customer number and connection code.' };
+  if (!/^(?:DS-[0-9A-F]{8}|(?:[A-Z0-9]{1,12}-)?[0-9]{4})$/.test(customerNumber) || !/^[A-Za-z0-9_-]{32}$/.test(code)) return { error: 'Enter a valid dropshipper ID and connection code.' };
   try {
     const url = new URL(endpoint);
     if (url.protocol !== 'https:') return { error: 'Connection service not configured.' };
@@ -36,7 +36,7 @@ export default function Connect() {
     <s-section heading="Customer connection">
       {!available ? <s-paragraph>The customer connection service is not configured yet.</s-paragraph> : <Form method="post">
         <div style={{ display: 'grid', gap: '12px', maxWidth: '440px' }}>
-          <label>Customer number<input name="customerNumber" placeholder="DS-XXXXXXXX" required maxLength={11} style={{ display:'block', width:'100%', padding:'10px' }} /></label>
+          <label>Dropshipper ID<input name="customerNumber" placeholder="A-3848" required maxLength={17} style={{ display:'block', width:'100%', padding:'10px' }} /></label>
           <label>Connection code<input name="code" type="password" required autoComplete="off" maxLength={32} style={{ display:'block', width:'100%', padding:'10px' }} /></label>
           <button type="submit" disabled={busy}>{busy ? 'Connecting...' : 'Connect store'}</button>
         </div>
@@ -47,4 +47,3 @@ export default function Connect() {
   </s-page>;
 }
 export const headers: HeadersFunction = (args) => boundary.headers(args);
-

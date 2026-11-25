@@ -85,6 +85,17 @@ test('generating a new code invalidates the previous code', () => {
   } finally { s.close(); }
 });
 
+test('SoloFlow dropshipper IDs work with shop-bound connection codes', () => {
+  const s = new ShopifyOrderStore(':memory:');
+  try {
+    const { code } = s.issueConnectionCode(a, 'A-3848', 'Synthetic Partner');
+    assert.equal(s.redeemConnectionCode(b, 'A-3848', code), false);
+    assert.equal(s.redeemConnectionCode(a, 'A-3849', code), false);
+    assert.equal(s.redeemConnectionCode(a, 'A-3848', code), true);
+    assert.equal(s.redeemConnectionCode(a, 'A-3848', code), false);
+  } finally { s.close(); }
+});
+
 test('privacy redaction is shop-scoped and repeatable', () => {
   const s = new ShopifyOrderStore(':memory:');
   try {
