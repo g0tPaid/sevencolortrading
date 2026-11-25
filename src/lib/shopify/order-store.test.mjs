@@ -85,3 +85,21 @@ test('generating a new code invalidates the previous code', () => {
   } finally { s.close(); }
 });
 
+test('privacy redaction is shop-scoped and repeatable', () => {
+  const s = new ShopifyOrderStore(':memory:');
+  try {
+    s.linkStore(a,'merchant-a','A'); s.linkStore(b,'merchant-b','B');
+    s.ingest(a,'event-a','orders/create',order);
+    s.ingest(b,'event-b','orders/create',order);
+    s.redactOrders(a,[order.id]); s.redactOrders(a,[order.id]);
+    assert.equal(s.merchantOrders('merchant-a').length,0);
+    assert.equal(s.merchantOrders('merchant-b').length,1);
+    assert.throws(() => s.redactOrders(a,['invalid']),/Invalid order identifiers/);
+    const code = s.issueConnectionCode(a,'merchant-a','A').code;
+    s.redactShop(a); s.redactShop(a);
+    assert.equal(s.redeemConnectionCode(a,'merchant-a',code),false);
+    assert.throws(() => s.ingest(a,'event-c','orders/create',order),/not connected/);
+    assert.equal(s.merchantOrders('merchant-b').length,1);
+  } finally { s.close(); }
+});
+
