@@ -19,7 +19,13 @@ The production repository is a Next.js 15 / React 19 / TypeScript application on
 - Read-only Shopify orders page inside the existing authenticated staff dashboard. No merchant interface is exposed yet.
 - Tests for idempotency, isolation, cancellation, stale events, uninstall, rollback and verified webhook handling.
 
-Run: `node --experimental-strip-types --test src/lib/shopify/*.test.mjs` (five tests passed locally using Node 24).
+Run: `node --experimental-strip-types --test src/lib/shopify/*.test.mjs` (seven tests passed locally using Node 24).
+
+## Customer-number connection
+
+The staff Shopify orders page can issue a short-lived, single-use code after staff verifies the customer's existing `DS-XXXXXXXX` application reference and Shopify domain. The code is stored as a SHA-256 digest and bound to the specific shop and customer; replacement invalidates the earlier code. The embedded Shopify app authenticates the shop with Shopify's SDK and calls the backend redemption endpoint server-to-server. No email or customer-facing shared secret is required.
+
+Configure `SHOPIFY_LINK_SECRET` (a randomly generated secret of at least 32 characters) in both services as a private environment variable. The embedded service uses `SC_CONNECTION_URL` pointing to the HTTPS redemption endpoint. This is a development foundation, not a public-ready release; verify the complete flow in the test store and add operational customer approval/ownership verification before launch.
 
 ## Configuration and remaining Phase 1 gates
 
@@ -38,4 +44,14 @@ Use only a separate development database (`SHOPIFY_DB_PATH` must be an absolute 
 - https://shopify.dev/docs/apps/build/webhooks
 - https://shopify.dev/docs/apps/build/privacy-law-compliance
 - https://shopify.dev/docs/apps/launch/shopify-app-store/app-store-requirements
+
+## Public launch checklist (limited-visibility listing)
+
+Use Shopify public distribution with a limited-visibility App Store listing if the owner wishes to send customers a direct link. Both visibility options require the same review. The distribution method cannot be changed once selected. Register for the App Store only with owner approval of its one-time fee. Before submission: provision a permanent HTTPS app host and persistent encrypted session storage; configure required Admin API IP allowlisting; implement and test mandatory privacy webhooks and deletion/retention for all connected stores; request protected customer data access if fulfillment needs addresses; complete merchant onboarding and order synchronization; test installation and cancellation; prepare truthful screenshots, support contact and privacy policy. Do not submit an unfinished app or publish it until review gates are met.
+
+- https://shopify.dev/docs/apps/launch/distribution
+- https://shopify.dev/docs/apps/launch/distribution/visibility
+- https://shopify.dev/docs/apps/launch/app-store-review/review-process
+- https://shopify.dev/docs/apps/build/compliance/privacy-law-compliance
+- https://shopify.dev/changelog/posts/ip-allowlists-are-now-required-for-public-apps
 
