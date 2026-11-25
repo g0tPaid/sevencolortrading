@@ -169,5 +169,26 @@ export class ShopifyOrderStore {
     validShop(shop);
     this.db.prepare('UPDATE sc_stores SET uninstalled_at=? WHERE shop=?').run(new Date().toISOString(),shop);
   }
+  // This operation is called only by the authenticated compliance pipeline.
+  // Orders and their dependent items/audit rows are scoped to the verified shop.
+  redactOrders(shop: string, orderIds: string[]) {
+    validShop(shop);
+    if (!Array.isArray(orderIds) || orderIds.length > 10000 || orderIds.some(id => !/^gid:\/\/shopify\/Order\/\d+$/.test(id))) throw new Error('Invalid order identifiers');
+    return this.transaction(() => {
+      const remove = this.db.prepare('DELETE FROM sc_orders WHERE shop=? AND shopify_id=?');
+      for (const id of new Set(orderIds)) remove.run(shop,id);
+    });
+  }
+  redactShop(shop: string) {
+    validShop(shop);
+    return this.transaction(() => {
+      const store = this.db.prepare('SELECT merchant_id FROM sc_stores WHERE shop=?').get(shop);
+      this.db.prepare('DELETE FROM sc_connection_codes WHERE shop=?').run(shop);
+      this.db.prepare('DELETE FROM sc_orders WHERE shop=?').run(shop);
+      this.db.prepare('DELETE FROM sc_webhook_events WHERE shop=?').run(shop);
+      this.db.prepare('DELETE FROM sc_stores WHERE shop=?').run(shop);
+      if (store) this.db.prepare('DELETE FROM sc_merchants WHERE id=? AND NOT EXISTS (SELECT 1 FROM sc_stores WHERE merchant_id=?) AND NOT EXISTS (SELECT 1 FROM sc_connection_codes WHERE merchant_id=?)').run(String(store.merchant_id),String(store.merchant_id),String(store.merchant_id));
+    });
+  }
 }
 
