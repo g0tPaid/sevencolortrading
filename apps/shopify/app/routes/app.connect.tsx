@@ -23,7 +23,7 @@ export async function action({ request }: ActionFunctionArgs) {
     const response = await fetch(url, { method: 'POST', redirect: 'error', signal: AbortSignal.timeout(10000), headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${secret}` }, body: JSON.stringify({ shop: session.shop, customerNumber, code }) });
     if (!response.ok) return { error: 'Connection failed. Check your code or contact Sourcing Center.' };
     const result = await response.json();
-    return result.connected === true ? { connected: true } : { error: 'Connection failed.' };
+    return result.connected === true ? { connected: true, demo: result.demo === true } : { error: 'Connection failed.' };
   } catch { return { error: 'Connection service unavailable. Try again later.' }; }
 }
 
@@ -36,14 +36,15 @@ export default function Connect() {
     <s-section heading="Customer connection">
       {!available ? <s-paragraph>The customer connection service is not configured yet.</s-paragraph> : <Form method="post">
         <div style={{ display: 'grid', gap: '12px', maxWidth: '440px' }}>
-          <label>Dropshipper ID<input name="customerNumber" placeholder="A-3848" required maxLength={17} style={{ display:'block', width:'100%', padding:'10px' }} /></label>
+          <label>Dropshipper ID<input name="customerNumber" placeholder="DS-XXXXXXXX" required maxLength={17} style={{ display:'block', width:'100%', padding:'10px' }} /></label>
           <label>Connection code<input name="code" type="password" required autoComplete="off" maxLength={32} style={{ display:'block', width:'100%', padding:'10px' }} /></label>
           <button type="submit" disabled={busy}>{busy ? 'Connecting...' : 'Connect store'}</button>
         </div>
       </Form>}
       {result?.error && <s-paragraph>{result.error}</s-paragraph>}
-      {result?.connected && <s-paragraph>Store connected successfully.</s-paragraph>}
+      {result?.connected && <s-paragraph>{result.demo ? 'Review sandbox connected successfully. No live customer account was linked.' : 'Store connected successfully.'}</s-paragraph>}
     </s-section>
   </s-page>;
 }
 export const headers: HeadersFunction = (args) => boundary.headers(args);
+
