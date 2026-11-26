@@ -8,7 +8,7 @@ embedded = true
 automatically_update_urls_on_dev = true
 
 [access_scopes]
-scopes = "read_orders"
+scopes = "read_orders,read_locations,read_assigned_fulfillment_orders,write_third_party_fulfillment_orders,write_fulfillments"
 
 [auth]
 redirect_urls = ["https://example.com/auth/callback"]
@@ -23,4 +23,3 @@ uri = "/webhooks/app/uninstalled"
 [[webhooks.subscriptions]]
 topics = ["app/scopes_update"]
 uri = "/webhooks/app/scopes_update"
-

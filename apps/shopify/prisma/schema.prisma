@@ -33,3 +33,10 @@ model Session {
   refreshTokenExpires DateTime?
 }
 
+model WarehouseNotification {
+  shop       String
+  kind       String
+  receivedAt String
+
+  @@id([shop, kind])
+}

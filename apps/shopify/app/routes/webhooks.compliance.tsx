@@ -37,8 +37,8 @@ export async function action({ request }: ActionFunctionArgs) {
   // The current read-only order viewer does not store customer or order payloads.
   // Shopify staff/shop session credentials are the only Shopify data in its database.
   if (event === "shop/redact") {
+    await db.$executeRaw`DELETE FROM WarehouseNotification WHERE shop=${shop}`;
     await db.session.deleteMany({ where: { shop } });
   }
   return new Response(null, { status: 200 });
 }
-

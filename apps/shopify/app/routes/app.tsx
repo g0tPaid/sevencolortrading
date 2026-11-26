@@ -20,6 +20,7 @@ export default function App() {
       <s-app-nav>
         <s-link href="/app">Home</s-link>
         <s-link href="/app/connect">Connect account</s-link>
+        <s-link href="/app/fulfillment">Fulfillment requests</s-link>
       </s-app-nav>
       <Outlet />
     </AppProvider>
@@ -34,4 +35,3 @@ export function ErrorBoundary() {
 export const headers: HeadersFunction = (headersArgs) => {
   return boundary.headers(headersArgs);
 };
-

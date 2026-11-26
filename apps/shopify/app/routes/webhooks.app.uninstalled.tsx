@@ -12,7 +12,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   if (session) {
     await db.session.deleteMany({ where: { shop } });
   }
+  await db.$executeRaw`DELETE FROM WarehouseNotification WHERE shop=${shop}`;
 
   return new Response();
 };
-
