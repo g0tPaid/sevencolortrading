@@ -34,7 +34,7 @@ export default function Home() {
     <s-page heading="Sourcing Center">
       <s-section heading="Connected Shopify store">
         <s-paragraph>{shop}</s-paragraph>
-        <s-paragraph>View recent orders from your connected shop. This development view is read-only and does not start purchasing or fulfillment.</s-paragraph>
+        <s-paragraph>View recent orders from your connected shop. To request warehouse fulfillment for eligible paid orders, open Fulfillment requests.</s-paragraph>
       </s-section>
       <s-section heading="Recent Shopify orders">
         {failed ? <s-paragraph>Unable to retrieve orders. Check the app permissions and try again.</s-paragraph> : orders.length === 0 ? <s-paragraph>No orders found.</s-paragraph> :
@@ -50,11 +50,10 @@ export default function Home() {
           </div>}
       </s-section>
       <s-section heading="Sourcing workflow">
-        <s-paragraph>Quote, merchant approval and separate payment, purchasing, warehouse QC, shipping and tracking.</s-paragraph>
+        <s-paragraph>The app is free to install and use. Physical goods and logistics services are quoted separately and require merchant approval. A Shopify fulfillment request is not purchase or shipment authorization.</s-paragraph>
       </s-section>
     </s-page>
   );
 }
 
 export const headers: HeadersFunction = (args) => boundary.headers(args);
-
