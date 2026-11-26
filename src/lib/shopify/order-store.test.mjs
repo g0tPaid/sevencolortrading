@@ -129,3 +129,22 @@ test('privacy requests are durable, deduplicated and redacted by shop', () => {
     assert.equal(s.staffPrivacyRequests()[0].shop,b);
   } finally { s.close(); }
 });
+
+test('retention removes expired codes and old event metadata but preserves active connections and pending requests', () => {
+  const s = new ShopifyOrderStore(':memory:');
+  try {
+    s.linkStore(a, 'merchant-a', 'A');
+    const issued = s.issueConnectionCode(b, 'merchant-b', 'B');
+    s.ingest(a, 'event-a', 'orders/create', order);
+    s.queueDataRequest(a,'123',[order.id]);
+    assert.equal(s.purgeExpiredRecords(issued.expiresAt - 1).codes, 0);
+    assert.equal(s.purgeExpiredRecords(issued.expiresAt).codes, 1);
+    assert.equal(s.redeemConnectionCode(b,'merchant-b',issued.code),false);
+    assert.equal(s.purgeExpiredRecords(Date.now()+31*86400000).events,1);
+    assert.equal(s.merchantOrders('merchant-a').length,1);
+    assert.equal(s.staffPrivacyRequests().length,1);
+    assert.equal(s.completeDataRequest(b,'123'),false);
+    assert.equal(s.completeDataRequest(a,'123'),true);
+    assert.equal(s.staffPrivacyRequests().length,0);
+  } finally { s.close(); }
+});
