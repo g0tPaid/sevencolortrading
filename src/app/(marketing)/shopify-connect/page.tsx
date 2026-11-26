@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 const steps = [
-  { icon: Store, title: "Connect your store", text: "Open the Sourcing Center app and enter your permanent Shopify store domain." },
+  { icon: Store, title: "Connect your store", text: "Install and open Sourcing Center from Shopify. Your store is identified automatically." },
   { icon: ShieldCheck, title: "Link your account", text: "Use your Sourcing Center customer number and the verification steps provided by our team." },
   { icon: PackageCheck, title: "Coordinate order fulfillment", text: "View recent orders and work with our team on warehousing, quality checks and international delivery." },
 ];
@@ -33,10 +33,10 @@ export default function ShopifyConnectPage() {
             <p className="inline-flex items-center gap-2 rounded-full bg-amber-50 px-3 py-1.5 text-xs font-semibold text-amber-800">
               <span className="size-2 rounded-full bg-amber-500" /> App preview · Shopify review pending
             </p>
-            <a href="https://sourcing-center-connect.up.railway.app" className="mt-4 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#e60043] px-5 py-3 text-base font-bold text-white shadow-lg shadow-rose-200 transition-colors hover:bg-rose-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rose-700">
-              Open connection preview <ArrowRight className="size-5" aria-hidden="true" />
+            <a href="https://admin.shopify.com/" className="mt-4 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#e60043] px-5 py-3 text-base font-bold text-white shadow-lg shadow-rose-200 transition-colors hover:bg-rose-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rose-700">
+              Open Shopify admin <ArrowRight className="size-5" aria-hidden="true" />
             </a>
-            <p className="mt-3 text-sm leading-relaxed text-slate-600">The official customer installation link will be available after Shopify approval. No customer data is collected on this page.</p>
+            <p className="mt-3 text-sm leading-relaxed text-slate-600">The official customer installation link will be available after Shopify approval. Existing test installations can be opened from Apps in Shopify admin. No customer data is collected on this page.</p>
           </div>
         </div>
         <div className="mt-12 grid gap-4 sm:grid-cols-3">
