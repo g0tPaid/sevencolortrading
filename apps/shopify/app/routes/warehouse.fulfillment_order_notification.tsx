@@ -1,7 +1,8 @@
 import type { ActionFunctionArgs } from 'react-router';
 import { createHmac, timingSafeEqual } from 'node:crypto';
 import db from '../db.server';
-import { warehouseSetupAllowed } from '../warehouse.server';
+import { warehouseApproval } from '../warehouse.server';
+import { warehouseConnection } from '../warehouse-approval.server';
 
 // Shopify sends only a notification kind. The real request details remain in
 // Shopify; this durable signal does not accept, fulfill, or purchase anything.
@@ -11,7 +12,7 @@ export async function action({ request }: ActionFunctionArgs) {
   const signature = request.headers.get('x-shopify-hmac-sha256');
   if (!secret || !signature) return new Response(null, { status: 401 });
   const shop = request.headers.get('x-shopify-shop-domain') ?? '';
-  if (!warehouseSetupAllowed(shop)) return new Response(null, { status: 403 });
+  if (!/^[a-z0-9][a-z0-9-]{0,62}\.myshopify\.com$/.test(shop)) return new Response(null, { status: 403 });
   if (Number(request.headers.get('content-length') ?? 0) > 4096) return new Response(null, { status: 413 });
   const reader = request.body?.getReader();
   if (!reader) return new Response(null, { status: 400 });
@@ -33,7 +34,15 @@ export async function action({ request }: ActionFunctionArgs) {
     if (kind !== 'FULFILLMENT_REQUEST' && kind !== 'CANCELLATION_REQUEST') return new Response(null, { status: 400 });
     const session = await db.session.findFirst({ where: { shop, isOnline: false }, select: { id: true } });
     if (!session) return new Response(null, { status: 403 });
+    const approval = await warehouseApproval(shop);
+    if (!approval.approved) return new Response(null, { status: 403 });
+    if (!approval.demo) {
+      const notice = await warehouseConnection(shop, 'notice', kind);
+      if (!notice.approved || notice.demo) return new Response(null, { status: 503 });
+    }
     const receivedAt = new Date().toISOString();
+    const cutoff = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
+    await db.$executeRaw`DELETE FROM WarehouseNotification WHERE receivedAt < ${cutoff}`;
     await db.$executeRaw`INSERT INTO WarehouseNotification (shop, kind, receivedAt) VALUES (${shop}, ${kind}, ${receivedAt}) ON CONFLICT(shop, kind) DO UPDATE SET receivedAt=excluded.receivedAt`;
     return new Response(null, { status: 200 });
   } catch { return new Response(null, { status: 503 }); }

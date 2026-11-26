@@ -1,9 +1,11 @@
 import { WAREHOUSE_NAME, WAREHOUSE_ADDRESS, warehouseAddressMatches } from './warehouse';
+import { warehouseConnection } from './warehouse-approval.server';
 
-// Test rollout only. Never register a new fulfillment service on a customer's
-// store without an explicit rollout decision and connected merchant approval.
-export function warehouseSetupAllowed(shop: string): boolean {
-  return shop === 'sourcing-center-test.myshopify.com';
+// Only a verified, staff-approved connection qualifies. The original test store
+// remains an isolated demonstration; no live requests are sent for this shop.
+export async function warehouseApproval(shop: string): Promise<{ approved: boolean; demo: boolean }> {
+  if (shop === 'sourcing-center-test.myshopify.com') return { approved: true, demo: true };
+  return warehouseConnection(shop);
 }
 
 export function warehouseCallback(appUrl = process.env.SHOPIFY_APP_URL): string | null {
@@ -51,7 +53,7 @@ export async function findWarehouse(admin: Admin, callback: string) {
 }
 
 export async function provisionWarehouse(admin: Admin, shop: string, callback: string) {
-  if (!warehouseSetupAllowed(shop)) throw new Error('Warehouse setup is restricted to the test store');
+  if (!(await warehouseApproval(shop)).approved) throw new Error('Connect an approved Sourcing Center account before registering a warehouse.');
   const existing = await findWarehouse(admin, callback);
   let id = existing?.location?.id;
   if (id && warehouseAddressMatches(existing?.location?.address)) return id;
