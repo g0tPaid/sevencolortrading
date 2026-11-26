@@ -75,6 +75,19 @@ export class ShopifyOrderStore {
     this.db.exec(schema);
   }
   close() { this.db.close(); }
+  // Retain only what the integration needs. Pending privacy requests and live
+  // order/merchant records are intentionally excluded from time-based deletion.
+  // Called on startup and hourly, as well as before issuing a new code.
+  purgeExpiredRecords(now = Date.now()) {
+    if (!Number.isFinite(now)) throw new Error('Invalid retention clock');
+    const eventCutoff = new Date(now - 30 * 24 * 60 * 60 * 1000).toISOString();
+    return this.transaction(() => {
+      const codes = this.db.prepare('DELETE FROM sc_connection_codes WHERE expires_at<=? OR redeemed_at IS NOT NULL').run(now);
+      const events = this.db.prepare('DELETE FROM sc_webhook_events WHERE received_at<?').run(eventCutoff);
+      const merchants = this.db.prepare('DELETE FROM sc_merchants WHERE NOT EXISTS (SELECT 1 FROM sc_stores WHERE merchant_id=sc_merchants.id) AND NOT EXISTS (SELECT 1 FROM sc_connection_codes WHERE merchant_id=sc_merchants.id)').run();
+      return { codes: Number(codes.changes), events: Number(events.changes), merchants: Number(merchants.changes) };
+    });
+  }
   private transaction<T>(fn: () => T): T {
     this.db.exec('BEGIN IMMEDIATE');
     try { const value = fn(); this.db.exec('COMMIT'); return value; }
@@ -96,6 +109,7 @@ export class ShopifyOrderStore {
   // The code is random, stored only as a digest, tied to the shop and valid for 15 minutes.
   issueConnectionCode(shop: string, merchantId: string, name: string) {
     validShop(shop); required(merchantId); required(name);
+    this.purgeExpiredRecords();
     const code = randomBytes(24).toString('base64url');
     const digest = createHash('sha256').update(code).digest('hex');
     const expiresAt = Date.now() + 15 * 60 * 1000;
@@ -116,7 +130,7 @@ export class ShopifyOrderStore {
       const entry = this.db.prepare('SELECT display_name FROM sc_connection_codes WHERE digest=? AND shop=? AND merchant_id=? AND redeemed_at IS NULL AND expires_at>?').get(digest, shop, merchantId, Date.now());
       if (!entry) return false;
       this.linkStoreInTransaction(shop, merchantId, String(entry.display_name));
-      this.db.prepare('UPDATE sc_connection_codes SET redeemed_at=? WHERE digest=?').run(Date.now(), digest);
+      this.db.prepare('DELETE FROM sc_connection_codes WHERE digest=?').run(digest);
       return true;
     });
   }
@@ -206,5 +220,10 @@ export class ShopifyOrderStore {
   }
   staffPrivacyRequests() {
     return this.db.prepare('SELECT * FROM sc_privacy_requests ORDER BY received_at ASC LIMIT 200').all();
+  }
+  // Staff use this only after verifying and securely completing the request.
+  completeDataRequest(shop: string, requestId: string) {
+    validShop(shop); required(requestId, 100);
+    return Number(this.db.prepare('DELETE FROM sc_privacy_requests WHERE shop=? AND request_id=?').run(shop,requestId).changes) === 1;
   }
 }
