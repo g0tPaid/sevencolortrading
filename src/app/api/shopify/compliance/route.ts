@@ -1,5 +1,6 @@
 import { timingSafeEqual } from 'node:crypto';
 import { ShopifyOrderStore } from '@/lib/shopify/order-store';
+import { reviewShopKey } from '@/lib/shopify/review-account';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -31,7 +32,14 @@ export async function POST(request: Request) {
   try {
     const store = new ShopifyOrderStore(db);
     try {
-      if (data.topic === 'shop/redact') store.redactShop(data.shop as string);
+      if (data.topic === 'shop/redact') {
+        store.redactShop(data.shop as string);
+        const key = reviewShopKey(data.shop as string);
+        if (key) {
+          const sandbox = new ShopifyOrderStore(`${db}.review`);
+          try { sandbox.redactShop(key); } finally { sandbox.close(); }
+        }
+      }
       else if (data.topic === 'customers/redact') store.redactOrders(data.shop as string, ids);
       else if (data.topic === 'customers/data_request') {
         const id = String(data.requestId ?? '');

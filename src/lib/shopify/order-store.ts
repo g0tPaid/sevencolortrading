@@ -46,6 +46,11 @@ CREATE TABLE IF NOT EXISTS sc_order_audit (
 );
 CREATE INDEX IF NOT EXISTS sc_orders_stage ON sc_orders(stage, updated_at);
 CREATE INDEX IF NOT EXISTS sc_stores_merchant ON sc_stores(merchant_id);
+CREATE TABLE IF NOT EXISTS sc_warehouse_notices (
+  shop TEXT NOT NULL REFERENCES sc_stores(shop) ON DELETE CASCADE,
+  kind TEXT NOT NULL CHECK(kind IN ('FULFILLMENT_REQUEST','CANCELLATION_REQUEST')),
+  received_at TEXT NOT NULL, PRIMARY KEY (shop,kind)
+);
 `;
 
 export type OrderInput = {
@@ -84,6 +89,7 @@ export class ShopifyOrderStore {
     return this.transaction(() => {
       const codes = this.db.prepare('DELETE FROM sc_connection_codes WHERE expires_at<=? OR redeemed_at IS NOT NULL').run(now);
       const events = this.db.prepare('DELETE FROM sc_webhook_events WHERE received_at<?').run(eventCutoff);
+      this.db.prepare('DELETE FROM sc_warehouse_notices WHERE received_at<?').run(eventCutoff);
       const merchants = this.db.prepare('DELETE FROM sc_merchants WHERE NOT EXISTS (SELECT 1 FROM sc_stores WHERE merchant_id=sc_merchants.id) AND NOT EXISTS (SELECT 1 FROM sc_connection_codes WHERE merchant_id=sc_merchants.id)').run();
       return { codes: Number(codes.changes), events: Number(events.changes), merchants: Number(merchants.changes) };
     });
@@ -183,9 +189,32 @@ export class ShopifyOrderStore {
   staffOrders() {
     return this.db.prepare('SELECT o.*, m.display_name FROM sc_orders o JOIN sc_stores s ON s.shop=o.shop JOIN sc_merchants m ON m.id=s.merchant_id ORDER BY o.updated_at DESC LIMIT 200').all();
   }
+  // Only a redeemed, staff-issued connection grants access; uninstalled shops do not qualify.
+  isConnected(shop: string) {
+    validShop(shop);
+    return Boolean(this.db.prepare('SELECT 1 FROM sc_stores WHERE shop=? AND uninstalled_at IS NULL').get(shop));
+  }
+  // Notifications contain no buyer information or order payloads. Staff must independently
+  // verify and approve the sourcing quote before any purchasing or shipment starts.
+  recordWarehouseNotice(shop: string, kind: 'FULFILLMENT_REQUEST' | 'CANCELLATION_REQUEST') {
+    validShop(shop);
+    if (!['FULFILLMENT_REQUEST','CANCELLATION_REQUEST'].includes(kind)) throw new Error('Invalid notification');
+    return this.transaction(() => {
+      if (!this.isConnected(shop)) return false;
+      this.db.prepare('INSERT INTO sc_warehouse_notices VALUES (?,?,?) ON CONFLICT(shop,kind) DO UPDATE SET received_at=excluded.received_at').run(shop,kind,new Date().toISOString());
+      return true;
+    });
+  }
+  staffWarehouseNotices() {
+    return this.db.prepare('SELECT n.*, m.display_name FROM sc_warehouse_notices n JOIN sc_stores s ON s.shop=n.shop JOIN sc_merchants m ON m.id=s.merchant_id WHERE s.uninstalled_at IS NULL ORDER BY n.received_at DESC LIMIT 200').all();
+  }
   uninstall(shop: string) {
     validShop(shop);
-    this.db.prepare('UPDATE sc_stores SET uninstalled_at=? WHERE shop=?').run(new Date().toISOString(),shop);
+    this.transaction(() => {
+      this.db.prepare('UPDATE sc_stores SET uninstalled_at=? WHERE shop=?').run(new Date().toISOString(),shop);
+      this.db.prepare('DELETE FROM sc_warehouse_notices WHERE shop=?').run(shop);
+      this.db.prepare('DELETE FROM sc_connection_codes WHERE shop=?').run(shop);
+    });
   }
   // This operation is called only by the authenticated compliance pipeline.
   // Orders and their dependent items/audit rows are scoped to the verified shop.
