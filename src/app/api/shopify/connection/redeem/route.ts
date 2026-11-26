@@ -1,6 +1,7 @@
 import { timingSafeEqual } from 'node:crypto';
 import { NextResponse } from 'next/server';
 import { ShopifyOrderStore } from '@/lib/shopify/order-store';
+import { REVIEW_ACCOUNT, reviewIdentity } from '@/lib/shopify/review-account';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -20,6 +21,17 @@ export async function POST(request: Request) {
   catch { return reply({ error: 'Invalid request' }, 400); }
   if (typeof body?.shop !== 'string' || typeof body?.customerNumber !== 'string' || typeof body?.code !== 'string') return reply({ error: 'Invalid request' }, 400);
   try {
+    if (body.customerNumber.trim().toUpperCase() === REVIEW_ACCOUNT) {
+      const identity = reviewIdentity(body.shop, body.code.trim(), process.env.SHOPIFY_REVIEW_PASSWORD_HASH);
+      if (!identity) return reply({ error: 'Invalid review credentials' }, 400);
+      // Reviewer connections exercise the real linking logic using only a separate sandbox database.
+      const sandbox = new ShopifyOrderStore(`${db}.review`);
+      try {
+        const { code } = sandbox.issueConnectionCode(identity.shop, identity.merchantId, identity.displayName);
+        const connected = sandbox.redeemConnectionCode(identity.shop, identity.merchantId, code);
+        return connected ? reply({ connected: true, demo: true }) : reply({ error: 'Unable to connect review sandbox' }, 400);
+      } finally { sandbox.close(); }
+    }
     const store = new ShopifyOrderStore(db);
     try {
       const connected = store.redeemConnectionCode(body.shop, body.customerNumber.trim().toUpperCase(), body.code.trim());
