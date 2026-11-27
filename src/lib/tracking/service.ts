@@ -175,6 +175,7 @@ export function listShipments(url: URL) {
   const dropshippers = [...new Set(refs.map(label).filter((name): name is string => Boolean(name)))].sort((a, b) => a.localeCompare(b));
   const result = searchShipments({
     customerRefs: dropshipper ? refs.filter((ref) => label(ref) === dropshipper) : undefined,
+    sort: url.searchParams.get("sort") ?? undefined,
     q: url.searchParams.get("q") ?? "",
     carrierId,
     status,

@@ -302,6 +302,7 @@ export function searchShipments(query: {
   carrierId?: string;
   status?: string;
   customerRefs?: string[];
+  sort?: string;
   limit?: number;
   offset?: number;
 }): { shipments: Shipment[]; total: number } {
@@ -325,8 +326,17 @@ export function searchShipments(query: {
   const total = num(
     getDb().prepare(`SELECT COUNT(*) AS n FROM shipments ${where}`).get(...args)?.n,
   );
+  // Keep empty order numbers last and compare numeric references as numbers, not strings.
+  const orderNumber = "trim(ltrim(trim(coalesce(order_number, '')), '#'))";
+  const numericOrder = `(${orderNumber} <> '' AND ${orderNumber} NOT GLOB '*[^0-9]*')`;
+  const direction = query.sort === "order-desc" ? "DESC" : "ASC";
+  const orderBy = query.sort === "order-asc" || query.sort === "order-desc"
+    ? `CASE WHEN ${orderNumber} = '' THEN 2 WHEN ${numericOrder} THEN 0 ELSE 1 END ASC,
+       CASE WHEN ${numericOrder} THEN CAST(${orderNumber} AS INTEGER) END ${direction},
+       ${orderNumber} COLLATE NOCASE ${direction}, created_at DESC, id DESC`
+    : query.sort === "date-asc" ? "created_at ASC, id ASC" : "created_at DESC, id DESC";
   const shipments = getDb()
-    .prepare(`SELECT * FROM shipments ${where} ORDER BY created_at DESC, id DESC LIMIT ? OFFSET ?`)
+    .prepare(`SELECT * FROM shipments ${where} ORDER BY ${orderBy} LIMIT ? OFFSET ?`)
     .all(...args, limit, offset)
     .map(mapShipment);
   return { shipments, total };

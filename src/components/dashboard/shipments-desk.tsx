@@ -6,7 +6,14 @@ import { DropshipProofControls } from "@/components/dashboard/dropship-proof-con
 import { FormEvent, useCallback, useEffect, useState } from "react";
 
 type Carrier = { id: string; name: string };
-type ShipmentQuery = { q: string; carrier: string; status: string; dropshipper: string };
+type ShipmentSort = "date-desc" | "date-asc" | "order-asc" | "order-desc";
+const SORT_OPTIONS: Record<ShipmentSort, string> = {
+  "date-desc": "Date added: newest first",
+  "date-asc": "Date added: oldest first",
+  "order-asc": "Order number: low to high",
+  "order-desc": "Order number: high to low",
+};
+type ShipmentQuery = { q: string; carrier: string; status: string; dropshipper: string; sort: ShipmentSort };
 const PAGE_SIZE = 50;
 type EventRow = { occurredAt: string | null; status: string; description: string; location: string | null };
 type LogRow = { createdAt: string; outcome: string; httpStatus: number | null; durationMs: number | null; errorKind: string | null };
@@ -107,9 +114,10 @@ export function ShipmentsDesk() {
   const [carrier, setCarrier] = useState("");
   const [status, setStatus] = useState("");
   const [dropshipper, setDropshipper] = useState("");
+  const [sort, setSort] = useState<ShipmentSort>("date-desc");
   const [dropshippers, setDropshippers] = useState<string[]>([]);
   const [offset, setOffset] = useState(0);
-  const [appliedQuery, setAppliedQuery] = useState<ShipmentQuery>({ q: "", carrier: "", status: "", dropshipper: "" });
+  const [appliedQuery, setAppliedQuery] = useState<ShipmentQuery>({ q: "", carrier: "", status: "", dropshipper: "", sort: "date-desc" });
   const [carriers, setCarriers] = useState<Carrier[]>([]);
   const [rows, setRows] = useState<Shipment[]>([]);
   const [total, setTotal] = useState(0);
@@ -139,6 +147,7 @@ export function ShipmentsDesk() {
       if (query.carrier) params.set("carrier", query.carrier);
       if (query.status) params.set("status", query.status);
       if (query.dropshipper) params.set("dropshipper", query.dropshipper);
+      params.set("sort", query.sort);
       params.set("limit", String(PAGE_SIZE));
       params.set("offset", String(pageOffset));
       const data = await api(`/api/admin/shipments?${params.toString()}`, { cache: "no-store" });
@@ -156,7 +165,7 @@ export function ShipmentsDesk() {
   }, []);
 
   useEffect(() => {
-    void load({ q: "", carrier: "", status: "", dropshipper: "" });
+    void load({ q: "", carrier: "", status: "", dropshipper: "", sort: "date-desc" });
     void api("/api/admin/shipments/settings", { headers: {} })
       .then((data) => setSettings(data.settings as Settings))
       .catch(() => setSettings(null));
@@ -164,7 +173,7 @@ export function ShipmentsDesk() {
 
   function onSearch(event: FormEvent) {
     event.preventDefault();
-    void load({ q, carrier, status, dropshipper });
+    void load({ q, carrier, status, dropshipper, sort });
   }
 
   async function showSavedShipment() {
@@ -288,7 +297,7 @@ export function ShipmentsDesk() {
       setDetail(null);
       setForm(emptyForm);
       setNotice("Shipment deleted.");
-      await load({ q, carrier, status, dropshipper });
+      await load({ q, carrier, status, dropshipper, sort });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Shipment was not deleted.");
     }
@@ -323,7 +332,7 @@ export function ShipmentsDesk() {
       const data = await api("/api/admin/shipments/import", { method: "POST", body: JSON.stringify({ csv }) });
       const errors = (data.errors as Array<{ row: number; message: string }> | undefined) ?? [];
       setNotice(`Imported ${String(data.created)} new and ${String(data.updated)} updated. ${errors.length} row errors.`);
-      await load({ q, carrier, status, dropshipper });
+      await load({ q, carrier, status, dropshipper, sort });
     } catch (err) {
       setError(err instanceof Error ? err.message : "CSV was not imported.");
     }
@@ -359,8 +368,8 @@ export function ShipmentsDesk() {
       ) : null}
       {notice ? <p className="rounded-2xl border border-line bg-paper px-4 py-3 text-sm text-ink">{notice}</p> : null}
 
-      <form onSubmit={onSearch} className="grid gap-3 rounded-3xl border border-line bg-paper-elevated p-4 md:grid-cols-5">
-        <label className="text-sm text-ink md:col-span-2">
+      <form onSubmit={onSearch} className="grid gap-3 rounded-3xl border border-line bg-paper-elevated p-4 md:grid-cols-3 xl:grid-cols-6">
+        <label className="text-sm text-ink xl:col-span-2">
           Search
           <input
             data-testid="shipments-search"
@@ -375,7 +384,7 @@ export function ShipmentsDesk() {
           <select value={dropshipper} onChange={(event) => {
             const selected = event.target.value;
             setDropshipper(selected);
-            void load({ q, carrier, status, dropshipper: selected });
+            void load({ q, carrier, status, dropshipper: selected, sort });
           }} className={fieldClass} disabled={loading}>
             <option value="">All dropshippers</option>
             {dropshippers.map((name) => <option key={name} value={name}>{name}</option>)}
@@ -404,7 +413,17 @@ export function ShipmentsDesk() {
             ))}
           </select>
         </label>
-        <button type="submit" className="rounded-2xl bg-ink px-4 py-2 text-sm text-paper md:col-span-5 md:w-fit" disabled={loading}>
+        <label className="text-sm text-ink">
+          Sort by
+          <select value={sort} onChange={(event) => {
+            const selected = event.target.value as ShipmentSort;
+            setSort(selected);
+            void load({ q, carrier, status, dropshipper, sort: selected });
+          }} className={fieldClass} disabled={loading}>
+            {Object.entries(SORT_OPTIONS).map(([value, label]) => <option key={value} value={value}>{label}</option>)}
+          </select>
+        </label>
+        <button type="submit" className="rounded-2xl bg-ink px-4 py-2 text-sm text-paper md:col-span-3 xl:col-span-6 md:w-fit" disabled={loading}>
           Search
         </button>
       </form>
@@ -419,8 +438,8 @@ export function ShipmentsDesk() {
                 <th className="px-4 py-3">Tracking</th>
                 <th className="px-4 py-3">Customer</th>
                 <th scope="col" className="px-4 py-3">Dropshipper</th>
-                <th className="px-4 py-3">Order</th>
-                <th className="px-4 py-3" aria-sort="descending">Created ↓</th>
+                <th className="px-4 py-3" aria-sort={appliedQuery.sort === "order-asc" ? "ascending" : appliedQuery.sort === "order-desc" ? "descending" : undefined}>Order {appliedQuery.sort === "order-asc" ? "↑" : appliedQuery.sort === "order-desc" ? "↓" : ""}</th>
+                <th className="px-4 py-3" aria-sort={appliedQuery.sort === "date-asc" ? "ascending" : appliedQuery.sort === "date-desc" ? "descending" : undefined}>Created {appliedQuery.sort === "date-asc" ? "↑" : appliedQuery.sort === "date-desc" ? "↓" : ""}</th>
                 <th className="px-4 py-3">Carrier</th>
                 <th className="px-4 py-3">Country</th>
                 <th scope="col" className="px-4 py-3"><span className="sr-only">Actions</span></th>
@@ -460,7 +479,7 @@ export function ShipmentsDesk() {
           </table>
         ) : null}
         <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-3 text-xs text-muted">
-          <p>{total ? offset + 1 : 0}–{Math.min(offset + rows.length, total)} of {total} shipments · Newest first</p>
+          <p>{total ? offset + 1 : 0}–{Math.min(offset + rows.length, total)} of {total} shipments · {SORT_OPTIONS[appliedQuery.sort]}</p>
           <div className="flex gap-2">
             <button type="button" disabled={loading || offset === 0} onClick={() => void load(appliedQuery, Math.max(0, offset - PAGE_SIZE))} className="rounded-lg border border-line px-3 py-1.5 disabled:opacity-40">Previous</button>
             <button type="button" disabled={loading || offset + PAGE_SIZE >= total} onClick={() => void load(appliedQuery, offset + PAGE_SIZE)} className="rounded-lg border border-line px-3 py-1.5 disabled:opacity-40">Next</button>
