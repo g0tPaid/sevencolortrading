@@ -6,6 +6,8 @@ import { DropshipProofControls } from "@/components/dashboard/dropship-proof-con
 import { FormEvent, useCallback, useEffect, useState } from "react";
 
 type Carrier = { id: string; name: string };
+type ShipmentQuery = { q: string; carrier: string; status: string; dropshipper: string };
+const PAGE_SIZE = 50;
 type EventRow = { occurredAt: string | null; status: string; description: string; location: string | null };
 type LogRow = { createdAt: string; outcome: string; httpStatus: number | null; durationMs: number | null; errorKind: string | null };
 const staffContactFields = {
@@ -104,6 +106,10 @@ export function ShipmentsDesk() {
   const [q, setQ] = useState("");
   const [carrier, setCarrier] = useState("");
   const [status, setStatus] = useState("");
+  const [dropshipper, setDropshipper] = useState("");
+  const [dropshippers, setDropshippers] = useState<string[]>([]);
+  const [offset, setOffset] = useState(0);
+  const [appliedQuery, setAppliedQuery] = useState<ShipmentQuery>({ q: "", carrier: "", status: "", dropshipper: "" });
   const [carriers, setCarriers] = useState<Carrier[]>([]);
   const [rows, setRows] = useState<Shipment[]>([]);
   const [total, setTotal] = useState(0);
@@ -124,7 +130,7 @@ export function ShipmentsDesk() {
     if (saveError) document.getElementById("shipment-save-error")?.scrollIntoView({ block: "nearest" });
   }, [saveError]);
 
-  const load = useCallback(async (query: { q: string; carrier: string; status: string }, savedShipment?: Shipment) => {
+  const load = useCallback(async (query: ShipmentQuery, pageOffset = 0) => {
     setLoading(true);
     setError(null);
     try {
@@ -132,10 +138,14 @@ export function ShipmentsDesk() {
       if (query.q) params.set("q", query.q);
       if (query.carrier) params.set("carrier", query.carrier);
       if (query.status) params.set("status", query.status);
+      if (query.dropshipper) params.set("dropshipper", query.dropshipper);
+      params.set("limit", String(PAGE_SIZE));
+      params.set("offset", String(pageOffset));
       const data = await api(`/api/admin/shipments?${params.toString()}`, { cache: "no-store" });
-      const shipments = (data.shipments as Shipment[]) ?? [];
-      const savedRow = shipments.find((shipment) => shipment.id === savedShipment?.id) ?? savedShipment;
-      setRows(savedRow ? [savedRow, ...shipments.filter((shipment) => shipment.id !== savedRow.id)] : shipments);
+      setRows((data.shipments as Shipment[]) ?? []);
+      setDropshippers((data.dropshippers as string[]) ?? []);
+      setAppliedQuery(query);
+      setOffset(pageOffset);
       setTotal(Number(data.total ?? 0));
       setCarriers((data.carriers as Carrier[]) ?? []);
     } catch (err) {
@@ -146,7 +156,7 @@ export function ShipmentsDesk() {
   }, []);
 
   useEffect(() => {
-    void load({ q: "", carrier: "", status: "" });
+    void load({ q: "", carrier: "", status: "", dropshipper: "" });
     void api("/api/admin/shipments/settings", { headers: {} })
       .then((data) => setSettings(data.settings as Settings))
       .catch(() => setSettings(null));
@@ -154,15 +164,11 @@ export function ShipmentsDesk() {
 
   function onSearch(event: FormEvent) {
     event.preventDefault();
-    void load({ q, carrier, status });
+    void load({ q, carrier, status, dropshipper });
   }
 
-  async function showSavedShipment(shipment: Shipment) {
-    setQ("");
-    setCarrier("");
-    setStatus("");
-    setRows((current) => [shipment, ...current.filter((row) => row.id !== shipment.id)]);
-    await load({ q: "", carrier: "", status: "" }, shipment);
+  async function showSavedShipment() {
+    await load(appliedQuery, offset);
   }
 
   async function onSave(event: FormEvent) {
@@ -197,7 +203,7 @@ export function ShipmentsDesk() {
         setDetail(shipment);
         setSaveProgress({ done: 1, total: 1 });
         setSaveNotice("Shipment updated.");
-        await showSavedShipment(shipment);
+        await showSavedShipment();
       } else {
         const created = await api("/api/admin/shipments", { method: "POST", body: JSON.stringify(payload) });
         const shipment = created.shipment as Shipment;
@@ -234,7 +240,7 @@ export function ShipmentsDesk() {
           setSaveNotice(shipment.trackingNumber ? "Shipment added and photos uploaded."
             : "Shipment and photos saved. Add the tracking number when it arrives.");
         }
-        await showSavedShipment(shipment);
+        await showSavedShipment();
       }
     } catch (err) {
       setSaveError(err instanceof Error && err.name === "TimeoutError"
@@ -282,7 +288,7 @@ export function ShipmentsDesk() {
       setDetail(null);
       setForm(emptyForm);
       setNotice("Shipment deleted.");
-      await load({ q, carrier, status });
+      await load({ q, carrier, status, dropshipper });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Shipment was not deleted.");
     }
@@ -317,7 +323,7 @@ export function ShipmentsDesk() {
       const data = await api("/api/admin/shipments/import", { method: "POST", body: JSON.stringify({ csv }) });
       const errors = (data.errors as Array<{ row: number; message: string }> | undefined) ?? [];
       setNotice(`Imported ${String(data.created)} new and ${String(data.updated)} updated. ${errors.length} row errors.`);
-      await load({ q, carrier, status });
+      await load({ q, carrier, status, dropshipper });
     } catch (err) {
       setError(err instanceof Error ? err.message : "CSV was not imported.");
     }
@@ -353,7 +359,7 @@ export function ShipmentsDesk() {
       ) : null}
       {notice ? <p className="rounded-2xl border border-line bg-paper px-4 py-3 text-sm text-ink">{notice}</p> : null}
 
-      <form onSubmit={onSearch} className="grid gap-3 rounded-3xl border border-line bg-paper-elevated p-4 md:grid-cols-4">
+      <form onSubmit={onSearch} className="grid gap-3 rounded-3xl border border-line bg-paper-elevated p-4 md:grid-cols-5">
         <label className="text-sm text-ink md:col-span-2">
           Search
           <input
@@ -363,6 +369,17 @@ export function ShipmentsDesk() {
             placeholder="Tracking, customer, or order"
             className={fieldClass}
           />
+        </label>
+        <label className="text-sm text-ink">
+          Dropshipper
+          <select value={dropshipper} onChange={(event) => {
+            const selected = event.target.value;
+            setDropshipper(selected);
+            void load({ q, carrier, status, dropshipper: selected });
+          }} className={fieldClass} disabled={loading}>
+            <option value="">All dropshippers</option>
+            {dropshippers.map((name) => <option key={name} value={name}>{name}</option>)}
+          </select>
         </label>
         <label className="text-sm text-ink">
           Carrier
@@ -387,7 +404,7 @@ export function ShipmentsDesk() {
             ))}
           </select>
         </label>
-        <button type="submit" className="rounded-2xl bg-ink px-4 py-2 text-sm text-paper md:col-span-4 md:w-fit">
+        <button type="submit" className="rounded-2xl bg-ink px-4 py-2 text-sm text-paper md:col-span-5 md:w-fit" disabled={loading}>
           Search
         </button>
       </form>
@@ -403,6 +420,7 @@ export function ShipmentsDesk() {
                 <th className="px-4 py-3">Customer</th>
                 <th scope="col" className="px-4 py-3">Dropshipper</th>
                 <th className="px-4 py-3">Order</th>
+                <th className="px-4 py-3" aria-sort="descending">Created ↓</th>
                 <th className="px-4 py-3">Carrier</th>
                 <th className="px-4 py-3">Country</th>
                 <th scope="col" className="px-4 py-3"><span className="sr-only">Actions</span></th>
@@ -427,6 +445,7 @@ export function ShipmentsDesk() {
                     {row.dropshipperName ? <span className="font-semibold text-emerald-700 dark:text-emerald-400">{row.dropshipperName}</span> : <span className="text-muted">—</span>}
                   </td>
                   <td className="px-4 py-3 text-ink">{row.orderNumber || "—"}</td>
+                  <td className="px-4 py-3 text-ink whitespace-nowrap">{row.createdAt ? new Date(row.createdAt).toLocaleDateString("en-GB", { timeZone: "Asia/Shanghai" }) : "—"}</td>
                   <td className="px-4 py-3 text-ink">{row.carrierName || row.carrierResolution}</td>
                   <td className="px-4 py-3 text-ink">{destinationCountry(row)}</td>
                   <td className="px-4 py-3 text-right">
@@ -440,7 +459,13 @@ export function ShipmentsDesk() {
             </tbody>
           </table>
         ) : null}
-        <p className="px-4 py-3 text-xs text-muted">{total} shipment{total === 1 ? "" : "s"}</p>
+        <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-3 text-xs text-muted">
+          <p>{total ? offset + 1 : 0}–{Math.min(offset + rows.length, total)} of {total} shipments · Newest first</p>
+          <div className="flex gap-2">
+            <button type="button" disabled={loading || offset === 0} onClick={() => void load(appliedQuery, Math.max(0, offset - PAGE_SIZE))} className="rounded-lg border border-line px-3 py-1.5 disabled:opacity-40">Previous</button>
+            <button type="button" disabled={loading || offset + PAGE_SIZE >= total} onClick={() => void load(appliedQuery, offset + PAGE_SIZE)} className="rounded-lg border border-line px-3 py-1.5 disabled:opacity-40">Next</button>
+          </div>
+        </div>
       </div>
 
       {detail ? (

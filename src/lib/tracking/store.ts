@@ -292,10 +292,16 @@ function like(value: string): string {
   return `%${value.replace(/[\\%_]/g, (char) => `\\${char}`)}%`;
 }
 
+export function shipmentCustomerRefs(): string[] {
+  return getDb().prepare("SELECT DISTINCT customer_ref FROM shipments WHERE customer_ref IS NOT NULL")
+    .all().map((row) => text(row.customer_ref)).filter((ref): ref is string => ref !== null);
+}
+
 export function searchShipments(query: {
   q?: string;
   carrierId?: string;
   status?: string;
+  customerRefs?: string[];
   limit?: number;
   offset?: number;
 }): { shipments: Shipment[]; total: number } {
@@ -303,7 +309,7 @@ export function searchShipments(query: {
   const carrier = query.carrierId ?? "";
   const status = query.status ?? "";
   const limit = Math.min(Math.max(query.limit ?? 50, 1), 200);
-  const offset = Math.min(Math.max(query.offset ?? 0, 0), 10_000);
+  const offset = Math.max(0, Math.floor(query.offset ?? 0));
   const pattern = like(q);
   const where = `
     WHERE (? = '' OR lower(tracking_number) LIKE ? ESCAPE '\\'
@@ -312,13 +318,15 @@ export function searchShipments(query: {
       OR lower(coalesce(customer_ref, '')) LIKE ? ESCAPE '\\')
       AND (? = '' OR carrier_id = ?)
       AND (? = '' OR status = ?)
+      AND (? IS NULL OR customer_ref IN (SELECT value FROM json_each(?)))
   `;
-  const args: SqlValue[] = [q, pattern, pattern, pattern, pattern, carrier, carrier, status, status];
+  const refs = query.customerRefs === undefined ? null : JSON.stringify(query.customerRefs);
+  const args: SqlValue[] = [q, pattern, pattern, pattern, pattern, carrier, carrier, status, status, refs, refs];
   const total = num(
     getDb().prepare(`SELECT COUNT(*) AS n FROM shipments ${where}`).get(...args)?.n,
   );
   const shipments = getDb()
-    .prepare(`SELECT * FROM shipments ${where} ORDER BY updated_at DESC LIMIT ? OFFSET ?`)
+    .prepare(`SELECT * FROM shipments ${where} ORDER BY created_at DESC, id DESC LIMIT ? OFFSET ?`)
     .all(...args, limit, offset)
     .map(mapShipment);
   return { shipments, total };

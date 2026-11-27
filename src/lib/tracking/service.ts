@@ -17,6 +17,7 @@ import {
   listLogs,
   saveSettings,
   searchShipments,
+  shipmentCustomerRefs,
   updateShipmentRow,
   validateSettings,
   type QueueResult,
@@ -168,16 +169,21 @@ export function removeShipment(id: string): boolean {
 export function listShipments(url: URL) {
   const status = url.searchParams.get("status") ?? "";
   const carrierId = url.searchParams.get("carrier") ?? "";
+  const label = getStaffPartnerLabels();
+  const refs = shipmentCustomerRefs();
+  const dropshipper = url.searchParams.get("dropshipper") ?? "";
+  const dropshippers = [...new Set(refs.map(label).filter((name): name is string => Boolean(name)))].sort((a, b) => a.localeCompare(b));
   const result = searchShipments({
+    customerRefs: dropshipper ? refs.filter((ref) => label(ref) === dropshipper) : undefined,
     q: url.searchParams.get("q") ?? "",
     carrierId,
     status,
     limit: Number(url.searchParams.get("limit") ?? "50"),
     offset: Number(url.searchParams.get("offset") ?? "0"),
   });
-  const label = getStaffPartnerLabels();
   return {
     ok: true,
+    dropshippers,
     total: result.total,
     carriers: CARRIERS,
     shipments: result.shipments.map((shipment) => ({
