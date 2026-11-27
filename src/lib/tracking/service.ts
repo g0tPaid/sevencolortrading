@@ -1,4 +1,4 @@
-import { getStaffPartnerLabels } from "@/lib/tracking/soloflow-staff-partners";
+import { getStaffPartnersByReference } from "@/lib/tracking/soloflow-staff-partners";
 import { requireAdmin, json, sameOrigin } from "@/lib/tracking/http";
 import { publicLookup as lookupPublicCache, type PublicLookupOptions } from "@/lib/tracking/public-cache";
 import { carrierName, CARRIERS, UNSUPPORTED_CARRIER_ID } from "@/lib/tracking/carriers";
@@ -169,7 +169,8 @@ export function removeShipment(id: string): boolean {
 export function listShipments(url: URL) {
   const status = url.searchParams.get("status") ?? "";
   const carrierId = url.searchParams.get("carrier") ?? "";
-  const label = getStaffPartnerLabels();
+  const partner = getStaffPartnersByReference();
+  const label = (reference: string | null) => partner(reference)?.name ?? null;
   const refs = shipmentCustomerRefs();
   const dropshipper = url.searchParams.get("dropshipper") ?? "";
   const dropshippers = [...new Set(refs.map(label).filter((name): name is string => Boolean(name)))].sort((a, b) => a.localeCompare(b));
@@ -190,6 +191,7 @@ export function listShipments(url: URL) {
     shipments: result.shipments.map((shipment) => ({
       ...shipment,
       dropshipperName: label(shipment.customerRef),
+      dropshipperCustomerId: partner(shipment.customerRef)?.number ?? null,
       carrierName: carrierName(shipment.carrierId),
     })),
   };

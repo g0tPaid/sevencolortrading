@@ -25,17 +25,17 @@ export function saveStaffPartners(input: unknown) {
   return true;
 }
 
-export function getStaffPartnerLabels() {
+export function getStaffPartnersByReference() {
   const rows = db().prepare("SELECT number, prefix, name FROM soloflow_staff_partners").all() as Partner[];
-  const aliases = new Map<string, string | null>();
-  function add(key: string, name: string) {
-    aliases.set(key, aliases.has(key) ? null : name);
+  const aliases = new Map<string, Partner | null>();
+  function add(key: string, partner: Partner) {
+    aliases.set(key, aliases.has(key) ? null : partner);
   }
   for (const { prefix, number, name } of rows) {
-    const label = name.trim();
-    add(prefix ? prefix + "-" + number : number, label);
+    const partner = { prefix, number, name: name.trim() };
+    add(prefix ? prefix + "-" + number : number, partner);
     if (prefix) {
-      for (const alias of new Set([prefix + number, number + prefix])) add(alias, label);
+      for (const alias of new Set([prefix + number, number + prefix])) add(alias, partner);
     }
   }
   return (reference: string | null) => {
@@ -43,4 +43,9 @@ export function getStaffPartnerLabels() {
     const clean = reference.trim().toUpperCase();
     return (aliases.get(clean) ?? aliases.get(clean.replace(/[\s-]/g, ""))) ?? null;
   };
+}
+
+export function getStaffPartnerLabels() {
+  const find = getStaffPartnersByReference();
+  return (reference: string | null) => find(reference)?.name ?? null;
 }

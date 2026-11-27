@@ -25,6 +25,7 @@ type StaffContact = Record<keyof typeof staffContactFields, string>;
 type Shipment = {
   staffContact?: StaffContact | null;
   dropshipperName?: string | null;
+  dropshipperCustomerId?: string | null;
   id: string;
   customerRef: string | null;
   customerName: string | null;
@@ -461,7 +462,12 @@ export function ShipmentsDesk() {
                   </td>
                   <td className="px-4 py-3 text-ink">{row.customerName || "—"}</td>
                   <td className="px-4 py-3">
-                    {row.dropshipperName ? <span className="font-semibold text-emerald-700 dark:text-emerald-400">{row.dropshipperName}</span> : <span className="text-muted">—</span>}
+                    {row.dropshipperName ? (
+                      <span className="font-semibold text-emerald-700 dark:text-emerald-400">
+                        {row.dropshipperName}
+                        {row.dropshipperCustomerId && <span className="ml-2 inline-block whitespace-nowrap rounded-md border border-line px-1.5 py-0.5 text-xs font-medium text-muted">ID: {row.dropshipperCustomerId}</span>}
+                      </span>
+                    ) : <span className="text-muted">—</span>}
                   </td>
                   <td className="px-4 py-3 text-ink">{row.orderNumber || "—"}</td>
                   <td className="px-4 py-3 text-ink whitespace-nowrap">{row.createdAt ? new Date(row.createdAt).toLocaleDateString("en-GB", { timeZone: "Asia/Shanghai" }) : "—"}</td>
