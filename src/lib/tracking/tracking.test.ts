@@ -4,6 +4,8 @@ import { tmpdir } from "os";
 import path from "path";
 import test from "node:test";
 import { POST as createShipmentRoute } from "@/app/api/admin/shipments/route";
+import { POST as livePartnerOrders } from "@/app/api/partner-shipment-orders/route";
+import { saveStaffPartners } from "@/lib/tracking/soloflow-staff-partners";
 import { ADMIN_SESSION_COOKIE, createSessionToken } from "@/lib/admin-auth";
 import { closeTrackingDatabase, getDb, openDatabase, useTrackingDatabase } from "@/lib/tracking/db";
 import { addProof, listProof, readTrackingMedia, removeProof } from "@/lib/tracking/dropship-proof";
@@ -419,4 +421,35 @@ test("a down scraper postpones due work instead of inventing a status", async ()
   assert.equal(stored?.status, "Unknown");
   assert.equal(stored?.lastError, MSG.unavailable);
   assert.equal(listEvents(shipment.id).length, 0);
+});
+
+test("live partner history returns all registered partner shipments and current status only", async () => {
+  const previous = process.env.PARTNER_SHIPMENT_PHOTO_KEY;
+  process.env.PARTNER_SHIPMENT_PHOTO_KEY = "test-only-partner-key";
+  try {
+    assert.equal(saveStaffPartners([
+      { number: "0042", prefix: "A", name: "Partner A" },
+      { number: "0043", prefix: "B", name: "Partner B" },
+    ]), true);
+    const first = createShipmentRecord({ customerRef: "A-0042", orderNumber: "ORDER-A1", trackingNumber: "TRACKA1000", carrierId: "ups" }, NOW);
+    createShipmentRecord({ customerRef: "0042-A", orderNumber: "ORDER-A2", trackingNumber: "TRACKA2000", carrierId: "ups" }, NOW);
+    createShipmentRecord({ customerRef: "B-0043", orderNumber: "ORDER-B1", trackingNumber: "TRACKB1000", carrierId: "ups" }, NOW);
+    getDb().prepare("UPDATE shipments SET status = ? WHERE id = ?").run("Delivered", first.id);
+    const request = (authorization: string, number = "0042", prefix = "A") => new Request("https://example.test/api/partner-shipment-orders", {
+      method: "POST", headers: { Authorization: authorization, "Content-Type": "application/json" },
+      body: JSON.stringify({ number, prefix }),
+    });
+    assert.equal((await livePartnerOrders(request("wrong"))).status, 404);
+    const response = await livePartnerOrders(request("Bearer test-only-partner-key"));
+    const data = await response.json();
+    assert.equal(response.status, 200);
+    assert.equal(data.shipments.length, 2);
+    assert.equal(data.shipments.find((row: { order: string }) => row.order === "ORDER-A1").status, "Delivered");
+    assert.ok(data.shipments.every((row: { order: string }) => row.order.startsWith("ORDER-A")));
+    const unknown = await livePartnerOrders(request("Bearer test-only-partner-key", "9999", "Z"));
+    assert.deepEqual(await unknown.json(), { shipments: [] });
+  } finally {
+    if (previous === undefined) delete process.env.PARTNER_SHIPMENT_PHOTO_KEY;
+    else process.env.PARTNER_SHIPMENT_PHOTO_KEY = previous;
+  }
 });
