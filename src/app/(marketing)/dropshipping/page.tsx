@@ -61,6 +61,10 @@ export default function DropshippingPage() {
                 <ArrowRight className="h-5 w-5 shrink-0" aria-hidden="true" />
               </a>
               <p className="mt-3 text-xs text-slate-600">Go straight to the partner application below</p>
+              <Link href="/dropshipping/demo" className="mt-4 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-red-200 bg-white/80 px-4 py-3 text-center text-sm font-bold text-red-800 transition-colors hover:bg-red-50 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-800 sm:w-auto">
+                View demo partner portal <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+              <p className="mt-2 text-xs text-slate-600">Explore a sample private dashboard with orders, shipment photos and stock.</p>
             </div>
             <div className="grid gap-3 md:grid-cols-3 lg:grid-cols-1">
               {[
