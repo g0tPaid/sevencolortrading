@@ -85,5 +85,5 @@ export function syncStaffOrder(input: Record<string, unknown>) {
       try { shipment = updateShipmentRecord(link, patch) ?? shipment; } catch { /* staff can correct tracking */ }
     }
   }
-  return { shipmentId: link, tracking: shipment?.trackingNumber ?? "", carrier: shipment?.carrierId ?? "" };
+  return { shipmentId: link, tracking: shipment?.trackingNumber ?? "", carrier: shipment?.carrierId ?? "", trackingStatus: shipment?.status ?? "Unknown" };
 }
