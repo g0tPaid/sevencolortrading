@@ -101,6 +101,8 @@ export async function middleware(request: NextRequest) {
   if (hostRedirect) return hostRedirect;
 
   const { pathname } = request.nextUrl;
+  // Private customer portals must not run marketing cookies or tracking logic.
+  if (pathname.startsWith("/c/")) return NextResponse.next();
   const method = request.method;
 
   const needsDashboardAuth = isDashboardPath(pathname);
