@@ -1,5 +1,5 @@
 const portalOrigin = 'https://soloflow.practicalthings.store';
-const previewImage = 'https://sourcing.center/icon-512.png';
+const previewImage = 'https://sourcing.center/sourcing-center-logo.png';
 const previewTitle = 'Your private order dashboard | Sourcing Center';
 const previewDescription = 'Track your sourcing orders, quality checks and shipments with Seven Color Trading Co Ltd.';
 export const dynamic = 'force-dynamic';
@@ -10,7 +10,7 @@ const privacyHeaders = {
   'X-Robots-Tag': 'noindex, nofollow, noarchive',
   'X-Content-Type-Options': 'nosniff',
 };
-const previewMeta = '<meta property="og:type" content="website"><meta property="og:site_name" content="Sourcing Center"><meta property="og:title" content="' + previewTitle + '"><meta property="og:description" content="' + previewDescription + '"><meta property="og:image" content="' + previewImage + '"><meta property="og:image:type" content="image/png"><meta property="og:image:width" content="512"><meta property="og:image:height" content="512"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="' + previewTitle + '"><meta name="twitter:description" content="' + previewDescription + '"><meta name="twitter:image" content="' + previewImage + '">';
+const previewMeta = '<meta property="og:type" content="website"><meta property="og:site_name" content="Sourcing Center"><meta property="og:title" content="' + previewTitle + '"><meta property="og:description" content="' + previewDescription + '"><meta property="og:image" content="' + previewImage + '"><meta property="og:image:type" content="image/png"><meta property="og:image:width" content="1536"><meta property="og:image:height" content="1024"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="' + previewTitle + '"><meta name="twitter:description" content="' + previewDescription + '"><meta name="twitter:image" content="' + previewImage + '">';
 function genericPage(status: number, message: string) {
   return new Response('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + previewTitle + '</title>' + previewMeta + '</head><body><h1>Sourcing Center</h1><p>' + message + '</p></body></html>', { status, headers: { ...privacyHeaders, 'Content-Security-Policy': "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'" } });
 }
